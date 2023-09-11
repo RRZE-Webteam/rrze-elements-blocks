@@ -1,0 +1,358 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+	/*!
+ * Accordion
+ */
+*{
+	font-family: Roboto;
+}
+
+	h1.accordion-heading,
+	h2.accordion-heading,
+	h3.accordion-heading,
+	h4.accordion-heading,
+	h5.accordion-heading,
+	h6.accordion-heading {
+		width: auto;
+		padding: 0 !important;
+		margin: 0;
+		border: none;
+		text-align: left;
+	}
+
+	button.accordion-toggle {
+		width: 100%;
+		border: none;
+		text-align: left;
+	}
+
+	button.expand-all.standard-btn {
+		margin: 5px 0;
+		float: none;
+	}
+
+	.button-container-right {
+		text-align: right;
+	}
+
+	.button-container-left {
+		text-align: left;
+	}
+
+	.accordion {
+		.accordion {
+			margin: 0;
+		}
+
+		.accordion-register {
+			padding-left: 0;
+			margin: 0 0 .5em;
+			border-top: 1px solid v.$border;
+			border-bottom: 1px solid v.$border;
+
+			li {
+				float: left;
+				list-style-type: none;
+				padding: .25em .5em;
+			}
+		}
+
+		.accordion-suffix {
+			font-weight: bold;
+		}
+
+		.accordion-group {
+			border: none;
+			margin-bottom: 5px;
+		}
+
+		.accordion-toggle {
+			display: block;
+			//border-left: 10px solid var(--color-primary-ci-hell, $colorDefault);
+			border-left-width: 10px;
+			border-left-style: solid;
+			background: var(--color-ContentBorders, #d2ddeb);
+			color: var(--color-Text, #444);
+			font-size: 1rem;
+			text-decoration: none;
+			padding: 8px 35px 8px 10px;
+			position: relative;
+
+			&:before {
+				@include m.svg-content('caret-down', 'solid');
+				position: absolute;
+				top: 12px;
+				right: 10px;
+				width: 12px;
+			}
+
+			&.active {
+				&:before {
+					@include m.svg-content('caret-up', 'solid');
+					position: absolute;
+					right: 10px;
+					width: 12px;
+					top: 12px;
+				}
+			}
+
+			&:hover,
+			&:focus,
+			&.active {
+				text-decoration: none;
+				background-color: var(--color-primary-ci-hell,v.$colorDefault);
+				color: var(--color-primary-ci-hell-kontrast, #fff);
+
+				.alert.font-light & {
+					* {
+						color: var(--color-primary-ci-hell-kontrast, #fff);
+					}
+				}
+
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-primary-dunkler, v.$colorDefaultDunkler);
+				background-color: var(--color-primary-dunkler, v.$colorDefaultDunkler);
+				color: var(--color-primary-ci-hell-kontrast, #fff);
+			}
+
+			.alert.font-light & {
+				* {
+					color: var(--color-Text, #444);
+				}
+			}
+
+			svg.rrze-elements-icon {
+				margin-right: 3px;
+			}
+		}
+
+		.phil .accordion-heading .accordion-toggle,
+		.philfak .accordion-heading .accordion-toggle,
+		.gold .accordion-heading .accordion-toggle {
+			border-color: var(--color-phil-ci-hell, v.$colorPhilFak);
+
+			&:hover,
+			&:focus,
+			&.active {
+				border-color: var(--color-phil-ci-hell, v.$colorPhilFak);
+				background-color: var(--color-phil-ci-hell, v.$colorPhilFak);
+				color: var(--color-phil-ci-hell-kontrast, #000);
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-phil-dunkler, v.$colorPhilFakDunkler);
+				background-color: var(--color-phil-dunkler, v.$colorPhilFakDunkler);
+				color: var(--color-phil-ci-hell-kontrast, #000);
+			}
+		}
+
+		.rw .accordion-heading .accordion-toggle,
+		.rwfak .accordion-heading .accordion-toggle,
+		.red .accordion-heading .accordion-toggle {
+			border-color: var(--color-rw-ci-hell, v.$colorRwFak);
+
+			&:hover,
+			&:focus,
+			&.active {
+				border-color: var(--color-rw-ci-hell, v.$colorRwFak);
+				background-color: var(--color-rw-ci-hell, v.$colorRwFak);
+				color: var(--color-rw-ci-hell-kontrast, #fff);
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-rw-dunkler, v.$colorRwFakDunkler);
+				background-color: var(--color-rw-dunkler, v.$colorRwFakDunkler);
+				color: var(--color-rw-ci-hell-kontrast, #fff);
+			}
+		}
+
+		.med .accordion-heading .accordion-toggle,
+		.medfak .accordion-heading .accordion-toggle,
+		.blue .accordion-heading .accordion-toggle {
+			border-color: var(--color-med-ci-hell, v.$colorMedFak);
+
+			&:hover,
+			&:focus,
+			&.active {
+				border-color: var(--color-med-ci-hell, v.$colorMedFak);
+				background-color: var(--color-med-ci-hell, v.$colorMedFak);
+				color: var(--color-med-ci-hell-kontrast, #000);
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-med-dunkler, v.$colorMedFakDunkler);
+				background-color: var(--color-med-dunkler, v.$colorMedFakDunkler);
+				color: var(--color-med-ci-dunkel-kontrast, #fff);
+			}
+		}
+
+		.nat .accordion-heading .accordion-toggle,
+		.natfak .accordion-heading .accordion-toggle,
+		.green .accordion-heading .accordion-toggle {
+			border-color: var(--color-nat-ci-hell, v.$colorNatFak);
+
+			&:hover,
+			&:focus,
+			&.active,
+			&.active:focus {
+				border-color: var(--color-nat-ci-hell, v.$colorNatFak);
+				background-color: var(--color-nat-ci-hell, v.$colorNatFak);
+				color: var(--color-nat-ci-hell-kontrast, #000);
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-nat-dunkler, v.$colorNatFakDunkler);
+				background-color: var(--color-nat-dunkler, v.$colorNatFakDunkler);
+				color: var(--color-nat-ci-dunkel-kontrast, #fff);
+			}
+		}
+
+		.tf .accordion-heading .accordion-toggle,
+		.techfak .accordion-heading .accordion-toggle,
+		.grey .accordion-heading .accordion-toggle {
+			border-color: var(--color-tf-ci-hell, v.$colorTechFak);
+
+			&:hover,
+			&:focus,
+			&.active {
+				border-color: var(--color-tf-ci-hell, v.$colorTechFak);
+				background-color: var(--color-tf-ci-hell, v.$colorTechFak);
+				color: var(--color-tf-ci-dunkel-kontrast, #000);
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-tf-dunkler, v.$colorTechFakDunkler);
+				background-color: var(--color-tf-dunkler, v.$colorTechFakDunkler);
+				color: var(--color-tf-ci-dunkel-kontrast, #fff);
+			}
+		}
+
+		.fau .accordion-heading .accordion-toggle,
+		.default .accordion-heading .accordion-toggle {
+			border-color: var(--color-zentral-ci-hell, v.$colorDefault);
+
+			&:hover,
+			&:focus,
+			&.active {
+				border-color: var(--color-zentral-ci-hell, v.$colorDefault);
+				background-color: var(--color-zentral-ci-hell, v.$colorDefault);
+				color: var(--color-zentral-ci-hell-kontrast, #fff);
+			}
+
+			&.active:hover,
+			&.active:focus {
+				border-color: var(--color-zentral-dunkler, v.$colorDefaultDunkler);
+				background-color: var(--color-zentral-dunkler, v.$colorDefaultDunkler);
+				color: var(--color-zentral-ci-hell-kontrast, #fff);
+			}
+		}
+
+		.accordion-body {
+			display: block; // none;
+			overflow: hidden;
+
+			.accordion-inner {
+				@extend .clearfix !optional;
+				border: none;
+				background-color: #fff;
+				padding: 15px 20px;
+
+				.alert.font-light & {
+					color: var(--color-Text, #222);
+
+					h1,
+					h2,
+					h3,
+					h4,
+					h5,
+					p,
+					li,
+					a,
+					span,
+					blockquote,
+					code,
+					pre,
+					th,
+					td,
+					strong,
+					em {
+						color: var(--color-Text, #222);
+					}
+				}
+			}
+		}
+	}
+
+	.fau-theme {
+		.accordion-heading .accordion-toggle {}
+
+		.accordion-toggle {
+			@include m.border-radius(var(--border-radius, 4px));
+		}
+
+		.accordion-body {
+			.accordion-inner {
+				background-color: #f5f7f9;
+				@include m.border-bottom-radius(4px);
+			}
+		}
+
+		.accordion-group .accordion-body .accordion-inner {
+			.accordion-inner {
+				background-color: darken(#f5f7f9, 4%);
+			}
+		}
+	}
+
+	@media print {
+		.accordion {
+			position: relative;
+			display: block;
+			overflow: visible;
+		}
+
+		.accordion-group,
+		.accordion-body,
+		.accordion-inner,
+		.accordion-inner p {
+			position: relative;
+			display: block !important;
+			page-break-inside: avoid;
+			break-inside: avoid;
+			overflow: visible;
+		}
+
+		button.expand-all.standard-btn {
+			display: none;
+		}
+
+		h3.accordion-heading,
+		h4.accordion-heading {
+			margin-bottom: 0 !important;
+		}
+	}
+
+	// read mode
+	.read-mode-only {
+		display: none;
+	}
+
+	.admin-bar #content main .accordion-body:target {
+		padding-top: 0;
+	}

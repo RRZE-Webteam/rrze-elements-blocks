@@ -1,0 +1,190 @@
+/*!
+ * Columns
+ */
+
+.two-columns-one,
+.three-columns-one,
+.three-columns-two,
+.four-columns-one,
+.four-columns-two,
+.four-columns-three {
+    width: 100%;
+    position: relative;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+    p {
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    @media screen and (min-width: 48em) {
+        float: left;
+        margin-bottom: 0;
+    }
+}
+
+.two-columns-one {
+    @media screen and (min-width: 48em) {
+        width: 48.5%;
+        margin: 0 1.5% 0 0;
+    }
+}
+
+.three-columns-one {
+    @media screen and (min-width: 48em) {
+        width: 31.3%;
+        margin: 0 3% 0 0;
+    }
+    .last {
+        @media screen and (min-width: 48em) {
+            margin: 0 1.5% 0;
+        }
+    }
+}
+
+.three-columns-two {
+    @media screen and (min-width: 48em) {
+        width: 65.15%;
+        margin: 0 3% 0 0;
+    }
+}
+
+.four-columns-one {
+    @media screen and (min-width: 37.5em) {
+        width: 48.5%;
+        margin: 0 1.5% 0 0;
+        float: left;
+    }
+    @media screen and (min-width: 48em) {
+        width: 22.375%;
+        margin: 0 3.5% 0 0;
+    }
+}
+
+.four-columns-two {
+    @media screen and (min-width: 48em) {
+        width: 48%;
+        margin: 0 3.5% 0 0;
+    }
+}
+
+.four-columns-three {
+    @media screen and (min-width: 48em) {
+        width: 74.125%;
+        margin: 0 3.5% 0 0;
+    }
+}
+
+.last {
+    clear: right;
+    margin-right: 0 !important;
+}
+
+.elements-divider {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    display: block;
+    clear: both;
+}
+
+.columns-grid {
+    display: grid;
+    grid-gap: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+    @media screen and (max-width: 37.5em) {
+        grid-template-columns: 1fr !important;
+    }
+    @media screen and (min-width: 37.51em) and (max-width: 48em) {
+        grid-template-columns: 1fr 1fr !important;
+    }
+    p {
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+.elements-columns {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+
+    * {
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+    }
+
+    .colspan-1,
+    .colspan-2,
+    .colspan-3 {
+        flex: 220px 1 0;
+        min-width: 220px;
+        // Fix für FAU-Themes
+        float: none;
+        margin: 0;
+        padding: 0 10px 1.5em;
+        .entry-content {
+            min-width: 0;
+        }
+        .limit-width {
+            min-width: 0;
+        }
+    }
+
+    @media (min-width: 480px) {
+        &.cols-2 {
+            .colspan-1 {
+                flex-basis: 50%;
+            }
+        }
+
+        &.cols-3 {
+            .colspan-1 {
+                flex-basis: 33%;
+            }
+
+            .colspan-2 {
+                flex-basis: 66%;
+            }
+        }
+        &.cols-4 {
+            .colspan-1 {
+                flex-basis: 25%;
+            }
+
+            .colspan-2 {
+                flex-basis: 50%;
+            }
+
+            .colspan-3 {
+                flex-basis: 75%;
+            }
+        }
+        &.cols-5 {
+            .colspan-1 {
+                flex-basis: 20%;
+            }
+
+            .colspan-2 {
+                flex-basis: 40%;
+            }
+
+            .colspan-3 {
+                flex-basis: 60%;
+            }
+        }
+    }
+}

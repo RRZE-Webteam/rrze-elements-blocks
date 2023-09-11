@@ -1,0 +1,50 @@
+svg.rrze-elements-icon {
+    vertical-align: baseline;
+    box-shadow: none;
+    position: relative;
+    top: 2px;
+    a > & {
+        padding: .2em .2em .15em;
+        border-radius: 50% !important   ;
+        color: var(--color-button-bg, #1f4c7a);
+        box-shadow: none;
+    }
+    a:hover > &, a:focus > &, a:active > & {
+        background-color: var(--color-button-bg, #1f4c7a);
+        color: var(--color-button-text, #ffffff);
+        .rrze-2019 & {
+            background-color: #00458C;
+        }
+    }
+}
+
+a.icon,
+a.icon:hover,
+a.icon:focus,
+a.icon:active {
+    box-shadow: none; // fix für FAU-Themes
+}
+
+ul[class^="rrze-elements-icon-list-"] {
+    li {
+        list-style-type:none;
+        position: relative;
+        &:before {
+            content: "";
+            display: inline-block;
+            margin-right: .5em;
+            height: .8em;
+            width: .8em;
+            background-size: .75em .75em;
+            background-repeat: no-repeat;
+            position: absolute;
+            left: calc(-.75em - 10px);
+            .fau-theme & {
+                margin-top: .35rem;
+            }
+            .fau-events & {
+                margin-top: .45rem;
+            }
+        }
+    }
+}

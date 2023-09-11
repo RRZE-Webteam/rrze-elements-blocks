@@ -1,0 +1,48 @@
+{
+  "name": "rrze-elements",
+  "version": "1.0.0",
+  "description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
+  "main": "build/index.js",
+  "textdomain": "rrze-elementsb",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RRZE-Webteam/rrze-elements",
+    "issues": "https://github.com/RRZE-Webteam/rrze-elements/issues",
+    "clone": "git+https://github.com/RRZE-Webteam/rrze-elements.git"
+  },
+  "browserslist": [
+    "last 3 years",
+    "ie 11"
+  ],
+  "supports": {
+    "email": "webmaster@fau.de",
+    "docs": "https://www.wordpress.rrze.fau.de/plugins/fau-und-rrze-plugins/elements/"
+  },
+  "author": {
+    "name": "RRZE-Webteam <webmaster@fau.de>",
+    "url": "https://www.wordpress.rrze.fau.de/person/webmaster"
+  },
+  "license": "GNU General Public License v3",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.7.0",
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@wordpress/babel-plugin-makepot": "^5.20.0",
+    "@wordpress/eslint-plugin": "^14.11.0",
+    "@wordpress/icons": "^9.26.0",
+    "@wordpress/i18n": "^4.36.0",
+    "@wordpress/server-side-render": "^4.12.0",
+    "@wordpress/api-fetch": "^6.33.0",
+    "autoprefixer": "^10.4.14",
+    "semver": "^7.5.3"
+  }
+}

@@ -1,0 +1,59 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "rrze-elements/collapse",
+	"version": "1.25.10",
+	"title": "Collapse",
+	"category": "design",
+	"icon": "align-center",
+	"description": "Creates an accordion block",
+	"parent": [
+		"rrze-elements/accordion"
+	],
+	"keywords": [
+		"accordion",
+		"collapse",
+		"expand",
+		"toggle"
+	],
+	"attributes": {
+		"message": {
+			"type": "string",
+			"source": "text",
+			"selector": "div"
+		},
+		"expandAllLink": {
+			"type": "boolean",
+			"default": false
+		},
+		"hstart": {
+			"type": "integer",
+			"default": 2
+		},
+		"register": {
+			"type": "boolean",
+			"default": false
+		},
+		"sameBlockCount": {
+			"type": "integer",
+			"default": 0
+		},
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": "button",
+			"default": "Enter your Title"
+		},
+		"color": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "rrze-elements",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
