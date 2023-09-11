@@ -105,6 +105,7 @@ function deactivation()
 function rrze_rrze_elements_block_init() {
     register_block_type( __DIR__ . '/build/accordion');
     register_block_type( __DIR__ . '/build/collapse');
+    register_block_type( __DIR__ . '/build/notice');
 }
 
 /**
@@ -126,7 +127,9 @@ function loaded()
             printf('<div class="notice notice-error"><p>%1$s: %2$s</p></div>', esc_html($plugin_name), esc_html($error));
         });
     } else {
-        // new Main(__FILE__);
+        new Main(__FILE__);
         add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
+        wp_enqueue_style('fontawesome');
+        wp_enqueue_style('rrze-elements');
     }
 }
