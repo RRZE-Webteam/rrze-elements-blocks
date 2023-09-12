@@ -1,18 +1,18 @@
-import { 
-  TextControl, 
-  ColorPalette, 
-  PanelBody,   
+import {
+  TextControl,
+  ColorPalette,
+  PanelBody,
   ToolbarDropdownMenu,
   Toolbar,
-  ToolbarGroup
+  ToolbarGroup,
 } from "@wordpress/components";
 import {
   useBlockProps,
   BlockControls,
   InnerBlocks,
-  InspectorControls
+  InspectorControls,
 } from "@wordpress/block-editor";
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect } from "@wordpress/data";
 
@@ -22,7 +22,7 @@ function Edit({
   selectedBlock,
   blockParents,
   siblingBlocks,
-  // ToolbarButton,
+  totalChildrenCount,
 }) {
   const props = useBlockProps();
   const [isActive, setIsActive] = useState(false);
@@ -53,70 +53,49 @@ function Edit({
     }
   };
 
-  let sameTypeSiblingsBefore = 0;
-  if (selectedBlock && blockParents.length > 0) {
-    for (const block of siblingBlocks) {
-      if (block.clientId === selectedBlock.clientId) {
-        break;
-      }
-      if (block.name === selectedBlock.name) {
-        sameTypeSiblingsBefore++;
-      }
+  useEffect(() => {
+    if (attributes.totalChildrenCount !== totalChildrenCount) {
+      setAttributes({ totalChildrenCount });
+      console.log("totalChildrenCount", totalChildrenCount);
     }
-    if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-      setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-    }
-  }
+  }, [totalChildrenCount, attributes.totalChildrenCount, setAttributes]);
 
   const handleToggleColor = (newTag) => {
     setAttributes({ color: newTag });
   };
 
+  let sameTypeSiblingsBefore = 0;
+  useEffect(() => {
+    if (selectedBlock && blockParents.length > 0) {
+      for (const block of siblingBlocks) {
+        if (block.clientId === selectedBlock.clientId) {
+          break;
+        }
+        if (block.name === selectedBlock.name) {
+          sameTypeSiblingsBefore++;
+        }
+      }
+      if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
+        setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
+      }
+    }
+  }, [
+    selectedBlock,
+    blockParents,
+    siblingBlocks,
+    attributes.sameBlockCount,
+    setAttributes,
+  ]);
+
   return (
     <>
-      <BlockControls>
+      {/* <BlockControls>
         <Toolbar label="Options">
           <ToolbarGroup>
-            <ToolbarDropdownMenu
-              icon={null}
-              label="Select a color"
-              value={attributes.color}
-              controls={[
-                {
-                  title: __("FAU Blau", "rrze-elements"),
-                  isDisabled: color === "",
-                  onClick: () => handleToggleColor(""),
-                },
-                {
-                  title: __("RW Rot", "rrze-elements"),
-                  isDisabled: color === "rw",
-                  onClick: () => handleToggleColor("rw"),
-                },
-                {
-                  title: __("Phil Gelb", "rrze-elements"),
-                  isDisabled: color === "phil",
-                  onClick: () => handleToggleColor("phil"),
-                },
-                {
-                  title: __("Nat Grün", "rrze-elements"),
-                  isDisabled: color === "nat",
-                  onClick: () => handleToggleColor("nat"),
-                },
-                {
-                  title: __("Med Blau", "rrze-elements"),
-                  isDisabled: color === "med",
-                  onClick: () => handleToggleColor("med"),
-                },
-                {
-                  title: __("TF Grau", "rrze-elements"),
-                  isDisabled: color === "tf",
-                  onClick: () => handleToggleColor("tf"),
-                },
-              ]}
-            />
+            
           </ToolbarGroup>
         </Toolbar>
-      </BlockControls>
+      </BlockControls> */}
 
       <InspectorControls>
         <PanelBody title={__("Settings", "text-box")}>
@@ -170,13 +149,27 @@ function Edit({
 
 export default withSelect((select, ownProps) => {
   const { getBlock, getBlockParents, getBlocks } = select("core/block-editor");
+
   const selectedBlockClientId = ownProps.clientId;
   const blockParents = getBlockParents(selectedBlockClientId, true);
   const parentClientId = blockParents[0];
+  const siblingBlocks = getBlocks(parentClientId);
+
+  const collapsiblesBeforeMe =
+    getBlock(parentClientId)?.attributes?.previousBlockIds || [];
+
+  let totalChildrenCount = 0;
+
+  collapsiblesBeforeMe.forEach((blockClientId) => {
+    const childrenCount =
+      getBlock(blockClientId)?.attributes?.childrenCount || 0;
+    totalChildrenCount += childrenCount;
+  });
 
   return {
     selectedBlock: getBlock(selectedBlockClientId),
     blockParents: blockParents,
-    siblingBlocks: getBlocks(parentClientId),
+    siblingBlocks: siblingBlocks,
+    totalChildrenCount: totalChildrenCount,
   };
 })(Edit);

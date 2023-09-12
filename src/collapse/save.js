@@ -2,7 +2,7 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, color } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title } = attributes;
 
   return (
     <div {...blockProps}>
@@ -14,14 +14,13 @@ export default function save({ attributes }) {
             <button
               className="accordion-toggle"
               data-toggle="collapse"
-              href={`#collapse_${sameBlockCount}`}
+              href={`#collapse_${sameBlockCount + totalChildrenCount}`}
             >
-              {" "}
-              Test{" "}
+              {title}
             </button>
           </h2>
           <div
-            id={`collapse_${sameBlockCount}`}
+            id={`collapse_${sameBlockCount + totalChildrenCount}`}
             className="accordion-body"
             style={{ display: "none" }}
           >

@@ -28,6 +28,14 @@
     "sameBlockCount": {
       "type": "integer",
       "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "previousBlockIds": {
+      "type": "array",
+      "default": []
     }
   },
   "supports": {

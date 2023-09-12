@@ -1,53 +1,65 @@
-// import { TextControl } from "@wordpress/components";
+// Uncomment this:
+import { useEffect, useState } from "@wordpress/element";
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-// import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect } from "@wordpress/data";
+import { isEqual } from 'lodash';
 
-function Edit({ blockProps, attributes, selectedBlock, setAttributes, blockParents}) {
+
+function Edit({ attributes, setAttributes, numberChildren: propNumberChildren, previousBlockClients }) {
   const props = useBlockProps();
-  const { sameBlockCount } = attributes;
+  const { sameBlockCount, previouusBlockIds } = attributes;
+  const [isNumberChildren, setNumberChildren] = useState(propNumberChildren || 0);
 
-  // let sameTypeSiblingsBefore = 0;
-  // if (selectedBlock && blockParents.length > 0) {
-  //   for (const block of siblingBlocks) {
-  //     if (block.clientId === selectedBlock.clientId) {
-  //       break;
-  //     }
-  //     if (block.name === selectedBlock.name) {
-  //       sameTypeSiblingsBefore++;
-  //     }
-  //   }
-  //   if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-  //     setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-  //   }
-  // }
+  useEffect(() => {
+    if(attributes.childrenCount !== isNumberChildren) {
+        setAttributes({ childrenCount: isNumberChildren });
+    }
+}, [isNumberChildren, setAttributes, attributes.childrenCount]);
+
+
+useEffect(() => {
+  if(!isEqual(attributes.previousBlockIds, previousBlockClients)) {
+      setAttributes({ previousBlockIds: previousBlockClients });
+  }
+}, [previousBlockClients, setAttributes, attributes.previousBlockClients]);
 
   return (
     <>
       <div {...props}>
         <div className="accordion" id={`accordion-`}>
-              <InnerBlocks 
-                allowedBlocks={['rrze-elements/accordion']}
-                template={[
-                    ['rrze-elements/collapse', {}],
-                    ['rrze-elements/collapse', {}]
-                  ]} />
+          <InnerBlocks 
+            allowedBlocks={['rrze-elements/accordion']}
+            template={[
+              ['rrze-elements/collapse', {}],
+              ['rrze-elements/collapse', {}]
+            ]} />
         </div>
       </div>
     </>
   );
 }
 
+
 export default withSelect((select, ownProps) => {
   const { getBlock, getBlockParents, getBlocks, getBlockIndex } = select("core/block-editor");
   const selectedBlockClientId = ownProps.clientId;
-  // console.log(ownProps);
+  const numberChildren = getBlocks(selectedBlockClientId).length;
   const blockIndex = getBlockIndex(selectedBlockClientId);
-  // console.log(blockIndex);
+  const allBlocks = getBlocks();
+
+  const CollapsiblesBlockClientIds = allBlocks
+    .filter(block => block.name === 'rrze-elements/accordion')
+    .map(block => block.clientId);
+
+  const currentBlockIndex = CollapsiblesBlockClientIds.indexOf(selectedBlockClientId);
+  const previousBlockClients = CollapsiblesBlockClientIds.slice(0, currentBlockIndex);
 
   return {
     selectedBlock: getBlock(selectedBlockClientId),
+    numberChildren: numberChildren,
     blockIndex: blockIndex,
+    previousBlockClients: previousBlockClients
   };
 })(Edit);
+

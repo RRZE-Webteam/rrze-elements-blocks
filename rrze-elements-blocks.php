@@ -106,6 +106,9 @@ function rrze_rrze_elements_block_init() {
     register_block_type( __DIR__ . '/build/accordion');
     register_block_type( __DIR__ . '/build/collapse');
     register_block_type( __DIR__ . '/build/notice');
+
+    wp_enqueue_style('fontawesome');
+    wp_enqueue_style('rrze-elements');
 }
 
 /**
@@ -129,7 +132,7 @@ function loaded()
     } else {
         new Main(__FILE__);
         add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
-        wp_enqueue_style('fontawesome');
-        wp_enqueue_style('rrze-elements');
+
     }
+
 }

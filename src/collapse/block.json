@@ -47,6 +47,10 @@
 		"color": {
 			"type": "string",
 			"default": ""
+		},
+		"totalChildrenCount": {
+			"type": "integer",
+			"default": 0
 		}
 	},
 	"supports": {

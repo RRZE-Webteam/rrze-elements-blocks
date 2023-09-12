@@ -22,6 +22,7 @@ class Main
     public function __construct($pluginFile)
     {
         $this->pluginFile = $pluginFile;
+        new Sanitize();
     }
 
     function __destruct() {
