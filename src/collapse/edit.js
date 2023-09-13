@@ -14,77 +14,101 @@ import {
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { withSelect } from "@wordpress/data";
+import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
-function Edit({
-  attributes,
-  setAttributes,
-  selectedBlock,
-  blockParents,
-  siblingBlocks,
-  totalChildrenCount,
-}) {
+function Edit({ attributes, setAttributes, clientId }) {
   const props = useBlockProps();
   const [isActive, setIsActive] = useState(false);
   const { sameBlockCount, title, color } = attributes;
 
   const colorToSlugMap = {
-    "#04316A": "",
-    "#C50F3C": "rw",
-    "#7bb725": "nat",
-    "#18B4F1": "med",
-    "#FDB735": "phil",
-    "#8C9FB1": "tech",
+      "#04316A": "",
+      "#C50F3C": "rw",
+      "#7bb725": "nat",
+      "#18B4F1": "med",
+      "#FDB735": "phil",
+      "#8C9FB1": "tech",
   };
 
   const onChangeColor = (newColor) => {
-    setAttributes({ color: colorToSlugMap[newColor] });
+      setAttributes({ color: colorToSlugMap[newColor] });
   };
 
   const toggleActive = () => {
-    setIsActive(!isActive);
+      setIsActive(!isActive);
   };
 
   const onChangeTitle = (newText) => {
-    if (newText === "") {
-      setAttributes({ title: " " });
-    } else {
-      setAttributes({ title: newText });
-    }
+      if (newText === "") {
+          setAttributes({ title: " " });
+      } else {
+          setAttributes({ title: newText });
+      }
   };
 
+  const {
+    selectedBlock,
+    blockParents,
+    siblingBlocks,
+    totalChildrenCount,
+  } = useSelect(
+    (select) => {
+      const { getBlock, getBlockParents, getBlocks } = select("core/block-editor");
+      const blockParents = getBlockParents(clientId, true);
+      const parentClientId = blockParents[0];
+      const siblingBlocks = getBlocks(parentClientId);
+      const collapsiblesBeforeMe = getBlock(parentClientId)?.attributes?.previousBlockIds || [];
+  
+      let totalChildrenCount = 0;
+      collapsiblesBeforeMe.forEach((blockClientId) => {
+        const childrenCount = getBlock(blockClientId)?.attributes?.childrenCount || 0;
+        totalChildrenCount += childrenCount;
+      });
+  
+      return {
+        selectedBlock: getBlock(clientId),
+        blockParents,
+        siblingBlocks,
+        totalChildrenCount,
+      };
+    },
+    [clientId] // only rerun if clientId changes
+  );
+  
+  // Move any additional logic or console.logs here, outside of useSelect.
+  
   useEffect(() => {
-    if (attributes.totalChildrenCount !== totalChildrenCount) {
-      setAttributes({ totalChildrenCount });
-      console.log("totalChildrenCount", totalChildrenCount);
-    }
-  }, [totalChildrenCount, attributes.totalChildrenCount, setAttributes]);
+      if (attributes.totalChildrenCount !== totalChildrenCount) {
+          setAttributes({ totalChildrenCount });
+          console.log("totalChildrenCount", totalChildrenCount);
+      }
+  }, [totalChildrenCount, attributes.totalChildrenCount]);
 
   const handleToggleColor = (newTag) => {
-    setAttributes({ color: newTag });
+      setAttributes({ color: newTag });
   };
 
   let sameTypeSiblingsBefore = 0;
   useEffect(() => {
-    if (selectedBlock && blockParents.length > 0) {
-      for (const block of siblingBlocks) {
-        if (block.clientId === selectedBlock.clientId) {
-          break;
-        }
-        if (block.name === selectedBlock.name) {
-          sameTypeSiblingsBefore++;
-        }
+      if (selectedBlock && blockParents.length > 0) {
+          for (const block of siblingBlocks) {
+              if (block.clientId === selectedBlock.clientId) {
+                  break;
+              }
+              if (block.name === selectedBlock.name) {
+                  sameTypeSiblingsBefore++;
+              }
+          }
+          if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
+              setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
+          }
       }
-      if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-        setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-      }
-    }
   }, [
-    selectedBlock,
-    blockParents,
-    siblingBlocks,
-    attributes.sameBlockCount,
-    setAttributes,
+      selectedBlock,
+      blockParents,
+      siblingBlocks,
+      attributes.sameBlockCount,
+      setAttributes,
   ]);
 
   return (

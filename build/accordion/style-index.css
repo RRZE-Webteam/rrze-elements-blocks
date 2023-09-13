@@ -1,1 +1,371 @@
-*{font-family:Roboto}h1.accordion-heading,h2.accordion-heading,h3.accordion-heading,h4.accordion-heading,h5.accordion-heading,h6.accordion-heading{border:none;margin:0;padding:0!important;text-align:left;width:auto}button.accordion-toggle{border:none;text-align:left;width:100%}button.expand-all.standard-btn{float:none;margin:5px 0}.button-container-right{text-align:right}.button-container-left{text-align:left}.accordion .accordion{margin:0}.accordion .accordion-register{border-bottom:1px solid #c3c3cb;border-top:1px solid #c3c3cb;margin:0 0 .5em;padding-left:0}.accordion .accordion-register li{float:left;list-style-type:none;padding:.25em .5em}.accordion .accordion-suffix{font-weight:700}.accordion .accordion-group{border:none;margin-bottom:5px}.accordion .accordion-toggle{background:var(--color-ContentBorders,#d2ddeb);border-left-style:solid;border-left-width:10px;color:var(--color-Text,#444);display:block;font-size:1rem;padding:8px 35px 8px 10px;position:relative;text-decoration:none}.accordion .accordion-toggle:before{content:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgRnJlZSA2LjEuMiBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIChJY29uczogQ0MgQlkgNC4wLCBGb250czogU0lMIE9GTCAxLjEsIENvZGU6IE1JVCBMaWNlbnNlKSBDb3B5cmlnaHQgMjAyMiBGb250aWNvbnMsIEluYy4gLS0+PHBhdGggZD0iTTMxMC42IDI0Ni42bC0xMjcuMSAxMjhDMTc2LjQgMzgwLjkgMTY4LjIgMzg0IDE2MCAzODRzLTE2LjM4LTMuMTI1LTIyLjYzLTkuMzc1bC0xMjcuMS0xMjhDLjIyNDQgMjM3LjUtMi41MTYgMjIzLjcgMi40MzggMjExLjhTMTkuMDcgMTkyIDMyIDE5MmgyNTUuMWMxMi45NCAwIDI0LjYyIDcuNzgxIDI5LjU4IDE5Ljc1UzMxOS44IDIzNy41IDMxMC42IDI0Ni42eiIvPjwvc3ZnPg==)}.accordion .accordion-toggle.active:before,.accordion .accordion-toggle:before{display:inline-block;margin-right:5px;position:relative;position:absolute;right:10px;top:2px;top:12px;width:1em;width:12px}.accordion .accordion-toggle.active:before{content:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgRnJlZSA2LjEuMiBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIChJY29uczogQ0MgQlkgNC4wLCBGb250czogU0lMIE9GTCAxLjEsIENvZGU6IE1JVCBMaWNlbnNlKSBDb3B5cmlnaHQgMjAyMiBGb250aWNvbnMsIEluYy4gLS0+PHBhdGggZD0iTTkuMzkgMjY1LjRsMTI3LjEtMTI4QzE0My42IDEzMS4xIDE1MS44IDEyOCAxNjAgMTI4czE2LjM4IDMuMTI1IDIyLjYzIDkuMzc1bDEyNy4xIDEyOGM5LjE1NiA5LjE1NiAxMS45IDIyLjkxIDYuOTQzIDM0Ljg4UzMwMC45IDMyMCAyODcuMSAzMjBIMzIuMDFjLTEyLjk0IDAtMjQuNjItNy43ODEtMjkuNTgtMTkuNzVTLjIzMzMgMjc0LjUgOS4zOSAyNjUuNHoiLz48L3N2Zz4=)}.accordion .accordion-toggle.active,.accordion .accordion-toggle:focus,.accordion .accordion-toggle:hover{background-color:var(--color-primary-ci-hell,#04316a);color:var(--color-primary-ci-hell-kontrast,#fff);text-decoration:none}.alert.font-light .accordion .accordion-toggle.active *,.alert.font-light .accordion .accordion-toggle:focus *,.alert.font-light .accordion .accordion-toggle:hover *{color:var(--color-primary-ci-hell-kontrast,#fff)}.accordion .accordion-toggle.active:focus,.accordion .accordion-toggle.active:hover{background-color:var(--color-primary-dunkler,#004a9f);border-color:var(--color-primary-dunkler,#004a9f);color:var(--color-primary-ci-hell-kontrast,#fff)}.alert.font-light .accordion .accordion-toggle *{color:var(--color-Text,#444)}.accordion .accordion-toggle svg.rrze-elements-icon{margin-right:3px}.accordion .gold .accordion-heading .accordion-toggle,.accordion .phil .accordion-heading .accordion-toggle,.accordion .philfak .accordion-heading .accordion-toggle{border-color:var(--color-phil-ci-hell,#fdb735)}.accordion .gold .accordion-heading .accordion-toggle.active,.accordion .gold .accordion-heading .accordion-toggle:focus,.accordion .gold .accordion-heading .accordion-toggle:hover,.accordion .phil .accordion-heading .accordion-toggle.active,.accordion .phil .accordion-heading .accordion-toggle:focus,.accordion .phil .accordion-heading .accordion-toggle:hover,.accordion .philfak .accordion-heading .accordion-toggle.active,.accordion .philfak .accordion-heading .accordion-toggle:focus,.accordion .philfak .accordion-heading .accordion-toggle:hover{background-color:var(--color-phil-ci-hell,#fdb735);border-color:var(--color-phil-ci-hell,#fdb735);color:var(--color-phil-ci-hell-kontrast,#000)}.accordion .gold .accordion-heading .accordion-toggle.active:focus,.accordion .gold .accordion-heading .accordion-toggle.active:hover,.accordion .phil .accordion-heading .accordion-toggle.active:focus,.accordion .phil .accordion-heading .accordion-toggle.active:hover,.accordion .philfak .accordion-heading .accordion-toggle.active:focus,.accordion .philfak .accordion-heading .accordion-toggle.active:hover{background-color:var(--color-phil-dunkler,#e87722);border-color:var(--color-phil-dunkler,#e87722);color:var(--color-phil-ci-hell-kontrast,#000)}.accordion .red .accordion-heading .accordion-toggle,.accordion .rw .accordion-heading .accordion-toggle,.accordion .rwfak .accordion-heading .accordion-toggle{border-color:var(--color-rw-ci-hell,#c50f3c)}.accordion .red .accordion-heading .accordion-toggle.active,.accordion .red .accordion-heading .accordion-toggle:focus,.accordion .red .accordion-heading .accordion-toggle:hover,.accordion .rw .accordion-heading .accordion-toggle.active,.accordion .rw .accordion-heading .accordion-toggle:focus,.accordion .rw .accordion-heading .accordion-toggle:hover,.accordion .rwfak .accordion-heading .accordion-toggle.active,.accordion .rwfak .accordion-heading .accordion-toggle:focus,.accordion .rwfak .accordion-heading .accordion-toggle:hover{background-color:var(--color-rw-ci-hell,#c50f3c);border-color:var(--color-rw-ci-hell,#c50f3c);color:var(--color-rw-ci-hell-kontrast,#fff)}.accordion .red .accordion-heading .accordion-toggle.active:focus,.accordion .red .accordion-heading .accordion-toggle.active:hover,.accordion .rw .accordion-heading .accordion-toggle.active:focus,.accordion .rw .accordion-heading .accordion-toggle.active:hover,.accordion .rwfak .accordion-heading .accordion-toggle.active:focus,.accordion .rwfak .accordion-heading .accordion-toggle.active:hover{background-color:var(--color-rw-dunkler,#971b2f);border-color:var(--color-rw-dunkler,#971b2f);color:var(--color-rw-ci-hell-kontrast,#fff)}.accordion .blue .accordion-heading .accordion-toggle,.accordion .med .accordion-heading .accordion-toggle,.accordion .medfak .accordion-heading .accordion-toggle{border-color:var(--color-med-ci-hell,#18b4f1)}.accordion .blue .accordion-heading .accordion-toggle.active,.accordion .blue .accordion-heading .accordion-toggle:focus,.accordion .blue .accordion-heading .accordion-toggle:hover,.accordion .med .accordion-heading .accordion-toggle.active,.accordion .med .accordion-heading .accordion-toggle:focus,.accordion .med .accordion-heading .accordion-toggle:hover,.accordion .medfak .accordion-heading .accordion-toggle.active,.accordion .medfak .accordion-heading .accordion-toggle:focus,.accordion .medfak .accordion-heading .accordion-toggle:hover{background-color:var(--color-med-ci-hell,#18b4f1);border-color:var(--color-med-ci-hell,#18b4f1);color:var(--color-med-ci-hell-kontrast,#000)}.accordion .blue .accordion-heading .accordion-toggle.active:focus,.accordion .blue .accordion-heading .accordion-toggle.active:hover,.accordion .med .accordion-heading .accordion-toggle.active:focus,.accordion .med .accordion-heading .accordion-toggle.active:hover,.accordion .medfak .accordion-heading .accordion-toggle.active:focus,.accordion .medfak .accordion-heading .accordion-toggle.active:hover{background-color:var(--color-med-dunkler,#005287);border-color:var(--color-med-dunkler,#005287);color:var(--color-med-ci-dunkel-kontrast,#fff)}.accordion .green .accordion-heading .accordion-toggle,.accordion .nat .accordion-heading .accordion-toggle,.accordion .natfak .accordion-heading .accordion-toggle{border-color:var(--color-nat-ci-hell,#7bb725)}.accordion .green .accordion-heading .accordion-toggle.active,.accordion .green .accordion-heading .accordion-toggle.active:focus,.accordion .green .accordion-heading .accordion-toggle:focus,.accordion .green .accordion-heading .accordion-toggle:hover,.accordion .nat .accordion-heading .accordion-toggle.active,.accordion .nat .accordion-heading .accordion-toggle.active:focus,.accordion .nat .accordion-heading .accordion-toggle:focus,.accordion .nat .accordion-heading .accordion-toggle:hover,.accordion .natfak .accordion-heading .accordion-toggle.active,.accordion .natfak .accordion-heading .accordion-toggle.active:focus,.accordion .natfak .accordion-heading .accordion-toggle:focus,.accordion .natfak .accordion-heading .accordion-toggle:hover{background-color:var(--color-nat-ci-hell,#7bb725);border-color:var(--color-nat-ci-hell,#7bb725);color:var(--color-nat-ci-hell-kontrast,#000)}.accordion .green .accordion-heading .accordion-toggle.active:focus,.accordion .green .accordion-heading .accordion-toggle.active:hover,.accordion .nat .accordion-heading .accordion-toggle.active:focus,.accordion .nat .accordion-heading .accordion-toggle.active:hover,.accordion .natfak .accordion-heading .accordion-toggle.active:focus,.accordion .natfak .accordion-heading .accordion-toggle.active:hover{background-color:var(--color-nat-dunkler,#266141);border-color:var(--color-nat-dunkler,#266141);color:var(--color-nat-ci-dunkel-kontrast,#fff)}.accordion .grey .accordion-heading .accordion-toggle,.accordion .techfak .accordion-heading .accordion-toggle,.accordion .tf .accordion-heading .accordion-toggle{border-color:var(--color-tf-ci-hell,#8c9fb1)}.accordion .grey .accordion-heading .accordion-toggle.active,.accordion .grey .accordion-heading .accordion-toggle:focus,.accordion .grey .accordion-heading .accordion-toggle:hover,.accordion .techfak .accordion-heading .accordion-toggle.active,.accordion .techfak .accordion-heading .accordion-toggle:focus,.accordion .techfak .accordion-heading .accordion-toggle:hover,.accordion .tf .accordion-heading .accordion-toggle.active,.accordion .tf .accordion-heading .accordion-toggle:focus,.accordion .tf .accordion-heading .accordion-toggle:hover{background-color:var(--color-tf-ci-hell,#8c9fb1);border-color:var(--color-tf-ci-hell,#8c9fb1);color:var(--color-tf-ci-dunkel-kontrast,#000)}.accordion .grey .accordion-heading .accordion-toggle.active:focus,.accordion .grey .accordion-heading .accordion-toggle.active:hover,.accordion .techfak .accordion-heading .accordion-toggle.active:focus,.accordion .techfak .accordion-heading .accordion-toggle.active:hover,.accordion .tf .accordion-heading .accordion-toggle.active:focus,.accordion .tf .accordion-heading .accordion-toggle.active:hover{background-color:var(--color-tf-dunkler,#2f586e);border-color:var(--color-tf-dunkler,#2f586e);color:var(--color-tf-ci-dunkel-kontrast,#fff)}.accordion .default .accordion-heading .accordion-toggle,.accordion .fau .accordion-heading .accordion-toggle{border-color:var(--color-zentral-ci-hell,#04316a)}.accordion .default .accordion-heading .accordion-toggle.active,.accordion .default .accordion-heading .accordion-toggle:focus,.accordion .default .accordion-heading .accordion-toggle:hover,.accordion .fau .accordion-heading .accordion-toggle.active,.accordion .fau .accordion-heading .accordion-toggle:focus,.accordion .fau .accordion-heading .accordion-toggle:hover{background-color:var(--color-zentral-ci-hell,#04316a);border-color:var(--color-zentral-ci-hell,#04316a);color:var(--color-zentral-ci-hell-kontrast,#fff)}.accordion .default .accordion-heading .accordion-toggle.active:focus,.accordion .default .accordion-heading .accordion-toggle.active:hover,.accordion .fau .accordion-heading .accordion-toggle.active:focus,.accordion .fau .accordion-heading .accordion-toggle.active:hover{background-color:var(--color-zentral-dunkler,#004a9f);border-color:var(--color-zentral-dunkler,#004a9f);color:var(--color-zentral-ci-hell-kontrast,#fff)}.accordion .accordion-body{display:block;overflow:hidden}.accordion .accordion-body .accordion-inner{background-color:#fff;border:none;padding:15px 20px}.alert.font-light .accordion .accordion-body .accordion-inner,.alert.font-light .accordion .accordion-body .accordion-inner a,.alert.font-light .accordion .accordion-body .accordion-inner blockquote,.alert.font-light .accordion .accordion-body .accordion-inner code,.alert.font-light .accordion .accordion-body .accordion-inner em,.alert.font-light .accordion .accordion-body .accordion-inner h1,.alert.font-light .accordion .accordion-body .accordion-inner h2,.alert.font-light .accordion .accordion-body .accordion-inner h3,.alert.font-light .accordion .accordion-body .accordion-inner h4,.alert.font-light .accordion .accordion-body .accordion-inner h5,.alert.font-light .accordion .accordion-body .accordion-inner li,.alert.font-light .accordion .accordion-body .accordion-inner p,.alert.font-light .accordion .accordion-body .accordion-inner pre,.alert.font-light .accordion .accordion-body .accordion-inner span,.alert.font-light .accordion .accordion-body .accordion-inner strong,.alert.font-light .accordion .accordion-body .accordion-inner td,.alert.font-light .accordion .accordion-body .accordion-inner th{color:var(--color-Text,#222)}.fau-theme .accordion-toggle{background-clip:padding-box;border-radius:var(--border-radius,4px)}.fau-theme .accordion-body .accordion-inner{background-clip:padding-box;background-color:#f5f7f9;border-bottom-left-radius:4px;border-bottom-right-radius:4px}.fau-theme .accordion-group .accordion-body .accordion-inner .accordion-inner{background-color:#e8edf1}@media print{.accordion{display:block;overflow:visible;position:relative}.accordion-body,.accordion-group,.accordion-inner,.accordion-inner p{-moz-column-break-inside:avoid;break-inside:avoid;display:block!important;overflow:visible;page-break-inside:avoid;position:relative}button.expand-all.standard-btn{display:none}h3.accordion-heading,h4.accordion-heading{margin-bottom:0!important}}.read-mode-only{display:none}.admin-bar #content main .accordion-body:target{padding-top:0}
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/accordion/style.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/*
+    --color-zentral-ci-hell: #04316a;
+    --color-zentral-ci-hell-kontrast: #fff;
+    --color-phil-ci-hell: #fdb735;
+    --color-phil-ci-hell-kontrast: #000;
+    --color-med-ci-hell: #18b4f1;
+    --color-med-ci-hell-kontrast: #000;
+    --color-nat-ci-hell: #7bb725;
+    --color-nat-ci-hell-kontrast: #000;
+    --color-rw-ci-hell: #c50f3c;
+    --color-rw-ci-hell-kontrast: #fff;
+    --color-tf-ci-hell: #8c9fb1;
+    --color-tf-ci-hell-kontrast: #000;
+
+    --color-primary-ci-hell
+    --color-primary-ci-hell-kontrast
+    --color-button-text
+    --color-button-bg
+    --color-button-hover-text
+    --color-button-hover-bg
+*/
+/*!
+Functions and Mixins
+*/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+/*!
+* Accordion
+*/
+* {
+  font-family: Roboto;
+}
+
+h1.accordion-heading,
+h2.accordion-heading,
+h3.accordion-heading,
+h4.accordion-heading,
+h5.accordion-heading,
+h6.accordion-heading {
+  width: auto;
+  padding: 0 !important;
+  margin: 0;
+  border: none;
+  text-align: left;
+}
+
+button.accordion-toggle {
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+
+button.expand-all.standard-btn {
+  margin: 5px 0;
+  float: none;
+}
+
+.button-container-right {
+  text-align: right;
+}
+
+.button-container-left {
+  text-align: left;
+}
+
+.accordion .accordion {
+  margin: 0;
+}
+.accordion .accordion-register {
+  padding-left: 0;
+  margin: 0 0 0.5em;
+  border-top: 1px solid #C3C3CB;
+  border-bottom: 1px solid #C3C3CB;
+}
+.accordion .accordion-register li {
+  float: left;
+  list-style-type: none;
+  padding: 0.25em 0.5em;
+}
+.accordion .accordion-suffix {
+  font-weight: bold;
+}
+.accordion .accordion-group {
+  border: none;
+  margin-bottom: 5px;
+}
+.accordion .accordion-toggle {
+  display: block;
+  border-left-width: 10px;
+  border-left-style: solid;
+  background: var(--color-ContentBorders, #d2ddeb);
+  color: var(--color-Text, #444);
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 8px 35px 8px 10px;
+  position: relative;
+}
+.accordion .accordion-toggle:before {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgRnJlZSA2LjEuMiBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIChJY29uczogQ0MgQlkgNC4wLCBGb250czogU0lMIE9GTCAxLjEsIENvZGU6IE1JVCBMaWNlbnNlKSBDb3B5cmlnaHQgMjAyMiBGb250aWNvbnMsIEluYy4gLS0+PHBhdGggZD0iTTMxMC42IDI0Ni42bC0xMjcuMSAxMjhDMTc2LjQgMzgwLjkgMTY4LjIgMzg0IDE2MCAzODRzLTE2LjM4LTMuMTI1LTIyLjYzLTkuMzc1bC0xMjcuMS0xMjhDLjIyNDQgMjM3LjUtMi41MTYgMjIzLjcgMi40MzggMjExLjhTMTkuMDcgMTkyIDMyIDE5MmgyNTUuMWMxMi45NCAwIDI0LjYyIDcuNzgxIDI5LjU4IDE5Ljc1UzMxOS44IDIzNy41IDMxMC42IDI0Ni42eiIvPjwvc3ZnPg==);
+  display: inline-block;
+  width: 1em;
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  width: 12px;
+}
+.accordion .accordion-toggle.active:before {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgRnJlZSA2LjEuMiBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIChJY29uczogQ0MgQlkgNC4wLCBGb250czogU0lMIE9GTCAxLjEsIENvZGU6IE1JVCBMaWNlbnNlKSBDb3B5cmlnaHQgMjAyMiBGb250aWNvbnMsIEluYy4gLS0+PHBhdGggZD0iTTkuMzkgMjY1LjRsMTI3LjEtMTI4QzE0My42IDEzMS4xIDE1MS44IDEyOCAxNjAgMTI4czE2LjM4IDMuMTI1IDIyLjYzIDkuMzc1bDEyNy4xIDEyOGM5LjE1NiA5LjE1NiAxMS45IDIyLjkxIDYuOTQzIDM0Ljg4UzMwMC45IDMyMCAyODcuMSAzMjBIMzIuMDFjLTEyLjk0IDAtMjQuNjItNy43ODEtMjkuNTgtMTkuNzVTLjIzMzMgMjc0LjUgOS4zOSAyNjUuNHoiLz48L3N2Zz4=);
+  display: inline-block;
+  width: 1em;
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+  position: absolute;
+  right: 10px;
+  width: 12px;
+  top: 12px;
+}
+.accordion .accordion-toggle:hover, .accordion .accordion-toggle:focus, .accordion .accordion-toggle.active {
+  text-decoration: none;
+  background-color: var(--color-primary-ci-hell, #04316A);
+  color: var(--color-primary-ci-hell-kontrast, #fff);
+}
+.alert.font-light .accordion .accordion-toggle:hover *, .alert.font-light .accordion .accordion-toggle:focus *, .alert.font-light .accordion .accordion-toggle.active * {
+  color: var(--color-primary-ci-hell-kontrast, #fff);
+}
+.accordion .accordion-toggle.active:hover, .accordion .accordion-toggle.active:focus {
+  border-color: var(--color-primary-dunkler, #004A9F);
+  background-color: var(--color-primary-dunkler, #004A9F);
+  color: var(--color-primary-ci-hell-kontrast, #fff);
+}
+.alert.font-light .accordion .accordion-toggle * {
+  color: var(--color-Text, #444);
+}
+.accordion .accordion-toggle svg.rrze-elements-icon {
+  margin-right: 3px;
+}
+.accordion .phil .accordion-heading .accordion-toggle,
+.accordion .philfak .accordion-heading .accordion-toggle,
+.accordion .gold .accordion-heading .accordion-toggle {
+  border-color: var(--color-phil-ci-hell, #FDB735);
+}
+.accordion .phil .accordion-heading .accordion-toggle:hover, .accordion .phil .accordion-heading .accordion-toggle:focus, .accordion .phil .accordion-heading .accordion-toggle.active,
+.accordion .philfak .accordion-heading .accordion-toggle:hover,
+.accordion .philfak .accordion-heading .accordion-toggle:focus,
+.accordion .philfak .accordion-heading .accordion-toggle.active,
+.accordion .gold .accordion-heading .accordion-toggle:hover,
+.accordion .gold .accordion-heading .accordion-toggle:focus,
+.accordion .gold .accordion-heading .accordion-toggle.active {
+  border-color: var(--color-phil-ci-hell, #FDB735);
+  background-color: var(--color-phil-ci-hell, #FDB735);
+  color: var(--color-phil-ci-hell-kontrast, #000);
+}
+.accordion .phil .accordion-heading .accordion-toggle.active:hover, .accordion .phil .accordion-heading .accordion-toggle.active:focus,
+.accordion .philfak .accordion-heading .accordion-toggle.active:hover,
+.accordion .philfak .accordion-heading .accordion-toggle.active:focus,
+.accordion .gold .accordion-heading .accordion-toggle.active:hover,
+.accordion .gold .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-phil-dunkler, #e87722);
+  background-color: var(--color-phil-dunkler, #e87722);
+  color: var(--color-phil-ci-hell-kontrast, #000);
+}
+.accordion .rw .accordion-heading .accordion-toggle,
+.accordion .rwfak .accordion-heading .accordion-toggle,
+.accordion .red .accordion-heading .accordion-toggle {
+  border-color: var(--color-rw-ci-hell, #C50F3C);
+}
+.accordion .rw .accordion-heading .accordion-toggle:hover, .accordion .rw .accordion-heading .accordion-toggle:focus, .accordion .rw .accordion-heading .accordion-toggle.active,
+.accordion .rwfak .accordion-heading .accordion-toggle:hover,
+.accordion .rwfak .accordion-heading .accordion-toggle:focus,
+.accordion .rwfak .accordion-heading .accordion-toggle.active,
+.accordion .red .accordion-heading .accordion-toggle:hover,
+.accordion .red .accordion-heading .accordion-toggle:focus,
+.accordion .red .accordion-heading .accordion-toggle.active {
+  border-color: var(--color-rw-ci-hell, #C50F3C);
+  background-color: var(--color-rw-ci-hell, #C50F3C);
+  color: var(--color-rw-ci-hell-kontrast, #fff);
+}
+.accordion .rw .accordion-heading .accordion-toggle.active:hover, .accordion .rw .accordion-heading .accordion-toggle.active:focus,
+.accordion .rwfak .accordion-heading .accordion-toggle.active:hover,
+.accordion .rwfak .accordion-heading .accordion-toggle.active:focus,
+.accordion .red .accordion-heading .accordion-toggle.active:hover,
+.accordion .red .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-rw-dunkler, #971B2F);
+  background-color: var(--color-rw-dunkler, #971B2F);
+  color: var(--color-rw-ci-hell-kontrast, #fff);
+}
+.accordion .med .accordion-heading .accordion-toggle,
+.accordion .medfak .accordion-heading .accordion-toggle,
+.accordion .blue .accordion-heading .accordion-toggle {
+  border-color: var(--color-med-ci-hell, #18B4F1);
+}
+.accordion .med .accordion-heading .accordion-toggle:hover, .accordion .med .accordion-heading .accordion-toggle:focus, .accordion .med .accordion-heading .accordion-toggle.active,
+.accordion .medfak .accordion-heading .accordion-toggle:hover,
+.accordion .medfak .accordion-heading .accordion-toggle:focus,
+.accordion .medfak .accordion-heading .accordion-toggle.active,
+.accordion .blue .accordion-heading .accordion-toggle:hover,
+.accordion .blue .accordion-heading .accordion-toggle:focus,
+.accordion .blue .accordion-heading .accordion-toggle.active {
+  border-color: var(--color-med-ci-hell, #18B4F1);
+  background-color: var(--color-med-ci-hell, #18B4F1);
+  color: var(--color-med-ci-hell-kontrast, #000);
+}
+.accordion .med .accordion-heading .accordion-toggle.active:hover, .accordion .med .accordion-heading .accordion-toggle.active:focus,
+.accordion .medfak .accordion-heading .accordion-toggle.active:hover,
+.accordion .medfak .accordion-heading .accordion-toggle.active:focus,
+.accordion .blue .accordion-heading .accordion-toggle.active:hover,
+.accordion .blue .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-med-dunkler, #005287);
+  background-color: var(--color-med-dunkler, #005287);
+  color: var(--color-med-ci-dunkel-kontrast, #fff);
+}
+.accordion .nat .accordion-heading .accordion-toggle,
+.accordion .natfak .accordion-heading .accordion-toggle,
+.accordion .green .accordion-heading .accordion-toggle {
+  border-color: var(--color-nat-ci-hell, #7BB725);
+}
+.accordion .nat .accordion-heading .accordion-toggle:hover, .accordion .nat .accordion-heading .accordion-toggle:focus, .accordion .nat .accordion-heading .accordion-toggle.active, .accordion .nat .accordion-heading .accordion-toggle.active:focus,
+.accordion .natfak .accordion-heading .accordion-toggle:hover,
+.accordion .natfak .accordion-heading .accordion-toggle:focus,
+.accordion .natfak .accordion-heading .accordion-toggle.active,
+.accordion .natfak .accordion-heading .accordion-toggle.active:focus,
+.accordion .green .accordion-heading .accordion-toggle:hover,
+.accordion .green .accordion-heading .accordion-toggle:focus,
+.accordion .green .accordion-heading .accordion-toggle.active,
+.accordion .green .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-nat-ci-hell, #7BB725);
+  background-color: var(--color-nat-ci-hell, #7BB725);
+  color: var(--color-nat-ci-hell-kontrast, #000);
+}
+.accordion .nat .accordion-heading .accordion-toggle.active:hover, .accordion .nat .accordion-heading .accordion-toggle.active:focus,
+.accordion .natfak .accordion-heading .accordion-toggle.active:hover,
+.accordion .natfak .accordion-heading .accordion-toggle.active:focus,
+.accordion .green .accordion-heading .accordion-toggle.active:hover,
+.accordion .green .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-nat-dunkler, #266141);
+  background-color: var(--color-nat-dunkler, #266141);
+  color: var(--color-nat-ci-dunkel-kontrast, #fff);
+}
+.accordion .tf .accordion-heading .accordion-toggle,
+.accordion .techfak .accordion-heading .accordion-toggle,
+.accordion .grey .accordion-heading .accordion-toggle {
+  border-color: var(--color-tf-ci-hell, #8C9FB1);
+}
+.accordion .tf .accordion-heading .accordion-toggle:hover, .accordion .tf .accordion-heading .accordion-toggle:focus, .accordion .tf .accordion-heading .accordion-toggle.active,
+.accordion .techfak .accordion-heading .accordion-toggle:hover,
+.accordion .techfak .accordion-heading .accordion-toggle:focus,
+.accordion .techfak .accordion-heading .accordion-toggle.active,
+.accordion .grey .accordion-heading .accordion-toggle:hover,
+.accordion .grey .accordion-heading .accordion-toggle:focus,
+.accordion .grey .accordion-heading .accordion-toggle.active {
+  border-color: var(--color-tf-ci-hell, #8C9FB1);
+  background-color: var(--color-tf-ci-hell, #8C9FB1);
+  color: var(--color-tf-ci-dunkel-kontrast, #000);
+}
+.accordion .tf .accordion-heading .accordion-toggle.active:hover, .accordion .tf .accordion-heading .accordion-toggle.active:focus,
+.accordion .techfak .accordion-heading .accordion-toggle.active:hover,
+.accordion .techfak .accordion-heading .accordion-toggle.active:focus,
+.accordion .grey .accordion-heading .accordion-toggle.active:hover,
+.accordion .grey .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-tf-dunkler, #2F586E);
+  background-color: var(--color-tf-dunkler, #2F586E);
+  color: var(--color-tf-ci-dunkel-kontrast, #fff);
+}
+.accordion .fau .accordion-heading .accordion-toggle,
+.accordion .default .accordion-heading .accordion-toggle {
+  border-color: var(--color-zentral-ci-hell, #04316A);
+}
+.accordion .fau .accordion-heading .accordion-toggle:hover, .accordion .fau .accordion-heading .accordion-toggle:focus, .accordion .fau .accordion-heading .accordion-toggle.active,
+.accordion .default .accordion-heading .accordion-toggle:hover,
+.accordion .default .accordion-heading .accordion-toggle:focus,
+.accordion .default .accordion-heading .accordion-toggle.active {
+  border-color: var(--color-zentral-ci-hell, #04316A);
+  background-color: var(--color-zentral-ci-hell, #04316A);
+  color: var(--color-zentral-ci-hell-kontrast, #fff);
+}
+.accordion .fau .accordion-heading .accordion-toggle.active:hover, .accordion .fau .accordion-heading .accordion-toggle.active:focus,
+.accordion .default .accordion-heading .accordion-toggle.active:hover,
+.accordion .default .accordion-heading .accordion-toggle.active:focus {
+  border-color: var(--color-zentral-dunkler, #004A9F);
+  background-color: var(--color-zentral-dunkler, #004A9F);
+  color: var(--color-zentral-ci-hell-kontrast, #fff);
+}
+.accordion .accordion-body {
+  display: block;
+  overflow: hidden;
+}
+.accordion .accordion-body .accordion-inner {
+  border: none;
+  background-color: #fff;
+  padding: 15px 20px;
+}
+.alert.font-light .accordion .accordion-body .accordion-inner {
+  color: var(--color-Text, #222);
+}
+.alert.font-light .accordion .accordion-body .accordion-inner h1,
+.alert.font-light .accordion .accordion-body .accordion-inner h2,
+.alert.font-light .accordion .accordion-body .accordion-inner h3,
+.alert.font-light .accordion .accordion-body .accordion-inner h4,
+.alert.font-light .accordion .accordion-body .accordion-inner h5,
+.alert.font-light .accordion .accordion-body .accordion-inner p,
+.alert.font-light .accordion .accordion-body .accordion-inner li,
+.alert.font-light .accordion .accordion-body .accordion-inner a,
+.alert.font-light .accordion .accordion-body .accordion-inner span,
+.alert.font-light .accordion .accordion-body .accordion-inner blockquote,
+.alert.font-light .accordion .accordion-body .accordion-inner code,
+.alert.font-light .accordion .accordion-body .accordion-inner pre,
+.alert.font-light .accordion .accordion-body .accordion-inner th,
+.alert.font-light .accordion .accordion-body .accordion-inner td,
+.alert.font-light .accordion .accordion-body .accordion-inner strong,
+.alert.font-light .accordion .accordion-body .accordion-inner em {
+  color: var(--color-Text, #222);
+}
+
+.fau-theme .accordion-toggle {
+  border-radius: var(--border-radius, 4px);
+  background-clip: padding-box;
+}
+.fau-theme .accordion-body .accordion-inner {
+  background-color: #f5f7f9;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background-clip: padding-box;
+}
+.fau-theme .accordion-group .accordion-body .accordion-inner .accordion-inner {
+  background-color: #e8edf1;
+}
+
+@media print {
+  .accordion {
+    position: relative;
+    display: block;
+    overflow: visible;
+  }
+  .accordion-group,
+  .accordion-body,
+  .accordion-inner,
+  .accordion-inner p {
+    position: relative;
+    display: block !important;
+    page-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+         break-inside: avoid;
+    overflow: visible;
+  }
+  button.expand-all.standard-btn {
+    display: none;
+  }
+  h3.accordion-heading,
+  h4.accordion-heading {
+    margin-bottom: 0 !important;
+  }
+}
+.read-mode-only {
+  display: none;
+}
+
+.admin-bar #content main .accordion-body:target {
+  padding-top: 0;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
