@@ -29,7 +29,7 @@ class Sanitize
 
     public function sanitize_title_attribute($response, $post, $request)
     {
-        Helper::debug($request->get_params());
+        // Helper::debug($request->get_params());
         if (isset($response->data['content']['rendered'])) {
             $content = $response->data['content']['rendered'];
 
