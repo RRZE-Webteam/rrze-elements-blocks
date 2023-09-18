@@ -162,7 +162,41 @@ function Edit({ attributes, setAttributes, clientId }) {
             className={`accordion-body ${isActive ? "active" : ""}`}
           >
             <div className="accordion-inner clearfix">
-              <InnerBlocks />
+              <InnerBlocks allowedBlocks={[
+                "rrze-elements/accordion-item",
+                "rrze/rrze-video",
+                "core/paragraph",
+                "core/heading",
+                "core/list",
+                "core/image",
+                "core/quote",
+                "core/file",
+                "core/video",
+                "core/audio",
+                "core/cover",
+                "core/table",
+                "core/freeform",
+                "core/html",
+                "core/preformatted",
+                "core/pullquote",
+                "core/verse",
+                "core/code",
+                "core/columns",
+                "core/column",
+                "core/more",
+                "core/nextpage",
+                "core/separator",
+                "core/spacer",
+                "core/shortcode",
+                "core/archives",
+                "core/categories",
+                "core/latest-comments",
+                "core/latest-posts",
+                "core/calendar",
+                "core/rss",
+                "core/search",
+                "core/tag-cloud",
+              ]} />
             </div>
           </div>
         </div>
@@ -181,6 +215,8 @@ export default withSelect((select, ownProps) => {
 
   const collapsiblesBeforeMe =
     getBlock(parentClientId)?.attributes?.previousBlockIds || [];
+
+  console.log(getBlock(selectedBlockClientId)?.attributes);
 
   let totalChildrenCount = 0;
 

@@ -1,21 +1,12 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "rrze-elements/accordion",
+  "name": "rrze-elements/collapsibles",
   "version": "1.25.10",
-  "title": "Accordion item",
+  "title": "Accordion",
   "category": "design",
   "icon": "align-center",
-  "description": "Creates an inner accordion item",
-  "parent": [
-    "rrze-elements/accordions"
-  ],
-  "keywords": [
-    "accordion",
-    "collapse",
-    "expand",
-    "toggle"
-  ],
+  "description": "Creates an accordion block",
   "attributes": {
     "message": {
       "type": "string",
@@ -38,19 +29,13 @@
       "type": "integer",
       "default": 0
     },
-    "title": {
-      "type": "string",
-      "source": "html",
-      "selector": "button",
-      "default": "Enter your Title"
-    },
-    "color": {
-      "type": "string",
-      "default": ""
-    },
-    "totalChildrenCount": {
+    "childrenCount": {
       "type": "integer",
       "default": 0
+    },
+    "previousBlockIds": {
+      "type": "array",
+      "default": []
     }
   },
   "supports": {
@@ -58,6 +43,7 @@
   },
   "textdomain": "rrze-elements",
   "editorScript": "file:./index.js",
+  "script": "rrze-accordions",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
 }

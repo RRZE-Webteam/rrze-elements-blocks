@@ -188,10 +188,12 @@ function Edit(_ref) {
     className: "accordion-body ".concat(isActive ? "active" : "")
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
     className: "accordion-inner clearfix"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InnerBlocks, null))))));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InnerBlocks, {
+    allowedBlocks: ["rrze-elements/accordion-item", "rrze/rrze-video", "core/paragraph", "core/heading", "core/list", "core/image", "core/quote", "core/file", "core/video", "core/audio", "core/cover", "core/table", "core/freeform", "core/html", "core/preformatted", "core/pullquote", "core/verse", "core/code", "core/columns", "core/column", "core/more", "core/nextpage", "core/separator", "core/spacer", "core/shortcode", "core/archives", "core/categories", "core/latest-comments", "core/latest-posts", "core/calendar", "core/rss", "core/search", "core/tag-cloud"]
+  }))))));
 }
 /* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_data__WEBPACK_IMPORTED_MODULE_6__.withSelect)(function (select, ownProps) {
-  var _getBlock3;
+  var _getBlock3, _getBlock4;
   var _select2 = select("core/block-editor"),
     getBlock = _select2.getBlock,
     getBlockParents = _select2.getBlockParents,
@@ -201,10 +203,11 @@ function Edit(_ref) {
   var parentClientId = blockParents[0];
   var siblingBlocks = getBlocks(parentClientId);
   var collapsiblesBeforeMe = ((_getBlock3 = getBlock(parentClientId)) === null || _getBlock3 === void 0 || (_getBlock3 = _getBlock3.attributes) === null || _getBlock3 === void 0 ? void 0 : _getBlock3.previousBlockIds) || [];
+  console.log((_getBlock4 = getBlock(selectedBlockClientId)) === null || _getBlock4 === void 0 ? void 0 : _getBlock4.attributes);
   var totalChildrenCount = 0;
   collapsiblesBeforeMe.forEach(function (blockClientId) {
-    var _getBlock4;
-    var childrenCount = ((_getBlock4 = getBlock(blockClientId)) === null || _getBlock4 === void 0 || (_getBlock4 = _getBlock4.attributes) === null || _getBlock4 === void 0 ? void 0 : _getBlock4.childrenCount) || 0;
+    var _getBlock5;
+    var childrenCount = ((_getBlock5 = getBlock(blockClientId)) === null || _getBlock5 === void 0 || (_getBlock5 = _getBlock5.attributes) === null || _getBlock5 === void 0 ? void 0 : _getBlock5.childrenCount) || 0;
     totalChildrenCount += childrenCount;
   });
   return {
@@ -628,7 +631,7 @@ function _unsupportedIterableToArray(o, minLen) {
   \*********************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"rrze-elements/collapse","version":"1.25.10","title":"Collapse","category":"design","icon":"align-center","description":"Creates an accordion block","parent":["rrze-elements/accordion"],"keywords":["accordion","collapse","expand","toggle"],"attributes":{"message":{"type":"string","source":"text","selector":"div"},"expandAllLink":{"type":"boolean","default":false},"hstart":{"type":"integer","default":2},"register":{"type":"boolean","default":false},"sameBlockCount":{"type":"integer","default":0},"title":{"type":"string","source":"html","selector":"button","default":"Enter your Title"},"color":{"type":"string","default":""},"totalChildrenCount":{"type":"integer","default":0}},"supports":{"html":false},"textdomain":"rrze-elements","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"rrze-elements/collapse","version":"1.25.10","title":"Akkordeonreiter","category":"design","icon":"align-center","description":"Creates an accordion block","parent":["rrze-elements/collapsibles"],"keywords":["accordion","collapse","expand","toggle"],"attributes":{"message":{"type":"string","source":"text","selector":"div"},"expandAllLink":{"type":"boolean","default":false},"hstart":{"type":"integer","default":2},"register":{"type":"boolean","default":false},"sameBlockCount":{"type":"integer","default":0},"title":{"type":"string","source":"html","selector":"button","default":"Enter your Title"},"color":{"type":"string","default":""},"totalChildrenCount":{"type":"integer","default":0}},"supports":{"html":false},"textdomain":"rrze-elements","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

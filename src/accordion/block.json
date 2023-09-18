@@ -3,10 +3,19 @@
 	"apiVersion": 3,
 	"name": "rrze-elements/accordion",
 	"version": "1.25.10",
-	"title": "Accordion",
+	"title": "Accordion item",
 	"category": "design",
 	"icon": "align-center",
-	"description": "Creates an accordion block",
+	"description": "Creates an inner accordion item",
+	"parent": [
+		"rrze-elements/accordions"
+	],
+	"keywords": [
+		"accordion",
+		"collapse",
+		"expand",
+		"toggle"
+	],
 	"attributes": {
 		"message": {
 			"type": "string",
@@ -29,13 +38,19 @@
 			"type": "integer",
 			"default": 0
 		},
-		"childrenCount": {
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": "button",
+			"default": "Enter your Title"
+		},
+		"color": {
+			"type": "string",
+			"default": ""
+		},
+		"totalChildrenCount": {
 			"type": "integer",
 			"default": 0
-		},
-		"previousBlockIds": {
-			"type": "array",
-			"default": []
 		}
 	},
 	"supports": {
@@ -43,7 +58,6 @@
 	},
 	"textdomain": "rrze-elements",
 	"editorScript": "file:./index.js",
-	"script": "rrze-accordions",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
 }

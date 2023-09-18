@@ -103,8 +103,10 @@ function deactivation()
  * @return void
  */
 function rrze_rrze_elements_block_init() {
-    register_block_type( __DIR__ . '/build/accordion');
+    register_block_type( __DIR__ . '/build/collapsibles');
     register_block_type( __DIR__ . '/build/collapse');
+    register_block_type( __DIR__ . '/build/accordions');
+    register_block_type( __DIR__ . '/build/accordion');
     register_block_type( __DIR__ . '/build/notice');
 
     wp_enqueue_style('fontawesome');

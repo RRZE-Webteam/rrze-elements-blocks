@@ -3,12 +3,12 @@
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
   "version": "1.25.10",
-  "title": "Collapse",
+  "title": "Akkordeonreiter",
   "category": "design",
   "icon": "align-center",
   "description": "Creates an accordion block",
   "parent": [
-    "rrze-elements/accordion"
+    "rrze-elements/collapsibles"
   ],
   "keywords": [
     "accordion",

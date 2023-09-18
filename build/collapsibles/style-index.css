@@ -1,6 +1,6 @@
-/*!**************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/accordion/editor.scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/collapsibles/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 /*
     --color-zentral-ci-hell: #04316a;
     --color-zentral-ci-hell-kontrast: #fff;
@@ -368,40 +368,4 @@ button.expand-all.standard-btn {
   padding-top: 0;
 }
 
-.accordion-body {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.5s ease-in-out;
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.accordion-body.active {
-  height: auto; /* Change this to a specific height if needed */
-  margin-top: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.wp-block-rrze-elements-collapse .accordion-heading .components-text-control__input {
-  background-color: rgba(255, 255, 255, 0);
-  border-color: rgba(255, 255, 255, 0);
-  font-size: inherit;
-  padding-bottom: 0;
-}
-.wp-block-rrze-elements-collapse .accordion-heading .components-text-control__input:focus {
-  background-color: #fff;
-  color: #000;
-  border-color: #000;
-  font-size: inherit;
-  padding-bottom: 0;
-}
-.wp-block-rrze-elements-collapse .accordion-heading .accordion-toggle.active {
-  color: #fff;
-}
-.wp-block-rrze-elements-collapse .accordion-heading .accordion-toggle:hover {
-  color: #fff;
-}
-
-/*# sourceMappingURL=index.css.map*/
+/*# sourceMappingURL=style-index.css.map*/
