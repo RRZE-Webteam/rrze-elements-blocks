@@ -16,7 +16,7 @@ import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
-function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, context, setAttributes, clientId }) {
   const props = useBlockProps();
   const [isActive, setIsActive] = useState(false);
   const { sameBlockCount, title, color } = attributes;
@@ -74,19 +74,13 @@ function Edit({ attributes, setAttributes, clientId }) {
     },
     [clientId] // only rerun if clientId changes
   );
-  
-  // Move any additional logic or console.logs here, outside of useSelect.
-  
-  useEffect(() => {
-      if (attributes.totalChildrenCount !== totalChildrenCount) {
-          setAttributes({ totalChildrenCount });
-          console.log("totalChildrenCount", totalChildrenCount);
-      }
-  }, [totalChildrenCount, attributes.totalChildrenCount]);
 
-  const handleToggleColor = (newTag) => {
-      setAttributes({ color: newTag });
-  };
+  useEffect(() => {
+    console.log('context', context['rrze-elements/collapseSBlockCount']);
+    setAttributes({ancestorCount:  context['rrze-elements/collapseSBlockCount'] + context['rrze-elements/collapseTotalChildrenCount'] +1})
+  }, [context['rrze-elements/collapseSBlockCount'], context['rrze-elements/collapseTotalChildrenCount']]);
+
+  console.log('contextVal:', context['rrze-elements/collapseSBlockCount'] + context['rrze-elements/collapseTotalChildrenCount']);
 
   let sameTypeSiblingsBefore = 0;
   useEffect(() => {
@@ -96,6 +90,10 @@ function Edit({ attributes, setAttributes, clientId }) {
                   break;
               }
               if (block.name === selectedBlock.name) {
+                  if(block?.innerBlocks?.forEach((innerBlock) => {
+                      if (innerBlock.name === "rrze-elements/accordions") {
+                        sameTypeSiblingsBefore = sameTypeSiblingsBefore + innerBlock?.innerBlocks.length;
+                      }}));
                   sameTypeSiblingsBefore++;
               }
           }
@@ -113,14 +111,6 @@ function Edit({ attributes, setAttributes, clientId }) {
 
   return (
     <>
-      {/* <BlockControls>
-        <Toolbar label="Options">
-          <ToolbarGroup>
-            
-          </ToolbarGroup>
-        </Toolbar>
-      </BlockControls> */}
-
       <InspectorControls>
         <PanelBody title={__("Settings", "text-box")}>
           <ColorPalette
@@ -158,7 +148,6 @@ function Edit({ attributes, setAttributes, clientId }) {
             />
           </h2>
           <div
-            id={`collapse_${sameTypeSiblingsBefore}`}
             className={`accordion-body ${isActive ? "active" : ""}`}
           >
             <div className="accordion-inner clearfix">
@@ -170,30 +159,3 @@ function Edit({ attributes, setAttributes, clientId }) {
     </>
   );
 }
-
-export default withSelect((select, ownProps) => {
-  const { getBlock, getBlockParents, getBlocks } = select("core/block-editor");
-
-  const selectedBlockClientId = ownProps.clientId;
-  const blockParents = getBlockParents(selectedBlockClientId, true);
-  const parentClientId = blockParents[0];
-  const siblingBlocks = getBlocks(parentClientId);
-
-  const collapsiblesBeforeMe =
-    getBlock(parentClientId)?.attributes?.previousBlockIds || [];
-
-  let totalChildrenCount = 0;
-
-  collapsiblesBeforeMe.forEach((blockClientId) => {
-    const childrenCount =
-      getBlock(blockClientId)?.attributes?.childrenCount || 0;
-    totalChildrenCount += childrenCount;
-  });
-
-  return {
-    selectedBlock: getBlock(selectedBlockClientId),
-    blockParents: blockParents,
-    siblingBlocks: siblingBlocks,
-    totalChildrenCount: totalChildrenCount,
-  };
-})(Edit);

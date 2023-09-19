@@ -51,7 +51,15 @@
     "totalChildrenCount": {
       "type": "integer",
       "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
     }
+  },
+  "providesContext": {
+    "rrze-elements/collapseSBlockCount": "sameBlockCount",
+    "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount"
   },
   "supports": {
     "html": false

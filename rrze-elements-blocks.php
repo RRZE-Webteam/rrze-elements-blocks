@@ -134,7 +134,6 @@ function loaded()
     } else {
         new Main(__FILE__);
         add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
-
     }
 
 }

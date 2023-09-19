@@ -300,8 +300,6 @@
 	}
 
 	.fau-theme {
-		.accordion-heading .accordion-toggle {}
-
 		.accordion-toggle {
 			@include m.border-radius(var(--border-radius, 4px));
 		}
@@ -396,6 +394,11 @@
 
 		.accordion-heading .accordion-toggle:hover{
 			color: #fff;
+		}
+
+		.wp-block-rrze-elements-accordion {
+			margin-bottom: 0;
+			padding-bottom: 0;
 		}
 	
 	}

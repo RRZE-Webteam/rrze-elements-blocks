@@ -3,7 +3,7 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { isEqual } from 'lodash';
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
-export default function Edit({ attributes, setAttributes, ...ownProps }) {
+export default function Edit({ attributes, setAttributes, ...ownProps}) {
   const props = useBlockProps();
   const { sameBlockCount, previousBlockIds } = attributes;
 
@@ -34,6 +34,7 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
     };
   }, [ownProps.clientId]);
 
+
   useEffect(() => {
     if(attributes.childrenCount !== numberChildren) {
         setAttributes({ childrenCount: numberChildren });
@@ -45,6 +46,8 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
       setAttributes({ previousBlockIds: previousBlockClients });
     }
   }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);
+
+  console.log('attributes', attributes.childrenCount);
 
   return (
     <>
