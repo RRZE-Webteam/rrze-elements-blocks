@@ -8,8 +8,6 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
   const props = useBlockProps();
   const { sameBlockCount, previousBlockIds } = attributes;
 
-  
-
   const {
     selectedBlock,
     numberChildren,
@@ -18,10 +16,20 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
   } = useSelect((select) => {
     const { getBlock, getBlocks, getBlockIndex } = select("core/block-editor");
     const selectedBlockClientId = ownProps.clientId;
-    const numberChildren = getBlocks(selectedBlockClientId).length;
+    let numberChildren = getBlocks(selectedBlockClientId).length;
+    getBlocks(selectedBlockClientId).forEach((block) => {
+      if (block?.innerBlocks.length !== 0 )
+      block?.innerBlocks.forEach((innerBlock) => {
+      //console.log(innerBlock);
+        if (innerBlock?.name === 'rrze-elements/accordions') {
+          numberChildren = numberChildren + innerBlock.attributes.childrenCount;
+        }})
+      // console.log("block", block.innerBlocks);
+    });
+
     const blockIndex = getBlockIndex(selectedBlockClientId);
     const allBlocks = getBlocks();
-  
+
     const CollapsiblesBlockClientIds = allBlocks
       .filter(block => block.name === 'rrze-elements/collapsibles')
       .map(block => block.clientId);

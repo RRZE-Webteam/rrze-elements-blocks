@@ -47,8 +47,6 @@ export default function Edit({ attributes, setAttributes, ...ownProps}) {
     }
   }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);
 
-  console.log('attributes', attributes.childrenCount);
-
   return (
     <>
       <div {...props}>

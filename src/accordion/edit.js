@@ -76,11 +76,8 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
   );
 
   useEffect(() => {
-    console.log('context', context['rrze-elements/collapseSBlockCount']);
     setAttributes({ancestorCount:  context['rrze-elements/collapseSBlockCount'] + context['rrze-elements/collapseTotalChildrenCount'] +1})
   }, [context['rrze-elements/collapseSBlockCount'], context['rrze-elements/collapseTotalChildrenCount']]);
-
-  console.log('contextVal:', context['rrze-elements/collapseSBlockCount'] + context['rrze-elements/collapseTotalChildrenCount']);
 
   let sameTypeSiblingsBefore = 0;
   useEffect(() => {
@@ -151,7 +148,40 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
             className={`accordion-body ${isActive ? "active" : ""}`}
           >
             <div className="accordion-inner clearfix">
-              <InnerBlocks />
+            <InnerBlocks allowedBlocks={[
+                "rrze/rrze-video",
+                "core/paragraph",
+                "core/heading",
+                "core/list",
+                "core/image",
+                "core/quote",
+                "core/file",
+                "core/video",
+                "core/audio",
+                "core/cover",
+                "core/table",
+                "core/freeform",
+                "core/html",
+                "core/preformatted",
+                "core/pullquote",
+                "core/verse",
+                "core/code",
+                "core/columns",
+                "core/column",
+                "core/more",
+                "core/nextpage",
+                "core/separator",
+                "core/spacer",
+                "core/shortcode",
+                "core/archives",
+                "core/categories",
+                "core/latest-comments",
+                "core/latest-posts",
+                "core/calendar",
+                "core/rss",
+                "core/search",
+                "core/tag-cloud",
+              ]} />
             </div>
           </div>
         </div>

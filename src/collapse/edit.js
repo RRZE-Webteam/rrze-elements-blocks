@@ -58,15 +58,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       const parentClientId = blockParents[0];
       const siblingBlocks = getBlocks(parentClientId);
       const collapsiblesBeforeMe = getBlock(parentClientId)?.attributes?.previousBlockIds || [];
-
-      // console.log("Init");
-      // console.log("collapsiblesBeforeMe", collapsiblesBeforeMe);
-      // console.log("blockParents", blockParents);
-      // console.log("siblingBlocks", siblingBlocks);
   
       let totalChildrenCount = 0;
       collapsiblesBeforeMe.forEach((blockClientId) => {
         const childrenCount = getBlock(blockClientId)?.attributes?.childrenCount || 0;
+        //console.log("childrenCount", getBlock(blockClientId));
         totalChildrenCount += childrenCount;
       });
   
@@ -100,9 +96,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                   break;
               }
               if (block.name === selectedBlock.name) {
-                console.log("block", block);
                   if(block?.innerBlocks?.forEach((innerBlock) => {
-                      console.log("innerBlock", innerBlock);
                       if (innerBlock.name === "rrze-elements/accordions") {
                         sameTypeSiblingsBefore = sameTypeSiblingsBefore + innerBlock?.innerBlocks.length;
                       }}));
@@ -110,7 +104,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
               }
           }
           if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-            // console.log("sameTypeSiblingsBefore", sameTypeSiblingsBefore);
               setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
           }
       }
