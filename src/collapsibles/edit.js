@@ -1,8 +1,17 @@
 import { useEffect } from "@wordpress/element";
-import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useBlockProps, InnerBlocks, InspectorControls } from "@wordpress/block-editor";
 import { isEqual } from 'lodash';
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
-
+import { __ } from "@wordpress/i18n";
+import ExpandAllLink from "./InspectorControls/ExpandAllLink";
+import {
+  PanelBody,
+  BaseControl,
+  __experimentalText as Text,
+  __experimentalDivider as Divider,
+  __experimentalHeading as Heading,
+  __experimentalSpacer as Spacer,
+} from "@wordpress/components";
 
 export default function Edit({ attributes, setAttributes, ...ownProps }) {
   const props = useBlockProps();
@@ -60,7 +69,20 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
   return (
     <>
       <div {...props}>
+      <InspectorControls>
+        <PanelBody
+          title={__("Collapsibles Settings", "rrze-elements-b")}
+          initialOpen={true}
+        >
+          <ExpandAllLink attributes={attributes} setAttributes={setAttributes} />
+          </PanelBody>  
+      </InspectorControls>
         <div className="accordion" id={`accordion-`}>
+        {attributes.expandAllLink && (
+          <div className="button-container-right">
+            <button className="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">{__("Expand All", "rrze-elements-b")}</button>
+          </div>
+          )}
           <InnerBlocks 
             allowedBlocks={['rrze-elements/collapse']}
             template={[

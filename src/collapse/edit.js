@@ -1,14 +1,8 @@
 import {
   TextControl,
-  ColorPalette,
-  PanelBody,
-  ToolbarDropdownMenu,
-  Toolbar,
-  ToolbarGroup,
 } from "@wordpress/components";
 import {
   useBlockProps,
-  BlockControls,
   InnerBlocks,
   InspectorControls,
 } from "@wordpress/block-editor";
@@ -16,23 +10,13 @@ import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
+import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
+import ColorSwitcher from "./InspectorControls/ColorSwitcher";
+
 export default function Edit({ attributes, setAttributes, clientId }) {
   const props = useBlockProps();
   const [isActive, setIsActive] = useState(false);
   const { sameBlockCount, title, color } = attributes;
-
-  const colorToSlugMap = {
-      "#04316A": "",
-      "#C50F3C": "rw",
-      "#7bb725": "nat",
-      "#18B4F1": "med",
-      "#FDB735": "phil",
-      "#8C9FB1": "tech",
-  };
-
-  const onChangeColor = (newColor) => {
-      setAttributes({ color: colorToSlugMap[newColor] });
-  };
 
   const toggleActive = () => {
       setIsActive(!isActive);
@@ -118,28 +102,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   return (
     <>
       <InspectorControls>
-        <PanelBody title={__("Settings", "text-box")}>
-          <ColorPalette
-            colors={[
-              { name: "Zentrale Institution", color: "#04316A", slug: "" },
-              {
-                name: "Rechts- und Wirtschafts­wissenschaftliche Fakultät",
-                color: "#C50F3C",
-              },
-              { name: "Naturwissenschaftliche Fakultät", color: "#7bb725" },
-              { name: "Medizinische Fakultät", color: "#18B4F1" },
-              {
-                name: "Philosophische Fakultät und Fachbereich Theologie",
-                color: "#FDB735",
-              },
-              { name: "Technische Fakultät", color: "#8C9FB1" },
-            ]}
-            value={Object.keys(colorToSlugMap).find(
-              (key) => colorToSlugMap[key] === color
-            )}
-            onChange={onChangeColor}
-          />
-        </PanelBody>
+        <JumpLinkSelector {...{ attributes, setAttributes }} />
+        <ColorSwitcher {...{ attributes, setAttributes }} />
       </InspectorControls>
 
       <div {...props}>

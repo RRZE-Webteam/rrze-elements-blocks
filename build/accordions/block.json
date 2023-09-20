@@ -44,7 +44,7 @@
   "supports": {
     "html": false
   },
-  "textdomain": "rrze-elements",
+  "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",
   "script": "rrze-accordions",
   "editorStyle": "file:./index.css",
