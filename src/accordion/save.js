@@ -8,7 +8,7 @@ export default function save({ attributes }) {
     <div {...blockProps}>
       {" "}
       <>
-        <div className={`accordion-group ${color}`}>
+        <div className={`accordion-group ${attributes.color}`}>
           <h2 className="accordion-heading">
             <span className="read-mode-only">Test </span>
             <button

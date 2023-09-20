@@ -15,24 +15,12 @@ import {
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
+import {ColorSwitcher, ColorSwitcherToolbar} from "./InspectorControls/ColorSwitcher";
 
 export default function Edit({ attributes, context, setAttributes, clientId }) {
   const props = useBlockProps();
   const [isActive, setIsActive] = useState(false);
   const { sameBlockCount, title, color } = attributes;
-
-  const colorToSlugMap = {
-      "#04316A": "",
-      "#C50F3C": "rw",
-      "#7bb725": "nat",
-      "#18B4F1": "med",
-      "#FDB735": "phil",
-      "#8C9FB1": "tech",
-  };
-
-  const onChangeColor = (newColor) => {
-      setAttributes({ color: colorToSlugMap[newColor] });
-  };
 
   const toggleActive = () => {
       setIsActive(!isActive);
@@ -108,33 +96,15 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
 
   return (
     <>
+      <BlockControls>
+        <ColorSwitcherToolbar attributes={attributes} setAttributes={setAttributes} />
+      </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Settings", "text-box")}>
-          <ColorPalette
-            colors={[
-              { name: "Zentrale Institution", color: "#04316A", slug: "" },
-              {
-                name: "Rechts- und Wirtschafts­wissenschaftliche Fakultät",
-                color: "#C50F3C",
-              },
-              { name: "Naturwissenschaftliche Fakultät", color: "#7bb725" },
-              { name: "Medizinische Fakultät", color: "#18B4F1" },
-              {
-                name: "Philosophische Fakultät und Fachbereich Theologie",
-                color: "#FDB735",
-              },
-              { name: "Technische Fakultät", color: "#8C9FB1" },
-            ]}
-            value={Object.keys(colorToSlugMap).find(
-              (key) => colorToSlugMap[key] === color
-            )}
-            onChange={onChangeColor}
-          />
-        </PanelBody>
+        <ColorSwitcher attributes={attributes} setAttributes={setAttributes} />
       </InspectorControls>
 
       <div {...props}>
-        <div className={`accordion-group ${color}`}>
+        <div className={`accordion-group ${attributes.color}`}>
           <h2 className="accordion-heading" onClick={toggleActive}>
             <span className="read-mode-only">{title}</span>
             <TextControl
