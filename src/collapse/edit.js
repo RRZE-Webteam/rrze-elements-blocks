@@ -1,22 +1,31 @@
 import {
   TextControl,
+  ToolbarButton,
+  ToolbarGroup,
+  ToolbarItem,
+  ToolbarDropdownMenu
 } from "@wordpress/components";
 import {
   useBlockProps,
   InnerBlocks,
   InspectorControls,
+  BlockControls,
 } from "@wordpress/block-editor";
+import {
+  seen, unseen, color as colorIcon
+} from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
 import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
-import ColorSwitcher from "./InspectorControls/ColorSwitcher";
+import {ColorSwitcher, ColorSwitcherToolbar} from "./InspectorControls/ColorSwitcher";
+import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
   const props = useBlockProps();
   const [isActive, setIsActive] = useState(false);
-  const { sameBlockCount, title, color } = attributes;
+  const { sameBlockCount, title, color, loadOpen } = attributes;
 
   const toggleActive = () => {
       setIsActive(!isActive);
@@ -28,6 +37,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       } else {
           setAttributes({ title: newText });
       }
+  };
+
+  const loadOpenToggle = () => {
+      setAttributes({ loadOpen: !loadOpen });
   };
 
   const {
@@ -101,9 +114,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
   return (
     <>
+      <BlockControls>
+        <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
+        <ToolbarGroup>
+          {/* {isTextInString("Title", attributes.show) && (
+            <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
+          )} */}
+          <ToolbarItem>
+            {() => (
+              <ToolbarButton
+                icon={loadOpen ? seen : unseen}
+                label={loadOpen ? __("Collapse on page load", "rrze-elements-b"): __("Open on page load", "rrze-elements-b")}
+                onClick={loadOpenToggle}
+                
+              />
+            )}
+          </ToolbarItem>
+          </ToolbarGroup>
+      </BlockControls>
+
       <InspectorControls>
         <JumpLinkSelector {...{ attributes, setAttributes }} />
         <ColorSwitcher {...{ attributes, setAttributes }} />
+        <AdvancedSettings {...{ attributes, setAttributes }} />
       </InspectorControls>
 
       <div {...props}>

@@ -2,7 +2,7 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, jumpName } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title, jumpName, loadOpen } = attributes;
 
   let output = '';
   if (jumpName === ''){
@@ -10,6 +10,14 @@ export default function save({ attributes }) {
   } else { 
       output = `${jumpName}`;
   }
+
+  let loadOnPageLoad = '';
+  let aciveOnPageLoad = '';
+
+  if ( loadOpen ) {
+    loadOnPageLoad = 'open';
+    aciveOnPageLoad = 'active';
+  } 
 
   return (
     <div {...blockProps}>
@@ -19,7 +27,7 @@ export default function save({ attributes }) {
           <h2 className="accordion-heading">
             <span className="read-mode-only">Test </span>
             <button
-              className="accordion-toggle"
+              className={`accordion-toggle ${aciveOnPageLoad}`}
               data-toggle="collapse"
               data-name={output}
               href={`#collapse_${sameBlockCount + totalChildrenCount}`}
@@ -29,9 +37,9 @@ export default function save({ attributes }) {
           </h2>
           <div
             id={`collapse_${sameBlockCount + totalChildrenCount}`}
-            className="accordion-body"
+            className={`accordion-body ${loadOnPageLoad}`}
             name={output}
-            style={{ display: "none" }}
+            style={loadOpen ? {} : { display: "none" }}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />

@@ -397,5 +397,53 @@
 		.accordion-heading .accordion-toggle:hover{
 			color: #fff;
 		}
-	
+		
+	}
+
+	// .rrzeElementsBFakColorSelector button{
+	// 	padding-left:1em !important;
+	// 	padding-right:1em !important;
+	// }
+
+	.rrzeElementsBFakColorSelector.central{
+		button {
+			background-color: #04316A;
+			color: #fff;
+		}
+	}
+
+	.rrzeElementsBFakColorSelector.phil{
+		button {
+			background-color: #fdb735;
+			color: #000;
+			
+		}
+	}
+	.rrzeElementsBFakColorSelector.rw{
+		button {
+			background-color: #c50f3c;
+			color: #fff;
+			
+		}
+	}
+	.rrzeElementsBFakColorSelector.med{
+		button {
+			background-color: #18b4f1;
+			color: #000;
+			
+		}
+	}
+	.rrzeElementsBFakColorSelector.nat{
+		button {
+			background-color: #7bb725;
+			color: #000;
+			
+		}
+	}
+	.rrzeElementsBFakColorSelector.tf{
+		button {
+			background-color: #8c9fb1;
+			color: #000;
+			
+		}
 	}

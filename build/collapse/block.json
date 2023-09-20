@@ -22,6 +22,10 @@
       "source": "text",
       "selector": "div"
     },
+    "loadOpen": {
+      "type": "boolean",
+      "default": false
+    },
     "expandAllLink": {
       "type": "boolean",
       "default": false
