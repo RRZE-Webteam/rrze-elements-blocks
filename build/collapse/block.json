@@ -44,8 +44,6 @@
     },
     "title": {
       "type": "string",
-      "source": "html",
-      "selector": "button",
       "default": "Enter your Title"
     },
     "color": {
@@ -61,6 +59,18 @@
       "default": 0
     },
     "jumpName": {
+      "type": "string",
+      "default": ""
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+    "svgString": {
+      "type": "string",
+      "default": ""
+    },
+    "directory": {
       "type": "string",
       "default": ""
     }

@@ -46,7 +46,7 @@ const JumpLinkSelector = ({ attributes, setAttributes }) => {
       >
         <Spacer>
           <Text>
-            {__("Jump Links allow your users to jump to this collapse by inserting /#jumplinkname at the end of the URL.", "rrze-elements-b")}
+            {__("Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL.", "rrze-elements-b")}
           </Text>
         </Spacer>
 

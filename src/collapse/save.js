@@ -31,8 +31,11 @@ export default function save({ attributes }) {
               data-toggle="collapse"
               data-name={output}
               href={`#collapse_${sameBlockCount + totalChildrenCount}`}
+              dangerouslySetInnerHTML={{
+                __html: `${attributes.svgString}${title}`,
+              }}
             >
-              {title}
+              
             </button>
           </h2>
           <div

@@ -25,7 +25,8 @@ class Main
         new Sanitize();
     }
 
-    function __destruct() {
+    function __destruct()
+    {
         //add_filter('the_content', 'wpautop');
     }
 
