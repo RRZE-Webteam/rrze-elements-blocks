@@ -86,6 +86,10 @@ button.expand-all.standard-btn {
 		padding: 8px 35px 8px 10px;
 		position: relative;
 
+		svg{
+			fill: var(--color-Text, #444);
+		}
+
 		&:before {
 			background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"/></svg>');
 			display: inline-block;
@@ -120,6 +124,11 @@ button.expand-all.standard-btn {
 			text-decoration: none;
 			background-color: var(--color-primary-ci-hell, v.$colorDefault);
 			color: var(--color-primary-ci-hell-kontrast, #fff);
+
+			svg{
+				fill: var(--color-primary-ci-hell-kontrast, #fff);
+			}
+	
 
 			.alert.font-light & {
 				* {
@@ -158,6 +167,9 @@ button.expand-all.standard-btn {
 			border-color: var(--color-phil-ci-hell, v.$colorPhilFak);
 			background-color: var(--color-phil-ci-hell, v.$colorPhilFak);
 			color: var(--color-phil-ci-hell-kontrast, #000);
+			svg{
+				fill: var(--color-phil-ci-hell-kontrast, #000);
+			}
 		}
 
 		&.active:hover,
@@ -470,3 +482,19 @@ button.expand-all.standard-btn {
 	float: right;
 	clear: both;
 }
+
+.elements-blocks-icon-insideEditor {
+	float: left;
+	clear: both;
+	max-height: 1.5em;
+	max-width: 1.5em;
+	padding-top: 0.25em;
+}
+
+.elements-blocks-input-following-icon {
+	input {
+		max-width: 90%;
+		font-size: 1.25em !important;
+	}
+}
+

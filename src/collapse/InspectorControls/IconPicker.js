@@ -129,8 +129,7 @@ const IconPicker = React.memo(({ attributes, setAttributes }) => {
 
 const IconMarkComponent = ({ type, iconName, attributes, setAttributes }) => {
   const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
-  console.log(Icon);
-  return Icon ? <Icon /> : null;
+  return Icon ? <Icon className="elements-blocks-icon-insideEditor"/> : null;
 };
 
 export { IconPicker, useDynamicSvgIcon, IconMarkComponent };

@@ -175,12 +175,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
               iconName={iconName}
               attributes={attributes}
               setAttributes={setAttributes}
+              className="elements-blocks-icon-insideEditor"
             />
             
             <TextControl
               onChange={onChangeTitle}
               value={title}
               placeholder={__("Your Text", "text-box")}
+              className="elements-blocks-input-following-icon"
             />
             </div>
           </h2>
