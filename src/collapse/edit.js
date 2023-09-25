@@ -201,7 +201,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         <JumpLinkSelector {...{ attributes, setAttributes }} />
         <ColorSwitcher {...{ attributes, setAttributes }} />
         <AdvancedSettings {...{ attributes, setAttributes }} />
-        <PanelBody title={__("Color Settings", "rrze-elements-b")}>
+        <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker {...{ attributes, setAttributes }} />
         </PanelBody>
       </InspectorControls>

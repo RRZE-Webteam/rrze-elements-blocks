@@ -77,7 +77,8 @@
   },
   "providesContext": {
     "rrze-elements/collapseSBlockCount": "sameBlockCount",
-    "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount"
+    "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount",
+    "rrze-elements/collapseColor": "color"
   },
   "supports": {
     "html": false

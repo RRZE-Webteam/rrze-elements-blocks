@@ -1,71 +1,79 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "rrze-elements/accordion",
-	"version": "1.25.10",
-	"title": "Accordion item",
-	"category": "design",
-	"icon": "align-center",
-	"description": "Creates an inner accordion item",
-	"parent": [
-		"rrze-elements/accordions"
-	],
-	"keywords": [
-		"accordion",
-		"collapse",
-		"expand",
-		"toggle"
-	],
-	"usesContext": [
-		"rrze-elements/collapseSBlockCount",
-		"rrze-elements/collapseTotalChildrenCount"
-	],
-	"attributes": {
-		"message": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
-		},
-		"expandAllLink": {
-			"type": "boolean",
-			"default": false
-		},
-		"hstart": {
-			"type": "integer",
-			"default": 2
-		},
-		"register": {
-			"type": "boolean",
-			"default": false
-		},
-		"sameBlockCount": {
-			"type": "integer",
-			"default": 0
-		},
-		"title": {
-			"type": "string",
-			"source": "html",
-			"selector": "button",
-			"default": "Enter your Title"
-		},
-		"color": {
-			"type": "string",
-			"default": ""
-		},
-		"totalChildrenCount": {
-			"type": "integer",
-			"default": 0
-		},
-		"ancestorCount": {
-			"type": "integer",
-			"default": 0
-		}
-	},
-	"supports": {
-		"html": false
-	},
-	"textdomain": "rrze-elements-b",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/accordion",
+  "version": "1.25.10",
+  "title": "Accordion item",
+  "category": "design",
+  "icon": "align-center",
+  "description": "Creates an inner accordion item",
+  "parent": ["rrze-elements/accordions"],
+  "keywords": ["accordion", "collapse", "expand", "toggle"],
+  "usesContext": [
+    "rrze-elements/collapseSBlockCount",
+    "rrze-elements/collapseTotalChildrenCount",
+    "rrze-elements/collapseColor"
+  ],
+  "attributes": {
+    "message": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    },
+    "expandAllLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 2
+    },
+    "register": {
+      "type": "boolean",
+      "default": false
+    },
+    "sameBlockCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "title": {
+      "type": "string",
+      "source": "html",
+      "selector": "button",
+      "default": "Enter your Title"
+    },
+    "color": {
+      "type": "string",
+      "default": ""
+    },
+    "totalChildrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "ancestorCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+    "svgString": {
+      "type": "string",
+      "default": ""
+    },
+
+    "directory": {
+      "type": "string",
+      "default": ""
+    }
+  },
+
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
 }

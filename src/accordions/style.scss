@@ -1,8 +1,8 @@
 @use "variables" as v;
 @use "mixins" as m;
 
-
-/**
+div[data-type="rrze-elements/accordions"] {
+	/**
  * The following styles get applied inside the editor only.
  *
  * Replace them with your own styles or remove the file completely.
@@ -11,9 +11,9 @@
 	/*!
  * Accordion
  */
-*{
-	font-family: Roboto;
-}
+	* {
+		font-family: Roboto;
+	}
 
 	h1.accordion-heading,
 	h2.accordion-heading,
@@ -108,7 +108,7 @@
 			&:focus,
 			&.active {
 				text-decoration: none;
-				background-color: var(--color-primary-ci-hell,v.$colorDefault);
+				background-color: var(--color-primary-ci-hell, v.$colorDefault);
 				color: var(--color-primary-ci-hell-kontrast, #fff);
 
 				.alert.font-light & {
@@ -300,7 +300,6 @@
 	}
 
 	.fau-theme {
-		.accordion-heading .accordion-toggle {}
 
 		.accordion-toggle {
 			@include m.border-radius(var(--border-radius, 4px));
@@ -356,3 +355,4 @@
 	.admin-bar #content main .accordion-body:target {
 		padding-top: 0;
 	}
+};
