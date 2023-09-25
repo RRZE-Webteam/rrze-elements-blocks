@@ -48,6 +48,11 @@ button.expand-all.standard-btn {
 }
 
 .accordion {
+
+	.accordion-heading .accordion-toggle{
+		border-color: #04316A;
+	}
+
 	.accordion {
 		margin: 0;
 	}
@@ -338,7 +343,10 @@ button.expand-all.standard-btn {
 			background-color: darken(#f5f7f9, 4%);
 		}
 	}
+
 }
+
+
 
 @media print {
 	.accordion {

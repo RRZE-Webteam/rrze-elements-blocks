@@ -1,8 +1,6 @@
 import {
-  Button,
   PanelBody,
   CheckboxControl,
-  BaseControl,
   __experimentalText as Text,
   __experimentalDivider as Divider,
   __experimentalHeading as Heading,
