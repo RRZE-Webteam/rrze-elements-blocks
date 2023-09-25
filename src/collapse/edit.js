@@ -169,7 +169,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         <div className={`accordion-group ${color}`}>
           <h2 className="accordion-heading" onClick={toggleActive}>
           <span className="read-mode-only">{title}</span>
-          <div className={`accordion-toggle ${isActive ? "active" : ""}`}>
+          <div className={`accordion-toggle ${isActive || loadOpen ? "active" : ""}`}>
             <IconMarkComponent
               type={iconType}
               iconName={iconName}
@@ -188,7 +188,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
           </h2>
           <div
             id={`collapse_${sameTypeSiblingsBefore}`}
-            className={`accordion-body ${isActive ? "active" : ""}`}
+            className={`accordion-body ${isActive || loadOpen ? "active" : ""}`}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks

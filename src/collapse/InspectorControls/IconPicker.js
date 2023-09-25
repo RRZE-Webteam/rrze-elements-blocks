@@ -41,7 +41,7 @@ const useDynamicSvgIcon = (type, iconName, attributes, setAttributes) => {
     if (type && iconName) {
       const filePath = `../svg/${type}/${iconName}.svg`;
 
-      import(`../svg/${type}/${iconName}.svg`)
+      import(/* webpackChunkName: "svg-icons" */ `../svg/${type}/${iconName}.svg`)
         .then(({ default: importedIcon }) => {
           setIcon(() => importedIcon);
         })

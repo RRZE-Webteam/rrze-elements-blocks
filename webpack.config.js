@@ -12,4 +12,23 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    ...defaultConfig.optimization,
+    splitChunks: {
+      chunks: 'all',  // This means even synchronous imports get their own chunks.
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        svgIcons: {
+          test: /svg[\\/]/,
+          name: 'svg-icons',
+          chunks: 'async',
+          reuseExistingChunk: true,
+        }
+      }
+    }
+  }
 };
