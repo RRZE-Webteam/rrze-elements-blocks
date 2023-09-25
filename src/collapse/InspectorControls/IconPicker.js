@@ -107,7 +107,7 @@ const IconPicker = React.memo(({ attributes, setAttributes }) => {
   }, []);
 
   return (
-    <PanelBody title={__("Color Settings", "rrze-elements-b")}>
+    <>
       <ComboboxControl
         label={__("Select an icon", "rrze-elements-b")}
         onChange={(newIcon) => setAttributes({ icon: newIcon })}
@@ -118,12 +118,12 @@ const IconPicker = React.memo(({ attributes, setAttributes }) => {
       {attributes.icon !== "" && (
         <>
           {Icon && <Icon className="elements-blocks-icon-selector-display" />}
-          <Button isSecondary onClick={() => setAttributes({ icon: "" })}>
+          <Button isSecondary onClick={() => setAttributes({ icon: "", svgString: "" })}>
             Remove Icon
           </Button>
         </>
       )}
-    </PanelBody>
+      </>
   );
 });
 

@@ -3,6 +3,9 @@ import {
   ToolbarButton,
   ToolbarGroup,
   ToolbarItem,
+  Modal,
+  Button,
+  PanelBody,
   Icon,
   ToolbarDropdownMenu,
 } from "@wordpress/components";
@@ -12,7 +15,7 @@ import {
   InspectorControls,
   BlockControls,
 } from "@wordpress/block-editor";
-import { seen, unseen, color as colorIcon } from "@wordpress/icons";
+import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
@@ -34,6 +37,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   const [isActive, setIsActive] = useState(false);
   const { sameBlockCount, title, color, loadOpen, icon } = attributes;
   const [iconType, iconName] = icon?.split(" ") || [];
+  const [isOpen, setOpen] = useState(false);
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
 
   const toggleActive = () => {
     setIsActive(!isActive);
@@ -144,6 +150,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
           )} */}
           <ToolbarItem>
             {() => (
+              <>
               <ToolbarButton
                 icon={loadOpen ? seen : unseen}
                 label={
@@ -153,6 +160,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 }
                 onClick={loadOpenToggle}
               />
+              <ToolbarButton
+                icon={symbol}
+                label={
+                  icon === ""
+                    ? __("Add an icon", "rrze-elements-b")
+                    : __("Change the icon", "rrze-elements-b")
+                }
+                onClick={openModal}
+              />
+              { isOpen && (
+                <Modal title={__("Select an Icon", "rrze-elements-b")} onRequestClose={ closeModal }>
+                  
+                  <IconPicker {...{ attributes, setAttributes }} />
+                  <Button isPrimary onClick={closeModal}>
+                    {__("Close", "rrze-elements-b")}
+                  </Button>
+                </Modal>  
+              )}
+              </>
             )}
           </ToolbarItem>
         </ToolbarGroup>
@@ -162,7 +188,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         <JumpLinkSelector {...{ attributes, setAttributes }} />
         <ColorSwitcher {...{ attributes, setAttributes }} />
         <AdvancedSettings {...{ attributes, setAttributes }} />
-        <IconPicker {...{ attributes, setAttributes }} />
+        <PanelBody title={__("Color Settings", "rrze-elements-b")}>
+          <IconPicker {...{ attributes, setAttributes }} />
+        </PanelBody>
       </InspectorControls>
 
       <div {...props}>
@@ -170,6 +198,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
           <h2 className="accordion-heading" onClick={toggleActive}>
           <span className="read-mode-only">{title}</span>
           <div className={`accordion-toggle ${isActive || loadOpen ? "active" : ""}`}>
+            {attributes.icon && (
             <IconMarkComponent
               type={iconType}
               iconName={iconName}
@@ -177,7 +206,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
               setAttributes={setAttributes}
               className="elements-blocks-icon-insideEditor"
             />
-            
+            )}
             <TextControl
               onChange={onChangeTitle}
               value={title}
