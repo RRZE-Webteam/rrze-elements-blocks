@@ -14,13 +14,13 @@ import {
 import { useState } from "@wordpress/element";
 
 /**
- * Controls the sidebar for videoblock in the blockeditor
- * @param {*} params
+ * Adds an input field to set individual jump links for collapses.
+ * @param {*} attributes The attributes of the block
+ * @param {*} setAttributes The function to set the attributes of the block
  * @returns JSX element
  */
 const JumpLinkSelector = ({ attributes, setAttributes }) => {
   const [inputURL, setInputURL] = useState(attributes.jumpName);
-  const { textAlign } = attributes;
 
   /**
    * Handles the submit event of the form for the video url
@@ -28,9 +28,7 @@ const JumpLinkSelector = ({ attributes, setAttributes }) => {
    */
   const handleToggleSubmit = (event) => {
     event.preventDefault();
-    const url = inputURL;
-
-    setAttributes({jumpName: inputURL});
+    setAttributes({ jumpName: inputURL });
   };
 
   const onChangeURL = (event) => {
@@ -59,7 +57,7 @@ const JumpLinkSelector = ({ attributes, setAttributes }) => {
               className="rrze-element-input-field"
               type="text"
               value={inputURL}
-              onChange={(event) => onChangeURL(event)}
+              onChange={onChangeURL}
               placeholder={__("Update the Jump Link", "rrze-video")}
               style={{ width: "100%" }}
             />
