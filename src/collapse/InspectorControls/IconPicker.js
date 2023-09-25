@@ -1,38 +1,41 @@
 import { __ } from "@wordpress/i18n";
-import {
-  TextControl,
-  ColorPalette,
-  PanelBody,
-  ToolbarDropdownMenu,
-  Toolbar,
-  ToolbarItem,
-  ToolbarGroup,
-  SearchControl,
-  ComboboxControl,
-  Button,
-  Modal,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
-} from "@wordpress/components";
-import {
-  useBlockProps,
-  BlockControls,
-  InnerBlocks,
-  InspectorControls,
-} from "@wordpress/block-editor";
-import { useState, useEffect, Suspense } from "@wordpress/element";
-import {
-  color as colorIcon,
-  formatUppercase,
-  formatLowercase,
-} from "@wordpress/icons";
+import { ComboboxControl, Button } from "@wordpress/components";
+import { useState, useEffect } from "@wordpress/element";
 import fontawesomeIconNames from "./fontawesomeIconNames.json";
 
 /**
- * Creates an Icon Component by using FA type and iconName
- * @param {*} type 
- * @param {*} iconName 
- * @returns ReactComponent
+ * Fetch and set the SVG string attribute based on the provided type and iconName.
+ *
+ * @param {string} type - Type of the fa-icon (e.g., solid, regular, brands).
+ * @param {string} iconName - Name of the icon.
+ * @param {Object} attributes - Block attributes.
+ * @param {Function} setAttributes - Setter for block attributes.
+ */
+const fetchSvgIcon = (type, iconName, attributes, setAttributes) => {
+  if (type && iconName) {
+    const filePath = `assets/svg/${type}/${iconName}.svg`;
+    fetch(attributes.directory + filePath)
+      .then((response) => response.text())
+      .then((svgString) => {
+        svgString = svgString.replace(
+          "<svg",
+          `<svg height="1em" width="1em" class="rrze-elements-icon" style="font-size: 1em; fill: currentcolor;" aria-hidden="true"`
+        );
+        setAttributes({ svgString: svgString + " " });
+      })
+      .catch((err) => {
+        console.error(`Failed to load SVG: ${err}`);
+      });
+  }
+};
+
+/**
+ * Dynamically import the SVG icon based on the provided type and iconName.
+ * @param {string} type - Type of the fa-icon (e.g., solid, regular, brands).
+ * @param {string} iconName - Name of the icon.
+ * @param {Object} attributes - Block attributes.
+ * @param {Function} setAttributes - Setter for block attributes.
+ * @returns
  */
 const useDynamicSvgIcon = (type, iconName, attributes, setAttributes) => {
   const [Icon, setIcon] = useState(null);
@@ -41,7 +44,9 @@ const useDynamicSvgIcon = (type, iconName, attributes, setAttributes) => {
     if (type && iconName) {
       const filePath = `../svg/${type}/${iconName}.svg`;
 
-      import(/* webpackChunkName: "svg-icons" */ `../svg/${type}/${iconName}.svg`)
+      import(
+        /* webpackChunkName: "svg-icons" */ `../svg/${type}/${iconName}.svg`
+      )
         .then(({ default: importedIcon }) => {
           setIcon(() => importedIcon);
         })
@@ -52,57 +57,34 @@ const useDynamicSvgIcon = (type, iconName, attributes, setAttributes) => {
   }, [type, iconName]);
 
   useEffect(() => {
-    if (attributes.icon !== "") {
-      const [type, iconName] = attributes.icon.split(" ");
-      const filePath = `assets/svg/${type}/${iconName}.svg`;
-      
-      fetch(attributes.directory + filePath)
-        .then(response => response.text())
-        .then(svgString => {
-          //inject a string after the <svg opening
-          svgString = svgString.replace('<svg', `<svg height="1em" width="1em" class="rrze-elements-icon" style="font-size: 1em; fill: currentcolor;" aria-hidden="true"`);          
-          setAttributes({ svgString: svgString + ' ' });
-        })
-        .catch((err) => {
-          console.error(`Failed to load SVG: ${err}`);
-        });
-    }
-  }, [attributes.icon]);
+    fetchSvgIcon(type, iconName, attributes, setAttributes);
+  }, [type, iconName, attributes, setAttributes]);
 
   return Icon;
 };
 
+/**
+ * Handles the Icon selection inside the InspectorControls IconPanel or ToolbarButton with Modal.
+ * @param {Object} attributes - Block attributes.
+ * @param {Function} setAttributes - Setter for block attributes.
+ */
 const IconPicker = React.memo(({ attributes, setAttributes }) => {
-  const [isOpen, setOpen] = useState(false);
   const [allIconsOptions, setAllIconsOptions] = useState([]);
   const [type, iconName] = attributes.icon.split(" ");
-  
-  // Use the custom hook to get the Icon component.
+
   const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
 
-  const openModal = () => setOpen(true);
-  const closeModal = () => setOpen(false);
-
   useEffect(() => {
-    const solidIconsOptions = fontawesomeIconNames.solid.map((icon) => ({
-      label: icon + " (solid)",
-      value: "solid " + icon,
-    }));
-
-    const regularIconsOptions = fontawesomeIconNames.regular.map((icon) => ({
-      label: icon + " (regular)",
-      value: "regular " + icon,
-    }));
-
-    const brandIconsOptions = fontawesomeIconNames.brands.map((icon) => ({
-      label: icon + " (brands)",
-      value: "brands " + icon,
-    }));
+    const createIconOptions = (icons, label) =>
+      icons.map((icon) => ({
+        label: `${icon} (${label})`,
+        value: `${label} ${icon}`,
+      }));
 
     setAllIconsOptions([
-      ...solidIconsOptions,
-      ...regularIconsOptions,
-      ...brandIconsOptions,
+      ...createIconOptions(fontawesomeIconNames.solid, "solid"),
+      ...createIconOptions(fontawesomeIconNames.regular, "regular"),
+      ...createIconOptions(fontawesomeIconNames.brands, "brands"),
     ]);
   }, []);
 
@@ -118,18 +100,28 @@ const IconPicker = React.memo(({ attributes, setAttributes }) => {
       {attributes.icon !== "" && (
         <>
           {Icon && <Icon className="elements-blocks-icon-selector-display" />}
-          <Button isSecondary onClick={() => setAttributes({ icon: "", svgString: "" })}>
+          <Button
+            isSecondary
+            onClick={() => setAttributes({ icon: "", svgString: "" })}
+          >
             Remove Icon
           </Button>
         </>
       )}
-      </>
+    </>
   );
 });
 
+/**
+ * Handles the Icon Display inside the Editor View.
+ * @param {string} type - Type of the fa-icon (e.g., solid, regular, brands).
+ * @param {string} iconName - Name of the icon.
+ * @param {Object} attributes - Block attributes.
+ * @param {Function} setAttributes - Setter for block attributes.
+ */
 const IconMarkComponent = ({ type, iconName, attributes, setAttributes }) => {
   const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
-  return Icon ? <Icon className="elements-blocks-icon-insideEditor"/> : null;
+  return Icon ? <Icon className="elements-blocks-icon-insideEditor" /> : null;
 };
 
 export { IconPicker, useDynamicSvgIcon, IconMarkComponent };

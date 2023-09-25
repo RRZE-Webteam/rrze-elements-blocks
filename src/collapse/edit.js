@@ -6,8 +6,6 @@ import {
   Modal,
   Button,
   PanelBody,
-  Icon,
-  ToolbarDropdownMenu,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -18,7 +16,7 @@ import {
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { withSelect, useDispatch, useSelect } from "@wordpress/data";
+import { useSelect } from "@wordpress/data";
 
 import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
 import {
@@ -26,40 +24,14 @@ import {
   ColorSwitcherToolbar,
 } from "./InspectorControls/ColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
-import {
-  IconPicker,
-  useDynamicSvgIcon,
-  IconMarkComponent,
-} from "./InspectorControls/IconPicker";
+import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-  const props = useBlockProps();
-  const [isActive, setIsActive] = useState(false);
-  const { sameBlockCount, title, color, loadOpen, icon } = attributes;
-  const [iconType, iconName] = icon?.split(" ") || [];
-  const [isOpen, setOpen] = useState(false);
-  const openModal = () => setOpen(true);
-  const closeModal = () => setOpen(false);
-
-  const toggleActive = () => {
-    setIsActive(!isActive);
-  };
-
-  const [pluginDir, setPluginDir] = useState("");
-
-  const onChangeTitle = (newText) => {
-    if (newText === "") {
-      setAttributes({ title: " " });
-    } else {
-      setAttributes({ title: newText });
-    }
-  };
-
-  const loadOpenToggle = () => {
-    setAttributes({ loadOpen: !loadOpen });
-  };
-
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
+    /**
+     * Get relevant data from the block editor to assist with the numbering
+     * of the collapsibles.
+     */
     useSelect(
       (select) => {
         const { getBlock, getBlockParents, getBlocks } =
@@ -86,7 +58,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       [clientId] // only rerun if clientId changes
     );
 
-  // Move any additional logic or console.logs here, outside of useSelect.
+  const props = useBlockProps();
+  const [isActive, setIsActive] = useState(false);
+  const { sameBlockCount, title, color, loadOpen, icon } = attributes;
+  const [iconType, iconName] = icon?.split(" ") || [];
+  const [isOpen, setOpen] = useState(false);
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+
+  const toggleActive = () => {
+    setIsActive(!isActive);
+  };
+
+  const [pluginDir, setPluginDir] = useState("");
+
+  const onChangeTitle = (newText) => {
+    if (newText === "") {
+      setAttributes({ title: " " });
+    } else {
+      setAttributes({ title: newText });
+    }
+  };
+
+  const loadOpenToggle = () => {
+    setAttributes({ loadOpen: !loadOpen });
+  };
 
   useEffect(() => {
     if (attributes.totalChildrenCount !== totalChildrenCount) {
@@ -130,13 +126,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   ]);
 
   useEffect(() => {
-    // Fetch plugin directory path via REST API
+    // Fetch plugin directory path via REST API – Needed for save.js
     fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         setPluginDir(data.directory);
-        // Store the fetched directory in block attributes
         setAttributes({ directory: data.directory });
+      })
+      .catch((error) => {
+        console.error("There was a problem fetching the directory:", error);
       });
   }, []);
 
@@ -151,33 +154,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
           <ToolbarItem>
             {() => (
               <>
-              <ToolbarButton
-                icon={loadOpen ? seen : unseen}
-                label={
-                  loadOpen
-                    ? __("Collapse on page load", "rrze-elements-b")
-                    : __("Open on page load", "rrze-elements-b")
-                }
-                onClick={loadOpenToggle}
-              />
-              <ToolbarButton
-                icon={symbol}
-                label={
-                  icon === ""
-                    ? __("Add an icon", "rrze-elements-b")
-                    : __("Change the icon", "rrze-elements-b")
-                }
-                onClick={openModal}
-              />
-              { isOpen && (
-                <Modal title={__("Select an Icon", "rrze-elements-b")} onRequestClose={ closeModal }>
-                  
-                  <IconPicker {...{ attributes, setAttributes }} />
-                  <Button isPrimary onClick={closeModal}>
-                    {__("Close", "rrze-elements-b")}
-                  </Button>
-                </Modal>  
-              )}
+                <ToolbarButton
+                  icon={loadOpen ? seen : unseen}
+                  label={
+                    loadOpen
+                      ? __("Collapse on page load", "rrze-elements-b")
+                      : __("Open on page load", "rrze-elements-b")
+                  }
+                  onClick={loadOpenToggle}
+                />
+                <ToolbarButton
+                  icon={symbol}
+                  label={
+                    icon === ""
+                      ? __("Add an icon", "rrze-elements-b")
+                      : __("Change the icon", "rrze-elements-b")
+                  }
+                  onClick={openModal}
+                />
+                {isOpen && (
+                  <Modal
+                    title={__("Select an Icon", "rrze-elements-b")}
+                    onRequestClose={closeModal}
+                  >
+                    <IconPicker {...{ attributes, setAttributes }} />
+                    <Button isPrimary onClick={closeModal}>
+                      {__("Close", "rrze-elements-b")}
+                    </Button>
+                  </Modal>
+                )}
               </>
             )}
           </ToolbarItem>
@@ -196,23 +201,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       <div {...props}>
         <div className={`accordion-group ${color}`}>
           <h2 className="accordion-heading" onClick={toggleActive}>
-          <span className="read-mode-only">{title}</span>
-          <div className={`accordion-toggle ${isActive || loadOpen ? "active" : ""}`}>
-            {attributes.icon && (
-            <IconMarkComponent
-              type={iconType}
-              iconName={iconName}
-              attributes={attributes}
-              setAttributes={setAttributes}
-              className="elements-blocks-icon-insideEditor"
-            />
-            )}
-            <TextControl
-              onChange={onChangeTitle}
-              value={title}
-              placeholder={__("Your Text", "text-box")}
-              className="elements-blocks-input-following-icon"
-            />
+            <span className="read-mode-only">{title}</span>
+            <div
+              className={`accordion-toggle ${
+                isActive || loadOpen ? "active" : ""
+              }`}
+            >
+              {attributes.icon && (
+                <IconMarkComponent
+                  type={iconType}
+                  iconName={iconName}
+                  attributes={attributes}
+                  setAttributes={setAttributes}
+                  className="elements-blocks-icon-insideEditor"
+                />
+              )}
+              <TextControl
+                onChange={onChangeTitle}
+                value={title}
+                placeholder={__("Your Text", "text-box")}
+                className="elements-blocks-input-following-icon"
+              />
             </div>
           </h2>
           <div
