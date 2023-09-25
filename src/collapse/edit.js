@@ -18,6 +18,7 @@ import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
 
+/////////// Custom Components and HelperFunction Imports ///////////
 import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
 import {
   ColorSwitcher,
@@ -27,6 +28,7 @@ import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
+  /////////// Use Selects ///////////
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
     /**
      * Get relevant data from the block editor to assist with the numbering
@@ -58,32 +60,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       [clientId] // only rerun if clientId changes
     );
 
+  /////////// Variables and UseState ///////////
+
   const props = useBlockProps();
-  const [isActive, setIsActive] = useState(false);
   const { sameBlockCount, title, color, loadOpen, icon } = attributes;
+  
+  const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
-  const openModal = () => setOpen(true);
-  const closeModal = () => setOpen(false);
-
-  const toggleActive = () => {
-    setIsActive(!isActive);
-  };
-
   const [pluginDir, setPluginDir] = useState("");
 
-  const onChangeTitle = (newText) => {
-    if (newText === "") {
-      setAttributes({ title: " " });
-    } else {
-      setAttributes({ title: newText });
-    }
-  };
-
-  const loadOpenToggle = () => {
-    setAttributes({ loadOpen: !loadOpen });
-  };
-
+  /////////// Use Effects ///////////
   useEffect(() => {
     if (attributes.totalChildrenCount !== totalChildrenCount) {
       setAttributes({ totalChildrenCount });
@@ -95,6 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   };
 
   let sameTypeSiblingsBefore = 0;
+
   useEffect(() => {
     if (selectedBlock && blockParents.length > 0) {
       for (const block of siblingBlocks) {
@@ -142,6 +130,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         console.error("There was a problem fetching the directory:", error);
       });
   }, []);
+
+  /////////// Event Handler / OnClick Handler ///////////
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+
+  const toggleActive = () => {
+    setIsActive(!isActive);
+  };
+
+  const onChangeTitle = (newText) => {
+    if (newText === "") {
+      setAttributes({ title: " " });
+    } else {
+      setAttributes({ title: newText });
+    }
+  };
+
+  const loadOpenToggle = () => {
+    setAttributes({ loadOpen: !loadOpen });
+  };
 
   return (
     <>
