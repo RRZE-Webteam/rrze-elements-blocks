@@ -74,6 +74,12 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
     context["rrze-elements/collapseTotalChildrenCount"],
   ]);
 
+  useEffect(() => {
+    setAttributes({
+      color: context["rrze-elements/collapseColor"],
+    })
+  }), [context["rrze-elements/collapseColor"]];
+
   let sameTypeSiblingsBefore = 0;
   useEffect(() => {
     if (selectedBlock && blockParents.length > 0) {
@@ -142,10 +148,10 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
   return (
     <>
       <BlockControls>
-        <ColorSwitcherToolbar
+        {/* <ColorSwitcherToolbar
           attributes={attributes}
           setAttributes={setAttributes}
-        />
+        /> */}
         <ToolbarGroup>
           {/* {isTextInString("Title", attributes.show) && (
             <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
@@ -179,7 +185,7 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        <ColorSwitcher attributes={attributes} setAttributes={setAttributes} />
+        {/* <ColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker {...{ attributes, setAttributes }} />
         </PanelBody>

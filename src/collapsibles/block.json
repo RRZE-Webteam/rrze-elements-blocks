@@ -38,6 +38,10 @@
 			"default": []
 		}
 	},
+	"providesContext": {
+		"rrze-elements/hstart": "hstart"
+	}
+	,
 	"supports": {
 		"html": false
 	},

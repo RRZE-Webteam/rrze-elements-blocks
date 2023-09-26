@@ -1,4 +1,31 @@
-const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+
+// Check if it's a production build
+const isProduction = process.env.NODE_ENV === 'production';
+
+let optimization = defaultConfig.optimization;
+
+if (isProduction) {
+  optimization = {
+    ...defaultConfig.optimization,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        svgIcons: {
+          test: /svg[\\/]/,
+          name: 'svg-icons',
+          chunks: 'async',
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  };
+}
 
 module.exports = {
   ...defaultConfig,
@@ -12,23 +39,5 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    ...defaultConfig.optimization,
-    splitChunks: {
-      chunks: 'all',  // This means even synchronous imports get their own chunks.
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-        svgIcons: {
-          test: /svg[\\/]/,
-          name: 'svg-icons',
-          chunks: 'async',
-          reuseExistingChunk: true,
-        }
-      }
-    }
-  }
+  optimization: optimization,
 };
