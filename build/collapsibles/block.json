@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/collapsibles",
+  "version": "1.25.10",
+  "title": "Accordion",
+  "category": "design",
+  "icon": "align-center",
+  "description": "Creates an accordion block",
+  "attributes": {
+    "message": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    },
+    "expandAllLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 2
+    },
+    "register": {
+      "type": "boolean",
+      "default": false
+    },
+    "sameBlockCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "previousBlockIds": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "providesContext": {
+    "rrze-elements/accordion-hstart": "hstart"
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "script": "rrze-accordions",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

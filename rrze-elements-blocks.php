@@ -4,7 +4,7 @@
 Plugin Name:     RRZE Elements Blocks
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-elements
 Description:     Advanced design elements for WordPress BlockEditor.
-Version:         1.0.0
+Version:         0.0.1
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -103,8 +103,14 @@ function deactivation()
  * @return void
  */
 function rrze_rrze_elements_block_init() {
-    register_block_type( __DIR__ . '/build/accordion');
+    register_block_type( __DIR__ . '/build/collapsibles');
     register_block_type( __DIR__ . '/build/collapse');
+    register_block_type( __DIR__ . '/build/accordions');
+    register_block_type( __DIR__ . '/build/accordion');
+    register_block_type( __DIR__ . '/build/notice');
+
+    wp_enqueue_style('fontawesome');
+    wp_enqueue_style('rrze-elements');
 }
 
 /**
@@ -126,7 +132,18 @@ function loaded()
             printf('<div class="notice notice-error"><p>%1$s: %2$s</p></div>', esc_html($plugin_name), esc_html($error));
         });
     } else {
-        // new Main(__FILE__);
+        new Main(__FILE__);
         add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
+        add_action('rest_api_init', function () {
+            register_rest_route('rrze-elements-blocks/v1', '/plugin-directory', array(
+                'methods' => 'GET',
+                'callback' => function () {
+                    return array(
+                        'directory' => plugin_dir_url(__FILE__)
+                    );
+                }
+            ));
+        });
     }
+
 }

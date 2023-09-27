@@ -3,12 +3,12 @@
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
   "version": "1.25.10",
-  "title": "Collapse",
+  "title": "Akkordeonreiter",
   "category": "design",
   "icon": "align-center",
   "description": "Creates an accordion block",
   "parent": [
-    "rrze-elements/accordion"
+    "rrze-elements/collapsibles"
   ],
   "keywords": [
     "accordion",
@@ -21,6 +21,10 @@
       "type": "string",
       "source": "text",
       "selector": "div"
+    },
+    "loadOpen": {
+      "type": "boolean",
+      "default": false
     },
     "expandAllLink": {
       "type": "boolean",
@@ -40,19 +44,49 @@
     },
     "title": {
       "type": "string",
-      "source": "html",
-      "selector": "button",
       "default": "Enter your Title"
     },
     "color": {
       "type": "string",
       "default": ""
+    },
+    "totalChildrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "jumpName": {
+      "type": "string",
+      "default": ""
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+    "svgString": {
+      "type": "string",
+      "default": ""
+    },
+    "directory": {
+      "type": "string",
+      "default": ""
     }
   },
+  "providesContext": {
+    "rrze-elements/collapseSBlockCount": "sameBlockCount",
+    "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount",
+    "rrze-elements/collapseColor": "color"
+  },
+  "usesContext": [
+    "rrze-elements/accordion-hstart"
+  ],
   "supports": {
     "html": false
   },
-  "textdomain": "rrze-elements",
+  "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"

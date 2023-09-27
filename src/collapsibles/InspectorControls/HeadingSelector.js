@@ -1,0 +1,118 @@
+//Imports for necessary WordPress libraries
+import { __ } from "@wordpress/i18n";
+import {
+  ToolbarDropdownMenu,
+  __experimentalDivider as Divider,
+  __experimentalToggleGroupControl as ToggleGroupControl,
+  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
+  __experimentalText as Text
+} from "@wordpress/components";
+import {
+  headingLevel2,
+  headingLevel3,
+  headingLevel4,
+  headingLevel5,
+  headingLevel6,
+} from "@wordpress/icons";
+
+/**
+ * Checks the heading level and returns the corresponding icon
+ * @param {*} hstart
+ * @returns
+ */
+const checkHeadingLevelIcon = (hstart) => {
+  switch (hstart) {
+    case 2:
+      return headingLevel2;
+    case 3:
+      return headingLevel3;
+    case 4:
+      return headingLevel4;
+    case 5:
+      return headingLevel5;
+    case 6:
+      return headingLevel6;
+    default:
+      return headingLevel2; // default icon if none matches
+  }
+};
+
+/**
+ * Creates a Selector for hstart inside the Blockeditor
+ * @param {*} props
+ * @returns JSX element
+ */
+const HeadingSelector = ({ attributes, setAttributes }) => {
+  const handleToggleHeadingGroup = (newValue) => {
+    setAttributes({ hstart: newValue });
+  };
+
+  return (
+    <ToolbarDropdownMenu
+      icon={checkHeadingLevelIcon(attributes.hstart)}
+      label="Select heading level"
+      value={attributes.hstart}
+      controls={[
+        {
+          title: "H2",
+          isDisabled: attributes.hstart === 2,
+          onClick: () => handleToggleHeadingGroup(2),
+        },
+        {
+          title: "H3",
+          isDisabled: attributes.hstart === 3,
+          onClick: () => handleToggleHeadingGroup(3),
+        },
+        {
+          title: "H4",
+          isDisabled: attributes.hstart === 4,
+          onClick: () => handleToggleHeadingGroup(4),
+        },
+        {
+          title: "H5",
+          isDisabled: attributes.hstart === 5,
+          onClick: () => handleToggleHeadingGroup(5),
+        },
+        {
+          title: "H6",
+          isDisabled: attributes.hstart === 6,
+          onClick: () => handleToggleHeadingGroup(6),
+        },
+      ]}
+    />
+  );
+};
+
+/**
+ * Creates a Dropdown HeadingSelector for hstart inside the BlockControls
+ * @param {*} props
+ * @returns JSX element
+ */
+const HeadingSelectorInspector = ({ attributes, setAttributes }) => {
+  const handleToggleHeadingGroup = (newValue) => {
+    setAttributes({ hstart: newValue });
+  };
+
+  return (
+    <>
+      <ToggleGroupControl
+        label={__("Heading level", "rrze-elements-b")}
+        value={attributes.hstart}
+        onChange={handleToggleHeadingGroup}
+        isBlock
+      >
+        <ToggleGroupControlOption value={2} label="H2" />
+        <ToggleGroupControlOption value={3} label="H3" />
+        <ToggleGroupControlOption value={4} label="H4" />
+        <ToggleGroupControlOption value={5} label="H5" />
+        <ToggleGroupControlOption value={6} label="H6" />
+      </ToggleGroupControl>
+      <Text>
+        {__("Controls the heading level of the accordion", "rrze-elements-b")}
+    </Text>
+      <Divider />
+    </>
+  );
+};
+
+export { HeadingSelector, HeadingSelectorInspector };
