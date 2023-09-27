@@ -16,6 +16,9 @@ export default function save({ attributes }) {
               className="accordion-toggle"
               data-toggle="collapse"
               href={`#collapse_${sameBlockCount + totalChildrenCount + ancestorCount}`}
+              dangerouslySetInnerHTML={{
+                __html: `${attributes.svgString}${title}`,
+              }}
             >
               {title}
             </button>
