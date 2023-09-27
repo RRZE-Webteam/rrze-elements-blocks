@@ -17,6 +17,7 @@ import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
+import HeadingComponent from "./InspectorControls/HeadingComponent";
 
 /////////// Custom Components and HelperFunction Imports ///////////
 import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
@@ -27,7 +28,7 @@ import {
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
   /////////// Use Selects ///////////
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
     /**
@@ -131,6 +132,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       });
   }, []);
 
+  useEffect(() => {
+    setAttributes({
+      hstart: context["rrze-elements/accordion-hstart"],
+    })
+  }), [context["rrze-elements/hstart"]];
+
   /////////// Event Handler / OnClick Handler ///////////
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -208,7 +215,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
       <div {...props}>
         <div className={`accordion-group ${color}`}>
-          <h2 className="accordion-heading" onClick={toggleActive}>
+          <HeadingComponent level={attributes.hstart} className="accordion-heading" onClick={toggleActive}>
             <span className="read-mode-only">{title}</span>
             <div
               className={`accordion-toggle ${
@@ -231,7 +238,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 className="elements-blocks-input-following-icon"
               />
             </div>
-          </h2>
+          </HeadingComponent>
           <div
             id={`collapse_${sameTypeSiblingsBefore}`}
             className={`accordion-body ${isActive || loadOpen ? "active" : ""}`}

@@ -39,7 +39,7 @@
 		}
 	},
 	"providesContext": {
-		"rrze-elements/hstart": "hstart"
+		"rrze-elements/accordion-hstart": "hstart"
 	}
 	,
 	"supports": {

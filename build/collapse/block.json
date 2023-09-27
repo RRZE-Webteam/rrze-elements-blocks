@@ -80,6 +80,9 @@
     "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount",
     "rrze-elements/collapseColor": "color"
   },
+  "usesContext": [
+    "rrze-elements/accordion-hstart"
+  ],
   "supports": {
     "html": false
   },
