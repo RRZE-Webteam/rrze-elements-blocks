@@ -1,0 +1,29 @@
+"use strict";
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons1279"],{
+
+/***/ "./src/collapse/svg/solid/headphones.svg":
+/*!***********************************************!*\
+  !*** ./src/collapse/svg/solid/headphones.svg ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _path;
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgHeadphones = function SvgHeadphones(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "m512 287.9-.004 112C511.1 444.1 476.1 480 432 480c-26.47 0-48-21.56-48-48.06V304.1c0-26.5 21.5-48.1 48-48.1 10.83 0 20.91 2.723 30.3 6.678C449.7 159.1 362.1 80.13 256 80.13S62.29 159.1 49.7 262.7c9.39-4 19.47-6.7 30.3-6.7 26.5 0 48 21.6 48 48.1V432c0 26.4-21.5 48-48 48C35.89 480 .9 444.12.9 399.94L0 288C0 146.8 114.8 32 256 32c140.9 0 255.6 114.5 255.1 255.3 0 .2 0 .4.9.6z"
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (SvgHeadphones);
+
+/***/ })
+
+}]);
+//# sourceMappingURL=svg-icons1279.js.map

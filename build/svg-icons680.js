@@ -1,0 +1,29 @@
+"use strict";
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons680"],{
+
+/***/ "./src/collapse/svg/solid/arrow-right-to-bracket.svg":
+/*!***********************************************************!*\
+  !*** ./src/collapse/svg/solid/arrow-right-to-bracket.svg ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _path;
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgArrowRightToBracket = function SvgArrowRightToBracket(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M416 32h-64c-17.67 0-32 14.33-32 32s14.33 32 32 32h64c17.67 0 32 14.33 32 32v256c0 17.67-14.33 32-32 32h-64c-17.67 0-32 14.33-32 32s14.33 32 32 32h64c53.02 0 96-42.98 96-96V128c0-53.02-43-96-96-96zm-73.4 201.4-128-128c-12.51-12.51-32.76-12.49-45.25 0-12.5 12.5-12.5 32.75 0 45.25L242.8 224H32c-17.69 0-32 14.3-32 32s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128c12.43-12.53 12.43-32.73-.07-45.23z"
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (SvgArrowRightToBracket);
+
+/***/ })
+
+}]);
+//# sourceMappingURL=svg-icons680.js.map
