@@ -5,6 +5,7 @@ import {
   __experimentalDivider as Divider,
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
+  __experimentalText as Text
 } from "@wordpress/components";
 import {
   headingLevel2,
@@ -95,17 +96,20 @@ const HeadingSelectorInspector = ({ attributes, setAttributes }) => {
   return (
     <>
       <ToggleGroupControl
-        label={__("Heading level", "rrze-video")}
+        label={__("Heading level", "rrze-elements-b")}
         value={attributes.hstart}
         onChange={handleToggleHeadingGroup}
         isBlock
       >
-        <ToggleGroupControlOption value="h2" label="H2" />
-        <ToggleGroupControlOption value="h3" label="H3" />
-        <ToggleGroupControlOption value="h4" label="H4" />
-        <ToggleGroupControlOption value="h5" label="H5" />
-        <ToggleGroupControlOption value="h6" label="H6" />
+        <ToggleGroupControlOption value={2} label="H2" />
+        <ToggleGroupControlOption value={3} label="H3" />
+        <ToggleGroupControlOption value={4} label="H4" />
+        <ToggleGroupControlOption value={5} label="H5" />
+        <ToggleGroupControlOption value={6} label="H6" />
       </ToggleGroupControl>
+      <Text>
+        {__("Controls the heading level of the accordion", "rrze-elements-b")}
+    </Text>
       <Divider />
     </>
   );

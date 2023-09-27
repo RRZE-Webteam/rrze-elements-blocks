@@ -12,7 +12,8 @@
   "usesContext": [
     "rrze-elements/collapseSBlockCount",
     "rrze-elements/collapseTotalChildrenCount",
-    "rrze-elements/collapseColor"
+    "rrze-elements/collapseColor",
+    "rrze-elements/accordion-hstart"
   ],
   "attributes": {
     "message": {
@@ -26,7 +27,7 @@
     },
     "hstart": {
       "type": "integer",
-      "default": 2
+      "default": 3
     },
     "register": {
       "type": "boolean",

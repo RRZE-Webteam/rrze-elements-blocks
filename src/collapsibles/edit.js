@@ -17,7 +17,7 @@ import {
   headingLevel6,
 } from "@wordpress/icons";
 import ExpandAllLink from "./InspectorControls/ExpandAllLink";
-import { HeadingSelector } from "./InspectorControls/HeadingSelector";
+import { HeadingSelector, HeadingSelectorInspector } from "./InspectorControls/HeadingSelector";
 
 export default function Edit({ attributes, setAttributes, ...ownProps }) {
   const props = useBlockProps();
@@ -86,6 +86,12 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
           <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
         </BlockControls>
         <InspectorControls>
+          <PanelBody 
+            title={__("Heading Settings", "rrze-elements-b")}
+            initialOpen={true}
+          >
+          <HeadingSelectorInspector attributes={attributes} setAttributes={setAttributes} />
+          </PanelBody>
           <PanelBody
             title={__("Collapsibles Settings", "rrze-elements-b")}
             initialOpen={true}

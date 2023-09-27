@@ -1,15 +1,16 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
 
 export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, ancestorCount } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title, ancestorCount, hstart } = attributes;
 
   return (
     <div {...blockProps}>
       {" "}
       <>
         <div className={`accordion-group ${attributes.color}`}>
-          <h2 className="accordion-heading">
+          <HeadingComponent level={hstart + 1} className="accordion-heading">
             <span className="read-mode-only">Test </span>
             <button
               className="accordion-toggle"
@@ -18,7 +19,7 @@ export default function save({ attributes }) {
             >
               {title}
             </button>
-          </h2>
+          </HeadingComponent>
           <div
             id={`collapse_${sameBlockCount + totalChildrenCount + ancestorCount}`}
             className="accordion-body"

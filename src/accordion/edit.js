@@ -21,6 +21,7 @@ import {
   ColorSwitcher,
   ColorSwitcherToolbar,
 } from "./InspectorControls/ColorSwitcher";
+import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
 import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
 
 export default function Edit({ attributes, context, setAttributes, clientId }) {
@@ -129,6 +130,12 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
       });
   }, []);
 
+  useEffect(() => {
+    setAttributes({
+      hstart: context["rrze-elements/accordion-hstart"],
+    });
+  }), [context["rrze-elements/accordion-hstart"]];
+
   /////////////////////// Event Handler / OnClick Handler //////////
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -193,7 +200,7 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
 
       <div {...props}>
         <div className={`accordion-group ${attributes.color}`}>
-          <h2 className="accordion-heading" onClick={toggleActive}>
+          <HeadingComponent level={attributes.hstart +1 } className="accordion-heading" onClick={toggleActive}>
             <div
               className={`accordion-toggle ${
                 isActive || loadOpen ? "active" : ""
@@ -215,7 +222,7 @@ export default function Edit({ attributes, context, setAttributes, clientId }) {
                 className="elements-blocks-input-following-icon"
               />
             </div>
-          </h2>
+          </HeadingComponent>
           <div className={`accordion-body ${isActive ? "active" : ""}`}>
             <div className="accordion-inner clearfix">
               <InnerBlocks

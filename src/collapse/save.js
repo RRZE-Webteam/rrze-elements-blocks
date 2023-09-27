@@ -1,8 +1,10 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import HeadingComponent from "./InspectorControls/HeadingComponent";
 
 export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, jumpName, loadOpen } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title, jumpName, loadOpen, hstart } = attributes;
+
 
   let output = '';
   if (jumpName === ''){
@@ -24,7 +26,7 @@ export default function save({ attributes }) {
       {" "}
       <>
         <div className={`accordion-group ${color}`}>
-          <h2 className="accordion-heading">
+          <HeadingComponent level={hstart} className="accordion-heading">
             <span className="read-mode-only">Test </span>
             <button
               className={`accordion-toggle ${aciveOnPageLoad}`}
@@ -37,7 +39,7 @@ export default function save({ attributes }) {
             >
               
             </button>
-          </h2>
+          </HeadingComponent>
           <div
             id={`collapse_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
