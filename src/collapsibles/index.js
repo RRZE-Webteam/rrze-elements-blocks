@@ -39,28 +39,10 @@ registerBlockType( metadata.name, {
 				type: 'shortcode',
 				tag: 'collapsibles',
 				attributes: {
-					title: {
-						type: 'string',
-						shortcode: attributes => {
-							return attributes.named.title || '';
-						}
-					},
 					hstart: {
 						type: 'integer',
 						shortcode: attributes => {
 							return attributes.named.hstart || 2;
-						}
-					},
-					color: {
-						type: 'string',
-						shortcode: attributes => {
-							return attributes.named.color || '';
-						}
-					},
-					message: {
-						type: 'string',
-						shortcode: (attributes, data) => {
-							return data.shortcode?.content || '';
 						}
 					}
 				},
@@ -98,6 +80,7 @@ registerBlockType( metadata.name, {
 						// For simplicity, we're just using the cleaned up content. 
 						// You might want to create separate blocks or use the captured attributes as needed.
 						collapseContent.forEach(item => {
+							console.log(item.content);
 							innerBlocks.push(
 								createBlock('rrze-elements/collapse', 
 									{ title: item.title || 'Enter a title', color: item.color || '', jumpName: item.name || '' }, 
@@ -109,9 +92,9 @@ registerBlockType( metadata.name, {
 						console.log(data.shortcode.content);
 						console.log(cleanData);
 					}
-					const hstart = parseInt(attributes.named.hstart, 10);
+					const hstart = parseInt(attributes.named.hstart, 10) || 2;
 					console.log(attributes);
-					blocks.push(createBlock('rrze-elements/collapsibles', {hstart}, innerBlocks));
+					blocks.push(createBlock('rrze-elements/collapsibles', {hstart: hstart}, innerBlocks));
 				
 					return blocks;
 				}
