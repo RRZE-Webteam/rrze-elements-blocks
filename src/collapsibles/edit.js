@@ -113,6 +113,12 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
               </button>
             </div>
           )}
+          {attributes.message && (
+            //create a classic gutenberg block and insert the message inside it's content area
+            <>
+              
+            </>
+          )}
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapse"]}
             template={[
