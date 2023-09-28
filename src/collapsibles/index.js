@@ -48,63 +48,76 @@ registerBlockType( metadata.name, {
 				},
 				transform: (attributes, data) => {
 					const blocks = [];
-					const innerBlocks = [];
+					const globalInnerBlocks = [];
 					
 					const cleanData = data.shortcode?.content.replace(/<\/?p>/g, '');
 					const regexCollapse = /\[collapse(?=\s)((?:\s+\w+=(?:'[^']*'|"[^"]*"|“[^”]*”))*)\]([\s\S]*?)\[\/collapse\]/g;
 					const matchesCollapseContent = [...cleanData.matchAll(regexCollapse)];
-				
-					const collapseContent = matchesCollapseContent.map(match => {
-						const attributesString = match[1];
-						const content = match[2].trim();
-				
-						// Extract attributes
-						const attributeMatches = attributesString.match(/(\w+)=('[^']*'|"[^"]*"|“[^”]*”)/g);
-						let collapseAttributes = {};
-				
-						attributeMatches?.forEach(attr => {
-							const [key, fullValue] = attr.split('=');
-							const actualValue = fullValue.slice(1, -1); // This trims the surrounding quotes
-							collapseAttributes[key] = actualValue;
+					let collapseAttributes = {};
+					matchesCollapseContent.forEach(match => {
+						const collapseAttributesString = match[1];
+						const contentInsideCollapse = match[2].trim();
+						
+						let collapseInnerBlocks = [];
+						
+						const accordionRegex = /\[accordions\]([\s\S]*?)\[\/accordions\]/g;
+						const splitContents = contentInsideCollapse.split(accordionRegex);
+						splitContents.forEach((splitContent, index) => {
+							if (index % 2 === 0) {
+								// This should be freeform content outside of the accordions
+								if (splitContent.trim()) {
+									collapseInnerBlocks.push(createBlock('core/freeform', { content: splitContent.trim() }));
+								}
+							} else {
+								// This should be content inside an accordion
+								const accordionItemsRegex = /\[accordion-item(?=\s)((?:\s+\w+=(?:'[^']*'|"[^"]*"|“[^”]*”))*)\]([\s\S]*?)\[\/accordion-item\]/g;
+								const accordionItemMatches = [...splitContent.matchAll(accordionItemsRegex)];
+								
+								let innerAccordionBlocks = [];
+								
+								accordionItemMatches.forEach(accordionItem => {
+									const accordionAttributesString = accordionItem[1];
+									const accordionContent = accordionItem[2].trim();
+									
+									const accordionAttributeMatches = accordionAttributesString.match(/(\w+)=('[^']*'|"[^"]*"|“[^”]*”)/g);
+									let accordionAttributes = {};
+									
+									accordionAttributeMatches?.forEach(attr => {
+										const [key, fullValue] = attr.split('=');
+										const actualValue = fullValue.slice(1, -1);
+										accordionAttributes[key] = actualValue;
+									});
+									
+									innerAccordionBlocks.push(
+										createBlock('rrze-elements/accordion',
+											{ title: accordionAttributes.title || 'Enter a title' },
+											[createBlock('core/freeform', { content: accordionContent })]
+										)
+									);
+								});
+								
+								if (innerAccordionBlocks.length) {
+									collapseInnerBlocks.push(createBlock('rrze-elements/accordions', {}, innerAccordionBlocks));
+								}
+							}
 						});
 						
-				
-						return {
-							...collapseAttributes,
-							content
-						};
+						globalInnerBlocks.push(
+							createBlock('rrze-elements/collapse',
+								{ title: collapseAttributes.title || 'Enter a title', color: collapseAttributes.color || '', jumpName: collapseAttributes.name || '' },
+								collapseInnerBlocks
+							)
+						);
 					});
-					console.log('collapseContent', collapseContent);
-				
-					if (data.shortcode?.content !== undefined) {
-						// For simplicity, we're just using the cleaned up content. 
-						// You might want to create separate blocks or use the captured attributes as needed.
-						collapseContent.forEach(item => {
-							console.log(item.content);
-							innerBlocks.push(
-								createBlock('rrze-elements/collapse', 
-									{ title: item.title || 'Enter a title', color: item.color || '', jumpName: item.name || '' }, 
-									[createBlock('core/freeform', { content: item.content })]
-								)
-							);
-						});
-				
-						console.log(data.shortcode.content);
-						console.log(cleanData);
-					}
+					
 					const hstart = parseInt(attributes.named.hstart, 10) || 2;
-					console.log(attributes);
-					blocks.push(createBlock('rrze-elements/collapsibles', {hstart: hstart}, innerBlocks));
-				
+					blocks.push(createBlock('rrze-elements/collapsibles', { hstart: hstart }, globalInnerBlocks));
+					
 					return blocks;
 				}
-				
-				
-				
-			},
-			
+			}
 		]
-	},
+	},	
 	/**
 	 * @see ./edit.js
 	 */
