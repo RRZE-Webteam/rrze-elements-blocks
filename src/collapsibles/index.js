@@ -69,7 +69,7 @@ registerBlockType( metadata.name, {
 					const innerBlocks = [];
 					
 					const cleanData = data.shortcode?.content.replace(/<\/?p>/g, '');
-					const regexCollapse = /\[collapse(?=\s)((?:\s+\w+="[^"]*")*)\]([\s\S]*?)\[\/collapse\]/g;
+					const regexCollapse = /\[collapse(?=\s)((?:\s+\w+=(?:'[^']*'|"[^"]*"|“[^”]*”))*)\]([\s\S]*?)\[\/collapse\]/g;
 					const matchesCollapseContent = [...cleanData.matchAll(regexCollapse)];
 				
 					const collapseContent = matchesCollapseContent.map(match => {
@@ -77,13 +77,15 @@ registerBlockType( metadata.name, {
 						const content = match[2].trim();
 				
 						// Extract attributes
-						const attributeMatches = attributesString.match(/(\w+)="([^"]*)"/g);
+						const attributeMatches = attributesString.match(/(\w+)=('[^']*'|"[^"]*"|“[^”]*”)/g);
 						let collapseAttributes = {};
 				
 						attributeMatches?.forEach(attr => {
-							const [key, value] = attr.split(/=/);
-							collapseAttributes[key] = value.replace(/"/g, ''); // remove quotes
+							const [key, fullValue] = attr.split('=');
+							const actualValue = fullValue.slice(1, -1); // This trims the surrounding quotes
+							collapseAttributes[key] = actualValue;
 						});
+						
 				
 						return {
 							...collapseAttributes,
@@ -98,7 +100,7 @@ registerBlockType( metadata.name, {
 						collapseContent.forEach(item => {
 							innerBlocks.push(
 								createBlock('rrze-elements/collapse', 
-									{ title: item.title || 'Enter a title', color: item.color || '' }, 
+									{ title: item.title || 'Enter a title', color: item.color || '', jumpName: item.name || '' }, 
 									[createBlock('core/freeform', { content: item.content })]
 								)
 							);
