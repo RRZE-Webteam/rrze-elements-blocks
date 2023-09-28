@@ -109,8 +109,9 @@ registerBlockType( metadata.name, {
 						console.log(data.shortcode.content);
 						console.log(cleanData);
 					}
-				
-					blocks.push(createBlock('rrze-elements/collapsibles', attributes, innerBlocks));
+					const hstart = parseInt(attributes.named.hstart, 10);
+					console.log(attributes);
+					blocks.push(createBlock('rrze-elements/collapsibles', {hstart}, innerBlocks));
 				
 					return blocks;
 				}
