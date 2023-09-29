@@ -23,6 +23,38 @@ import './editor.scss';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import iconJson from '../collapse/InspectorControls/fontawesomeIconNames.json';
+
+/**
+ * Helper Functions
+ */
+function validateIcon(iconStr) {
+    // Splitting the string to see if it has a prefix.
+	if(iconStr === undefined) return '';
+
+    const parts = iconStr.split(' ');
+
+    let prefix, iconName;
+    
+    if (parts.length === 1) {
+        // If only icon name is provided, use "solid" as the default prefix.
+        prefix = 'solid';
+        iconName = parts[0];
+    } else if (parts.length === 2) {
+        prefix = parts[0];
+        iconName = parts[1];
+    } else {
+        // Invalid icon string format
+        return null;
+    }
+
+    // Check if the icon exists in the provided prefix category.
+    if (iconJson[prefix] && iconJson[prefix].includes(iconName)) {
+        return `${prefix} ${iconName}`;
+    }
+
+    return '';
+}
 
 /**
  * Every block starts by registering a new block type definition.
@@ -46,6 +78,7 @@ registerBlockType( metadata.name, {
 						}
 					}
 				},
+				priority: 1,
 				transform: (attributes, data) => {
 					const blocks = [];
 					const globalInnerBlocks = [];
@@ -56,11 +89,19 @@ registerBlockType( metadata.name, {
 					let collapseAttributes = {};
 					matchesCollapseContent.forEach(match => {
 						const collapseAttributesString = match[1];
+						const attributesRegex = /(\w+)="([^"]*)"/g;
+						let attributeMatches;
+						while((attributeMatches = attributesRegex.exec(collapseAttributesString)) !== null) {
+							const key = attributeMatches[1];
+							const value = attributeMatches[2];
+							collapseAttributes[key] = value;
+						}
+
 						const contentInsideCollapse = match[2].trim();
-						
+
 						let collapseInnerBlocks = [];
 						
-						const accordionRegex = /\[accordions\]([\s\S]*?)\[\/accordions\]/g;
+						const accordionRegex = /\[accordion(?=\s|\])(?:\s+\w+="[^"]*")*\]([\s\S]*?)\[\/accordion\]/g;
 						const splitContents = contentInsideCollapse.split(accordionRegex);
 						splitContents.forEach((splitContent, index) => {
 							if (index % 2 === 0) {
@@ -102,9 +143,26 @@ registerBlockType( metadata.name, {
 							}
 						});
 						
+						const colorChoice = (color) => {
+							switch( color ) {
+								case 'tf':
+									return 'tf';
+								case 'nat':
+									return 'nat';
+								case 'phil':
+									return 'phil';
+								case 'med':
+									return 'med';
+								case 'rw':
+									return 'rw';
+								default:
+									return '';
+							}
+						};
+
 						globalInnerBlocks.push(
 							createBlock('rrze-elements/collapse',
-								{ title: collapseAttributes.title || 'Enter a title', color: collapseAttributes.color || '', jumpName: collapseAttributes.name || '' },
+								{ title: collapseAttributes.title || 'Enter a title', color: colorChoice(collapseAttributes.color), jumpName: collapseAttributes.name || '', icon: validateIcon(collapseAttributes.icon) || ''},
 								collapseInnerBlocks
 							)
 						);
