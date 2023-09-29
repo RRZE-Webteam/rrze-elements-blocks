@@ -11,10 +11,15 @@ export default function Edit({ blockProps, attributes, selectedBlock, setAttribu
 
   return (
     <>
-      <InspectorControls>
+      <InspectorControls
+        allowedBlocks={["core/paragraph"]}
+      >
           <ColorSwitcher attributes={attributes} setAttributes={setAttributes} />
       </InspectorControls>
-      <div className="alert clearfix clear">
+      <div 
+    className={`alert clearfix clear ${attributes.style ? `alert-${attributes.style}` : ''}`}
+    style={attributes.style ? {} : {backgroundColor: attributes.color}}
+>
        <InnerBlocks
           template={[
             ["core/paragraph", { placeholder: __("Add a description…") }],

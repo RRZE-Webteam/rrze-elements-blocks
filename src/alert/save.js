@@ -2,7 +2,7 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount } = attributes;
+  const { sameBlockCount, style } = attributes;
 
   return (
     <div {...blockProps}>
@@ -14,7 +14,10 @@ export default function save({ attributes }) {
           <p>Beispiel</p>
           </div>
         </div> */}
-      <div className="alert clearfix clear">
+        <div 
+        className={`alert clearfix clear ${attributes.style ? `alert-${attributes.style}` : ''}`}
+        style={attributes.style ? {} : {backgroundColor: attributes.color}}
+    >
         <InnerBlocks.Content />
       </div>
       </>

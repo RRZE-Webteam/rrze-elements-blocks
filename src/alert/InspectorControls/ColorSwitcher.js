@@ -26,10 +26,13 @@ const colorToSlugMap = {
 };
 
 const ColorSwitcher = ({ attributes, setAttributes }) => {
-  const { color } = attributes;
+  const { color, style } = attributes;
 
   const onChangeColor = (newColor) => {
-    setAttributes({ color: colorToSlugMap[newColor] });
+    console.log('color', newColor);
+    console.log('slug', colorToSlugMap[newColor]);
+    setAttributes({ color: newColor });
+    setAttributes({ style: colorToSlugMap[newColor] });
   };
 
   return (
@@ -64,9 +67,7 @@ const ColorSwitcher = ({ attributes, setAttributes }) => {
             color: "#f2dede",
           },
         ]}
-        value={Object.keys(colorToSlugMap).find(
-          (key) => colorToSlugMap[key] === color
-        )}
+        value={attributes.color}
         onChange={onChangeColor}
       />
     </PanelBody>
