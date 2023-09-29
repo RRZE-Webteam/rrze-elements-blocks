@@ -37,6 +37,73 @@
 			"default": []
 		}
 	},
+	"example": {
+        "attributes": {
+            "hstart": 2
+        },
+        "innerBlocks": [
+            {
+                "name": "rrze-elements/collapse",
+                "attributes": {
+                    "title": "Akkordionreiter 1",
+					"loadOpen": false
+                },
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"content": "Inhalt 1"
+						}
+					}
+				]
+            },
+			{
+                "name": "rrze-elements/collapse",
+                "attributes": {
+                    "title": "Akkordionreiter 2",
+					"loadOpen": false
+                },
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"content": "Inhalt 2"
+						}
+					}
+				]
+            },
+			{
+                "name": "rrze-elements/collapse",
+                "attributes": {
+                    "title": "Akkordionreiter 3",
+					"loadOpen": false
+                },
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"content": "Inhalt 2"
+						}
+					}
+				]
+            },
+			{
+                "name": "rrze-elements/collapse",
+                "attributes": {
+                    "title": "Akkordionreiter 4",
+					"loadOpen": false
+                },
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"content": "Inhalt 2"
+						}
+					}
+				]
+            }
+        ]
+    },
 	"providesContext": {
 		"rrze-elements/accordion-hstart": "hstart"
 	}

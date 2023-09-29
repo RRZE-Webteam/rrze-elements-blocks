@@ -14,7 +14,7 @@ export default function save({ attributes }) {
           <p>Beispiel</p>
           </div>
         </div> */}
-      <div class="alert clearfix clear">
+      <div className="alert clearfix clear">
         <InnerBlocks.Content />
       </div>
       </>
