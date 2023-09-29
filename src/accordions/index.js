@@ -37,6 +37,10 @@ registerBlockType( metadata.name, {
 			message: 'Accordion',
 		},
 	},
+	icon: {
+		src: "align-center",
+		background: "#00458c"
+	},
 	/**
 	 * @see ./edit.js
 	 */

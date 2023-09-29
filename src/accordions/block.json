@@ -5,7 +5,6 @@
 	"version": "1.25.10",
 	"title": "Inner Accordion",
 	"category": "design",
-	"icon": "align-center",
 	"parent": [
 		"rrze-elements/collapse"
 	],

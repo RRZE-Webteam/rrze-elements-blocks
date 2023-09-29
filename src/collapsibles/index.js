@@ -65,6 +65,10 @@ registerBlockType( metadata.name, {
 	/**
 	 * Used to construct a preview for the block to be shown in the block inserter.
 	 */
+	icon: {
+		src: "align-center",
+		background: "#00458c"
+	},
 	transforms: {
 		from: [
 			{

@@ -5,7 +5,6 @@
   "version": "1.25.10",
   "title": "Akkordeonreiter",
   "category": "design",
-  "icon": "align-center",
   "description": "Creates an accordion block",
   "parent": ["rrze-elements/collapsibles"],
   "keywords": ["accordion", "collapse", "expand", "toggle"],

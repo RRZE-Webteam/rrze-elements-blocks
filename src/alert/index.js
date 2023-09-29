@@ -20,6 +20,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import './editor.scss';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -34,6 +35,10 @@ registerBlockType( metadata.name, {
 		attributes: {
 			message: 'Accordion',
 		},
+	},
+	icon: {
+		src: "minus",
+		background: "#00458c"
 	},
 	/**
 	 * @see ./edit.js

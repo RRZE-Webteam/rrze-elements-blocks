@@ -8,12 +8,15 @@ export default function save({ attributes }) {
     <div {...blockProps}>
       {" "}
       <>
-        <div className={`notice notice-download no-title`}>
+        {/* <div className={`notice notice-download no-title`}>
           <InnerBlocks.Content />
           <div>
           <p>Beispiel</p>
           </div>
-        </div>
+        </div> */}
+      <div class="alert clearfix clear">
+        <InnerBlocks.Content />
+      </div>
       </>
     </div>
   );

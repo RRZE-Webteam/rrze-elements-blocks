@@ -9,7 +9,13 @@ export default function Edit({ blockProps, attributes, selectedBlock, setAttribu
 
   return (
     <>
-      <div>
+      <div class="alert clearfix clear">
+       <InnerBlocks
+          template={[
+            ["core/paragraph", { placeholder: __("Add a description…") }],
+          ]}
+          templateLock={false}
+        />
       </div>
     </>
   );

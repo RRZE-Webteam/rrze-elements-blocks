@@ -17,4 +17,8 @@ import metadata from './block.json';
 registerBlockType( metadata.name, {
 	edit: Edit,
 	save,
+	icon: {
+		src: "align-center",
+		background: "#00458c"
+	}
 } );

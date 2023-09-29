@@ -5,7 +5,6 @@
   "version": "1.25.10",
   "title": "Accordion item",
   "category": "design",
-  "icon": "align-center",
   "description": "Creates an inner accordion item",
   "parent": ["rrze-elements/accordions"],
   "keywords": ["accordion", "collapse", "expand", "toggle"],

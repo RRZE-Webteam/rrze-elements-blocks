@@ -5,7 +5,6 @@
   "version": "1.25.10",
   "title": "Accordion",
   "category": "design",
-  "icon": "align-center",
   "description": "Creates an accordion block",
   "attributes": {
     "message": {
