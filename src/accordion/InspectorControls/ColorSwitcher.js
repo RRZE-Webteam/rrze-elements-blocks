@@ -36,6 +36,7 @@ const ColorSwitcher = ({ attributes, setAttributes }) => {
   return (
     <PanelBody title={__("Color Settings", "rrze-elements-b")}>
       <ColorPalette
+        disableCustomColors={true}
         colors={[
           {
             name: __("Central institution", "rrze-elements-b"),

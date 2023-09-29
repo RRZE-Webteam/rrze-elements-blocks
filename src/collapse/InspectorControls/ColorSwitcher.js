@@ -31,6 +31,7 @@ const ColorSwitcher = ({ attributes, setAttributes }) => {
         colors={colorData}
         value={colorData.find((entry) => entry.slug === color).color}
         onChange={onChangeColor}
+        disableCustomColors={true}
       />
     </PanelBody>
   );
