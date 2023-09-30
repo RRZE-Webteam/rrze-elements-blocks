@@ -33,11 +33,22 @@ module.exports = {
     ...defaultConfig.module,
     rules: [
       ...defaultConfig.module.rules,
+      // TypeScript loader
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
     ],
+  },
+  // Erweitern Sie die Dateierweiterungen, die Webpack verarbeiten wird
+  resolve: {
+    ...defaultConfig.resolve,
+    extensions: ['.tsx', '.ts', '.js', '.json'],
   },
   optimization: optimization,
 };

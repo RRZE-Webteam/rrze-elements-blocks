@@ -17,20 +17,63 @@ import {
   headingLevel6,
 } from "@wordpress/icons";
 import ExpandAllLink from "./InspectorControls/ExpandAllLink";
-import { HeadingSelector, HeadingSelectorInspector } from "./InspectorControls/HeadingSelector";
+import {
+  HeadingSelector,
+  HeadingSelectorInspector,
+} from "./InspectorControls/HeadingSelector";
 
-export default function Edit({ attributes, setAttributes, ...ownProps }) {
+type SaveProps = {
+  attributes: {
+    expandAllLink: boolean;
+    sameBlockCount: number;
+    previousBlockIds: string[];
+    hstart: number;
+    childrenCount: number;
+    message: string;
+    previousBlockClients: string[];
+  };
+  setAttributes: (newAttributes: {
+    expandAllLink?: boolean;
+    sameBlockCount?: number;
+    previousBlockIds?: string[];
+    hstart?: number;
+    childrenCount?: number;
+    message?: string;
+    previousBlockClients?: string[];
+  }) => void;
+  clientId?: string;
+};
+
+type WPBlock = {
+  innerBlocks: WPBlock[];
+  name?: string;
+  attributes?: {
+    childrenCount?: number;
+  },
+  clientId?: string;
+};
+
+export default function Edit({
+  attributes,
+  setAttributes,
+  ...ownProps
+}: SaveProps) {
   const props = useBlockProps();
   const { sameBlockCount, previousBlockIds, hstart } = attributes;
 
   const { selectedBlock, numberChildren, blockIndex, previousBlockClients } =
     useSelect(
       (select) => {
-        const { getBlock, getBlocks, getBlockIndex } =
-          select("core/block-editor");
+        const { getBlock, getBlocks, getBlockIndex } = select(
+          "core/block-editor"
+        ) as {
+          getBlock: Function;
+          getBlocks: Function;
+          getBlockIndex: Function;
+        };
         const selectedBlockClientId = ownProps.clientId;
         let numberChildren = getBlocks(selectedBlockClientId).length;
-        getBlocks(selectedBlockClientId).forEach((block) => {
+        getBlocks(selectedBlockClientId).forEach((block: WPBlock) => {
           if (block?.innerBlocks.length !== 0)
             block?.innerBlocks.forEach((innerBlock) => {
               //console.log(innerBlock);
@@ -46,8 +89,8 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
         const allBlocks = getBlocks();
 
         const CollapsiblesBlockClientIds = allBlocks
-          .filter((block) => block.name === "rrze-elements/collapsibles")
-          .map((block) => block.clientId);
+          .filter((block: WPBlock) => block.name === "rrze-elements/collapsibles")
+          .map((block: WPBlock) => block.clientId);
 
         const currentBlockIndex = CollapsiblesBlockClientIds.indexOf(
           selectedBlockClientId
@@ -82,15 +125,21 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
   return (
     <>
       <div {...props}>
-        <BlockControls>
-          <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
+        <BlockControls controls>
+          <HeadingSelector
+            attributes={attributes}
+            setAttributes={setAttributes}
+          />
         </BlockControls>
         <InspectorControls>
-          <PanelBody 
+          <PanelBody
             title={__("Heading Settings", "rrze-elements-b")}
             initialOpen={true}
           >
-          <HeadingSelectorInspector attributes={attributes} setAttributes={setAttributes} />
+            <HeadingSelectorInspector
+              attributes={attributes}
+              setAttributes={setAttributes}
+            />
           </PanelBody>
           <PanelBody
             title={__("Collapsibles Settings", "rrze-elements-b")}
@@ -115,9 +164,7 @@ export default function Edit({ attributes, setAttributes, ...ownProps }) {
           )}
           {attributes.message && (
             //create a classic gutenberg block and insert the message inside it's content area
-            <>
-              
-            </>
+            <></>
           )}
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapse"]}

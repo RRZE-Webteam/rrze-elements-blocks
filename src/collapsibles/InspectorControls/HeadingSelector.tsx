@@ -15,12 +15,19 @@ import {
   headingLevel6,
 } from "@wordpress/icons";
 
+type SaveProps = {
+  attributes: {
+    hstart: number;
+  },
+  setAttributes: (newAttributes: { hstart: number }) => void;
+}
+
 /**
  * Checks the heading level and returns the corresponding icon
  * @param {*} hstart
  * @returns
  */
-const checkHeadingLevelIcon = (hstart) => {
+const checkHeadingLevelIcon = (hstart: number) => {
   switch (hstart) {
     case 2:
       return headingLevel2;
@@ -42,8 +49,8 @@ const checkHeadingLevelIcon = (hstart) => {
  * @param {*} props
  * @returns JSX element
  */
-const HeadingSelector = ({ attributes, setAttributes }) => {
-  const handleToggleHeadingGroup = (newValue) => {
+const HeadingSelector = ({ attributes, setAttributes }: SaveProps) => {
+  const handleToggleHeadingGroup = (newValue: number) => {
     setAttributes({ hstart: newValue });
   };
 
@@ -51,7 +58,6 @@ const HeadingSelector = ({ attributes, setAttributes }) => {
     <ToolbarDropdownMenu
       icon={checkHeadingLevelIcon(attributes.hstart)}
       label="Select heading level"
-      value={attributes.hstart}
       controls={[
         {
           title: "H2",
@@ -88,8 +94,8 @@ const HeadingSelector = ({ attributes, setAttributes }) => {
  * @param {*} props
  * @returns JSX element
  */
-const HeadingSelectorInspector = ({ attributes, setAttributes }) => {
-  const handleToggleHeadingGroup = (newValue) => {
+const HeadingSelectorInspector = ({ attributes, setAttributes }: SaveProps) => {
+  const handleToggleHeadingGroup = (newValue: number) => {
     setAttributes({ hstart: newValue });
   };
 

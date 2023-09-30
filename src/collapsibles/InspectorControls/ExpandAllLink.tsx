@@ -1,6 +1,12 @@
 import { CheckboxControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
+type SaveProps = {
+  attributes: {
+    expandAllLink: boolean;
+  },
+  setAttributes: (newAttributes: { expandAllLink: boolean }) => void;
+}
 
 /**
  * Handles the Expand All Link selection inside the InspectorControls
@@ -9,7 +15,7 @@ import { __ } from "@wordpress/i18n";
  * @returns JSX element
  * @see edit.js
  */
-const ExpandAllLinkSelector = ({attributes, setAttributes}) => {
+const ExpandAllLinkSelector = ({attributes, setAttributes}: SaveProps) => {
   const updateExpandAllLink = () => {
     setAttributes({expandAllLink: !attributes.expandAllLink});
   }
@@ -18,7 +24,7 @@ const ExpandAllLinkSelector = ({attributes, setAttributes}) => {
       <CheckboxControl
         label={__("Show Expand-All-Link", "rrze-elements-b")}
         checked={attributes.expandAllLink}
-        onChange={() => updateExpandAllLink()}
+        onChange={updateExpandAllLink}
       />
   );
 };
