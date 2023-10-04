@@ -38,8 +38,6 @@
     },
     "title": {
       "type": "string",
-      "source": "html",
-      "selector": "button",
       "default": "Enter your Title"
     },
     "color": {

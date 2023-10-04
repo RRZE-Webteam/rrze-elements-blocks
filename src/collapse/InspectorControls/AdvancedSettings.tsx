@@ -10,6 +10,13 @@ import {
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
+type AdvancedSettingsProps = {
+  attributes: {
+    loadOpen: boolean;
+  };
+  setAttributes: (newAttributes: { loadOpen: boolean }) => void;
+}
+
 /**
  * Handles the Expand All Link selection inside the InspectorControls
  * @param {*} attributes
@@ -17,7 +24,7 @@ import { __ } from "@wordpress/i18n";
  * @returns JSX element
  * @see edit.js
  */
-const AdvancedSettings = ({ attributes, setAttributes }) => {
+const AdvancedSettings = ({ attributes, setAttributes }: AdvancedSettingsProps) => {
   const updateloadOpen = () => {
     setAttributes({ loadOpen: !attributes.loadOpen });
   };

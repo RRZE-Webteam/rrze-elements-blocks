@@ -8,6 +8,13 @@ import {
 } from "@wordpress/components";
 import { color as colorIcon } from "@wordpress/icons";
 
+type ColorSwitcherProps = {
+  attributes: {
+    color: string;
+  };
+  setAttributes: (newAttributes: { color: string }) => void;
+};
+
 const colorData = [
   { color: "#04316A", slug: "", name: __("Central institution", "rrze-elements-b") },
   { color: "#C50F3C", slug: "rw", name: __("Faculty of Business, Economics, and Law", "rrze-elements-b") },
@@ -17,9 +24,9 @@ const colorData = [
   { color: "#8C9FB1", slug: "tf", name: __("Faculty of Engineering", "rrze-elements-b") },
 ];
 
-const ColorSwitcher = ({ attributes, setAttributes }) => {
+const ColorSwitcher = ({ attributes, setAttributes }: ColorSwitcherProps) => {
   const { color } = attributes;
-  const onChangeColor = (newColor) => {
+  const onChangeColor = (newColor: string) => {
     const colorEntry = colorData.find((entry) => entry.color === newColor);
     console.log(colorEntry);
     setAttributes({ color: colorEntry.slug });
@@ -37,9 +44,9 @@ const ColorSwitcher = ({ attributes, setAttributes }) => {
   );
 };
 
-const ColorSwitcherToolbar = ({ attributes, setAttributes }) => {
+const ColorSwitcherToolbar = ({ attributes, setAttributes }: ColorSwitcherProps) => {
   const { color } = attributes;
-  const setColor = (newColor) => {
+  const setColor = (newColor: string) => {
     const colorEntry = colorData.find((entry) => entry.color === newColor);
     setAttributes({ color: colorEntry.slug });
   };

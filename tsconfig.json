@@ -3,7 +3,7 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "resolveJsonModule": true,
@@ -11,5 +11,5 @@
     "target": "es2015",
     "downlevelIteration": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./typings/declarations.d.ts"]
 }

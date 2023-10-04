@@ -1,4 +1,10 @@
-const HeadingComponent = ({ level, children, ...props }) => {
+type HeadingComponentProps = {
+  level: number;
+  children: React.ReactNode;
+  props: any;
+};
+
+const HeadingComponent = ({ level, children, ...props }: HeadingComponentProps) => {
   switch (level) {
     case 3:
       return <h3 {...props}>{children}</h3>;
