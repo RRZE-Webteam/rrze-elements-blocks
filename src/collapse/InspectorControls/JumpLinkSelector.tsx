@@ -12,6 +12,17 @@ import {
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
+import { ChangeEvent, FormEvent } from "react";
+import { Icon } from "@wordpress/components";
+import { link } from "@wordpress/icons";
+
+
+interface JumpLinkSelectorProps {
+  attributes: {
+    jumpName: string;
+  };
+  setAttributes: (attributes: { jumpName: string }) => void;
+}
 
 /**
  * Adds an input field to set individual jump links for collapses.
@@ -19,19 +30,19 @@ import { useState } from "@wordpress/element";
  * @param {*} setAttributes The function to set the attributes of the block
  * @returns JSX element
  */
-const JumpLinkSelector = ({ attributes, setAttributes }) => {
+const JumpLinkSelector: React.FC<JumpLinkSelectorProps> = ({ attributes, setAttributes }) => {
   const [inputURL, setInputURL] = useState(attributes.jumpName);
 
   /**
    * Handles the submit event of the form for the video url
    * @param {*} event
    */
-  const handleToggleSubmit = (event) => {
+  const handleToggleSubmit = (event: FormEvent) => {
     event.preventDefault();
     setAttributes({ jumpName: inputURL });
   };
 
-  const onChangeURL = (event) => {
+  const onChangeURL = (event: ChangeEvent<HTMLInputElement>) => {
     const url = event.target.value;
     setInputURL(url);
   };
@@ -39,8 +50,8 @@ const JumpLinkSelector = ({ attributes, setAttributes }) => {
   return (
       <PanelBody
         title={__("Jump Link Settings", "rrze-elements-b")}
-        icon="admin-links"
         initialOpen={false}
+        icon = {<Icon icon={link} />}
       >
         <Spacer>
           <Text>
@@ -62,7 +73,7 @@ const JumpLinkSelector = ({ attributes, setAttributes }) => {
               style={{ width: "100%" }}
             />
           </BaseControl>
-          <Button isPrimary type="submit">
+          <Button variant="primary" type="submit">
             {__("Set Jump Link", "rrze-elements-b")}
           </Button>
         </form>
