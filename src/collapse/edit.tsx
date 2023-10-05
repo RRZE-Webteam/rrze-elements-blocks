@@ -1,3 +1,4 @@
+// Imports from WordPress core components and hooks.
 import {
   TextControl,
   ToolbarButton,
@@ -19,7 +20,7 @@ import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
 import HeadingComponent from "./InspectorControls/HeadingComponent";
 
-/////////// Custom Components and HelperFunction Imports ///////////
+// Imports of custom components and helper functions.
 import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
 import {
   ColorSwitcher,
@@ -28,8 +29,49 @@ import {
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
-  /////////// Use Selects ///////////
+/**
+ * Interface for the SaveProps containing the structure of the attributes and other properties
+ * passed to the Edit component.
+ */
+interface SaveProps {
+  attributes: {
+    totalChildrenCount?: number;
+    sameBlockCount?: number;
+    title: string;
+    color: string;
+    loadOpen: boolean;
+    icon: string;
+    hstart?: number;
+    directory?: string;
+    jumpName?: string;
+    svgString?: string;
+  };
+  setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
+  clientId: string;
+  context: { [key: string]: any }; // You might want to further specify the shape of context if known
+}
+
+type WPBlock = {
+  innerBlocks: WPBlock[];
+  name?: string;
+  attributes?: {
+    childrenCount?: number;
+  };
+  clientId?: string;
+};
+
+/**
+ * Edit component responsible for the editor side rendering and logic of the custom block.
+ *
+ * @param {SaveProps} props - The properties and attributes of the block.
+ */
+const Edit: React.FC<SaveProps> = ({
+  attributes,
+  setAttributes,
+  clientId,
+  context,
+}) => {
+  // Use the useSelect hook to gather necessary data from the WordPress block editor.
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
     /**
      * Get relevant data from the block editor to assist with the numbering
@@ -37,15 +79,20 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
      */
     useSelect(
       (select) => {
-        const { getBlock, getBlockParents, getBlocks } =
-          select("core/block-editor");
+        const { getBlock, getBlockParents, getBlocks } = select(
+          "core/block-editor"
+        ) as {
+          getBlock: Function;
+          getBlocks: Function;
+          getBlockParents: Function;
+        };
         const blockParents = getBlockParents(clientId, true);
         const parentClientId = blockParents[0];
         const siblingBlocks = getBlocks(parentClientId);
         const collapsiblesBeforeMe =
           getBlock(parentClientId)?.attributes?.previousBlockIds || [];
         let totalChildrenCount = 0;
-        collapsiblesBeforeMe.forEach((blockClientId) => {
+        collapsiblesBeforeMe.forEach((blockClientId: string) => {
           const childrenCount =
             getBlock(blockClientId)?.attributes?.childrenCount || 0;
           totalChildrenCount += childrenCount;
@@ -61,29 +108,36 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
       [clientId] // only rerun if clientId changes
     );
 
-  /////////// Variables and UseState ///////////
+  // Local state and destructuring of attributes.
 
   const props = useBlockProps();
   const { sameBlockCount, title, color, loadOpen, icon } = attributes;
-  
+
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
   const [pluginDir, setPluginDir] = useState("");
 
-  /////////// Use Effects ///////////
+  // Effects to keep the attributes in sync with the local state and other calculations.
   useEffect(() => {
     if (attributes.totalChildrenCount !== totalChildrenCount) {
       setAttributes({ totalChildrenCount });
     }
   }, [totalChildrenCount, attributes.totalChildrenCount]);
 
-  const handleToggleColor = (newTag) => {
+  /**
+   * Function to handle the toggle of color.
+   * @param {string} newTag - The new color to be set.
+   */
+  const handleToggleColor = (newTag: string) => {
     setAttributes({ color: newTag });
   };
 
   let sameTypeSiblingsBefore = 0;
 
+  /**
+   * Calculate the number of siblings of the same type before the current block.
+   */
   useEffect(() => {
     if (selectedBlock && blockParents.length > 0) {
       for (const block of siblingBlocks) {
@@ -91,14 +145,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
           break;
         }
         if (block.name === selectedBlock.name) {
-          if (
-            block?.innerBlocks?.forEach((innerBlock) => {
-              if (innerBlock.name === "rrze-elements/accordions") {
-                sameTypeSiblingsBefore =
-                  sameTypeSiblingsBefore + innerBlock?.innerBlocks.length;
-              }
-            })
-          );
+          block?.innerBlocks?.forEach((innerBlock: WPBlock) => {
+            if (innerBlock.name === "rrze-elements/accordions") {
+              sameTypeSiblingsBefore += innerBlock?.innerBlocks?.length || 0;
+            }
+          });
           sameTypeSiblingsBefore++;
         }
       }
@@ -114,6 +165,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     setAttributes,
   ]);
 
+  /**
+   * Fetch the plugin directory path via REST API and store it in the state.
+   */
   useEffect(() => {
     // Fetch plugin directory path via REST API – Needed for save.js
     fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
@@ -132,13 +186,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
       });
   }, []);
 
+  /**
+   * Set the heading level attribute based on the global setting.
+   */
   useEffect(() => {
     setAttributes({
       hstart: context["rrze-elements/accordion-hstart"],
-    })
-  }), [context["rrze-elements/hstart"]];
+    });
+  }),
+    [context["rrze-elements/hstart"]];
 
-  /////////// Event Handler / OnClick Handler ///////////
+  // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
 
@@ -146,7 +204,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     setIsActive(!isActive);
   };
 
-  const onChangeTitle = (newText) => {
+  // Function to handle the change of the title attribute.
+  const onChangeTitle = (newText: string) => {
     if (newText === "") {
       setAttributes({ title: " " });
     } else {
@@ -154,13 +213,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     }
   };
 
+  // Function to handle the toggle of the loadOpen attribute.
   const loadOpenToggle = () => {
     setAttributes({ loadOpen: !loadOpen });
   };
 
   return (
     <>
-      <BlockControls>
+    <div {...props}>
+      <BlockControls controls>
         <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
         <ToolbarGroup>
           {/* {isTextInString("Title", attributes.show) && (
@@ -192,8 +253,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     title={__("Select an Icon", "rrze-elements-b")}
                     onRequestClose={closeModal}
                   >
-                    <IconPicker {...{ attributes, setAttributes }} />
-                    <Button isPrimary onClick={closeModal}>
+                    <IconPicker
+                      attributes={{
+                        directory: attributes.directory,
+                        icon: attributes.icon,
+                        svgString: attributes.svgString,
+                      }}
+                      setAttributes={setAttributes}
+                    />
+                    <Button variant="primary" onClick={closeModal}>
                       {__("Close", "rrze-elements-b")}
                     </Button>
                   </Modal>
@@ -205,17 +273,33 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
       </BlockControls>
 
       <InspectorControls>
-        <JumpLinkSelector {...{ attributes, setAttributes }} />
+        <JumpLinkSelector
+          attributes={{
+            jumpName: attributes.jumpName,
+          }}
+          setAttributes={setAttributes}
+        />
         <ColorSwitcher {...{ attributes, setAttributes }} />
         <AdvancedSettings {...{ attributes, setAttributes }} />
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
-          <IconPicker {...{ attributes, setAttributes }} />
+          <IconPicker
+            attributes={{
+              directory: attributes.directory,
+              icon: attributes.icon,
+              svgString: attributes.svgString,
+            }}
+            setAttributes={setAttributes}
+          />
         </PanelBody>
       </InspectorControls>
 
-      <div {...props}>
+
         <div className={`accordion-group ${color}`}>
-          <HeadingComponent level={attributes.hstart} className="accordion-heading" onClick={toggleActive}>
+          <HeadingComponent
+            level={attributes.hstart}
+            className="accordion-heading"
+            onClick={toggleActive}
+          >
             <span className="read-mode-only">{title}</span>
             <div
               className={`accordion-toggle ${
@@ -226,9 +310,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                 <IconMarkComponent
                   type={iconType}
                   iconName={iconName}
-                  attributes={attributes}
+                  attributes={{
+                    directory: attributes.directory,
+                    icon: attributes.icon,
+                    svgString: attributes.svgString,
+                  }}
                   setAttributes={setAttributes}
-                  className="elements-blocks-icon-insideEditor"
                 />
               )}
               <TextControl
@@ -287,4 +374,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
       </div>
     </>
   );
-}
+};
+
+export default Edit;

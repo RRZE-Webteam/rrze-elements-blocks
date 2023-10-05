@@ -27,8 +27,12 @@ if (isProduction) {
   };
 }
 
+// Set the devtool based on the build environment
+const devtool = isProduction ? false : 'eval-source-map';
+
 module.exports = {
   ...defaultConfig,
+  devtool: devtool,
   module: {
     ...defaultConfig.module,
     rules: [

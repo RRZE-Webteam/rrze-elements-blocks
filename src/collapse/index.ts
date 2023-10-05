@@ -1,4 +1,4 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, BlockConfiguration, BlockSaveProps } from '@wordpress/blocks';
 import './style.scss';
 import './editor.scss';
 
@@ -14,8 +14,9 @@ import metadata from './block.json';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( metadata.name, {
+registerBlockType( metadata.name as any, {
 	edit: Edit,
+	//@ts-ignore
 	save,
 	icon: {
 		src: "align-center",

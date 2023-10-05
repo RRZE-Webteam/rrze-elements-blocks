@@ -60,10 +60,11 @@ const ColorSwitcherToolbar = ({ attributes, setAttributes }: ColorSwitcherProps)
             className={`rrzeElementsBFakColorSelector ${attributes.color}`}
             label={__("Select a Color", "rrze-elements-b")}
             controls={colorData.map((entry) => ({
+              key: entry.slug,
               title: entry.name,
               icon: colorIcon,
               onClick: () => setColor(entry.color),
-            }))}
+            }))}            
           />
         )}
       </ToolbarItem>

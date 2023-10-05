@@ -1,7 +1,22 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import HeadingComponent from "./InspectorControls/HeadingComponent";
 
-export default function save({ attributes }) {
+interface Attributes {
+  sameBlockCount: number;
+  totalChildrenCount: number;
+  color: string;
+  title: string;
+  jumpName: string;
+  loadOpen: boolean;
+  hstart: number;
+  svgString?: string;
+}
+
+interface SaveProps {
+  attributes: Attributes;
+}
+
+const Save: React.FC<SaveProps> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
   const { sameBlockCount, totalChildrenCount, color, title, jumpName, loadOpen, hstart } = attributes;
 
@@ -32,6 +47,7 @@ export default function save({ attributes }) {
               className={`accordion-toggle ${aciveOnPageLoad}`}
               data-toggle="collapse"
               data-name={output}
+              // @ts-ignore
               href={`#collapse_${sameBlockCount + totalChildrenCount}`}
               dangerouslySetInnerHTML={{
                 __html: `${attributes.svgString}${title}`,
@@ -43,7 +59,8 @@ export default function save({ attributes }) {
           <div
             id={`collapse_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
-            name={output}
+            // @ts-ignore
+            name={output} 
             style={loadOpen ? {} : { display: "none" }}
           >
             <div className="accordion-inner clearfix">
@@ -55,3 +72,5 @@ export default function save({ attributes }) {
     </div>
   );
 }
+
+export default Save;

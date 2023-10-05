@@ -1,10 +1,10 @@
 type HeadingComponentProps = {
   level: number;
   children: React.ReactNode;
-  props: any;
+  [key: string]: any; // This allows for any additional properties like `className`.
 };
 
-const HeadingComponent = ({ level, children, ...props }: HeadingComponentProps) => {
+const HeadingComponent: React.FC<HeadingComponentProps> = ({ level, children, ...props }) => {
   switch (level) {
     case 3:
       return <h3 {...props}>{children}</h3>;

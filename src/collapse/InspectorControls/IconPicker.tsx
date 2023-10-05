@@ -66,13 +66,13 @@ const useDynamicSvgIcon = (
       import(
         /* webpackChunkName: "svg-icons" */ `../svg/${type}/${iconName}.svg`
       )
-      .then((module) => {
-        const SvgIconComponent: React.FC = module.default;
-        setIcon(<SvgIconComponent />);           
-      })
-      .catch((err) => {
-        console.error(`Failed to load SVG: ${err}`);
-      });      
+        .then((module) => {
+          const SvgIconComponent: React.FC = module.default;
+          setIcon(<SvgIconComponent />);
+        })
+        .catch((err) => {
+          console.error(`Failed to load SVG: ${err}`);
+        });
     }
   }, [type, iconName]);
 
@@ -103,8 +103,8 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
     useEffect(() => {
       const createIconOptions = (icons: string[], label: string) =>
         icons.map((icon) => ({
-          label: `${icon} (${label})`,
           value: `${label} ${icon}`,
+          label: `${icon} (${label})`,
         }));
 
       setAllIconsOptions([
@@ -123,17 +123,21 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
           options={allIconsOptions}
           onFilterValueChange={(newIcon) => setAttributes({ icon: newIcon })}
         />
-        {attributes.icon !== "" && (
-          <>
-            {Icon && cloneElement(Icon, { className: "elements-blocks-icon-selector-display" })}
-            <Button
-              variant="secondary"
-              onClick={() => setAttributes({ icon: "", svgString: "" })}
-            >
-              Remove Icon
-            </Button>
-          </>
-        )}
+        {attributes.icon !== "" && [
+          Icon
+            ? cloneElement(Icon, {
+                key: "icon",
+                className: "elements-blocks-icon-selector-display",
+              })
+            : null,
+          <Button
+            key="removeButton"
+            variant="secondary"
+            onClick={() => setAttributes({ icon: "", svgString: "" })}
+          >
+            Remove Icon
+          </Button>,
+        ]}
       </>
     );
   }
@@ -160,7 +164,9 @@ const IconMarkComponent: React.ComponentType<IconMarkComponentProps> = ({
   setAttributes,
 }) => {
   const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
-  return Icon ? cloneElement(Icon, { className: "elements-blocks-icon-insideEditor" }) : null;
+  return Icon
+    ? cloneElement(Icon, { className: "elements-blocks-icon-insideEditor" })
+    : null;
 };
 
 export { IconPicker, useDynamicSvgIcon, IconMarkComponent };
