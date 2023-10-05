@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons161"],{
+
+/***/ "./src/collapse/svg/brands/gg-circle.svg":
+/*!***********************************************!*\
+  !*** ./src/collapse/svg/brands/gg-circle.svg ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgGgCircle = function SvgGgCircle(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 512 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M257 8C120 8 9 119 9 256s111 248 248 248 248-111 248-248S394 8 257 8zm-49.5 374.8L81.8 257.1l125.7-125.7 35.2 35.4-24.2 24.2-11.1-11.1-77.2 77.2 77.2 77.2 26.6-26.6-53.1-52.9 24.4-24.4 77.2 77.2-75 75.2zm99-2.2-35.2-35.2 24.1-24.4 11.1 11.1 77.2-77.2-77.2-77.2-26.5 26.5 53.1 52.9-24.4 24.4-77.2-77.2 75-75L432.2 255 306.5 380.6z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgGgCircle);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL2JyYW5kcy9nZy1jaXJjbGUuc3ZnIiwibWFwcGluZ3MiOiI7OztBQUFBO0FBQ0Esc0JBQXNCLHNFQUFzRSxnQkFBZ0Isc0JBQXNCLE9BQU8sMkJBQTJCLDBCQUEwQix5REFBeUQsaUNBQWlDLGtCQUFrQjtBQUMzUTtBQUMvQjtBQUNBLHNCQUFzQixnREFBbUI7QUFDekM7QUFDQTtBQUNBLEdBQUcseUNBQXlDLGdEQUFtQjtBQUMvRDtBQUNBLEdBQUc7QUFDSDtBQUNBLCtEQUFlLFdBQVciLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9ycnplLWVsZW1lbnRzLy4vc3JjL2NvbGxhcHNlL3N2Zy9icmFuZHMvZ2ctY2lyY2xlLnN2Zz85ZGI2Il0sInNvdXJjZXNDb250ZW50IjpbInZhciBfcGF0aDtcbmZ1bmN0aW9uIF9leHRlbmRzKCkgeyBfZXh0ZW5kcyA9IE9iamVjdC5hc3NpZ24gPyBPYmplY3QuYXNzaWduLmJpbmQoKSA6IGZ1bmN0aW9uICh0YXJnZXQpIHsgZm9yICh2YXIgaSA9IDE7IGkgPCBhcmd1bWVudHMubGVuZ3RoOyBpKyspIHsgdmFyIHNvdXJjZSA9IGFyZ3VtZW50c1tpXTsgZm9yICh2YXIga2V5IGluIHNvdXJjZSkgeyBpZiAoT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsKHNvdXJjZSwga2V5KSkgeyB0YXJnZXRba2V5XSA9IHNvdXJjZVtrZXldOyB9IH0gfSByZXR1cm4gdGFyZ2V0OyB9OyByZXR1cm4gX2V4dGVuZHMuYXBwbHkodGhpcywgYXJndW1lbnRzKTsgfVxuaW1wb3J0ICogYXMgUmVhY3QgZnJvbSBcInJlYWN0XCI7XG52YXIgU3ZnR2dDaXJjbGUgPSBmdW5jdGlvbiBTdmdHZ0NpcmNsZShwcm9wcykge1xuICByZXR1cm4gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJzdmdcIiwgX2V4dGVuZHMoe1xuICAgIHhtbG5zOiBcImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIsXG4gICAgdmlld0JveDogXCIwIDAgNTEyIDUxMlwiXG4gIH0sIHByb3BzKSwgX3BhdGggfHwgKF9wYXRoID0gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJwYXRoXCIsIHtcbiAgICBkOiBcIk0yNTcgOEMxMjAgOCA5IDExOSA5IDI1NnMxMTEgMjQ4IDI0OCAyNDggMjQ4LTExMSAyNDgtMjQ4UzM5NCA4IDI1NyA4em0tNDkuNSAzNzQuOEw4MS44IDI1Ny4xbDEyNS43LTEyNS43IDM1LjIgMzUuNC0yNC4yIDI0LjItMTEuMS0xMS4xLTc3LjIgNzcuMiA3Ny4yIDc3LjIgMjYuNi0yNi42LTUzLjEtNTIuOSAyNC40LTI0LjQgNzcuMiA3Ny4yLTc1IDc1LjJ6bTk5LTIuMi0zNS4yLTM1LjIgMjQuMS0yNC40IDExLjEgMTEuMSA3Ny4yLTc3LjItNzcuMi03Ny4yLTI2LjUgMjYuNSA1My4xIDUyLjktMjQuNCAyNC40LTc3LjItNzcuMiA3NS03NUw0MzIuMiAyNTUgMzA2LjUgMzgwLjZ6XCJcbiAgfSkpKTtcbn07XG5leHBvcnQgZGVmYXVsdCBTdmdHZ0NpcmNsZTsiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/collapse/svg/brands/gg-circle.svg\n");
+
+/***/ })
+
+}]);

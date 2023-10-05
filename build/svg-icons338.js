@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons338"],{
+
+/***/ "./src/collapse/svg/brands/sitrox.svg":
+/*!********************************************!*\
+  !*** ./src/collapse/svg/brands/sitrox.svg ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgSitrox = function SvgSitrox(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 448 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M212.439.008V0H448v128H64C64 57.6 141.755.475 212.439.008ZM237.256 192v.007C307.135 192.475 384 249.6 384 320H210.809v-.005C140.915 319.563 64 262.424 64 192h173.256Zm-1.691 319.993C306.251 511.521 384 454.399 384 384H0v128h235.565v-.007Z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgSitrox);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL2JyYW5kcy9zaXRyb3guc3ZnIiwibWFwcGluZ3MiOiI7OztBQUFBO0FBQ0Esc0JBQXNCLHNFQUFzRSxnQkFBZ0Isc0JBQXNCLE9BQU8sMkJBQTJCLDBCQUEwQix5REFBeUQsaUNBQWlDLGtCQUFrQjtBQUMzUTtBQUMvQjtBQUNBLHNCQUFzQixnREFBbUI7QUFDekM7QUFDQTtBQUNBLEdBQUcseUNBQXlDLGdEQUFtQjtBQUMvRDtBQUNBLEdBQUc7QUFDSDtBQUNBLCtEQUFlLFNBQVMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9ycnplLWVsZW1lbnRzLy4vc3JjL2NvbGxhcHNlL3N2Zy9icmFuZHMvc2l0cm94LnN2Zz9lNDhkIl0sInNvdXJjZXNDb250ZW50IjpbInZhciBfcGF0aDtcbmZ1bmN0aW9uIF9leHRlbmRzKCkgeyBfZXh0ZW5kcyA9IE9iamVjdC5hc3NpZ24gPyBPYmplY3QuYXNzaWduLmJpbmQoKSA6IGZ1bmN0aW9uICh0YXJnZXQpIHsgZm9yICh2YXIgaSA9IDE7IGkgPCBhcmd1bWVudHMubGVuZ3RoOyBpKyspIHsgdmFyIHNvdXJjZSA9IGFyZ3VtZW50c1tpXTsgZm9yICh2YXIga2V5IGluIHNvdXJjZSkgeyBpZiAoT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsKHNvdXJjZSwga2V5KSkgeyB0YXJnZXRba2V5XSA9IHNvdXJjZVtrZXldOyB9IH0gfSByZXR1cm4gdGFyZ2V0OyB9OyByZXR1cm4gX2V4dGVuZHMuYXBwbHkodGhpcywgYXJndW1lbnRzKTsgfVxuaW1wb3J0ICogYXMgUmVhY3QgZnJvbSBcInJlYWN0XCI7XG52YXIgU3ZnU2l0cm94ID0gZnVuY3Rpb24gU3ZnU2l0cm94KHByb3BzKSB7XG4gIHJldHVybiAvKiNfX1BVUkVfXyovUmVhY3QuY3JlYXRlRWxlbWVudChcInN2Z1wiLCBfZXh0ZW5kcyh7XG4gICAgeG1sbnM6IFwiaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmdcIixcbiAgICB2aWV3Qm94OiBcIjAgMCA0NDggNTEyXCJcbiAgfSwgcHJvcHMpLCBfcGF0aCB8fCAoX3BhdGggPSAvKiNfX1BVUkVfXyovUmVhY3QuY3JlYXRlRWxlbWVudChcInBhdGhcIiwge1xuICAgIGQ6IFwiTTIxMi40MzkuMDA4VjBINDQ4djEyOEg2NEM2NCA1Ny42IDE0MS43NTUuNDc1IDIxMi40MzkuMDA4Wk0yMzcuMjU2IDE5MnYuMDA3QzMwNy4xMzUgMTkyLjQ3NSAzODQgMjQ5LjYgMzg0IDMyMEgyMTAuODA5di0uMDA1QzE0MC45MTUgMzE5LjU2MyA2NCAyNjIuNDI0IDY0IDE5MmgxNzMuMjU2Wm0tMS42OTEgMzE5Ljk5M0MzMDYuMjUxIDUxMS41MjEgMzg0IDQ1NC4zOTkgMzg0IDM4NEgwdjEyOGgyMzUuNTY1di0uMDA3WlwiXG4gIH0pKSk7XG59O1xuZXhwb3J0IGRlZmF1bHQgU3ZnU2l0cm94OyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/collapse/svg/brands/sitrox.svg\n");
+
+/***/ })
+
+}]);

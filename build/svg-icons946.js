@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons946"],{
+
+/***/ "./src/collapse/svg/solid/clapperboard.svg":
+/*!*************************************************!*\
+  !*** ./src/collapse/svg/solid/clapperboard.svg ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgClapperboard = function SvgClapperboard(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 512 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M326.1 160 453.5 32.6c-1.8-.21-3.6-.6-5.5-.6h-86.06l-128 128h92.16zm-160 0 128-128h-92.2l-128 128h92.2zM497.7 56.19 393.9 160H512V96c0-15.13-5.5-28.85-14.3-39.81zM134.1 32H64C28.65 32 0 60.65 0 96v64h6.062L134.1 32zM0 416c0 35.35 28.65 64 64 64h384c35.35 0 64-28.65 64-64V192H0v224z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgClapperboard);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL2NsYXBwZXJib2FyZC5zdmciLCJtYXBwaW5ncyI6Ijs7O0FBQUE7QUFDQSxzQkFBc0Isc0VBQXNFLGdCQUFnQixzQkFBc0IsT0FBTywyQkFBMkIsMEJBQTBCLHlEQUF5RCxpQ0FBaUMsa0JBQWtCO0FBQzNRO0FBQy9CO0FBQ0Esc0JBQXNCLGdEQUFtQjtBQUN6QztBQUNBO0FBQ0EsR0FBRyx5Q0FBeUMsZ0RBQW1CO0FBQy9EO0FBQ0EsR0FBRztBQUNIO0FBQ0EsK0RBQWUsZUFBZSIsInNvdXJjZXMiOlsid2VicGFjazovL3JyemUtZWxlbWVudHMvLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL2NsYXBwZXJib2FyZC5zdmc/YTY1YSJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgX3BhdGg7XG5mdW5jdGlvbiBfZXh0ZW5kcygpIHsgX2V4dGVuZHMgPSBPYmplY3QuYXNzaWduID8gT2JqZWN0LmFzc2lnbi5iaW5kKCkgOiBmdW5jdGlvbiAodGFyZ2V0KSB7IGZvciAodmFyIGkgPSAxOyBpIDwgYXJndW1lbnRzLmxlbmd0aDsgaSsrKSB7IHZhciBzb3VyY2UgPSBhcmd1bWVudHNbaV07IGZvciAodmFyIGtleSBpbiBzb3VyY2UpIHsgaWYgKE9iamVjdC5wcm90b3R5cGUuaGFzT3duUHJvcGVydHkuY2FsbChzb3VyY2UsIGtleSkpIHsgdGFyZ2V0W2tleV0gPSBzb3VyY2Vba2V5XTsgfSB9IH0gcmV0dXJuIHRhcmdldDsgfTsgcmV0dXJuIF9leHRlbmRzLmFwcGx5KHRoaXMsIGFyZ3VtZW50cyk7IH1cbmltcG9ydCAqIGFzIFJlYWN0IGZyb20gXCJyZWFjdFwiO1xudmFyIFN2Z0NsYXBwZXJib2FyZCA9IGZ1bmN0aW9uIFN2Z0NsYXBwZXJib2FyZChwcm9wcykge1xuICByZXR1cm4gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJzdmdcIiwgX2V4dGVuZHMoe1xuICAgIHhtbG5zOiBcImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIsXG4gICAgdmlld0JveDogXCIwIDAgNTEyIDUxMlwiXG4gIH0sIHByb3BzKSwgX3BhdGggfHwgKF9wYXRoID0gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJwYXRoXCIsIHtcbiAgICBkOiBcIk0zMjYuMSAxNjAgNDUzLjUgMzIuNmMtMS44LS4yMS0zLjYtLjYtNS41LS42aC04Ni4wNmwtMTI4IDEyOGg5Mi4xNnptLTE2MCAwIDEyOC0xMjhoLTkyLjJsLTEyOCAxMjhoOTIuMnpNNDk3LjcgNTYuMTkgMzkzLjkgMTYwSDUxMlY5NmMwLTE1LjEzLTUuNS0yOC44NS0xNC4zLTM5Ljgxek0xMzQuMSAzMkg2NEMyOC42NSAzMiAwIDYwLjY1IDAgOTZ2NjRoNi4wNjJMMTM0LjEgMzJ6TTAgNDE2YzAgMzUuMzUgMjguNjUgNjQgNjQgNjRoMzg0YzM1LjM1IDAgNjQtMjguNjUgNjQtNjRWMTkySDB2MjI0elwiXG4gIH0pKSk7XG59O1xuZXhwb3J0IGRlZmF1bHQgU3ZnQ2xhcHBlcmJvYXJkOyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/clapperboard.svg\n");
+
+/***/ })
+
+}]);

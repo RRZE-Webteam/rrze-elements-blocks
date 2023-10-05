@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons1891"],{
+
+/***/ "./src/collapse/svg/solid/trowel.svg":
+/*!*******************************************!*\
+  !*** ./src/collapse/svg/solid/trowel.svg ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgTrowel = function SvgTrowel(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 512 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M343.9 213.4 245.3 312l65.3 65.4c7.9 7.9 11.2 19.4 8.5 30.2-2.7 10.9-10.9 19.6-21.6 22.9l-255.95 80c-11.37 3.6-23.76.5-32.177-7.9-8.416-8.4-11.466-20.8-7.915-32.1l80.002-256a32.095 32.095 0 0 1 22.94-21.6c10.8-2.6 22.3.6 30.2 8.5l65.4 65.3 98.6-98.6c-14.2-14.6-14.1-38 .3-52.5l95.5-95.42c26.9-26.908 70.5-26.908 97.4 0 26.9 26.92 26.9 70.55 0 97.42l-95.4 95.5c-14.5 14.4-37.9 14.5-52.5.3z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgTrowel);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL3Ryb3dlbC5zdmciLCJtYXBwaW5ncyI6Ijs7O0FBQUE7QUFDQSxzQkFBc0Isc0VBQXNFLGdCQUFnQixzQkFBc0IsT0FBTywyQkFBMkIsMEJBQTBCLHlEQUF5RCxpQ0FBaUMsa0JBQWtCO0FBQzNRO0FBQy9CO0FBQ0Esc0JBQXNCLGdEQUFtQjtBQUN6QztBQUNBO0FBQ0EsR0FBRyx5Q0FBeUMsZ0RBQW1CO0FBQy9EO0FBQ0EsR0FBRztBQUNIO0FBQ0EsK0RBQWUsU0FBUyIsInNvdXJjZXMiOlsid2VicGFjazovL3JyemUtZWxlbWVudHMvLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL3Ryb3dlbC5zdmc/MmU3MiJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgX3BhdGg7XG5mdW5jdGlvbiBfZXh0ZW5kcygpIHsgX2V4dGVuZHMgPSBPYmplY3QuYXNzaWduID8gT2JqZWN0LmFzc2lnbi5iaW5kKCkgOiBmdW5jdGlvbiAodGFyZ2V0KSB7IGZvciAodmFyIGkgPSAxOyBpIDwgYXJndW1lbnRzLmxlbmd0aDsgaSsrKSB7IHZhciBzb3VyY2UgPSBhcmd1bWVudHNbaV07IGZvciAodmFyIGtleSBpbiBzb3VyY2UpIHsgaWYgKE9iamVjdC5wcm90b3R5cGUuaGFzT3duUHJvcGVydHkuY2FsbChzb3VyY2UsIGtleSkpIHsgdGFyZ2V0W2tleV0gPSBzb3VyY2Vba2V5XTsgfSB9IH0gcmV0dXJuIHRhcmdldDsgfTsgcmV0dXJuIF9leHRlbmRzLmFwcGx5KHRoaXMsIGFyZ3VtZW50cyk7IH1cbmltcG9ydCAqIGFzIFJlYWN0IGZyb20gXCJyZWFjdFwiO1xudmFyIFN2Z1Ryb3dlbCA9IGZ1bmN0aW9uIFN2Z1Ryb3dlbChwcm9wcykge1xuICByZXR1cm4gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJzdmdcIiwgX2V4dGVuZHMoe1xuICAgIHhtbG5zOiBcImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIsXG4gICAgdmlld0JveDogXCIwIDAgNTEyIDUxMlwiXG4gIH0sIHByb3BzKSwgX3BhdGggfHwgKF9wYXRoID0gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJwYXRoXCIsIHtcbiAgICBkOiBcIk0zNDMuOSAyMTMuNCAyNDUuMyAzMTJsNjUuMyA2NS40YzcuOSA3LjkgMTEuMiAxOS40IDguNSAzMC4yLTIuNyAxMC45LTEwLjkgMTkuNi0yMS42IDIyLjlsLTI1NS45NSA4MGMtMTEuMzcgMy42LTIzLjc2LjUtMzIuMTc3LTcuOS04LjQxNi04LjQtMTEuNDY2LTIwLjgtNy45MTUtMzIuMWw4MC4wMDItMjU2YTMyLjA5NSAzMi4wOTUgMCAwIDEgMjIuOTQtMjEuNmMxMC44LTIuNiAyMi4zLjYgMzAuMiA4LjVsNjUuNCA2NS4zIDk4LjYtOTguNmMtMTQuMi0xNC42LTE0LjEtMzggLjMtNTIuNWw5NS41LTk1LjQyYzI2LjktMjYuOTA4IDcwLjUtMjYuOTA4IDk3LjQgMCAyNi45IDI2LjkyIDI2LjkgNzAuNTUgMCA5Ny40MmwtOTUuNCA5NS41Yy0xNC41IDE0LjQtMzcuOSAxNC41LTUyLjUuM3pcIlxuICB9KSkpO1xufTtcbmV4cG9ydCBkZWZhdWx0IFN2Z1Ryb3dlbDsiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/trowel.svg\n");
+
+/***/ })
+
+}]);

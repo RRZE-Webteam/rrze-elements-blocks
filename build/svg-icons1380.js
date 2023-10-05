@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons1380"],{
+
+/***/ "./src/collapse/svg/solid/laptop-file.svg":
+/*!************************************************!*\
+  !*** ./src/collapse/svg/solid/laptop-file.svg ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgLaptopFile = function SvgLaptopFile(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 640 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M192 96c0 17.7 14.3 32 32 32h96v64h-32c-44.2 0-80 35.8-80 80v112c-20.9 0-38.7 13.4-45.3 32H48c-26.51 0-48-21.5-48-48V48C0 21.49 21.49 0 48 0h144v96zm48 176c0-26.5 21.5-48 48-48h256c26.5 0 48 21.5 48 48v144h32c8.8 0 16 7.2 16 16v16c0 35.3-28.7 64-64 64H256c-35.3 0-64-28.7-64-64v-16c0-8.8 7.2-16 16-16h32V272zm64 16v128h224V288H304zm16-192h-96V0l96 96z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgLaptopFile);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL2xhcHRvcC1maWxlLnN2ZyIsIm1hcHBpbmdzIjoiOzs7QUFBQTtBQUNBLHNCQUFzQixzRUFBc0UsZ0JBQWdCLHNCQUFzQixPQUFPLDJCQUEyQiwwQkFBMEIseURBQXlELGlDQUFpQyxrQkFBa0I7QUFDM1E7QUFDL0I7QUFDQSxzQkFBc0IsZ0RBQW1CO0FBQ3pDO0FBQ0E7QUFDQSxHQUFHLHlDQUF5QyxnREFBbUI7QUFDL0Q7QUFDQSxHQUFHO0FBQ0g7QUFDQSwrREFBZSxhQUFhIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcnJ6ZS1lbGVtZW50cy8uL3NyYy9jb2xsYXBzZS9zdmcvc29saWQvbGFwdG9wLWZpbGUuc3ZnP2IxNjUiXSwic291cmNlc0NvbnRlbnQiOlsidmFyIF9wYXRoO1xuZnVuY3Rpb24gX2V4dGVuZHMoKSB7IF9leHRlbmRzID0gT2JqZWN0LmFzc2lnbiA/IE9iamVjdC5hc3NpZ24uYmluZCgpIDogZnVuY3Rpb24gKHRhcmdldCkgeyBmb3IgKHZhciBpID0gMTsgaSA8IGFyZ3VtZW50cy5sZW5ndGg7IGkrKykgeyB2YXIgc291cmNlID0gYXJndW1lbnRzW2ldOyBmb3IgKHZhciBrZXkgaW4gc291cmNlKSB7IGlmIChPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwoc291cmNlLCBrZXkpKSB7IHRhcmdldFtrZXldID0gc291cmNlW2tleV07IH0gfSB9IHJldHVybiB0YXJnZXQ7IH07IHJldHVybiBfZXh0ZW5kcy5hcHBseSh0aGlzLCBhcmd1bWVudHMpOyB9XG5pbXBvcnQgKiBhcyBSZWFjdCBmcm9tIFwicmVhY3RcIjtcbnZhciBTdmdMYXB0b3BGaWxlID0gZnVuY3Rpb24gU3ZnTGFwdG9wRmlsZShwcm9wcykge1xuICByZXR1cm4gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJzdmdcIiwgX2V4dGVuZHMoe1xuICAgIHhtbG5zOiBcImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIsXG4gICAgdmlld0JveDogXCIwIDAgNjQwIDUxMlwiXG4gIH0sIHByb3BzKSwgX3BhdGggfHwgKF9wYXRoID0gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJwYXRoXCIsIHtcbiAgICBkOiBcIk0xOTIgOTZjMCAxNy43IDE0LjMgMzIgMzIgMzJoOTZ2NjRoLTMyYy00NC4yIDAtODAgMzUuOC04MCA4MHYxMTJjLTIwLjkgMC0zOC43IDEzLjQtNDUuMyAzMkg0OGMtMjYuNTEgMC00OC0yMS41LTQ4LTQ4VjQ4QzAgMjEuNDkgMjEuNDkgMCA0OCAwaDE0NHY5NnptNDggMTc2YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4aDI1NmMyNi41IDAgNDggMjEuNSA0OCA0OHYxNDRoMzJjOC44IDAgMTYgNy4yIDE2IDE2djE2YzAgMzUuMy0yOC43IDY0LTY0IDY0SDI1NmMtMzUuMyAwLTY0LTI4LjctNjQtNjR2LTE2YzAtOC44IDcuMi0xNiAxNi0xNmgzMlYyNzJ6bTY0IDE2djEyOGgyMjRWMjg4SDMwNHptMTYtMTkyaC05NlYwbDk2IDk2elwiXG4gIH0pKSk7XG59O1xuZXhwb3J0IGRlZmF1bHQgU3ZnTGFwdG9wRmlsZTsiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/laptop-file.svg\n");
+
+/***/ })
+
+}]);

@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons838"],{
+
+/***/ "./src/collapse/svg/solid/c.svg":
+/*!**************************************!*\
+  !*** ./src/collapse/svg/solid/c.svg ***!
+  \**************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgC = function SvgC(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 384 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M352 359.8c22.46 0 31.1 19.53 31.1 31.99 0 23.14-66.96 88.23-164.5 88.23-137.1 0-219.4-117.8-219.4-224 0-103.8 79.87-223.1 219.4-223.1 99.47 0 164.5 66.12 164.5 88.23 0 12.27-9.527 32.01-32.01 32.01-31.32 0-45.8-56.25-132.5-56.25-97.99 0-155.4 84.59-155.4 159.1 0 74.03 56.42 160 155.4 160C306.5 416 320.5 359.8 352 359.8z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgC);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL2Muc3ZnIiwibWFwcGluZ3MiOiI7OztBQUFBO0FBQ0Esc0JBQXNCLHNFQUFzRSxnQkFBZ0Isc0JBQXNCLE9BQU8sMkJBQTJCLDBCQUEwQix5REFBeUQsaUNBQWlDLGtCQUFrQjtBQUMzUTtBQUMvQjtBQUNBLHNCQUFzQixnREFBbUI7QUFDekM7QUFDQTtBQUNBLEdBQUcseUNBQXlDLGdEQUFtQjtBQUMvRDtBQUNBLEdBQUc7QUFDSDtBQUNBLCtEQUFlLElBQUkiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9ycnplLWVsZW1lbnRzLy4vc3JjL2NvbGxhcHNlL3N2Zy9zb2xpZC9jLnN2Zz8yMjhjIl0sInNvdXJjZXNDb250ZW50IjpbInZhciBfcGF0aDtcbmZ1bmN0aW9uIF9leHRlbmRzKCkgeyBfZXh0ZW5kcyA9IE9iamVjdC5hc3NpZ24gPyBPYmplY3QuYXNzaWduLmJpbmQoKSA6IGZ1bmN0aW9uICh0YXJnZXQpIHsgZm9yICh2YXIgaSA9IDE7IGkgPCBhcmd1bWVudHMubGVuZ3RoOyBpKyspIHsgdmFyIHNvdXJjZSA9IGFyZ3VtZW50c1tpXTsgZm9yICh2YXIga2V5IGluIHNvdXJjZSkgeyBpZiAoT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsKHNvdXJjZSwga2V5KSkgeyB0YXJnZXRba2V5XSA9IHNvdXJjZVtrZXldOyB9IH0gfSByZXR1cm4gdGFyZ2V0OyB9OyByZXR1cm4gX2V4dGVuZHMuYXBwbHkodGhpcywgYXJndW1lbnRzKTsgfVxuaW1wb3J0ICogYXMgUmVhY3QgZnJvbSBcInJlYWN0XCI7XG52YXIgU3ZnQyA9IGZ1bmN0aW9uIFN2Z0MocHJvcHMpIHtcbiAgcmV0dXJuIC8qI19fUFVSRV9fKi9SZWFjdC5jcmVhdGVFbGVtZW50KFwic3ZnXCIsIF9leHRlbmRzKHtcbiAgICB4bWxuczogXCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiLFxuICAgIHZpZXdCb3g6IFwiMCAwIDM4NCA1MTJcIlxuICB9LCBwcm9wcyksIF9wYXRoIHx8IChfcGF0aCA9IC8qI19fUFVSRV9fKi9SZWFjdC5jcmVhdGVFbGVtZW50KFwicGF0aFwiLCB7XG4gICAgZDogXCJNMzUyIDM1OS44YzIyLjQ2IDAgMzEuMSAxOS41MyAzMS4xIDMxLjk5IDAgMjMuMTQtNjYuOTYgODguMjMtMTY0LjUgODguMjMtMTM3LjEgMC0yMTkuNC0xMTcuOC0yMTkuNC0yMjQgMC0xMDMuOCA3OS44Ny0yMjMuMSAyMTkuNC0yMjMuMSA5OS40NyAwIDE2NC41IDY2LjEyIDE2NC41IDg4LjIzIDAgMTIuMjctOS41MjcgMzIuMDEtMzIuMDEgMzIuMDEtMzEuMzIgMC00NS44LTU2LjI1LTEzMi41LTU2LjI1LTk3Ljk5IDAtMTU1LjQgODQuNTktMTU1LjQgMTU5LjEgMCA3NC4wMyA1Ni40MiAxNjAgMTU1LjQgMTYwQzMwNi41IDQxNiAzMjAuNSAzNTkuOCAzNTIgMzU5Ljh6XCJcbiAgfSkpKTtcbn07XG5leHBvcnQgZGVmYXVsdCBTdmdDOyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/c.svg\n");
+
+/***/ })
+
+}]);

@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons1500"],{
+
+/***/ "./src/collapse/svg/solid/oil-can.svg":
+/*!********************************************!*\
+  !*** ./src/collapse/svg/solid/oil-can.svg ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgOilCan = function SvgOilCan(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 640 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M288 128v32h80.9c9.9 0 19.7 2.3 28.6 6.8L448 192l167-35.8c18.1-3.9 30.7 17.6 18.5 31.5L451.1 394.3c-13 13.8-29.6 21.7-48 21.7H144c-26.5 0-48-21.5-48-48v-21.3l-67.49-30C11.17 308.1 0 291.8 0 272.8V208c0-26.5 21.49-48 48-48h176v-32h-32c-17.7 0-32-14.3-32-32 0-17.67 14.3-32 32-32h128c17.7 0 32 14.33 32 32 0 17.7-14.3 32-32 32h-32zM96 208H48v64.8l48 21.3V208z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgOilCan);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL29pbC1jYW4uc3ZnIiwibWFwcGluZ3MiOiI7OztBQUFBO0FBQ0Esc0JBQXNCLHNFQUFzRSxnQkFBZ0Isc0JBQXNCLE9BQU8sMkJBQTJCLDBCQUEwQix5REFBeUQsaUNBQWlDLGtCQUFrQjtBQUMzUTtBQUMvQjtBQUNBLHNCQUFzQixnREFBbUI7QUFDekM7QUFDQTtBQUNBLEdBQUcseUNBQXlDLGdEQUFtQjtBQUMvRDtBQUNBLEdBQUc7QUFDSDtBQUNBLCtEQUFlLFNBQVMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9ycnplLWVsZW1lbnRzLy4vc3JjL2NvbGxhcHNlL3N2Zy9zb2xpZC9vaWwtY2FuLnN2Zz9iMTM2Il0sInNvdXJjZXNDb250ZW50IjpbInZhciBfcGF0aDtcbmZ1bmN0aW9uIF9leHRlbmRzKCkgeyBfZXh0ZW5kcyA9IE9iamVjdC5hc3NpZ24gPyBPYmplY3QuYXNzaWduLmJpbmQoKSA6IGZ1bmN0aW9uICh0YXJnZXQpIHsgZm9yICh2YXIgaSA9IDE7IGkgPCBhcmd1bWVudHMubGVuZ3RoOyBpKyspIHsgdmFyIHNvdXJjZSA9IGFyZ3VtZW50c1tpXTsgZm9yICh2YXIga2V5IGluIHNvdXJjZSkgeyBpZiAoT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsKHNvdXJjZSwga2V5KSkgeyB0YXJnZXRba2V5XSA9IHNvdXJjZVtrZXldOyB9IH0gfSByZXR1cm4gdGFyZ2V0OyB9OyByZXR1cm4gX2V4dGVuZHMuYXBwbHkodGhpcywgYXJndW1lbnRzKTsgfVxuaW1wb3J0ICogYXMgUmVhY3QgZnJvbSBcInJlYWN0XCI7XG52YXIgU3ZnT2lsQ2FuID0gZnVuY3Rpb24gU3ZnT2lsQ2FuKHByb3BzKSB7XG4gIHJldHVybiAvKiNfX1BVUkVfXyovUmVhY3QuY3JlYXRlRWxlbWVudChcInN2Z1wiLCBfZXh0ZW5kcyh7XG4gICAgeG1sbnM6IFwiaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmdcIixcbiAgICB2aWV3Qm94OiBcIjAgMCA2NDAgNTEyXCJcbiAgfSwgcHJvcHMpLCBfcGF0aCB8fCAoX3BhdGggPSAvKiNfX1BVUkVfXyovUmVhY3QuY3JlYXRlRWxlbWVudChcInBhdGhcIiwge1xuICAgIGQ6IFwiTTI4OCAxMjh2MzJoODAuOWM5LjkgMCAxOS43IDIuMyAyOC42IDYuOEw0NDggMTkybDE2Ny0zNS44YzE4LjEtMy45IDMwLjcgMTcuNiAxOC41IDMxLjVMNDUxLjEgMzk0LjNjLTEzIDEzLjgtMjkuNiAyMS43LTQ4IDIxLjdIMTQ0Yy0yNi41IDAtNDgtMjEuNS00OC00OHYtMjEuM2wtNjcuNDktMzBDMTEuMTcgMzA4LjEgMCAyOTEuOCAwIDI3Mi44VjIwOGMwLTI2LjUgMjEuNDktNDggNDgtNDhoMTc2di0zMmgtMzJjLTE3LjcgMC0zMi0xNC4zLTMyLTMyIDAtMTcuNjcgMTQuMy0zMiAzMi0zMmgxMjhjMTcuNyAwIDMyIDE0LjMzIDMyIDMyIDAgMTcuNy0xNC4zIDMyLTMyIDMyaC0zMnpNOTYgMjA4SDQ4djY0LjhsNDggMjEuM1YyMDh6XCJcbiAgfSkpKTtcbn07XG5leHBvcnQgZGVmYXVsdCBTdmdPaWxDYW47Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/oil-can.svg\n");
+
+/***/ })
+
+}]);

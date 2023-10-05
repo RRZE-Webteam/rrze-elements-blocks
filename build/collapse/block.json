@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
   "version": "1.25.10",
-  "title": "Akkordeonreiter",
+  "title": "Accordion-item",
   "category": "design",
   "description": "Creates an accordion block",
   "parent": [

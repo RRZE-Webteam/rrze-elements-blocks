@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons1179"],{
+
+/***/ "./src/collapse/svg/solid/floppy-disk.svg":
+/*!************************************************!*\
+  !*** ./src/collapse/svg/solid/floppy-disk.svg ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgFloppyDisk = function SvgFloppyDisk(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 448 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"m433.1 129.1-83.9-83.9c-6.9-6.88-22.1-13.2-33.1-13.2H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V163.9c0-11-6.3-26.2-14.9-34.8zM224 416c-35.34 0-64-28.66-64-64s28.66-64 64-64 64 28.66 64 64-28.7 64-64 64zm96-208c0 8.8-7.2 16-16 16H80c-8.84 0-16-7.2-16-16v-96c0-8.8 7.16-16 16-16h224c8.8 0 16 7.2 16 16v96z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgFloppyDisk);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL2Zsb3BweS1kaXNrLnN2ZyIsIm1hcHBpbmdzIjoiOzs7QUFBQTtBQUNBLHNCQUFzQixzRUFBc0UsZ0JBQWdCLHNCQUFzQixPQUFPLDJCQUEyQiwwQkFBMEIseURBQXlELGlDQUFpQyxrQkFBa0I7QUFDM1E7QUFDL0I7QUFDQSxzQkFBc0IsZ0RBQW1CO0FBQ3pDO0FBQ0E7QUFDQSxHQUFHLHlDQUF5QyxnREFBbUI7QUFDL0Q7QUFDQSxHQUFHO0FBQ0g7QUFDQSwrREFBZSxhQUFhIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcnJ6ZS1lbGVtZW50cy8uL3NyYy9jb2xsYXBzZS9zdmcvc29saWQvZmxvcHB5LWRpc2suc3ZnP2QwZTQiXSwic291cmNlc0NvbnRlbnQiOlsidmFyIF9wYXRoO1xuZnVuY3Rpb24gX2V4dGVuZHMoKSB7IF9leHRlbmRzID0gT2JqZWN0LmFzc2lnbiA/IE9iamVjdC5hc3NpZ24uYmluZCgpIDogZnVuY3Rpb24gKHRhcmdldCkgeyBmb3IgKHZhciBpID0gMTsgaSA8IGFyZ3VtZW50cy5sZW5ndGg7IGkrKykgeyB2YXIgc291cmNlID0gYXJndW1lbnRzW2ldOyBmb3IgKHZhciBrZXkgaW4gc291cmNlKSB7IGlmIChPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwoc291cmNlLCBrZXkpKSB7IHRhcmdldFtrZXldID0gc291cmNlW2tleV07IH0gfSB9IHJldHVybiB0YXJnZXQ7IH07IHJldHVybiBfZXh0ZW5kcy5hcHBseSh0aGlzLCBhcmd1bWVudHMpOyB9XG5pbXBvcnQgKiBhcyBSZWFjdCBmcm9tIFwicmVhY3RcIjtcbnZhciBTdmdGbG9wcHlEaXNrID0gZnVuY3Rpb24gU3ZnRmxvcHB5RGlzayhwcm9wcykge1xuICByZXR1cm4gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJzdmdcIiwgX2V4dGVuZHMoe1xuICAgIHhtbG5zOiBcImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIsXG4gICAgdmlld0JveDogXCIwIDAgNDQ4IDUxMlwiXG4gIH0sIHByb3BzKSwgX3BhdGggfHwgKF9wYXRoID0gLyojX19QVVJFX18qL1JlYWN0LmNyZWF0ZUVsZW1lbnQoXCJwYXRoXCIsIHtcbiAgICBkOiBcIm00MzMuMSAxMjkuMS04My45LTgzLjljLTYuOS02Ljg4LTIyLjEtMTMuMi0zMy4xLTEzLjJINjRDMjguNjUgMzIgMCA2MC42NSAwIDk2djMyMGMwIDM1LjM1IDI4LjY1IDY0IDY0IDY0aDMyMGMzNS4zNSAwIDY0LTI4LjY1IDY0LTY0VjE2My45YzAtMTEtNi4zLTI2LjItMTQuOS0zNC44ek0yMjQgNDE2Yy0zNS4zNCAwLTY0LTI4LjY2LTY0LTY0czI4LjY2LTY0IDY0LTY0IDY0IDI4LjY2IDY0IDY0LTI4LjcgNjQtNjQgNjR6bTk2LTIwOGMwIDguOC03LjIgMTYtMTYgMTZIODBjLTguODQgMC0xNi03LjItMTYtMTZ2LTk2YzAtOC44IDcuMTYtMTYgMTYtMTZoMjI0YzguOCAwIDE2IDcuMiAxNiAxNnY5NnpcIlxuICB9KSkpO1xufTtcbmV4cG9ydCBkZWZhdWx0IFN2Z0Zsb3BweURpc2s7Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/floppy-disk.svg\n");
+
+/***/ })
+
+}]);

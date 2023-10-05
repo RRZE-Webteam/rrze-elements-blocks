@@ -1,0 +1,22 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(self["webpackChunkrrze_elements"] = self["webpackChunkrrze_elements"] || []).push([["svg-icons1522"],{
+
+/***/ "./src/collapse/svg/solid/pen-fancy.svg":
+/*!**********************************************!*\
+  !*** ./src/collapse/svg/solid/pen-fancy.svg ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\nvar _path;\nfunction _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nvar SvgPenFancy = function SvgPenFancy(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"svg\", _extends({\n    xmlns: \"http://www.w3.org/2000/svg\",\n    viewBox: \"0 0 512 512\"\n  }, props), _path || (_path = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"path\", {\n    d: \"M373.5 27.11C388.5 9.885 410.2 0 433 0c43.6 0 79 35.36 79 78.98 0 22.82-9.9 44.52-27.1 59.52L277.7 319l-85.6-84.7L373.5 27.11zM255.1 341.7l-19.2 83.4c-4 17.1-17 30.7-33.9 35.4L24.35 510.3l95.35-95.4c2.7.7 5.4 1.1 8.3 1.1 17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32c0 2.9.38 5.6 1.08 8.3L1.724 487.6 51.47 309.1c4.74-16 18.33-29 35.43-33l83.4-19.2 84.8 84.8z\"\n  })));\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (SvgPenFancy);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL3Blbi1mYW5jeS5zdmciLCJtYXBwaW5ncyI6Ijs7O0FBQUE7QUFDQSxzQkFBc0Isc0VBQXNFLGdCQUFnQixzQkFBc0IsT0FBTywyQkFBMkIsMEJBQTBCLHlEQUF5RCxpQ0FBaUMsa0JBQWtCO0FBQzNRO0FBQy9CO0FBQ0Esc0JBQXNCLGdEQUFtQjtBQUN6QztBQUNBO0FBQ0EsR0FBRyx5Q0FBeUMsZ0RBQW1CO0FBQy9EO0FBQ0EsR0FBRztBQUNIO0FBQ0EsK0RBQWUsV0FBVyIsInNvdXJjZXMiOlsid2VicGFjazovL3JyemUtZWxlbWVudHMvLi9zcmMvY29sbGFwc2Uvc3ZnL3NvbGlkL3Blbi1mYW5jeS5zdmc/MWRkNCJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgX3BhdGg7XG5mdW5jdGlvbiBfZXh0ZW5kcygpIHsgX2V4dGVuZHMgPSBPYmplY3QuYXNzaWduID8gT2JqZWN0LmFzc2lnbi5iaW5kKCkgOiBmdW5jdGlvbiAodGFyZ2V0KSB7IGZvciAodmFyIGkgPSAxOyBpIDwgYXJndW1lbnRzLmxlbmd0aDsgaSsrKSB7IHZhciBzb3VyY2UgPSBhcmd1bWVudHNbaV07IGZvciAodmFyIGtleSBpbiBzb3VyY2UpIHsgaWYgKE9iamVjdC5wcm90b3R5cGUuaGFzT3duUHJvcGVydHkuY2FsbChzb3VyY2UsIGtleSkpIHsgdGFyZ2V0W2tleV0gPSBzb3VyY2Vba2V5XTsgfSB9IH0gcmV0dXJuIHRhcmdldDsgfTsgcmV0dXJuIF9leHRlbmRzLmFwcGx5KHRoaXMsIGFyZ3VtZW50cyk7IH1cbmltcG9ydCAqIGFzIFJlYWN0IGZyb20gXCJyZWFjdFwiO1xudmFyIFN2Z1BlbkZhbmN5ID0gZnVuY3Rpb24gU3ZnUGVuRmFuY3kocHJvcHMpIHtcbiAgcmV0dXJuIC8qI19fUFVSRV9fKi9SZWFjdC5jcmVhdGVFbGVtZW50KFwic3ZnXCIsIF9leHRlbmRzKHtcbiAgICB4bWxuczogXCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiLFxuICAgIHZpZXdCb3g6IFwiMCAwIDUxMiA1MTJcIlxuICB9LCBwcm9wcyksIF9wYXRoIHx8IChfcGF0aCA9IC8qI19fUFVSRV9fKi9SZWFjdC5jcmVhdGVFbGVtZW50KFwicGF0aFwiLCB7XG4gICAgZDogXCJNMzczLjUgMjcuMTFDMzg4LjUgOS44ODUgNDEwLjIgMCA0MzMgMGM0My42IDAgNzkgMzUuMzYgNzkgNzguOTggMCAyMi44Mi05LjkgNDQuNTItMjcuMSA1OS41MkwyNzcuNyAzMTlsLTg1LjYtODQuN0wzNzMuNSAyNy4xMXpNMjU1LjEgMzQxLjdsLTE5LjIgODMuNGMtNCAxNy4xLTE3IDMwLjctMzMuOSAzNS40TDI0LjM1IDUxMC4zbDk1LjM1LTk1LjRjMi43LjcgNS40IDEuMSA4LjMgMS4xIDE3LjcgMCAzMi0xNC4zIDMyLTMycy0xNC4zLTMyLTMyLTMyLTMyIDE0LjMtMzIgMzJjMCAyLjkuMzggNS42IDEuMDggOC4zTDEuNzI0IDQ4Ny42IDUxLjQ3IDMwOS4xYzQuNzQtMTYgMTguMzMtMjkgMzUuNDMtMzNsODMuNC0xOS4yIDg0LjggODQuOHpcIlxuICB9KSkpO1xufTtcbmV4cG9ydCBkZWZhdWx0IFN2Z1BlbkZhbmN5OyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/collapse/svg/solid/pen-fancy.svg\n");
+
+/***/ })
+
+}]);
