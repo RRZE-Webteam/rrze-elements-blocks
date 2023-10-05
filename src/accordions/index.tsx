@@ -28,7 +28,7 @@ import metadata from './block.json';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( metadata.name, {
+registerBlockType( metadata.name as any, {
 	/**
 	 * Used to construct a preview for the block to be shown in the block inserter.
 	 */
@@ -49,5 +49,6 @@ registerBlockType( metadata.name, {
 	/**
 	 * @see ./save.js
 	 */
+	//@ts-ignore
 	save,
 } );

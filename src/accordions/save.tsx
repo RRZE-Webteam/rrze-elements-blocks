@@ -1,6 +1,16 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
-export default function save({ attributes }) {
+type SaveProps = {
+  attributes: {
+    sameBlockCount: number;
+  };
+  setAttributes: (newAttributes: {
+    sameBlockCount?: number;
+  }) => void;
+  clientId?: string;
+};
+
+export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
   const { sameBlockCount } = attributes;
 
