@@ -336,6 +336,7 @@ const Edit: React.FC<SaveProps> = ({
                   "rrze-elements/accordions",
                   "rrze/rrze-video",
                   "core/paragraph",
+                  "core/columns",
                   "core/heading",
                   "core/list",
                   "core/image",

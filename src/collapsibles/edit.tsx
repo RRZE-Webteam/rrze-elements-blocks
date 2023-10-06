@@ -22,6 +22,24 @@ import {
   HeadingSelectorInspector,
 } from "./InspectorControls/HeadingSelector";
 
+/**
+ * Retrieve all blocks, including nested ones.
+ * 
+ * @param {Array} blocks - List of top-level blocks.
+ * @returns {Array} - List of all blocks, including nested ones.
+ */
+const getAllBlocksRecursively = (blocks: WPBlock[]) => {
+  let result = [...blocks];
+
+  blocks.forEach(block => {
+    if (block.innerBlocks && block.innerBlocks.length > 0) {
+      result = [...result, ...getAllBlocksRecursively(block.innerBlocks)];
+    }
+  });
+
+  return result;
+};
+
 type SaveProps = {
   attributes: {
     expandAllLink: boolean;
@@ -86,7 +104,9 @@ export default function Edit({
         });
 
         const blockIndex = getBlockIndex(selectedBlockClientId);
-        const allBlocks = getBlocks();
+        const topLevelBlocks = getBlocks();
+        const allBlocks = getAllBlocksRecursively(topLevelBlocks);
+        //console.log(allBlocks);
 
         const CollapsiblesBlockClientIds = allBlocks
           .filter((block: WPBlock) => block.name === "rrze-elements/collapsibles")
