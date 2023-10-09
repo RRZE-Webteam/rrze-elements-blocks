@@ -29,12 +29,17 @@
       "default": []
     },
     "title": {
-      "type": "string",
-      "default": "Tab title"
+      "type": "array",
+      "default": []
+    },
+    "innerClientIds": {
+      "type": "array",
+      "default": []
     }
   },
   "providesContext": {
-    "rrze-elements/tabs-color": "color"
+    "rrze-elements/tabs-color": "color",
+    "rrze-elements/tabs-order": "innerClientIds"
   },
   "supports": {
     "html": false

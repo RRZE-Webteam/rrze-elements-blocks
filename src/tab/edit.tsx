@@ -18,6 +18,7 @@ interface EditProps {
     totalChildrenCount?: number;
     icon: string;
     svgString?: string;
+    order?: number;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -116,7 +117,7 @@ export default function Edit({
     setAttributes({ color: newTag });
   };
 
-  let sameTypeSiblingsBefore = 0;
+  let sameTypeSiblingsBefore = 1;
 
   /**
    * Calculate the number of siblings of the same type before the current block.
@@ -148,6 +149,16 @@ export default function Edit({
     setAttributes,
   ]);
 
+  useEffect(() => {
+    const array = context["rrze-elements/tabs-order"];
+    const index = array.indexOf(clientId);
+    console.log("index", index);
+
+    if (index !== attributes.order){
+    setAttributes({ order: index });
+    }
+  }, [context["rrze-elements/tabs-order"]]);
+
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
@@ -159,6 +170,8 @@ export default function Edit({
 
   const { sameBlockCount, color, icon } = attributes;
 
+
+  //TODO: Add Class is-hidden and aria-selected="true"
   return (
     <>
       <div

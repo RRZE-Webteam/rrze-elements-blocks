@@ -53,9 +53,9 @@
       "type": "string",
       "default": ""
     },
-    "directory": {
-      "type": "string",
-      "default": ""
+    "order": {
+      "type": "integer",
+      "default": 0
     }
   },
   "providesContext": {
@@ -64,6 +64,7 @@
   "supports": {
     "html": false
   },
+  "usesContext": ["rrze-elements/tabs-order"],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "script": "rrze-tabs",
