@@ -1,6 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import './style.scss';
 import './editor.scss';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -20,5 +21,29 @@ registerBlockType( metadata.name, {
 	icon: {
 		src: "align-center",
 		background: "#00458c"
+	},
+	__experimentalLabel: (attributes, { context }) => {
+		const { title, hstart } = attributes;
+
+		// In the list view, use the block's title as the label.
+		// If the title is empty, fall back to the default label.
+		if (context === 'list-view' && title) {
+			return title;
+		}
+
+		if (context === 'accessibility') {
+			return !title || title.length === 0
+				? sprintf(
+					/* translators: accessibility text. %s: heading level. */
+					__('Level %s. Empty.'),
+					hstart
+				)
+				: sprintf(
+					/* translators: accessibility text. 1: heading level. 2: heading title. */
+					__('Level %1$s. %2$s'),
+					hstart,
+					title
+				);
+		}
 	}
 } );

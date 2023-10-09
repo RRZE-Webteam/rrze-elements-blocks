@@ -106,7 +106,7 @@ export default function Edit({
         const blockIndex = getBlockIndex(selectedBlockClientId);
         const topLevelBlocks = getBlocks();
         const allBlocks = getAllBlocksRecursively(topLevelBlocks);
-        //console.log(allBlocks);
+        //  console.log(allBlocks);
 
         const CollapsiblesBlockClientIds = allBlocks
           .filter((block: WPBlock) => block.name === "rrze-elements/collapsibles")

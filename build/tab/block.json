@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/tab",
+  "version": "0.0.6",
+  "title": "Tabs",
+  "category": "design",
+  "description": "Creates an tabs block.",
+  "parent": [
+    "rrze-elements/tabs"
+  ],
+  "attributes": {
+    "message": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    },
+    "sameBlockCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "previousBlockIds": {
+      "type": "array",
+      "default": []
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 2
+    },
+    "register": {
+      "type": "boolean",
+      "default": false
+    },
+    "title": {
+      "type": "string",
+      "default": "Enter your Title"
+    },
+    "color": {
+      "type": "string",
+      "default": ""
+    },
+    "totalChildrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+    "svgString": {
+      "type": "string",
+      "default": ""
+    },
+    "directory": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "providesContext": {
+    "rrze-elements/tabs-color": "color"
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "script": "rrze-tabs",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

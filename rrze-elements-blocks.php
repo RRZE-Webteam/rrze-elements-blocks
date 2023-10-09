@@ -108,6 +108,8 @@ function rrze_rrze_elements_block_init() {
     register_block_type( __DIR__ . '/build/accordions');
     register_block_type( __DIR__ . '/build/accordion');
     register_block_type( __DIR__ . '/build/alert');
+    register_block_type( __DIR__ . '/build/tabs');
+    register_block_type( __DIR__ . '/build/tab');
 
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('rrze-elements');
