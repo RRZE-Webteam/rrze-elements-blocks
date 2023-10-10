@@ -28,18 +28,24 @@
       "type": "array",
       "default": []
     },
-    "title": {
+    "tabs": {
       "type": "array",
       "default": []
     },
     "innerClientIds": {
       "type": "array",
       "default": []
+    },
+    "active": {
+      "type": "string",
+      "default": ""
     }
   },
   "providesContext": {
     "rrze-elements/tabs-color": "color",
-    "rrze-elements/tabs-order": "innerClientIds"
+    "rrze-elements/tabs-order": "innerClientIds",
+    "rrze-elements/tabs": "tabs",
+    "rrze-elements/tabs-active": "active"
   },
   "supports": {
     "html": false

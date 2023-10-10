@@ -19,6 +19,7 @@ interface EditProps {
     icon: string;
     svgString?: string;
     order?: number;
+    active?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -150,14 +151,47 @@ export default function Edit({
   ]);
 
   useEffect(() => {
-    const array = context["rrze-elements/tabs-order"];
-    const index = array.indexOf(clientId);
-    console.log("index", index);
+    try {
+      const array = context["rrze-elements/tabs-order"];
+      const clientId = props.id.slice(6);
 
-    if (index !== attributes.order){
-    setAttributes({ order: index });
+      if (!Array.isArray(array) || !clientId) {
+        throw new Error("Invalid array or clientId is missing.");
+      }
+      const index = array.indexOf(clientId);
+
+      if (index === -1) {
+        throw new Error(
+          "ClientId not found in the tabs-order array. It may take a moment for the array to be populated."
+        );
+      }
+
+      if (index !== attributes.order) {
+        setAttributes({ order: index });
+      }
+    } catch (error) {
+      console.error("Info in useEffect:", error.message);
     }
   }, [context["rrze-elements/tabs-order"]]);
+
+  useEffect(() => {
+    const tabsArray = context["rrze-elements/tabs"];
+    const clientId = props.id.slice(6);
+    if (tabsArray && Array.isArray(tabsArray)) {
+      // Find the tab object with the matching clientId.
+
+      const tabObject = tabsArray.find((tab) => String(tab.clientId) === String(clientId));
+    }
+  }, [
+    context["rrze-elements/tabs"],
+    setAttributes,
+  ]);
+  
+  useEffect(() => {
+    if (context["rrze-elements/tabs-active"] !== attributes.active) {
+      setAttributes({ active: context["rrze-elements/tabs-active"] });
+    }
+  })
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
@@ -169,16 +203,16 @@ export default function Edit({
   };
 
   const { sameBlockCount, color, icon } = attributes;
+  const blockId = props.id.slice(6);
+  const classNameValue = (attributes.active === blockId) ? "" : "is-hidden";
 
-
-  //TODO: Add Class is-hidden and aria-selected="true"
   return (
     <>
       <div
         id={`tab-${attributes.sameBlockCount}_tabpanel_reiter-${attributes.sameBlockCount}`}
         role="tabpanel"
         aria-labelledby={`tab-${attributes.sameBlockCount}_reiter-${attributes.sameBlockCount}`}
-        className=""
+        className={classNameValue}
       >
         <h2 className="print-only">{attributes.title}</h2>
         <InnerBlocks

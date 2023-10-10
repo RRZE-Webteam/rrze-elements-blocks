@@ -58,6 +58,10 @@
     "order": {
       "type": "integer",
       "default": 0
+    },
+    "active": {
+      "type": "string",
+      "default": ""
     }
   },
   "providesContext": {
@@ -67,7 +71,9 @@
     "html": false
   },
   "usesContext": [
-    "rrze-elements/tabs-order"
+    "rrze-elements/tabs-order",
+    "rrze-elements/tabs",
+    "rrze-elements/tabs-active"
   ],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",

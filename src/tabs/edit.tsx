@@ -10,24 +10,33 @@ import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
+interface Tab {
+  title?: string;
+  index?: number;
+  active?: string;
+  clientId?: string;
+}
+
 interface EditProps {
   attributes: {
     style?: string;
     color?: string;
-    title?: string[];
+    tabs?: Tab[];
     childrenCount?: number;
     previousBlockIds?: string[];
     previousBlockClients?: string[];
     innerClientIds?: string[];
+    active?: string;
   };
   setAttributes: (newAttributes: {
     style?: string;
     color?: string;
-    title?: string[];
+    tabs?: Tab[];
     childrenCount?: number;
     previousBlockIds?: string[];
     previousBlockClients?: string[];
     innerClientIds?: string[];
+    active?: string;
   }) => void;
   clientId: string;
   context: { [key: string]: any };
@@ -71,7 +80,7 @@ export default function Edit({
   context,
 }: EditProps) {
   const props = useBlockProps();
-  const { title } = attributes;
+  const { tabs } = attributes;
 
   const {
     selectedBlock,
@@ -95,17 +104,6 @@ export default function Edit({
         };
         const selectedBlockClientId = clientId;
         let numberChildren = getBlocks(selectedBlockClientId).length;
-        // getBlocks(selectedBlockClientId).forEach((block: WPBlock) => {
-        //   // if (block?.innerBlocks.length !== 0)
-        //     // block?.innerBlocks.forEach((innerBlock) => {
-        //     //   //console.log(innerBlock);
-        //     //   // if (innerBlock?.name === "rrze-elements/accordions") {
-        //     //   //   numberChildren =
-        //     //   //     numberChildren + innerBlock.attributes.childrenCount;
-        //     //   // }
-        //     // });
-        //   // console.log("block", block.innerBlocks);
-        // });
 
         const blockIndex = getBlockIndex(selectedBlockClientId);
         const topLevelBlocks = getBlocks();
@@ -114,7 +112,6 @@ export default function Edit({
           (block: WPBlock) => block.clientId
         );
         const allBlocks = getAllBlocksRecursively(topLevelBlocks);
-        //  console.log(allBlocks);
 
         const CollapsiblesBlockClientIds = allBlocks
           .filter((block: WPBlock) => block.name === "rrze-elements/tabs")
@@ -127,10 +124,6 @@ export default function Edit({
           0,
           currentBlockIndex
         );
-
-        // console.log("selectedBlockClientId", selectedBlockClientId);
-        // console.log("numberChildren", numberChildren);
-        // console.log("blockIndex", blockIndex);
 
         return {
           selectedBlock: getBlock(selectedBlockClientId),
@@ -146,62 +139,86 @@ export default function Edit({
   useEffect(() => {
     if (attributes.childrenCount !== numberChildren) {
       setAttributes({ childrenCount: numberChildren });
-      console.log("attributes.childrenCount", attributes.childrenCount);
     }
   }, [numberChildren, setAttributes, attributes.childrenCount]);
 
   useEffect(() => {
     if (!isEqual(attributes.previousBlockIds, previousBlockClients)) {
       setAttributes({ previousBlockIds: previousBlockClients });
-      console.log(
-        "attributes.previousBlockClients",
-        attributes.previousBlockIds
-      );
     }
   }, [previousBlockClients, setAttributes, attributes.previousBlockIds]);
 
   useEffect(() => {
-    if (!isEqual(attributes.innerClientIds, innerClientIds)) {
-      setAttributes({ innerClientIds: innerClientIds });
-      console.log("attributes.innerClientIds", attributes.innerClientIds);
+    if (innerClientIds.length === 0) {
+      return;
     }
-  });
+
+    if (!isEqual(attributes.innerClientIds, innerClientIds)) {
+      setAttributes({ innerClientIds });
+    }
+  }, [innerClientIds, setAttributes]);
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string, index: number) => {
-    let newTitles = [...title]; // clone the current titles
-    newTitles[index] = newText; // update the title at the specific index
-    console.log(index);
-    console.log(newTitles);
-    setAttributes({ title: newTitles });
+    let newTabs = [...tabs];
+
+    // Ensure that the object at the specified index exists
+    if (!newTabs[index]) {
+      newTabs[index] = {};
+    }
+
+    newTabs[index].title = newText;
+    newTabs[index].clientId = innerClientIds[index];
+    setAttributes({ tabs: newTabs });
   };
+
+  const onChangeActive = (index: number) => {
+    let newTabs = [...tabs];
+    if (newTabs[index]) {
+      if (innerClientIds[index] !== undefined) {
+        setAttributes({ active: innerClientIds[index] });
+      }
+    }
+  };
+
+  const ariaSelected: any = (index: number) => {
+    console.log("innerClientIds[index]", innerClientIds[index]);
+    console.log("attributes.active", attributes.active);
+    if ((innerClientIds[index] === attributes.active) || (attributes.active === "")) {
+      return true;
+    }
+    return false;
+  }
 
   return (
     <>
       <div className="rrze-elements-tabs primary" id="tabs-1">
         // For each tab, add a button and a tabpanel.
         <div role="tablist" className="manual">
-          {attributes.innerClientIds.map((innerClientId, index) => (
-            <button
-              key={index}
-              id={`tab-${index + 1}_reiter-${index + 1}`}
-              type="button"
-              role="tab"
-              aria-selected={index === 0}
-              aria-controls={`tab-${index + 1}_tabpanel_reiter-${index + 1}`}
-            >
-              <span className="focus" tabIndex={-1}>
-                <RichText
-                  identifier={`tab-${index + 1}_reiter-${index + 1}`}
-                  value={attributes.title[index]} // Using the index to get the corresponding title
-                  onChange={(text) => onChangeTitle(text, index)}
-                  placeholder={__("Tab Title")}
-                  multiline={false}
-                  allowedFormats={[]}
-                />
-              </span>
-            </button>
-          ))}
+          {attributes.innerClientIds.map((innerClientId, index) => {
+            return (
+              <button
+                key={index}
+                onClick={() => onChangeActive(index)}
+                id={`tab-${index + 1}_reiter-${index + 1}`}
+                type="button"
+                role="tab"
+                aria-selected={ariaSelected(index)}
+                aria-controls={`tab-${index + 1}_tabpanel_reiter-${index + 1}`}
+              >
+                <span className="focus" tabIndex={-1}>
+                  <RichText
+                    identifier={`tab-${index + 1}_reiter-${index + 1}`}
+                    value={attributes.tabs[index]?.title} // Using the index to get the corresponding title
+                    onChange={(text) => onChangeTitle(text, index)}
+                    placeholder={__("Tab Title")}
+                    multiline={false}
+                    allowedFormats={[]}
+                  />
+                </span>
+              </button>
+            );
+          })}
         </div>
         <InnerBlocks
           allowedBlocks={["rrze-elements/tab"]}
