@@ -42,7 +42,7 @@
     },
     "color": {
       "type": "string",
-      "default": ""
+      "default": "inherit"
     },
     "totalChildrenCount": {
       "type": "integer",

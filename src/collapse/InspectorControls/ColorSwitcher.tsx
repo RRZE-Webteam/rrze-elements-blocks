@@ -28,7 +28,6 @@ const ColorSwitcher = ({ attributes, setAttributes }: ColorSwitcherProps) => {
   const { color } = attributes;
   const onChangeColor = (newColor: string) => {
     const colorEntry = colorData.find((entry) => entry.color === newColor);
-    console.log(colorEntry);
     setAttributes({ color: colorEntry.slug });
   };
 
@@ -39,6 +38,7 @@ const ColorSwitcher = ({ attributes, setAttributes }: ColorSwitcherProps) => {
         value={colorData.find((entry) => entry.slug === color).color}
         onChange={onChangeColor}
         disableCustomColors={true}
+        clearable={false}
       />
     </PanelBody>
   );

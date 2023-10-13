@@ -121,6 +121,7 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
           onChange={(newIcon) => setAttributes({ icon: newIcon })}
           value={attributes.icon}
           options={allIconsOptions}
+          allowReset={false}
         />
         {attributes.icon !== "" && [
           Icon

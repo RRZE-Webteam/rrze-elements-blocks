@@ -118,12 +118,18 @@ const Edit: React.FC<SaveProps> = ({
   ]);
 
   useEffect(() => {
+    let color = context["rrze-elements/collapseColor"];
+  
+    if (color !== attributes.color) {
+      color = attributes.color;
+    }
+  
     setAttributes({
-      color: context["rrze-elements/collapseColor"],
+      color: color
     });
-  }),
-    [context["rrze-elements/collapseColor"]];
-
+  
+  }, [context["rrze-elements/collapseColor"], attributes.color]);
+  
   let sameTypeSiblingsBefore = 0;
   useEffect(() => {
     if (selectedBlock && blockParents.length > 0) {
@@ -227,6 +233,8 @@ const Edit: React.FC<SaveProps> = ({
     }
   };
 
+  let finalColor = attributes.color === "inherit" ? context["rrze-elements/collapseColor"] : attributes.color;
+
   return (
     <>
       <BlockControls controls>
@@ -275,6 +283,7 @@ const Edit: React.FC<SaveProps> = ({
       </BlockControls>
       <InspectorControls>
         {/* <ColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
+        <ColorSwitcher attributes={attributes} setAttributes={setAttributes} />
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
@@ -288,7 +297,7 @@ const Edit: React.FC<SaveProps> = ({
       </InspectorControls>
 
       <div {...props}>
-        <div className={`accordion-group ${attributes.color}`}>
+        <div className={`accordion-group ${finalColor} `}>
           <HeadingComponent
             level={attributes.hstart + 1}
             className="accordion-heading"

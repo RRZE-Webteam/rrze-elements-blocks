@@ -4,7 +4,6 @@ import {
   InnerBlocks,
   InspectorControls,
 } from "@wordpress/block-editor";
-// import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
@@ -191,7 +190,7 @@ export default function Edit({
     if (context["rrze-elements/tabs-active"] !== attributes.active) {
       setAttributes({ active: context["rrze-elements/tabs-active"] });
     }
-  })
+  }, [attributes.active, context["rrze-elements/tabs-active"]]);
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
@@ -204,6 +203,7 @@ export default function Edit({
 
   const { sameBlockCount, color, icon } = attributes;
   const blockId = props.id.slice(6);
+  console.log(attributes.active);
   const classNameValue = (attributes.active === blockId) ? "" : "is-hidden";
 
   return (

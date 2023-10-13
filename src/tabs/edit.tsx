@@ -5,7 +5,6 @@ import {
   InspectorControls,
 } from "@wordpress/block-editor";
 import { isEqual } from "lodash";
-// import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
@@ -162,7 +161,6 @@ export default function Edit({
   const onChangeTitle = (newText: string, index: number) => {
     let newTabs = [...tabs];
 
-    // Ensure that the object at the specified index exists
     if (!newTabs[index]) {
       newTabs[index] = {};
     }
@@ -170,7 +168,15 @@ export default function Edit({
     newTabs[index].title = newText;
     newTabs[index].clientId = innerClientIds[index];
     setAttributes({ tabs: newTabs });
+
+    onChangeActive(index);
   };
+
+  useEffect(() => {
+    if(attributes.active === "" && innerClientIds[0] !== undefined) {
+      setAttributes({ active: innerClientIds[0] });
+    }
+  }, [innerClientIds]);
 
   const onChangeActive = (index: number) => {
     let newTabs = [...tabs];
@@ -182,8 +188,6 @@ export default function Edit({
   };
 
   const ariaSelected: any = (index: number) => {
-    console.log("innerClientIds[index]", innerClientIds[index]);
-    console.log("attributes.active", attributes.active);
     if ((innerClientIds[index] === attributes.active) || (attributes.active === "")) {
       return true;
     }
@@ -193,7 +197,6 @@ export default function Edit({
   return (
     <>
       <div className="rrze-elements-tabs primary" id="tabs-1">
-        // For each tab, add a button and a tabpanel.
         <div role="tablist" className="manual">
           {attributes.innerClientIds.map((innerClientId, index) => {
             return (
@@ -211,7 +214,7 @@ export default function Edit({
                     identifier={`tab-${index + 1}_reiter-${index + 1}`}
                     value={attributes.tabs[index]?.title} // Using the index to get the corresponding title
                     onChange={(text) => onChangeTitle(text, index)}
-                    placeholder={__("Tab Title")}
+                    placeholder={__("Tab Title", "rrze-elements")}
                     multiline={false}
                     allowedFormats={[]}
                   />
@@ -223,7 +226,6 @@ export default function Edit({
         <InnerBlocks
           allowedBlocks={["rrze-elements/tab"]}
           template={[
-            ["rrze-elements/tab"],
             ["rrze-elements/tab"],
             ["rrze-elements/tab"],
           ]}
