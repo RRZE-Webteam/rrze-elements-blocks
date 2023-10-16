@@ -4,6 +4,9 @@ import {
   InnerBlocks,
   InspectorControls,
 } from "@wordpress/block-editor";
+import {
+  TextControl
+} from "@wordpress/components";
 import { isEqual } from "lodash";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
@@ -241,14 +244,13 @@ export default function Edit({
                 aria-controls={`tab-${index + 1}_tabpanel_reiter-${index + 1}`}
               >
                 <span className="focus" tabIndex={-1}>
-                  <RichText
-                    identifier={`tab-${index + 1}_reiter-${index + 1}`}
-                    value={attributes.tabs[index]?.title} // Using the index to get the corresponding title
+                  {/* <TextControl
                     onChange={(text) => onChangeTitle(text, index)}
+                    value={attributes.tabs[index]?.title}
                     placeholder={__("Tab Title", "rrze-elements")}
-                    multiline={false}
-                    allowedFormats={[]}
-                  />
+                    className="elements-blocks-input-following-icon"
+                  /> */}
+                  InnerProps Title & UID          
                 </span>
               </button>
             );

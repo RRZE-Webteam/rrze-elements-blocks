@@ -3,13 +3,7 @@ import {
   RichText,
   InnerBlocks,
   InspectorControls,
-  BlockControls
 } from "@wordpress/block-editor";
-import {
-  ToolbarItem,
-  ToolbarGroup,
-  ToolbarButton
-} from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
@@ -211,22 +205,10 @@ export default function Edit({
 
   const { sameBlockCount, color, icon } = attributes;
   const blockId = props.id.slice(6);
-  let classNameValue = (attributes.active === blockId) ? "" : "is-hidden";
-  classNameValue = "";
+  const classNameValue = (attributes.active === blockId) ? "" : "is-hidden";
 
   return (
     <>
-    <div {...props}>
-    <BlockControls controls>
-      <ToolbarGroup>
-        <ToolbarButton
-                    label={__("Collapse on page load", "rrze-elements-b")}
-                    onClick = {() => {
-                      console.log("clicked");
-                    }}
-                  />
-        </ToolbarGroup>
-    </BlockControls>
       <div
         id={`tab-${attributes.sameBlockCount}_tabpanel_reiter-${attributes.sameBlockCount}`}
         role="tabpanel"
@@ -242,7 +224,6 @@ export default function Edit({
             ],
           ]}
         />
-      </div>
       </div>
     </>
   );
