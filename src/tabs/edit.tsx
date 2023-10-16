@@ -157,6 +157,33 @@ export default function Edit({
     }
   }, [innerClientIds, setAttributes]);
 
+  const syncTabsWithInnerBlocks = () => {
+    console.log("innerClientIds", innerClientIds);
+    console.log("tabs", tabs);
+
+    const newTabsOrder = innerClientIds.map((clientId: string) => {
+      const existingTab = tabs.find((tab) => tab.clientId === clientId);
+      if (existingTab) {
+        return existingTab;
+      }
+      return {
+        title: "",
+        clientId: clientId,
+      };
+    });
+
+    // Only update if there's a change
+    if (!isEqual(newTabsOrder, tabs)) {
+      setAttributes({ tabs: newTabsOrder });
+    }
+  };
+
+  useEffect(() => {
+    if (attributes.tabs.length !== 0) {
+      syncTabsWithInnerBlocks();
+    }
+  }, [innerClientIds, attributes.tabs]);
+
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string, index: number) => {
     let newTabs = [...tabs];
@@ -173,7 +200,7 @@ export default function Edit({
   };
 
   useEffect(() => {
-    if(attributes.active === "" && innerClientIds[0] !== undefined) {
+    if (attributes.active === "" && innerClientIds[0] !== undefined) {
       setAttributes({ active: innerClientIds[0] });
     }
   }, [innerClientIds]);
@@ -188,12 +215,16 @@ export default function Edit({
   };
 
   const ariaSelected: any = (index: number) => {
-    if ((innerClientIds[index] === attributes.active) || (attributes.active === "")) {
+    if (
+      innerClientIds[index] === attributes.active ||
+      attributes.active === ""
+    ) {
       return true;
     }
     return false;
-  }
+  };
 
+  console.log(attributes);
   return (
     <>
       <div className="rrze-elements-tabs primary" id="tabs-1">
@@ -225,38 +256,8 @@ export default function Edit({
         </div>
         <InnerBlocks
           allowedBlocks={["rrze-elements/tab"]}
-          template={[
-            ["rrze-elements/tab"],
-            ["rrze-elements/tab"],
-          ]}
+          template={[["rrze-elements/tab"], ["rrze-elements/tab"]]}
         />
-        {/* <div
-          id="tab-1_tabpanel_reiter-1"
-          role="tabpanel"
-          aria-labelledby="tab-1_reiter-1"
-          className=""
-        >
-          <h2 className="print-only">Reiter 1</h2>
-          <p>Text 1</p>
-        </div>
-        <div
-          id="tab-1_tabpanel_reiter-2"
-          role="tabpanel"
-          aria-labelledby="tab-1_reiter-2"
-          className="is-hidden"
-        >
-          <h2 className="print-only">Reiter 2</h2>
-          <p>Text 2</p>
-        </div>
-        <div
-          id="tab-1_tabpanel_reiter-3"
-          role="tabpanel"
-          aria-labelledby="tab-1_reiter-3"
-          className="is-hidden"
-        >
-          <h2 className="print-only">Reiter 3</h2>
-          <p>Text 3</p>
-        </div> */}
       </div>
     </>
   );

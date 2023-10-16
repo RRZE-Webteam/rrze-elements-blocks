@@ -21,6 +21,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -39,6 +40,15 @@ registerBlockType( metadata.name as any, {
 	icon: {
 		src: "minus",
 		background: "#00458c"
+	},
+	__experimentalLabel: (attributes: any, { context }: any) => {
+		const { title } = attributes;
+
+		// In the list view, use the block's title as the label.
+		// If the title is empty, fall back to the default label.
+		if (context === 'list-view' && title) {
+			return title;
+		}
 	},
 	/**
 	 * @see ./edit.js

@@ -177,9 +177,11 @@ export default function Edit({
     const tabsArray = context["rrze-elements/tabs"];
     const clientId = props.id.slice(6);
     if (tabsArray && Array.isArray(tabsArray)) {
-      // Find the tab object with the matching clientId.
-
       const tabObject = tabsArray.find((tab) => String(tab.clientId) === String(clientId));
+      
+      if (tabObject){
+        setAttributes({ title: tabObject.title });
+      }
     }
   }, [
     context["rrze-elements/tabs"],
@@ -203,7 +205,6 @@ export default function Edit({
 
   const { sameBlockCount, color, icon } = attributes;
   const blockId = props.id.slice(6);
-  console.log(attributes.active);
   const classNameValue = (attributes.active === blockId) ? "" : "is-hidden";
 
   return (
