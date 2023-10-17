@@ -8,7 +8,9 @@ import {
 import {
   ToolbarItem,
   ToolbarGroup,
-  ToolbarButton
+  ToolbarButton,
+  Placeholder,
+  TextControl
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
@@ -69,133 +71,13 @@ export default function Edit({
   context,
 }: EditProps) {
   const props = useBlockProps();
+  const blockId = props["data-block"];
   const { title } = attributes;
 
-  // Use the useSelect hook to gather necessary data from the WordPress block editor.
-  const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
-    /**
-     * Get relevant data from the block editor to assist with the numbering
-     * of the collapsibles.
-     */
-    useSelect(
-      (select) => {
-        const { getBlock, getBlockParents, getBlocks } = select(
-          "core/block-editor"
-        ) as {
-          getBlock: Function;
-          getBlocks: Function;
-          getBlockParents: Function;
-        };
-        const blockParents = getBlockParents(clientId, true);
-        const parentClientId = blockParents[0];
-        const siblingBlocks = getBlocks(parentClientId);
-        const collapsiblesBeforeMe =
-          getBlock(parentClientId)?.attributes?.previousBlockIds || [];
-        let totalChildrenCount = 0;
-        collapsiblesBeforeMe.forEach((blockClientId: string) => {
-          const childrenCount =
-            getBlock(blockClientId)?.attributes?.childrenCount || 0;
-          totalChildrenCount += childrenCount;
-        });
-
-        return {
-          selectedBlock: getBlock(clientId),
-          blockParents,
-          siblingBlocks,
-          totalChildrenCount,
-        };
-      },
-      [clientId] // only rerun if clientId changes
-    );
-
-  // Effects to keep the attributes in sync with the local state and other calculations.
-  useEffect(() => {
-    if (attributes.totalChildrenCount !== totalChildrenCount) {
-      setAttributes({ totalChildrenCount });
-    }
-  }, [totalChildrenCount, attributes.totalChildrenCount]);
-
-  /**
-   * Function to handle the toggle of color.
-   * @param {string} newTag - The new color to be set.
-   */
-  const handleToggleColor = (newTag: string) => {
-    setAttributes({ color: newTag });
-  };
-
-  let sameTypeSiblingsBefore = 1;
-
-  /**
-   * Calculate the number of siblings of the same type before the current block.
-   */
-  useEffect(() => {
-    if (selectedBlock && blockParents.length > 0) {
-      for (const block of siblingBlocks) {
-        if (block.clientId === selectedBlock.clientId) {
-          break;
-        }
-        if (block.name === selectedBlock.name) {
-          block?.innerBlocks?.forEach((innerBlock: WPBlock) => {
-            if (innerBlock.name === "rrze-elements/accordions") {
-              sameTypeSiblingsBefore += innerBlock?.innerBlocks?.length || 0;
-            }
-          });
-          sameTypeSiblingsBefore++;
-        }
-      }
-      if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-        setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-      }
-    }
-  }, [
-    selectedBlock,
-    blockParents,
-    siblingBlocks,
-    attributes.sameBlockCount,
-    setAttributes,
-  ]);
+  console.log("props", );
 
   useEffect(() => {
-    try {
-      const array = context["rrze-elements/tabs-order"];
-      const clientId = props.id.slice(6);
-
-      if (!Array.isArray(array) || !clientId) {
-        throw new Error("Invalid array or clientId is missing.");
-      }
-      const index = array.indexOf(clientId);
-
-      if (index === -1) {
-        throw new Error(
-          "ClientId not found in the tabs-order array. It may take a moment for the array to be populated."
-        );
-      }
-
-      if (index !== attributes.order) {
-        setAttributes({ order: index });
-      }
-    } catch (error) {
-      console.error("Info in useEffect:", error.message);
-    }
-  }, [context["rrze-elements/tabs-order"]]);
-
-  useEffect(() => {
-    const tabsArray = context["rrze-elements/tabs"];
-    const clientId = props.id.slice(6);
-    if (tabsArray && Array.isArray(tabsArray)) {
-      const tabObject = tabsArray.find((tab) => String(tab.clientId) === String(clientId));
-      
-      if (tabObject){
-        setAttributes({ title: tabObject.title });
-      }
-    }
-  }, [
-    context["rrze-elements/tabs"],
-    setAttributes,
-  ]);
-  
-  useEffect(() => {
-    if (context["rrze-elements/tabs-active"] !== attributes.active) {
+    if (context["rrze-elements/tabs-active"] === attributes.active) {
       setAttributes({ active: context["rrze-elements/tabs-active"] });
     }
   }, [attributes.active, context["rrze-elements/tabs-active"]]);
@@ -210,7 +92,6 @@ export default function Edit({
   };
 
   const { sameBlockCount, color, icon } = attributes;
-  const blockId = props.id.slice(6);
   let classNameValue = (attributes.active === blockId) ? "" : "is-hidden";
   classNameValue = "";
 
@@ -228,12 +109,19 @@ export default function Edit({
         </ToolbarGroup>
     </BlockControls>
       <div
-        id={`tab-${attributes.sameBlockCount}_tabpanel_reiter-${attributes.sameBlockCount}`}
+        id={blockId}
         role="tabpanel"
-        aria-labelledby={`tab-${attributes.sameBlockCount}_reiter-${attributes.sameBlockCount}`}
+        aria-labelledby={blockId}
         className={classNameValue}
       >
         <h2 className="print-only">{attributes.title}</h2>
+        <Placeholder label={__("Tab", "rrze-elements-b")}>
+          <TextControl 
+            value={attributes.title}
+            onChange={onChangeTitle}
+            placeholder={__("Tab", "rrze-elements-b")}
+          />
+        </Placeholder>
         <InnerBlocks
           template={[
             [

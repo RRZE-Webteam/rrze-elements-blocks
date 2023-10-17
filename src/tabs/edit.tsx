@@ -4,9 +4,7 @@ import {
   InnerBlocks,
   InspectorControls,
 } from "@wordpress/block-editor";
-import {
-  TextControl
-} from "@wordpress/components";
+import { TextControl } from "@wordpress/components";
 import { isEqual } from "lodash";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
@@ -27,7 +25,11 @@ interface EditProps {
     childrenCount?: number;
     previousBlockIds?: string[];
     previousBlockClients?: string[];
-    innerClientIds?: string[];
+    innerClientIds?: {
+      clientId: string;
+      title: string;
+      position: number;
+    }[];
     active?: string;
   };
   setAttributes: (newAttributes: {
@@ -52,6 +54,7 @@ type WPBlock = {
   name?: string;
   attributes?: {
     childrenCount?: number;
+    title?: string;
   };
   clientId?: string;
 };
@@ -110,9 +113,13 @@ export default function Edit({
         const blockIndex = getBlockIndex(selectedBlockClientId);
         const topLevelBlocks = getBlocks();
         const innerBlocks = getBlocks(selectedBlockClientId);
-        const innerClientIds = innerBlocks.map(
-          (block: WPBlock) => block.clientId
-        );
+        let counter = 0;
+        const innerClientIds = innerBlocks.map((block: WPBlock) => ({
+          clientId: block.clientId,
+          title: block.attributes?.title,
+          position: counter++,
+        }));
+        console.log(innerClientIds);
         const allBlocks = getAllBlocksRecursively(topLevelBlocks);
 
         const CollapsiblesBlockClientIds = allBlocks
@@ -137,12 +144,6 @@ export default function Edit({
       },
       [clientId]
     );
-
-  useEffect(() => {
-    if (attributes.childrenCount !== numberChildren) {
-      setAttributes({ childrenCount: numberChildren });
-    }
-  }, [numberChildren, setAttributes, attributes.childrenCount]);
 
   useEffect(() => {
     if (!isEqual(attributes.previousBlockIds, previousBlockClients)) {
@@ -235,13 +236,13 @@ export default function Edit({
           {attributes.innerClientIds.map((innerClientId, index) => {
             return (
               <button
-                key={index}
-                onClick={() => onChangeActive(index)}
-                id={`tab-${index + 1}_reiter-${index + 1}`}
+                key={innerClientId["position"]}
+                onClick={() => onChangeActive(innerClientId["position"])}
+                id={innerClientId["clientId"]}
                 type="button"
                 role="tab"
-                aria-selected={ariaSelected(index)}
-                aria-controls={`tab-${index + 1}_tabpanel_reiter-${index + 1}`}
+                aria-selected={ariaSelected(innerClientId["position"])}
+                aria-controls={`${innerClientId["position"]}`}
               >
                 <span className="focus" tabIndex={-1}>
                   {/* <TextControl
@@ -250,7 +251,7 @@ export default function Edit({
                     placeholder={__("Tab Title", "rrze-elements")}
                     className="elements-blocks-input-following-icon"
                   /> */}
-                  InnerProps Title & UID          
+                  {innerClientId["title"]}
                 </span>
               </button>
             );
