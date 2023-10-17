@@ -39,6 +39,10 @@
     "active": {
       "type": "string",
       "default": ""
+    },
+    "xray": {
+      "type": "boolean",
+      "default": false
     }
   },
   "providesContext": {
