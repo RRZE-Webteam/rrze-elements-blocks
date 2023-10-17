@@ -57,7 +57,7 @@ export default function Edit ({
             aria-controls={id}
             tabIndex={tabindex}
           >
-            <span className={focus} tabIndex={tabindex}>
+            <span key={id} className={focus} tabIndex={tabindex}>
               Text
             </span>
           </button>

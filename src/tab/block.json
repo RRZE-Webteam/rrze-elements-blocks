@@ -58,8 +58,8 @@
       "default": 0
     },
     "active": {
-      "type": "string",
-      "default": ""
+      "type": "boolean",
+      "default": true
     }
   },
   "providesContext": {

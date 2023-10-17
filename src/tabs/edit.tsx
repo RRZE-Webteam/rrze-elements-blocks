@@ -4,7 +4,7 @@ import {
   InnerBlocks,
   InspectorControls,
 } from "@wordpress/block-editor";
-import { TextControl } from "@wordpress/components";
+import { TextControl, Button } from "@wordpress/components";
 import { isEqual } from "lodash";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
@@ -200,23 +200,21 @@ export default function Edit({
     newTabs[index].clientId = innerClientIds[index];
     setAttributes({ tabs: newTabs });
 
-    onChangeActive(index);
+    onChangeActive(index, innerClientIds);
   };
 
   useEffect(() => {
     if (attributes.active === "" && innerClientIds[0] !== undefined) {
-      setAttributes({ active: innerClientIds[0] });
+      setAttributes({ active: innerClientIds[0].clientId });
     }
   }, [innerClientIds]);
 
-  const onChangeActive = (index: number) => {
-    let newTabs = [...tabs];
-    if (newTabs[index]) {
-      if (innerClientIds[index] !== undefined) {
-        setAttributes({ active: innerClientIds[index] });
-      }
+  const onChangeActive = (index: number, innerClientIds: { clientId: string, position: number }[]) => {
+    if (innerClientIds[index]?.clientId !== undefined) {
+      console.log(`Active in Tabs changed to ${innerClientIds[index].clientId}`);
+        setAttributes({ active: innerClientIds[index].clientId });
     }
-  };
+};
 
   const ariaSelected: any = (index: number) => {
     if (
@@ -235,9 +233,9 @@ export default function Edit({
         <div role="tablist" className="manual">
           {attributes.innerClientIds.map((innerClientId, index) => {
             return (
-              <button
-                key={innerClientId["position"]}
-                onClick={() => onChangeActive(innerClientId["position"])}
+              <Button
+                key={index}
+                onClick={() => onChangeActive(index, innerClientIds)}
                 id={innerClientId["clientId"]}
                 type="button"
                 role="tab"
@@ -253,7 +251,7 @@ export default function Edit({
                   /> */}
                   {innerClientId["title"]}
                 </span>
-              </button>
+              </Button>
             );
           })}
         </div>
