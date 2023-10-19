@@ -49,7 +49,8 @@
     "rrze-elements/tabs-color": "color",
     "rrze-elements/tabs-order": "innerClientIds",
     "rrze-elements/tabs": "tabs",
-    "rrze-elements/tabs-active": "active"
+    "rrze-elements/tabs-active": "active",
+    "rrze-elements/tabs-xray": "xray"
   },
   "supports": {
     "html": false

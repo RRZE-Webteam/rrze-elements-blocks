@@ -30,6 +30,7 @@ interface EditProps {
     svgString?: string;
     order?: number;
     active?: boolean;
+    xray?: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -87,6 +88,10 @@ export default function Edit({
     }
   }, [attributes.active, context["rrze-elements/tabs-active"]]);
 
+  useEffect(() => {
+    setAttributes({ xray: context["rrze-elements/tabs-xray"] });
+  }, [attributes.active, context["rrze-elements/tabs-xray"]]);
+
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
@@ -97,8 +102,7 @@ export default function Edit({
   };
 
   const { sameBlockCount, color, icon } = attributes;
-  let classNameValue = attributes.active ? "" : "is-hidden";
-  // classNameValue = "";
+  let classNameValue = (attributes.active || attributes.xray) ? "" : "is-hidden";
 
   return (
     <div {...props}>

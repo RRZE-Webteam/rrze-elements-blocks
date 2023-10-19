@@ -60,6 +60,10 @@
     "active": {
       "type": "boolean",
       "default": true
+    },
+    "xray": {
+      "type": "boolean",
+      "default": false
     }
   },
   "providesContext": {
@@ -68,7 +72,7 @@
   "supports": {
     "html": false
   },
-  "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs", "rrze-elements/tabs-active"],
+  "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs", "rrze-elements/tabs-active", "rrze-elements/tabs-xray"],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "script": "rrze-tabs",
