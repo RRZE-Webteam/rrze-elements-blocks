@@ -8,11 +8,6 @@
   "description": "Creates an tabs block.",
   "parent": ["rrze-elements/tabs"],
   "attributes": {
-    "message": {
-      "type": "string",
-      "source": "text",
-      "selector": "div"
-    },
     "sameBlockCount": {
       "type": "integer",
       "default": 0
@@ -35,11 +30,7 @@
     },
     "title": {
       "type": "string",
-      "default": "Enter your Title"
-    },
-    "color": {
-      "type": "string",
-      "default": ""
+      "default": "T"
     },
     "totalChildrenCount": {
       "type": "integer",
@@ -64,15 +55,16 @@
     "xray": {
       "type": "boolean",
       "default": false
+    },
+    "labelSettings": {
+      "type": "boolean",
+      "default": true
     }
-  },
-  "providesContext": {
-    "rrze-elements/tabs-color": "color"
   },
   "supports": {
     "html": false
   },
-  "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs", "rrze-elements/tabs-active", "rrze-elements/tabs-xray"],
+  "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs-active", "rrze-elements/tabs-xray"],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "script": "rrze-tabs",

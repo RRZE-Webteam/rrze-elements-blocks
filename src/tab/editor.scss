@@ -8,6 +8,61 @@ $colormaps : (
     tf: ("basis": #2F586E, "basis-kontrast": #fff,"heller": #d2d5d7, "hellste": #ebecee, "dunkler": #2F586E, "dunkler-kontrast": #fff, "dunkelste": #204251, "dunkelste-kontrast": #fff,  "ci-hell": #8C9FB1, "ci-hell-kontrast": #000, "ci-hell2": #D3DDE6, "ci-hell2-kontrast": #000),
 );
 
+
+.rrzeElementsBFakColorSelector.fau {
+	button {
+		background-color: #04316A;
+		color: #fff;
+	}
+}
+
+.rrzeElementsBFakColorSelector.central {
+	button {
+		background-color: #04316A;
+		color: #fff;
+	}
+}
+
+.rrzeElementsBFakColorSelector.phil {
+	button {
+		background-color: #fdb735;
+		color: #000;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.rw {
+	button {
+		background-color: #c50f3c;
+		color: #fff;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.med {
+	button {
+		background-color: #18b4f1;
+		color: #000;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.nat {
+	button {
+		background-color: #7bb725;
+		color: #000;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.tf {
+	button {
+		background-color: #8c9fb1;
+		color: #000;
+
+	}
+}
+
 .rrze-elements-tabs {
     margin-bottom: 1em;
     /*

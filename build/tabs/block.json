@@ -9,28 +9,15 @@
   "attributes": {
     "message": {
       "type": "string",
-      "source": "text",
-      "selector": "div"
+      "source": "text"
     },
     "expandAllLink": {
       "type": "boolean",
       "default": false
     },
-    "sameBlockCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "childrenCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "previousBlockIds": {
-      "type": "array",
-      "default": []
-    },
-    "tabs": {
-      "type": "array",
-      "default": []
+    "color": {
+      "type": "string",
+      "default": ""
     },
     "innerClientIds": {
       "type": "array",
@@ -46,9 +33,7 @@
     }
   },
   "providesContext": {
-    "rrze-elements/tabs-color": "color",
     "rrze-elements/tabs-order": "innerClientIds",
-    "rrze-elements/tabs": "tabs",
     "rrze-elements/tabs-active": "active",
     "rrze-elements/tabs-xray": "xray"
   },

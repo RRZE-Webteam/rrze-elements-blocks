@@ -21,6 +21,7 @@ import { useSelect } from "@wordpress/data";
 import { unseen } from "@wordpress/icons";
 
 import { XrayBar } from "./InspectorControls/Xray";
+import { ColorSwitcher, ColorSwitcherToolbar } from "./InspectorControls/ColorSwitcher";
 
 interface Tab {
   title?: string;
@@ -174,30 +175,6 @@ export default function Edit({
     }
   }, [innerClientIds, setAttributes]);
 
-  const syncTabsWithInnerBlocks = () => {
-    const newTabsOrder = innerClientIds.map((clientId: string) => {
-      const existingTab = tabs.find((tab) => tab.clientId === clientId);
-      if (existingTab) {
-        return existingTab;
-      }
-      return {
-        title: "",
-        clientId: clientId,
-      };
-    });
-
-    // Only update if there's a change
-    if (!isEqual(newTabsOrder, tabs)) {
-      setAttributes({ tabs: newTabsOrder });
-    }
-  };
-
-  useEffect(() => {
-    if (attributes.tabs.length !== 0) {
-      syncTabsWithInnerBlocks();
-    }
-  }, [innerClientIds, attributes.tabs]);
-
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string, index: number) => {
     let newTabs = [...tabs];
@@ -259,8 +236,9 @@ export default function Edit({
     <div {...props}>
       <BlockControls controls>
        <XrayBar attributes={{xray: attributes.xray}} setAttributes={setAttributes} />
+       <ColorSwitcherToolbar attributes={{color: attributes.color}} setAttributes={setAttributes} />
       </BlockControls>
-      <div className="rrze-elements-tabs primary" id="tabs-1">
+      <div className={`rrze-elements-tabs primary ${attributes.color}`} id="tabs-1">
         <div role="tablist" className="manual">
           {attributes.innerClientIds.map((innerClientId, index) => {
             return (
