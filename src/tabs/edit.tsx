@@ -250,12 +250,6 @@ export default function Edit({
                 aria-controls={`${innerClientId["position"]}`}
               >
                 <span className="focus" tabIndex={-1}>
-                  {/* <TextControl
-                    onChange={(text) => onChangeTitle(text, index)}
-                    value={attributes.tabs[index]?.title}
-                    placeholder={__("Tab Title", "rrze-elements")}
-                    className="elements-blocks-input-following-icon"
-                  /> */}
                   {innerClientId["title"]}
                 </span>
               </Button>

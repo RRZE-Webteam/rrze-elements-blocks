@@ -19,7 +19,11 @@ import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
-import { TitleToolbar, TitlePlaceholder } from "./InspectorControls/TitleSettings";
+import {
+  TitleToolbar,
+  TitleModal,
+  TitlePlaceholder,
+} from "./InspectorControls/TitleSettings";
 
 interface EditProps {
   attributes: {
@@ -78,6 +82,7 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
   const blockId = props["data-block"];
+
   const { title } = attributes;
 
   useEffect(() => {
@@ -106,6 +111,8 @@ export default function Edit({
     setAttributes({ xray: context["rrze-elements/tabs-xray"] });
   }, [attributes.active, context["rrze-elements/tabs-xray"]]);
 
+
+
   const { color, icon } = attributes;
   let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
 
@@ -113,10 +120,12 @@ export default function Edit({
 
   return (
     <div {...props}>
-      
       {/* @ts-ignore */}
       <BlockControls>
-        <TitleToolbar attributes={{labelSettings: attributes.labelSettings}} setAttributes={setAttributes} />
+        <TitleModal
+          attributes={{ labelSettings: attributes.labelSettings, title: attributes.title }}
+          setAttributes={setAttributes}
+        />
       </BlockControls>
       <div
         id={blockId}
@@ -126,7 +135,13 @@ export default function Edit({
       >
         <h2 className="print-only">{attributes.title}</h2>
         {attributes.labelSettings && (
-          <TitlePlaceholder attributes={{title: attributes.title, labelSettings: attributes.labelSettings}} setAttributes={setAttributes} />
+          <TitlePlaceholder
+            attributes={{
+              title: attributes.title,
+              labelSettings: attributes.labelSettings,
+            }}
+            setAttributes={setAttributes}
+          />
         )}
         <InnerBlocks
           template={[
