@@ -9,6 +9,7 @@ interface SaveProps {
       clientId: string;
       title: string;
       position: number;
+      svgString: string;
     }[];
   };
 }
@@ -47,6 +48,10 @@ export default function save({ attributes }: SaveProps) {
                 role="tab"
                 aria-selected={ariaSelected(index)}
                 aria-controls={`tab-${uid}_tabpanel_tab-label-${innerUid}`}
+                dangerouslySetInnerHTML={{
+                  __html: `<span class="focus" tabIndex=-1>
+                  ${innerClientId["svgString"]} ${innerClientId["title"]}</span>`,
+                }}
               >
                 <span className="focus" tabIndex={-1}>
                   {innerClientId["title"]}

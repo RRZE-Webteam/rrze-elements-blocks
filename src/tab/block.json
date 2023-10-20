@@ -14,7 +14,7 @@
     },
     "title": {
       "type": "string",
-      "default": "T"
+      "default": ""
     },
     "icon": {
       "type": "string",

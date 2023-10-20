@@ -164,7 +164,7 @@ const TitlePlaceholder = ({
       instructions="Enter your Tab title. You can change it later through the block settings inside the Toolbar."
       label={__("Tab Label Settings", "rrze-elements-b")}
     >
-      <div>
+      <div className="rrze-elements-tabs-modal-container">
         {attributes.icon && (
           <IconMarkComponent
             type={iconType}
@@ -174,6 +174,7 @@ const TitlePlaceholder = ({
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}
+            defaultClass="elements-tabs-icon-modal"
             setAttributes={setAttributes}
           />
         )}
@@ -181,7 +182,7 @@ const TitlePlaceholder = ({
           value={attributes.title}
           onChange={onChangeTitle}
           placeholder={__("Enter your Tab Label", "rrze-elements-b")}
-          className="elements-blocks-input-following-icon"
+          className="elements-tabs-icon-modal-input"
         />
         <Button variant="primary" onClick={onChangeLabelHint}>
           {__("Hide Label settings", "rrze-elements-b")}
