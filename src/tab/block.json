@@ -8,22 +8,6 @@
   "description": "Creates an tabs block.",
   "parent": ["rrze-elements/tabs"],
   "attributes": {
-    "sameBlockCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "childrenCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "previousBlockIds": {
-      "type": "array",
-      "default": []
-    },
-    "hstart": {
-      "type": "integer",
-      "default": 2
-    },
     "register": {
       "type": "boolean",
       "default": false
@@ -31,10 +15,6 @@
     "title": {
       "type": "string",
       "default": "T"
-    },
-    "totalChildrenCount": {
-      "type": "integer",
-      "default": 0
     },
     "icon": {
       "type": "string",
@@ -59,12 +39,20 @@
     "labelSettings": {
       "type": "boolean",
       "default": true
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "tabsUid": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
     "html": false
   },
-  "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs-active", "rrze-elements/tabs-xray"],
+  "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs-active", "rrze-elements/tabs-xray", "rrze-elements/tabs-uid"],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "script": "rrze-tabs",

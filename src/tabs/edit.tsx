@@ -38,6 +38,7 @@ interface EditProps {
     childrenCount?: number;
     previousBlockIds?: string[];
     previousBlockClients?: string[];
+    blockId?: string;
     innerClientIds?: {
       clientId: string;
       title: string;
@@ -46,17 +47,7 @@ interface EditProps {
     active?: string;
     xray?: boolean;
   };
-  setAttributes: (newAttributes: {
-    style?: string;
-    color?: string;
-    tabs?: Tab[];
-    childrenCount?: number;
-    previousBlockIds?: string[];
-    previousBlockClients?: string[];
-    innerClientIds?: string[];
-    active?: string;
-    xray?: boolean;
-  }) => void;
+  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
   context: { [key: string]: any };
   blockProps: any;
@@ -100,6 +91,7 @@ export default function Edit({
   context,
 }: EditProps) {
   const props = useBlockProps();
+  const blockId = props["data-block"];
   const { tabs } = attributes;
 
   const {
@@ -164,6 +156,12 @@ export default function Edit({
       setAttributes({ previousBlockIds: previousBlockClients });
     }
   }, [previousBlockClients, setAttributes, attributes.previousBlockIds]);
+
+  useEffect(() => {
+    if (attributes.blockId !== blockId) {
+      setAttributes({ blockId: blockId.slice(0, 10) });
+    }
+  }, [attributes.blockId, blockId]);
 
   useEffect(() => {
     if (innerClientIds.length === 0) {

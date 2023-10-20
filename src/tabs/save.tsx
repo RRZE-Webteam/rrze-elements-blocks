@@ -4,6 +4,7 @@ interface SaveProps {
   attributes: {
     color: string;
     active: string;
+    blockId: string;
     innerClientIds: {
       clientId: string;
       title: string;
@@ -27,22 +28,25 @@ export default function save({ attributes }: SaveProps) {
     }
     return false;
   };
+  
+  const uid= attributes.blockId;
 
   return (
     <div {...blockProps}>
       {" "}
       <>
-        <div className={`rrze-elements-tabs primary ${attributes.color}`} id="tabs-1">
+        <div className={`rrze-elements-tabs primary ${attributes.color}`} id={`tabs-${uid}`}>
           <div role="tablist" className="manual">
           {attributes.innerClientIds.map((innerClientId, index) => {
+            const innerUid = innerClientId["clientId"].slice(0, 10);
             return (
               <button
                 key={index}
-                id={innerClientId["clientId"]}
+                id={innerUid}
                 type="button"
                 role="tab"
                 aria-selected={ariaSelected(index)}
-                aria-controls={`${innerClientId["position"]}`}
+                aria-controls={`tab-${uid}_tabpanel_tab-label-${innerUid}`}
               >
                 <span className="focus" tabIndex={-1}>
                   {innerClientId["title"]}

@@ -30,12 +30,17 @@
     "xray": {
       "type": "boolean",
       "default": false
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
     }
   },
   "providesContext": {
     "rrze-elements/tabs-order": "innerClientIds",
     "rrze-elements/tabs-active": "active",
-    "rrze-elements/tabs-xray": "xray"
+    "rrze-elements/tabs-xray": "xray",
+    "rrze-elements/tabs-uid": "blockId"
   },
   "supports": {
     "html": false

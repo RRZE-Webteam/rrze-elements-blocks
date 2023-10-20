@@ -28,10 +28,11 @@ interface EditProps {
     title?: string;
     icon: string;
     svgString?: string;
-    order?: number;
     active?: boolean;
     xray?: boolean;
     labelSettings?: boolean;
+    blockId?: string;
+    tabsUid?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -78,6 +79,18 @@ export default function Edit({
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { title } = attributes;
+
+  useEffect(() => {
+    if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
+      setAttributes({ tabsUid: context["rrze-elements/tabs-uid"] });
+    }
+  }, [attributes.tabsUid, context["rrze-elements/tabs-uid"]]);
+
+  useEffect(() => {
+    if (attributes.blockId !== blockId) {
+      setAttributes({ blockId: blockId });
+    }
+  }, [attributes.blockId, blockId]);
 
   useEffect(() => {
     if (context["rrze-elements/tabs-active"] === "") {
