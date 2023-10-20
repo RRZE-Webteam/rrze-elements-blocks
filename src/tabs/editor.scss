@@ -132,6 +132,28 @@ $colormaps : (
             background: hsl(220deg 43% 99%);*/
         }
 
+        span.focus {
+            
+            display: inline;
+            margin: 2px;
+            padding: 4px 6px;
+
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: baseline;
+            
+    
+            &>svg {
+                padding: 0;
+                border-radius: 0 !important;
+                color: unset;
+                margin-right: .4em;
+                max-width: 1.5ch;
+                display: inline;
+            }
+        }
+
         /*&[aria-selected="false"] {
             border-bottom: 1px solid hsl(219deg 1% 72%);
         }*/
@@ -151,22 +173,22 @@ $colormaps : (
             top: 1px;
         }
         span.focus {
-            display: inline-block;
+            
+            display: inline;
             margin: 2px;
             padding: 4px 6px;
-            & > svg.rrze-elements-icon {
+            
+    
+            &>svg {
                 padding: 0;
                 border-radius: 0 !important;
                 color: unset;
                 margin-right: .4em;
-                max-width: 2em;
-            }
-            .tab-suffix {
-                display: inline-block;
-                margin-left: .4em;
-                font-weight: bold;
+                max-width: 1.5ch;
+                display: inline;
             }
         }
+    
     }
 
     [role="tabpanel"] {
@@ -186,6 +208,23 @@ $colormaps : (
         figure:first-child {
             margin-top: 0;
         }
+    }
+
+        // .elements-blocks-icon-selector-display {
+    //     max-width: 3em;
+    //     //background-color: #04316a;
+    //     padding: 0.5em;
+    //     //fill: #fff;
+    //     margin-right: 1em;
+    //     float: right;
+    //     clear: both;
+    // }
+
+    .elements-tabs-label-icon-inside-editor {
+        max-height: 1.5ch;
+        max-width: 1.5ch;
+        padding-right: 1ch;
+        width: 1.5ch;
     }
 
 }

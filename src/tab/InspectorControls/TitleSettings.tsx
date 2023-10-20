@@ -16,17 +16,22 @@ import {
 } from "@wordpress/components";
 
 import { useState } from "@wordpress/element";
+import { IconMarkComponent } from "./IconPicker";
 
 type TitleSettingsProps = {
   attributes: {
     xray?: boolean;
     labelSettings?: boolean;
+    icon?: string;
     title?: string;
+    directory?: string;
+    svgString?: string;
   };
   setAttributes: (newAttributes: {
     xray?: boolean;
     labelSettings?: boolean;
     title?: string;
+    icon?: string;
   }) => void;
 };
 
@@ -86,6 +91,8 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
     }
   };
 
+  const [iconType, iconName] = attributes.icon?.split(" ") || [];
+
   return (
     <>
       <ToolbarButton
@@ -103,11 +110,25 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
           onRequestClose={closeModal}
         >
           <div>
+            {attributes.icon && (
+              <IconMarkComponent
+                type={iconType}
+                iconName={iconName}
+                attributes={{
+                  directory: attributes.directory,
+                  icon: attributes.icon,
+                  svgString: attributes.svgString,
+                }}
+                setAttributes={setAttributes}
+              />
+            )}
             <TextControl
               value={attributes.title}
               onChange={onChangeTitle}
               placeholder={__("Enter your Tab Label", "rrze-elements-b")}
+              className="elements-blocks-input-following-icon"
             />
+
             <Button variant="primary" onClick={closeModal}>
               {__("Close", "rrze-elements-b")}
             </Button>
@@ -122,6 +143,8 @@ const TitlePlaceholder = ({
   attributes,
   setAttributes,
 }: TitleSettingsProps) => {
+  const [iconType, iconName] = attributes.icon?.split(" ") || [];
+
   const onChangeLabelHint = () => {
     setAttributes({ labelSettings: !attributes.labelSettings });
   };
@@ -142,10 +165,23 @@ const TitlePlaceholder = ({
       label={__("Tab Label Settings", "rrze-elements-b")}
     >
       <div>
+        {attributes.icon && (
+          <IconMarkComponent
+            type={iconType}
+            iconName={iconName}
+            attributes={{
+              directory: attributes.directory,
+              icon: attributes.icon,
+              svgString: attributes.svgString,
+            }}
+            setAttributes={setAttributes}
+          />
+        )}
         <TextControl
           value={attributes.title}
           onChange={onChangeTitle}
           placeholder={__("Enter your Tab Label", "rrze-elements-b")}
+          className="elements-blocks-input-following-icon"
         />
         <Button variant="primary" onClick={onChangeLabelHint}>
           {__("Hide Label settings", "rrze-elements-b")}

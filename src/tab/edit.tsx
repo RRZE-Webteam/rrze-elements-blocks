@@ -13,11 +13,15 @@ import {
   TextControl,
   Button,
   SVG,
+  Modal,
   Path,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
+import { symbol } from "@wordpress/icons";
+
+import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
 
 import {
   TitleToolbar,
@@ -37,6 +41,7 @@ interface EditProps {
     labelSettings?: boolean;
     blockId?: string;
     tabsUid?: string;
+    directory?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -84,6 +89,9 @@ export default function Edit({
   const blockId = props["data-block"];
 
   const { title } = attributes;
+  // Needed for Icon Selection
+  const [isOpen, setOpen] = useState(false);
+  const [pluginDir, setPluginDir] = useState("");
 
   useEffect(() => {
     if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
@@ -111,12 +119,34 @@ export default function Edit({
     setAttributes({ xray: context["rrze-elements/tabs-xray"] });
   }, [attributes.active, context["rrze-elements/tabs-xray"]]);
 
-
+  /**
+   * Fetch the plugin directory path via REST API and store it in the state.
+   */
+  useEffect(() => {
+    // Fetch plugin directory path via REST API – Needed for save.js
+    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPluginDir(data.directory);
+        setAttributes({ directory: data.directory });
+      })
+      .catch((error) => {
+        console.error("There was a problem fetching the directory:", error);
+      });
+  }, []);
 
   const { color, icon } = attributes;
   let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
 
-  console.log(attributes);
+  // Functions to handle the opening and closing of the icon picker modal.
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+  
 
   return (
     <div {...props}>
@@ -126,6 +156,44 @@ export default function Edit({
           attributes={{ labelSettings: attributes.labelSettings, title: attributes.title }}
           setAttributes={setAttributes}
         />
+        <ToolbarGroup>
+          {/* {isTextInString("Title", attributes.show) && (
+            <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
+          )} */}
+          <ToolbarItem>
+            {() => (
+              <>
+                <ToolbarButton
+                  icon={symbol}
+                  label={
+                    icon === ""
+                      ? __("Add an icon", "rrze-elements-b")
+                      : __("Change the icon", "rrze-elements-b")
+                  }
+                  onClick={openModal}
+                />
+                {isOpen && (
+                  <Modal
+                    title={__("Select an Icon", "rrze-elements-b")}
+                    onRequestClose={closeModal}
+                  >
+                    <IconPicker
+                      attributes={{
+                        directory: attributes.directory,
+                        icon: attributes.icon,
+                        svgString: attributes.svgString,
+                      }}
+                      setAttributes={setAttributes}
+                    />
+                    <Button variant="primary" onClick={closeModal}>
+                      {__("Close", "rrze-elements-b")}
+                    </Button>
+                  </Modal>
+                )}
+              </>
+            )}
+          </ToolbarItem>
+        </ToolbarGroup>
       </BlockControls>
       <div
         id={blockId}
@@ -139,6 +207,9 @@ export default function Edit({
             attributes={{
               title: attributes.title,
               labelSettings: attributes.labelSettings,
+              directory: attributes.directory,
+              svgString: attributes.svgString,
+              icon: attributes.icon
             }}
             setAttributes={setAttributes}
           />

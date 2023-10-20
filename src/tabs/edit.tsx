@@ -21,7 +21,12 @@ import { useSelect } from "@wordpress/data";
 import { unseen } from "@wordpress/icons";
 
 import { XrayBar } from "./InspectorControls/Xray";
-import { ColorSwitcher, ColorSwitcherToolbar } from "./InspectorControls/ColorSwitcher";
+import {
+  ColorSwitcher,
+  ColorSwitcherToolbar,
+} from "./InspectorControls/ColorSwitcher";
+
+import { IconMarkComponent } from "../tab/InspectorControls/IconPicker";
 
 interface Tab {
   title?: string;
@@ -43,6 +48,9 @@ interface EditProps {
       clientId: string;
       title: string;
       position: number;
+      directory: string;
+      icon: string;
+      svgString: string;
     }[];
     active?: string;
     xray?: boolean;
@@ -59,6 +67,9 @@ type WPBlock = {
   innerBlocks: WPBlock[];
   name?: string;
   attributes?: {
+    icon: any;
+    svgString: any;
+    directory: any;
     childrenCount?: number;
     title?: string;
   };
@@ -125,6 +136,9 @@ export default function Edit({
           clientId: block.clientId,
           title: block.attributes?.title,
           position: counter++,
+          directory: block.attributes?.directory,
+          icon: block.attributes?.icon,
+          svgString: block.attributes?.svgString,
         }));
         const allBlocks = getAllBlocksRecursively(topLevelBlocks);
 
@@ -233,12 +247,23 @@ export default function Edit({
   return (
     <div {...props}>
       <BlockControls controls>
-       <XrayBar attributes={{xray: attributes.xray}} setAttributes={setAttributes} />
-       <ColorSwitcherToolbar attributes={{color: attributes.color}} setAttributes={setAttributes} />
+        <XrayBar
+          attributes={{ xray: attributes.xray }}
+          setAttributes={setAttributes}
+        />
+        <ColorSwitcherToolbar
+          attributes={{ color: attributes.color }}
+          setAttributes={setAttributes}
+        />
       </BlockControls>
-      <div className={`rrze-elements-tabs primary ${attributes.color}`} id="tabs-1">
+      <div
+        className={`rrze-elements-tabs primary ${attributes.color}`}
+        id="tabs-1"
+      >
         <div role="tablist" className="manual">
           {attributes.innerClientIds.map((innerClientId, index) => {
+            const [iconType, iconName] =
+              innerClientId["icon"]?.split(" ") || [];
             return (
               <Button
                 key={index}
@@ -250,18 +275,28 @@ export default function Edit({
                 aria-controls={`${innerClientId["position"]}`}
               >
                 <span className="focus" tabIndex={-1}>
-                  {innerClientId["title"]}
+                  {innerClientId["icon"] && (
+                    <IconMarkComponent
+                      type={iconType}
+                      iconName={iconName}
+                      attributes={{
+                        directory: innerClientId["directory"],
+                        icon: innerClientId["icon"],
+                        svgString: innerClientId["svgString"],
+                      }}
+                      defaultClass="elements-tabs-label-icon-inside-editor"
+                    />
+                  )}{innerClientId["title"]}
                 </span>
               </Button>
             );
           })}
         </div>
         <InnerBlocks
-        //@ts-ignore
-        allowedBlocks={["rrze-elements/tab"]}
-        template={[["rrze-elements/tab"], ["rrze-elements/tab"]]}
-      />
-
+          //@ts-ignore
+          allowedBlocks={["rrze-elements/tab"]}
+          template={[["rrze-elements/tab"], ["rrze-elements/tab"]]}
+        />
       </div>
     </div>
   );
