@@ -17,8 +17,10 @@ import {
 import { isEqual } from "lodash";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
+import { useSelect, useDispatch } from "@wordpress/data";
 import { unseen } from "@wordpress/icons";
+
+import { createBlock } from "@wordpress/blocks";
 
 import { XrayBar } from "./InspectorControls/Xray";
 import {
@@ -104,6 +106,8 @@ export default function Edit({
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { tabs } = attributes;
+
+  const { insertBlock } = useDispatch("core/block-editor");
 
   const {
     selectedBlock,
@@ -222,6 +226,11 @@ export default function Edit({
     }
   }, [innerClientIds, attributes.active]);
 
+  const addNewTab = () => {
+    const block = createBlock("rrze-elements/tab");
+    insertBlock(block, undefined, clientId);
+  };
+
   const onChangeActive = (
     index: number,
     innerClientIds: { clientId: string; position: number }[]
@@ -286,11 +295,16 @@ export default function Edit({
                       }}
                       defaultClass="elements-tabs-label-icon-inside-editor"
                     />
-                  )}{innerClientId["title"]}
+                  )}
+                  {innerClientId["title"]}
                 </span>
               </Button>
             );
           })}
+          <Button onClick={addNewTab} className="add-tab-button" type="button"
+                role="tab">
+            {__("Add new Tab", "rrze-elements-b")}
+          </Button>
         </div>
         <InnerBlocks
           //@ts-ignore
