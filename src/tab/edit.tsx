@@ -157,9 +157,6 @@ export default function Edit({
           setAttributes={setAttributes}
         />
         <ToolbarGroup>
-          {/* {isTextInString("Title", attributes.show) && (
-            <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
-          )} */}
           <ToolbarItem>
             {() => (
               <>
@@ -195,6 +192,7 @@ export default function Edit({
           </ToolbarItem>
         </ToolbarGroup>
       </BlockControls>
+      
       <div
         id={blockId}
         role="tabpanel"

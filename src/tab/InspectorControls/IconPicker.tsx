@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { ComboboxControl, Button } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
-import fontawesomeIconNames from "../../collapse/InspectorControls/fontawesomeIconNames.json";
+import fontawesomeIconNames from "./fontawesomeIconNames.json";
 import { memo, cloneElement } from "react";
 
 interface BlockAttributes {
