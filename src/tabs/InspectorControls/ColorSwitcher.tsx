@@ -28,14 +28,17 @@ const ColorSwitcher = ({ attributes, setAttributes }: ColorSwitcherProps) => {
   const { color } = attributes;
   const onChangeColor = (newColor: string) => {
     const colorEntry = colorData.find((entry) => entry.color === newColor);
-    setAttributes({ color: colorEntry.slug });
+    if (colorEntry) {
+      setAttributes({ color: colorEntry.slug });
+    } 
   };
+  
 
   return (
     <PanelBody title={__("Color Settings", "rrze-elements-b")}>
       <ColorPalette
         colors={colorData}
-        value={colorData.find((entry) => entry.slug === color).color}
+        value={colorData.find((entry) => entry.slug === color)?.color}
         onChange={onChangeColor}
         disableCustomColors={true}
         clearable={false}
@@ -48,8 +51,11 @@ const ColorSwitcherToolbar = ({ attributes, setAttributes }: ColorSwitcherProps)
   const { color } = attributes;
   const setColor = (newColor: string) => {
     const colorEntry = colorData.find((entry) => entry.color === newColor);
-    setAttributes({ color: colorEntry.slug });
+    if (colorEntry) {
+      setAttributes({ color: colorEntry.slug });
+    }
   };
+  
 
   return (
     <ToolbarGroup>

@@ -23,6 +23,7 @@ import { unseen } from "@wordpress/icons";
 import { createBlock } from "@wordpress/blocks";
 
 import { XrayBar } from "./InspectorControls/Xray";
+import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   ColorSwitcher,
   ColorSwitcherToolbar,
@@ -255,6 +256,10 @@ export default function Edit({
 
   return (
     <div {...props}>
+      <CustomInspectorControls 
+        attributes={{ xray: attributes.xray, color: attributes.color }}
+        setAttributes={setAttributes}
+      />
       <BlockControls controls>
         <XrayBar
           attributes={{ xray: attributes.xray }}
