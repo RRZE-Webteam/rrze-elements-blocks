@@ -66,7 +66,9 @@ const ColorSwitcher = ({ attributes, setAttributes }: ColorSwitcherProps) => {
     } else {
       colorEntry = colorData.find((entry) => entry.color === newColor);
     }
-    setAttributes({ color: colorEntry.slug });
+    if (colorEntry) {
+      setAttributes({ color: colorEntry.slug });
+    } 
   };
 
   return (
@@ -90,7 +92,9 @@ const ColorSwitcherToolbar = ({
   const { color } = attributes;
   const setColor = (newColor: string) => {
     const colorEntry = colorData.find((entry) => entry.color === newColor);
-    setAttributes({ color: colorEntry.slug });
+    if (colorEntry) {
+      setAttributes({ color: colorEntry.slug });
+    } 
   };
 
   return (
