@@ -12,6 +12,8 @@ import {
   Button,
   TextControl,
   Modal,
+  __experimentalSpacer as Spacer,
+  __experimentalText as Text,
   Icon,
 } from "@wordpress/components";
 
@@ -192,4 +194,35 @@ const TitlePlaceholder = ({
   );
 };
 
-export { TitleModal, TitleToolbar, TitlePlaceholder };
+const TitleInspectorControls = ({
+  attributes,
+  setAttributes,
+}: TitleSettingsProps) => {
+  const onChangeTitle = (newText: string) => {
+    if (newText === "") {
+      setAttributes({ title: " " });
+    } else {
+      setAttributes({ title: newText });
+    }
+  };
+
+  return (
+    <PanelBody
+      title={__("Label settings", "rrze-elements-b")}
+      initialOpen={true}
+    >
+      <Spacer>
+        <Text>{__("Enter your Tab Label.", "rrze-elements-b")}</Text>
+      </Spacer>
+
+      <TextControl
+        value={attributes.title}
+        onChange={onChangeTitle}
+        placeholder={__("Enter your Tab Label", "rrze-elements-b")}
+        className="elements-blocks-input-following-icon"
+      />
+    </PanelBody>
+  );
+};
+
+export { TitleModal, TitleToolbar, TitlePlaceholder, TitleInspectorControls};

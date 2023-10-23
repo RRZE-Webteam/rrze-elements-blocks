@@ -22,6 +22,7 @@ import { useSelect } from "@wordpress/data";
 import { symbol } from "@wordpress/icons";
 
 import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
+import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 
 import {
   TitleToolbar,
@@ -150,6 +151,7 @@ export default function Edit({
 
   return (
     <div {...props}>
+      <CustomInspectorControls  attributes={{ title: attributes.title, icon: attributes.icon, directory: attributes.directory, svgString: attributes.svgString }} setAttributes={setAttributes} />
       {/* @ts-ignore */}
       <BlockControls>
         <TitleModal

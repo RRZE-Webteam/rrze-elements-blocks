@@ -109,6 +109,7 @@ export default function Edit({
   const { tabs } = attributes;
 
   const { insertBlock } = useDispatch("core/block-editor");
+  const { selectBlock } = useDispatch('core/block-editor');
 
   const {
     selectedBlock,
@@ -238,6 +239,7 @@ export default function Edit({
   ) => {
     if (innerClientIds[index]?.clientId !== undefined) {
       setAttributes({ active: innerClientIds[index].clientId });
+      selectBlock(innerClientIds[index].clientId);
     }
   };
 
