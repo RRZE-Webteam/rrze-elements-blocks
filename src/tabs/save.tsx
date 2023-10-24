@@ -14,6 +14,12 @@ interface SaveProps {
   };
 }
 
+/**
+ * Save Component for the Tabs WordPress block.
+ *
+ * This component serves as the Save function for the Tabs WordPress block.
+ * It controls the block's display inside the frontend using data stored as attributes.
+ */
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
   const uid = attributes.blockId;
