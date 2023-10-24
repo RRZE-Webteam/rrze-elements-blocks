@@ -1,43 +1,22 @@
-import {
-  useBlockProps,
-  RichText,
-  InnerBlocks,
-  InspectorControls,
-  BlockControls,
-} from "@wordpress/block-editor";
-import {
-  TextControl,
-  Button,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarButton,
-  SVG,
-  Path,
-} from "@wordpress/components";
-import { isEqual } from "lodash";
+// WordPress Imports
+import { useBlockProps, InnerBlocks, BlockControls } from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
-import { unseen } from "@wordpress/icons";
-
 import { createBlock } from "@wordpress/blocks";
 
+// Other Imports
+import { isEqual } from "lodash";
+
+// Custom Components
 import { XrayBar } from "./InspectorControls/Xray";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
-import {
-  ColorSwitcher,
-  ColorSwitcherToolbar,
-} from "./InspectorControls/ColorSwitcher";
-
+import { ColorSwitcherToolbar } from "./InspectorControls/ColorSwitcher";
 import { IconMarkComponent } from "../tab/InspectorControls/IconPicker";
 
-interface Tab {
-  title?: string;
-  index?: number;
-  active?: string;
-  clientId?: string;
-}
-
+// TypeScript interfaces for better type checking
+interface Tab { title?: string; index?: number; active?: string; clientId?: string; }
 interface EditProps {
   attributes: {
     style?: string;
@@ -79,24 +58,13 @@ type WPBlock = {
   clientId?: string;
 };
 
+
 /**
- * Retrieve all blocks, including nested ones.
+ * Edit Component for the Tabs WordPress block.
  *
- * @param {Array} blocks - List of top-level blocks.
- * @returns {Array} - List of all blocks, including nested ones.
+ * This component serves as the Edit function for the Tabs WordPress block.
+ * It controls the block's behavior in the WordPress editor.
  */
-const getAllBlocksRecursively = (blocks: WPBlock[]) => {
-  let result = [...blocks];
-
-  blocks.forEach((block) => {
-    if (block.innerBlocks && block.innerBlocks.length > 0) {
-      result = [...result, ...getAllBlocksRecursively(block.innerBlocks)];
-    }
-  });
-
-  return result;
-};
-
 export default function Edit({
   blockProps,
   attributes,
@@ -104,6 +72,7 @@ export default function Edit({
   clientId,
   context,
 }: EditProps) {
+  // WordPress hooks and other logic here.
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { tabs } = attributes;
@@ -111,17 +80,11 @@ export default function Edit({
   const { insertBlock } = useDispatch("core/block-editor");
   const { selectBlock } = useDispatch('core/block-editor');
 
+  // useEffects for syncing component state and attributes
   const {
-    selectedBlock,
-    numberChildren,
-    blockIndex,
-    previousBlockClients,
-    innerClientIds,
+    innerClientIds
   } =
-    /**
-     * Get relevant data from the block editor to assist with the numbering
-     * of the collapsibles.
-     */
+    // retrieve the inner client ids of the current block
     useSelect(
       (select) => {
         const { getBlock, getBlocks, getBlockIndex } = select(
@@ -132,10 +95,6 @@ export default function Edit({
           getBlockIndex: Function;
         };
         const selectedBlockClientId = clientId;
-        let numberChildren = getBlocks(selectedBlockClientId).length;
-
-        const blockIndex = getBlockIndex(selectedBlockClientId);
-        const topLevelBlocks = getBlocks();
         const innerBlocks = getBlocks(selectedBlockClientId);
         let counter = 0;
         const innerClientIds = innerBlocks.map((block: WPBlock) => ({
@@ -146,43 +105,26 @@ export default function Edit({
           icon: block.attributes?.icon,
           svgString: block.attributes?.svgString,
         }));
-        const allBlocks = getAllBlocksRecursively(topLevelBlocks);
-
-        const CollapsiblesBlockClientIds = allBlocks
-          .filter((block: WPBlock) => block.name === "rrze-elements/tabs")
-          .map((block: WPBlock) => block.clientId);
-
-        const currentBlockIndex = CollapsiblesBlockClientIds.indexOf(
-          selectedBlockClientId
-        );
-        const previousBlockClients = CollapsiblesBlockClientIds.slice(
-          0,
-          currentBlockIndex
-        );
 
         return {
-          selectedBlock: getBlock(selectedBlockClientId),
-          numberChildren,
-          blockIndex,
-          previousBlockClients,
           innerClientIds,
         };
       },
       [clientId]
     );
 
-  useEffect(() => {
-    if (!isEqual(attributes.previousBlockIds, previousBlockClients)) {
-      setAttributes({ previousBlockIds: previousBlockClients });
-    }
-  }, [previousBlockClients, setAttributes, attributes.previousBlockIds]);
-
+  /**
+   * Update the blockId attribute whenever it changes
+   */
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       setAttributes({ blockId: blockId.slice(0, 10) });
     }
   }, [attributes.blockId, blockId]);
 
+  /**
+   * Syncs the innerClientIds attribute with the component state
+   */
   useEffect(() => {
     if (innerClientIds.length === 0) {
       return;
@@ -193,19 +135,9 @@ export default function Edit({
     }
   }, [innerClientIds, setAttributes]);
 
-  // Function to handle the change of the title attribute.
-  const onChangeTitle = (newText: string, index: number) => {
-    let newTabs = [...tabs];
-
-    if (!newTabs[index]) {
-      newTabs[index] = {};
-    }
-
-    newTabs[index].title = newText;
-    newTabs[index].clientId = innerClientIds[index];
-    setAttributes({ tabs: newTabs });
-  };
-
+  /**
+   * Handles logic to set the active tab.
+   */
   useEffect(() => {
     if (
       attributes.active === "" &&
@@ -228,11 +160,20 @@ export default function Edit({
     }
   }, [innerClientIds, attributes.active]);
 
+  /**
+   * Adds a new "rrze-elements/tab" block as a child of this block.
+   */
   const addNewTab = () => {
     const block = createBlock("rrze-elements/tab");
     insertBlock(block, undefined, clientId);
   };
 
+  /**
+   * Changes the currently active tab.
+   * 
+   * @param index - The index of the tab to activate.
+   * @param innerClientIds - List of inner block client IDs.
+   */
   const onChangeActive = (
     index: number,
     innerClientIds: { clientId: string; position: number }[]
@@ -243,6 +184,11 @@ export default function Edit({
     }
   };
 
+  /**
+   * Function to determine if a tab is currently selected.
+   * @param {number} index - The index of the tab.
+   * @returns {boolean} - Whether the tab is selected.
+   */
   const ariaSelected: any = (index: number) => {
     if (innerClientIds[index] === undefined) {
       return true;
@@ -256,6 +202,7 @@ export default function Edit({
     return false;
   };
 
+  // Main return statement for the Edit function component.
   return (
     <div {...props}>
       <CustomInspectorControls 
