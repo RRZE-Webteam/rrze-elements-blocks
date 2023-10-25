@@ -1,35 +1,49 @@
+// Imports from WordPress libraries
 import {
   useBlockProps,
-  RichText,
   InnerBlocks,
-  InspectorControls,
   BlockControls,
 } from "@wordpress/block-editor";
 import {
   ToolbarItem,
   ToolbarGroup,
   ToolbarButton,
-  Placeholder,
-  TextControl,
   Button,
-  SVG,
   Modal,
-  Path,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
 import { symbol } from "@wordpress/icons";
 
-import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
+// Custom components for enhancing block controls.
+import { IconPicker } from "./InspectorControls/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
-
 import {
-  TitleToolbar,
   TitleModal,
   TitlePlaceholder,
 } from "./InspectorControls/TitleSettings";
 
+/**
+ * Interface representing the properties for the Edit component.
+ * 
+ * @interface EditProps
+ * @property {Object} attributes - The block attributes.
+ * @property {string} [attributes.style] - The style of the block.
+ * @property {string} [attributes.color] - The color of the block.
+ * @property {string} [attributes.title] - The title of the block.
+ * @property {string} attributes.icon - The icon of the block.
+ * @property {string} [attributes.svgString] - SVG string for the icon.
+ * @property {boolean} [attributes.active] - Whether the block is active.
+ * @property {boolean} [attributes.xray] - Whether x-ray is enabled for the block.
+ * @property {boolean} [attributes.labelSettings] - Whether label settings are enabled.
+ * @property {string} [attributes.blockId] - The block ID.
+ * @property {string} [attributes.tabsUid] - The UID for tabs.
+ * @property {string} [attributes.directory] - Directory path for assets.
+ * @property {Function} setAttributes - Function to set new attributes.
+ * @property {string} clientId - Unique client ID of the block.
+ * @property {Object} context - Context provided by block context.
+ * @property {any} blockProps - Additional block properties.
+ */
 interface EditProps {
   attributes: {
     style?: string;
@@ -62,23 +76,13 @@ type WPBlock = {
 };
 
 /**
- * Retrieve all blocks, including nested ones.
+ * Edit component for the Tab block.
  *
- * @param {Array} blocks - List of top-level blocks.
- * @returns {Array} - List of all blocks, including nested ones.
+ * Provides controls for customizing the Tab-block and renders the block inside the editor.
+ *
+ * @param {EditProps} props - The properties passed to the component.
+ * @returns {JSX.Element} The JSX representation of the component.
  */
-const getAllBlocksRecursively = (blocks: WPBlock[]) => {
-  let result = [...blocks];
-
-  blocks.forEach((block) => {
-    if (block.innerBlocks && block.innerBlocks.length > 0) {
-      result = [...result, ...getAllBlocksRecursively(block.innerBlocks)];
-    }
-  });
-
-  return result;
-};
-
 export default function Edit({
   blockProps,
   attributes,
@@ -88,24 +92,37 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
   const blockId = props["data-block"];
+  const { icon } = attributes;
 
-  const { title } = attributes;
-  // Needed for Icon Selection
+  // Hide the block in the editor if it is not active or xray is enabled.
+  let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
+
+  // isOpen state is used to control the opening and closing of the icon picker modal  
   const [isOpen, setOpen] = useState(false);
+  // pluginDir holds the plugin directory path fetched via REST API
   const [pluginDir, setPluginDir] = useState("");
 
+  // Sync the block's 'tabsUid' attribute with the parent block's context.  
   useEffect(() => {
     if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
       setAttributes({ tabsUid: context["rrze-elements/tabs-uid"] });
     }
   }, [attributes.tabsUid, context["rrze-elements/tabs-uid"]]);
 
+  /**
+   * Sync the block's 'blockId' attribute with the block's ID.
+   * This is needed for the tab navigation.
+   */
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       setAttributes({ blockId: blockId });
     }
   }, [attributes.blockId, blockId]);
 
+  /**
+   * Sync the block's 'active' attribute with the parent block's context.
+   * This is needed for the tab navigation to make active tabs visible.
+   */
   useEffect(() => {
     if (context["rrze-elements/tabs-active"] === "") {
       setAttributes({ active: true });
@@ -116,12 +133,16 @@ export default function Edit({
     }
   }, [attributes.active, context["rrze-elements/tabs-active"]]);
 
+  /**
+   * Sync the block's 'xray' attribute with the parent block's context.
+   * The xray attribute is used to show all tabs in the editor.
+   */
   useEffect(() => {
     setAttributes({ xray: context["rrze-elements/tabs-xray"] });
   }, [attributes.active, context["rrze-elements/tabs-xray"]]);
 
   /**
-   * Fetch the plugin directory path via REST API and store it in the state.
+   * Fetch the plugin directory path via REST API and store it inside the state.
    */
   useEffect(() => {
     // Fetch plugin directory path via REST API – Needed for save.js
@@ -141,21 +162,29 @@ export default function Edit({
       });
   }, []);
 
-  const { color, icon } = attributes;
-  let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
-
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
-  
+
 
   return (
     <div {...props}>
-      <CustomInspectorControls  attributes={{ title: attributes.title, icon: attributes.icon, directory: attributes.directory, svgString: attributes.svgString }} setAttributes={setAttributes} />
+      <CustomInspectorControls
+        attributes={{
+          title: attributes.title,
+          icon: attributes.icon,
+          directory: attributes.directory,
+          svgString: attributes.svgString,
+        }}
+        setAttributes={setAttributes}
+      />
       {/* @ts-ignore */}
       <BlockControls>
         <TitleModal
-          attributes={{ labelSettings: attributes.labelSettings, title: attributes.title }}
+          attributes={{
+            labelSettings: attributes.labelSettings,
+            title: attributes.title,
+          }}
           setAttributes={setAttributes}
         />
         <ToolbarGroup>
@@ -194,7 +223,7 @@ export default function Edit({
           </ToolbarItem>
         </ToolbarGroup>
       </BlockControls>
-      
+
       <div
         id={blockId}
         role="tabpanel"
@@ -209,7 +238,7 @@ export default function Edit({
               labelSettings: attributes.labelSettings,
               directory: attributes.directory,
               svgString: attributes.svgString,
-              icon: attributes.icon
+              icon: attributes.icon,
             }}
             setAttributes={setAttributes}
           />

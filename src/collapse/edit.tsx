@@ -48,7 +48,7 @@ interface SaveProps {
   };
   setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
   clientId: string;
-  context: { [key: string]: any }; // You might want to further specify the shape of context if known
+  context: { [key: string]: any }; 
 }
 
 type WPBlock = {

@@ -60,10 +60,12 @@ type WPBlock = {
 
 
 /**
- * Edit Component for the Tabs WordPress block.
+ * Edit component for the Gutenberg block.
  *
- * This component serves as the Edit function for the Tabs WordPress block.
- * It controls the block's behavior in the WordPress editor.
+ * Provides controls for customizing the block and renders the block inside the editor.
+ *
+ * @param {EditProps} props - The properties passed to the component.
+ * @returns {JSX.Element} The JSX representation of the component.
  */
 export default function Edit({
   blockProps,

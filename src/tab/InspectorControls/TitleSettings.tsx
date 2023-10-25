@@ -1,9 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import {
-  ColorPalette,
   PanelBody,
-  ToolbarDropdownMenu,
-  ToolbarItem,
   ToolbarGroup,
   ToolbarButton,
   SVG,
@@ -20,6 +17,15 @@ import {
 import { useState } from "@wordpress/element";
 import { IconMarkComponent } from "./IconPicker";
 
+/**
+ * Type definition for TitleSettingsProps
+ * @typedef {Object} TitleSettingsProps
+ * @property {Object} attributes - The attributes for title settings
+ * @property {boolean} attributes.xray - The xray setting
+ * @property {boolean} attributes.labelSettings - The label settings flag
+ * @property {string} attributes.title - The title text
+ * @property {Function} setAttributes - Function to set new attributes
+ */
 type TitleSettingsProps = {
   attributes: {
     xray?: boolean;
@@ -44,6 +50,12 @@ const labelIcon = (
   </SVG>
 );
 
+/**
+ * A toolbar component to manage title settings.
+ *
+ * @param {TitleSettingsProps} props - Properties passed to the component
+ * @returns {JSX.Element} JSX element
+ */
 const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
   const { labelSettings } = attributes;
 
@@ -77,6 +89,13 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
     </ToolbarGroup>
   );
 };
+
+/**
+ * A modal component to manage title settings.
+ *
+ * @param {TitleSettingsProps} props - Properties passed to the component
+ * @returns {JSX.Element} JSX element
+ */
 
 const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
   const [isOpen, setOpen] = useState(false);
@@ -141,6 +160,12 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
   );
 };
 
+/**
+ * A placeholder component for title settings.
+ *
+ * @param {TitleSettingsProps} props - Properties passed to the component
+ * @returns {JSX.Element} JSX element
+ */
 const TitlePlaceholder = ({
   attributes,
   setAttributes,
@@ -194,6 +219,12 @@ const TitlePlaceholder = ({
   );
 };
 
+/**
+ * Inspector controls for title settings.
+ *
+ * @param {TitleSettingsProps} props - Properties passed to the component
+ * @returns {JSX.Element} JSX element
+ */
 const TitleInspectorControls = ({
   attributes,
   setAttributes,
@@ -225,4 +256,4 @@ const TitleInspectorControls = ({
   );
 };
 
-export { TitleModal, TitleToolbar, TitlePlaceholder, TitleInspectorControls};
+export { TitleModal, TitleToolbar, TitlePlaceholder, TitleInspectorControls };
