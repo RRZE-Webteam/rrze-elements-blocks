@@ -16,7 +16,7 @@ export default function save({ attributes }) {
         </div> */}
         <div 
         className={`alert clearfix clear ${attributes.style ? `alert-${attributes.style}` : ''}`}
-        style={attributes.style ? {} : {backgroundColor: attributes.color}}
+        style={attributes.style ? {} : {backgroundColor: attributes.color, color: attributes.textColor, border: `1px solid ${attributes.borderColor}`}}
     >
         <InnerBlocks.Content />
       </div>

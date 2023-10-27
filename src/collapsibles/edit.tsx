@@ -5,17 +5,10 @@ import {
   InspectorControls,
   BlockControls,
 } from "@wordpress/block-editor";
-import { PanelBody, Toolbar, ToolbarDropdownMenu } from "@wordpress/components";
+import { PanelBody } from "@wordpress/components";
 import { isEqual } from "lodash";
 import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
-import {
-  headingLevel2,
-  headingLevel3,
-  headingLevel4,
-  headingLevel5,
-  headingLevel6,
-} from "@wordpress/icons";
 import ExpandAllLink from "./InspectorControls/ExpandAllLink";
 import {
   HeadingSelector,

@@ -1,6 +1,6 @@
 // WordPress Imports
 import { useBlockProps, InnerBlocks, BlockControls } from "@wordpress/block-editor";
-import { Button } from "@wordpress/components";
+import { Button, SVG, Path } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
@@ -100,7 +100,7 @@ export default function Edit({
         const innerBlocks = getBlocks(selectedBlockClientId);
         let counter = 0;
         const innerClientIds = innerBlocks.map((block: WPBlock) => ({
-          clientId: block.clientId,
+          clientId: block?.clientId,
           title: block.attributes?.title,
           position: counter++,
           directory: block.attributes?.directory,
@@ -168,6 +168,8 @@ export default function Edit({
   const addNewTab = () => {
     const block = createBlock("rrze-elements/tab");
     insertBlock(block, undefined, clientId);
+    selectBlock(block.clientId);
+    setAttributes({ active: block.clientId });
   };
 
   /**
@@ -257,9 +259,8 @@ export default function Edit({
               </Button>
             );
           })}
-          <Button onClick={addNewTab} className="add-tab-button" type="button"
-                role="tab">
-            {__("Add new Tab", "rrze-elements-b")}
+          <Button onClick={addNewTab} className="add-tab-button" type="button" role="tab">
+            <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><Path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></Path></SVG>
           </Button>
         </div>
         <InnerBlocks
