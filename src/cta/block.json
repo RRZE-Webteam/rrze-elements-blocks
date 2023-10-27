@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "rrze-elements/cta",
+	"version": "1.0.0",
+	"title": "Call to action",
+	"category": "design",
+	"description": "Creates an Call to action box.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "rrze-elementsb",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
