@@ -8,8 +8,9 @@ import {
   ToolbarItem,
   ToolbarGroup,
 } from "@wordpress/components";
-import { color as colorIcon } from "@wordpress/icons";
 import Color from "color";
+import { color as colorIcon } from "@wordpress/icons";
+
 
 // Define TypeScript interface for component props
 type ColorSwitcherProps = {
@@ -19,29 +20,32 @@ type ColorSwitcherProps = {
     style?: string;
     borderColor?: string;
   };
-  setAttributes: (newAttributes: { color?: string; style?: string; textColor?: string; borderColor?: string; }) => void;
+  setAttributes: (newAttributes: Partial<ColorSwitcherProps['attributes']>) => void;
 };
-
-interface CustomColor extends Color {
-  luminance(): number;
-}
-
 
 // Update attributes based on color contrast
 const updateColorAttributes = (
   bgColor: string,
-  setAttributes: (newAttributes: { textColor: string; }) => void
-) => {
+  setAttributes: ColorSwitcherProps['setAttributes']
+): void => {
+  try {
+    console.log(bgColor);
+    if (bgColor){
+      const parsedColor = Color(bgColor).isDark();
+      console.log(parsedColor);
 
-  const blackLum = "";
-  const whiteLum = "#ffffff";
+      const whiteColor = "#ffffff";
 
-  const isDark = Color(bgColor).isDark();
+      // Determine text color based on the luminosity of the background color
+      const newFontColor = parsedColor ? whiteColor : "";
 
-  const newFontColor = isDark ? whiteLum : blackLum;
-  setAttributes({ textColor: newFontColor });
+      // Update text color attribute
+      setAttributes({ textColor: newFontColor });
+    }
+  } catch (error) {
+    console.error("Invalid color string provided to updateColorAttributes:", error);
+  }
 };
-
 
 // Data for color options
 const colorData = [

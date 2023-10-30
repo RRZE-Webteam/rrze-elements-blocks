@@ -31,11 +31,6 @@ registerBlockType( metadata.name, {
 	/**
 	 * Used to construct a preview for the block to be shown in the block inserter.
 	 */
-	example: {
-		attributes: {
-			message: 'Accordion',
-		},
-	},
 	icon: {
 		src: "minus",
 		background: "#00458c"

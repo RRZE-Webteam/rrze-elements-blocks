@@ -10,17 +10,15 @@ if (isProduction) {
     ...defaultConfig.optimization,
     splitChunks: {
       chunks: 'all',
+      minSize: 10000,
+        maxSize: 249856,
       cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
         svgIcons: {
           test: /svg[\\/]/,
           name: 'svg-icons',
           chunks: 'async',
           reuseExistingChunk: true,
+          maxSize: 249856,
         },
       },
     },
@@ -55,4 +53,8 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.json'],
   },
   optimization: optimization,
+  performance: {
+    ...defaultConfig.performance,
+    hints: false
+  },
 };

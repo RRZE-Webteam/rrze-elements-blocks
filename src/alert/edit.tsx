@@ -42,6 +42,7 @@ export default function Edit({
           attributes={{ color: attributes.color, style: attributes.style }}
           setAttributes={setAttributes}
         />
+
         {attributes.style ? null : (
           <CustomColorPicker
             attributes={{ color: attributes.color, style: attributes.style }}
