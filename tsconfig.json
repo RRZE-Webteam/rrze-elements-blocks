@@ -11,5 +11,5 @@
     "target": "es2015",
     "downlevelIteration": true
   },
-  "include": ["./src/**/*", "./declarations.d.ts"]
+  "include": ["./src/**/*", "./declarations.d.ts", "./block-editor.d.ts"]
 }

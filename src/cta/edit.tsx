@@ -4,16 +4,18 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  RichText,
+  MediaReplaceFlow,
 } from "@wordpress/block-editor";
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { withSelect } from "@wordpress/data";
+import { getBlobTypeByURL, isBlobURL } from "@wordpress/blob";
 
 interface EditProps {
   attributes: {
-    color: string;
-    textColor?: string;
-    borderColor?: string;
+    id: number;
+    url: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -27,19 +29,108 @@ export default function Edit({
   setAttributes,
 }: EditProps) {
   const props = useBlockProps();
+  const { id, url } = attributes;
+
+  const onSelectMedia = async (newMedia: any) => {
+    if (!newMedia || !newMedia.url) {
+      setAttributes({
+        id: undefined,
+        url: undefined,
+      });
+    }
+
+    if (isBlobURL(newMedia.url)) {
+      newMedia.type = getBlobTypeByURL(newMedia.url);
+    }
+
+    let newMediaType;
+
+    if (newMedia.media_type) {
+      newMediaType = "image";
+    } else {
+      if (newMedia.type !== "image") {
+        return;
+      }
+    }
+
+    console.log("newMedia.id", newMedia.id);
+    console.log("newMedia.url", newMedia.url);
+    setAttributes({
+      id: newMedia.id,
+      url: newMedia.url,
+    });
+  };
+
+  const imageClass = url ? "has-image" : "no-image";
 
   return (
     <div {...props}>
-      {/* <InspectorControls></InspectorControls>
-      <BlockControls controls></BlockControls> */}
-      <div className="rrze-elements-cta no-image bg-1">
+      {/* <InspectorControls></InspectorControls> */}
+      <BlockControls controls>
+        <MediaReplaceFlow
+          mediaId={id}
+          mediaURL={url}
+          allowedTypes="image"
+          accept="image/*,video/*"
+          //onSelect={onSelectMedia}
+          onSelect={onSelectMedia}
+          //onToggleFeaturedImage={toggleUseFeaturedImage}
+          // onToggleFeaturedImage={() => {}}
+          //useFeaturedImage={useFeaturedImage}
+          useFeaturedImage={false}
+          name={
+            !url
+              ? __("Add Image", "rrze-elements-b")
+              : __("Replace Image", "rrze-elements-b")
+          }
+        />
+      </BlockControls>
+      <div className={`rrze-elements-cta ${imageClass} bg-1`}>
         <div className="cta-content">
-          <span className="cta-title">Der Titel des CTA!</span>
-          <span className="cta-subtitle">Wissen bewegen.</span>
+          <RichText
+            {...props}
+            tagName="span"
+            value=""
+            onChange={() => {}}
+            placeholder={__("CTA Title", "rrze-elements-b")}
+            allowedFormats={[]}
+            className="cta-title"
+          />
+          <RichText
+            {...props}
+            tagName="span"
+            value=""
+            onChange={() => {}}
+            placeholder={__("CTA Subtitle", "rrze-elements-b")}
+            allowedFormats={[]}
+            className="cta-subtitle"
+          />
         </div>
+        {url && (
+          <div className="cta-image">
+            <img
+              width="620"
+              height="620"
+              src={url}
+              className="attachment-large size-large"
+              alt="Ein gelber Singvogel sitzt auf einem Ast."
+              decoding="async"
+              sizes="(max-width: 620px) 100vw, 620px"
+            />
+          </div>
+        )}
         <div className="cta-button-container">
           <a href="#" className="btn cta-button">
-            FAU Forschung kennenlernen
+            <RichText
+              {...props}
+              tagName="span"
+              value=""
+              onChange={() => {}}
+              placeholder={__("CTA Button Text", "rrze-elements-b")}
+              allowedFormats={[]}
+              className="cta-button-text"
+            />
+            &nbsp;
             <SVG
               height="1em"
               width="1em"

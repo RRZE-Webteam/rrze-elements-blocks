@@ -6,6 +6,14 @@
   "title": "Call to action",
   "category": "design",
   "description": "Creates an Call to action box.",
+  "attributes": {
+    "id": {
+      "type": "number"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
   "supports": {
     "html": false
   },
