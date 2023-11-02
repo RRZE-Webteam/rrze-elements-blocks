@@ -14,10 +14,15 @@ declare module '@wordpress/block-editor' {
         name: string;
     }
 
-    export interface MediaUploadProgressProps {
-        mediaId: number;
+    export interface LinkControlProps {
+        onChange: (change: any) => void;
+        value?: {
+            url?: string
+        };
+        onRemove: (any: any) => void;
+        forceIsEditingLink?: any;
     }
 
     export const MediaReplaceFlow: ComponentType<MediaReplaceFlowProps>;
-    export const MediaUploadProgress: ComponentType<MediaUploadProgressProps>;
+    export const __experimentalLinkControl: ComponentType<LinkControlProps>;
 }

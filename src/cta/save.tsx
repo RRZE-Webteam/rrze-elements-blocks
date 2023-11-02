@@ -6,6 +6,11 @@ interface SaveProps {
     alt: string;
     url: string;
     srcset: string;
+    title: string;
+    subtitle: string;
+    buttonText: string;
+    buttonUrl: string;
+    target: string;
   };
 }
 
@@ -18,29 +23,37 @@ interface SaveProps {
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
 
-  const { id, alt, url, srcset } = attributes;
+  const { id, alt, url, srcset, title, subtitle, buttonText, buttonUrl, target } = attributes;
+
+  function prependHttps(url: string): string {
+    if (url?.startsWith('www.')) {
+      return 'https://' + url;
+    } else if (url?.startsWith('http://')) {
+      return url.replace('http://', 'https://');
+    }
+    return url;
+  }  
 
   return (
     <div {...blockProps}>
-     <div className="rrze-elements-cta no-image bg-1">
+      <div className="rrze-elements-cta no-image bg-1">
         <div className="cta-content">
-          <span className="cta-title">Der Titel des CTA!</span>
-          <span className="cta-subtitle">Wissen bewegen.</span>
+          <span className="cta-title">{title}</span>
+          <span className="cta-subtitle">{subtitle}</span>
         </div>
         {url && (
           <div className="cta-image">
             <img
-              src = {url}
+              src={url}
               className={id ? `wp-image-${id}` : null}
               alt={alt}
               decoding="async"
-              sizes={srcset}
             />
           </div>
         )}
         <div className="cta-button-container">
-          <a href="#" className="btn cta-button">
-            FAU Forschung kennenlernen
+          <a href={prependHttps(buttonUrl)} className="btn cta-button" target={target} rel="noopener">
+            {buttonText}
             <svg
               height="1em"
               width="1em"

@@ -1,16 +1,23 @@
-import { SVG, Path, Spinner } from "@wordpress/components";
+import {
+  SVG,
+  Path,
+  Spinner,
+  Popover,
+  ToolbarGroup,
+  ToolbarButton,
+} from "@wordpress/components";
 import {
   useBlockProps,
   InspectorControls,
   BlockControls,
   RichText,
-  MediaUploadProgress
+  __experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
-// import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import {
-  isBlobURL
-} from "@wordpress/blob";
+import { isBlobURL } from "@wordpress/blob";
+import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
+import { link, linkOff } from "@wordpress/icons";
 
 import { CustomMediaReplaceFlow } from "./BlockControls/CustomMediaReplaceFlow";
 
@@ -18,10 +25,16 @@ interface EditProps {
   attributes: {
     id: number;
     url: string;
+    buttonUrl: string;
     alt: string;
     srcset: string;
+    title: string;
+    subtitle: string;
+    buttonText: string;
+    target: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
+  isSelected: boolean;
   clientId: string;
   context: { [key: string]: any };
   blockProps: any;
@@ -31,17 +44,92 @@ export default function Edit({
   blockProps,
   attributes,
   setAttributes,
+  isSelected,
 }: EditProps) {
   const props = useBlockProps();
-  const { id, url, alt, srcset } = attributes;
+  const {
+    id,
+    url,
+    alt,
+    srcset,
+    title,
+    subtitle,
+    buttonText,
+    buttonUrl,
+    target,
+  } = attributes;
+  const [popoverAnchor, setPopoverAnchor] = useState(null);
+  const [isEditingURL, setIsEditingURL] = useState(false);
+
+  const TagName = "a";
+  const isLinkTag = "a" === TagName;
+  const isURLSet = !!buttonUrl;
 
   const imageClass = url ? "has-image" : "no-image";
+
+  const startEditing = () => {
+    setIsEditingURL(true);
+  };
+
+  const unlink = () => {
+    setAttributes({ buttonUrl: undefined });
+    setIsEditingURL(false);
+  };
+
+  useEffect(() => {
+    if (!isSelected) {
+      setIsEditingURL(false);
+    }
+  }, [isSelected]);
+
+  const onChangeButtonUrl = (newButtonUrl: {
+    url: string;
+    id: string;
+    title: string;
+    type: string;
+    opensInNewTab?: boolean;
+  }) => {
+    console.log(newButtonUrl);
+    if (newButtonUrl?.opensInNewTab) {
+      setAttributes({ target: "_blank" });
+    }
+    setAttributes({ buttonUrl: newButtonUrl?.url });
+    console.log(buttonUrl);
+  };
+
+  const onChangeTitle = (newTitle: string) => {
+    setAttributes({ title: newTitle });
+  };
+
+  const onChangeSubtitle = (newSubtitle: string) => {
+    setAttributes({ subtitle: newSubtitle });
+  };
+
+  const onChangeButtonText = (newButtonText: string) => {
+    setAttributes({ buttonText: newButtonText });
+  };
 
   return (
     <div {...props}>
       {/* <InspectorControls></InspectorControls> */}
+      {isLinkTag && isSelected && (isEditingURL || isURLSet) && (
+        <Popover
+          placement="bottom"
+          onClose={() => {}}
+          anchor={popoverAnchor}
+          focusOnMount={isEditingURL ? "firstElement" : false}
+          __unstableSlotName={"__unstable-block-tools-after"}
+          shift
+        >
+          <LinkControl
+            value={{ url: buttonUrl }}
+            onChange={onChangeButtonUrl}
+            onRemove={unlink}
+          />
+        </Popover>
+      )}
       <BlockControls controls>
-        <CustomMediaReplaceFlow 
+        <CustomMediaReplaceFlow
           attributes={{
             id: id,
             url: url,
@@ -50,14 +138,35 @@ export default function Edit({
           }}
           setAttributes={setAttributes}
         />
+        <ToolbarGroup>
+          {!isURLSet && isLinkTag && (
+            <ToolbarButton
+              label="link"
+              icon={link}
+              title={__("Link")}
+              shortcut={displayShortcut.primary("k")}
+              onClick={startEditing}
+            />
+          )}
+          {isURLSet && isLinkTag && (
+            <ToolbarButton
+              label="link"
+              icon={linkOff}
+              title={__("Unlink")}
+              shortcut={displayShortcut.primaryShift("k")}
+              onClick={unlink}
+              isActive={true}
+            />
+          )}
+        </ToolbarGroup>
       </BlockControls>
       <div className={`rrze-elements-cta ${imageClass} bg-1`}>
         <div className="cta-content">
           <RichText
             {...props}
             tagName="span"
-            value=""
-            onChange={() => {}}
+            value={title}
+            onChange={onChangeTitle}
             placeholder={__("CTA Title", "rrze-elements-b")}
             allowedFormats={[]}
             className="cta-title"
@@ -65,30 +174,26 @@ export default function Edit({
           <RichText
             {...props}
             tagName="span"
-            value=""
-            onChange={() => {}}
+            value={subtitle}
+            onChange={onChangeSubtitle}
             placeholder={__("CTA Subtitle", "rrze-elements-b")}
             allowedFormats={[]}
             className="cta-subtitle"
           />
         </div>
         {url && (
-          <div className={`cta-image ${isBlobURL(url) ? ' is-loading' : ''}`}>
-            <img
-              src={url}
-              className="attachment-large size-large"
-              alt={alt}
-            />
-            { isBlobURL(url) && <Spinner />}
+          <div className={`cta-image ${isBlobURL(url) ? " is-loading" : ""}`}>
+            <img src={url} className="attachment-large size-large" alt={alt} />
+            {isBlobURL(url) && <Spinner />}
           </div>
         )}
         <div className="cta-button-container">
-          <a href="#" className="btn cta-button">
+          <a ref={setPopoverAnchor} href="#" className="btn cta-button">
             <RichText
               {...props}
               tagName="span"
-              value=""
-              onChange={() => {}}
+              value={buttonText}
+              onChange={onChangeButtonText}
               placeholder={__("CTA Button Text", "rrze-elements-b")}
               allowedFormats={[]}
               className="cta-button-text"
