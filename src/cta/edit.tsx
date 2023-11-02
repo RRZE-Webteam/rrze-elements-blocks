@@ -1,12 +1,16 @@
-import { SVG, Path } from "@wordpress/components";
+import { SVG, Path, Spinner } from "@wordpress/components";
 import {
   useBlockProps,
   InspectorControls,
   BlockControls,
   RichText,
+  MediaUploadProgress
 } from "@wordpress/block-editor";
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
+import {
+  isBlobURL
+} from "@wordpress/blob";
 
 import { CustomMediaReplaceFlow } from "./BlockControls/CustomMediaReplaceFlow";
 
@@ -69,12 +73,13 @@ export default function Edit({
           />
         </div>
         {url && (
-          <div className="cta-image">
+          <div className={`cta-image ${isBlobURL(url) ? ' is-loading' : ''}`}>
             <img
               src={url}
               className="attachment-large size-large"
               alt={alt}
             />
+            { isBlobURL(url) && <Spinner />}
           </div>
         )}
         <div className="cta-button-container">

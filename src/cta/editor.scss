@@ -8,6 +8,18 @@ $cta-btn-hover-text-color: lighten($cta-btn-text-color, 10%);
 $cta-border-radius: 0px;
 
 .block-editor-block-list__block.wp-block-rrze-elements-cta {
+    .is-loading{
+        background-color: rgba(211, 211, 211, 0.589);
+        position: relative;
+    }
+    .components-spinner{
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        position: absolute;
+        right: 80px;
+        top: 80px;
+    }
     .rrze-elements-cta {
         position: relative;
         margin: 2em 0;

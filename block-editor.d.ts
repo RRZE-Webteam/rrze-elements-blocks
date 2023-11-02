@@ -14,5 +14,10 @@ declare module '@wordpress/block-editor' {
         name: string;
     }
 
+    export interface MediaUploadProgressProps {
+        mediaId: number;
+    }
+
     export const MediaReplaceFlow: ComponentType<MediaReplaceFlowProps>;
+    export const MediaUploadProgress: ComponentType<MediaUploadProgressProps>;
 }
