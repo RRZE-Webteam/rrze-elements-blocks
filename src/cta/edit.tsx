@@ -1,21 +1,21 @@
 import { SVG, Path } from "@wordpress/components";
 import {
   useBlockProps,
-  InnerBlocks,
   InspectorControls,
   BlockControls,
   RichText,
-  MediaReplaceFlow,
 } from "@wordpress/block-editor";
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { withSelect } from "@wordpress/data";
-import { getBlobTypeByURL, isBlobURL } from "@wordpress/blob";
+
+import { CustomMediaReplaceFlow } from "./BlockControls/CustomMediaReplaceFlow";
 
 interface EditProps {
   attributes: {
     id: number;
     url: string;
+    alt: string;
+    srcset: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -29,37 +29,7 @@ export default function Edit({
   setAttributes,
 }: EditProps) {
   const props = useBlockProps();
-  const { id, url } = attributes;
-
-  const onSelectMedia = async (newMedia: any) => {
-    if (!newMedia || !newMedia.url) {
-      setAttributes({
-        id: undefined,
-        url: undefined,
-      });
-    }
-
-    if (isBlobURL(newMedia.url)) {
-      newMedia.type = getBlobTypeByURL(newMedia.url);
-    }
-
-    let newMediaType;
-
-    if (newMedia.media_type) {
-      newMediaType = "image";
-    } else {
-      if (newMedia.type !== "image") {
-        return;
-      }
-    }
-
-    console.log("newMedia.id", newMedia.id);
-    console.log("newMedia.url", newMedia.url);
-    setAttributes({
-      id: newMedia.id,
-      url: newMedia.url,
-    });
-  };
+  const { id, url, alt, srcset } = attributes;
 
   const imageClass = url ? "has-image" : "no-image";
 
@@ -67,22 +37,14 @@ export default function Edit({
     <div {...props}>
       {/* <InspectorControls></InspectorControls> */}
       <BlockControls controls>
-        <MediaReplaceFlow
-          mediaId={id}
-          mediaURL={url}
-          allowedTypes="image"
-          accept="image/*,video/*"
-          //onSelect={onSelectMedia}
-          onSelect={onSelectMedia}
-          //onToggleFeaturedImage={toggleUseFeaturedImage}
-          // onToggleFeaturedImage={() => {}}
-          //useFeaturedImage={useFeaturedImage}
-          useFeaturedImage={false}
-          name={
-            !url
-              ? __("Add Image", "rrze-elements-b")
-              : __("Replace Image", "rrze-elements-b")
-          }
+        <CustomMediaReplaceFlow 
+          attributes={{
+            id: id,
+            url: url,
+            alt: alt,
+            srcset: srcset,
+          }}
+          setAttributes={setAttributes}
         />
       </BlockControls>
       <div className={`rrze-elements-cta ${imageClass} bg-1`}>
@@ -109,13 +71,9 @@ export default function Edit({
         {url && (
           <div className="cta-image">
             <img
-              width="620"
-              height="620"
               src={url}
               className="attachment-large size-large"
-              alt="Ein gelber Singvogel sitzt auf einem Ast."
-              decoding="async"
-              sizes="(max-width: 620px) 100vw, 620px"
+              alt={alt}
             />
           </div>
         )}

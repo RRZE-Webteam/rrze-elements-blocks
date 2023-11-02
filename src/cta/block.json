@@ -12,6 +12,12 @@
 		},
 		"url": {
 			"type": "string"
+		},
+		"alt": {
+			"type": "string"
+		},
+		"srcset":{
+			"type": "string"
 		}
 	},
 	"supports": {

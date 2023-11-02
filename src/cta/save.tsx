@@ -1,16 +1,11 @@
-import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useBlockProps } from "@wordpress/block-editor";
 
 interface SaveProps {
   attributes: {
-    color: string;
-    active: string;
-    blockId: string;
-    innerClientIds: {
-      clientId: string;
-      title: string;
-      position: number;
-      svgString: string;
-    }[];
+    id: number;
+    alt: string;
+    url: string;
+    srcset: string;
   };
 }
 
@@ -22,7 +17,8 @@ interface SaveProps {
  */
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
-  const uid = attributes.blockId;
+
+  const { id, alt, url, srcset } = attributes;
 
   return (
     <div {...blockProps}>
@@ -31,6 +27,17 @@ export default function save({ attributes }: SaveProps) {
           <span className="cta-title">Der Titel des CTA!</span>
           <span className="cta-subtitle">Wissen bewegen.</span>
         </div>
+        {url && (
+          <div className="cta-image">
+            <img
+              src = {url}
+              className={id ? `wp-image-${id}` : null}
+              alt={alt}
+              decoding="async"
+              sizes={srcset}
+            />
+          </div>
+        )}
         <div className="cta-button-container">
           <a href="#" className="btn cta-button">
             FAU Forschung kennenlernen
