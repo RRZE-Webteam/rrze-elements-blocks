@@ -8,6 +8,8 @@ $cta-btn-hover-text-color: lighten($cta-btn-text-color, 10%);
 $cta-border-radius: 0px;
 
 .block-editor-block-list__block.wp-block-rrze-elements-cta {
+    $backgrounds: '1', 'rrze';
+
     .is-loading{
         background-color: rgba(211, 211, 211, 0.589);
         position: relative;
@@ -20,21 +22,26 @@ $cta-border-radius: 0px;
         right: 80px;
         top: 80px;
     }
+    .is-style-background{
+        .rrze-elements-cta {
+            @each $background in $backgrounds {
+                &.bg-#{$background} {
+                    background-image: url("../../assets/cta/background-#{$background}.svg");
+                    background-position: bottom 50% left;
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+    }
+
+
     .rrze-elements-cta {
         position: relative;
         margin: 2em 0;
         color: #fff;
         background-color: var(--color-zentral-primary, #04316a);
-        $backgrounds: '1', 'rrze';
 
-        @each $background in $backgrounds {
-            &.bg-#{$background} {
-                background-image: url("./cta/background-#{$background}.svg");
-                background-position: bottom 50% left;
-                background-size: 100%;
-                background-repeat: no-repeat;
-            }
-        }
 
         @media screen and (max-width: 767px) {
             margin-left: -15px;
