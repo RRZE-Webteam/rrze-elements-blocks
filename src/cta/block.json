@@ -45,7 +45,8 @@
 	},
 	"styles": [
 		{ "name": "background", "label": "With Background", "isDefault": true },
-		{ "name": "no-background", "label": "No Background" }
+		{ "name": "no-background", "label": "No Background" },
+		{ "name": "small", "label": "Small" }
 	],
 	"textdomain": "rrze-elementsb",
 	"editorScript": "file:./index.js",

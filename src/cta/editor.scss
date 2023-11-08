@@ -7,14 +7,30 @@ $cta-btn-hover-bg-color: darken($cta-btn-bg-color, 10%);
 $cta-btn-hover-text-color: lighten($cta-btn-text-color, 10%);
 $cta-border-radius: 0px;
 
-.block-editor-block-list__block.wp-block-rrze-elements-cta {
-    $backgrounds: '1', 'rrze';
+$backgrounds: '1', 'rrze';
 
-    .is-loading{
+.block-editor-block-list__block.wp-block-rrze-elements-cta .is-style-background {
+    .rrze-elements-cta {
+        @each $background in $backgrounds {
+            &.bg-#{$background} {
+                background-image: url("./cta/background-#{$background}.svg");
+                background-position: bottom 50% left;
+                background-size: 100%;
+                background-repeat: no-repeat;
+                border: 4px solid red;
+            }
+        }
+    }
+}
+
+.block-editor-block-list__block.wp-block-rrze-elements-cta {
+
+    .is-loading {
         background-color: rgba(211, 211, 211, 0.589);
         position: relative;
     }
-    .components-spinner{
+
+    .components-spinner {
         width: 100px;
         height: 100px;
         margin: 0 auto;
@@ -22,18 +38,7 @@ $cta-border-radius: 0px;
         right: 80px;
         top: 80px;
     }
-    .is-style-background{
-        .rrze-elements-cta {
-            @each $background in $backgrounds {
-                &.bg-#{$background} {
-                    background-image: url("../../assets/cta/background-#{$background}.svg");
-                    background-position: bottom 50% left;
-                    background-size: 100%;
-                    background-repeat: no-repeat;
-                }
-            }
-        }
-    }
+
 
 
     .rrze-elements-cta {

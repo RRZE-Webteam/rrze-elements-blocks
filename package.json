@@ -4,6 +4,8 @@
   "description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
   "main": "build/index.js",
   "textdomain": "rrze-elementsb",
+  "license": "GPL-3.0-or-later",
+  "private": true,
   "scripts": {
     "build": "wp-scripts build",
     "format": "wp-scripts format",
@@ -31,7 +33,6 @@
     "name": "RRZE-Webteam <webmaster@fau.de>",
     "url": "https://www.wordpress.rrze.fau.de/person/webmaster"
   },
-  "license": "GNU General Public License v3",
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.5",
@@ -53,19 +54,14 @@
     "semver": "^7.5.3",
     "svg-sprite-loader": "^6.0.11",
     "ts-loader": "^9.4.4",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-brands-svg-icons": "^6.4.2",
-    "@fortawesome/free-regular-svg-icons": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@svgr/webpack": "^8.1.0",
-    "@types/lodash": "^4.14.199",
+    "typescript": "^5.2.2",
     "@types/wordpress__block-editor": "^11.5.4",
     "@types/wordpress__blocks": "^12.5.5",
     "@types/wordpress__components": "^23.0.4",
+    "@svgr/webpack": "^8.1.0"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.199",
     "@wordpress/keycodes": "^3.45.0",
     "color": "^4.2.3",
     "lodash": "^4.17.21",

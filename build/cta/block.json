@@ -52,6 +52,10 @@
     {
       "name": "no-background",
       "label": "No Background"
+    },
+    {
+      "name": "small",
+      "label": "Small"
     }
   ],
   "textdomain": "rrze-elementsb",
