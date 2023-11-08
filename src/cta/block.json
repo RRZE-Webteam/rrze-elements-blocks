@@ -36,8 +36,9 @@
 		"buttonText": {
 			"type": "string"
 		},
-		"srcset":{
-			"type": "string"
+		"background": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

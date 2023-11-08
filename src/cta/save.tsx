@@ -11,6 +11,7 @@ interface SaveProps {
     buttonText: string;
     buttonUrl: string;
     target: string;
+    background: string;
   };
 }
 
@@ -23,7 +24,7 @@ interface SaveProps {
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
 
-  const { id, alt, url, srcset, title, subtitle, buttonText, buttonUrl, target } = attributes;
+  const { id, alt, url, srcset, title, subtitle, buttonText, buttonUrl, target, background } = attributes;
 
   function prependHttps(url: string): string {
     if (url?.startsWith('www.')) {
@@ -36,7 +37,7 @@ export default function save({ attributes }: SaveProps) {
 
   return (
     <div {...blockProps}>
-      <div className="rrze-elements-cta no-image bg-1">
+      <div className={`rrze-elements-cta no-image ${background}`}>
         <div className="cta-content">
           <span className="cta-title">{title}</span>
           <span className="cta-subtitle">{subtitle}</span>
@@ -52,7 +53,7 @@ export default function save({ attributes }: SaveProps) {
           </div>
         )}
         <div className="cta-button-container">
-          <a href={prependHttps(buttonUrl)} className="btn cta-button" target={target} rel="noopener">
+          <a href={prependHttps(buttonUrl)} className="btn cta-button">
             {buttonText}
             <svg
               height="1em"

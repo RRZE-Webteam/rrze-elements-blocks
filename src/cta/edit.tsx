@@ -32,6 +32,7 @@ interface EditProps {
     subtitle: string;
     buttonText: string;
     target: string;
+    background: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   isSelected: boolean;
@@ -57,6 +58,7 @@ export default function Edit({
     buttonText,
     buttonUrl,
     target,
+    background
   } = attributes;
   // For the URL popover
   const [popoverAnchor, setPopoverAnchor] = useState(null);
@@ -78,6 +80,23 @@ export default function Edit({
   };
 
   useEffect(() => {
+    if(props.className) {
+      //string contains a string
+      const needle = "is-style-no-background";
+      const hasNeedle = (needle:string) => {
+        return props.className.indexOf(needle) !== -1;
+      }
+      if(hasNeedle("is-style-no-background")) {
+        setAttributes({ background: ''});
+      } else if (hasNeedle("is-style-small")) {
+        setAttributes({ background: 'bg-1 style-small'});
+      } else {
+        setAttributes({ background: 'bg-1'});
+      }
+    }
+  }, [props.className]);
+
+  useEffect(() => {
     if (!isSelected) {
       setIsEditingURL(false);
     }
@@ -90,12 +109,10 @@ export default function Edit({
     type: string;
     opensInNewTab?: boolean;
   }) => {
-    console.log(newButtonUrl);
     if (newButtonUrl?.opensInNewTab) {
       setAttributes({ target: "_blank" });
     }
     setAttributes({ buttonUrl: newButtonUrl?.url });
-    console.log(buttonUrl);
   };
 
   const onChangeTitle = (newTitle: string) => {
@@ -161,7 +178,7 @@ export default function Edit({
           )}
         </ToolbarGroup>
       </BlockControls>
-      <div className={`rrze-elements-cta ${imageClass} bg-1`}>
+      <div className={`rrze-elements-cta ${imageClass} ${background}`}>
         <div className="cta-content">
           <RichText
             {...props}

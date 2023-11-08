@@ -17,7 +17,8 @@ declare module '@wordpress/block-editor' {
     export interface LinkControlProps {
         onChange: (change: any) => void;
         value?: {
-            url?: string
+            url?: string;
+            opensInNewTab?: boolean;
         };
         onRemove: (any: any) => void;
         forceIsEditingLink?: any;
