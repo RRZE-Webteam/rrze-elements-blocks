@@ -363,7 +363,6 @@ $backgrounds: '1', 'rrze';
 }
 
 .block-editor-block-list__block.wp-block-rrze-elements-cta.is-style-background {
-    border: 4px solid green;
     .rrze-elements-cta {
         @each $background in $backgrounds {
             &.bg-#{$background} {
@@ -371,7 +370,6 @@ $backgrounds: '1', 'rrze';
                 background-position: bottom 50% left;
                 background-size: 100%;
                 background-repeat: no-repeat;
-                border: 4px solid red;
             }
         }
     }
