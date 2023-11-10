@@ -2,7 +2,7 @@ import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
-import { IconPicker } from "./IconPicker";
+import { IconPicker } from "../../components/IconPicker";
 import { TitleInspectorControls } from "./TitleSettings";
 
 /**

@@ -16,7 +16,7 @@ import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
 
 // Custom components for enhancing block controls.
-import { IconPicker } from "./InspectorControls/IconPicker";
+import { IconPicker } from "../components/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   TitleModal,

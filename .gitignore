@@ -69,3 +69,5 @@ bin/install-wp-tests.sh
 .phpcs.xml.dist
 .phpunit.xml.dist
 phpunit.xml.dist.bak
+
+/build
