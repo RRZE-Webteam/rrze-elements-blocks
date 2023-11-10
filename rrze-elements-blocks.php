@@ -144,7 +144,8 @@ function loaded()
                     return array(
                         'directory' => plugin_dir_url(__FILE__)
                     );
-                }
+                },
+                'permission_callback' => '__return_true', // This line is added
             ));
         });
     }

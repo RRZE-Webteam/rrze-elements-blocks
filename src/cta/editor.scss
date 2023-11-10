@@ -130,12 +130,12 @@ $backgrounds: '1', 'rrze';
             &:focus,
             &:active {
                 box-shadow: none;
-                background-color: var(--cta-btn-bg-color, #1f4c7a);
+                background-color: var(--cta-btn-bg-color, #004a9f);
+                color: #ffffff;
                 text-decoration: none;
 
                 .rrze-2019 & {
                     background-color: #00458C;
-                    color: #ffffff;
                 }
             }
 
