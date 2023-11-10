@@ -15,10 +15,10 @@ type SetAttributesFunction = (attributes: Partial<BlockAttributes>) => void;
 /**
  * Fetch and set the SVG string attribute based on the provided type and iconName.
  *
- * @param {string} type - Type of the fa-icon (e.g., solid, regular, brands).
- * @param {string} iconName - Name of the icon.
- * @param {Object} attributes - Block attributes.
- * @param {Function} setAttributes - Setter for block attributes.
+ * @param {string} type - The type of the FontAwesome icon (e.g., solid, regular, brands).
+ * @param {string} iconName - The name of the icon.
+ * @param {BlockAttributes} attributes - The current block attributes.
+ * @param {SetAttributesFunction} setAttributes - Function to set new attributes for the block.
  */
 const fetchSvgIcon = (
   type: string,
@@ -45,11 +45,12 @@ const fetchSvgIcon = (
 
 /**
  * Dynamically import the SVG icon based on the provided type and iconName.
- * @param {string} type - Type of the fa-icon (e.g., solid, regular, brands).
- * @param {string} iconName - Name of the icon.
- * @param {Object} attributes - Block attributes.
- * @param {Function} setAttributes - Setter for block attributes.
- * @returns
+ *
+ * @param {string} type - The type of the FontAwesome icon (e.g., solid, regular, brands).
+ * @param {string} iconName - The name of the icon.
+ * @param {BlockAttributes} attributes - The current block attributes.
+ * @param {SetAttributesFunction} setAttributes - Function to set new attributes for the block.
+ * @returns {JSX.Element | null} The loaded SVG icon or null.
  */
 const useDynamicSvgIcon = (
   type: string,
@@ -64,7 +65,7 @@ const useDynamicSvgIcon = (
       const filePath = `../svg/${type}/${iconName}.svg`;
 
       import(
-        /* webpackChunkName: "svg-icons" */ `../svg/${type}/${iconName}.svg`
+        /* webpackChunkName: "svg-icons" */ `./svg/${type}/${iconName}.svg?url`
       )
         .then((module) => {
           const SvgIconComponent: React.FC = module.default;
@@ -83,15 +84,24 @@ const useDynamicSvgIcon = (
   return Icon;
 };
 
+/**
+ * IconPicker component properties.
+ *
+ * @interface IconPickerProps
+ * @property {BlockAttributes} attributes - Current block attributes.
+ * @property {SetAttributesFunction} setAttributes - Function to set new attributes for the block.
+ */
 interface IconPickerProps {
   attributes: BlockAttributes;
   setAttributes: SetAttributesFunction;
 }
 
 /**
- * Handles the Icon selection inside the InspectorControls IconPanel or ToolbarButton with Modal.
- * @param {Object} attributes - Block attributes.
- * @param {Function} setAttributes - Setter for block attributes.
+ * A component for picking icons.
+ *
+ * @component
+ * @param {IconPickerProps} props - The properties.
+ * @returns {JSX.Element} The `IconPicker` component.
  */
 const IconPicker: React.ComponentType<IconPickerProps> = memo(
   ({ attributes, setAttributes }) => {
@@ -143,29 +153,41 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
   }
 );
 
+/**
+ * IconMarkComponent component properties.
+ *
+ * @interface IconMarkComponentProps
+ * @property {string} type - The type of the FontAwesome icon (e.g., solid, regular, brands).
+ * @property {string} iconName - The name of the icon.
+ * @property {BlockAttributes} attributes - The current block attributes.
+ * @property {string} [defaultClass] - The default class for the icon.
+ * @property {SetAttributesFunction} [setAttributes] - Optional function to set new attributes for the block.
+ */
 interface IconMarkComponentProps {
   type: string;
   iconName: string;
   attributes: BlockAttributes;
-  setAttributes: SetAttributesFunction;
+  defaultClass?: string;
+  setAttributes?: SetAttributesFunction;
 }
 
 /**
- * Handles the Icon Display inside the Editor View.
- * @param {string} type - Type of the fa-icon (e.g., solid, regular, brands).
- * @param {string} iconName - Name of the icon.
- * @param {Object} attributes - Block attributes.
- * @param {Function} setAttributes - Setter for block attributes.
+ * A component for displaying icons in the editor.
+ *
+ * @component
+ * @param {IconMarkComponentProps} props - The properties.
+ * @returns {JSX.Element | null} The loaded SVG icon or null.
  */
 const IconMarkComponent: React.ComponentType<IconMarkComponentProps> = ({
   type,
   iconName,
   attributes,
-  setAttributes,
+  defaultClass = "elements-blocks-icon-insideEditor",
+  setAttributes = () => {},
 }) => {
   const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
   return Icon
-    ? cloneElement(Icon, { className: "elements-blocks-icon-insideEditor" })
+    ? cloneElement(Icon, { className: defaultClass })
     : null;
 };
 

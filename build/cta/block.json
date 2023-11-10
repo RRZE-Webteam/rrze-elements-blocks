@@ -36,8 +36,13 @@
     "buttonText": {
       "type": "string"
     },
-    "srcset": {
-      "type": "string"
+    "background": {
+      "type": "string",
+      "default": ""
+    },
+    "isSearch": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

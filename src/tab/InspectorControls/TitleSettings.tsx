@@ -15,7 +15,7 @@ import {
 } from "@wordpress/components";
 
 import { useState } from "@wordpress/element";
-import { IconMarkComponent } from "./IconPicker";
+import { IconMarkComponent } from "../../components/IconPicker";
 
 /**
  * Type definition for TitleSettingsProps

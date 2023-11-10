@@ -27,7 +27,7 @@ import {
   ColorSwitcherToolbar,
 } from "./InspectorControls/ColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
-import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
+import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties

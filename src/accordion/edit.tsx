@@ -22,7 +22,7 @@ import {
   ColorSwitcherToolbar,
 } from "./InspectorControls/ColorSwitcher";
 import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
-import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
+import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties

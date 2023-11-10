@@ -13,7 +13,7 @@ import { isEqual } from "lodash";
 import { XrayBar } from "./InspectorControls/Xray";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import { ColorSwitcherToolbar } from "./InspectorControls/ColorSwitcher";
-import { IconMarkComponent } from "../tab/InspectorControls/IconPicker";
+import { IconMarkComponent } from "../components/IconPicker";
 
 // TypeScript interfaces for better type checking
 interface Tab { title?: string; index?: number; active?: string; clientId?: string; }
