@@ -116,9 +116,9 @@ export default function save({ attributes }: SaveProps) {
               <svg
                 height="1em"
                 width="1em"
-                class="rrze-elements-icon"
+                className="rrze-elements-icon"
                 // @ts-ignore
-                style="font-size: 2em; fill: #1f4c7a;"
+                style={{fill:'currentcolor', fontSize:'2em', marginLeft: '1em'}}
                 aria-hidden="true"
                 focusable="false"
                 xmlns="http://www.w3.org/2000/svg"
