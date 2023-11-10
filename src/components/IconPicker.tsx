@@ -65,7 +65,7 @@ const useDynamicSvgIcon = (
       const filePath = `../svg/${type}/${iconName}.svg`;
 
       import(
-        /* webpackChunkName: "svg-icons" */ `./svg/${type}/${iconName}.svg`
+        /* webpackChunkName: "svg-icons" */ `./svg/${type}/${iconName}.svg?url`
       )
         .then((module) => {
           const SvgIconComponent: React.FC = module.default;
