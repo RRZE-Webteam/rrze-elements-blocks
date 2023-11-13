@@ -1,4 +1,5 @@
 import { useBlockProps } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
 
 interface SaveProps {
   attributes: {
@@ -101,13 +102,13 @@ export default function save({ attributes }: SaveProps) {
               itemProp="potentialAction"
               itemType="https://schema.org/SearchAction"
               role="search"
-              aria-label="Search on /"
+              aria-label={__('Search on ', 'rrze-elements-b')}
               method="get"
               className="cta-search searchform"
               action="/"
             >
               <label htmlFor="cta_search_442333">
-                Please enter the search term for searching on /:
+                {__('Please enter the search term for searching on /: ', 'rrze-elements-b')}
               </label>
               <meta itemProp="target" content="/?s={s}" />
               <input
@@ -116,7 +117,7 @@ export default function save({ attributes }: SaveProps) {
                 type="text"
                 value=""
                 name="s"
-                placeholder="Search for..."
+                placeholder={__('Search for…', 'rrze-elements-b')}
                 required
               />
               {/* @ts-ignore */}
