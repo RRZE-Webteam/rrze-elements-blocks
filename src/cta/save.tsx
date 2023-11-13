@@ -30,12 +30,10 @@ export default function save({ attributes }: SaveProps) {
     id,
     alt,
     url,
-    srcset,
     title,
     subtitle,
     buttonText,
     buttonUrl,
-    target,
     background,
     isSearch,
   } = attributes;
@@ -49,10 +47,15 @@ export default function save({ attributes }: SaveProps) {
     return url;
   }
 
+  let urlClass = 'has-image'
+  if(!url) {
+    urlClass = 'no-image';
+  }
+
   return (
     <div {...blockProps}>
       {!isSearch && (
-        <div className={`rrze-elements-cta no-image ${background}`}>
+        <div className={`rrze-elements-cta ${urlClass} ${background}`}>
           <div className="cta-content">
             <span className="cta-title">{title}</span>
             <span className="cta-subtitle">{subtitle}</span>
@@ -92,11 +95,21 @@ export default function save({ attributes }: SaveProps) {
         </div>
       )}
       {isSearch && (
-        <div className="rrze-elements-cta no-image bg-1">
+        <div className={`rrze-elements-cta  ${urlClass} ${background}`}>
           <div className="cta-content">
             <span className="cta-title">{title}</span>
             <span className="cta-subtitle">{subtitle}</span>
           </div>
+          {url && (
+            <div className="cta-image">
+              <img
+                src={url}
+                className={id ? `wp-image-${id}` : null}
+                alt={alt}
+                decoding="async"
+              />
+            </div>
+          )}
           <div className="cta-search-container">
             <form
               itemProp="potentialAction"
