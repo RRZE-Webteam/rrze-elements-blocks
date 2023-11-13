@@ -4,6 +4,21 @@ import { useState, useEffect } from "@wordpress/element";
 import fontawesomeIconNames from "./fontawesomeIconNames.json";
 import { memo, cloneElement } from "react";
 
+// You probably already include the core styles
+// @import "../components/assets/fontawesome/scss/fontawesome.scss";
+
+import "./assets/fontawesome/scss/fontawesome.scss";
+import "./assets/fontawesome/scss/solid.scss";
+import "./assets/fontawesome/scss/brands.scss";
+import "./assets/fontawesome/scss/regular.scss";
+
+// You can include all the other styles the same as before
+// @import "../components/assets/fontawesome/scss/solid.scss";
+// @import "../components/assets/fontawesome/scss/brands.scss";
+// @import "../components/assets/fontawesome/scss/regular.scss";
+
+
+
 interface BlockAttributes {
   directory: string;
   icon: string;
@@ -80,6 +95,8 @@ const useDynamicSvgIcon = (
   useEffect(() => {
     fetchSvgIcon(type, iconName, attributes, setAttributes);
   }, [type, iconName, attributes, setAttributes]);
+
+  console.log(attributes);
 
   return Icon;
 };

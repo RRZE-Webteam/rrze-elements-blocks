@@ -1,1 +1,28 @@
-.alert{background-color:#e9edf2;border:1px solid transparent;color:#000;font-weight:400;margin-bottom:20px;overflow:hidden;padding:15px}.rrzeElementsBFakColorSelector.dff0d8{background-color:#dff0d8}.rrzeElementsBFakColorSelector.e9edf2{background-color:#e9edf2}.rrzeElementsBFakColorSelector.d9edf7{background-color:#d9edf7}.rrzeElementsBFakColorSelector.fcf8e3{background-color:#fcf8e3}.rrzeElementsBFakColorSelector.f2dede{background-color:#f2dede}
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/alert/editor.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  font-weight: normal;
+  background-color: #e9edf2;
+  overflow: hidden;
+  color: #000;
+}
+
+.rrzeElementsBFakColorSelector.dff0d8 {
+  background-color: #dff0d8;
+}
+.rrzeElementsBFakColorSelector.e9edf2 {
+  background-color: #e9edf2;
+}
+.rrzeElementsBFakColorSelector.d9edf7 {
+  background-color: #d9edf7;
+}
+.rrzeElementsBFakColorSelector.fcf8e3 {
+  background-color: #fcf8e3;
+}
+.rrzeElementsBFakColorSelector.f2dede {
+  background-color: #f2dede;
+}

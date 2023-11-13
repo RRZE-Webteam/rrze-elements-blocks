@@ -138,6 +138,7 @@ export default function Edit({
   return (
     <>
       <div {...props}>
+        <span className="fa-solid fa-user"></span>
         <BlockControls controls>
           <HeadingSelector
             attributes={attributes}

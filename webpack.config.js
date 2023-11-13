@@ -52,6 +52,13 @@ module.exports = {
         resourceQuery: { not: [/url/] }, // exclude react component if *.svg?url
         use: ['@svgr/webpack'],
       },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '*/webfonts/[name][ext][query]' // you can customize the path and filename as needed
+        }
+      },
     ],
   },
   // Erweitern Sie die Dateierweiterungen, die Webpack verarbeiten wird
