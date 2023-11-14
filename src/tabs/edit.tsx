@@ -12,7 +12,7 @@ import { isEqual } from "lodash";
 // Custom Components
 import { XrayBar } from "./InspectorControls/Xray";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
-import { ColorSwitcherToolbar } from "./InspectorControls/ColorSwitcher";
+import { ColorSwitcherToolbar } from "../components/ColorSwitcher";
 import { IconMarkComponent } from "../components/IconPicker";
 
 // TypeScript interfaces for better type checking

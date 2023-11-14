@@ -8,20 +8,6 @@ let optimization = defaultConfig.optimization;
 if (isProduction) {
   optimization = {
     ...defaultConfig.optimization,
-    splitChunks: {
-      chunks: 'all',
-      minSize: 10000,
-        maxSize: 249856,
-      cacheGroups: {
-        svgIcons: {
-          test: /svg[\\/]/,
-          name: 'svg-icons',
-          chunks: 'async',
-          reuseExistingChunk: true,
-          maxSize: 249856,
-        },
-      },
-    },
   };
 }
 

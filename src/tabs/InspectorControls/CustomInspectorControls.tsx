@@ -4,7 +4,7 @@ import { PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 // Import custom components
-import { ColorSwitcher } from "./ColorSwitcher";
+import { ColorSwitcher } from "../../components/ColorSwitcher";
 
 // Define TypeScript interface for component props
 interface EditProps {

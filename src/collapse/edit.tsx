@@ -25,7 +25,7 @@ import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
 import {
   ColorSwitcher,
   ColorSwitcherToolbar,
-} from "./InspectorControls/ColorSwitcher";
+} from "../components/ColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 

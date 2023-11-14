@@ -18,9 +18,9 @@ import { __ } from "@wordpress/i18n";
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useSelect } from "@wordpress/data";
 import {
-  ColorSwitcher,
-  ColorSwitcherToolbar,
-} from "./InspectorControls/ColorSwitcher";
+  ExtendedColorSwitcher,
+  ExtendedColorSwitcherToolbar,
+} from "../components/ColorSwitcher";
 import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
@@ -219,7 +219,7 @@ const Edit: React.FC<SaveProps> = ({
   return (
     <>
       <BlockControls controls>
-        {/* <ColorSwitcherToolbar
+        {/* <ExtendedColorSwitcherToolbar
           attributes={attributes}
           setAttributes={setAttributes}
         /> */}
@@ -262,8 +262,8 @@ const Edit: React.FC<SaveProps> = ({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        {/* <ColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
-        <ColorSwitcher attributes={attributes} setAttributes={setAttributes} />
+        {/* <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
+        <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} />
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
