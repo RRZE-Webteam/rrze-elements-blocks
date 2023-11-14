@@ -15,11 +15,6 @@
     "rrze-elements/accordion-hstart"
   ],
   "attributes": {
-    "message": {
-      "type": "string",
-      "source": "text",
-      "selector": "div"
-    },
     "expandAllLink": {
       "type": "boolean",
       "default": false
@@ -57,11 +52,6 @@
       "default": ""
     },
     "svgString": {
-      "type": "string",
-      "default": ""
-    },
-
-    "directory": {
       "type": "string",
       "default": ""
     }

@@ -7,11 +7,6 @@
 	"category": "design",
 	"description": "Creates an accordion block",
 	"attributes": {
-		"message": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
-		},
 		"expandAllLink": {
 			"type": "boolean",
 			"default": false

@@ -38,7 +38,6 @@ import {
  * @property {boolean} [attributes.labelSettings] - Whether label settings are enabled.
  * @property {string} [attributes.blockId] - The block ID.
  * @property {string} [attributes.tabsUid] - The UID for tabs.
- * @property {string} [attributes.directory] - Directory path for assets.
  * @property {Function} setAttributes - Function to set new attributes.
  * @property {string} clientId - Unique client ID of the block.
  * @property {Object} context - Context provided by block context.
@@ -56,7 +55,6 @@ interface EditProps {
     labelSettings?: boolean;
     blockId?: string;
     tabsUid?: string;
-    directory?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -99,8 +97,6 @@ export default function Edit({
 
   // isOpen state is used to control the opening and closing of the icon picker modal  
   const [isOpen, setOpen] = useState(false);
-  // pluginDir holds the plugin directory path fetched via REST API
-  const [pluginDir, setPluginDir] = useState("");
 
   // Sync the block's 'tabsUid' attribute with the parent block's context.  
   useEffect(() => {
@@ -141,27 +137,6 @@ export default function Edit({
     setAttributes({ xray: context["rrze-elements/tabs-xray"] });
   }, [attributes.active, context["rrze-elements/tabs-xray"]]);
 
-  /**
-   * Fetch the plugin directory path via REST API and store it inside the state.
-   */
-  useEffect(() => {
-    // Fetch plugin directory path via REST API – Needed for save.js
-    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPluginDir(data.directory);
-        setAttributes({ directory: data.directory });
-      })
-      .catch((error) => {
-        console.error("There was a problem fetching the directory:", error);
-      });
-  }, []);
-
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -173,7 +148,6 @@ export default function Edit({
         attributes={{
           title: attributes.title,
           icon: attributes.icon,
-          directory: attributes.directory,
           svgString: attributes.svgString,
         }}
         setAttributes={setAttributes}
@@ -207,7 +181,6 @@ export default function Edit({
                   >
                     <IconPicker
                       attributes={{
-                        directory: attributes.directory,
                         icon: attributes.icon,
                         svgString: attributes.svgString,
                       }}
@@ -236,7 +209,6 @@ export default function Edit({
             attributes={{
               title: attributes.title,
               labelSettings: attributes.labelSettings,
-              directory: attributes.directory,
               svgString: attributes.svgString,
               icon: attributes.icon,
             }}

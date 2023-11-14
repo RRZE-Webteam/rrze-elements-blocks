@@ -30,7 +30,6 @@ interface EditProps {
       clientId: string;
       title: string;
       position: number;
-      directory: string;
       icon: string;
       svgString: string;
     }[];
@@ -51,7 +50,6 @@ type WPBlock = {
   attributes?: {
     icon: any;
     svgString: any;
-    directory: any;
     childrenCount?: number;
     title?: string;
   };
@@ -103,7 +101,6 @@ export default function Edit({
           clientId: block?.clientId,
           title: block.attributes?.title,
           position: counter++,
-          directory: block.attributes?.directory,
           icon: block.attributes?.icon,
           svgString: block.attributes?.svgString,
         }));
@@ -247,7 +244,6 @@ export default function Edit({
                       type={iconType}
                       iconName={iconName}
                       attributes={{
-                        directory: innerClientId["directory"],
                         icon: innerClientId["icon"],
                         svgString: innerClientId["svgString"],
                       }}

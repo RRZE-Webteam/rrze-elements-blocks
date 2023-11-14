@@ -13,7 +13,6 @@ import "./assets/fontawesome/scss/brands.scss";
 import "./assets/fontawesome/scss/regular.scss";
 
 interface BlockAttributes {
-  directory: string;
   icon: string;
   svgString: string;
 }

@@ -11,7 +11,6 @@ import { TitleInspectorControls } from "./TitleSettings";
  * @interface EditProps
  * @property {Object} attributes - The attributes for the block.
  * @property {string} [attributes.svgString] - The SVG string for the icon.
- * @property {string} [attributes.directory] - The directory path for assets.
  * @property {string} [attributes.icon] - The icon name.
  * @property {string} [attributes.title] - The title.
  * @property {Function} setAttributes - The function to set new attributes.
@@ -19,7 +18,6 @@ import { TitleInspectorControls } from "./TitleSettings";
 interface EditProps {
   attributes: {
     svgString?: string;
-    directory?: string;
     icon?: string;
     title?: string;
   };
@@ -46,7 +44,6 @@ const CustomInspectorControls = ({
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}

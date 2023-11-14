@@ -37,7 +37,6 @@ interface SaveProps {
     loadOpen: boolean;
     icon: string;
     hstart?: number;
-    directory?: string;
     jumpName?: string;
     svgString?: string;
     ancestorCount?: number;
@@ -193,24 +192,6 @@ const Edit: React.FC<SaveProps> = ({
   // ]);
 
   useEffect(() => {
-    // Fetch plugin directory path via REST API – Needed for save.js
-    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPluginDir(data.directory);
-        setAttributes({ directory: data.directory });
-      })
-      .catch((error) => {
-        console.error("There was a problem fetching the directory:", error);
-      });
-  }, []);
-
-  useEffect(() => {
     setAttributes({
       hstart: context["rrze-elements/accordion-hstart"],
     });
@@ -265,7 +246,6 @@ const Edit: React.FC<SaveProps> = ({
                   >
                     <IconPicker
                       attributes={{
-                        directory: attributes.directory,
                         icon: attributes.icon,
                         svgString: attributes.svgString,
                       }}
@@ -287,7 +267,6 @@ const Edit: React.FC<SaveProps> = ({
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}
@@ -313,7 +292,6 @@ const Edit: React.FC<SaveProps> = ({
                   type={iconType}
                   iconName={iconName}
                   attributes={{
-                    directory: attributes.directory,
                     icon: attributes.icon,
                     svgString: attributes.svgString,
                   }}

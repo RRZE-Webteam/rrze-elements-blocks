@@ -47,10 +47,6 @@
     "tabsUid": {
       "type": "string",
       "default": ""
-    },
-    "directory": {
-      "type": "string",
-      "default": ""
     }
   },
   "supports": {
