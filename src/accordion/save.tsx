@@ -18,7 +18,7 @@ interface SaveProps {
 }
 const Save: React.FC<SaveProps> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, ancestorCount, hstart } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title, svgString, ancestorCount, hstart } = attributes;
 
   return (
     <div {...blockProps}>
@@ -32,11 +32,8 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
               data-toggle="collapse"
               // @ts-ignore
               href={`#collapse_${sameBlockCount + totalChildrenCount + ancestorCount}`}
-              dangerouslySetInnerHTML={{
-                __html: `${attributes.svgString}${title}`,
-              }}
             >
-              {title}
+              <span className={svgString}></span>{title}
             </button>
           </HeadingComponent>
           <div

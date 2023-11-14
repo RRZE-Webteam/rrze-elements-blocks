@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { ComboboxControl, Button } from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import fontawesomeIconNames from "./fontawesomeIconNames.json";
+import { useState, useEffect, Fragment } from "@wordpress/element";
+import fontawesomeIconNames from "./assets/fontawesome/fontawesomeIconNames.json";
 import { memo, cloneElement } from "react";
 
 // You probably already include the core styles
@@ -11,13 +11,6 @@ import "./assets/fontawesome/scss/fontawesome.scss";
 import "./assets/fontawesome/scss/solid.scss";
 import "./assets/fontawesome/scss/brands.scss";
 import "./assets/fontawesome/scss/regular.scss";
-
-// You can include all the other styles the same as before
-// @import "../components/assets/fontawesome/scss/solid.scss";
-// @import "../components/assets/fontawesome/scss/brands.scss";
-// @import "../components/assets/fontawesome/scss/regular.scss";
-
-
 
 interface BlockAttributes {
   directory: string;
@@ -41,64 +34,12 @@ const fetchSvgIcon = (
   attributes: BlockAttributes,
   setAttributes: SetAttributesFunction
 ): void => {
-  if (type && iconName) {
-    const filePath = `assets/svg/${type}/${iconName}.svg`;
-    fetch(attributes.directory + filePath)
-      .then((response) => response.text())
-      .then((svgString) => {
-        svgString = svgString.replace(
-          "<svg",
-          `<svg height="1em" width="1em" class="rrze-elements-icon" style="font-size: 1em; fill: currentcolor;" aria-hidden="true"`
-        );
-        setAttributes({ svgString: svgString + " " });
-      })
-      .catch((err) => {
-        console.error(`Failed to load SVG: ${err}`);
-      });
+  let svgFaClass = "";
+  //check if iconName and type are set
+  if (iconName && type) {
+    svgFaClass = `fa-${type} fa-${iconName}`;
+    setAttributes({ svgString: svgFaClass });
   }
-};
-
-/**
- * Dynamically import the SVG icon based on the provided type and iconName.
- *
- * @param {string} type - The type of the FontAwesome icon (e.g., solid, regular, brands).
- * @param {string} iconName - The name of the icon.
- * @param {BlockAttributes} attributes - The current block attributes.
- * @param {SetAttributesFunction} setAttributes - Function to set new attributes for the block.
- * @returns {JSX.Element | null} The loaded SVG icon or null.
- */
-const useDynamicSvgIcon = (
-  type: string,
-  iconName: string,
-  attributes: BlockAttributes,
-  setAttributes: SetAttributesFunction
-): JSX.Element | null => {
-  const [Icon, setIcon] = useState<JSX.Element | null>(null);
-
-  useEffect(() => {
-    if (type && iconName) {
-      const filePath = `../svg/${type}/${iconName}.svg`;
-
-      import(
-        /* webpackChunkName: "svg-icons" */ `./svg/${type}/${iconName}.svg?url`
-      )
-        .then((module) => {
-          const SvgIconComponent: React.FC = module.default;
-          setIcon(<SvgIconComponent />);
-        })
-        .catch((err) => {
-          console.error(`Failed to load SVG: ${err}`);
-        });
-    }
-  }, [type, iconName]);
-
-  useEffect(() => {
-    fetchSvgIcon(type, iconName, attributes, setAttributes);
-  }, [type, iconName, attributes, setAttributes]);
-
-  console.log(attributes);
-
-  return Icon;
 };
 
 /**
@@ -125,7 +66,7 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
     const [allIconsOptions, setAllIconsOptions] = useState([]);
     const [type, iconName] = attributes.icon.split(" ");
 
-    const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
+    // const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
 
     useEffect(() => {
       const createIconOptions = (icons: string[], label: string) =>
@@ -141,6 +82,10 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
       ]);
     }, []);
 
+    useEffect(() => {
+      fetchSvgIcon(type, iconName, attributes, setAttributes);
+    }, [type, iconName, attributes, setAttributes]);
+
     return (
       <>
         <ComboboxControl
@@ -150,21 +95,21 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
           options={allIconsOptions}
           allowReset={false}
         />
-        {attributes.icon !== "" && [
-          Icon
-            ? cloneElement(Icon, {
-                key: "icon",
-                className: "elements-blocks-icon-selector-display",
-              })
-            : null,
-          <Button
-            key="removeButton"
-            variant="secondary"
-            onClick={() => setAttributes({ icon: "", svgString: "" })}
-          >
-            Remove Icon
-          </Button>,
-        ]}
+        {attributes.icon !== "" && (
+          <Fragment key="iconFragment">
+            <span
+              key={attributes.icon}
+              className={`elements-blocks-icon-selector-display ${attributes.svgString}`}
+            ></span>
+            <Button
+              key="removeButton"
+              variant="secondary"
+              onClick={() => setAttributes({ icon: "", svgString: "" })}
+            >
+              Remove Icon
+            </Button>
+          </Fragment>
+        )}
       </>
     );
   }
@@ -202,10 +147,7 @@ const IconMarkComponent: React.ComponentType<IconMarkComponentProps> = ({
   defaultClass = "elements-blocks-icon-insideEditor",
   setAttributes = () => {},
 }) => {
-  const Icon = useDynamicSvgIcon(type, iconName, attributes, setAttributes);
-  return Icon
-    ? cloneElement(Icon, { className: defaultClass })
-    : null;
+  return <span className={`${attributes.svgString}`}></span>;
 };
 
-export { IconPicker, useDynamicSvgIcon, IconMarkComponent };
+export { IconPicker, IconMarkComponent };

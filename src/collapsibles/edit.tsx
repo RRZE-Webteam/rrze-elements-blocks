@@ -138,7 +138,6 @@ export default function Edit({
   return (
     <>
       <div {...props}>
-        <span className="fa-solid fa-user"></span>
         <BlockControls controls>
           <HeadingSelector
             attributes={attributes}
@@ -175,10 +174,6 @@ export default function Edit({
                 {__("Expand All", "rrze-elements-b")}
               </button>
             </div>
-          )}
-          {attributes.message && (
-            //create a classic gutenberg block and insert the message inside it's content area
-            <></>
           )}
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapse"]}

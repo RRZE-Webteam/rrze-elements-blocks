@@ -18,7 +18,7 @@ interface SaveProps {
 
 const Save: React.FC<SaveProps> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, jumpName, loadOpen, hstart } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title, jumpName, svgString, loadOpen, hstart } = attributes;
 
 
   let output = '';
@@ -29,11 +29,11 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
   }
 
   let loadOnPageLoad = '';
-  let aciveOnPageLoad = '';
+  let activeOnPageLoad = '';
 
   if ( loadOpen ) {
     loadOnPageLoad = 'open';
-    aciveOnPageLoad = 'active';
+    activeOnPageLoad = 'active';
   } 
 
   return (
@@ -44,16 +44,13 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
           <HeadingComponent level={hstart} className="accordion-heading">
             <span className="read-mode-only">Test </span>
             <button
-              className={`accordion-toggle ${aciveOnPageLoad}`}
+              className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
               data-name={output}
               // @ts-ignore
               href={`#collapse_${sameBlockCount + totalChildrenCount}`}
-              dangerouslySetInnerHTML={{
-                __html: `${attributes.svgString}${title}`,
-              }}
             >
-              
+              <span className={svgString}></span>{title}
             </button>
           </HeadingComponent>
           <div

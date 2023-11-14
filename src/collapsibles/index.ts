@@ -22,7 +22,7 @@ import "./editor.scss";
 import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
-import iconJson from "../components/fontawesomeIconNames.json";
+import iconJson from "../components/assets/fontawesome/fontawesomeIconNames.json";
 
 type SaveProps = {
   attributes: {
