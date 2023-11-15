@@ -21,7 +21,7 @@ import { isBlobURL } from "@wordpress/blob";
 import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { link, linkOff } from "@wordpress/icons";
 
-import { CustomMediaReplaceFlow } from "./BlockControls/CustomMediaReplaceFlow";
+import { CustomMediaReplaceFlow } from "../components/CustomMediaReplaceFlow";
 
 interface EditProps {
   attributes: {
