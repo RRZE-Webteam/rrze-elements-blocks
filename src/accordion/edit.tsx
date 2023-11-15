@@ -20,7 +20,7 @@ import { useSelect } from "@wordpress/data";
 import {
   ExtendedColorSwitcher,
   ExtendedColorSwitcherToolbar,
-} from "../components/ColorSwitcher";
+} from "../components/CustomColorSwitcher";
 import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
@@ -161,36 +161,6 @@ const Edit: React.FC<SaveProps> = ({
     setAttributes,
   ]);
 
-  /**
-   * Calculate the number of siblings of the same type before the current block.
-   */
-  // useEffect(() => {
-  //   if (selectedBlock && blockParents.length > 0) {
-  //     for (const block of siblingBlocks) {
-  //       if (block.clientId === selectedBlock.clientId) {
-  //         break;
-  //       }
-  //       if (block.name === selectedBlock.name) {
-  //         block?.innerBlocks?.forEach((innerBlock: WPBlock) => {
-  //           if (innerBlock.name === "rrze-elements/accordions") {
-  //             sameTypeSiblingsBefore += innerBlock?.innerBlocks?.length || 0;
-  //           }
-  //         });
-  //         sameTypeSiblingsBefore++;
-  //       }
-  //     }
-  //     if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-  //       setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-  //     }
-  //   }
-  // }, [
-  //   selectedBlock,
-  //   blockParents,
-  //   siblingBlocks,
-  //   attributes.sameBlockCount,
-  //   setAttributes,
-  // ]);
-
   useEffect(() => {
     setAttributes({
       hstart: context["rrze-elements/accordion-hstart"],
@@ -219,10 +189,10 @@ const Edit: React.FC<SaveProps> = ({
   return (
     <>
       <BlockControls controls>
-        {/* <ExtendedColorSwitcherToolbar
+        <ExtendedColorSwitcherToolbar
           attributes={attributes}
           setAttributes={setAttributes}
-        /> */}
+        />
         <ToolbarGroup>
           {/* {isTextInString("Title", attributes.show) && (
             <HeadingSelector attributes={attributes} setAttributes={setAttributes} />

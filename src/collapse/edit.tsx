@@ -23,9 +23,9 @@ import HeadingComponent from "./InspectorControls/HeadingComponent";
 // Imports of custom components and helper functions.
 import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
 import {
-  ColorSwitcher,
-  ColorSwitcherToolbar,
-} from "../components/ColorSwitcher";
+  StandardColorSwitcher as ColorSwitcher,
+  StandardColorSwitcherToolbar as ColorSwitcherToolbar,
+} from "../components/CustomColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 

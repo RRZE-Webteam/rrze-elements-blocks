@@ -4,7 +4,8 @@ import { PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 // Import custom components
-import { ColorSwitcher } from "../../components/ColorSwitcher";
+import { StandardColorSwitcher as ColorSwitcher } from "../../components/CustomColorSwitcher";
+import { StandardColorSwitcher } from "../../components/CustomColorSwitcher";
 
 // Define TypeScript interface for component props
 interface EditProps {
@@ -43,7 +44,7 @@ const CustomInspectorControls = ({
             onChange={(xray) => setAttributes({ xray })}
           />
         </PanelBody>
-        <ColorSwitcher
+        <StandardColorSwitcher
           attributes={{ color: attributes.color }}
           setAttributes={setAttributes}
         />
