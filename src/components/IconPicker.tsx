@@ -130,6 +130,7 @@ interface IconMarkComponentProps {
   attributes: BlockAttributes;
   defaultClass?: string;
   setAttributes?: SetAttributesFunction;
+  className?: string;
 }
 
 /**
@@ -145,8 +146,9 @@ const IconMarkComponent: React.ComponentType<IconMarkComponentProps> = ({
   attributes,
   defaultClass = "elements-blocks-icon-insideEditor",
   setAttributes = () => {},
+  className = "",
 }) => {
-  return <span className={`${attributes.svgString}`}></span>;
+  return <span className={`${attributes.svgString} ${className}`}></span>;
 };
 
 export { IconPicker, IconMarkComponent };

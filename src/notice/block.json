@@ -1,11 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "rrze-elements/alert",
+  "name": "rrze-elements/notice",
   "version": "1.0.0",
-  "title": "Alert",
+  "title": "Notice",
   "category": "design",
-  "description": "Creates an alert box.",
+  "description": "Creates an notice.",
   "attributes": {
     "style": {
       "type": "string",
@@ -30,7 +30,15 @@
     "borderColor": {
       "type": "string",
       "default": ""
-    }
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+	"svgString": {
+		"type": "string",
+		"default": "" 
+	}
   },
   "supports": {
     "html": false

@@ -1,0 +1,143 @@
+$red : #d9534f;
+$text-blue : #337ab7;
+$medium-blue : #5bc0de;
+$green : #5cb85c;
+$dark-grey: #4B4A56;
+
+/*!
+ * Absatzklassen
+ */
+
+ .notice {
+    display: flex;
+    margin: 20px 0;
+    padding-left: 40px;
+    position: relative;
+    border: none;
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0;
+        padding-top: 0;
+    }
+    p, ul, ol {
+        margin-bottom: .3em;
+        .alert & {
+            margin-bottom: 0;
+        }
+    }
+    .alert & {
+        margin: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    span.rrze-elements-icon {
+        padding: 2ch;
+        color: #fff;
+        background-color: $red;
+        font-size: 1em;
+    }
+}
+
+
+.notice-alert,
+.notice-attention {
+    span.rrze-elements-icon {
+        color: #fff;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: $red;
+    }
+    &.no-title p {
+        color: $red;
+        font-weight: bold;
+    }
+}
+
+.notice-hinweis {
+    span.rrze-elements-icon {
+        color: $text-blue !important;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: $text-blue;
+    }
+    &.no-title p {
+        color: $text-blue;
+        font-weight: bold;
+    }
+}
+
+.notice-baustelle {
+    span.rrze-elements-icon {
+        color: $dark-grey !important;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: $dark-grey;
+    }
+    &.no-title p {
+        color: $dark-grey;
+        font-weight: bold;
+    }
+}
+
+.notice-question {
+    span.rrze-elements-icon {
+        color: $medium-blue !important;
+    }
+}
+
+.notice-minus {
+    span.rrze-elements-icon {
+        color: $red !important;
+    }
+}
+
+.notice-plus {
+    span.rrze-elements-icon {
+        color: $green !important;
+    }
+}
+.notice-tipp {
+    span.rrze-elements-icon {
+        color: orange !important;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: $dark-grey;
+    }
+    &.no-title p {
+        color: $dark-grey;
+        font-weight: bold;
+    }
+}
+.notice-download {
+    span.rrze-elements-icon {
+        color: $medium-blue !important;
+    }
+}
+
+.notice-faubox {
+    span.rrze-elements-icon {
+        color: $medium-blue !important;
+    }
+}
+
+.notice-audio {
+    span.rrze-elements-icon {
+        color: $medium-blue !important;
+    }
+}
+
+.notice-video {
+    span.rrze-elements-icon {
+        color: $medium-blue !important;
+    }
+}
+
+.notice-thumbs-up {
+    span.rrze-elements-icon {
+        color: $green !important;
+}
+}
+.notice-thumbs-down {
+    span.rrze-elements-icon {
+        color: $red !important;
+}
+}
