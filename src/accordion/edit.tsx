@@ -18,10 +18,10 @@ import { __ } from "@wordpress/i18n";
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useSelect } from "@wordpress/data";
 import {
-  ColorSwitcher,
-  ColorSwitcherToolbar,
-} from "./InspectorControls/ColorSwitcher";
-import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
+  ExtendedColorSwitcher,
+  ExtendedColorSwitcherToolbar,
+} from "../components/CustomColorSwitcher";
+import HeadingComponent from "../components/HeadingComponent";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
 /**
@@ -37,7 +37,6 @@ interface SaveProps {
     loadOpen: boolean;
     icon: string;
     hstart?: number;
-    directory?: string;
     jumpName?: string;
     svgString?: string;
     ancestorCount?: number;
@@ -162,54 +161,6 @@ const Edit: React.FC<SaveProps> = ({
     setAttributes,
   ]);
 
-  /**
-   * Calculate the number of siblings of the same type before the current block.
-   */
-  // useEffect(() => {
-  //   if (selectedBlock && blockParents.length > 0) {
-  //     for (const block of siblingBlocks) {
-  //       if (block.clientId === selectedBlock.clientId) {
-  //         break;
-  //       }
-  //       if (block.name === selectedBlock.name) {
-  //         block?.innerBlocks?.forEach((innerBlock: WPBlock) => {
-  //           if (innerBlock.name === "rrze-elements/accordions") {
-  //             sameTypeSiblingsBefore += innerBlock?.innerBlocks?.length || 0;
-  //           }
-  //         });
-  //         sameTypeSiblingsBefore++;
-  //       }
-  //     }
-  //     if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-  //       setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-  //     }
-  //   }
-  // }, [
-  //   selectedBlock,
-  //   blockParents,
-  //   siblingBlocks,
-  //   attributes.sameBlockCount,
-  //   setAttributes,
-  // ]);
-
-  useEffect(() => {
-    // Fetch plugin directory path via REST API – Needed for save.js
-    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPluginDir(data.directory);
-        setAttributes({ directory: data.directory });
-      })
-      .catch((error) => {
-        console.error("There was a problem fetching the directory:", error);
-      });
-  }, []);
-
   useEffect(() => {
     setAttributes({
       hstart: context["rrze-elements/accordion-hstart"],
@@ -238,10 +189,10 @@ const Edit: React.FC<SaveProps> = ({
   return (
     <>
       <BlockControls controls>
-        {/* <ColorSwitcherToolbar
+        <ExtendedColorSwitcherToolbar
           attributes={attributes}
           setAttributes={setAttributes}
-        /> */}
+        />
         <ToolbarGroup>
           {/* {isTextInString("Title", attributes.show) && (
             <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
@@ -265,7 +216,6 @@ const Edit: React.FC<SaveProps> = ({
                   >
                     <IconPicker
                       attributes={{
-                        directory: attributes.directory,
                         icon: attributes.icon,
                         svgString: attributes.svgString,
                       }}
@@ -282,12 +232,11 @@ const Edit: React.FC<SaveProps> = ({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        {/* <ColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
-        <ColorSwitcher attributes={attributes} setAttributes={setAttributes} />
+        {/* <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
+        <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} />
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}
@@ -313,7 +262,6 @@ const Edit: React.FC<SaveProps> = ({
                   type={iconType}
                   iconName={iconName}
                   attributes={{
-                    directory: attributes.directory,
                     icon: attributes.icon,
                     svgString: attributes.svgString,
                   }}

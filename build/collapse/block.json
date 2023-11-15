@@ -68,10 +68,6 @@
     "svgString": {
       "type": "string",
       "default": ""
-    },
-    "directory": {
-      "type": "string",
-      "default": ""
     }
   },
   "providesContext": {

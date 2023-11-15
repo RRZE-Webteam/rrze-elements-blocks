@@ -21,7 +21,7 @@ import { isBlobURL } from "@wordpress/blob";
 import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { link, linkOff } from "@wordpress/icons";
 
-import { CustomMediaReplaceFlow } from "./BlockControls/CustomMediaReplaceFlow";
+import { CustomMediaReplaceFlow } from "../components/CustomMediaReplaceFlow";
 
 interface EditProps {
   attributes: {
@@ -65,7 +65,7 @@ export default function Edit({
     isSearch,
   } = attributes;
   // For the URL popover
-  const [popoverAnchor, setPopoverAnchor] = useState(null);
+  const [UrlPopoverAnchor, setUrlPopoverAnchor] = useState(null);
   const [isEditingURL, setIsEditingURL] = useState(false);
 
   const TagName = "a";
@@ -137,6 +137,38 @@ export default function Edit({
 
   return (
     <div {...props}>
+      <BlockControls controls>
+          <CustomMediaReplaceFlow
+            attributes={{
+              id: id,
+              url: url,
+              alt: alt,
+              srcset: srcset,
+            }}
+            setAttributes={setAttributes}
+          />
+          <ToolbarGroup>
+            {!isURLSet && isLinkTag && (
+              <ToolbarButton
+                label="link"
+                icon={link}
+                title={__("Link")}
+                shortcut={displayShortcut.primary("k")}
+                onClick={startEditing}
+              />
+            )}
+            {isURLSet && isLinkTag && (
+              <ToolbarButton
+                label="link"
+                icon={linkOff}
+                title={__("Unlink")}
+                shortcut={displayShortcut.primaryShift("k")}
+                onClick={unlink}
+                isActive={true}
+              />
+            )}
+          </ToolbarGroup>
+        </BlockControls>
       <InspectorControls>
         <PanelBody
           title={__("Advanced Options", "rrze-elements-b")}
@@ -153,7 +185,7 @@ export default function Edit({
         <Popover
           placement="bottom"
           onClose={() => {}}
-          anchor={popoverAnchor}
+          anchor={UrlPopoverAnchor}
           focusOnMount={isEditingURL ? "firstElement" : false}
           __unstableSlotName={"__unstable-block-tools-after"}
           shift
@@ -165,44 +197,10 @@ export default function Edit({
           />
         </Popover>
       )}
-      <BlockControls controls>
-        <CustomMediaReplaceFlow
-          attributes={{
-            id: id,
-            url: url,
-            alt: alt,
-            srcset: srcset,
-          }}
-          setAttributes={setAttributes}
-        />
-        <ToolbarGroup>
-          {!isURLSet && isLinkTag && (
-            <ToolbarButton
-              label="link"
-              icon={link}
-              title={__("Link")}
-              shortcut={displayShortcut.primary("k")}
-              onClick={startEditing}
-            />
-          )}
-          {isURLSet && isLinkTag && (
-            <ToolbarButton
-              label="link"
-              icon={linkOff}
-              title={__("Unlink")}
-              shortcut={displayShortcut.primaryShift("k")}
-              onClick={unlink}
-              isActive={true}
-            />
-          )}
-        </ToolbarGroup>
-      </BlockControls>
+
       <div className={`rrze-elements-cta ${imageClass} ${background}`}>
-        {!isSearch && (
-          <>
             <div className="cta-content">
               <RichText
-                {...props}
                 tagName="span"
                 value={title}
                 onChange={onChangeTitle}
@@ -211,7 +209,6 @@ export default function Edit({
                 className="cta-title"
               />
               <RichText
-                {...props}
                 tagName="span"
                 value={subtitle}
                 onChange={onChangeSubtitle}
@@ -232,10 +229,10 @@ export default function Edit({
                 {isBlobURL(url) && <Spinner />}
               </div>
             )}
+            {!isSearch && (
             <div className="cta-button-container">
-              <a ref={setPopoverAnchor} href="#" className="btn cta-button">
+              <a ref={setUrlPopoverAnchor} href="#" className="btn cta-button">
                 <RichText
-                  {...props}
                   tagName="span"
                   value={buttonText}
                   onChange={onChangeButtonText}
@@ -263,31 +260,9 @@ export default function Edit({
                 </SVG>
               </a>
             </div>
-          </>
-        )}
-        {isSearch && (
-          <>
-            <div className="cta-content">
-              <RichText
-                {...props}
-                tagName="span"
-                value={title}
-                onChange={onChangeTitle}
-                placeholder={__("CTA Title", "rrze-elements-b")}
-                allowedFormats={[]}
-                className="cta-title"
-              />
-              <RichText
-                {...props}
-                tagName="span"
-                value={subtitle}
-                onChange={onChangeSubtitle}
-                placeholder={__("CTA Subtitle", "rrze-elements-b")}
-                allowedFormats={[]}
-                className="cta-subtitle"
-              />
-            </div>
-            <div className="cta-search-container">
+            )}
+            {isSearch && (
+              <div className="cta-search-container">
               <form
                 itemProp="potentialAction"
                 itemType="https://schema.org/SearchAction"
@@ -314,11 +289,7 @@ export default function Edit({
                   required
                 />
                 {/* @ts-ignore */}
-                <button
-                  ref={setPopoverAnchor}
-                  type="submit"
-                  value=""
-                >
+                <button ref={setUrlPopoverAnchor} type="submit" value="">
                   <svg
                     height="1em"
                     width="1em"
@@ -343,8 +314,7 @@ export default function Edit({
                 </button>
               </form>
             </div>
-          </>
-        )}
+            )}
       </div>
     </div>
   );

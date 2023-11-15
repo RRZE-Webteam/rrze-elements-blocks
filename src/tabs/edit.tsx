@@ -10,9 +10,9 @@ import { createBlock } from "@wordpress/blocks";
 import { isEqual } from "lodash";
 
 // Custom Components
-import { XrayBar } from "./InspectorControls/Xray";
+import { XrayBar } from "../components/Xray";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
-import { ColorSwitcherToolbar } from "./InspectorControls/ColorSwitcher";
+import { StandardColorSwitcherToolbar as ColorSwitcherToolbar } from "../components/CustomColorSwitcher";
 import { IconMarkComponent } from "../components/IconPicker";
 
 // TypeScript interfaces for better type checking
@@ -30,7 +30,6 @@ interface EditProps {
       clientId: string;
       title: string;
       position: number;
-      directory: string;
       icon: string;
       svgString: string;
     }[];
@@ -51,7 +50,6 @@ type WPBlock = {
   attributes?: {
     icon: any;
     svgString: any;
-    directory: any;
     childrenCount?: number;
     title?: string;
   };
@@ -103,7 +101,6 @@ export default function Edit({
           clientId: block?.clientId,
           title: block.attributes?.title,
           position: counter++,
-          directory: block.attributes?.directory,
           icon: block.attributes?.icon,
           svgString: block.attributes?.svgString,
         }));
@@ -247,20 +244,19 @@ export default function Edit({
                       type={iconType}
                       iconName={iconName}
                       attributes={{
-                        directory: innerClientId["directory"],
                         icon: innerClientId["icon"],
                         svgString: innerClientId["svgString"],
                       }}
                       defaultClass="elements-tabs-label-icon-inside-editor"
                     />
                   )}
-                  {innerClientId["title"]}
+                  { innerClientId["title"]}
                 </span>
               </Button>
             );
           })}
           <Button onClick={addNewTab} className="add-tab-button" type="button" role="tab">
-            <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><Path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></Path></SVG>
+            <span className={"fa-solid fa-plus"}></span>{__(" Add new tab", "rrze-elements-b")}
           </Button>
         </div>
         <InnerBlocks

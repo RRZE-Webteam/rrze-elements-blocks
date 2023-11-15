@@ -10,11 +10,6 @@
 	],
 	"description": "Creates an inner accordion block",
 	"attributes": {
-		"message": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
-		},
 		"expandAllLink": {
 			"type": "boolean",
 			"default": false

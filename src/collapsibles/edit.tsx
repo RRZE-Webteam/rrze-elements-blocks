@@ -9,11 +9,11 @@ import { PanelBody } from "@wordpress/components";
 import { isEqual } from "lodash";
 import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
-import ExpandAllLink from "./InspectorControls/ExpandAllLink";
+import ExpandAllLink from "../components/ExpandAllLink";
 import {
   HeadingSelector,
   HeadingSelectorInspector,
-} from "./InspectorControls/HeadingSelector";
+} from "../components/HeadingSelector";
 
 /**
  * Retrieve all blocks, including nested ones.
@@ -174,10 +174,6 @@ export default function Edit({
                 {__("Expand All", "rrze-elements-b")}
               </button>
             </div>
-          )}
-          {attributes.message && (
-            //create a classic gutenberg block and insert the message inside it's content area
-            <></>
           )}
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapse"]}

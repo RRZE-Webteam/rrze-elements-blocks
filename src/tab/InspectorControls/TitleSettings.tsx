@@ -32,7 +32,6 @@ type TitleSettingsProps = {
     labelSettings?: boolean;
     icon?: string;
     title?: string;
-    directory?: string;
     svgString?: string;
   };
   setAttributes: (newAttributes: {
@@ -136,7 +135,6 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
                 type={iconType}
                 iconName={iconName}
                 attributes={{
-                  directory: attributes.directory,
                   icon: attributes.icon,
                   svgString: attributes.svgString,
                 }}
@@ -197,7 +195,6 @@ const TitlePlaceholder = ({
             type={iconType}
             iconName={iconName}
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}

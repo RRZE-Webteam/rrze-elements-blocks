@@ -8,20 +8,6 @@ let optimization = defaultConfig.optimization;
 if (isProduction) {
   optimization = {
     ...defaultConfig.optimization,
-    splitChunks: {
-      chunks: 'all',
-      minSize: 10000,
-        maxSize: 249856,
-      cacheGroups: {
-        svgIcons: {
-          test: /svg[\\/]/,
-          name: 'svg-icons',
-          chunks: 'async',
-          reuseExistingChunk: true,
-          maxSize: 249856,
-        },
-      },
-    },
   };
 }
 
@@ -51,6 +37,13 @@ module.exports = {
         issuer: /\.[jt]sx?$/,
         resourceQuery: { not: [/url/] }, // exclude react component if *.svg?url
         use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '*/webfonts/[name][ext][query]' // you can customize the path and filename as needed
+        }
       },
     ],
   },

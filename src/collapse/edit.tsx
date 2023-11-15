@@ -18,14 +18,14 @@ import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
-import HeadingComponent from "./InspectorControls/HeadingComponent";
+import HeadingComponent from "../components/HeadingComponent";
 
 // Imports of custom components and helper functions.
-import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
+import JumpLinkSelector from "../components/JumpLinkSelector";
 import {
-  ColorSwitcher,
-  ColorSwitcherToolbar,
-} from "./InspectorControls/ColorSwitcher";
+  StandardColorSwitcher as ColorSwitcher,
+  StandardColorSwitcherToolbar as ColorSwitcherToolbar,
+} from "../components/CustomColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
@@ -42,7 +42,6 @@ interface SaveProps {
     loadOpen: boolean;
     icon: string;
     hstart?: number;
-    directory?: string;
     jumpName?: string;
     svgString?: string;
   };
@@ -166,27 +165,6 @@ const Edit: React.FC<SaveProps> = ({
   ]);
 
   /**
-   * Fetch the plugin directory path via REST API and store it in the state.
-   */
-  useEffect(() => {
-    // Fetch plugin directory path via REST API – Needed for save.js
-    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPluginDir(data.directory);
-        setAttributes({ directory: data.directory });
-      })
-      .catch((error) => {
-        console.error("There was a problem fetching the directory:", error);
-      });
-  }, []);
-
-  /**
    * Set the heading level attribute based on the global setting.
    */
   useEffect(() => {
@@ -255,7 +233,6 @@ const Edit: React.FC<SaveProps> = ({
                   >
                     <IconPicker
                       attributes={{
-                        directory: attributes.directory,
                         icon: attributes.icon,
                         svgString: attributes.svgString,
                       }}
@@ -284,7 +261,6 @@ const Edit: React.FC<SaveProps> = ({
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}
@@ -311,7 +287,6 @@ const Edit: React.FC<SaveProps> = ({
                   type={iconType}
                   iconName={iconName}
                   attributes={{
-                    directory: attributes.directory,
                     icon: attributes.icon,
                     svgString: attributes.svgString,
                   }}
