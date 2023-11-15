@@ -7,13 +7,12 @@ import {
 } from "@wordpress/block-editor";
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { withSelect } from "@wordpress/data";
 
 import {
-  CustomColorSwitcher,
-  CustomColorSwitcherToolbar,
-  CustomColorPicker,
-} from "./InspectorControls/ColorSwitcher";
+  StandardColorSwitcher,
+  StandardColorSwitcherToolbar,
+  BorderColorPicker,
+} from "../components/CustomColorSwitcher";
 
 interface EditProps {
   attributes: {
@@ -35,25 +34,65 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
 
+  // Data for color options
+const colorDataAlert = [
+    {
+      color: "#e9edf2",
+      slug: "default",
+      name: __("Default", "rrze-elements-b"),
+    },
+    {
+      color: "#dff0d8",
+      slug: "success",
+      name: __("Success", "rrze-elements-b"),
+    },
+    {
+      color: "#d9edf7",
+      slug: "info",
+      name: __("Info", "rrze-elements-b"),
+    },
+    {
+      color: "#fcf8e3",
+      slug: "warning",
+      name: __("Warning", "rrze-elements-b"),
+    },
+    {
+      color: "#f2dede",
+      slug: "danger",
+      name: __(
+        "Danger",
+        "rrze-elements-b"
+      ),
+    },
+  ];
+
   return (
     <div {...props}>
       <InspectorControls>
-        <CustomColorSwitcher
-          attributes={{ color: attributes.color, style: attributes.style }}
+        <StandardColorSwitcher
+          attributes={{ color: attributes.color }}
           setAttributes={setAttributes}
+          colorData={colorDataAlert}
+          hex={true}
+          useStyle={true}
+          customColor={true}
+          useTextColor={true}
         />
 
         {attributes.style ? null : (
-          <CustomColorPicker
-            attributes={{ color: attributes.color, style: attributes.style }}
+          <BorderColorPicker
+            attributes={{ color: attributes.borderColor }}
             setAttributes={setAttributes}
           />
         )}
       </InspectorControls>
       <BlockControls controls>
-        <CustomColorSwitcherToolbar
+        <StandardColorSwitcherToolbar
           attributes={{ color: attributes.color, style: attributes.style }}
           setAttributes={setAttributes}
+          colorData={colorDataAlert}
+          hex={true}
+          useStyle={true}
         />
       </BlockControls>
       <div
