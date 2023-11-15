@@ -9,11 +9,11 @@ import { PanelBody } from "@wordpress/components";
 import { isEqual } from "lodash";
 import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
-import ExpandAllLink from "./InspectorControls/ExpandAllLink";
+import ExpandAllLink from "../components/ExpandAllLink";
 import {
   HeadingSelector,
   HeadingSelectorInspector,
-} from "./InspectorControls/HeadingSelector";
+} from "../components/HeadingSelector";
 
 /**
  * Retrieve all blocks, including nested ones.

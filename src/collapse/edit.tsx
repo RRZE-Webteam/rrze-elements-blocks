@@ -18,10 +18,10 @@ import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
-import HeadingComponent from "./InspectorControls/HeadingComponent";
+import HeadingComponent from "../components/HeadingComponent";
 
 // Imports of custom components and helper functions.
-import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
+import JumpLinkSelector from "../components/JumpLinkSelector";
 import {
   StandardColorSwitcher as ColorSwitcher,
   StandardColorSwitcherToolbar as ColorSwitcherToolbar,

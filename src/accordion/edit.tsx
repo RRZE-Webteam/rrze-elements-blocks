@@ -21,7 +21,7 @@ import {
   ExtendedColorSwitcher,
   ExtendedColorSwitcherToolbar,
 } from "../components/CustomColorSwitcher";
-import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
+import HeadingComponent from "../components/HeadingComponent";
 import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
 /**

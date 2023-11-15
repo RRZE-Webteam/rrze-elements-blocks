@@ -1,5 +1,5 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import HeadingComponent from "./InspectorControls/HeadingComponent";
+import HeadingComponent from "../components/HeadingComponent";
 
 interface Attributes {
   sameBlockCount: number;

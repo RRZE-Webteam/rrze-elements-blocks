@@ -10,7 +10,7 @@ import { createBlock } from "@wordpress/blocks";
 import { isEqual } from "lodash";
 
 // Custom Components
-import { XrayBar } from "./InspectorControls/Xray";
+import { XrayBar } from "../components/Xray";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import { StandardColorSwitcherToolbar as ColorSwitcherToolbar } from "../components/CustomColorSwitcher";
 import { IconMarkComponent } from "../components/IconPicker";
