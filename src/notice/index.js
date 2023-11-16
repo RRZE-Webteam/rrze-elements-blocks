@@ -21,6 +21,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import variations from './variations';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -35,6 +36,7 @@ registerBlockType( metadata.name, {
 		src: "minus",
 		background: "#00458c"
 	},
+	variations,
 	/**
 	 * @see ./edit.js
 	 */

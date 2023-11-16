@@ -4,9 +4,16 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  __experimentalBlockVariationPicker as BlockVariationPicker,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
+  import {
+	store as blocksStore,
+} from '@wordpress/blocks';
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
+import { useSelect } from "@wordpress/data";
+import { Placeholder } from "@wordpress/components";
 
 import {
   StandardColorSwitcher,
@@ -14,7 +21,10 @@ import {
   BorderColorPicker,
 } from "../components/CustomColorSwitcher";
 
-import { IconMarkComponent, IconPicker} from "../components/IconPicker";
+{/* @ts-ignore */}
+import variations from "./variations";
+
+import { IconMarkComponent, IconPicker } from "../components/IconPicker";
 
 interface EditProps {
   attributes: {
@@ -40,50 +50,26 @@ export default function Edit({
   const { icon } = attributes;
   const [iconType, iconName] = icon?.split(" ") || [];
   // Data for color options
-const colorDataAlert = [
-    {
-      color: "#e9edf2",
-      slug: "default",
-      name: __("Default", "rrze-elements-b"),
-    },
-    {
-      color: "#dff0d8",
-      slug: "success",
-      name: __("Success", "rrze-elements-b"),
-    },
-    {
-      color: "#d9edf7",
-      slug: "info",
-      name: __("Info", "rrze-elements-b"),
-    },
-    {
-      color: "#fcf8e3",
-      slug: "warning",
-      name: __("Warning", "rrze-elements-b"),
-    },
-    {
-      color: "#f2dede",
-      slug: "danger",
-      name: __(
-        "Danger",
-        "rrze-elements-b"
-      ),
-    },
-  ];
+
+  const blockName = 'rrze-elements/notice';
+
+  const variations = useSelect(
+		( select ) => {
+			const { getBlockVariations } = select( blocksStore ) as any;;
+			return getBlockVariations( blockName, 'block' );
+		},
+		[ blockName ]
+	);
 
   return (
     <div {...props}>
+      <Placeholder
+        icon="admin-plugins"
+        label={__("Notice", "rrze-elements")}
+      >
+        <BlockVariationPicker variations = { variations } />
+      </Placeholder>
       <InspectorControls>
-        <StandardColorSwitcher
-          attributes={{ color: attributes.color }}
-          setAttributes={setAttributes}
-          colorData={colorDataAlert}
-          hex={true}
-          useStyle={true}
-          customColor={true}
-          useTextColor={true}
-        />
-
         {attributes.style ? null : (
           <BorderColorPicker
             attributes={{ color: attributes.borderColor }}
@@ -91,22 +77,14 @@ const colorDataAlert = [
           />
         )}
         <IconPicker
-                      attributes={{
-                        icon: attributes.icon,
-                        svgString: attributes.svgString,
-                      }}
-                      setAttributes={setAttributes}
-                    />
-      </InspectorControls>
-      <BlockControls controls>
-        <StandardColorSwitcherToolbar
-          attributes={{ color: attributes.color, style: attributes.style }}
+          attributes={{
+            icon: attributes.icon,
+            svgString: attributes.svgString,
+          }}
           setAttributes={setAttributes}
-          colorData={colorDataAlert}
-          hex={true}
-          useStyle={true}
         />
-      </BlockControls>
+      </InspectorControls>
+      {/* <BlockControls controls></BlockControls> */}
       <div
         className={`notice notice-attention no-title ${
           attributes.style ? `alert-${attributes.style}` : ""
@@ -122,18 +100,25 @@ const colorDataAlert = [
         }
       >
         <div>
-        {attributes.icon && (
-                <IconMarkComponent
-                  className="rrze-elements-icon"
-                  type={iconType}
-                  iconName={iconName}
-                  attributes={{
-                    icon: attributes.icon,
-                    svgString: attributes.svgString,
-                  }}
-                  setAttributes={setAttributes}
-                />
-              )}
+          {/* {attributes.icon && (
+            <IconMarkComponent
+              className="rrze-elements-icon"
+              type={iconType}
+              iconName={iconName}
+              attributes={{
+                icon: attributes.icon,
+                svgString: attributes.svgString,
+              }}
+              setAttributes={setAttributes}
+            />
+          )} */}
+          {variations.map ( ( variation: any ) => { 
+            return (
+              variation.icon
+            )
+          })
+          }
+
         </div>
         <InnerBlocks
           template={[
