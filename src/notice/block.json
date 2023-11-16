@@ -9,35 +9,7 @@
   "attributes": {
     "style": {
       "type": "string"
-    },
-    "color": {
-      "type": "string",
-      "default": "#e9edf2"
-    },
-    "border_color": {
-      "type": "string",
-      "default": ""
-    },
-    "title": {
-      "type": "string",
-      "default": ""
-    },
-    "textColor": {
-      "type": "string",
-      "default": "#000000"
-    },
-    "borderColor": {
-      "type": "string",
-      "default": ""
-    },
-    "icon": {
-      "type": "string",
-      "default": ""
-    },
-	"svgString": {
-		"type": "string",
-		"default": "" 
-	}
+    }
   },
   "supports": {
     "html": false
