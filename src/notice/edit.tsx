@@ -7,13 +7,21 @@ import {
   __experimentalBlockVariationPicker as BlockVariationPicker,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
-  import {
-	store as blocksStore,
-} from '@wordpress/blocks';
-// import { useEffect, useState } from "@wordpress/element";
+import { store as blocksStore } from "@wordpress/blocks";
+import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
-import { Placeholder } from "@wordpress/components";
+import {
+  Placeholder,
+  PanelBody,
+  ToolbarItem,
+  ToolbarGroup,
+  ToolbarButton,
+  Button,
+  Modal,
+} from "@wordpress/components";
+
+import { symbol } from "@wordpress/icons";
 
 import {
   StandardColorSwitcher,
@@ -21,10 +29,8 @@ import {
   BorderColorPicker,
 } from "../components/CustomColorSwitcher";
 
-{/* @ts-ignore */}
+// @ts-ignore
 import variations from "./variations";
-
-import { IconMarkComponent, IconPicker } from "../components/IconPicker";
 
 interface EditProps {
   attributes: {
@@ -49,26 +55,29 @@ export default function Edit({
   const props = useBlockProps();
   const { icon } = attributes;
   const [iconType, iconName] = icon?.split(" ") || [];
-  // Data for color options
 
-  const blockName = 'rrze-elements/notice';
+  // isOpen state is used to control the opening and closing of the icon picker modal
+  const [isOpen, setOpen] = useState(false);
+
+  const blockName = "rrze-elements/notice";
 
   const variations = useSelect(
-		( select ) => {
-			const { getBlockVariations } = select( blocksStore ) as any;;
-			return getBlockVariations( blockName, 'block' );
-		},
-		[ blockName ]
-	);
+    (select) => {
+      const { getBlockVariations } = select(blocksStore) as any;
+      return getBlockVariations(blockName, "block");
+    },
+    [blockName]
+  );
+
+  const matchedVariation = variations.find(
+    (variation: any) => variation.name === attributes.style
+  );
+
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
 
   return (
     <div {...props}>
-      <Placeholder
-        icon="admin-plugins"
-        label={__("Notice", "rrze-elements")}
-      >
-        <BlockVariationPicker variations = { variations } />
-      </Placeholder>
       <InspectorControls>
         {attributes.style ? null : (
           <BorderColorPicker
@@ -76,15 +85,64 @@ export default function Edit({
             setAttributes={setAttributes}
           />
         )}
-        <IconPicker
-          attributes={{
-            icon: attributes.icon,
-            svgString: attributes.svgString,
-          }}
-          setAttributes={setAttributes}
-        />
+        <PanelBody
+          title={__("Style Settings", "rrze-elements-b")}
+          initialOpen={true}
+        >
+          <BlockVariationPicker
+            variations={variations}
+            onSelect={(variation) => {
+              setAttributes({ style: variation?.name });
+            }}
+          />
+        </PanelBody>
       </InspectorControls>
-      {/* <BlockControls controls></BlockControls> */}
+      <BlockControls controls>
+        <ToolbarGroup>
+          <ToolbarItem>
+            {() => (
+              <>
+                <ToolbarButton
+                  icon={symbol}
+                  label={
+                    icon === ""
+                      ? __("Select a style", "rrze-elements-b")
+                      : __("Change the style", "rrze-elements-b")
+                  }
+                  onClick={openModal}
+                />
+                {isOpen && (
+                  <Modal
+                    title={__("Select an Icon", "rrze-elements-b")}
+                    onRequestClose={closeModal}
+                  >
+                    <BlockVariationPicker
+                      variations={variations}
+                      onSelect={(variation) => {
+                        setAttributes({ style: variation?.name });
+                      }}
+                    />
+                    <Button variant="primary" onClick={closeModal}>
+                      {__("Save changes", "rrze-elements-b")}
+                    </Button>
+                  </Modal>
+                )}
+              </>
+            )}
+          </ToolbarItem>
+        </ToolbarGroup>
+      </BlockControls>
+
+      {!attributes.style && (
+        <Placeholder icon="admin-plugins" label={__("Notice", "rrze-elements")}>
+          <BlockVariationPicker
+            variations={variations}
+            onSelect={(variation) => {
+              setAttributes({ style: variation?.name });
+            }}
+          />
+        </Placeholder>
+      )}
       <div
         className={`notice notice-attention no-title ${
           attributes.style ? `alert-${attributes.style}` : ""
@@ -100,33 +158,21 @@ export default function Edit({
         }
       >
         <div>
-          {/* {attributes.icon && (
-            <IconMarkComponent
-              className="rrze-elements-icon"
-              type={iconType}
-              iconName={iconName}
-              attributes={{
-                icon: attributes.icon,
-                svgString: attributes.svgString,
-              }}
-              setAttributes={setAttributes}
-            />
-          )} */}
-          {variations.map ( ( variation: any ) => { 
-            return (
-              variation.icon
-            )
-          })
-          }
-
+          <div>
+            {/* Render the icon if a matching variation is found */}
+            {matchedVariation?.icon}
+          </div>
         </div>
-        <InnerBlocks
-          template={[
-            ["core/paragraph", { placeholder: __("Add a description…") }],
-          ]}
-          allowedBlocks={["core/paragraph"]}
-          templateLock={false}
-        />
+        {attributes.style && (
+          <InnerBlocks
+            template={[
+              ["core/heading", { placeholder: __("Add a Headline") }],
+              ["core/paragraph", { placeholder: __("Add a description…") }],
+            ]}
+            allowedBlocks={["core/heading", "core/paragraph"]}
+            templateLock={false}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,25 +1,30 @@
-$red : #d9534f;
+$red : rgb(137, 39, 36);
 $text-blue : #337ab7;
 $medium-blue : #5bc0de;
 $green : #5cb85c;
-$dark-grey: #4B4A56;
+$dark-grey: #121212;
 
 /*!
  * Absatzklassen
  */
 
- .notice {
-    display: flex;
+ /*!
+ * Absatzklassen
+ */
+
+ .wp-block-rrze-elements-notice {
+    display: block;
     margin: 20px 0;
     padding-left: 40px;
     position: relative;
-    border: none;
     h1, h2, h3, h4, h5, h6 {
         margin-bottom: 0;
         padding-top: 0;
+        color: #121212;
     }
     p, ul, ol {
         margin-bottom: .3em;
+        color: #121212;
         .alert & {
             margin-bottom: 0;
         }
@@ -29,19 +34,23 @@ $dark-grey: #4B4A56;
         padding-top: 0;
         padding-bottom: 0;
     }
-    span.rrze-elements-icon {
-        padding: 2ch;
-        color: #fff;
-        background-color: $red;
-        font-size: 1em;
+    svg.rrze-elements-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 30px;
+        font-size: 2em
+    }
+    .notice {
+        border: none;
     }
 }
 
 
 .notice-alert,
 .notice-attention {
-    span.rrze-elements-icon {
-        color: #fff;
+    svg.rrze-elements-icon {
+        fill: $red !important;
     }
     h1, h2, h3, h4, h5, h6 {
         color: $red;
@@ -53,8 +62,8 @@ $dark-grey: #4B4A56;
 }
 
 .notice-hinweis {
-    span.rrze-elements-icon {
-        color: $text-blue !important;
+    svg.rrze-elements-icon {
+        fill: $text-blue !important;
     }
     h1, h2, h3, h4, h5, h6 {
         color: $text-blue;
@@ -66,8 +75,8 @@ $dark-grey: #4B4A56;
 }
 
 .notice-baustelle {
-    span.rrze-elements-icon {
-        color: $dark-grey !important;
+    svg.rrze-elements-icon {
+        fill: $dark-grey !important;
     }
     h1, h2, h3, h4, h5, h6 {
         color: $dark-grey;
@@ -79,25 +88,25 @@ $dark-grey: #4B4A56;
 }
 
 .notice-question {
-    span.rrze-elements-icon {
-        color: $medium-blue !important;
+    svg.rrze-elements-icon {
+        fill: $medium-blue !important;
     }
 }
 
 .notice-minus {
-    span.rrze-elements-icon {
-        color: $red !important;
+    svg.rrze-elements-icon {
+        fill: $red !important;
     }
 }
 
 .notice-plus {
-    span.rrze-elements-icon {
-        color: $green !important;
+    svg.rrze-elements-icon {
+        fill: $green !important;
     }
 }
 .notice-tipp {
-    span.rrze-elements-icon {
-        color: orange !important;
+    svg.rrze-elements-icon {
+        fill: orange !important;
     }
     h1, h2, h3, h4, h5, h6 {
         color: $dark-grey;
@@ -108,36 +117,36 @@ $dark-grey: #4B4A56;
     }
 }
 .notice-download {
-    span.rrze-elements-icon {
-        color: $medium-blue !important;
+    svg.rrze-elements-icon {
+        fill: $medium-blue !important;
     }
 }
 
 .notice-faubox {
-    span.rrze-elements-icon {
-        color: $medium-blue !important;
+    svg.rrze-elements-icon {
+        fill: $medium-blue !important;
     }
 }
 
 .notice-audio {
-    span.rrze-elements-icon {
-        color: $medium-blue !important;
+    svg.rrze-elements-icon {
+        fill: $medium-blue !important;
     }
 }
 
 .notice-video {
-    span.rrze-elements-icon {
-        color: $medium-blue !important;
+    svg.rrze-elements-icon {
+        fill: $medium-blue !important;
     }
 }
 
 .notice-thumbs-up {
-    span.rrze-elements-icon {
-        color: $green !important;
+    svg.rrze-elements-icon {
+        fill: $green !important;
 }
 }
 .notice-thumbs-down {
-    span.rrze-elements-icon {
-        color: $red !important;
+    svg.rrze-elements-icon {
+        fill: $red !important;
 }
 }

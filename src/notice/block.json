@@ -8,8 +8,7 @@
   "description": "Creates an notice.",
   "attributes": {
     "style": {
-      "type": "string",
-      "default": "default"
+      "type": "string"
     },
     "color": {
       "type": "string",
