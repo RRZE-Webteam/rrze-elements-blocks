@@ -21,6 +21,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -37,8 +38,16 @@ registerBlockType( metadata.name as any, {
 		},
 	},
 	icon: {
-		src: "minus",
-		background: "#00458c"
+		src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g opacity=".5"><rect x="75.86" y="204.25" width="360.29" height="133.91" fill="evenodd" stroke-width="0"/></g><path d="m81.59,173.84h112.67c3.16,0,5.73,2.57,5.73,5.73v25.16h-124.13v-25.16c0-3.16,2.57-5.73,5.73-5.73Z" fill="evenodd" stroke-width="0"/><path d="m150.48,173.84h112.67c3.16,0,5.73,2.57,5.73,5.73v25.16h-124.13v-25.16c0-3.16,2.57-5.73,5.73-5.73Z" fill="evenodd" opacity=".2" stroke-width="0"/></svg>
+	},
+	__experimentalLabel: (attributes: any, { context }: any) => {
+		const { title } = attributes;
+
+		// In the list view, use the block's title as the label.
+		// If the title is empty, fall back to the default label.
+		if (context === 'list-view' && title) {
+			return title;
+		}
 	},
 	/**
 	 * @see ./edit.js

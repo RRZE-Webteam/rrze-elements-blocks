@@ -1,4 +1,9 @@
-import { registerBlockType } from "@wordpress/blocks";
+import {
+  registerBlockType,
+  BlockConfiguration,
+  BlockSaveProps,
+} from "@wordpress/blocks";
+import "./style.scss";
 import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
@@ -9,13 +14,24 @@ import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
 
+interface BlockAttributes {
+  title?: string;
+  hstart?: number;
+  // ... add other attribute types here if needed
+}
+
+interface LabelContext {
+  context: string;
+}
+
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType(metadata.name, {
+registerBlockType(metadata.name as any, {
   edit: Edit,
+  //@ts-ignore
   save,
   icon: {
     src: (
@@ -62,7 +78,10 @@ registerBlockType(metadata.name, {
       </svg>
     ),
   },
-  __experimentalLabel: (attributes, { context }) => {
+  __experimentalLabel: (
+    attributes: BlockAttributes,
+    { context }: LabelContext
+  ) => {
     const { title, hstart } = attributes;
 
     // In the list view, use the block's title as the label.
