@@ -112,7 +112,7 @@ function rrze_rrze_elements_block_init() {
     register_block_type( __DIR__ . '/build/tabs');
     register_block_type( __DIR__ . '/build/tab');
     register_block_type( __DIR__ . '/build/cta');
-    register_block_type( __DIR__ . '/build/block-blueprint');
+    register_block_type( __DIR__ . '/build/insertion');
 
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('rrze-elements');
