@@ -31,13 +31,13 @@ registerBlockType(metadata.name, {
             width="360.29"
             height="142.31"
             fillRule="evenodd"
-            stroke-width="0"
+            strokeWidth="0"
           />
         </g>
         <path
           d="m81.59,109.83h348.82c3.16,0,5.73,2.57,5.73,5.73v25.16H75.86v-25.16c0-3.16,2.57-5.73,5.73-5.73Z"
           fillRule="evenodd"
-          stroke-width="0"
+          strokeWidth="0"
         />
         <rect
           x="75.86"
@@ -47,7 +47,7 @@ registerBlockType(metadata.name, {
           rx="5.73"
           ry="5.73"
           fillRule="evenodd"
-          stroke-width="0"
+          strokeWidth="0"
         />
         <rect
           x="75.86"
@@ -57,7 +57,7 @@ registerBlockType(metadata.name, {
           rx="5.73"
           ry="5.73"
           fillRule="evenodd"
-          stroke-width="0"
+          strokeWidth="0"
         />
       </svg>
     ),
