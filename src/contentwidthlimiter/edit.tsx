@@ -81,15 +81,6 @@ export default function Edit({
     setActive(false);
   };
 
-  // let margin = "";
-  // if (alignment === "left") {
-  //   margin = "margin-right: auto !important;";
-  // } else if (alignment === "right") {
-  //   margin = "margin-left: auto !important;";
-  // } else {
-  //   margin = "margin: 0 auto !important;";
-  // }
-
   let hint = "";
   if(Math.round(width * 0.125) >= 50 && Math.round(width * 0.125) <= 75){
     hint = __(" (Ideale Leselänge)", "rrze-elements-b");

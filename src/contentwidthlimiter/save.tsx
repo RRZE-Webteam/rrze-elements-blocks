@@ -16,24 +16,44 @@ export default function save({ attributes }: SaveProps) {
   let characterWidth = Math.round(width * 0.125);
 
   let alignment = attributes.alignment;
-  let margin = "";
+  let marginStyle = "";
   if (alignment === "left") {
-    margin = "margin-right: auto;";
+    marginStyle = "margin-right: auto;";
   } else if (alignment === "right") {
-    margin = "margin-left: auto;";
+    marginStyle = "margin-left: auto;";
   } else {
-    margin = "margin: 0 auto;";
+    marginStyle = "margin: 0 auto;";
   }
 
+  // Helper function to convert CSS string to style object
+  function cssStringToStyleObject(cssString: string) {
+    const styles = cssString
+      .split(";")
+      .map((style) => style.split(":"))
+      .reduce((styleObj, style) => {
+        if (style.length === 2) {
+          const key = style[0].trim();
+          const value = style[1].trim();
+          styleObj[key] = value;
+        }
+        return styleObj;
+      }, {} as { [key: string]: string });
+    return styles;
+  }
 
   return (
-          <div 
-            className={`limit-width ${blockProps?.className}`}
-            style={{ maxWidth: `min(${characterWidth}ch, 100%)`, margin }}
-          >
-            <InnerBlocks.Content />
-          </div>
+    <div
+      className={`limit-width ${blockProps?.className}`}
+      style={{
+        maxWidth: `min(${characterWidth}ch, 100%)`,
+        ...cssStringToStyleObject(marginStyle),
+      }}
+    >
+      <InnerBlocks.Content />
+    </div>
   );
 }
 
-{/* <div class="limit-width" style="max-width: min(60ch, 100%); margin: 0 auto;"></div> */}
+{
+  /* <div class="limit-width" style="max-width: min(60ch, 100%); margin: 0 auto;"></div> */
+}
