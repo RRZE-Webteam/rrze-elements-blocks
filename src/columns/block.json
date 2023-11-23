@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "rrze-elements/columns",
   "version": "0.0.6",
-  "title": "Columns",
+  "title": "Text Columns",
   "category": "design",
-  "description": "Creates a columns block.",
+  "description": "Creates a columns block which dynamically breaks.",
   "supports": {
     "html": false
   },
@@ -29,11 +29,14 @@
     "borderColor": {
       "type": "string",
       "default": "#C3C3CB"
+    },
+    "border":{ 
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
-  "script": "rrze-tabs",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
 }

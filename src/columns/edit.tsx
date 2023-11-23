@@ -31,6 +31,7 @@ interface EditProps {
     rule: boolean;
     width: number;
     borderColor: string;
+    border: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -50,7 +51,7 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
 
-  const { numberOfColumns, rule, width, borderColor } = attributes;
+  const { numberOfColumns, rule, width, borderColor, border } = attributes;
 
   const onChangeRangeControl = (numberOfColumns: number) => {
     setAttributes({ numberOfColumns });
@@ -62,23 +63,23 @@ export default function Edit({
 
   const onChangeRuler = (rule: boolean) => {
     setAttributes({ rule });
-    if(rule === false) {
-      setAttributes({ borderColor: "#C3C3CB" });
-    }
   };
 
+  const onChangeBorder = (border: boolean) => {
+    setAttributes({ border });
+  };
+
+    // Style calculation moved outside JSX for clarity and optimization
+    const style = {
+      ...props.style,
+      columnCount: numberOfColumns,
+      columnWidth: width,
+      ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
+      ...(border ? { border: `1px solid ${borderColor}` } : {}),
+    };
+
   return (
-    <div
-      {...props}
-      style={{
-        ...props.style,
-        columnCount: numberOfColumns,
-        columnWidth: width,
-        ...(rule
-          ? { columnRule: `1px solid ${borderColor}` } // Use finalRuleColor here
-          : {}),
-      }}
-    >
+    <div {...props} style={style}>
       <InspectorControls>
         <PanelBody
           title={__("Display settings", "rrze-elements-b")}
@@ -92,11 +93,6 @@ export default function Edit({
             onChange={onChangeRangeControl}
             step={1}
             value={numberOfColumns}
-          />
-          <ToggleControl
-            checked={rule}
-            label={__("ShowRuler", "rrze-elements-b")}
-            onChange={onChangeRuler}
           />
           <RangeControl
             label={__("Minimum Width of Columns", "rrze-elements-b")}
@@ -112,10 +108,20 @@ export default function Edit({
             step={1}
             value={width}
           />
+          <ToggleControl
+            checked={rule}
+            label={__("Show Rule", "rrze-elements-b")}
+            onChange={onChangeRuler}
+          />
+          <ToggleControl
+            checked={border}
+            label={__("Show Border", "rrze-elements-b")}
+            onChange={onChangeBorder}
+          />
         </PanelBody>
-        {rule && (
+        { (rule || border) && (
           <BorderColorPicker
-            attributes={{ color: attributes.borderColor }}
+            attributes={{ color: borderColor }}
             setAttributes={setAttributes}
           />
         )}
