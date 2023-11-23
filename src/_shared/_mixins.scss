@@ -3,7 +3,7 @@ Functions and Mixins
 */
 
 @function px2rem($font-size, $base-font-size: 16) {
-    @return $font-size / $base-font-size + rem;
+    @return calc($font-size / $base-font-size) + rem;
   }
   @mixin px2rem($font-size, $line: 1.5, $base-font-size: 16) {
       font-size: px2rem($font-size, $base-font-size);

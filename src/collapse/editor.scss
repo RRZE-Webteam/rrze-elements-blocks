@@ -1,5 +1,5 @@
-@use "variables" as v;
-@use "mixins" as m;
+@use "../_shared/variables" as v;
+@use "../_shared/mixins" as m;
 
 
 /**
@@ -129,7 +129,7 @@ button.expand-all.standard-btn {
 			svg{
 				fill: var(--color-primary-ci-hell-kontrast, #fff);
 			}
-	
+
 
 			.alert.font-light & {
 				* {
@@ -393,9 +393,12 @@ button.expand-all.standard-btn {
 .accordion-body.active {
 	height: auto;
 	/* Change this to a specific height if needed */
-	margin-top: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	//margin-top: 10px;
+	padding: 15px 20px;
+	background: var(--color-ContentRegions, #f5f7f9);
+	* {
+		background: var(--color-ContentRegions, #f5f7f9);
+	}
 }
 
 
