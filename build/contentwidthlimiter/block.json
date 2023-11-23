@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/block-contentwidthlimiter",
+  "version": "0.0.6",
+  "title": "Content Width Limiter",
+  "category": "design",
+  "description": "Creates a contentwidthlimiter block.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Content Width Limiter"
+    },
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    }
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "script": "rrze-tabs",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
