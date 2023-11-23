@@ -49,8 +49,8 @@
     "html": false
   },
   "styles": [
-    { "name": "background", "label": "With Background", "isDefault": true },
-    { "name": "no-background", "label": "No Background" },
+    { "name": "background", "label": "With Background" },
+    { "name": "no-background", "label": "No Background", "isDefault": true },
     { "name": "small", "label": "Small" }
   ],
   "textdomain": "rrze-elementsb",
