@@ -88,6 +88,20 @@ export default function Edit({
     hint = ""; 
   }
 
+  let showHandleLeft = false;
+  let showHandleRight = false;
+  if(alignment === "right"){
+    showHandleLeft = true;
+    showHandleRight = false;
+
+  } else if (alignment === "center"){
+    showHandleLeft = true;
+    showHandleRight = true;
+  } else {
+    showHandleLeft = false;
+    showHandleRight = true;
+  }
+
   return (
     <div {...props} className={`${props.className}` }>
       <BlockControls controls>
@@ -100,13 +114,13 @@ export default function Edit({
         __("Ca. ") + Math.round(width * 0.125) + __(" Zeichen", "rrze-elements-b") + hint
       )}
       <ResizableBox
-      className={`limit-width align${alignment}`}
+      className={`limit-width cwl-${alignment}`}
   enable={{
     bottom: false,
     bottomLeft: false,
     bottomRight: false,
-    left: false,
-    right: true,
+    left: showHandleLeft,
+    right: showHandleRight,
     top: false,
     topLeft: false,
     topRight: false
