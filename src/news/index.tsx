@@ -18,6 +18,7 @@ import { registerBlockType } from '@wordpress/blocks';
  * Internal dependencies
  */
 import Edit from './edit';
+//@ts-ignore
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
