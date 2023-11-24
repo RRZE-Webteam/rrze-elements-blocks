@@ -48,8 +48,6 @@ const CategorySelectorControl = ({
     };
   }, []);
 
-  console.log(categories);
-
   // Function to handle category selection
   const onCategoryChange = (selectedCategorySlug: string) => {
     setAttributes({ cat: selectedCategorySlug });

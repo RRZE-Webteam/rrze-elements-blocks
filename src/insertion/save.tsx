@@ -13,7 +13,6 @@ interface SaveProps {
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
   const alignment = attributes.alignment;
-  console.log(blockProps);
 
   return (
       <>
