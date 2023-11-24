@@ -51,13 +51,11 @@ export default function Edit({
    const alignment = attributes.alignment;
 
    const onChangeResizerStart = (event: MouseEvent, direction: string, elementRef: HTMLElement): void => {
-    // This is where you can handle any state or actions needed at the start of resizing
-    console.log("Resize started");
   };
   
   const onChangeResizer = (event: MouseEvent, direction: string, elementRef: HTMLElement, delta: { height: number, width: number }): void => {
     const newWidth = elementRef.offsetWidth;
-    // Update the local state continuously during resizing
+    
     if(newWidth >= 300 && newWidth <= 1040){
       setWidth(newWidth);
     }
@@ -71,7 +69,6 @@ export default function Edit({
     else {
       setBackground("#f2ded1");
     }
-    console.log("Resizing: new width is ", newWidth);
   };
   
   const onChangeResizerStop = (event: MouseEvent, direction: string, elementRef: HTMLElement, delta: { height: number, width: number }): void => {
