@@ -14,6 +14,7 @@ import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
 import { CategorySelectorControl } from "../components/TaxonomySelector";
+import { CustomQueryControls } from "../components/QueryControls";
 
 /**
  * Interface representing the properties for the Edit component.
@@ -69,6 +70,12 @@ export default function Edit({
             step={1}
           />
            <CategorySelectorControl
+            attributes={{
+              cat: attributes.cat
+            }}
+            setAttributes={setAttributes}
+            />
+            <CustomQueryControls 
             attributes={{
               cat: attributes.cat
             }}
