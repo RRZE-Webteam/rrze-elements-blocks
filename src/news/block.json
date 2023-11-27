@@ -31,7 +31,8 @@
       "default": false
     },
     "hstart" : {
-      "type": "number"
+      "type": "number",
+      "default": 2
     },
     "type" : {
       "type": "string"

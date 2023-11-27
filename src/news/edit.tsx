@@ -6,6 +6,11 @@ import {
   InspectorControls,
 } from "@wordpress/block-editor";
 
+import {
+  HeadingSelector,
+  HeadingSelectorInspector,
+} from "../components/HeadingSelector";
+
 import ServerSideRender from "@wordpress/server-side-render";
 
 import {
@@ -39,6 +44,10 @@ interface EditProps {
     divclass: string;
     hidemeta: boolean;
     grid: boolean;
+    hstart: number;
+    hideduplicates: boolean;
+    has_thumbnail: boolean;
+    sticky_only: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -103,29 +112,29 @@ export default function Edit({
 
   const updateTypeAttribute = (leftWidth: number, rightWidth: number) => {
     const type = attributes.type || "";
-    const types = type.split(",").filter(t => t); // Filter out empty strings
+    const types = type.split(",").filter((t) => t); // Filter out empty strings
     const regex = /cols_\d+-\d+/;
     let newTypes: string[];
-  
+
     if (leftWidth === 0 || rightWidth === 0) {
       // Remove any 'cols_?-?' entries when either width is 0
-      newTypes = types.filter(t => !regex.test(t));
+      newTypes = types.filter((t) => !regex.test(t));
     } else {
       // Update or add 'cols_?-?' entry
       let hasCol = false;
-      newTypes = types.map(t => {
+      newTypes = types.map((t) => {
         if (regex.test(t)) {
           hasCol = true;
           return `cols_${leftWidth}-${rightWidth}`;
         }
         return t;
       });
-  
+
       if (!hasCol) {
         newTypes.push(`cols_${leftWidth}-${rightWidth}`);
       }
     }
-  
+
     setAttributes({ type: newTypes.join(",") });
   };
 
@@ -138,8 +147,18 @@ export default function Edit({
 
   return (
     <div {...props}>
+      <BlockControls controls>
+        <HeadingSelector
+          attributes={{ hstart: attributes.hstart }}
+          setAttributes={setAttributes}
+        />
+      </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Settings", "rrze-elements-b")} initialOpen={true}>
+        <PanelBody title={__("Filter", "rrze-elements-b")} initialOpen={true}>
+          <HeadingSelectorInspector
+            attributes={{ hstart: attributes.hstart }}
+            setAttributes={setAttributes}
+          />
           <TextControl
             label="Title"
             value={title}
@@ -163,6 +182,21 @@ export default function Edit({
             value={divclass}
             onChange={(value) => setAttributes({ divclass: value })}
           />
+          <CheckboxControl
+            label={__("Hide duplicate posts", "rrze-elements-b")}
+            checked={attributes.hideduplicates ?? false}
+            onChange={(value) => setAttributes({ hideduplicates: value })}
+          />
+          <CheckboxControl
+            label={__("Only show posts with thumbnails", "rrze-elements-b")}
+            checked={attributes.has_thumbnail ?? false}
+            onChange={(value) => setAttributes({ has_thumbnail: value })}
+          />
+           <CheckboxControl
+            label={__("Only show sticky posts", "rrze-elements-b")}
+            checked={attributes.sticky_only ?? false}
+            onChange={(value) => setAttributes({ sticky_only: value })}
+          />
         </PanelBody>
         <PanelBody title={__("Layout", "rrze-elements-b")} initialOpen={true}>
           <CheckboxControl
@@ -181,14 +215,14 @@ export default function Edit({
             onChange={onChangeType("show_more")}
           />
           <RangeControl
-            label={__("Width of left column", "rrze-elements-b")}
+            label={__("Ratio image", "rrze-elements-b")}
             value={leftColumnWidth}
             onChange={onChangeLeftColumnWidth}
             min={0}
             max={3}
           />
           <RangeControl
-            label={__("Width of right column", "rrze-elements-b")}
+            label={__("Ratio text & metadata", "rrze-elements-b")}
             value={rightColumnWidth}
             onChange={onChangeRightColumnWidth}
             min={0}
@@ -207,6 +241,9 @@ export default function Edit({
           type: attributes.type,
           divclass: divclass,
           hidemeta: hidemeta,
+          sticky_only: attributes.sticky_only,
+          hideduplicates: attributes.hideduplicates,
+          has_thumbnail: attributes.has_thumbnail,
         }}
       />
     </div>
