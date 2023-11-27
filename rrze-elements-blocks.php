@@ -14,6 +14,7 @@ Text Domain:     rrze-elementsB
 */
 
 namespace RRZE\ElementsB;
+use RRZE\Elements\News\News;
 
 defined('ABSPATH') || exit;
 
@@ -97,6 +98,16 @@ function deactivation()
 {
 }
 
+function render_news_block($attributes) {
+    Helper::debug(get_option('home'));
+    if (class_exists('RRZE\Elements\News\News')) {
+        $news_instance = new News();
+        return $news_instance->shortcodeCustomNews($attributes);
+    }
+    
+    return '';
+}
+
 /**
  * Register Block
  *
@@ -114,6 +125,12 @@ function rrze_rrze_elements_block_init() {
     register_block_type( __DIR__ . '/build/cta');
     register_block_type( __DIR__ . '/build/insertion');
     register_block_type( __DIR__ . '/build/contentwidthlimiter');
+    register_block_type( __DIR__ . '/build/columns');
+    if (class_exists('RRZE\Elements\News\News')) {
+        register_block_type( __DIR__ . '/build/news', array(
+            'render_callback' => 'RRZE\ElementsB\render_news_block',
+        ));
+    }
 
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('rrze-elements');

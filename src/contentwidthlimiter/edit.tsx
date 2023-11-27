@@ -51,28 +51,30 @@ export default function Edit({
    const alignment = attributes.alignment;
 
    const onChangeResizerStart = (event: MouseEvent, direction: string, elementRef: HTMLElement): void => {
-    // This is where you can handle any state or actions needed at the start of resizing
-    console.log("Resize started");
   };
   
   const onChangeResizer = (event: MouseEvent, direction: string, elementRef: HTMLElement, delta: { height: number, width: number }): void => {
     const newWidth = elementRef.offsetWidth;
-    // Update the local state continuously during resizing
-    setWidth(newWidth);
+    
+    if(newWidth >= 300 && newWidth <= 1040){
+      setWidth(newWidth);
+    }
     setActive(true);
     
-    if(Math.round(width * 0.125) >= 50 && Math.round(width * 0.125) <= 75){
+    if(Math.round(newWidth * 0.125) >= 50 && Math.round(newWidth * 0.125) <= 75){
       setBackground("#cfedd8");
-    } else {
+    } else if (newWidth <= 300 || newWidth >= 1040){
+      setBackground("#E61607");
+    }
+    else {
       setBackground("#f2ded1");
     }
-    console.log("Resizing: new width is ", newWidth);
   };
   
   const onChangeResizerStop = (event: MouseEvent, direction: string, elementRef: HTMLElement, delta: { height: number, width: number }): void => {
     const finalWidth = elementRef.offsetWidth;
     // Finalize the width when resizing stops
-    if(width >= 150 && width <= 1100){
+    if(finalWidth >= 300 && finalWidth <= 1040){
       setWidth(finalWidth);
       setAttributes({ width: finalWidth });
     }
@@ -84,6 +86,8 @@ export default function Edit({
   let hint = "";
   if(Math.round(width * 0.125) >= 50 && Math.round(width * 0.125) <= 75){
     hint = __(" (Ideale Leselänge)", "rrze-elements-b");
+  } else if (width <= 300 || width >= 1040){
+    hint = __(" (Außerhalb des sichtbaren Bereichs)", "rrze-elements-b");
   } else {
     hint = ""; 
   }

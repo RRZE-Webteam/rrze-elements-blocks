@@ -1,0 +1,75 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/block-blueprint",
+  "version": "0.0.6",
+  "title": "Blueprint",
+  "category": "design",
+  "description": "Creates a blueprint block.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title" : {
+      "type": "string"
+    },
+    "cat" : {
+      "type": "string"
+    },
+    "tag" : {
+      "type": "string"
+    },
+    "num" : {
+      "type": "number",
+      "default": 5
+    },
+    "divclass" : {
+      "type": "string"
+    },
+    "hidemeta" : {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart" : {
+      "type": "number"
+    },
+    "type" : {
+      "type": "string"
+    },
+    "hideduplicates" : {
+      "type": "boolean"
+    },
+    "has_thumbnail" : {
+      "type": "boolean"
+    },
+    "days" : {
+      "type": "number"
+    },
+    "id" : {
+      "type": "array"
+    },
+    "display" : {
+      "type": "string"
+    },
+    "hide" : {
+      "type": "array"
+    },
+    "imgfloat" : {
+      "type": "string"
+    },
+    "columns" : {
+      "type": "number"
+    },
+    "sticky_only" : {
+      "type": "boolean"
+    },
+    "grid" : {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.ts",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -51,12 +51,12 @@
   "styles": [
     {
       "name": "background",
-      "label": "With Background",
-      "isDefault": true
+      "label": "With Background"
     },
     {
       "name": "no-background",
-      "label": "No Background"
+      "label": "No Background",
+      "isDefault": true
     },
     {
       "name": "small",

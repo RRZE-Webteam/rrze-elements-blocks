@@ -21,26 +21,28 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( metadata.name, {
+registerBlockType( metadata.name as any, {
 	/**
 	 * Used to construct a preview for the block to be shown in the block inserter.
 	 */
-	example: {
-		attributes: {
-			title: 'Your CTA title',
-			buttonText: 'Button Text',
-			subtitle: 'Your CTA subtitle'
-		},
-		className: 'is-style-background',
-	},
 	icon: {
-		src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect x="75.86" y="175.02" width="360.28" height="160.43" rx="5.73" ry="5.73" fill="#evenodd" strokeWidth="0"/><rect x="90.94" y="189.82" width="162.03" height="29.53" rx="5.73" ry="5.73" fill="#fff" strokeWidth="0"/><rect x="90.94" y="229.35" width="162.03" height="12.53" rx="5.73" ry="5.73" fill="#fff" strokeWidth="0"/><rect x="264.87" y="295.98" width="162.03" height="27.41" rx="5.73" ry="5.73" fill="#fff" strokeWidth="0"/></svg>
+		src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect x="60.05" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/><rect x="199.53" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/><rect x="339.01" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/></svg>
+	},
+	__experimentalLabel: (attributes: any, { context }: any) => {
+		const { title } = attributes;
+
+		// In the list view, use the block's title as the label.
+		// If the title is empty, fall back to the default label.
+		if (context === 'list-view' && title) {
+			return title;
+		}
 	},
 	/**
 	 * @see ./edit.js
@@ -51,4 +53,4 @@ registerBlockType( metadata.name, {
 	 * @see ./save.js
 	 */
 	save,
-} );
+} as any );
