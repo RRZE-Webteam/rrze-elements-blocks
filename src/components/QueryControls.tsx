@@ -5,8 +5,9 @@ import { QueryControls } from "@wordpress/components";
 type CustomQueryControlsProps = {
   attributes: {
     cat: string;
+    num: number;
   };
-  setAttributes: (newAttributes: { cat: string }) => void;
+  setAttributes: (attributes: Partial<CustomQueryControlsProps["attributes"]>) => void;
 };
 
 interface Category {
@@ -68,7 +69,7 @@ const CustomQueryControls = ({
   const onCategoryChange = (
     newValue: string | Array<string | { id: number; value: string }>
   ) => {
-    let currentCategorySlugs = cat.split(",").filter(Boolean);
+    let currentCategorySlugs = cat.toLowerCase().split(",").filter(Boolean);
 
     const newValueSlugs = (Array.isArray(newValue) ? newValue : [newValue])
       .map((item) => {
@@ -91,33 +92,18 @@ const CustomQueryControls = ({
       }
     });
 
-    console.log(currentCategorySlugs);
     setAttributes({ cat: currentCategorySlugs.join(",") });
   };
 
   return (
     <QueryControls
-      authorList={[
-        {
-          id: 1,
-          name: "admin",
-        },
-        {
-          id: 2,
-          name: "editor",
-        },
-      ]}
       categorySuggestions={categorySuggestions}
-      numberOfItems={5}
-      onAuthorChange={function noRefCheck() {}}
+      numberOfItems={attributes.num}
       onCategoryChange={onCategoryChange}
-      onNumberOfItemsChange={function noRefCheck() {}}
-      onOrderByChange={function noRefCheck() {}}
-      onOrderChange={function noRefCheck() {}}
-      order="desc"
-      orderBy="date"
-      selectedAuthorId={1}
+      onNumberOfItemsChange={(value) => setAttributes({ num: value })}
       selectedCategories={selectedCategories}
+      minItems = {1}
+      maxItems = {15}
     />
   );
 };

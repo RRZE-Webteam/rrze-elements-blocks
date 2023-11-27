@@ -8,7 +8,12 @@ import {
 
 import ServerSideRender from "@wordpress/server-side-render";
 
-import { PanelBody, TextControl, RangeControl, SelectControl } from "@wordpress/components";
+import {
+  PanelBody,
+  TextControl,
+  RangeControl,
+  SelectControl,
+} from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
@@ -60,27 +65,13 @@ export default function Edit({
             value={title}
             onChange={(value) => setAttributes({ title: value })}
           />
-          <RangeControl
-            label="Number of Entries"
-            marks
-            max={15}
-            min={1}
-            onChange={(value) => setAttributes({ num: value })}
-            value={attributes.num}
-            step={1}
+          <CustomQueryControls
+            attributes={{
+              cat: attributes.cat,
+              num: attributes.num,
+            }}
+            setAttributes={setAttributes}
           />
-           <CategorySelectorControl
-            attributes={{
-              cat: attributes.cat
-            }}
-            setAttributes={setAttributes}
-            />
-            <CustomQueryControls 
-            attributes={{
-              cat: attributes.cat
-            }}
-            setAttributes={setAttributes}
-            />
         </PanelBody>
       </InspectorControls>
       <ServerSideRender
