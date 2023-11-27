@@ -27,13 +27,14 @@
       "type": "string"
     },
     "hidemeta": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "hstart": {
       "type": "number"
     },
     "type": {
-      "type": "array"
+      "type": "string"
     },
     "hideduplicates": {
       "type": "boolean"
@@ -61,6 +62,10 @@
     },
     "sticky_only": {
       "type": "boolean"
+    },
+    "grid": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "rrze-elements-b",
