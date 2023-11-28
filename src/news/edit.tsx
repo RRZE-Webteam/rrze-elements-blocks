@@ -1,7 +1,6 @@
 // Imports from WordPress libraries
 import {
   useBlockProps,
-  InnerBlocks,
   BlockControls,
   InspectorControls,
 } from "@wordpress/block-editor";
@@ -18,6 +17,8 @@ import {
   TextControl,
   CheckboxControl,
   RangeControl,
+  __experimentalToggleGroupControl as ToggleGroupControl,
+  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -48,14 +49,18 @@ interface EditProps {
     hideduplicates: boolean;
     has_thumbnail: boolean;
     sticky_only: boolean;
+    days: number;
+    display: string;
+    hide: string;
+    imgfloat: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
 
 /**
- * Edit component for the Blueprint block.
+ * Edit component for the News block.
  *
- * Provides controls for customizing the Blueprint-block and renders the block inside the editor.
+ * Provides controls for customizing the News-block and renders the block inside the editor.
  *
  * @param {EditProps} props - The properties passed to the component.
  * @returns {JSX.Element} The JSX representation of the component.
@@ -79,7 +84,7 @@ export default function Edit({
 
   const onChangeType = (newType: string) => () => {
     const type = attributes.type || "";
-    const types = type.split(",");
+    const types = type.split(",").filter((t) => t);
     if (types.includes(newType)) {
       const index = types.indexOf(newType);
       types.splice(index, 1);
@@ -90,11 +95,23 @@ export default function Edit({
     setAttributes({ type: types.join(",") });
   };
 
+  const onChangeDisplay = () => {
+    const currentDisplay = attributes.display || "";
+    if (currentDisplay.includes("list")) {
+      setAttributes({ display: currentDisplay.replace("list", "").trim() });
+    } else {
+      setAttributes({
+        display: currentDisplay ? `${currentDisplay}, list` : "list",
+      });
+    }
+  };
+
   const onChangeLeftColumnWidth = (newWidth: number) => {
     let newRightWidth = 0;
     if (newWidth !== 0) {
       newRightWidth = 4 - newWidth;
     }
+    setAttributes({ columns: 0 });
     setLeftColumnWidth(newWidth);
     setRightColumnWidth(newRightWidth);
     updateTypeAttribute(newWidth, newRightWidth);
@@ -105,6 +122,7 @@ export default function Edit({
     if (newWidth !== 0) {
       newLeftWidth = 4 - newWidth;
     }
+    setAttributes({ columns: 0 });
     setRightColumnWidth(newWidth);
     setLeftColumnWidth(newLeftWidth);
     updateTypeAttribute(newLeftWidth, newWidth);
@@ -138,11 +156,32 @@ export default function Edit({
     setAttributes({ type: newTypes.join(",") });
   };
 
-  const removeColsFromType = () => {
-    const type = attributes.type || "";
-    const regex = /cols_\d+-\d+/; // Regular expression to match 'cols_?-?' pattern
-    const types = type.split(",").filter((t) => !regex.test(t)); // Remove only the matching 'cols_?-?' entries
-    setAttributes({ type: types.join(",") }); // Update the 'type' attribute
+  const onChangeColumns = (newColumns: number) => {
+    if (newColumns === 1) {
+      setAttributes({ columns: 0 });
+    } else {
+      setLeftColumnWidth(0);
+      setRightColumnWidth(0);
+      setAttributes({ columns: newColumns });
+    }
+  };
+
+  const onChangeDays = (newDays: number) => {
+    setAttributes({ days: newDays });
+  };
+
+  const toggleHideValue = (value: string) => {
+    let hideValues = attributes.hide ? attributes.hide.split(",") : [];
+    if (hideValues.includes(value)) {
+      hideValues = hideValues.filter((v) => v !== value); // Remove the value
+    } else {
+      hideValues.push(value); // Add the value
+    }
+    setAttributes({ hide: hideValues.join(",") });
+  };
+
+  const handleToggleImgAlignment = (newAlignment: string) => {
+    setAttributes({ imgfloat: newAlignment });
   };
 
   return (
@@ -155,15 +194,6 @@ export default function Edit({
       </BlockControls>
       <InspectorControls>
         <PanelBody title={__("Filter", "rrze-elements-b")} initialOpen={true}>
-          <HeadingSelectorInspector
-            attributes={{ hstart: attributes.hstart }}
-            setAttributes={setAttributes}
-          />
-          <TextControl
-            label="Title"
-            value={title}
-            onChange={(value) => setAttributes({ title: value })}
-          />
           <CustomQueryControls
             attributes={{
               cat: attributes.cat,
@@ -192,17 +222,28 @@ export default function Edit({
             checked={attributes.has_thumbnail ?? false}
             onChange={(value) => setAttributes({ has_thumbnail: value })}
           />
-           <CheckboxControl
+          <CheckboxControl
             label={__("Only show sticky posts", "rrze-elements-b")}
             checked={attributes.sticky_only ?? false}
             onChange={(value) => setAttributes({ sticky_only: value })}
           />
+          <RangeControl
+            label={__("Number of days", "rrze-elements-b")}
+            value={attributes.days}
+            onChange={onChangeDays}
+            min={0}
+            max={365}
+          />
         </PanelBody>
-        <PanelBody title={__("Layout", "rrze-elements-b")} initialOpen={true}>
-          <CheckboxControl
-            label={__("Hide meta", "rrze-elements-b")}
-            checked={attributes.hidemeta ?? false}
-            onChange={(value) => setAttributes({ hidemeta: value })}
+        <PanelBody title={__("Layout", "rrze-elements-b")} initialOpen={false}>
+          <HeadingSelectorInspector
+            attributes={{ hstart: attributes.hstart }}
+            setAttributes={setAttributes}
+          />
+          <TextControl
+            label="Title"
+            value={title}
+            onChange={(value) => setAttributes({ title: value })}
           />
           <CheckboxControl
             label={__("Img first", "rrze-elements-b")}
@@ -213,6 +254,11 @@ export default function Edit({
             label={__("Show more articles button", "rrze-elements-b")}
             checked={attributes.type?.includes("show_more") ?? false}
             onChange={onChangeType("show_more")}
+          />
+          <CheckboxControl
+            label={__("Display as List", "rrze-elements-b")}
+            checked={attributes.display?.includes("list") ?? false}
+            onChange={onChangeDisplay}
           />
           <RangeControl
             label={__("Ratio image", "rrze-elements-b")}
@@ -228,15 +274,62 @@ export default function Edit({
             min={0}
             max={3}
           />
+          <RangeControl
+            label={__("Number of Columns", "rrze-elements-b")}
+            value={attributes.columns}
+            onChange={onChangeColumns}
+            min={1}
+            max={4}
+          />
+          <ToggleGroupControl
+            label={__("Image alignment", "rrze-elements-b")}
+            value={attributes.hstart}
+            onChange={handleToggleImgAlignment}
+            isBlock
+          >
+            <ToggleGroupControlOption
+              value={"left"}
+              label={__("left", "rrze-elements-b")}
+            />
+            <ToggleGroupControlOption
+              value={"right"}
+              label={__("right", "rrze-elements-b")}
+            />
+          </ToggleGroupControl>
+        </PanelBody>
+        <PanelBody
+          title={__("Hide Options", "rrze-elements-b")}
+          initialOpen={false}
+        >
+          <CheckboxControl
+            label={__("Hide Date", "rrze-elements-b")}
+            checked={attributes.hide?.includes("date") ?? false}
+            onChange={() => toggleHideValue("date")}
+          />
+          <CheckboxControl
+            label={__("Hide Thumbnail", "rrze-elements-b")}
+            checked={attributes.hide?.includes("thumbnail") ?? false}
+            onChange={() => toggleHideValue("thumbnail")}
+          />
+          <CheckboxControl
+            label={__("Hide Category", "rrze-elements-b")}
+            checked={attributes.hide?.includes("category") ?? false}
+            onChange={() => toggleHideValue("category")}
+          />
+          <CheckboxControl
+            label={__("Hide meta", "rrze-elements-b")}
+            checked={attributes.hidemeta ?? false}
+            onChange={(value) => setAttributes({ hidemeta: value })}
+          />
         </PanelBody>
       </InspectorControls>
       <ServerSideRender
-        block="rrze-elements/block-blueprint"
+        block="rrze-elements/news"
         attributes={{
           title: title,
           num: attributes.num,
           cat: attributes.cat,
-          columns: 3,
+          columns: attributes.columns,
           tag: tag,
           type: attributes.type,
           divclass: divclass,
@@ -244,6 +337,10 @@ export default function Edit({
           sticky_only: attributes.sticky_only,
           hideduplicates: attributes.hideduplicates,
           has_thumbnail: attributes.has_thumbnail,
+          days: attributes.days,
+          display: attributes.display,
+          hide: attributes.hide,
+          imgfloat: attributes.imgfloat,
         }}
       />
     </div>

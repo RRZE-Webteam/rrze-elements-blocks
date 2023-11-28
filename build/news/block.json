@@ -1,11 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "rrze-elements/block-blueprint",
+  "name": "rrze-elements/news",
   "version": "0.0.6",
-  "title": "Blueprint",
+  "title": "News",
   "category": "design",
-  "description": "Creates a blueprint block.",
+  "description": "Creates a news block.",
   "supports": {
     "html": false
   },
@@ -44,22 +44,26 @@
       "type": "boolean"
     },
     "days": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "id": {
       "type": "array"
     },
     "display": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "hide": {
-      "type": "array"
-    },
-    "imgfloat": {
       "type": "string"
     },
+    "imgfloat": {
+      "type": "string",
+      "default": "left"
+    },
     "columns": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "sticky_only": {
       "type": "boolean"
