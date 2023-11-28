@@ -34,7 +34,7 @@ registerBlockType( metadata.name as any, {
 	 * Used to construct a preview for the block to be shown in the block inserter.
 	 */
 	icon: {
-		src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect x="60.05" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/><rect x="199.53" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/><rect x="339.01" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/></svg>
+		src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect x="199.53" y="-23.79" width="112.94" height="280.62" rx="5.73" ry="5.73" transform="translate(372.52 -139.48) rotate(90)" fill="evenodd" strokeWidth="0"/><rect x="199.53" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" transform="translate(512) rotate(90)" fill="evenodd" strokeWidth="0"/><rect x="199.53" y="255.17" width="112.94" height="280.62" rx="5.73" ry="5.73" transform="translate(651.48 139.48) rotate(90)" fill="evenodd" strokeWidth="0"/></svg>
 	},
 	__experimentalLabel: (attributes: any, { context }: any) => {
 		const { title } = attributes;

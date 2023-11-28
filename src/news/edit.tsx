@@ -77,8 +77,6 @@ export default function Edit({
   const divclass = attributes.divclass || "";
   const hidemeta = attributes.hidemeta || false;
 
-  console.log(attributes);
-
   const [leftColumnWidth, setLeftColumnWidth] = useState(0);
   const [rightColumnWidth, setRightColumnWidth] = useState(0);
 
