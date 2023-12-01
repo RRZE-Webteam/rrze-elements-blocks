@@ -32,6 +32,24 @@
       "default": ""
     }
   },
+  "example": {
+    "attributes": {
+      "style": "success",
+      "color": "#e9edf2",
+      "border_color": "",
+      "title": "Alert",
+      "textColor": "#000000",
+      "borderColor": ""
+    },
+    "innerBlocks": [
+      {
+        "name": "core/paragraph",
+        "attributes": {
+          "content": "This is an alert box."
+        }
+      }
+    ]
+  },
   "supports": {
     "html": false
   },

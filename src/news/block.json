@@ -73,6 +73,24 @@
       "default": false
     }
   },
+  "example": {
+    "attributes": {
+      "num": 5,
+      "hidemeta": false,
+      "hstart": 2,
+      "type": "cols_3-1",
+      "hideduplicates": false,
+      "has_thumbnail": false,
+      "days": 0,
+      "id": [],
+      "display": "list",
+      "hide": "",
+      "imgfloat": "left",
+      "columns": 0,
+      "sticky_only": false,
+      "grid": false
+    }
+  },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
