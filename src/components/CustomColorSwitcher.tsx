@@ -8,6 +8,8 @@ import {
   ColorPicker,
 } from "@wordpress/components";
 import { color as colorIcon } from "@wordpress/icons";
+//@ts-ignore
+import { useSetting } from "@wordpress/block-editor";
 import Color from "color";
 
 /**
@@ -22,6 +24,7 @@ import Color from "color";
  * @property {boolean} [useStyle] - Flag to apply styles.
  * @property {boolean} [customColor] - Flag for custom color usage.
  * @property {boolean} [useTextColor] - Flag to set textcolor attribute based on selected Color.
+ * @property {boolean} [overwriteThemeColors] - Flag to overwrite theme colors.
  */
 type ColorSwitcherProps = {
   attributes: {
@@ -40,6 +43,7 @@ type ColorSwitcherProps = {
   useStyle?: boolean;
   customColor?: boolean;
   useTextColor?: boolean;
+  overwriteThemeColors?: boolean;
 };
 
 /**
@@ -120,10 +124,20 @@ const ColorSwitcher = ({
   setAttributes,
   hex,
   useStyle,
-  colorData = standardColorData,
   customColor = false,
   useTextColor = false,
+  overwriteThemeColors = false,
 }: ColorSwitcherProps) => {
+
+  // if the theme colorPalette is not empty, use it instead of the passed values!
+  // Example entry from colorPalette [Log] [{slug: "primary", color: "#005177", name: "Primary"}, {slug: "accent", color: "#f2a900", name: "Accent"}] (2)
+  // const colorPalette = useSetting( 'color.palette' );
+  // console.log(colorPalette);
+  const themeColorPalette = !overwriteThemeColors
+  ? useSetting('color.palette') as { color: string; slug: string; name: string }[]
+  : null;
+  const colorData = themeColorPalette || standardColorData;
+
   const value = hex
     ? attributes.color
     : colorData.find((entry) => entry.slug === attributes.color)?.color;
@@ -163,7 +177,14 @@ const ColorSwitcherToolbar = ({
   colorData = standardColorData,
   useStyle = false,
   hex = false,
+  overwriteThemeColors = false,
 }: ColorSwitcherProps) => {
+  const themeColorPalette = !overwriteThemeColors
+    ? useSetting('color.palette') as { color: string; slug: string; name: string }[]
+    : null;
+
+  const effectiveColorData = themeColorPalette || colorData;
+
   const classLabel = hex
     ? `rrzeElementsBFakColorSelector ${attributes.color.slice(1)}`
     : `rrzeElementsBFakColorSelector ${attributes.color}`;
@@ -175,7 +196,7 @@ const ColorSwitcherToolbar = ({
             icon={colorIcon}
             className={classLabel}
             label={__("Select a Color", "rrze-elements-b")}
-            controls={colorData.map((entry) => ({
+            controls={effectiveColorData.map((entry) => ({
               key: entry.slug,
               title: entry.name,
               icon: colorIcon,
