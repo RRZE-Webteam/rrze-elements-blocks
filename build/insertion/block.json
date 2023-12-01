@@ -23,5 +23,19 @@
   "editorScript": "file:./index.js",
   "script": "rrze-tabs",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "example": {
+    "attributes": {
+      "title": "Insertion",
+      "alignment": "right"
+    },
+    "innerBlocks": [
+      {
+        "name": "core/paragraph",
+        "attributes": {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, elit quis lacinia lacinia, i aculis eros."
+        }
+      }
+    ]
+  }
 }

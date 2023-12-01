@@ -11,6 +11,25 @@
       "type": "string"
     }
   },
+  "example": {
+    "attributes": {
+      "style": "notice-hinweis"
+    },
+    "innerBlocks": [
+      {
+        "name": "core/heading",
+        "attributes": {
+          "content": "Info"
+        }
+      },
+      {
+        "name": "core/paragraph",
+        "attributes": {
+          "content": "This is an info notice."
+        }
+      }
+    ]
+  },
   "supports": {
     "html": false
   },
