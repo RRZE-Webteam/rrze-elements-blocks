@@ -130,7 +130,7 @@ export default function save({ attributes }: SaveProps) {
                 type="text"
                 value=""
                 name="s"
-                placeholder={__('Search for…', 'rrze-elements-b')}
+                placeholder={buttonText}
                 required
               />
               {/* @ts-ignore */}
