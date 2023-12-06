@@ -1,6 +1,6 @@
-/*!
- * Bootstrap Alerts
- */
+@use "variables" as v;
+@use "mixins" as m;
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -70,11 +70,11 @@
     position: relative;
     background: #fff;
     overflow: initial;
-    border: 1px dashed var(--color-TextLight, $medium-grey);
+    border: 1px dashed var(--color-TextLight, v.$medium-grey);
     border-radius: var(--border-radius, 3px);
     &:after {
         background: #fff;
-        border: 1px dashed var(--color-TextLight, $medium-grey);
+        border: 1px dashed var(--color-TextLight, v.$medium-grey);
         color: var(--color-Text);
         content: "Beispiel";
         font-family: sans-serif;
@@ -99,5 +99,26 @@
     }
     &[title]:after {
         content: attr(title);
+    }
+}
+
+.fau-theme {
+    #content .alert {
+        h2 {
+            padding-top: 7px;
+        }
+        p {
+            padding: 5px 0;
+        }
+        &.alert-danger p {
+            font-size: 1.1rem;
+        }
+
+        margin-left: calc(var(--gutter-halfwidth, 15px) * -1);
+        margin-right: calc(var(--gutter-halfwidth, 15px) * -1);
+        @media (min-width: 768px) {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 }

@@ -5,7 +5,7 @@ import fontawesomeIconNames from "./assets/fontawesome/fontawesomeIconNames.json
 import { memo, cloneElement } from "react";
 
 // You probably already include the core styles
-// @import "../components/assets/fontawesome/scss/fontawesome.scss";
+// @import "../<components/assets/fontawesome/scss/fontawesome.scss";
 
 import "./assets/fontawesome/scss/fontawesome.scss";
 import "./assets/fontawesome/scss/solid.scss";

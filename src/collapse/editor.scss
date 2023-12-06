@@ -8,9 +8,17 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-/*!
- * Accordion
- */
+@import "../_shared/variables";
+@import "../_shared/mixins";
+@import "../_shared/accordion";
+
+.accordion-toggle span[class^="fa"] {
+	float: left;
+	line-height: 2em;
+}
+	/*!
+     * Accordion
+     */
 h1.accordion-heading,
 h2.accordion-heading,
 h3.accordion-heading,

@@ -1,4 +1,10 @@
-	.wp-block-rrze-elements-collapsibles {
+@import "../_shared/variables";
+@import "../_shared/mixins";
+@import "../_shared/accordion";
+
+@import "../_shared/accordion";
+
+.wp-block-rrze-elements-collapsibles {
 		padding-bottom: 2em;
 		margin-bottom: 2em;
 		// .block-editor-inserter{

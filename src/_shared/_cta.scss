@@ -1,3 +1,6 @@
+@use "variables" as v;
+@use "mixins" as m;
+
 .rrze-elements-cta {
     position: relative;
     margin: 2em 0;
@@ -6,59 +9,72 @@
     $backgrounds: '1', 'rrze';
     @each $background in $backgrounds {
         &.bg-#{$background} {
-            background-image: url("../svg/cta/background-#{$background}.svg");
+            background-image: url("../svg/cta/background-#{$background}.svg?url");
             background-position: bottom 50% left;
             background-size: 100%;
             background-repeat: no-repeat;
         }
     }
+
     @media screen and (max-width: 767px) {
         margin-left: -15px;
         margin-right: -15px;
     }
+
     @media screen and (min-width: 992px) {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
     }
+
     .rrze-2019 & {
         background-color: #005CAE;
     }
+
     .cta-content {
         padding: 10px;
+
         .rrze-2019 & {
             text-shadow: 0 0 5px #005CAE;
         }
+
         @media screen and (min-width: 992px) {
             flex-basis: 60%;
             flex-grow: 1;
             flex-shrink: 0;
             padding: 4em 2em 8em 6.5em;
         }
+
         .cta-title {
             display: block;
             font-size: 1.8em;
             line-height: 1.5;
             font-weight: bold;
+
             @media screen and (min-width: 992px) {
                 font-size: 2.6em;
             }
         }
+
         .cta-subtitle {
             display: block;
             font-size: 1.1em;
             line-height: 1.5;
             margin-top: .25em;
+
             @media screen and (min-width: 992px) {
                 font-size: 1.3em;
             }
         }
     }
+
     .cta-button-container,
     .cta-search-container {
         padding: 10px 1em 1em 10px;
         display: flex;
         justify-content: flex-end;
+        right: 0;
+
         @media screen and (min-width: 992px) {
             position: absolute;
             bottom: 0;
@@ -66,6 +82,7 @@
             padding: 10px 6.5em 2em 6.5em;
         }
     }
+
     .cta-button {
         display: inline-block;
         background: #fff;
@@ -76,18 +93,24 @@
         color: var(--color-Text, #222222);
         font-weight: bold;
         border-radius: 0;
-        &:hover, &:focus, &:active {
+
+        &:hover,
+        &:focus,
+        &:active {
             box-shadow: none;
-            background-color: var(--color-button-bg, #1f4c7a);
+            background-color: var(--cta-btn-bg-color, #004a9f);
+            color: #ffffff;
             text-decoration: none;
+
             .rrze-2019 & {
                 background-color: #00458C;
-                color: #ffffff;
             }
         }
+
         .rrze-2019 & {
             color: #393944;
         }
+
         .rrze-elements-icon {
             margin-left: 1em;
             vertical-align: middle;
@@ -95,17 +118,21 @@
             padding-bottom: 0;
             padding-right: 0;
             border-radius: 0 !important;
+            box-shadow: none;
         }
+
         @media screen and (min-width: 992px) {
             max-width: 100%;
             font-size: 1.25em;
             padding: 0.65em 1.5em 0.65em 2.5em;
         }
     }
+
     .cta-search {
         width: 100%;
         display: flex;
         justify-content: flex-end;
+
         @media screen and (min-width: 992px) {
             //position: relative;
             //right: 15%;
@@ -113,13 +140,21 @@
             //font-size: 1.25em;
             //padding: 0.65em 1.5em 0.65em 2.5em;
         }
+
         label {
-            @include hideout();
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
+
         input[type="text"] {
             margin: 0;
-            width: clamp(20ch,50ch,100%);
+            width: clamp(20ch, 50ch, 100%);
         }
+
         input[type="text"],
         input[type="submit"],
         button[type="submit"] {
@@ -129,101 +164,140 @@
             height: 3em;
             margin: 0;
         }
+
         input[type="text"] {
             background-color: #fff;
         }
+
         input[type="submit"],
         button[type="submit"] {
             position: relative;
             padding-left: 1em;
             padding-right: 1em;
             background-color: #fff;
-            color: var(--color-Text, #222222);
+            color: var(--cta-btn-text-color, #222222);
+
             .rrze-2019 & {
                 color: #393944;
             }
+
             svg {
                 top: 0;
             }
-            &:hover, &:focus, &.active {
-                background-color: var(--color-button-bg, #004a9f);
+
+            &:hover,
+            &:focus,
+            &.active {
+                background-color: var(--cta-btn-bg-color, #004a9f);
                 color: #fff;
+
                 svg {
                     fill: #fff !important;
                 }
+
                 .rrze-2019 & {
                     background-color: #00458c;
                 }
             }
         }
     }
+
     .cta-image {
         display: none;
+
         img {
             box-shadow: none;
             height: 100%;
             object-fit: cover;
         }
+
         @media screen and (min-width: 992px) {
             display: block;
             width: 25%;
             min-width: 200px;
         }
 
+
+
     }
+
+    img.attachment-large.size-large {
+        width: 320px;
+        height: 320px;
+    }
+
+    img {
+        border: 0;
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
     &.style-small {
         background-size: cover;
+
         .cta-content {
             @media screen and (min-width: 992px) {
-                padding: min(5%,2em) min(5%,2em) 120px;
+                padding: min(5%, 2em) min(5%, 2em) 120px;
             }
         }
+
         .cta-image {
             min-width: 0;
         }
+
         .cta-button-container,
         .cta-search-container {
             padding: 10px;
+
             @media screen and (min-width: 992px) {
                 padding: 0 min(5%, 2em) min(5%, 2em);
             }
         }
+
         .cta-button {
             @media screen and (min-width: 992px) {
                 position: static;
                 max-width: 100%;
                 padding: .5em 1em;
             }
+
             .rrze-elements-icon {
                 margin-left: .25em;
             }
         }
+
         &.no-image {
             .cta-content {
                 @media screen and (min-width: 992px) {
                     padding: min(5%, 2em) min(5%, 2em) 120px;
                 }
+
                 @media screen and (min-width: 1200px) {
                     min-height: auto;
                 }
             }
         }
     }
+
     &.no-image {
         .cta-button {
             @media screen and (min-width: 992px) {
                 right: 0;
             }
         }
+
         .cta-content {
             @media screen and (min-width: 992px) {
                 padding-right: 6.5em;
-                min-height: 320px;
+                min-height: 128px;
             }
+
             @media screen and (min-width: 1200px) {
-                min-height: 360px;
+                min-height: 128px;
             }
         }
+
         .cta-button-container,
         .cta-search-container {
             @media screen and (min-width: 992px) {
@@ -231,21 +305,25 @@
                 padding-left: 4em;
             }
         }
+
         @each $background in $backgrounds {
             &.bg-#{$background} {
                 background-position: left bottom;
             }
         }
+
         &.bg-rrze {
             background-size: cover;
             background-position: center center;
         }
+
         &.style-small {
+
             .cta-button-container,
             .cta-search-container {
                 @media screen and (min-width: 992px) {
-                    padding-right: min(5%,2em);
-                    padding-left: min(5%,2em);
+                    padding-right: min(5%, 2em);
+                    padding-left: min(5%, 2em);
                 }
             }
         }

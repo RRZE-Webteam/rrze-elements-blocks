@@ -21,6 +21,8 @@ class Main
      */
     public function __construct($pluginFile)
     {
+        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+
         $this->pluginFile = $pluginFile;
         new Sanitize();
     }
@@ -41,8 +43,8 @@ class Main
         }
 
         wp_register_style(
-            'rrze-elements',
-            plugins_url('assets/css/rrze-elements.css', plugin_basename($this->pluginFile)),
+            'rrze-elements-blocks',
+            plugins_url('assets/css/rrze-elements-blocks.css', plugin_basename($this->pluginFile)),
             [],
             RRZE_ELEMENTS_VERSION
         );

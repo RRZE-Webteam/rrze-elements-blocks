@@ -224,7 +224,7 @@ button.expand-all.standard-btn {
         overflow: hidden;
 
         .accordion-inner {
-            @extend .clearfix;
+            @extend .clearfix !optional;
             border: none;
             background-color: #fff;
             padding: 15px 20px;

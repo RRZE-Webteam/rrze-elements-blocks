@@ -1,6 +1,10 @@
 @use "../_shared/variables" as v;
 @use "../_shared/mixins" as m;
 
+@import "../_shared/variables";
+@import "../_shared/mixins";
+@import "../_shared/accordion";
+
 
 /**
  * The following styles get applied inside the editor only.
