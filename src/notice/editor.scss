@@ -4,9 +4,9 @@ $medium-blue : #5bc0de;
 $green : #5cb85c;
 $dark-grey: #121212;
 
-@import "../_shared/variables";
-@import "../_shared/mixins";
-@import "../_shared/notice";
+@import "../_shared/scss/variables";
+@import "../_shared/scss/mixins";
+@import "../_shared/scss/notice";
 /*!
  * Absatzklassen
  */
