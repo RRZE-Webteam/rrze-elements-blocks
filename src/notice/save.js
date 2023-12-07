@@ -14,7 +14,7 @@ export default function save({ attributes }) {
       {" "}
       <>
         <div 
-        className={`notice notice-attention ${attributes.style ? `${attributes.style}` : ''}`}
+        className={`notice ${attributes.style ? `${attributes.style}` : ''}`}
         style={attributes.style ? {} : {backgroundColor: attributes.color, color: attributes.textColor, border: `1px solid ${attributes.borderColor}`}}
     >
     
