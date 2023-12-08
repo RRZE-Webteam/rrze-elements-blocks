@@ -238,7 +238,7 @@ const BorderColorPicker = ({
 
   // Render ColorSwitcher component
   return (
-    <PanelBody title={__("Border Settings", "rrze-elements-b")}>
+    <PanelBody title={__("Border Settings", "rrze-elements-b")} initialOpen={false}>
       <ColorPicker color={attributes.borderColor} onChange={onChangeColor} />
     </PanelBody>
   );

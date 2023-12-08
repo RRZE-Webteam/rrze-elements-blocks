@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/textslideritem",
+  "version": "0.0.6",
+  "title": "Text-Slider",
+  "parent": [
+    "rrze-elements/textslider"
+  ],
+  "category": "design",
+  "description": "Creates a textslideritem block.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Text-Slider item"
+    }
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

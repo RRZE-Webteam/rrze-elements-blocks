@@ -131,6 +131,14 @@ export default function Edit({
     setAttributes({ buttonText: newButtonText });
   };
 
+  const onChangeSearchBoxText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newButtonText = event.target.value;
+  
+    // Rest of your logic...
+    setAttributes({ buttonText: newButtonText });
+  };
+  
+
   const updateIsSearch = () => {
     setAttributes({ isSearch: !attributes.isSearch });
   };
@@ -283,10 +291,11 @@ export default function Edit({
                   itemProp="query-input"
                   id="442333"
                   type="text"
-                  value=""
+                  value={buttonText}
                   name="s"
                   placeholder={__("Search for...", "rrze-elements-b")}
                   required
+                  onChange={onChangeSearchBoxText}
                 />
                 {/* @ts-ignore */}
                 <button ref={setUrlPopoverAnchor} type="submit" value="">

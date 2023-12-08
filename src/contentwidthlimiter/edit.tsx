@@ -112,6 +112,7 @@ export default function Edit({
         <AlignmentBar
           attributes={{alignment}}
           setAttributes={setAttributes}
+          showCenterAlign={true}
         />
       </BlockControls>
       {active && (
