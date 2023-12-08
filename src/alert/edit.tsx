@@ -4,6 +4,7 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  ContrastChecker
 } from "@wordpress/block-editor";
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -78,6 +79,7 @@ const colorDataAlert = [
           customColor={true}
           useTextColor={true}
         />
+        <ContrastChecker textColor={attributes.textColor} backgroundColor={attributes.color} />
 
         {attributes.style ? null : (
           <BorderColorPicker

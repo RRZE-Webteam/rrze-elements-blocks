@@ -4,19 +4,21 @@ import {
   InnerBlocks,
   BlockControls,
   InspectorControls,
+  ContrastChecker
 } from "@wordpress/block-editor";
-
-import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
-
-import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
 
 import {
   StandardColorSwitcher,
   StandardColorSwitcherToolbar,
   BorderColorPicker,
 } from "../components/CustomColorSwitcher";
+
+
+import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
+
+import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from "@wordpress/element";
+import { symbol } from "@wordpress/icons";
 
 /**
  * Interface representing the properties for the Edit component.
@@ -32,6 +34,8 @@ interface EditProps {
     width: number;
     borderColor: string;
     border: boolean;
+    color: string;
+    textColor: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -69,6 +73,37 @@ export default function Edit({
     setAttributes({ border });
   };
 
+  const colorDataAlert = [
+    {
+      color: "#e9edf2",
+      slug: "default",
+      name: __("Default", "rrze-elements-b"),
+    },
+    {
+      color: "#dff0d8",
+      slug: "success",
+      name: __("Success", "rrze-elements-b"),
+    },
+    {
+      color: "#d9edf7",
+      slug: "info",
+      name: __("Info", "rrze-elements-b"),
+    },
+    {
+      color: "#fcf8e3",
+      slug: "warning",
+      name: __("Warning", "rrze-elements-b"),
+    },
+    {
+      color: "#f2dede",
+      slug: "danger",
+      name: __(
+        "Danger",
+        "rrze-elements-b"
+      ),
+    },
+  ];
+
     // Style calculation moved outside JSX for clarity and optimization
     const style = {
       ...props.style,
@@ -76,7 +111,15 @@ export default function Edit({
       columnWidth: width,
       ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
       ...(border ? { border: `1px solid ${borderColor}` } : {}),
+      backgroundColor: attributes.color,
+      color: attributes.textColor
     };
+
+    useEffect(() => {
+      if (!attributes.color) {
+        setAttributes({ textColor: undefined });
+      }
+    }, [attributes.color]);
 
   return (
     <div {...props} style={style}>
@@ -108,6 +151,7 @@ export default function Edit({
             step={1}
             value={width}
           />
+          
           <ToggleControl
             checked={rule}
             label={__("Show Rule", "rrze-elements-b")}
@@ -118,6 +162,17 @@ export default function Edit({
             label={__("Show Border", "rrze-elements-b")}
             onChange={onChangeBorder}
           />
+          <StandardColorSwitcher
+          attributes={{ color: attributes.color }}
+          setAttributes={setAttributes}
+          colorData={colorDataAlert}
+          hex={true}
+          useStyle={true}
+          customColor={true}
+          useTextColor={true}
+          clearButton = {true}
+        />
+        <ContrastChecker textColor={attributes.textColor} backgroundColor={attributes.color} />
         </PanelBody>
         { (rule || border) && (
           <BorderColorPicker

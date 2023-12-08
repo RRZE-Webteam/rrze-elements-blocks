@@ -25,6 +25,7 @@ import Color from "color";
  * @property {boolean} [customColor] - Flag for custom color usage.
  * @property {boolean} [useTextColor] - Flag to set textcolor attribute based on selected Color.
  * @property {boolean} [overwriteThemeColors] - Flag to overwrite theme colors.
+ * @property {boolean} [clearButton] - Flag to show clear button.
  */
 type ColorSwitcherProps = {
   attributes: {
@@ -44,6 +45,7 @@ type ColorSwitcherProps = {
   customColor?: boolean;
   useTextColor?: boolean;
   overwriteThemeColors?: boolean;
+  clearButton ?: boolean;
 };
 
 /**
@@ -97,8 +99,10 @@ const handleColorChange = (
   const colorEntry = colorData.find((entry) => entry.color === newColor);
   if (colorEntry && outputHex) {
     setAttributes({ color: colorEntry.color });
+    updateColorAttributes(newColor, setAttributes);
     if (useStyle) {
       setAttributes({ style: colorEntry.slug });
+      updateColorAttributes(newColor, setAttributes);
     }
   } else if (colorEntry) {
     setAttributes({ color: colorEntry.slug });
@@ -127,6 +131,7 @@ const ColorSwitcher = ({
   customColor = false,
   useTextColor = false,
   overwriteThemeColors = false,
+  clearButton = false,
 }: ColorSwitcherProps) => {
 
   // if the theme colorPalette is not empty, use it instead of the passed values!
@@ -158,7 +163,7 @@ const ColorSwitcher = ({
           )
         }
         disableCustomColors={!customColor}
-        clearable={false}
+        clearable={clearButton}
       />
     </PanelBody>
   );
