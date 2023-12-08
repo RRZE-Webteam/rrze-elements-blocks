@@ -7,6 +7,8 @@ interface SaveProps {
     width: number;
     rule: boolean;
     border: boolean;
+    textColor?: string;
+    color?: string;
   };
 }
 
@@ -20,6 +22,8 @@ export default function save({ attributes }: SaveProps) {
     columnWidth: width,
     ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
     ...(border ? { border: `1px solid ${borderColor}` } : {}),
+    backgroundColor: attributes.color,
+    color: attributes.textColor,
   };
 
   return (

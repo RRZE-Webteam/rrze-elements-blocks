@@ -125,6 +125,8 @@ function rrze_rrze_elements_block_init() {
     register_block_type( __DIR__ . '/build/cta');
     register_block_type( __DIR__ . '/build/insertion');
     register_block_type( __DIR__ . '/build/contentwidthlimiter');
+    register_block_type( __DIR__ . '/build/textslider');
+    register_block_type( __DIR__ . '/build/textslideritem');
     register_block_type( __DIR__ . '/build/columns');
     if (class_exists('RRZE\Elements\News\News')) {
         register_block_type( __DIR__ . '/build/news', array(
