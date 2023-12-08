@@ -1,5 +1,9 @@
-@use "../_shared/variables" as v;
-@use "../_shared/mixins" as m;
+@use "../_shared/scss/variables" as v;
+@use "../_shared/scss/mixins" as m;
+
+@import "../_shared/scss/variables";
+@import "../_shared/scss/mixins";
+@import "../_shared/scss/accordion";
 
 
 /**

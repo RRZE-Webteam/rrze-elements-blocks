@@ -4,6 +4,12 @@
 // Mixins
 @import "mixins";
 
+// Fontawesome Webfonts
+@import "../fontawesome/scss/fontawesome";
+@import "../fontawesome/scss/regular";
+@import "../fontawesome/scss/solid";
+@import "../fontawesome/scss/brands";
+
 // FlexSlider
 @import "flexslider";
 
@@ -14,10 +20,10 @@
 @import "tabs";
 
 // Absatzklassen
-@import "absatzklassen";
+@import "notice";
 
 // Alerts
-@import "alerts";
+@import "alert";
 
 // Button
 @import "button";

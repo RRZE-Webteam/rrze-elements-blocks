@@ -144,7 +144,7 @@ export default function Edit({
         </Placeholder>
       )}
       <div
-        className={`notice notice-attention no-title ${
+        className={`notice no-title ${
           attributes.style ? `alert-${attributes.style}` : ""
         }`}
         style={

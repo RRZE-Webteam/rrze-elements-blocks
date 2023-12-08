@@ -135,7 +135,7 @@ function rrze_rrze_elements_block_init() {
     }
 
     wp_enqueue_style('fontawesome');
-    wp_enqueue_style('rrze-elements');
+    wp_enqueue_style('rrze-elements-blocks');
 }
 
 /**
