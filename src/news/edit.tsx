@@ -11,6 +11,7 @@ import {
 } from "../components/HeadingSelector";
 
 import ServerSideRender from "@wordpress/server-side-render";
+import { ErrorBoundary } from "react-error-boundary";
 
 import {
   PanelBody,
@@ -182,6 +183,24 @@ export default function Edit({
     setAttributes({ imgfloat: newAlignment });
   };
 
+  console.log("Attributes passed to ServerSideRender:", {
+    title: attributes.title || "",
+    num: attributes.num || "",
+    cat: attributes.cat || "",
+    columns: attributes.columns || "",
+    tag: attributes.tag || "",
+    type: attributes.type || "",
+    divclass: attributes.divclass || "",
+    hidemeta: attributes.hidemeta || false,
+    sticky_only: attributes.sticky_only || false,
+    hideduplicates: attributes.hideduplicates || false,
+    has_thumbnail: attributes.has_thumbnail || false,
+    days: attributes.days || "",
+    display: attributes.display || "",
+    hide: attributes.hide || "",
+    imgfloat: attributes.imgfloat || "",
+  });
+
   return (
     <div {...props}>
       <BlockControls controls>
@@ -321,26 +340,34 @@ export default function Edit({
           />
         </PanelBody>
       </InspectorControls>
-      <ServerSideRender
-        block="rrze-elements/news"
-        attributes={{
-          title: title,
-          num: attributes.num,
-          cat: attributes.cat,
-          columns: attributes.columns,
-          tag: tag,
-          type: attributes.type,
-          divclass: divclass,
-          hidemeta: hidemeta,
-          sticky_only: attributes.sticky_only,
-          hideduplicates: attributes.hideduplicates,
-          has_thumbnail: attributes.has_thumbnail,
-          days: attributes.days,
-          display: attributes.display,
-          hide: attributes.hide,
-          imgfloat: attributes.imgfloat,
-        }}
-      />
+      <ErrorBoundary
+        fallback={
+          <div {...props}>
+            <p>{__("An error occured inside the ServerSideRender component of this block. Try adjusting the block settings, save your draft and refresh the page.", "rrze-elements-b")}</p>
+          </div>
+        }
+      >
+        <ServerSideRender
+          block="rrze-elements/news"
+          attributes={{
+            title: title,
+            num: attributes.num,
+            cat: attributes.cat,
+            columns: attributes.columns,
+            tag: tag,
+            type: attributes.type,
+            divclass: divclass,
+            hidemeta: hidemeta,
+            sticky_only: attributes.sticky_only,
+            hideduplicates: attributes.hideduplicates,
+            has_thumbnail: attributes.has_thumbnail,
+            days: attributes.days,
+            display: attributes.display,
+            hide: attributes.hide,
+            imgfloat: attributes.imgfloat,
+          }}
+        />
+      </ErrorBoundary>
     </div>
   );
 }

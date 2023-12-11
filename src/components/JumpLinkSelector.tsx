@@ -9,7 +9,7 @@ import {
   __experimentalHeading as Heading,
   __experimentalSpacer as Spacer,
   __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
+  __experimentalToggleGroupControlOption as ToggleGroupControlOption
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { ChangeEvent, FormEvent } from "react";
