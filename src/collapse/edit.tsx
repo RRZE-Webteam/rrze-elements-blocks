@@ -6,7 +6,7 @@ import {
   ToolbarItem,
   Modal,
   Button,
-  PanelBody,
+  PanelBody
 } from "@wordpress/components";
 import {
   useBlockProps,

@@ -14,17 +14,18 @@ import {
   HeadingSelector,
   HeadingSelectorInspector,
 } from "../components/HeadingSelector";
+import InputWarning from "../components/InputWarning";
 
 /**
  * Retrieve all blocks, including nested ones.
- * 
+ *
  * @param {Array} blocks - List of top-level blocks.
  * @returns {Array} - List of all blocks, including nested ones.
  */
 const getAllBlocksRecursively = (blocks: WPBlock[]) => {
   let result = [...blocks];
 
-  blocks.forEach(block => {
+  blocks.forEach((block) => {
     if (block.innerBlocks && block.innerBlocks.length > 0) {
       result = [...result, ...getAllBlocksRecursively(block.innerBlocks)];
     }
@@ -60,7 +61,7 @@ type WPBlock = {
   name?: string;
   attributes?: {
     childrenCount?: number;
-  },
+  };
   clientId?: string;
 };
 
@@ -102,7 +103,9 @@ export default function Edit({
         //  console.log(allBlocks);
 
         const CollapsiblesBlockClientIds = allBlocks
-          .filter((block: WPBlock) => block.name === "rrze-elements/collapsibles")
+          .filter(
+            (block: WPBlock) => block.name === "rrze-elements/collapsibles"
+          )
           .map((block: WPBlock) => block.clientId);
 
         const currentBlockIndex = CollapsiblesBlockClientIds.indexOf(
@@ -137,6 +140,30 @@ export default function Edit({
 
   return (
     <>
+      <InputWarning
+        warning={__("For performance and User Experience reasons, we do not recommend using too many items in a collapsible.", "rrze-elements-b")}
+        min={10}
+        max={20}
+        count={attributes.childrenCount}
+        status="info"
+        className="accordion-notice"
+      />
+      <InputWarning
+        warning={__("You have more than 20 items inside a collapsible. This can cause performance and User Experience issues.", "rrze-elements-b")}
+        min={20}
+        max={50}
+        count={attributes.childrenCount}
+        status="warning"
+        className="accordion-notice"
+      />
+      <InputWarning
+        warning={__("Apparently you really love accordions. Great! But please don't use more than 20 items inside a collapsible. This can cause performance and User Experience issues.", "rrze-elements-b")}
+        min={30}
+        max={null}
+        count={attributes.childrenCount}
+        status="error"
+        className="accordion-notice"
+      />
       <div {...props}>
         <BlockControls controls>
           <HeadingSelector

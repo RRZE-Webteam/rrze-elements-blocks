@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.199",
+    "@wordpress/compose": "^6.25.0",
     "@wordpress/keycodes": "^3.45.0",
     "color": "^4.2.3",
     "lodash": "^4.17.21",
