@@ -73,3 +73,5 @@ phpunit.xml.dist.bak
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+/tests/authStorage.json
