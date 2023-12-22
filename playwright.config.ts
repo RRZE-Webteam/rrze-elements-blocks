@@ -31,7 +31,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     // trace: 'retain-on-failure',
-    // video: 'retain-on-failure',
+    video: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */
@@ -40,10 +40,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: false,
-        launchOptions: {
-          slowMo: 5000,
-        },
+        headless: true,
       },
     },
 
