@@ -4,10 +4,11 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { PanelBody } from "@wordpress/components";
 import { isEqual } from "lodash";
-import { useSelect } from "@wordpress/data";
+import { useSelect, useDispatch } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import ExpandAllLink from "../components/ExpandAllLink";
 import {
@@ -71,6 +72,9 @@ export default function Edit({
   ...ownProps
 }: SaveProps) {
   const props = useBlockProps();
+  const { __unstableMarkNextChangeAsNotPersistent } =
+  useDispatch( blockEditorStore );
+
   const { sameBlockCount, previousBlockIds, hstart } = attributes;
 
   const { selectedBlock, numberChildren, blockIndex, previousBlockClients } =
@@ -128,12 +132,14 @@ export default function Edit({
 
   useEffect(() => {
     if (attributes.childrenCount !== numberChildren) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ childrenCount: numberChildren });
     }
   }, [numberChildren, setAttributes, attributes.childrenCount]);
 
   useEffect(() => {
     if (!isEqual(attributes.previousBlockIds, previousBlockClients)) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ previousBlockIds: previousBlockClients });
     }
   }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);

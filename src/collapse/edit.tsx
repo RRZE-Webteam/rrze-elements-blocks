@@ -13,11 +13,12 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { useSelect } from "@wordpress/data";
+import { useSelect, useDispatch } from "@wordpress/data";
 import HeadingComponent from "../components/HeadingComponent";
 
 // Imports of custom components and helper functions.
@@ -70,6 +71,10 @@ const Edit: React.FC<SaveProps> = ({
   clientId,
   context,
 }) => {
+
+  const { __unstableMarkNextChangeAsNotPersistent } =
+  useDispatch( blockEditorStore );
+
   // Use the useSelect hook to gather necessary data from the WordPress block editor.
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
     /**
@@ -120,6 +125,7 @@ const Edit: React.FC<SaveProps> = ({
   // Effects to keep the attributes in sync with the local state and other calculations.
   useEffect(() => {
     if (attributes.totalChildrenCount !== totalChildrenCount) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ totalChildrenCount });
     }
   }, [totalChildrenCount, attributes.totalChildrenCount]);
@@ -153,6 +159,7 @@ const Edit: React.FC<SaveProps> = ({
         }
       }
       if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
+        __unstableMarkNextChangeAsNotPersistent();
         setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
       }
     }
