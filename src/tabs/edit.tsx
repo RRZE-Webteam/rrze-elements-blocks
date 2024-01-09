@@ -1,10 +1,15 @@
 // WordPress Imports
-import { useBlockProps, InnerBlocks, BlockControls } from "@wordpress/block-editor";
-import { Button, SVG, Path } from "@wordpress/components";
+import {
+  useBlockProps,
+  InnerBlocks,
+  BlockControls,
+} from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
+import InputWarning from "../components/InputWarning";
 
 // Other Imports
 import { isEqual } from "lodash";
@@ -16,7 +21,12 @@ import { StandardColorSwitcherToolbar as ColorSwitcherToolbar } from "../compone
 import { IconMarkComponent } from "../components/IconPicker";
 
 // TypeScript interfaces for better type checking
-interface Tab { title?: string; index?: number; active?: string; clientId?: string; }
+interface Tab {
+  title?: string;
+  index?: number;
+  active?: string;
+  clientId?: string;
+}
 interface EditProps {
   attributes: {
     style?: string;
@@ -56,7 +66,6 @@ type WPBlock = {
   clientId?: string;
 };
 
-
 /**
  * Edit component for the Gutenberg block.
  *
@@ -78,12 +87,10 @@ export default function Edit({
   const { tabs } = attributes;
 
   const { insertBlock } = useDispatch("core/block-editor");
-  const { selectBlock } = useDispatch('core/block-editor');
+  const { selectBlock } = useDispatch("core/block-editor");
 
   // useEffects for syncing component state and attributes
-  const {
-    innerClientIds
-  } =
+  const { innerClientIds } =
     // retrieve the inner client ids of the current block
     useSelect(
       (select) => {
@@ -171,7 +178,7 @@ export default function Edit({
 
   /**
    * Changes the currently active tab.
-   * 
+   *
    * @param index - The index of the tab to activate.
    * @param innerClientIds - List of inner block client IDs.
    */
@@ -205,66 +212,85 @@ export default function Edit({
 
   // Main return statement for the Edit function component.
   return (
-    <div {...props}>
-      <CustomInspectorControls 
-        attributes={{ xray: attributes.xray, color: attributes.color }}
-        setAttributes={setAttributes}
+    <>
+      <InputWarning
+        warning={__(
+          "We recommend using a maximum of 4 tabs for the best User Experience.",
+          "rrze-elements-b"
+        )}
+        min={5}
+        max={null}
+        count={attributes.innerClientIds?.length || 0}
+        status="info"
+        className="accordion-notice"
       />
-      <BlockControls controls>
-        <XrayBar
-          attributes={{ xray: attributes.xray }}
+      <div {...props}>
+        <CustomInspectorControls
+          attributes={{ xray: attributes.xray, color: attributes.color }}
           setAttributes={setAttributes}
         />
-        <ColorSwitcherToolbar
-          attributes={{ color: attributes.color }}
-          setAttributes={setAttributes}
-        />
-      </BlockControls>
-      <div
-        className={`rrze-elements-tabs primary ${attributes.color}`}
-        id="tabs-1"
-      >
-        <div role="tablist" className="manual">
-          {attributes.innerClientIds.map((innerClientId, index) => {
-            const [iconType, iconName] =
-              innerClientId["icon"]?.split(" ") || [];
-            return (
-              <Button
-                key={index}
-                onClick={() => onChangeActive(index, innerClientIds)}
-                id={innerClientId["clientId"]}
-                type="button"
-                role="tab"
-                aria-selected={ariaSelected(index)}
-                aria-controls={`${innerClientId["position"]}`}
-              >
-                <span className="focus" tabIndex={-1}>
-                  {innerClientId["icon"] && (
-                    <IconMarkComponent
-                      type={iconType}
-                      iconName={iconName}
-                      attributes={{
-                        icon: innerClientId["icon"],
-                        svgString: innerClientId["svgString"],
-                      }}
-                      defaultClass="elements-tabs-label-icon-inside-editor"
-                    />
-                  )}
-                  { innerClientId["title"]}
-                </span>
-              </Button>
-            );
-          })}
-          <Button onClick={addNewTab} className="add-tab-button" type="button" role="tab">
-            <span className={"fa-solid fa-plus"}></span>{__(" Add new tab", "rrze-elements-b")}
-          </Button>
+        <BlockControls controls>
+          <XrayBar
+            attributes={{ xray: attributes.xray }}
+            setAttributes={setAttributes}
+          />
+          <ColorSwitcherToolbar
+            attributes={{ color: attributes.color }}
+            setAttributes={setAttributes}
+          />
+        </BlockControls>
+        <div
+          className={`rrze-elements-tabs primary ${attributes.color}`}
+          id="tabs-1"
+        >
+          <div role="tablist" className="manual">
+            {attributes.innerClientIds.map((innerClientId, index) => {
+              const [iconType, iconName] =
+                innerClientId["icon"]?.split(" ") || [];
+              return (
+                <Button
+                  key={index}
+                  onClick={() => onChangeActive(index, innerClientIds)}
+                  id={innerClientId["clientId"]}
+                  type="button"
+                  role="tab"
+                  aria-selected={ariaSelected(index)}
+                  aria-controls={`${innerClientId["position"]}`}
+                >
+                  <span className="focus" tabIndex={-1}>
+                    {innerClientId["icon"] && (
+                      <IconMarkComponent
+                        type={iconType}
+                        iconName={iconName}
+                        attributes={{
+                          icon: innerClientId["icon"],
+                          svgString: innerClientId["svgString"],
+                        }}
+                        defaultClass="elements-tabs-label-icon-inside-editor"
+                      />
+                    )}
+                    {innerClientId["title"]}
+                  </span>
+                </Button>
+              );
+            })}
+            <Button
+              onClick={addNewTab}
+              className="add-tab-button"
+              type="button"
+              role="tab"
+            >
+              <span className={"fa-solid fa-plus"}></span>
+              {__(" Add new tab", "rrze-elements-b")}
+            </Button>
+          </div>
+          <InnerBlocks
+            //@ts-ignore
+            allowedBlocks={["rrze-elements/tab"]}
+            template={[["rrze-elements/tab"], ["rrze-elements/tab"]]}
+          />
         </div>
-        <InnerBlocks
-          //@ts-ignore
-          allowedBlocks={["rrze-elements/tab"]}
-          template={[["rrze-elements/tab"], ["rrze-elements/tab"]]}
-        />
       </div>
-    </div>
+    </>
   );
 }

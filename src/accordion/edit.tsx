@@ -12,11 +12,12 @@ import {
   BlockControls,
   InnerBlocks,
   InspectorControls,
+  store as blockEditorStore
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
-import { useSelect } from "@wordpress/data";
+import { useSelect, useDispatch } from "@wordpress/data";
 import {
   ExtendedColorSwitcher,
   ExtendedColorSwitcherToolbar,
@@ -61,6 +62,9 @@ const Edit: React.FC<SaveProps> = ({
   clientId,
   context,
 }) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
+
   /////////// Use Selects ///////////
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
     useSelect(
@@ -105,6 +109,7 @@ const Edit: React.FC<SaveProps> = ({
 
   //////////////// Use Effects ////////////////
   useEffect(() => {
+    __unstableMarkNextChangeAsNotPersistent();
     setAttributes({
       ancestorCount:
         context["rrze-elements/collapseSBlockCount"] +
@@ -150,6 +155,7 @@ const Edit: React.FC<SaveProps> = ({
         }
       }
       if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
+        __unstableMarkNextChangeAsNotPersistent();
         setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
       }
     }

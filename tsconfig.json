@@ -15,6 +15,10 @@
     "./src/**/*",
     "./declarations.d.ts",
     "./block-editor.d.ts",
-    "./server-side-render.d.ts"
+    "./server-side-render.d.ts",
+    "tests/**/*.spec.ts",
+    "playwright.config.ts",
+    "global-setup.ts",
+    "./nodeJs.d.ts"
   ]
 }

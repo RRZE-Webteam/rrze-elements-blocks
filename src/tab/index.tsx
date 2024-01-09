@@ -21,7 +21,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * Every block starts by registering a new block type definition.

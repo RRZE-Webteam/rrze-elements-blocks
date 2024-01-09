@@ -69,3 +69,10 @@ bin/install-wp-tests.sh
 .phpcs.xml.dist
 .phpunit.xml.dist
 phpunit.xml.dist.bak
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+/tests/authStorage.json
+*.authStorage.json

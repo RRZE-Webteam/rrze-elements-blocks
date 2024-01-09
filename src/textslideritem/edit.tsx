@@ -36,34 +36,14 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
 
-  const liStyle: React.CSSProperties = {
-    width: "100%",
-    float: "left",
-    marginRight: "-100%",
-    position: "relative",
-    opacity: 1,
-    display: "block",
-    zIndex: 2,
-  };
-
-  const liStyleInactive: React.CSSProperties = {
-    width: "100%",
-    float: "left",
-    marginRight: "-100%",
-    position: "relative",
-    opacity: 0,
-    display: "block",
-    zIndex: 1,
+  const extendedProps = {
+    ...props,
+    className: `slide ${props.className || ''}`
   };
 
   return (
-    <li
-      {...props}
-      className="flex-active-slide"
-      data-thumb-alt=""
-      style={liStyle}
-    >
-      <InnerBlocks 
+   <li {...extendedProps}>
+      <InnerBlocks
         template={[
           [
             "core/paragraph",
