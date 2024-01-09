@@ -3,6 +3,7 @@ import {
   useBlockProps,
   InnerBlocks,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -82,6 +83,8 @@ export default function Edit({
   context,
 }: EditProps) {
   // WordPress hooks and other logic here.
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { tabs } = attributes;
@@ -124,6 +127,7 @@ export default function Edit({
    */
   useEffect(() => {
     if (attributes.blockId !== blockId) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ blockId: blockId.slice(0, 10) });
     }
   }, [attributes.blockId, blockId]);
@@ -137,6 +141,7 @@ export default function Edit({
     }
 
     if (!isEqual(attributes.innerClientIds, innerClientIds)) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ innerClientIds });
     }
   }, [innerClientIds, setAttributes]);
@@ -150,6 +155,7 @@ export default function Edit({
       innerClientIds &&
       innerClientIds.length > 0
     ) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: innerClientIds[0].clientId });
     }
 
@@ -161,6 +167,7 @@ export default function Edit({
       )
     ) {
       if (innerClientIds && innerClientIds.length > 0) {
+        __unstableMarkNextChangeAsNotPersistent();
         setAttributes({ active: innerClientIds[0].clientId });
       }
     }
@@ -173,6 +180,7 @@ export default function Edit({
     const block = createBlock("rrze-elements/tab");
     insertBlock(block, undefined, clientId);
     selectBlock(block.clientId);
+    __unstableMarkNextChangeAsNotPersistent();
     setAttributes({ active: block.clientId });
   };
 
@@ -187,6 +195,7 @@ export default function Edit({
     innerClientIds: { clientId: string; position: number }[]
   ) => {
     if (innerClientIds[index]?.clientId !== undefined) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: innerClientIds[index].clientId });
       selectBlock(innerClientIds[index].clientId);
     }

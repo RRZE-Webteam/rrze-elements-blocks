@@ -13,7 +13,9 @@ import {
   __experimentalText as Text,
   Icon,
 } from "@wordpress/components";
+import { store as blockEditorStore } from "@wordpress/block-editor";
 
+import { useDispatch } from "@wordpress/data";
 import { useState } from "@wordpress/element";
 import { IconMarkComponent } from "../../components/IconPicker";
 
@@ -97,6 +99,9 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
  */
 
 const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
+
   const [isOpen, setOpen] = useState(false);
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
@@ -105,8 +110,10 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: " " });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };
@@ -168,6 +175,8 @@ const TitlePlaceholder = ({
   attributes,
   setAttributes,
 }: TitleSettingsProps) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const [iconType, iconName] = attributes.icon?.split(" ") || [];
 
   const onChangeLabelHint = () => {
@@ -177,8 +186,10 @@ const TitlePlaceholder = ({
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: " " });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };
@@ -226,10 +237,14 @@ const TitleInspectorControls = ({
   attributes,
   setAttributes,
 }: TitleSettingsProps) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: " " });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };

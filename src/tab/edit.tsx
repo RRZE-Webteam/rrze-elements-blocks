@@ -3,6 +3,7 @@ import {
   useBlockProps,
   InnerBlocks,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {
   ToolbarItem,
@@ -14,6 +15,7 @@ import {
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
+import { useDispatch } from "@wordpress/data";
 
 // Custom components for enhancing block controls.
 import { IconPicker } from "../components/IconPicker";
@@ -88,6 +90,8 @@ export default function Edit({
   clientId,
   context,
 }: EditProps) {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { icon } = attributes;
@@ -101,6 +105,7 @@ export default function Edit({
   // Sync the block's 'tabsUid' attribute with the parent block's context.  
   useEffect(() => {
     if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ tabsUid: context["rrze-elements/tabs-uid"] });
     }
   }, [attributes.tabsUid, context["rrze-elements/tabs-uid"]]);
@@ -111,6 +116,7 @@ export default function Edit({
    */
   useEffect(() => {
     if (attributes.blockId !== blockId) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ blockId: blockId });
     }
   }, [attributes.blockId, blockId]);
@@ -123,8 +129,10 @@ export default function Edit({
     if (context["rrze-elements/tabs-active"] === "") {
       setAttributes({ active: true });
     } else if (context["rrze-elements/tabs-active"] !== blockId) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: false });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: true });
     }
   }, [attributes.active, context["rrze-elements/tabs-active"]]);
