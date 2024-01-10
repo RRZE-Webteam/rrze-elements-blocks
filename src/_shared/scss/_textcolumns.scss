@@ -1,4 +1,10 @@
 .elements-textcolumns {
+    .font-light * {
+        p {
+            color: #fff;
+        }
+    }
+    
     column-gap: 1.5em;
     padding-bottom: 1em;
     > * {

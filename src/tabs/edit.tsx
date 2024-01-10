@@ -290,7 +290,7 @@ export default function Edit({
               role="tab"
             >
               <span className={"fa-solid fa-plus"}></span>
-              {__(" Add new tab", "rrze-elements-b")}
+              {/* {__(" Add new tab", "rrze-elements-b")} */}
             </Button>
           </div>
           <InnerBlocks

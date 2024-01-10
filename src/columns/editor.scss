@@ -1,4 +1,4 @@
-@import "../_shared/scss/columns";
+@import "../_shared/scss/textcolumns";
 
 .wp-block-rrze-elements-columns {
     column-gap: 1.5em;
@@ -15,10 +15,16 @@
         break-inside: avoid;
         page-break-inside: avoid;
     }
-    &.font-light {
-        * {
-            color: #fff;
-            letter-spacing: .02em;
-        }
-    }
+    // &.font-light {
+    //     * {
+    //         color: #fff;
+    //         letter-spacing: .02em;
+    //     }
+    // }
+    // &.font-light {
+    //     p {
+    //         color: #fff;
+    //     }
+    // }
+
 }

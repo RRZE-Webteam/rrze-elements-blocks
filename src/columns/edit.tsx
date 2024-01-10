@@ -112,7 +112,7 @@ export default function Edit({
       ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
       ...(border ? { border: `1px solid ${borderColor}` } : {}),
       backgroundColor: attributes.color,
-      color: attributes.textColor
+      // color: attributes.textColor
     };
 
     useEffect(() => {

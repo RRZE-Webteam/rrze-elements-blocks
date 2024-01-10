@@ -14,16 +14,15 @@ interface SaveProps {
 
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
-
-  const { numberOfColumns, borderColor, width, rule, border } = attributes;
-
+  const { numberOfColumns, borderColor, width, rule, border, textColor } = attributes;
+  
   const style = {
     columnCount: numberOfColumns,
     columnWidth: width,
     ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
     ...(border ? { border: `1px solid ${borderColor}` } : {}),
     backgroundColor: attributes.color,
-    color: attributes.textColor,
+    // color: attributes.textColor,
   };
 
   return (
