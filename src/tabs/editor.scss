@@ -105,7 +105,7 @@ $colormaps : (
         }
     }
     */
-
+ 
     // [role="tablist"] {
     //     //min-width: 550px;
     // }
@@ -137,7 +137,6 @@ $colormaps : (
         }
 
         span.focus {
-            
             display: inline;
             margin: 2px;
             padding: 4px 6px;
@@ -147,7 +146,6 @@ $colormaps : (
             justify-content: center;
             align-items: baseline;
             
-    
             &>svg {
                 padding: 0;
                 border-radius: 0 !important;
@@ -182,7 +180,6 @@ $colormaps : (
             margin: 2px;
             padding: 4px 6px;
             
-    
             &>svg {
                 padding: 0;
                 border-radius: 0 !important;
@@ -192,7 +189,6 @@ $colormaps : (
                 display: inline;
             }
         }
-    
     }
 
     [role="tabpanel"] {
@@ -214,7 +210,7 @@ $colormaps : (
         }
     }
 
-        // .elements-blocks-icon-selector-display {
+    // .elements-blocks-icon-selector-display {
     //     max-width: 3em;
     //     //background-color: #04316a;
     //     padding: 0.5em;
@@ -232,7 +228,6 @@ $colormaps : (
     }
 
 }
-
 
 $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
 @each $color in $colors {
@@ -260,9 +255,23 @@ $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
                             border-radius: 3px;
                         }
                     }
-
                 }
             }
+
+            button.add-tab-button {
+                background-color: #1e1e1e;
+                color: #fff;
+                padding: 6px 0.6rem;
+                border: none;
+            }
+
+            button.add-tab-button:hover {
+                background-color: rgb(9, 100, 132);
+                color: #fff;
+                padding: 6px 0.6rem;
+                border: none;
+            }
+
             [aria-selected="true"] {
                 background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
                 color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
@@ -274,6 +283,7 @@ $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
                     border-bottom-color: #fff;
                     color: unset;
                 }
+
                 &:hover, &:focus, &:active {
                     background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
                     color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
