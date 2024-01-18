@@ -144,7 +144,7 @@ export default function Edit({
       background: background,
       display: 'flex',
       height: '100%',
-      justifyContent: 'center',
+      justifyContent: 'left',
       width: (Math.round(width * 0.125)) + 'ch',
     }}
   >
