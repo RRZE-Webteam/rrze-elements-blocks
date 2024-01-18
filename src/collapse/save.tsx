@@ -46,7 +46,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
-              data-name={title}
+              data-name={output}
               // @ts-ignore
               href={`#${output}`}
             >
@@ -60,7 +60,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             id={`collapse_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
             // @ts-ignore
-            name={title} 
+            name={output} 
             // style={loadOpen ? {} : { display: "none" }}
           >
             <div className="accordion-inner clearfix">
