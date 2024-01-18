@@ -42,23 +42,26 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
       <>
         <div className={`accordion-group ${color}`}>
           <HeadingComponent level={hstart} className="accordion-heading">
-            <span className="read-mode-only">Test </span>
+            <span className="read-mode-only">{title}</span>
             <button
               className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
-              data-name={output}
+              data-name={title}
               // @ts-ignore
-              href={`#collapse_${sameBlockCount + totalChildrenCount}`}
+              href={`#${output}`}
             >
-              <span className={svgString}></span>{title}
+              {(svgString &&
+                <span className={svgString}></span>
+              )}
+              {title}
             </button>
           </HeadingComponent>
           <div
             id={`collapse_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
             // @ts-ignore
-            name={output} 
-            style={loadOpen ? {} : { display: "none" }}
+            name={title} 
+            // style={loadOpen ? {} : { display: "none" }}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />
