@@ -24,7 +24,7 @@ use RRZE\ElementsB\Main;
 
 const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
-const RRZE_ELEMENTS_VERSION = '1.0.0';
+const RRZE_ELEMENTSB_VERSION = '1.0.0';
 
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
@@ -172,5 +172,4 @@ function loaded()
             ));
         });
     }
-
 }

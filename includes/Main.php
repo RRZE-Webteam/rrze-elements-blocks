@@ -1,6 +1,7 @@
 <?php
 
 namespace RRZE\ElementsB;
+use const RRZE\ElementsB\RRZE_ELEMENTSB_VERSION;
 
 defined('ABSPATH') || exit;
 
@@ -21,6 +22,7 @@ class Main
      */
     public function __construct($pluginFile)
     {
+        Helper::debug('Here');
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
 
         $this->pluginFile = $pluginFile;
@@ -38,15 +40,31 @@ class Main
      */
     public function enqueueScripts()
     {
-        if (is_404() || is_search()) {
-            return;
-        }
-
+        Helper::debug('Holla');
+        // if (is_404() || is_search()) {
+        //     Helper::debug(is_404());
+        //     Helper::debug(is_search());
+        //     return;
+        // }
         wp_register_style(
             'rrze-elements-blocks',
             plugins_url('assets/css/rrze-elements-blocks.css', plugin_basename($this->pluginFile)),
             [],
-            RRZE_ELEMENTS_VERSION
+            RRZE_ELEMENTSB_VERSION
         );
+    
+        wp_register_script(
+            'rrze-accordions',
+            plugins_url('assets/js/accordion/rrze-accordion.min.js', plugin_basename($this->pluginFile)),
+            ['jquery', 'wp-i18n'],
+            RRZE_ELEMENTSB_VERSION
+        );
+    
+        wp_register_script(
+            'rrze-tabs',
+            plugins_url('assets/js/tabs/rrze-tabs.min.js', plugin_basename($this->pluginFile)),
+            ['jquery'],
+            RRZE_ELEMENTSB_VERSION
+        );    
     }
 }
