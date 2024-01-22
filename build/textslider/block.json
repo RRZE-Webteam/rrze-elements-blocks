@@ -18,9 +18,5 @@
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
-  "script": [
-    "rrze-flexslider",
-    "jquery-flexslider"
-  ]
+  "style": "file:./style-index.css"
 }

@@ -55,7 +55,6 @@
   "usesContext": ["rrze-elements/tabs-order", "rrze-elements/tabs-active", "rrze-elements/tabs-xray", "rrze-elements/tabs-uid"],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
-  "script": "rrze-tabs",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
 }

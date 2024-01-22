@@ -21,7 +21,6 @@
   },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
-  "script": "rrze-tabs",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "example": {
