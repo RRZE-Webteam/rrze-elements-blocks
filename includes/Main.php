@@ -22,7 +22,6 @@ class Main
      */
     public function __construct($pluginFile)
     {
-        Helper::debug('Here');
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
 
         $this->pluginFile = $pluginFile;
@@ -40,12 +39,10 @@ class Main
      */
     public function enqueueScripts()
     {
-        Helper::debug('Holla');
-        // if (is_404() || is_search()) {
-        //     Helper::debug(is_404());
-        //     Helper::debug(is_search());
-        //     return;
-        // }
+        if (is_404() || is_search()) {
+            return;
+        }
+
         wp_register_style(
             'rrze-elements-blocks',
             plugins_url('assets/css/rrze-elements-blocks.css', plugin_basename($this->pluginFile)),
