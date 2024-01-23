@@ -150,7 +150,7 @@ export default function Edit({
   >
     <InnerBlocks
       template={[
-        ["core/paragraph", { placeholder: __("Add your content here...") }],
+        ["core/paragraph", { placeholder: __("Add your content here...", "rrze-elements-b") }],
       ]}
     />
   </div>

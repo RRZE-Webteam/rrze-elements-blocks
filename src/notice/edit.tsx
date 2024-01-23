@@ -134,7 +134,7 @@ export default function Edit({
       </BlockControls>
 
       {!attributes.style && (
-        <Placeholder icon="admin-plugins" label={__("Notice", "rrze-elements")}>
+        <Placeholder icon="admin-plugins" label={__("Notice", "rrze-elements-b")}>
           <BlockVariationPicker
             variations={variations}
             onSelect={(variation) => {
@@ -166,8 +166,8 @@ export default function Edit({
         {attributes.style && (
           <InnerBlocks
             template={[
-              ["core/heading", { placeholder: __("Add a Headline") }],
-              ["core/paragraph", { placeholder: __("Add a description…") }],
+              ["core/heading", { placeholder: __("Add a Headline", "rrze-elements-b") }],
+              ["core/paragraph", { placeholder: __("Add a description…", "rrze-elements-b") }],
             ]}
             allowedBlocks={["core/heading", "core/paragraph"]}
             templateLock={false}

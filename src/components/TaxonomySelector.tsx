@@ -55,12 +55,12 @@ const CategorySelectorControl = ({
 
   const categoryOptions = categories ? categories.map(category => ({
     value: category.slug,
-    label: `${category.name} ( ${category.count} ${__("Posts", "text-domain")})`,
+    label: `${category.name} ( ${category.count} ${__("Posts", "rrze-elements-b")})`,
   })) : [];
 
   return (
     <SelectControl
-      label={__("Select a Category", "text-domain")}
+      label={__("Select a Category", "rrze-elements-b")}
       value={attributes.cat}
       options={[{ label: "None", value: "" }, ...categoryOptions]}
       onChange={onCategoryChange}
