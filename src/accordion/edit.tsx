@@ -277,7 +277,7 @@ const Edit: React.FC<SaveProps> = ({
               <TextControl
                 onChange={onChangeTitle}
                 value={title}
-                placeholder={__("Your Text", "text-box")}
+                placeholder={__("Your Text", "rrze-elements-b")}
                 className="elements-blocks-input-following-icon"
               />
             </div>
