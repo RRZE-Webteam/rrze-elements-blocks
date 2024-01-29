@@ -160,7 +160,7 @@ export default function Edit({
               <ToolbarButton
                 label="link"
                 icon={link}
-                title={__("Link")}
+                title={__("Link", "rrze-elements-b")}
                 shortcut={displayShortcut.primary("k")}
                 onClick={startEditing}
               />
@@ -169,7 +169,7 @@ export default function Edit({
               <ToolbarButton
                 label="link"
                 icon={linkOff}
-                title={__("Unlink")}
+                title={__("Unlink", "rrze-elements-b")}
                 shortcut={displayShortcut.primaryShift("k")}
                 onClick={unlink}
                 isActive={true}

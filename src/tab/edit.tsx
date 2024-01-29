@@ -230,7 +230,7 @@ export default function Edit({
               {
                 placeholder: __(
                   "Click here and press / to enter content inside your Tab",
-                  "rrze-blocks-b"
+                  "rrze-elements-b"
                 ),
               },
             ],

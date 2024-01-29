@@ -52,7 +52,7 @@ export default function Edit({
       <InnerBlocks
         allowedBlocks={["core/paragraph", "core/heading", "core/list", "core/image"]}
         template={[
-          ["core/paragraph", { placeholder: __("Insertion") }],
+          ["core/paragraph", { placeholder: __("Insertion", "rrze-elements-b") }],
         ]}
       />
     </aside>

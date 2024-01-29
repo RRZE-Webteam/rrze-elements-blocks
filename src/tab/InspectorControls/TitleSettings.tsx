@@ -197,7 +197,7 @@ const TitlePlaceholder = ({
   return (
     <Placeholder
       icon={labelIcon}
-      instructions="Enter your Tab title. You can change it later through the block settings inside the Toolbar."
+      instructions={__("Enter your Tab title. You can change it later through the block settings inside the Toolbar.", "rrze-elements-b")}
       label={__("Tab Label Settings", "rrze-elements-b")}
     >
       <div className="rrze-elements-tabs-modal-container">

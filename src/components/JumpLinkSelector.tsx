@@ -91,7 +91,7 @@ const JumpLinkSelector: React.FC<JumpLinkSelectorProps> = ({
             type="text"
             value={inputURL}
             onChange={onChangeURL}
-            placeholder={__("Update the Jump Link", "rrze-video")}
+            placeholder={__("Update the Jump Link", "rrze-elements-b")}
             style={{ width: "100%" }}
           />
         </BaseControl>

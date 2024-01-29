@@ -44,7 +44,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
               }`}
             >
               {svgString && <span className={svgString}></span>}
-              {title}
+              {title || "…"}
             </button>
           </HeadingComponent>
           <div

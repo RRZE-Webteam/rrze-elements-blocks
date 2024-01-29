@@ -113,7 +113,7 @@ const colorDataAlert = [
       >
         <InnerBlocks
           template={[
-            ["core/paragraph", { placeholder: __("Add a description…") }],
+            ["core/paragraph", { placeholder: __("Add a description…", "rrze-elements-b") }],
           ]}
           allowedBlocks={["core/paragraph"]}
           templateLock={false}

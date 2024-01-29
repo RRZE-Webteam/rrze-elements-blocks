@@ -10,7 +10,7 @@ Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
 License URI:     http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path:     /languages
-Text Domain:     rrze-elementsB
+Text Domain:     rrze-elements-b
 */
 
 namespace RRZE\ElementsB;
@@ -58,7 +58,7 @@ add_action('plugins_loaded', 'RRZE\ElementsB\loaded');
  */
 function loadTextdomain()
 {
-    load_plugin_textdomain('rrze-elementsB', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+    load_plugin_textdomain('rrze-elements-b', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /**
@@ -69,9 +69,9 @@ function systemRequirements()
 {
     $error = '';
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
-        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elementsB'), PHP_VERSION, RRZE_PHP_VERSION);
+        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elements-b'), PHP_VERSION, RRZE_PHP_VERSION);
     } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
-        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elementsB'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
+        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elements-b'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
     }
     return $error;
 }
@@ -113,29 +113,42 @@ function render_news_block($attributes) {
  *
  * @return void
  */
-function rrze_rrze_elements_block_init() {
-    register_block_type( __DIR__ . '/build/collapsibles');
-    register_block_type( __DIR__ . '/build/collapse');
-    register_block_type( __DIR__ . '/build/accordions');
-    register_block_type( __DIR__ . '/build/accordion');
-    register_block_type( __DIR__ . '/build/alert');
-    register_block_type( __DIR__ . '/build/notice');
-    register_block_type( __DIR__ . '/build/tabs');
-    register_block_type( __DIR__ . '/build/tab');
-    register_block_type( __DIR__ . '/build/cta');
-    register_block_type( __DIR__ . '/build/insertion');
-    register_block_type( __DIR__ . '/build/contentwidthlimiter');
-    // register_block_type( __DIR__ . '/build/textslider');
-    // register_block_type( __DIR__ . '/build/textslideritem');
-    register_block_type( __DIR__ . '/build/columns');
-    if (class_exists('RRZE\Elements\News\News')) {
-        register_block_type( __DIR__ . '/build/news', array(
-            'render_callback' => 'RRZE\ElementsB\render_news_block',
-        ));
+function rrze_register_blocks_and_translations() {
+    $blocks = [
+        'collapsibles', 'collapse', 'accordions', 'accordion', 'alert', 'notice',
+        'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns'
+        // Add other blocks here
+    ];
+
+    foreach ($blocks as $block) {
+        register_block_type(__DIR__ . '/build/' . $block);
+
+        load_plugin_textdomain( 'rrze-elements-b', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+        // Assuming the script handle is the same as the block name
+        $script_handle = generate_block_asset_handle( 'rrze-elements/'. $block, 'editorScript' );
+        wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
     }
 
+    // Enqueue global styles and scripts here
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('rrze-elements-blocks');
+}
+
+function rrze_rrze_elements_block_init() {
+    rrze_register_blocks_and_translations();
+
+    // Special handling for blocks with custom render callbacks
+    if (class_exists('RRZE\Elements\News\News')) {
+        register_block_type(__DIR__ . '/build/news', array(
+            'render_callback' => 'RRZE\ElementsB\render_news_block',
+        ));
+        load_plugin_textdomain( 'rrze-elements-b', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+        // Assuming the script handle is the same as the block name
+        $script_handle = generate_block_asset_handle( 'rrze-elements/'. 'news', 'editorScript' );
+        wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
+    }
 }
 
 /**
@@ -157,6 +170,7 @@ function loaded()
             printf('<div class="notice notice-error"><p>%1$s: %2$s</p></div>', esc_html($plugin_name), esc_html($error));
         });
     } else {
+        add_action('init', 'RRZE\ElementsB\rrze_rrze_elements_block_init');
         new Main(__FILE__);
         new Patterns();
         add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );

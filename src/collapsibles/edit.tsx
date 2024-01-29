@@ -73,7 +73,7 @@ export default function Edit({
 }: SaveProps) {
   const props = useBlockProps();
   const { __unstableMarkNextChangeAsNotPersistent } =
-  useDispatch( blockEditorStore );
+    useDispatch(blockEditorStore);
 
   const { sameBlockCount, previousBlockIds, hstart } = attributes;
 
@@ -147,7 +147,10 @@ export default function Edit({
   return (
     <>
       <InputWarning
-        warning={__("For performance and User Experience reasons, we do not recommend using too many items in a collapsible.", "rrze-elements-b")}
+        warning={__(
+          "For performance and User Experience reasons, we do not recommend using too many items in a collapsible.",
+          "rrze-elements-b"
+        )}
         min={10}
         max={20}
         count={attributes.childrenCount}
@@ -155,7 +158,10 @@ export default function Edit({
         className="accordion-notice"
       />
       <InputWarning
-        warning={__("You have more than 20 items inside a collapsible. This can cause performance and User Experience issues.", "rrze-elements-b")}
+        warning={__(
+          "You have more than 20 items inside a collapsible. This can cause performance and User Experience issues.",
+          "rrze-elements-b"
+        )}
         min={20}
         max={50}
         count={attributes.childrenCount}
@@ -163,7 +169,10 @@ export default function Edit({
         className="accordion-notice"
       />
       <InputWarning
-        warning={__("Apparently you really love accordions. Great! But please don't use more than 20 items inside a collapsible. This can cause performance and User Experience issues.", "rrze-elements-b")}
+        warning={__(
+          "Apparently you really love accordions. Great! But please don't use more than 20 items inside a collapsible. This can cause performance and User Experience issues.",
+          "rrze-elements-b"
+        )}
         min={30}
         max={null}
         count={attributes.childrenCount}

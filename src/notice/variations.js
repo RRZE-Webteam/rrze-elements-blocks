@@ -16,8 +16,8 @@ import { WPBlockVariation } from "@wordpress/blocks";
 const variations = [
   {
     name: "notice-attention",
-    title: __("Warning"),
-    description: __("Warning"),
+    title: __("Warning", "rrze-elements-b"),
+    description: __("Warning", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -44,7 +44,7 @@ const variations = [
   {
     name: "notice-hinweis",
     title: __("Hint"),
-    description: __("Notice with hint-icon"),
+    description: __("Notice with hint-icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -70,8 +70,8 @@ const variations = [
   },
   {
     name: "notice-baustelle",
-    title: __("Maintenance"),
-    description: __("Notice with wrench icon"),
+    title: __("Maintenance", "rrze-elements-b"),
+    description: __("Notice with wrench icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -96,8 +96,8 @@ const variations = [
   },
   {
     name: "notice-question",
-    title: __("Question"),
-    description: __("Questionmark"),
+    title: __("Question", "rrze-elements-b"),
+    description: __("Questionmark", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -122,8 +122,8 @@ const variations = [
   },
   {
     name: "notice-minus",
-    title: __("Negative"),
-    description: __("Minus icon"),
+    title: __("Negative", "rrze-elements-b"),
+    description: __("Minus icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -147,8 +147,8 @@ const variations = [
   },
   {
     name: "notice-plus",
-    title: __("Positive"),
-    description: __("Plus-icon"),
+    title: __("Positive", "rrze-elements-b"),
+    description: __("Plus-icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -172,8 +172,8 @@ const variations = [
   },
   {
     name: "notice-idea",
-    title: __("Idea"),
-    description: __("Lightbulb icon"),
+    title: __("Idea", "rrze-elements-b"),
+    description: __("Lightbulb icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -197,8 +197,8 @@ const variations = [
   },
   {
     name: "notice-download",
-    title: __("Download"),
-    description: __("Download-icon"),
+    title: __("Download", "rrze-elements-b"),
+    description: __("Download-icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -221,8 +221,8 @@ const variations = [
   },
   {
     name: "notice-faubox",
-    title: __("FAUbox"),
-    description: __("FAUbox-icon"),
+    title: __("FAUbox", "rrze-elements-b"),
+    description: __("FAUbox-icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -245,8 +245,8 @@ const variations = [
   },
   {
     name: "notice-audio",
-    title: __("Audio"),
-    description: __("Loudspeaker icon"),
+    title: __("Audio", "rrze-elements-b"),
+    description: __("Loudspeaker icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -269,8 +269,8 @@ const variations = [
   },
   {
     name: "notice-video",
-    title: __("Video"),
-    description: __("Video-icon"),
+    title: __("Video", "rrze-elements-b"),
+    description: __("Video-icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -293,8 +293,8 @@ const variations = [
   },
   {
     name: "notice-thumbs-up",
-    title: __("Thumbs up"),
-    description: __("Thumps up icon"),
+    title: __("Thumbs up", "rrze-elements-b"),
+    description: __("Thumps up icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
@@ -318,8 +318,8 @@ const variations = [
   },
   {
     name: "notice-thumbs-down",
-    title: __("Thumbs down"),
-    description: __("Thumbs down icon"),
+    title: __("Thumbs down", "rrze-elements-b"),
+    description: __("Thumbs down icon", "rrze-elements-b"),
     icon: (
       <SVG
         width="1em"
