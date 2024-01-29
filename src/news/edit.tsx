@@ -26,7 +26,6 @@ import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
 import { CustomQueryControls } from "../components/QueryControls";
-import {} from "@wordpress/components";
 
 /**
  * Interface representing the properties for the Edit component.

@@ -43,7 +43,7 @@
     },
     "title": {
       "type": "string",
-      "default": "Enter your Title"
+      "default": ""
     },
     "color": {
       "type": "string",

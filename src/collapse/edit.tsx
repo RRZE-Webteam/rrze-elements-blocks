@@ -115,7 +115,8 @@ const Edit: React.FC<SaveProps> = ({
   // Local state and destructuring of attributes.
 
   const props = useBlockProps();
-  const { sameBlockCount, title, color, loadOpen, icon } = attributes;
+  const { sameBlockCount, color, loadOpen, icon } = attributes;
+  const title = attributes.title || __("Enter your Title…", "rrze-elements-b");
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
