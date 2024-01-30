@@ -22,7 +22,7 @@ import { AlignmentBar } from "../components/Alignment";
  * @property {Object} attributes - The block attributes.
  */
 interface EditProps {
-  blockProps: string[];
+  blockProps: any;
   attributes: {
     width: number;
     alignment: string;

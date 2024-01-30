@@ -91,7 +91,7 @@ registerBlockType( metadata.name as any, {
 				transform: (attributes: ShortcodeTransformAttributes, data: any) => {
 					// console.log('Transforming content:', attributes);
 					// console.log('transformation data:', data);
-					let cleanData = data.shortcode?.content.replace(/<\/?p>/g, "");
+					let cleanData = data.shortcode?.content;
           const styleChoice = (style: string) => {
             switch (style) {
               case "success":
