@@ -1,14 +1,20 @@
-// import { TextControl } from "@wordpress/components";
+import {
+  TextControl,
+  PanelBody,
+  __experimentalText as Text,
+  __experimentalSpacer as Spacer,
+} from "@wordpress/components";
 import {
   useBlockProps,
   InnerBlocks,
   InspectorControls,
   BlockControls,
-  ContrastChecker
+  ContrastChecker,
 } from "@wordpress/block-editor";
 // import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-
+import { useDispatch } from "@wordpress/data";
+import { store as blockEditorStore } from "@wordpress/block-editor";
 import {
   StandardColorSwitcher,
   StandardColorSwitcherToolbar,
@@ -21,6 +27,7 @@ interface EditProps {
     color: string;
     textColor?: string;
     borderColor?: string;
+    title?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -36,7 +43,7 @@ export default function Edit({
   const props = useBlockProps();
 
   // Data for color options
-const colorDataAlert = [
+  const colorDataAlert = [
     {
       color: "#e9edf2",
       slug: "default",
@@ -60,12 +67,28 @@ const colorDataAlert = [
     {
       color: "#f2dede",
       slug: "danger",
-      name: __(
-        "Danger",
-        "rrze-elements-b"
-      ),
+      name: __("Danger", "rrze-elements-b"),
     },
   ];
+
+  let borderStyle = attributes.borderColor
+    ? { border: `1px solid ${attributes.borderColor}` }
+    : {};
+  if (attributes.style === "example") {
+    borderStyle = { border: `1px dashed var(--color-TextLight, #707070)` };
+  }
+
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
+  const onChangeTitle = (newText: string) => {
+    if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
+      setAttributes({ title: "", style:"default" });
+    } else {
+      __unstableMarkNextChangeAsNotPersistent();
+      setAttributes({ title: newText, style: "example"});
+    }
+  };
 
   return (
     <div {...props}>
@@ -79,7 +102,10 @@ const colorDataAlert = [
           customColor={true}
           useTextColor={true}
         />
-        <ContrastChecker textColor={attributes.textColor} backgroundColor={attributes.color} />
+        <ContrastChecker
+          textColor={attributes.textColor}
+          backgroundColor={attributes.color}
+        />
 
         {attributes.style ? null : (
           <BorderColorPicker
@@ -87,6 +113,21 @@ const colorDataAlert = [
             setAttributes={setAttributes}
           />
         )}
+        <PanelBody
+          title={__("Label settings", "rrze-elements-b")}
+          initialOpen={true}
+        >
+          <Spacer>
+            <Text>{__("Add a Label for your Alert. This changes the style to example", "rrze-elements-b")}</Text>
+          </Spacer>
+
+          <TextControl
+            value={attributes.title}
+            onChange={onChangeTitle}
+            placeholder={__("Add a Label", "rrze-elements-b")}
+            className="elements-blocks-input-following-icon"
+          />
+        </PanelBody>
       </InspectorControls>
       <BlockControls controls>
         <StandardColorSwitcherToolbar
@@ -101,19 +142,23 @@ const colorDataAlert = [
         className={`alert clearfix clear ${
           attributes.style ? `alert-${attributes.style}` : ""
         }`}
-        style={
-          attributes.style
+        style={{
+          ...(attributes.style
             ? {}
             : {
                 backgroundColor: attributes.color,
                 color: attributes.textColor,
-                border: `1px solid ${attributes.borderColor}`,
-              }
-        }
+              }),
+          ...borderStyle,
+        }}
+        title={attributes.title}
       >
         <InnerBlocks
           template={[
-            ["core/paragraph", { placeholder: __("Add a description…", "rrze-elements-b") }],
+            [
+              "core/paragraph",
+              { placeholder: __("Add a description…", "rrze-elements-b") },
+            ],
           ]}
           allowedBlocks={["core/paragraph"]}
           templateLock={false}
