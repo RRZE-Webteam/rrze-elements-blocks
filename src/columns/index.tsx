@@ -4,6 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
 import { registerBlockType } from '@wordpress/blocks';
+import { createBlock } from '@wordpress/blocks';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -22,6 +23,15 @@ import save from './save';
 import metadata from './block.json';
 import './editor.scss';
 import { __, sprintf } from '@wordpress/i18n';
+
+interface ShortcodeTransformAttributes {
+    named: {
+      number?: string;
+      title?: string;
+    };
+    number: string;
+    content: string;
+}
 
 /**
  * Every block starts by registering a new block type definition.
@@ -53,4 +63,25 @@ registerBlockType( metadata.name as any, {
 	 * @see ./save.js
 	 */
 	save,
+	transforms: {
+		from: [
+			{
+				type: "shortcode",
+				tag: "text-columns",
+				transform: (attributes: ShortcodeTransformAttributes, data: any) => {
+					let cleanData = data.shortcode?.content.replace(/<\/?p>/g, "");
+          const numberChoice = (number: string) => {
+			return parseInt(number);
+		  }
+                    const blockContent = createBlock('core/freeform', {
+                        content: cleanData,
+                    });
+                    return createBlock(metadata.name, {
+                        numberOfColumns: numberChoice(attributes.named.number) || 2,
+                    }, [blockContent]);
+                },
+
+			}
+		]
+	}
 } as any );
