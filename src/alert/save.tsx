@@ -4,6 +4,7 @@ interface SaveProps {
   attributes: {
     style?: string;
     color?: string;
+    title?: string;
     textColor?: string;
     borderColor?: string;
   };
@@ -12,7 +13,6 @@ interface SaveProps {
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
 
-  // Function to create style object
   const createStyleObject = () => {
     if (attributes.style) {
       return {};
@@ -30,11 +30,19 @@ export default function save({ attributes }: SaveProps) {
     return styleObj;
   };
 
+  const createTitle = () => {
+    if (attributes.title && attributes.style === "example") {
+      return attributes.title.replace(/"/g, "&quot;");
+    }
+    return undefined;
+  };
+
   return (
     <div {...blockProps}>
       <div 
         className={`alert clearfix clear ${attributes.style ? `alert-${attributes.style}` : ''}`}
         style={createStyleObject()}
+        title={createTitle()}
       >
         <InnerBlocks.Content />
       </div>
