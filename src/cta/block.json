@@ -4,7 +4,7 @@
   "name": "rrze-elements/cta",
   "version": "1.0.0",
   "title": "Call to action",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates an Call to action box.",
   "attributes": {
     "id": {

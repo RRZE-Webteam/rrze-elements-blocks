@@ -4,7 +4,7 @@
   "name": "rrze-elements/columns",
   "version": "0.0.6",
   "title": "Text Columns",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates a columns block which dynamically breaks.",
   "supports": {
     "html": false

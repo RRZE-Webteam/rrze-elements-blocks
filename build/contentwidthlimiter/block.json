@@ -4,7 +4,7 @@
   "name": "rrze-elements/block-contentwidthlimiter",
   "version": "0.0.6",
   "title": "Content Width Limiter",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates a contentwidthlimiter block.",
   "supports": {
     "html": false
