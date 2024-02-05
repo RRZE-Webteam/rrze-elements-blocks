@@ -157,29 +157,29 @@ export default function Edit({
             label={__("Show Rule", "rrze-elements-b")}
             onChange={onChangeRuler}
           />
-          <ToggleControl
+          {/* <ToggleControl
             checked={border}
             label={__("Show Border", "rrze-elements-b")}
             onChange={onChangeBorder}
-          />
+          /> */}
           <StandardColorSwitcher
           attributes={{ color: attributes.color }}
           setAttributes={setAttributes}
           colorData={colorDataAlert}
           hex={true}
           useStyle={true}
-          customColor={true}
+          customColor={false}
           useTextColor={true}
           clearButton = {true}
         />
         <ContrastChecker textColor={attributes.textColor} backgroundColor={attributes.color} />
         </PanelBody>
-        { (rule || border) && (
+        {/* { (rule || border) && (
           <BorderColorPicker
             attributes={{ color: borderColor }}
             setAttributes={setAttributes}
           />
-        )}
+        )} */}
       </InspectorControls>
       <InnerBlocks
         template={[

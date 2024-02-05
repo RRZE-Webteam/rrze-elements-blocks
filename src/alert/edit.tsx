@@ -99,7 +99,7 @@ export default function Edit({
           colorData={colorDataAlert}
           hex={true}
           useStyle={true}
-          customColor={true}
+          customColor={false}
           useTextColor={true}
         />
         <ContrastChecker
