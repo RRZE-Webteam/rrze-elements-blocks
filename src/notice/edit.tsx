@@ -104,13 +104,10 @@ export default function Edit({
               <>
                 <ToolbarButton
                   icon={symbol}
-                  label={
-                    icon === ""
-                      ? __("Select a style", "rrze-elements-b")
-                      : __("Change the style", "rrze-elements-b")
-                  }
-                  onClick={openModal}
-                />
+                  label={icon === ""
+                    ? __("Select a style", "rrze-elements-b")
+                    : __("Change the style", "rrze-elements-b")}
+                  onClick={openModal} placeholder={undefined}                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}

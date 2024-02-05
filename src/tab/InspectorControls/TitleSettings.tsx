@@ -85,8 +85,7 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
       <ToolbarButton
         label={__("Show / Hide Label Settings", "rrze-elements-b")}
         onClick={onChangeLabelHint}
-        icon={labelIcon}
-      />
+        icon={labelIcon} placeholder={undefined}      />
     </ToolbarGroup>
   );
 };
@@ -124,13 +123,10 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
     <>
       <ToolbarButton
         icon={labelIcon}
-        label={
-          attributes.title === ""
-            ? __("Add an Label", "rrze-elements-b")
-            : __("Change the Label", "rrze-elements-b")
-        }
-        onClick={openModal}
-      />
+        label={attributes.title === ""
+          ? __("Add an Label", "rrze-elements-b")
+          : __("Change the Label", "rrze-elements-b")}
+        onClick={openModal} placeholder={undefined}      />
       {isOpen && (
         <Modal
           title={__("Change the Tab Label", "rrze-elements-b")}

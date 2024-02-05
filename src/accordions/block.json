@@ -4,7 +4,7 @@
 	"name": "rrze-elements/accordions",
 	"version": "1.25.10",
 	"title": "Inner Accordion",
-	"category": "design",
+	"category": "rrze_elements",
 	"parent": [
 		"rrze-elements/collapse"
 	],

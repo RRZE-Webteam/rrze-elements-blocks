@@ -4,7 +4,7 @@
   "name": "rrze-elements/news",
   "version": "0.0.6",
   "title": "News",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates a news block.",
   "supports": {
     "html": false

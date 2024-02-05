@@ -217,23 +217,17 @@ const Edit: React.FC<SaveProps> = ({
             {() => (
               <>
                 <ToolbarButton
-                  icon={loadOpen ? seen : unseen}
-                  label={
-                    loadOpen
+                    icon={loadOpen ? seen : unseen}
+                    label={loadOpen
                       ? __("Collapse on page load", "rrze-elements-b")
-                      : __("Open on page load", "rrze-elements-b")
-                  }
-                  onClick={loadOpenToggle}
-                />
+                      : __("Open on page load", "rrze-elements-b")}
+                    onClick={loadOpenToggle} placeholder={undefined}                />
                 <ToolbarButton
-                  icon={symbol}
-                  label={
-                    icon === ""
+                    icon={symbol}
+                    label={icon === ""
                       ? __("Add an icon", "rrze-elements-b")
-                      : __("Change the icon", "rrze-elements-b")
-                  }
-                  onClick={openModal}
-                />
+                      : __("Change the icon", "rrze-elements-b")}
+                    onClick={openModal} placeholder={undefined}                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}

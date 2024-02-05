@@ -3,7 +3,6 @@ nbproject*
 .sass-cache
 .DS_Store
 /node_modules/
-/package-lock.json
 
 ### vscode ###
 .vscode/
@@ -15,7 +14,6 @@ nbproject*
 .DS_Store
 ### Node ###
 node_modules/
-package-lock.json
 ### Composer ###
 composer.lock
 ### WordPress ###

@@ -209,13 +209,10 @@ const Edit: React.FC<SaveProps> = ({
               <>
                 <ToolbarButton
                   icon={symbol}
-                  label={
-                    icon === ""
-                      ? __("Add an icon", "rrze-elements-b")
-                      : __("Change the icon", "rrze-elements-b")
-                  }
-                  onClick={openModal}
-                />
+                  label={icon === ""
+                    ? __("Add an icon", "rrze-elements-b")
+                    : __("Change the icon", "rrze-elements-b")}
+                  onClick={openModal} placeholder={undefined}                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}

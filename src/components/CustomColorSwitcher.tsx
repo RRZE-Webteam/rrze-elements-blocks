@@ -190,9 +190,13 @@ const ColorSwitcherToolbar = ({
 
   const effectiveColorData = themeColorPalette || colorData;
 
-  const classLabel = hex
+  let classLabel = `rrzeElementsBFakColorSelector`;
+  if(attributes.color) {
+  classLabel = hex
     ? `rrzeElementsBFakColorSelector ${attributes.color.slice(1)}`
     : `rrzeElementsBFakColorSelector ${attributes.color}`;
+  }
+
   return (
     <ToolbarGroup>
       <ToolbarItem>
