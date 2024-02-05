@@ -158,22 +158,20 @@ export default function Edit({
           <ToolbarGroup>
             {!isURLSet && isLinkTag && (
               <ToolbarButton
-                label="link"
-                icon={link}
-                title={__("Link", "rrze-elements-b")}
-                shortcut={displayShortcut.primary("k")}
-                onClick={startEditing}
-              />
+              label="link"
+              icon={link}
+              title={__("Link", "rrze-elements-b")}
+              shortcut={displayShortcut.primary("k")}
+              onClick={startEditing} placeholder={undefined}              />
             )}
             {isURLSet && isLinkTag && (
               <ToolbarButton
-                label="link"
-                icon={linkOff}
-                title={__("Unlink", "rrze-elements-b")}
-                shortcut={displayShortcut.primaryShift("k")}
-                onClick={unlink}
-                isActive={true}
-              />
+              label="link"
+              icon={linkOff}
+              title={__("Unlink", "rrze-elements-b")}
+              shortcut={displayShortcut.primaryShift("k")}
+              onClick={unlink}
+              isActive={true} placeholder={undefined}              />
             )}
           </ToolbarGroup>
         </BlockControls>

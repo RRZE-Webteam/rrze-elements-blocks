@@ -104,8 +104,7 @@ const CustomMediaReplaceFlow = ({
               <ToolbarButton
                 icon={trash}
                 label={__("Remove image", "rrze-elements-b")}
-                onClick={onClearMedia}
-              />
+                onClick={onClearMedia} placeholder={undefined}              />
             )}
           </ToolbarItem>
         )}
