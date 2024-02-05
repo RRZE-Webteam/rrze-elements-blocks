@@ -4,7 +4,8 @@ import { PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 // Import custom components
-import { ColorSwitcher } from "./ColorSwitcher";
+import { StandardColorSwitcher as ColorSwitcher } from "../../components/CustomColorSwitcher";
+import { StandardColorSwitcher } from "../../components/CustomColorSwitcher";
 
 // Define TypeScript interface for component props
 interface EditProps {
@@ -33,17 +34,17 @@ const CustomInspectorControls = ({
   return (
     <>
       <InspectorControls>
-        <PanelBody title={__("X-ray", "rrze-elements")} initialOpen={false}>
+        <PanelBody title={__("X-ray", "rrze-elements-b")} initialOpen={false}>
           <ToggleControl
             label={__(
               "Show / Hide all inactive tabs inside the editor.",
-              "rrze-elements"
+              "rrze-elements-b"
             )}
             checked={xray}
             onChange={(xray) => setAttributes({ xray })}
           />
         </PanelBody>
-        <ColorSwitcher
+        <StandardColorSwitcher
           attributes={{ color: attributes.color }}
           setAttributes={setAttributes}
         />

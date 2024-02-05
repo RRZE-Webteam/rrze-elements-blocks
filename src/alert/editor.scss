@@ -1,11 +1,10 @@
+@import "../_shared/scss/alert";
+
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(0, 0, 0, 0);
-    font-weight: normal;
-    background-color: #e9edf2;
-    overflow: hidden;
-    color: #000;
+    line-height: 1.5;
+    & p {
+        margin: 0;
+    }
 }
 
 .rrzeElementsBFakColorSelector{
@@ -24,4 +23,8 @@
     &.f2dede{
         background-color: #f2dede;
     }
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+    font-family: 'Roboto', sans-serif;
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "@wordpress/element";
-import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useBlockProps, InnerBlocks, store as blockEditorStore } from "@wordpress/block-editor";
 import { isEqual } from "lodash";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
@@ -41,6 +41,8 @@ export default function Edit({
 }: SaveProps) {
   const props = useBlockProps();
   const { sameBlockCount, previousBlockIds } = attributes;
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
 
   const { selectedBlock, numberChildren, blockIndex, previousBlockClients } =
     useSelect(
@@ -81,12 +83,14 @@ export default function Edit({
 
   useEffect(() => {
     if (attributes.childrenCount !== numberChildren) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ childrenCount: numberChildren });
     }
   }, [numberChildren, setAttributes, attributes.childrenCount]);
 
   useEffect(() => {
     if (!isEqual(attributes.previousBlockIds, previousBlockClients)) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ previousBlockIds: previousBlockClients });
     }
   }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);

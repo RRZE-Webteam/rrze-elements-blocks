@@ -13,9 +13,11 @@ import {
   __experimentalText as Text,
   Icon,
 } from "@wordpress/components";
+import { store as blockEditorStore } from "@wordpress/block-editor";
 
+import { useDispatch } from "@wordpress/data";
 import { useState } from "@wordpress/element";
-import { IconMarkComponent } from "./IconPicker";
+import { IconMarkComponent } from "../../components/IconPicker";
 
 /**
  * Type definition for TitleSettingsProps
@@ -32,7 +34,6 @@ type TitleSettingsProps = {
     labelSettings?: boolean;
     icon?: string;
     title?: string;
-    directory?: string;
     svgString?: string;
   };
   setAttributes: (newAttributes: {
@@ -84,8 +85,7 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
       <ToolbarButton
         label={__("Show / Hide Label Settings", "rrze-elements-b")}
         onClick={onChangeLabelHint}
-        icon={labelIcon}
-      />
+        icon={labelIcon} placeholder={undefined}      />
     </ToolbarGroup>
   );
 };
@@ -98,6 +98,9 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
  */
 
 const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
+
   const [isOpen, setOpen] = useState(false);
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
@@ -106,8 +109,10 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: " " });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };
@@ -118,13 +123,10 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
     <>
       <ToolbarButton
         icon={labelIcon}
-        label={
-          attributes.title === ""
-            ? __("Add an Label", "rrze-elements-b")
-            : __("Change the Label", "rrze-elements-b")
-        }
-        onClick={openModal}
-      />
+        label={attributes.title === ""
+          ? __("Add an Label", "rrze-elements-b")
+          : __("Change the Label", "rrze-elements-b")}
+        onClick={openModal} placeholder={undefined}      />
       {isOpen && (
         <Modal
           title={__("Change the Tab Label", "rrze-elements-b")}
@@ -136,7 +138,6 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
                 type={iconType}
                 iconName={iconName}
                 attributes={{
-                  directory: attributes.directory,
                   icon: attributes.icon,
                   svgString: attributes.svgString,
                 }}
@@ -170,6 +171,8 @@ const TitlePlaceholder = ({
   attributes,
   setAttributes,
 }: TitleSettingsProps) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const [iconType, iconName] = attributes.icon?.split(" ") || [];
 
   const onChangeLabelHint = () => {
@@ -179,8 +182,10 @@ const TitlePlaceholder = ({
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: " " });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };
@@ -188,7 +193,7 @@ const TitlePlaceholder = ({
   return (
     <Placeholder
       icon={labelIcon}
-      instructions="Enter your Tab title. You can change it later through the block settings inside the Toolbar."
+      instructions={__("Enter your Tab title. You can change it later through the block settings inside the Toolbar.", "rrze-elements-b")}
       label={__("Tab Label Settings", "rrze-elements-b")}
     >
       <div className="rrze-elements-tabs-modal-container">
@@ -197,7 +202,6 @@ const TitlePlaceholder = ({
             type={iconType}
             iconName={iconName}
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}
@@ -229,10 +233,14 @@ const TitleInspectorControls = ({
   attributes,
   setAttributes,
 }: TitleSettingsProps) => {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: " " });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };

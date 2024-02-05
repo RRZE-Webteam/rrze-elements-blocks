@@ -40,13 +40,9 @@ export default function save({ attributes }: SaveProps) {
                 role="tab"
                 aria-selected={isSelected}
                 aria-controls={`tab-${uid}_tabpanel_tab-label-${innerUid}`}
-                dangerouslySetInnerHTML={{
-                  __html: `<span class="focus" tabIndex=-1>
-                  ${innerClientId.svgString} ${innerClientId.title}</span>`,
-                }}
               >
                 <span className="focus" tabIndex={-1}>
-                  {innerClientId.title}
+                  <span className={`${innerClientId.svgString}`}></span>{` ${innerClientId.title}`}
                 </span>
               </button>
             );

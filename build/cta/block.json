@@ -4,7 +4,7 @@
   "name": "rrze-elements/cta",
   "version": "1.0.0",
   "title": "Call to action",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates an Call to action box.",
   "attributes": {
     "id": {
@@ -36,8 +36,13 @@
     "buttonText": {
       "type": "string"
     },
-    "srcset": {
-      "type": "string"
+    "background": {
+      "type": "string",
+      "default": ""
+    },
+    "isSearch": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {
@@ -46,12 +51,12 @@
   "styles": [
     {
       "name": "background",
-      "label": "With Background",
-      "isDefault": true
+      "label": "With Background"
     },
     {
       "name": "no-background",
-      "label": "No Background"
+      "label": "No Background",
+      "isDefault": true
     },
     {
       "name": "small",

@@ -6,28 +6,29 @@ import {
   ToolbarItem,
   Modal,
   Button,
-  PanelBody,
+  PanelBody
 } from "@wordpress/components";
 import {
   useBlockProps,
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { useSelect } from "@wordpress/data";
-import HeadingComponent from "./InspectorControls/HeadingComponent";
+import { useSelect, useDispatch } from "@wordpress/data";
+import HeadingComponent from "../components/HeadingComponent";
 
 // Imports of custom components and helper functions.
-import JumpLinkSelector from "./InspectorControls/JumpLinkSelector";
+import JumpLinkSelector from "../components/JumpLinkSelector";
 import {
-  ColorSwitcher,
-  ColorSwitcherToolbar,
-} from "./InspectorControls/ColorSwitcher";
+  StandardColorSwitcher as ColorSwitcher,
+  StandardColorSwitcherToolbar as ColorSwitcherToolbar,
+} from "../components/CustomColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
-import { IconPicker, IconMarkComponent } from "./InspectorControls/IconPicker";
+import { IconPicker, IconMarkComponent } from "../components/IconPicker";
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -42,7 +43,6 @@ interface SaveProps {
     loadOpen: boolean;
     icon: string;
     hstart?: number;
-    directory?: string;
     jumpName?: string;
     svgString?: string;
   };
@@ -71,6 +71,10 @@ const Edit: React.FC<SaveProps> = ({
   clientId,
   context,
 }) => {
+
+  const { __unstableMarkNextChangeAsNotPersistent } =
+  useDispatch( blockEditorStore );
+
   // Use the useSelect hook to gather necessary data from the WordPress block editor.
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
     /**
@@ -111,7 +115,8 @@ const Edit: React.FC<SaveProps> = ({
   // Local state and destructuring of attributes.
 
   const props = useBlockProps();
-  const { sameBlockCount, title, color, loadOpen, icon } = attributes;
+  const { sameBlockCount, color, loadOpen, icon } = attributes;
+  const title = attributes.title || __("Enter your Title…", "rrze-elements-b");
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
@@ -121,6 +126,7 @@ const Edit: React.FC<SaveProps> = ({
   // Effects to keep the attributes in sync with the local state and other calculations.
   useEffect(() => {
     if (attributes.totalChildrenCount !== totalChildrenCount) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ totalChildrenCount });
     }
   }, [totalChildrenCount, attributes.totalChildrenCount]);
@@ -154,6 +160,7 @@ const Edit: React.FC<SaveProps> = ({
         }
       }
       if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
+        __unstableMarkNextChangeAsNotPersistent();
         setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
       }
     }
@@ -164,27 +171,6 @@ const Edit: React.FC<SaveProps> = ({
     attributes.sameBlockCount,
     setAttributes,
   ]);
-
-  /**
-   * Fetch the plugin directory path via REST API and store it in the state.
-   */
-  useEffect(() => {
-    // Fetch plugin directory path via REST API – Needed for save.js
-    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPluginDir(data.directory);
-        setAttributes({ directory: data.directory });
-      })
-      .catch((error) => {
-        console.error("There was a problem fetching the directory:", error);
-      });
-  }, []);
 
   /**
    * Set the heading level attribute based on the global setting.
@@ -231,23 +217,17 @@ const Edit: React.FC<SaveProps> = ({
             {() => (
               <>
                 <ToolbarButton
-                  icon={loadOpen ? seen : unseen}
-                  label={
-                    loadOpen
+                    icon={loadOpen ? seen : unseen}
+                    label={loadOpen
                       ? __("Collapse on page load", "rrze-elements-b")
-                      : __("Open on page load", "rrze-elements-b")
-                  }
-                  onClick={loadOpenToggle}
-                />
+                      : __("Open on page load", "rrze-elements-b")}
+                    onClick={loadOpenToggle} placeholder={undefined}                />
                 <ToolbarButton
-                  icon={symbol}
-                  label={
-                    icon === ""
+                    icon={symbol}
+                    label={icon === ""
                       ? __("Add an icon", "rrze-elements-b")
-                      : __("Change the icon", "rrze-elements-b")
-                  }
-                  onClick={openModal}
-                />
+                      : __("Change the icon", "rrze-elements-b")}
+                    onClick={openModal} placeholder={undefined}                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}
@@ -255,7 +235,6 @@ const Edit: React.FC<SaveProps> = ({
                   >
                     <IconPicker
                       attributes={{
-                        directory: attributes.directory,
                         icon: attributes.icon,
                         svgString: attributes.svgString,
                       }}
@@ -284,7 +263,6 @@ const Edit: React.FC<SaveProps> = ({
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
-              directory: attributes.directory,
               icon: attributes.icon,
               svgString: attributes.svgString,
             }}
@@ -311,7 +289,6 @@ const Edit: React.FC<SaveProps> = ({
                   type={iconType}
                   iconName={iconName}
                   attributes={{
-                    directory: attributes.directory,
                     icon: attributes.icon,
                     svgString: attributes.svgString,
                   }}
@@ -321,7 +298,7 @@ const Edit: React.FC<SaveProps> = ({
               <TextControl
                 onChange={onChangeTitle}
                 value={title}
-                placeholder={__("Your Text", "text-box")}
+                placeholder={__("Your Text", "rrze-elements-b")}
                 className="elements-blocks-input-following-icon"
               />
             </div>

@@ -1,0 +1,18 @@
+$red : rgb(137, 39, 36);
+$text-blue : #337ab7;
+$medium-blue : #5bc0de;
+$green : #5cb85c;
+$dark-grey: #121212;
+
+@import "../_shared/scss/variables";
+@import "../_shared/scss/mixins";
+@import "../_shared/scss/notice";
+
+.wp-block-rrze-elements-notice {
+    .notice {
+        border: none;
+        h2.wp-block-heading {
+            margin-top: 0;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import HeadingComponent from "./InspectorControls/HeadingComponent";
+import HeadingComponent from "../components/HeadingComponent";
 
 interface Attributes {
   sameBlockCount: number;
@@ -18,7 +18,7 @@ interface SaveProps {
 
 const Save: React.FC<SaveProps> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, jumpName, loadOpen, hstart } = attributes;
+  const { sameBlockCount, totalChildrenCount, color, title, jumpName, svgString, loadOpen, hstart } = attributes;
 
 
   let output = '';
@@ -29,11 +29,11 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
   }
 
   let loadOnPageLoad = '';
-  let aciveOnPageLoad = '';
+  let activeOnPageLoad = '';
 
   if ( loadOpen ) {
     loadOnPageLoad = 'open';
-    aciveOnPageLoad = 'active';
+    activeOnPageLoad = 'active';
   } 
 
   return (
@@ -42,18 +42,18 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
       <>
         <div className={`accordion-group ${color}`}>
           <HeadingComponent level={hstart} className="accordion-heading">
-            <span className="read-mode-only">Test </span>
+            <span className="read-mode-only">{title}</span>
             <button
-              className={`accordion-toggle ${aciveOnPageLoad}`}
+              className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
               data-name={output}
               // @ts-ignore
-              href={`#collapse_${sameBlockCount + totalChildrenCount}`}
-              dangerouslySetInnerHTML={{
-                __html: `${attributes.svgString}${title}`,
-              }}
+              href={`#${output}`}
             >
-              
+              {(svgString &&
+                <span className={svgString}></span>
+              )}
+              {title || "…"}
             </button>
           </HeadingComponent>
           <div
@@ -61,7 +61,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             className={`accordion-body ${loadOnPageLoad}`}
             // @ts-ignore
             name={output} 
-            style={loadOpen ? {} : { display: "none" }}
+            // style={loadOpen ? {} : { display: "none" }}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />

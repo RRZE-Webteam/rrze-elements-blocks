@@ -4,7 +4,7 @@
   "name": "rrze-elements/accordion",
   "version": "1.25.10",
   "title": "Accordion item",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates an inner accordion item",
   "parent": ["rrze-elements/accordions"],
   "keywords": ["accordion", "collapse", "expand", "toggle"],
@@ -15,11 +15,6 @@
     "rrze-elements/accordion-hstart"
   ],
   "attributes": {
-    "message": {
-      "type": "string",
-      "source": "text",
-      "selector": "div"
-    },
     "expandAllLink": {
       "type": "boolean",
       "default": false
@@ -57,11 +52,6 @@
       "default": ""
     },
     "svgString": {
-      "type": "string",
-      "default": ""
-    },
-
-    "directory": {
       "type": "string",
       "default": ""
     }

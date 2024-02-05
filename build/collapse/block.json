@@ -43,7 +43,7 @@
     },
     "title": {
       "type": "string",
-      "default": "Enter your Title"
+      "default": ""
     },
     "color": {
       "type": "string",
@@ -66,10 +66,6 @@
       "default": ""
     },
     "svgString": {
-      "type": "string",
-      "default": ""
-    },
-    "directory": {
       "type": "string",
       "default": ""
     }

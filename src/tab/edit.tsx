@@ -3,6 +3,7 @@ import {
   useBlockProps,
   InnerBlocks,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {
   ToolbarItem,
@@ -14,9 +15,10 @@ import {
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
+import { useDispatch } from "@wordpress/data";
 
 // Custom components for enhancing block controls.
-import { IconPicker } from "./InspectorControls/IconPicker";
+import { IconPicker } from "../components/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   TitleModal,
@@ -38,7 +40,6 @@ import {
  * @property {boolean} [attributes.labelSettings] - Whether label settings are enabled.
  * @property {string} [attributes.blockId] - The block ID.
  * @property {string} [attributes.tabsUid] - The UID for tabs.
- * @property {string} [attributes.directory] - Directory path for assets.
  * @property {Function} setAttributes - Function to set new attributes.
  * @property {string} clientId - Unique client ID of the block.
  * @property {Object} context - Context provided by block context.
@@ -56,7 +57,6 @@ interface EditProps {
     labelSettings?: boolean;
     blockId?: string;
     tabsUid?: string;
-    directory?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -90,6 +90,8 @@ export default function Edit({
   clientId,
   context,
 }: EditProps) {
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { icon } = attributes;
@@ -99,12 +101,11 @@ export default function Edit({
 
   // isOpen state is used to control the opening and closing of the icon picker modal  
   const [isOpen, setOpen] = useState(false);
-  // pluginDir holds the plugin directory path fetched via REST API
-  const [pluginDir, setPluginDir] = useState("");
 
   // Sync the block's 'tabsUid' attribute with the parent block's context.  
   useEffect(() => {
     if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ tabsUid: context["rrze-elements/tabs-uid"] });
     }
   }, [attributes.tabsUid, context["rrze-elements/tabs-uid"]]);
@@ -115,6 +116,7 @@ export default function Edit({
    */
   useEffect(() => {
     if (attributes.blockId !== blockId) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ blockId: blockId });
     }
   }, [attributes.blockId, blockId]);
@@ -127,8 +129,10 @@ export default function Edit({
     if (context["rrze-elements/tabs-active"] === "") {
       setAttributes({ active: true });
     } else if (context["rrze-elements/tabs-active"] !== blockId) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: false });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: true });
     }
   }, [attributes.active, context["rrze-elements/tabs-active"]]);
@@ -141,27 +145,6 @@ export default function Edit({
     setAttributes({ xray: context["rrze-elements/tabs-xray"] });
   }, [attributes.active, context["rrze-elements/tabs-xray"]]);
 
-  /**
-   * Fetch the plugin directory path via REST API and store it inside the state.
-   */
-  useEffect(() => {
-    // Fetch plugin directory path via REST API – Needed for save.js
-    fetch("/wp-json/rrze-elements-blocks/v1/plugin-directory")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPluginDir(data.directory);
-        setAttributes({ directory: data.directory });
-      })
-      .catch((error) => {
-        console.error("There was a problem fetching the directory:", error);
-      });
-  }, []);
-
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -173,7 +156,6 @@ export default function Edit({
         attributes={{
           title: attributes.title,
           icon: attributes.icon,
-          directory: attributes.directory,
           svgString: attributes.svgString,
         }}
         setAttributes={setAttributes}
@@ -193,13 +175,10 @@ export default function Edit({
               <>
                 <ToolbarButton
                   icon={symbol}
-                  label={
-                    icon === ""
-                      ? __("Add an icon", "rrze-elements-b")
-                      : __("Change the icon", "rrze-elements-b")
-                  }
-                  onClick={openModal}
-                />
+                  label={icon === ""
+                    ? __("Add an icon", "rrze-elements-b")
+                    : __("Change the icon", "rrze-elements-b")}
+                  onClick={openModal} placeholder={undefined}                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}
@@ -207,7 +186,6 @@ export default function Edit({
                   >
                     <IconPicker
                       attributes={{
-                        directory: attributes.directory,
                         icon: attributes.icon,
                         svgString: attributes.svgString,
                       }}
@@ -236,7 +214,6 @@ export default function Edit({
             attributes={{
               title: attributes.title,
               labelSettings: attributes.labelSettings,
-              directory: attributes.directory,
               svgString: attributes.svgString,
               icon: attributes.icon,
             }}
@@ -250,7 +227,7 @@ export default function Edit({
               {
                 placeholder: __(
                   "Click here and press / to enter content inside your Tab",
-                  "rrze-blocks-b"
+                  "rrze-elements-b"
                 ),
               },
             ],

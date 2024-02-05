@@ -1,0 +1,31 @@
+.elements-textcolumns, .wp-block-rrze-elements-columns {
+    padding: 15px;
+
+    .font-light * {
+        p {
+            color: #fff;
+        }
+    }
+    
+    column-gap: 1.5em;
+    padding-bottom: 1em;
+    > * {
+        margin-top: 0;
+    }
+    p {
+        hyphens:auto;
+        orphans: 3;
+        widows: 3;
+    }
+    figure {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    &.font-light {
+        * {
+            color: #fff;
+            letter-spacing: .02em;
+        }
+    }
+}
+

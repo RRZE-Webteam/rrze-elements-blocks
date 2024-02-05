@@ -4,17 +4,12 @@
   "name": "rrze-elements/accordions",
   "version": "1.25.10",
   "title": "Inner Accordion",
-  "category": "design",
+  "category": "rrze_elements",
   "parent": [
     "rrze-elements/collapse"
   ],
   "description": "Creates an inner accordion block",
   "attributes": {
-    "message": {
-      "type": "string",
-      "source": "text",
-      "selector": "div"
-    },
     "expandAllLink": {
       "type": "boolean",
       "default": false
@@ -45,7 +40,6 @@
   },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",
-  "script": "rrze-accordions",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
 }

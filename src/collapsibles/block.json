@@ -4,14 +4,9 @@
 	"name": "rrze-elements/collapsibles",
 	"version": "1.25.10",
 	"title": "Accordion",
-	"category": "design",
+	"category": "rrze_elements",
 	"description": "Creates an accordion block",
 	"attributes": {
-		"message": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
-		},
 		"expandAllLink": {
 			"type": "boolean",
 			"default": false
@@ -113,7 +108,7 @@
 	},
 	"textdomain": "rrze-elements-b",
 	"editorScript": "file:./index.js",
-	"script": "rrze-accordions",
+	"viewScript": "rrze-accordions",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
 }

@@ -1,5 +1,5 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import HeadingComponent from "../collapse/InspectorControls/HeadingComponent";
+import HeadingComponent from "../components/HeadingComponent";
 
 interface Attributes {
   sameBlockCount: number;
@@ -18,7 +18,15 @@ interface SaveProps {
 }
 const Save: React.FC<SaveProps> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, ancestorCount, hstart } = attributes;
+  const {
+    sameBlockCount,
+    totalChildrenCount,
+    color,
+    title,
+    svgString,
+    ancestorCount,
+    hstart,
+  } = attributes;
 
   return (
     <div {...blockProps}>
@@ -26,21 +34,23 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
       <>
         <div className={`accordion-group ${attributes.color}`}>
           <HeadingComponent level={hstart + 1} className="accordion-heading">
-            <span className="read-mode-only">Test </span>
+            <span className="read-mode-only">{title}</span>
             <button
               className="accordion-toggle"
               data-toggle="collapse"
               // @ts-ignore
-              href={`#collapse_${sameBlockCount + totalChildrenCount + ancestorCount}`}
-              dangerouslySetInnerHTML={{
-                __html: `${attributes.svgString}${title}`,
-              }}
+              href={`#collapse_${
+                sameBlockCount + totalChildrenCount + ancestorCount
+              }`}
             >
-              {title}
+              {svgString && <span className={svgString}></span>}
+              {title || "…"}
             </button>
           </HeadingComponent>
           <div
-            id={`collapse_${sameBlockCount + totalChildrenCount + ancestorCount}`}
+            id={`collapse_${
+              sameBlockCount + totalChildrenCount + ancestorCount
+            }`}
             className="accordion-body"
             style={{ display: "none" }}
           >
@@ -52,6 +62,6 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
       </>
     </div>
   );
-}
+};
 
 export default Save;

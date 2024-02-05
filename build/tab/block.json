@@ -4,7 +4,7 @@
   "name": "rrze-elements/tab",
   "version": "0.0.6",
   "title": "Tabs",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates an tabs block.",
   "parent": [
     "rrze-elements/tabs"
@@ -49,10 +49,6 @@
     "tabsUid": {
       "type": "string",
       "default": ""
-    },
-    "directory": {
-      "type": "string",
-      "default": ""
     }
   },
   "supports": {
@@ -66,7 +62,6 @@
   ],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",
-  "script": "rrze-tabs",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
 }
