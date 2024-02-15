@@ -117,7 +117,6 @@ function rrze_register_blocks_and_translations() {
     $blocks = [
         'collapsibles', 'collapse', 'accordions', 'accordion', 'alert', 'notice',
         'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns'
-        // Add other blocks here
     ];
 
     foreach ($blocks as $block) {
@@ -125,7 +124,6 @@ function rrze_register_blocks_and_translations() {
 
         load_plugin_textdomain( 'rrze-elements-b', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-        // Assuming the script handle is the same as the block name
         $script_handle = generate_block_asset_handle( 'rrze-elements/'. $block, 'editorScript' );
         wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
     }
@@ -145,7 +143,6 @@ function rrze_rrze_elements_block_init() {
         ));
         load_plugin_textdomain( 'rrze-elements-b', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-        // Assuming the script handle is the same as the block name
         $script_handle = generate_block_asset_handle( 'rrze-elements/'. 'news', 'editorScript' );
         wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
     }
