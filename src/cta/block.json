@@ -49,9 +49,19 @@
     "html": false
   },
   "styles": [
-    { "name": "background", "label": "With Background" },
-    { "name": "no-background", "label": "No Background", "isDefault": true },
-    { "name": "small", "label": "Small" }
+    {
+      "name": "background",
+      "label": "With Background"
+    },
+    {
+      "name": "no-background",
+      "label": "No Background",
+      "isDefault": true
+    },
+    {
+      "name": "small",
+      "label": "Small"
+    }
   ],
   "textdomain": "rrze-elementsb",
   "editorScript": "file:./index.js",

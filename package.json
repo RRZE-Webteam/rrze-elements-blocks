@@ -14,7 +14,8 @@
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
-    "build-all": "sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test"
+    "build-all": "sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
+    "update-version": "node update-version.js"
   },
   "repository": {
     "type": "git",

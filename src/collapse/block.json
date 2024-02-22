@@ -2,12 +2,19 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
-  "version": "1.25.10",
+  "version": "1.0.0",
   "title": "Accordion-item",
   "category": "design",
   "description": "Creates an accordion block",
-  "parent": ["rrze-elements/collapsibles"],
-  "keywords": ["accordion", "collapse", "expand", "toggle"],
+  "parent": [
+    "rrze-elements/collapsibles"
+  ],
+  "keywords": [
+    "accordion",
+    "collapse",
+    "expand",
+    "toggle"
+  ],
   "attributes": {
     "message": {
       "type": "string",
@@ -63,14 +70,14 @@
       "default": ""
     }
   },
-
   "providesContext": {
     "rrze-elements/collapseSBlockCount": "sameBlockCount",
     "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount",
     "rrze-elements/collapseColor": "color"
   },
-  "usesContext": ["rrze-elements/accordion-hstart"],
-
+  "usesContext": [
+    "rrze-elements/accordion-hstart"
+  ],
   "supports": {
     "html": false
   },

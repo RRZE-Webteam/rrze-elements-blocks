@@ -1,114 +1,113 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "rrze-elements/collapsibles",
-	"version": "1.25.10",
-	"title": "Accordion",
-	"category": "rrze_elements",
-	"description": "Creates an accordion block",
-	"attributes": {
-		"expandAllLink": {
-			"type": "boolean",
-			"default": false
-		},
-		"hstart": {
-			"type": "integer",
-			"default": 2
-		},
-		"register": {
-			"type": "boolean",
-			"default": false
-		},
-		"sameBlockCount": {
-			"type": "integer",
-			"default": 0
-		},
-		"childrenCount": {
-			"type": "integer",
-			"default": 0
-		},
-		"previousBlockIds": {
-			"type": "array",
-			"default": []
-		}
-	},
-	"example": {
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/collapsibles",
+  "version": "1.0.0",
+  "title": "Accordion",
+  "category": "rrze_elements",
+  "description": "Creates an accordion block",
+  "attributes": {
+    "expandAllLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 2
+    },
+    "register": {
+      "type": "boolean",
+      "default": false
+    },
+    "sameBlockCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "previousBlockIds": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "example": {
+    "attributes": {
+      "hstart": 2
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/collapse",
         "attributes": {
-            "hstart": 2
+          "title": "Akkordionreiter 1",
+          "loadOpen": false
         },
         "innerBlocks": [
-            {
-                "name": "rrze-elements/collapse",
-                "attributes": {
-                    "title": "Akkordionreiter 1",
-					"loadOpen": false
-                },
-				"innerBlocks": [
-					{
-						"name": "core/paragraph",
-						"attributes": {
-							"content": "Inhalt 1"
-						}
-					}
-				]
-            },
-			{
-                "name": "rrze-elements/collapse",
-                "attributes": {
-                    "title": "Akkordionreiter 2",
-					"loadOpen": false
-                },
-				"innerBlocks": [
-					{
-						"name": "core/paragraph",
-						"attributes": {
-							"content": "Inhalt 2"
-						}
-					}
-				]
-            },
-			{
-                "name": "rrze-elements/collapse",
-                "attributes": {
-                    "title": "Akkordionreiter 3",
-					"loadOpen": false
-                },
-				"innerBlocks": [
-					{
-						"name": "core/paragraph",
-						"attributes": {
-							"content": "Inhalt 2"
-						}
-					}
-				]
-            },
-			{
-                "name": "rrze-elements/collapse",
-                "attributes": {
-                    "title": "Akkordionreiter 4",
-					"loadOpen": false
-                },
-				"innerBlocks": [
-					{
-						"name": "core/paragraph",
-						"attributes": {
-							"content": "Inhalt 2"
-						}
-					}
-				]
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "Inhalt 1"
             }
+          }
         ]
-    },
-	"providesContext": {
-		"rrze-elements/accordion-hstart": "hstart"
-	}
-	,
-	"supports": {
-		"html": false
-	},
-	"textdomain": "rrze-elements-b",
-	"editorScript": "file:./index.js",
-	"viewScript": "rrze-accordions",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Akkordionreiter 2",
+          "loadOpen": false
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "Inhalt 2"
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Akkordionreiter 3",
+          "loadOpen": false
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "Inhalt 2"
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Akkordionreiter 4",
+          "loadOpen": false
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "Inhalt 2"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "providesContext": {
+    "rrze-elements/accordion-hstart": "hstart"
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "viewScript": "rrze-accordions",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
 }
