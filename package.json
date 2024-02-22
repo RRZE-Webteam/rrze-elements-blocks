@@ -15,7 +15,7 @@
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
     "build-all": "sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
-    "update-version": "node update-version.js"
+    "update-version": "node update-version.js && npm run build"
   },
   "repository": {
     "type": "git",
@@ -62,6 +62,7 @@
     "eslint": "^8.50.0",
     "eslint-plugin-react": "^7.33.2",
     "file-loader": "^6.2.0",
+    "inquirer": "^9.2.15",
     "semver": "^7.5.3",
     "svg-sprite-loader": "^6.0.11",
     "ts-loader": "^9.4.4",
