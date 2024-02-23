@@ -99,7 +99,6 @@ function deactivation()
 }
 
 function render_news_block($attributes) {
-    Helper::debug(get_option('home'));
     if (class_exists('RRZE\Elements\News\News')) {
         $news_instance = new News();
         return $news_instance->shortcodeCustomNews($attributes);

@@ -53,6 +53,8 @@ interface EditProps {
     display: string;
     hide: string;
     imgfloat: string;
+    leftcolumn: number;
+    rightcolumn: number;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -77,8 +79,33 @@ export default function Edit({
   const divclass = attributes.divclass || "";
   const hidemeta = attributes.hidemeta || false;
 
-  const [leftColumnWidth, setLeftColumnWidth] = useState(0);
-  const [rightColumnWidth, setRightColumnWidth] = useState(0);
+  const [leftColumnWidth, setLeftColumnWidth] = useState(
+    attributes.leftcolumn || 0
+  );
+  const [rightColumnWidth, setRightColumnWidth] = useState(
+    attributes.rightcolumn || 0
+  );
+  const [renderVersion, setRenderVersion] = useState(0);
+
+  //write me a use effect, that uses setRenderVersion((prevVersion) => prevVersion + 1); everytime the attributes get updated
+  useEffect(() => {
+    setRenderVersion((prevVersion) => prevVersion + 1);
+  }, [
+    attributes.has_thumbnail,
+    attributes.hideduplicates,
+    attributes.sticky_only,
+    attributes.hidemeta,
+    attributes.display,
+    attributes.hide,
+    attributes.imgfloat,
+    attributes.leftcolumn,
+    attributes.rightcolumn,
+    attributes.type,
+    attributes.num,
+    attributes.cat,
+    attributes.columns,
+    attributes.tag,
+  ]);
 
   const onChangeType = (newType: string) => () => {
     const type = attributes.type || "";
@@ -97,10 +124,12 @@ export default function Edit({
     const currentDisplay = attributes.display || "";
     if (currentDisplay.includes("list")) {
       setAttributes({ display: currentDisplay.replace("list", "").trim() });
+      setRenderVersion((prevVersion) => prevVersion + 1);
     } else {
       setAttributes({
         display: currentDisplay ? `${currentDisplay}, list` : "list",
       });
+      setRenderVersion((prevVersion) => prevVersion + 1);
     }
   };
 
@@ -109,7 +138,11 @@ export default function Edit({
     if (newWidth !== 0) {
       newRightWidth = 4 - newWidth;
     }
-    setAttributes({ columns: 0 });
+    setAttributes({
+      columns: 0,
+      rightcolumn: newRightWidth,
+      leftcolumn: newWidth,
+    });
     setLeftColumnWidth(newWidth);
     setRightColumnWidth(newRightWidth);
     updateTypeAttribute(newWidth, newRightWidth);
@@ -120,7 +153,11 @@ export default function Edit({
     if (newWidth !== 0) {
       newLeftWidth = 4 - newWidth;
     }
-    setAttributes({ columns: 0 });
+    setAttributes({
+      columns: 0,
+      rightcolumn: newWidth,
+      leftcolumn: newLeftWidth,
+    });
     setRightColumnWidth(newWidth);
     setLeftColumnWidth(newLeftWidth);
     updateTypeAttribute(newLeftWidth, newWidth);
@@ -152,6 +189,7 @@ export default function Edit({
     }
 
     setAttributes({ type: newTypes.join(",") });
+    setRenderVersion((prevVersion) => prevVersion + 1);
   };
 
   const onChangeColumns = (newColumns: number) => {
@@ -161,6 +199,7 @@ export default function Edit({
       setLeftColumnWidth(0);
       setRightColumnWidth(0);
       setAttributes({ columns: newColumns });
+      setRenderVersion((prevVersion) => prevVersion + 1);
     }
   };
 
@@ -178,27 +217,9 @@ export default function Edit({
     setAttributes({ hide: hideValues.join(",") });
   };
 
-  const handleToggleImgAlignment = (newAlignment: string) => {
-    setAttributes({ imgfloat: newAlignment });
-  };
-
-  console.log("Attributes passed to ServerSideRender:", {
-    title: attributes.title || "",
-    num: attributes.num || "",
-    cat: attributes.cat || "",
-    columns: attributes.columns || "",
-    tag: attributes.tag || "",
-    type: attributes.type || "",
-    divclass: attributes.divclass || "",
-    hidemeta: attributes.hidemeta || false,
-    sticky_only: attributes.sticky_only || false,
-    hideduplicates: attributes.hideduplicates || false,
-    has_thumbnail: attributes.has_thumbnail || false,
-    days: attributes.days || "",
-    display: attributes.display || "",
-    hide: attributes.hide || "",
-    imgfloat: attributes.imgfloat || "",
-  });
+  // const handleToggleImgAlignment = (newAlignment: string) => {
+  //   setAttributes({ imgfloat: newAlignment });
+  // };
 
   return (
     <div {...props}>
@@ -235,7 +256,7 @@ export default function Edit({
           />
           <CheckboxControl
             label={__("Only show posts with thumbnails", "rrze-elements-b")}
-            checked={attributes.has_thumbnail ?? false}
+            checked={attributes.has_thumbnail}
             onChange={(value) => setAttributes({ has_thumbnail: value })}
           />
           <CheckboxControl
@@ -243,13 +264,13 @@ export default function Edit({
             checked={attributes.sticky_only ?? false}
             onChange={(value) => setAttributes({ sticky_only: value })}
           />
-          <RangeControl
+          {/* <RangeControl
             label={__("Number of days", "rrze-elements-b")}
             value={attributes.days}
             onChange={onChangeDays}
             min={0}
             max={365}
-          />
+          /> */}
         </PanelBody>
         <PanelBody title={__("Layout", "rrze-elements-b")} initialOpen={false}>
           <HeadingSelectorInspector
@@ -297,7 +318,7 @@ export default function Edit({
             min={1}
             max={4}
           />
-          <ToggleGroupControl
+          {/* <ToggleGroupControl
             label={__("Image alignment", "rrze-elements-b")}
             value={attributes.hstart}
             onChange={handleToggleImgAlignment}
@@ -311,7 +332,7 @@ export default function Edit({
               value={"right"}
               label={__("right", "rrze-elements-b")}
             />
-          </ToggleGroupControl>
+          </ToggleGroupControl> */}
         </PanelBody>
         <PanelBody
           title={__("Hide Options", "rrze-elements-b")}
@@ -342,12 +363,18 @@ export default function Edit({
       <ErrorBoundary
         fallback={
           <div {...props}>
-            <p>{__("An error occured inside the ServerSideRender component of this block. Try adjusting the block settings, save your draft and refresh the page.", "rrze-elements-b")}</p>
+            <p>
+              {__(
+                "An error occured inside the ServerSideRender component of this block. Try adjusting the block settings, save your draft and refresh the page.",
+                "rrze-elements-b"
+              )}
+            </p>
           </div>
         }
       >
         <ServerSideRender
           block="rrze-elements/news"
+          key={renderVersion}
           attributes={{
             title: title,
             num: attributes.num,
@@ -355,12 +382,11 @@ export default function Edit({
             columns: attributes.columns,
             tag: tag,
             type: attributes.type,
+            has_thumbnail: attributes.has_thumbnail,
             divclass: divclass,
             hidemeta: hidemeta,
             sticky_only: attributes.sticky_only,
             hideduplicates: attributes.hideduplicates,
-            has_thumbnail: attributes.has_thumbnail,
-            days: attributes.days,
             display: attributes.display,
             hide: attributes.hide,
             imgfloat: attributes.imgfloat,

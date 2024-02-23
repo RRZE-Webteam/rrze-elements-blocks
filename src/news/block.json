@@ -41,7 +41,8 @@
       "type": "boolean"
     },
     "has_thumbnail": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "days": {
       "type": "number",
