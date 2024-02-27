@@ -79,12 +79,6 @@ export default function Edit({
   return (
     <div {...props}>
       <InspectorControls>
-        {attributes.style ? null : (
-          <BorderColorPicker
-            attributes={{ color: attributes.borderColor }}
-            setAttributes={setAttributes}
-          />
-        )}
         <PanelBody
           title={__("Style Settings", "rrze-elements-b")}
           initialOpen={true}
