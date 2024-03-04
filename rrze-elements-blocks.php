@@ -18,14 +18,17 @@ use RRZE\Elements\News\News;
 
 defined('ABSPATH') || exit;
 
+// Require necessary configuration files.
 require_once 'config/config.php';
 
 use RRZE\ElementsB\Main;
 
+// Define plugin version requirements.
 const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
 const RRZE_ELEMENTSB_VERSION = '1.0.0';
 
+// Autoload plugin classes.
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
     $base_dir = __DIR__ . '/includes/';
@@ -43,17 +46,13 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Register activation and deactivation hooks.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');
 register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
-register_activation_hook(__FILE__, 'RRZE\ElementsB\activation');
-register_deactivation_hook(__FILE__, 'RRZE\ElementsB\deactivation');
-
-add_action('plugins_loaded', 'RRZE\ElementsB\loaded');
-
 /**
- * [loadTextdomain description]
+ * Load the plugin text domain for translation.
  * @return void
  */
 function loadTextdomain()
@@ -62,8 +61,9 @@ function loadTextdomain()
 }
 
 /**
- * [systemRequirements description]
- * @return string [description]
+ * Check system requirements like PHP and WordPress version.
+ * 
+ * @return string Error message if requirements are not met.
  */
 function systemRequirements()
 {
@@ -77,8 +77,7 @@ function systemRequirements()
 }
 
 /**
- * [activation description]
- * @return void
+ * Actions to perform upon plugin activation, including checking system requirements.
  */
 function activation()
 {
@@ -91,8 +90,7 @@ function activation()
 }
 
 /**
- * [deactivation description]
- * @return [type] [description]
+ * Actions to perform upon plugin deactivation.
  */
 function deactivation()
 {
@@ -108,9 +106,7 @@ function render_news_block($attributes) {
 }
 
 /**
- * Register Block
- *
- * @return void
+ * Registers blocks and localizations.
  */
 function rrze_register_blocks_and_translations() {
     $blocks = [
@@ -127,15 +123,18 @@ function rrze_register_blocks_and_translations() {
         wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
     }
 
-    // Enqueue global styles and scripts here
+    // Register global styles and scripts here.
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('rrze-elements-blocks');
 }
 
+/**
+ * Initialization function for registering blocks and hooking into WordPress.
+ */
 function rrze_rrze_elements_block_init() {
     rrze_register_blocks_and_translations();
 
-    // Special handling for blocks with custom render callbacks
+    // Additional logic for blocks with custom render callbacks.
     if (class_exists('RRZE\Elements\News\News')) {
         register_block_type(__DIR__ . '/build/news', array(
             'render_callback' => 'RRZE\ElementsB\render_news_block',
@@ -147,6 +146,13 @@ function rrze_rrze_elements_block_init() {
     }
 }
 
+/**
+ * Adds custom block category for grouping RRZE elements in the block editor.
+ *
+ * @param array $categories Existing block categories.
+ * @param WP_Post $post Current post object.
+ * @return array Modified block categories.
+ */
 function my_custom_block_category( $categories, $post ) {
     return array_merge(
         $categories,
@@ -161,7 +167,7 @@ function my_custom_block_category( $categories, $post ) {
 }
 
 /**
- * [loaded description]
+ * Plugin loaded actions including system requirement checks and initialization.
  * @return void
  */
 function loaded()
