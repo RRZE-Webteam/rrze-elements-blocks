@@ -16,7 +16,7 @@ Text Domain:     rrze-elements-b
 namespace RRZE\ElementsB;
 use RRZE\Elements\News\News;
 
-defined('ABSPATH') || exit;
+defined('ABSPATH') || exit('No direct script access allowed');
 
 // Require necessary configuration files.
 require_once 'config/config.php';
@@ -28,7 +28,7 @@ const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
 const RRZE_ELEMENTSB_VERSION = '1.0.0';
 
-// Autoload plugin classes.
+// Autoloads plugin classes.
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
     $base_dir = __DIR__ . '/includes/';
@@ -52,7 +52,7 @@ register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
 /**
- * Load the plugin text domain for translation.
+ * Loads the plugin text domain for translation.
  * @return void
  */
 function loadTextdomain()
@@ -61,23 +61,25 @@ function loadTextdomain()
 }
 
 /**
- * Check system requirements like PHP and WordPress version.
+ * Checks system requirements like PHP and WordPress version.
  * 
  * @return string Error message if requirements are not met.
  */
 function systemRequirements()
 {
     $error = '';
+
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
         $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elements-b'), PHP_VERSION, RRZE_PHP_VERSION);
     } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
         $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elements-b'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
     }
+
     return $error;
 }
 
 /**
- * Actions to perform upon plugin activation, including checking system requirements.
+ * Plugin activation callback
  */
 function activation()
 {
@@ -90,12 +92,19 @@ function activation()
 }
 
 /**
- * Actions to perform upon plugin deactivation.
+ * Plugin deactivation callback
  */
 function deactivation()
 {
+    // Add deactivation logic if necessary.
 }
 
+/**
+ * Renders the news block.
+ * 
+ * @param array $attributes Attributes for the news block.
+ * @return string HTML content for the news block.
+ */
 function render_news_block($attributes) {
     if (class_exists('RRZE\Elements\News\News')) {
         $news_instance = new News();
@@ -129,7 +138,7 @@ function rrze_register_blocks_and_translations() {
 }
 
 /**
- * Initialization function for registering blocks and hooking into WordPress.
+ * Initializes the block registration and sets up localization.
  */
 function rrze_rrze_elements_block_init() {
     rrze_register_blocks_and_translations();
