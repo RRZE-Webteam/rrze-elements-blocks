@@ -13,12 +13,12 @@
   },
   "include": [
     "./src/**/*",
-    "./declarations.d.ts",
-    "./block-editor.d.ts",
-    "./server-side-render.d.ts",
+    "types/declarations.d.ts",
+    "types/block-editor.d.ts",
+    "types/server-side-render.d.ts",
     "tests/**/*.spec.ts",
     "playwright.config.ts",
     "global-setup.ts",
-    "./nodeJs.d.ts"
+    "types/nodeJs.d.ts"
   ]
 }
