@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/block-blueprint",
+  "version": "1.0.0",
+  "title": "Counter",
+  "category": "rrze_elements",
+  "description": "Creates a Counter block.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Blueprint"
+    }
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "rrze-counter"
+}

@@ -63,5 +63,18 @@ class Main
             ['jquery'],
             RRZE_ELEMENTSB_VERSION
         );    
+     
+        wp_register_script(
+            'rrze-gsap',
+            plugins_url('assets/js/counter/gsap.min.js', plugin_basename($this->pluginFile)),
+            [],
+            RRZE_ELEMENTSB_VERSION
+        );    
+        wp_register_script(
+            'rrze-counter',
+            plugins_url('assets/js/counter/rrze-counter.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap'],
+            RRZE_ELEMENTSB_VERSION
+        );
     }
 }
