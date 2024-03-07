@@ -25,7 +25,6 @@ class Main
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
 
         $this->pluginFile = $pluginFile;
-        new Sanitize();
     }
 
     function __destruct()
