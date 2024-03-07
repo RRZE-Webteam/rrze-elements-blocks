@@ -1,1 +1,152 @@
-.notice{display:block;margin:20px 0;padding-left:40px;position:relative}.notice h1,.notice h2,.notice h3,.notice h4,.notice h5,.notice h6{margin-bottom:0;padding-top:0}.notice ol,.notice p,.notice ul{margin-bottom:.3em}.alert .notice ol,.alert .notice p,.alert .notice ul{margin-bottom:0}.alert .notice{margin:0;padding-bottom:0;padding-top:0}.notice svg.rrze-elements-icon{left:0;max-width:30px;position:absolute;top:0}.notice-alert svg.rrze-elements-icon,.notice-attention svg.rrze-elements-icon{fill:#a71c18!important}.notice-alert h1,.notice-alert h2,.notice-alert h3,.notice-alert h4,.notice-alert h5,.notice-alert h6,.notice-attention h1,.notice-attention h2,.notice-attention h3,.notice-attention h4,.notice-attention h5,.notice-attention h6{color:#a71c18}.notice-alert.no-title p,.notice-attention.no-title p{color:#a71c18;font-weight:700}.notice-hinweis svg.rrze-elements-icon{fill:#00458c!important}.notice-hinweis h1,.notice-hinweis h2,.notice-hinweis h3,.notice-hinweis h4,.notice-hinweis h5,.notice-hinweis h6{color:#00458c}.notice-hinweis.no-title p{color:#00458c;font-weight:700}.notice-baustelle svg.rrze-elements-icon{fill:#4b4a56!important}.notice-baustelle h1,.notice-baustelle h2,.notice-baustelle h3,.notice-baustelle h4,.notice-baustelle h5,.notice-baustelle h6{color:#4b4a56}.notice-baustelle.no-title p{color:#4b4a56;font-weight:700}.notice-question svg.rrze-elements-icon{fill:#005cae!important}.notice-minus svg.rrze-elements-icon{fill:#a71c18!important}.notice-plus svg.rrze-elements-icon{fill:#00905a!important}.notice-tipp svg.rrze-elements-icon{fill:orange!important}.notice-tipp h1,.notice-tipp h2,.notice-tipp h3,.notice-tipp h4,.notice-tipp h5,.notice-tipp h6{color:#4b4a56}.notice-tipp.no-title p{color:#4b4a56;font-weight:700}.notice-audio svg.rrze-elements-icon,.notice-download svg.rrze-elements-icon,.notice-faubox svg.rrze-elements-icon,.notice-video svg.rrze-elements-icon{fill:#005cae!important}.notice-thumbs-up svg.rrze-elements-icon{fill:#00905a!important}.notice-thumbs-down svg.rrze-elements-icon{fill:#a71c18!important}.wp-block-rrze-elements-notice .notice{border:none}.wp-block-rrze-elements-notice .notice h2.wp-block-heading{margin-top:0}
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/notice/editor.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*
+    --color-zentral-ci-hell: #04316a;
+    --color-zentral-ci-hell-kontrast: #fff;
+    --color-phil-ci-hell: #fdb735;
+    --color-phil-ci-hell-kontrast: #000;
+    --color-med-ci-hell: #18b4f1;
+    --color-med-ci-hell-kontrast: #000;
+    --color-nat-ci-hell: #7bb725;
+    --color-nat-ci-hell-kontrast: #000;
+    --color-rw-ci-hell: #c50f3c;
+    --color-rw-ci-hell-kontrast: #fff;
+    --color-tf-ci-hell: #8c9fb1;
+    --color-tf-ci-hell-kontrast: #000;
+
+    --color-primary-ci-hell
+    --color-primary-ci-hell-kontrast
+    --color-button-text
+    --color-button-bg
+    --color-button-hover-text
+    --color-button-hover-bg
+*/
+/*!
+Functions and Mixins
+*/
+/*!
+ * Absatzklassen
+ */
+.notice {
+  display: block;
+  margin: 20px 0;
+  padding-left: 40px;
+  position: relative;
+}
+.notice h1, .notice h2, .notice h3, .notice h4, .notice h5, .notice h6 {
+  margin-bottom: 0;
+  padding-top: 0;
+}
+.notice p, .notice ul, .notice ol {
+  margin-bottom: 0.3em;
+}
+.alert .notice p, .alert .notice ul, .alert .notice ol {
+  margin-bottom: 0;
+}
+.alert .notice {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.notice svg.rrze-elements-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 30px;
+}
+
+.notice-alert svg.rrze-elements-icon,
+.notice-attention svg.rrze-elements-icon {
+  fill: #a71c18 !important;
+}
+.notice-alert h1, .notice-alert h2, .notice-alert h3, .notice-alert h4, .notice-alert h5, .notice-alert h6,
+.notice-attention h1,
+.notice-attention h2,
+.notice-attention h3,
+.notice-attention h4,
+.notice-attention h5,
+.notice-attention h6 {
+  color: #a71c18;
+}
+.notice-alert.no-title p,
+.notice-attention.no-title p {
+  color: #a71c18;
+  font-weight: bold;
+}
+
+.notice-hinweis svg.rrze-elements-icon {
+  fill: #00458C !important;
+}
+.notice-hinweis h1, .notice-hinweis h2, .notice-hinweis h3, .notice-hinweis h4, .notice-hinweis h5, .notice-hinweis h6 {
+  color: #00458C;
+}
+.notice-hinweis.no-title p {
+  color: #00458C;
+  font-weight: bold;
+}
+
+.notice-baustelle svg.rrze-elements-icon {
+  fill: #4B4A56 !important;
+}
+.notice-baustelle h1, .notice-baustelle h2, .notice-baustelle h3, .notice-baustelle h4, .notice-baustelle h5, .notice-baustelle h6 {
+  color: #4B4A56;
+}
+.notice-baustelle.no-title p {
+  color: #4B4A56;
+  font-weight: bold;
+}
+
+.notice-question svg.rrze-elements-icon {
+  fill: #005CAE !important;
+}
+
+.notice-minus svg.rrze-elements-icon {
+  fill: #a71c18 !important;
+}
+
+.notice-plus svg.rrze-elements-icon {
+  fill: #00905A !important;
+}
+
+.notice-tipp svg.rrze-elements-icon {
+  fill: orange !important;
+}
+.notice-tipp h1, .notice-tipp h2, .notice-tipp h3, .notice-tipp h4, .notice-tipp h5, .notice-tipp h6 {
+  color: #4B4A56;
+}
+.notice-tipp.no-title p {
+  color: #4B4A56;
+  font-weight: bold;
+}
+
+.notice-download svg.rrze-elements-icon {
+  fill: #005CAE !important;
+}
+
+.notice-faubox svg.rrze-elements-icon {
+  fill: #005CAE !important;
+}
+
+.notice-audio svg.rrze-elements-icon {
+  fill: #005CAE !important;
+}
+
+.notice-video svg.rrze-elements-icon {
+  fill: #005CAE !important;
+}
+
+.notice-thumbs-up svg.rrze-elements-icon {
+  fill: #00905A !important;
+}
+
+.notice-thumbs-down svg.rrze-elements-icon {
+  fill: #a71c18 !important;
+}
+
+.wp-block-rrze-elements-notice .notice {
+  border: none;
+}
+.wp-block-rrze-elements-notice .notice h2.wp-block-heading {
+  margin-top: 0;
+}

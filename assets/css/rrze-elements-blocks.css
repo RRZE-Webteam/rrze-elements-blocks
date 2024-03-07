@@ -15138,4 +15138,87 @@ Functions and Mixins
   }
 }
 
+.fauCustomResearchHighlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.15rem;
+}
+
+@media (min-width: 992px) {
+  .fauCustomResearchHighlights {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.15rem;
+  }
+}
+.fauCustomResearchHighlightBox {
+  background-color: var(--color-FAU, blue);
+  color: #fff;
+  border: 1px solid var(--color-FAU, blue);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  /* Creates spacing between the boxes */
+}
+.fauCustomResearchHighlightBox dl {
+  margin: 0.5rem;
+}
+.fauCustomResearchHighlightBox dt {
+  font-size: 1.25rem;
+}
+.fauCustomResearchHighlightBox dt a {
+  color: #fff;
+  text-decoration: none;
+}
+.fauCustomResearchHighlightBox a.standard-btn.ghost-btn {
+  color: #fff;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.fauCustomResearchHighlightBox:hover {
+  background-color: #fff;
+  color: var(--color-FAU, blue);
+  border: 1px solid var(--color-FAU, blue);
+}
+.fauCustomResearchHighlightBox:hover dt a {
+  color: var(--color-FAU, blue);
+  text-decoration: none;
+}
+.fauCustomResearchHighlightBox:hover dd a.standard-btn.ghost-btn {
+  color: var(--color-FAU, blue);
+  text-decoration: none;
+}
+.fauCustomResearchHighlightBox:hover a.standard-btn.ghost-btn:hover {
+  color: #fff;
+  background-color: var(--color-FAU, blue);
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.fauCustomResearchHighlightBox dt,
+.fauCustomResearchHighlightBox dd {
+  margin: 0;
+  /* Resets default margin for clean alignment */
+}
+
+/* COMMONS - END */
+/* STYLES -  START */
+#scroll-container {
+  scroll-behavior: auto;
+  scroll-snap-type: y mandatory;
+}
+#scroll-container .section {
+  text-align: center;
+  scroll-snap-align: center;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  display: grid;
+  place-items: center;
+}
+#scroll-container .section:nth-child(odd) {
+  background-color: #000;
+  color: #fff;
+}
+
 /*# sourceMappingURL=rrze-elements-blocks.css.map */

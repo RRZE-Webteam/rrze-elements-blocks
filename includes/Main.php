@@ -66,14 +66,27 @@ class Main
      
         wp_register_script(
             'rrze-gsap',
-            plugins_url('assets/js/counter/gsap.min.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/gsap/gsap.min.js', plugin_basename($this->pluginFile)),
             [],
             RRZE_ELEMENTSB_VERSION
-        );    
+        );
+        wp_register_script(
+            'rrze-gsap-scrolltrigger',
+            plugins_url('assets/js/gsap/ScrollTrigger.min.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap'],
+            RRZE_ELEMENTSB_VERSION,
+            true // Assuming you want it in the footer
+        );
         wp_register_script(
             'rrze-counter',
             plugins_url('assets/js/counter/rrze-counter.js', plugin_basename($this->pluginFile)),
-            ['rrze-gsap'],
+            ['rrze-gsap-scrolltrigger'],
+            RRZE_ELEMENTSB_VERSION
+        );
+        wp_register_script(
+            'rrze-scrollstories',
+            plugins_url('assets/js/scrollstories/scrollstories.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap-scrolltrigger'],
             RRZE_ELEMENTSB_VERSION
         );
     }

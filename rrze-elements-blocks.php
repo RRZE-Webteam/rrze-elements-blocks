@@ -120,7 +120,7 @@ function render_news_block($attributes) {
 function rrze_register_blocks_and_translations() {
     $blocks = [
         'collapsibles', 'collapse', 'accordions', 'accordion', 'alert', 'notice',
-        'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter'
+        'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'scrollstories'
     ];
 
     foreach ($blocks as $block) {
