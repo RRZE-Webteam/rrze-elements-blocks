@@ -11,6 +11,14 @@
   },
   "attributes": {
     "title": {
+      "type": "number",
+      "default": 0
+    },
+    "description": {
+      "type": "string",
+      "default": "Blueprint"
+    },
+    "buttonText": {
       "type": "string",
       "default": "Blueprint"
     }

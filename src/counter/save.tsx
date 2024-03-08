@@ -6,6 +6,8 @@ interface SaveProps {
     tabsUid: string;
     blockId: string;
     title: string;
+    description: string;
+    buttonText: string;
   };
 }
 
@@ -29,18 +31,18 @@ export default function save({ attributes }: SaveProps) {
                 href="https://www.fau.de/forschungsprofil/forschungsschwerpunkte-der-fau/exploring-principles-of-nature/"
                 data-wpel-link="internal"
               >
-                <span className="fau-counter-data">197000005</span>
+                <span className="fau-counter-data">{attributes.title}</span>
               </a>
             </dt>
             <dd>
-              principles of nature
+              {attributes.description}
               <br />
               <a
                 className="standard-btn ghost-btn"
                 href="https://www.fau.de/forschungsprofil/forschungsschwerpunkte-der-fau/exploring-principles-of-nature/"
                 data-wpel-link="internal"
               >
-                Weiterlesen
+                {attributes.buttonText}
               </a>
             </dd>
           </dl>

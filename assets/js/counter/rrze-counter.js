@@ -21,8 +21,8 @@ try {
     // Check if the user prefers reduced motion
     if (!prefersReducedMotion) {
       const start = item.getAttribute("data-start") || 0;
-      const duration = parseFloat(item.getAttribute("data-duration")) || 4;
-      const ease = item.getAttribute("data-ease") || "power1.in";
+      const duration = parseFloat(item.getAttribute("data-duration")) || 2;
+      const ease = item.getAttribute("data-ease") || "power3.inOut";
       const stagger = parseFloat(item.getAttribute("data-stagger")) || 1.0;
 
       // If not, initialize the GSAP animation with ScrollTrigger
