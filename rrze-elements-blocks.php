@@ -199,16 +199,5 @@ function loaded()
         new Main(__FILE__);
         new Patterns();
         add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
-        add_action('rest_api_init', function () {
-            register_rest_route('rrze-elements-blocks/v1', '/plugin-directory', array(
-                'methods' => 'GET',
-                'callback' => function () {
-                    return array(
-                        'directory' => plugin_dir_url(__FILE__)
-                    );
-                },
-                'permission_callback' => '__return_true',
-            ));
-        });
     }
 }
