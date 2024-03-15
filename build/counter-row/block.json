@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/counter-row",
+  "version": "1.0.0",
+  "title": "Counter Row",
+  "category": "rrze_elements",
+  "description": "Create a Row for Counters",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "stagger": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -20,7 +20,6 @@ import { __ } from "@wordpress/i18n";
 import { isBlobURL } from "@wordpress/blob";
 import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { link, linkOff } from "@wordpress/icons";
-
 import { CustomMediaReplaceFlow } from "../components/CustomMediaReplaceFlow";
 
 interface EditProps {
@@ -137,7 +136,6 @@ export default function Edit({
     // Rest of your logic...
     setAttributes({ buttonText: newButtonText });
   };
-  
 
   const updateIsSearch = () => {
     setAttributes({ isSearch: !attributes.isSearch });
@@ -203,7 +201,6 @@ export default function Edit({
           />
         </Popover>
       )}
-
       <div className={`rrze-elements-cta ${imageClass} ${background}`}>
             <div className="cta-content">
               <RichText
