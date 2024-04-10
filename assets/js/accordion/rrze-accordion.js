@@ -8,9 +8,9 @@ const { __, _x, _n, sprintf } = wp.i18n;
 jQuery(document).ready(function($) {
     // Close Accordions on start, except first
     $('.accordion-body').not(".accordion-body.open").not('.accordion-body.stayopen').hide();
-    $('.accordion-body.open').each( function () {
+    $('.accordion-body.open').each(function() {
         $(this).closest('.accordion-group').find('button.accordion-toggle').first().addClass('active');
-    })
+    });
     $('.accordion').each(function() {
         if ($(this).find('button.expand-all').length > 0) {
             var items = $(this).find(".accordion-group");
@@ -21,28 +21,32 @@ jQuery(document).ready(function($) {
         }
     });
 
+    // Unified selector for both href and data-href
+    function getAccordionTarget($elem) {
+        return $elem.data('href') ? $elem.data('href') : $elem.attr('href');
+    }
+
     $('.accordion-toggle').bind('mousedown', function(event) {
         event.preventDefault();
-        var $accordion = $(this).attr('href');
-        var $name = $(this).data('name');
+        var $accordion = getAccordionTarget($(this));
+        var $name = $(this).data('name'); // data-name is already being used, no change needed here
         toggleAccordion($accordion);
-        // Put name attribute in URL path if available, else href
+        // Updated logic to accommodate both href and data-href
         if (typeof($name) !== 'undefined') {
             window.history.replaceState(null, null, '#' + $name);
-        } else {
+        } else if ($accordion) {
             window.history.replaceState(null, null, $accordion);
         }
     });
 
-    // Keyboard navigation for accordions
     $('.accordion-toggle').keydown(function(event) {
         if (event.keyCode == 32) {
-            var $accordion = $(this).attr('href');
+            var $accordion = getAccordionTarget($(this));
             var $name = $(this).data('name');
             toggleAccordion($accordion);
             if (typeof($name) !== 'undefined') {
                 window.history.replaceState(null, null, '#' + $name);
-            } else {
+            } else if ($accordion) {
                 window.history.replaceState(null, null, $accordion);
             }
         }
@@ -57,9 +61,9 @@ jQuery(document).ready(function($) {
         $($thisgroup).children('.accordion-body').slideToggle();
         // refresh Slick Gallery
         var $slick = $($thisgroup).find("div.slick-slider");
-            if ($slick.length < 0) {
-                $slick.slick("refresh");
-            }
+        if ($slick.length > 0) {
+            $slick.slick("refresh");
+        }
     }
 
     function openAnchorAccordion($target) {

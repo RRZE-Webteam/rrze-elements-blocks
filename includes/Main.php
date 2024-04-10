@@ -51,7 +51,7 @@ class Main
     
         wp_register_script(
             'rrze-accordions',
-            plugins_url('assets/js/accordion/rrze-accordion.min.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/accordion/rrze-accordion.js', plugin_basename($this->pluginFile)),
             ['jquery', 'wp-i18n'],
             RRZE_ELEMENTSB_VERSION
         );
