@@ -15,6 +15,17 @@
       "default": 0
     }
   },
+  "styles": [
+    {
+      "name": "outlined",
+      "label": "Outlined",
+      "isDefault": true
+    },
+    {
+      "name": "colorblock",
+      "label": "Colorblock"
+    }
+  ],
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",

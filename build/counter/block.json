@@ -50,5 +50,8 @@
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "viewScript": "rrze-counter"
+  "viewScript": "rrze-counter",
+  "parent": [
+    "rrze-elements/counter-row"
+  ]
 }
