@@ -38,8 +38,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className="accordion-toggle"
               data-toggle="collapse"
-              // @ts-ignore
-              href={`#collapse_${
+              data-href={`#collapse_${
                 sameBlockCount + totalChildrenCount + ancestorCount
               }`}
             >
