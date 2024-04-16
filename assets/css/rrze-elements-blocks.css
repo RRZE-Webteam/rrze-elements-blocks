@@ -15165,6 +15165,15 @@ dt span.fau-counter-data.rrze-counter-medium {
 dt span.fau-counter-data.rrze-counter-large {
   font-size: var(--wp--preset--font-size--large, 4rem);
 }
+dt span.fau-counter-editor-data.rrze-counter-normal {
+  font-size: var(--wp--preset--font-size--normal, 1rem);
+}
+dt span.fau-counter-editor-data.rrze-counter-medium {
+  font-size: var(--wp--preset--font-size--medium, 1.25rem);
+}
+dt span.fau-counter-editor-data.rrze-counter-large {
+  font-size: var(--wp--preset--font-size--large, 4rem);
+}
 
 .rrze--counter-element-container {
   background-color: var(--color-FAU, blue);

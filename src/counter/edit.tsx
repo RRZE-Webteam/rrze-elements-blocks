@@ -15,6 +15,8 @@ import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
 
+
+
 /**
  * Interface representing the properties for the Edit component.
  *
@@ -56,7 +58,11 @@ export default function Edit({
   } = attributes;
 
   const onChangeTitle = (title: string) => {
-    setAttributes({ title: parseInt(title) });
+    if (isNaN(parseInt(title))) {
+      return;
+    } else {
+      setAttributes({ title: parseInt(title) });
+    }
   };
 
   const onChangeButtonUrl = (newButtonUrl: {
@@ -166,13 +172,20 @@ export default function Edit({
       <div className="rrze--counter-element-container">
         <dl className="rrze-elements-counter">
           <dt>
+            {isSelected && (
             <RichText
               tagName="span"
               value={attributes.title.toString()}
               onChange={onChangeTitle}
               allowedFormats={[]}
-              className={`fau-counter-data rrze-counter-${attributes.fontSize || "large"} `}
+              className={`fau-counter-editor-data rrze-counter-${attributes.fontSize || "large"} `}
             />
+            )}
+            {!isSelected && (
+            <span className={`fau-counter-data rrze-counter-${attributes.fontSize || "large"} `}>
+              {attributes.title.toString()}
+            </span>
+            )}
           </dt>
           <dd>
             <RichText
@@ -180,7 +193,6 @@ export default function Edit({
               value={attributes.description}
               onChange={(description) => setAttributes({ description })}
               allowedFormats={[]}
-              className="fau-counter-data"
             />
             <br />
             {isURLSet && isLinkTag && (
@@ -190,7 +202,6 @@ export default function Edit({
                 value={attributes.buttonText}
                 onChange={(buttonText) => setAttributes({ buttonText })}
                 allowedFormats={[]}
-                className="fau-counter-data"
                 ref={setUrlPopoverAnchor}
               />
             </a>
