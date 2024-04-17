@@ -127,7 +127,7 @@ export default function Edit({
             <Button onClick={onClickPlay}>Preview Animation</Button>
           </PanelBody>
         </InspectorControls>
-        <InnerBlocks allowedBlocks={["rrze-elements/rrze-counter"]} />
+        <InnerBlocks allowedBlocks={["rrze-elements/rrze-counter", "rrze-elements/rrze-iconbox"]} />
       </section>
     </div>
   );

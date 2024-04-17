@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/rrze-iconbox",
+  "version": "1.0.0",
+  "title": "Iconbox",
+  "category": "rrze_elements",
+  "description": "Creates a Iconbox block.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": "Blueprint"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Blueprint"
+    },
+    "duration": {
+      "type": "number",
+      "default": 1
+    },
+    "stagger": {
+      "type": "number",
+      "default": 0.5
+    },
+    "fontSize": {
+      "type": "string",
+      "default": "large"
+    },
+    "buttonUrl": {
+      "type": "string"
+    },
+    "buttonOpensInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "target": {
+      "type": "string",
+      "default": "_self"
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+    "svgString": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "rrze-elements-b",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "parent": [
+    "rrze-elements/counter-row"
+  ]
+}
