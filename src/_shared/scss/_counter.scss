@@ -35,9 +35,9 @@ dt {
 }
 
 .rrze--counter-element-container {
-    background-color: var(--color-FAU, blue);
+    background-color: var(--color-primary-basis, #04316a);
     color: #fff;
-    border: 1px solid var(--color-FAU, blue);
+    border: 1px solid var(--color-primary-basis, #04316a);
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     height: 100%;
@@ -64,7 +64,7 @@ dt {
     a.standard-btn.ghost-btn:hover {
         background-color: var(--color-white, #fff);
         color: var(--color-KontrastDunkel, #222);
-        border: 1px solid var(--color-FAU, blue);
+        border: 1px solid var(--color-primary-basis, #04316a);
     }
 }
 
@@ -72,7 +72,7 @@ dt {
     .rrze--counter-element-container {
         background-color: var(--color-white, #fff);
         color: var(--color-KontrastDunkel, #222);
-        border: 1px solid var(--color-FAU, blue);
+        border: 1px solid var(--color-primary-basis, #04316a);
         
         dt {
             a {
@@ -86,30 +86,30 @@ dt {
         }
         a.standard-btn.ghost-btn:hover {
             color: var(--color-white, #fff);
-            background-color: var(--color-FAU, blue);
-            border: 1px solid var(--color-FAU, blue);
+            background-color: var(--color-primary-basis, #04316a);
+            border: 1px solid var(--color-primary-basis, #04316a);
         }
     }
 }
 
 // .rrze--counter-element-container:hover {
 //     background-color: #fff;
-//     color: var(--color-FAU, blue);
-//     border: 1px solid var(--color-FAU, blue);
+//     color: var(--color-primary-basis, #04316a);
+//     border: 1px solid var(--color-primary-basis, #04316a);
 
 //     dt a {
-//         color: var(--color-FAU, blue);
+//         color: var(--color-primary-basis, #04316a);
 //         text-decoration: none;
 //     }
 
 //     dd a.standard-btn.ghost-btn {
-//         color: var(--color-FAU, blue);
+//         color: var(--color-primary-basis, #04316a);
 //         text-decoration: none;
 //     }
 
 //     a.standard-btn.ghost-btn:hover {
 //         color: #fff;
-//         background-color: var(--color-FAU, blue);
+//         background-color: var(--color-primary-basis, #04316a);
 //         text-decoration: none;
 //         margin-top: 1rem;
 //     }
@@ -127,6 +127,6 @@ dt {
 // }
 
 // .rrze--counter-element-container:hover dt a {
-//     color: var(--color-FAU, blue);
+//     color: var(--color-primary-basis, #04316a);
 //     text-decoration: none;
 // }
