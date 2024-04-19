@@ -12,39 +12,51 @@ interface SaveProps {
     stagger: number;
     fontSize: string;
     buttonUrl: string;
+    svgString: string;
   };
 }
 
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
   return (
-    <div {...blockProps}>
-      <div className="rrze--counter-element-container">
-        <dl className="rrze-elements-counter">
-          <dt>
-            <span
-              className={`fau-counter-data rrze-counter-${attributes.fontSize || "large"} `}
-              data-duration={attributes.duration}
-              data-stagger={attributes.stagger}
-            >
-              {attributes.title}
-            </span>
-          </dt>
-          <dd>
-            {attributes.description}
-            <br />
-            {attributes.buttonUrl && (
-            <a
-              className="standard-btn ghost-btn"
-              href={attributes.buttonUrl}
-              data-wpel-link="internal"
-            >
-              {attributes.buttonText}
-            </a>
-            )}
-          </dd>
-        </dl>
-      </div>
-    </div>
+    <>
+      {attributes.title && attributes.description && attributes.svgString && (
+        <div {...blockProps}>
+          <div className="rrze--iconbox-element-container">
+            <div className="rrze-iconbox-icon">
+              <span className={attributes.svgString}></span>
+            </div>
+            <div className="rrze-iconbox-content">
+              <dl className="rrze-elements-iconbox">
+                <dt>
+                  <span
+                    className={`fau-iconbox-data rrze-iconbox-${attributes.fontSize || "large"} `}
+                    data-duration={attributes.duration}
+                    data-stagger={attributes.stagger}
+                  >
+                    {attributes.title}
+                  </span>
+                </dt>
+                <dd>
+                  {attributes.description}
+                  <br />
+                  {attributes.buttonUrl &&
+                    attributes.buttonText &&
+                    attributes.description && (
+                      <a
+                        className="standard-btn ghost-btn"
+                        href={attributes.buttonUrl}
+                        data-wpel-link="internal"
+                      >
+                        {attributes.buttonText}
+                      </a>
+                    )}
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -4,28 +4,34 @@
 @import "../_shared/scss/button";
 
 .wp-block-rrze-elements-counter-row {
-    .fauCustomResearchHighlights {
-        display: initial;
+    // .fauCustomResearchHighlights {
+    //     display: initial;
 
-        .block-editor-block-list__layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 0.15rem;
-        }
-    }
+    //     .block-editor-block-list__layout {
+    //         display: grid;
+    //         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    //         column-gap: 0.15rem;
+    //         row-gap: 0.15rem;
+    //     }
+    // }
 
-    .rrze-iconbox-content {
-        align-self: center;
+    // .rrze-iconbox-content {
+    //     align-self: center;
 
-        dl {
-            padding: 0.75rem 1rem 0.75rem 0;
-        }
+    //     dl {
+    //         padding: 0.75rem 1rem 0.75rem 0;
+    //     }
 
-        dt {
-            /*break automatically if words are too long*/
-            word-break: break-all;
-        }
-    }
+    //     dt {
+    //         /*break automatically if words are too long*/
+    //         overflow-wrap: break-word;
+    //         hyphens: auto;
+    //     }
+
+    //     .manual-hyphens {
+    //         hyphens: manual;
+    //     }
+    // }
 
     dt {
         .fau-iconbox-editor-data.rrze-iconbox-normal {
@@ -44,17 +50,17 @@
         }
     }
 
-    .fau-iconbox-data {
-        font-weight: bold;
-    }
+    // .fau-iconbox-data {
+    //     font-weight: bold;
+    // }
 
-    .rrze--iconbox-element-container {
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-    }
+    // .rrze--iconbox-element-container {
+    //     padding: 0;
+    //     display: grid;
+    //     grid-template-columns: 1fr 3fr;
+    // }
 
-    .rrze-iconbox-icon {
-        font-size: 3rem;
-    }
+    // .rrze-iconbox-icon {
+    //     font-size: 3rem;
+    // }
 }

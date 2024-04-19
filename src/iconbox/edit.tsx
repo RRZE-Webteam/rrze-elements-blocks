@@ -11,9 +11,11 @@ import {
 import {
   FontSizePicker,
   PanelBody,
+  Modal,
   Popover,
   ToolbarGroup,
   ToolbarButton,
+  Button,
 } from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
 import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
@@ -65,7 +67,7 @@ export default function Edit({
   const [iconType, iconName] = icon?.split(" ") || [];
 
   const onChangeTitle = (title: string) => {
-      setAttributes({ title: title });
+    setAttributes({ title: title });
   };
 
   const onChangeButtonUrl = (newButtonUrl: {
@@ -83,6 +85,8 @@ export default function Edit({
 
   const [UrlPopoverAnchor, setUrlPopoverAnchor] = useState(null);
   const [isEditingURL, setIsEditingURL] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const TagName = "a";
   const isLinkTag = "a" === TagName;
@@ -96,6 +100,10 @@ export default function Edit({
     setAttributes({ buttonUrl: undefined });
     setIsEditingURL(false);
   };
+
+  // Functions to handle the opening and closing of the icon picker modal.
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
 
   useEffect(() => {
     if (!isSelected) {
@@ -128,6 +136,33 @@ export default function Edit({
               placeholder={undefined}
             />
           )}
+          <ToolbarButton
+            icon={symbol}
+            label={
+              icon === ""
+                ? __("Add an icon", "rrze-elements-b")
+                : __("Change the icon", "rrze-elements-b")
+            }
+            onClick={openModal}
+            placeholder={undefined}
+          />
+          {isOpen && (
+            <Modal
+              title={__("Select an Icon", "rrze-elements-b")}
+              onRequestClose={closeModal}
+            >
+              <IconPicker
+                attributes={{
+                  icon: attributes.icon,
+                  svgString: attributes.svgString,
+                }}
+                setAttributes={setAttributes}
+              />
+              <Button variant="primary" onClick={closeModal}>
+                {__("Close", "rrze-elements-b")}
+              </Button>
+            </Modal>
+          )}
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
@@ -138,24 +173,24 @@ export default function Edit({
               {
                 name: "Small",
                 size: "normal",
-                slug: "small",
+                slug: "normal",
               },
               {
                 name: "Normal",
                 size: "medium",
-                slug: "normal",
+                slug: "medium",
               },
               {
                 name: "Big",
                 size: "large",
-                slug: "big",
+                slug: "large",
               },
             ]}
             onChange={(newFontSize: string) =>
               setAttributes({ fontSize: newFontSize })
             }
             units={["px", "em", "rem"]}
-            value={16}
+            value={attributes.fontSize}
           />
           <IconPicker
             attributes={{
@@ -195,35 +230,28 @@ export default function Edit({
               }}
               defaultClass="rrze-iconbox-icon"
               setAttributes={setAttributes}
+              onClick={openModal}
             />
           )}
         </div>
         <div className="rrze-iconbox-content">
           <dl className="rrze-elements-iconbox">
             <dt>
-              {isSelected && (
-                <RichText
-                  tagName="span"
-                  value={attributes.title}
-                  onChange={onChangeTitle}
-                  allowedFormats={[]}
-                  placeholder={__("Title", "rrze-elements-b")}
-                  className={`fau-iconbox-editor-data rrze-iconbox-${attributes.fontSize || "large"} `}
-                />
-              )}
-              {!isSelected && (
-                <span
-                  className={`fau-iconbox-editor-data rrze-iconbox-${attributes.fontSize || "large"} `}
-                >
-                  {attributes.title.toString()}
-                </span>
-              )}
+              <RichText
+                tagName="span"
+                value={attributes.title}
+                onChange={onChangeTitle}
+                allowedFormats={[]}
+                placeholder={__("Begriff", "rrze-elements-b")}
+                className={`fau-iconbox-editor-data rrze-iconbox-${attributes.fontSize || "large"} `}
+              />
             </dt>
             <dd>
               <RichText
                 tagName="span"
                 value={attributes.description}
                 onChange={(description) => setAttributes({ description })}
+                placeholder={__("Definition", "rrze-elements-b")}
                 allowedFormats={[]}
               />
               <br />
@@ -234,6 +262,7 @@ export default function Edit({
                     value={attributes.buttonText}
                     onChange={(buttonText) => setAttributes({ buttonText })}
                     allowedFormats={[]}
+                    placeholder={__("Button Text", "rrze-elements-b")}
                     ref={setUrlPopoverAnchor}
                   />
                 </a>

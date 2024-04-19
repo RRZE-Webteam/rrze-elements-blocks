@@ -15141,14 +15141,16 @@ Functions and Mixins
 .rrze--counter-element {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0.15rem;
+  column-gap: 0.15em;
+  row-gap: 0.15em;
 }
 
 @media (min-width: 992px) {
   .rrze--counter-element {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0.15rem;
+    column-gap: 0.15em;
+    row-gap: 0.15em;
   }
 }
 dl.rrze-elements-counter dd {
@@ -15216,82 +15218,106 @@ dt span.fau-counter-data.rrze-counter-large {
   /* Resets default margin for clean alignment */
 }
 
-.rrze--counter-element {
+dt span.fau-iconbox-data.rrze-counter-normal {
+  font-size: var(--wp--preset--font-size--normal, 1rem);
+}
+dt span.fau-iconbox-data.rrze-counter-medium {
+  font-size: var(--wp--preset--font-size--medium, 1.25rem);
+}
+dt span.fau-iconbox-data.rrze-counter-large {
+  font-size: var(--wp--preset--font-size--large, 4rem);
+}
+
+.rrze--iconbox-element-container {
+  background-color: var(--color-primary-basis, #04316a);
+  color: #fff;
+  border: 1px solid var(--color-primary-basis, #04316a);
+  padding: 0.5rem 1rem;
+  height: 100%;
+  /* Creates spacing between the boxes */
+}
+.rrze--iconbox-element-container .rrze-iconbox-icon {
+  padding: 1rem;
+  align-self: center;
+}
+.rrze--iconbox-element-container dl {
+  margin: 0.5rem;
+}
+.rrze--iconbox-element-container dt a {
+  color: #fff;
+  text-decoration: none;
+}
+.rrze--iconbox-element-container a.standard-btn.ghost-btn {
+  color: #fff;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+.rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
+  background-color: var(--color-white, #fff);
+  color: var(--color-KontrastDunkel, #222);
+  border: 1px solid var(--color-primary-basis, #04316a);
+}
+
+.is-style-outlined .rrze--iconbox-element-container {
+  background-color: var(--color-white, #fff);
+  color: var(--color-KontrastDunkel, #222);
+  border: 1px solid var(--color-primary-basis, #04316a);
+}
+.is-style-outlined .rrze--iconbox-element-container dt a {
+  color: var(--color-KontrastDunkel, #222);
+}
+.is-style-outlined .rrze--iconbox-element-container a.standard-btn.ghost-btn {
+  color: var(--color-KontrastDunkel, #222);
+}
+.is-style-outlined .rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
+  color: var(--color-white, #fff);
+  background-color: var(--color-primary-basis, #04316a);
+  border: 1px solid var(--color-primary-basis, #04316a);
+}
+
+.rrze--iconbox-element-container dt,
+.rrze--iconbox-element-container dd {
+  margin: 0;
+  /* Resets default margin for clean alignment */
+}
+
+.fauCustomResearchHighlights {
+  display: initial;
+}
+.fauCustomResearchHighlights .block-editor-block-list__layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0.15rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  column-gap: 0.15rem;
+  row-gap: 0.15rem;
 }
 
-@media (min-width: 992px) {
-  .rrze--counter-element {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.15rem;
-  }
+.rrze-iconbox-content {
+  align-self: center;
 }
-dl.rrze-elements-counter dd {
-  margin-left: 0;
-  padding-left: 0;
+.rrze-iconbox-content dl {
+  padding: 0.75rem 1rem 0.75rem 0;
 }
-
-dt span.fau-counter-data.rrze-counter-normal {
-  font-size: var(--wp--preset--font-size--normal, 1rem);
+.rrze-iconbox-content dt {
+  /*break automatically if words are too long*/
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
-dt span.fau-counter-data.rrze-counter-medium {
-  font-size: var(--wp--preset--font-size--medium, 1.25rem);
-}
-dt span.fau-counter-data.rrze-counter-large {
-  font-size: var(--wp--preset--font-size--large, 4rem);
+.rrze-iconbox-content .manual-hyphens {
+  hyphens: manual;
 }
 
-.rrze--counter-element-container {
-  background-color: var(--color-primary-basis, #04316a);
-  color: #fff;
-  border: 1px solid var(--color-primary-basis, #04316a);
-  padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
-  height: 100%;
-  /* Creates spacing between the boxes */
-}
-.rrze--counter-element-container dl {
-  margin: 0.5rem;
-}
-.rrze--counter-element-container dt a {
-  color: #fff;
-  text-decoration: none;
-}
-.rrze--counter-element-container a.standard-btn.ghost-btn {
-  color: #fff;
-  text-decoration: none;
-  margin-top: 1rem;
-}
-.rrze--counter-element-container a.standard-btn.ghost-btn:hover {
-  background-color: var(--color-white, #fff);
-  color: var(--color-KontrastDunkel, #222);
-  border: 1px solid var(--color-primary-basis, #04316a);
+.fau-iconbox-data {
+  font-weight: bold;
 }
 
-.is-style-outlined .rrze--counter-element-container {
-  background-color: var(--color-white, #fff);
-  color: var(--color-KontrastDunkel, #222);
-  border: 1px solid var(--color-primary-basis, #04316a);
-}
-.is-style-outlined .rrze--counter-element-container dt a {
-  color: var(--color-KontrastDunkel, #222);
-}
-.is-style-outlined .rrze--counter-element-container a.standard-btn.ghost-btn {
-  color: var(--color-KontrastDunkel, #222);
-}
-.is-style-outlined .rrze--counter-element-container a.standard-btn.ghost-btn:hover {
-  color: var(--color-white, #fff);
-  background-color: var(--color-primary-basis, #04316a);
-  border: 1px solid var(--color-primary-basis, #04316a);
+.rrze--iconbox-element-container {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }
 
-.rrze--counter-element-container dt,
-.rrze--counter-element-container dd {
-  margin: 0;
-  /* Resets default margin for clean alignment */
+.rrze-iconbox-icon {
+  font-size: 3rem;
 }
 
 /* COMMONS - END */

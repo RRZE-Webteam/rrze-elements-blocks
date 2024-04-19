@@ -32,6 +32,7 @@ interface EditProps {
   isSelected: boolean;
   attributes: {
     stagger: number;
+    columns: number;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -51,11 +52,19 @@ export default function Edit({
   setAttributes,
 }: EditProps) {
   gsap.registerPlugin(ScrollTrigger);
-  const props = useBlockProps();
+  const dynamicClass = `rrze-elements-column-span-${attributes.columns}`;
+
+  const props = useBlockProps({
+    className: dynamicClass,
+  });
 
   const onChangeStagger = (stagger: number) => {
     setAttributes({ stagger });
   };
+
+  const onChangeColumns = (columns: number) => {
+    setAttributes({ columns });
+  }
 
   const onClickPlay = () => {
     if (isSelected) {
@@ -123,6 +132,22 @@ export default function Edit({
               onMouseLeave={function noRefCheck() {}}
               onMouseMove={function noRefCheck() {}}
               step={0.05}
+            />
+            <Button onClick={onClickPlay}>Preview Animation</Button>
+          </PanelBody>
+          <PanelBody title={__("Grid Settings")}>
+            <RangeControl
+              label="Column number"
+              marks
+              max={5}
+              min={1}
+              value={attributes.columns}
+              onBlur={function noRefCheck() {}}
+              onChange={onChangeColumns}
+              onFocus={function noRefCheck() {}}
+              onMouseLeave={function noRefCheck() {}}
+              onMouseMove={function noRefCheck() {}}
+              step={1}
             />
             <Button onClick={onClickPlay}>Preview Animation</Button>
           </PanelBody>

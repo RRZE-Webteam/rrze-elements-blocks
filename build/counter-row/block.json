@@ -13,6 +13,10 @@
     "stagger": {
       "type": "number",
       "default": 0
+    },
+    "columns": {
+      "type": "number",
+      "default": 5
     }
   },
   "styles": [

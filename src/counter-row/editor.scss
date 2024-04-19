@@ -1,4 +1,4 @@
-svg.elements-tabs-icon-modal{
+svg.elements-tabs-icon-modal {
     float: left;
     clear: both;
     width: 2ch;
@@ -8,16 +8,16 @@ svg.elements-tabs-icon-modal{
     padding: 1ch;
 }
 
-.elements-tabs-icon-modal-input .components-text-control__input{
+.elements-tabs-icon-modal-input .components-text-control__input {
     // width: 80%;
     display: inline-block;
 }
 
-.components-base-control.elements-tabs-icon-modal-input{
+.components-base-control.elements-tabs-icon-modal-input {
     width: auto;
 }
 
-.rrze-elements-tabs-modal-container{
+.rrze-elements-tabs-modal-container {
     display: flex;
     flex-wrap: wrap;
 }
@@ -26,3 +26,59 @@ svg.elements-tabs-icon-modal{
 //     padding-top: 4em;
 //     margin-top: -4em;
 // }
+
+.wp-block-rrze-elements-counter-row {
+    .fauCustomResearchHighlights {
+        display: initial;
+
+        .block-editor-block-list__layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+
+
+            gap: 4px;
+        }
+    }
+
+    @for $i from 1 through 5 {
+
+        &.rrze-elements-column-span-#{$i} {
+            .fauCustomResearchHighlights {
+                .block-editor-block-list__layout {
+                    grid-template-columns: repeat($i, minmax(240px, 1fr));
+                }
+            }
+        }
+
+    }
+
+    dl {
+        padding: 0.5rem 1rem;
+    }
+
+    dt {
+        .fau-counter-editor-data.rrze-counter-normal {
+            font-size: var(--wp--preset--font-size--normal, 1rem);
+            font-weight: normal;
+        }
+
+        .fau-counter-editor-data.rrze-counter-medium {
+            font-size: var(--wp--preset--font-size--medium, 1.25rem);
+            font-weight: normal;
+        }
+
+        .fau-counter-editor-data.rrze-counter-large {
+            font-size: var(--wp--preset--font-size--large, 4rem);
+            font-weight: normal;
+        }
+    }
+
+    .fau-counter-data {
+        font-weight: bold;
+    }
+
+    .rrze--counter-element-container {
+        padding: 0;
+    }
+}

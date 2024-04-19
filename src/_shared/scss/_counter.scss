@@ -1,14 +1,16 @@
 .rrze--counter-element {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 0.15rem;
+    column-gap: 0.15em;
+    row-gap: 0.15em;
 }
 
 @media (min-width: 992px) {
     .rrze--counter-element {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: 0.15rem;
+        column-gap: 0.15em;
+        row-gap: 0.15em;
     }
 }
 

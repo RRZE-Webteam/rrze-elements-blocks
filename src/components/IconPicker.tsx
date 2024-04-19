@@ -131,6 +131,7 @@ interface IconMarkComponentProps {
   defaultClass?: string;
   setAttributes?: SetAttributesFunction;
   className?: string;
+  onClick?: () => void;
 }
 
 /**
@@ -147,8 +148,15 @@ const IconMarkComponent: React.ComponentType<IconMarkComponentProps> = ({
   defaultClass = "elements-blocks-icon-insideEditor",
   setAttributes = () => {},
   className = "",
+  onClick,
 }) => {
-  return <span className={`${attributes.svgString} ${className}`}></span>;
+  const handleOnClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
+  return <span className={`${attributes.svgString} ${className}`} onClick={handleOnClick}></span>;
 };
 
 export { IconPicker, IconMarkComponent };
