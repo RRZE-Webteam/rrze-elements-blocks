@@ -15140,7 +15140,7 @@ Functions and Mixins
 
 .rrze--counter-element {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   column-gap: 0.15em;
   row-gap: 0.15em;
 }
@@ -15148,7 +15148,7 @@ Functions and Mixins
 @media (min-width: 992px) {
   .rrze--counter-element {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     column-gap: 0.15em;
     row-gap: 0.15em;
   }
@@ -15286,7 +15286,7 @@ dt span.fau-iconbox-data.rrze-counter-large {
 }
 .fauCustomResearchHighlights .block-editor-block-list__layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   column-gap: 0.15rem;
   row-gap: 0.15rem;
 }
@@ -15313,11 +15313,12 @@ dt span.fau-iconbox-data.rrze-counter-large {
 .rrze--iconbox-element-container {
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 95px 5fr;
 }
 
 .rrze-iconbox-icon {
   font-size: 3rem;
+  margin: 0.5rem;
 }
 
 /* COMMONS - END */

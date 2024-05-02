@@ -17,6 +17,10 @@
     "columns": {
       "type": "number",
       "default": 5
+    },
+    "startValue": {
+      "type": "number",
+      "default": 0
     }
   },
   "styles": [

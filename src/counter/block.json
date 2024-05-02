@@ -26,15 +26,10 @@
       "type": "number",
       "default": 1.0
     },
-    "stagger": {
-      "type": "number",
-      "default": 0.5
-    },
     "fontSize": {
       "type": "string",
       "default": "large"
     },
-
     "buttonUrl": {
       "type": "string"
     },

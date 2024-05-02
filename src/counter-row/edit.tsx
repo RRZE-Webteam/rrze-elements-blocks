@@ -12,7 +12,8 @@ import {
   ToolbarItem,
   PanelBody,
   RangeControl,
-  Button
+  Button,
+  __experimentalNumberControl as NumberControl
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -33,6 +34,7 @@ interface EditProps {
   attributes: {
     stagger: number;
     columns: number;
+    startValue: number;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -66,6 +68,11 @@ export default function Edit({
     setAttributes({ columns });
   }
 
+  const onChangeStartValue = (startValue: string) => {
+    const output = parseInt(startValue, 10);
+    setAttributes({ startValue: output});
+  }
+
   const onClickPlay = () => {
     if (isSelected) {
       function numberWithDots(x: any) {
@@ -91,7 +98,7 @@ export default function Edit({
         const items = container.querySelectorAll(".fau-counter-data");
 
         gsap.from(items, {
-          textContent: 0,
+          textContent: attributes.startValue || 0,
           duration: 2,
           ease: "power3.inOut",
           stagger: attributes.stagger || 0,
@@ -119,7 +126,7 @@ export default function Edit({
           </ToolbarItem>
         </BlockControls>
         <InspectorControls>
-          <PanelBody title={__("Animation Settings")}>
+          <PanelBody title={__("Animation Settings", "rrze-elements-b")}>
             <RangeControl
               label="Stagger between Animations (seconds)"
               marks
@@ -135,9 +142,9 @@ export default function Edit({
             />
             <Button onClick={onClickPlay}>Preview Animation</Button>
           </PanelBody>
-          <PanelBody title={__("Grid Settings")}>
+          <PanelBody title={__("Grid Settings", "rrze-elements-b")}>
             <RangeControl
-              label="Column number"
+              label={__("Column number", "rrze-elements-b")}
               marks
               max={5}
               min={1}
@@ -148,6 +155,13 @@ export default function Edit({
               onMouseLeave={function noRefCheck() {}}
               onMouseMove={function noRefCheck() {}}
               step={1}
+            />
+            <NumberControl 
+              label={__("Start value", "rrze-elements-b")}
+              value={attributes.startValue}
+              onChange={onChangeStartValue}
+              min={0}
+              max={Number.MAX_VALUE}
             />
             <Button onClick={onClickPlay}>Preview Animation</Button>
           </PanelBody>
