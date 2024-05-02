@@ -18,6 +18,7 @@ const variations = [
     name: "notice-attention",
     title: __("Warning", "rrze-elements-b"),
     description: __("Warning", "rrze-elements-b"),
+    iconClass: "fa-solid fa-icons",
     icon: (
       <SVG
         width="1em"

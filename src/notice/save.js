@@ -20,7 +20,7 @@ export default function save({ attributes }) {
     
           
             {/* Render the icon if a matching variation is found */}
-            {matchedVariation?.icon}
+            <span className={matchedVariation?.iconClass}></span>
           
         <InnerBlocks.Content />
       </div>
