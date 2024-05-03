@@ -46,6 +46,7 @@ class Main
             'div' => [
                 'class' => true,
                 'id' => true,
+                'name' => true,
             ],
             'span' => [
                 'class' => true,
@@ -63,6 +64,8 @@ class Main
                 'aria-expanded' => true,
                 'aria-selected' => true,
                 'tabindex' => true,
+                'href' => true,
+                'data-name' => true,
             ],
             // 'svg' => [
             //     'xmlns' => true,
