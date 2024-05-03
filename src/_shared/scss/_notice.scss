@@ -134,4 +134,20 @@
             fill: $red !important;
     }
 }
+
+.wp-block-rrze-elements-notice{
+    display:grid;
+    grid-template-columns: 3em 1fr;
+    grid-gap: 1em;
+
+    :first-child {
+        align-self: center;
+        span:before {
+            font-size: 1.5em;
+            padding: 0.5em;
+            background-color: red;
+            color: white;
+        }
+    }
+}
     

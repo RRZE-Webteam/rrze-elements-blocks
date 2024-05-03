@@ -12314,6 +12314,21 @@ button.expand-all.standard-btn {
   fill: #a71c18 !important;
 }
 
+.wp-block-rrze-elements-notice {
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  grid-gap: 1em;
+}
+.wp-block-rrze-elements-notice :first-child {
+  align-self: center;
+}
+.wp-block-rrze-elements-notice :first-child span:before {
+  font-size: 1.5em;
+  padding: 0.5em;
+  background-color: red;
+  color: white;
+}
+
 /*
     --color-zentral-ci-hell: #04316a;
     --color-zentral-ci-hell-kontrast: #fff;
