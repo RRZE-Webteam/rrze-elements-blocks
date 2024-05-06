@@ -15228,6 +15228,11 @@ Functions and Mixins
   }
 }
 
+.wp-block-rrze-elements-cta .rrze-elements-cta-icon {
+  font-size: 1.25em;
+  margin-left: 1em;
+}
+
 .rrze--counter-element {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
