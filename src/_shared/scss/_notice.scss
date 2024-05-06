@@ -135,19 +135,68 @@
     }
 }
 
-.wp-block-rrze-elements-notice{
-    display:grid;
-    grid-template-columns: 3em 1fr;
-    grid-gap: 1em;
+// .wp-block-rrze-elements-notice{
+//     display:grid;
+//     grid-template-columns: 3em 1fr;
+//     grid-gap: 1em;
 
-    :first-child {
-        align-self: center;
-        span:before {
-            font-size: 1.5em;
-            padding: 0.5em;
-            background-color: red;
-            color: white;
+//     :first-child {
+//         align-self: center;
+//         span:before {
+//             font-size: 1.5em;
+//             padding: 0.5em;
+//             background-color: red;
+//             color: white;
+//         }
+//     }
+// }
+    
+.wp-block-rrze-elements-notice {
+    display: block; 
+    .notice {
+        border: none;
+        padding-left: 0;
+
+        h2.wp-block-heading {
+            margin-top: 0;
+        }
+
+        display: grid;
+        grid-template-columns: 6em auto;
+        grid-gap: 2em;
+
+        :first-child {
+            align-self: top;
+
+            .fa-solid {
+                font-size: 1.5em;
+                width: 3em;
+                text-align: center;
+            }
+
+            span:before {
+                display: block;
+                color: #fff;
+                background-color: var(--color-zentral-basis, #04316A);
+                aspect-ratio: 1/1;
+                padding: 1em 0.5em;
+            }
+        
+            span.fa-triangle-exclamation:before {
+                // background-color: #fad201;
+                background-color: #ffff00;
+                color: #121212;
+            }
+        }
+
+        div:nth-child(2) {
+            align-self: top;
+            h1, h2, h3, h4, h5, h6 {
+                padding-bottom: 0;
+            }
+            border-top: 3px solid var(--color-zentral-basis, #04316A);
+            padding-top: 0.5em;
         }
     }
+
 }
-    

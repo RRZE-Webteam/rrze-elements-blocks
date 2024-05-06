@@ -149,14 +149,16 @@ export default function Edit({
         }
       >
         <div>
+          <div>
             {/* Render the icon if a matching variation is found */}
             <span className={`${matchedVariation?.iconClass} rrze-elements-icon`}></span>
+          </div>
         </div>
         {attributes.style && (
           <div>
           <InnerBlocks
             template={[
-              ["core/heading", { placeholder: __("Add a Headline", "rrze-elements-b") }],
+              ["core/heading", { placeholder: __("Add a Headline", "rrze-elements-b"), level: 3, }],
               ["core/paragraph", { placeholder: __("Add a description…", "rrze-elements-b") }],
             ]}
             allowedBlocks={["core/heading", "core/paragraph"]}
