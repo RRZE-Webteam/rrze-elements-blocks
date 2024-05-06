@@ -30,7 +30,7 @@ export default function save({ attributes }: SaveProps) {
 
   return (
     <>
-      <div {...blockProps} style={style}>
+      <div {...blockProps} className={`${blockProps.className} ${attributes.color}`} style={style}>
         <InnerBlocks.Content />
       </div>
     </>

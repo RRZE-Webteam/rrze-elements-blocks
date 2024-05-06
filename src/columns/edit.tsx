@@ -111,7 +111,6 @@ export default function Edit({
       columnWidth: width,
       ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
       ...(border ? { border: `1px solid ${borderColor}` } : {}),
-      backgroundColor: attributes.color,
       // color: attributes.textColor
     };
 
@@ -122,7 +121,7 @@ export default function Edit({
     }, [attributes.color]);
 
   return (
-    <div {...props} style={style}>
+    <div {...props} className={`${props.className} ${attributes.color}`} style={style}>
       <InspectorControls>
         <PanelBody
           title={__("Display settings", "rrze-elements-b")}
@@ -166,7 +165,7 @@ export default function Edit({
           attributes={{ color: attributes.color }}
           setAttributes={setAttributes}
           colorData={colorDataAlert}
-          hex={true}
+          hex={false}
           useStyle={true}
           customColor={false}
           useTextColor={true}

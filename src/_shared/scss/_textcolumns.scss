@@ -1,4 +1,5 @@
-.elements-textcolumns, .wp-block-rrze-elements-columns {
+.elements-textcolumns,
+.wp-block-rrze-elements-columns {
     padding: 15px;
 
     .font-light * {
@@ -6,26 +7,57 @@
             color: #fff;
         }
     }
-    
+
     column-gap: 1.5em;
     padding-bottom: 1em;
-    > * {
+
+    >* {
         margin-top: 0;
     }
+
     p {
-        hyphens:auto;
+        hyphens: auto;
         orphans: 3;
         widows: 3;
     }
+
     figure {
         break-inside: avoid;
         page-break-inside: avoid;
     }
+
     &.font-light {
         * {
             color: #fff;
             letter-spacing: .02em;
         }
     }
-}
 
+    // Mixin for color variations
+    @mixin color-variation($background-color, $border-color) {
+        background-color: $background-color;
+        color: #000; // Common text color
+        border-color: $border-color;
+    }
+
+    // Specific styles for different types of info
+    &.success {
+        @include color-variation(#dff0d8, #d6e9c6);
+    }
+
+    &.info {
+        @include color-variation(#d9edf7, #bce8f1);
+    }
+
+    &.warning {
+        @include color-variation(#fcf8e3, #faebcc);
+    }
+
+    &.danger {
+        @include color-variation(#f2dede, #ebccd1);
+    }
+
+    &.undefined {
+        @include color-variation(#f5f5f5, #ddd);
+    }
+}
