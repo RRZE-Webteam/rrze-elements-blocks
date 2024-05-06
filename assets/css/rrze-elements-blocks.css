@@ -12204,14 +12204,23 @@ button.expand-all.standard-btn {
   padding-left: 40px;
   position: relative;
 }
-.notice h1, .notice h2, .notice h3, .notice h4, .notice h5, .notice h6 {
+.notice h1,
+.notice h2,
+.notice h3,
+.notice h4,
+.notice h5,
+.notice h6 {
   margin-bottom: 0;
   padding-top: 0;
 }
-.notice p, .notice ul, .notice ol {
+.notice p,
+.notice ul,
+.notice ol {
   margin-bottom: 0.3em;
 }
-.alert .notice p, .alert .notice ul, .alert .notice ol {
+.alert .notice p,
+.alert .notice ul,
+.alert .notice ol {
   margin-bottom: 0;
 }
 .alert .notice {
@@ -12230,7 +12239,12 @@ button.expand-all.standard-btn {
 .notice-attention svg.rrze-elements-icon {
   fill: #a71c18 !important;
 }
-.notice-alert h1, .notice-alert h2, .notice-alert h3, .notice-alert h4, .notice-alert h5, .notice-alert h6,
+.notice-alert h1,
+.notice-alert h2,
+.notice-alert h3,
+.notice-alert h4,
+.notice-alert h5,
+.notice-alert h6,
 .notice-attention h1,
 .notice-attention h2,
 .notice-attention h3,
@@ -12248,7 +12262,12 @@ button.expand-all.standard-btn {
 .notice-hinweis svg.rrze-elements-icon {
   fill: #00458C !important;
 }
-.notice-hinweis h1, .notice-hinweis h2, .notice-hinweis h3, .notice-hinweis h4, .notice-hinweis h5, .notice-hinweis h6 {
+.notice-hinweis h1,
+.notice-hinweis h2,
+.notice-hinweis h3,
+.notice-hinweis h4,
+.notice-hinweis h5,
+.notice-hinweis h6 {
   color: #00458C;
 }
 .notice-hinweis.no-title p {
@@ -12259,7 +12278,12 @@ button.expand-all.standard-btn {
 .notice-baustelle svg.rrze-elements-icon {
   fill: #4B4A56 !important;
 }
-.notice-baustelle h1, .notice-baustelle h2, .notice-baustelle h3, .notice-baustelle h4, .notice-baustelle h5, .notice-baustelle h6 {
+.notice-baustelle h1,
+.notice-baustelle h2,
+.notice-baustelle h3,
+.notice-baustelle h4,
+.notice-baustelle h5,
+.notice-baustelle h6 {
   color: #4B4A56;
 }
 .notice-baustelle.no-title p {
@@ -12282,7 +12306,12 @@ button.expand-all.standard-btn {
 .notice-tipp svg.rrze-elements-icon {
   fill: orange !important;
 }
-.notice-tipp h1, .notice-tipp h2, .notice-tipp h3, .notice-tipp h4, .notice-tipp h5, .notice-tipp h6 {
+.notice-tipp h1,
+.notice-tipp h2,
+.notice-tipp h3,
+.notice-tipp h4,
+.notice-tipp h5,
+.notice-tipp h6 {
   color: #4B4A56;
 }
 .notice-tipp.no-title p {
@@ -12321,11 +12350,21 @@ button.expand-all.standard-btn {
   border: none;
   padding-left: 0;
   display: grid;
-  grid-template-columns: 6em auto;
-  grid-gap: 2em;
+  grid-template-columns: 1fr;
+  grid-gap: 0.5em;
 }
 .wp-block-rrze-elements-notice .notice h2.wp-block-heading {
   margin-top: 0;
+}
+@media screen and (min-width: 300px) {
+  .wp-block-rrze-elements-notice .notice {
+    grid-template-columns: 6em auto;
+  }
+}
+@media screen and (min-width: 600px) {
+  .wp-block-rrze-elements-notice .notice {
+    grid-gap: 2em;
+  }
 }
 .wp-block-rrze-elements-notice .notice :first-child {
   align-self: top;
@@ -12348,11 +12387,21 @@ button.expand-all.standard-btn {
 }
 .wp-block-rrze-elements-notice .notice div:nth-child(2) {
   align-self: top;
-  border-top: 3px solid var(--color-zentral-basis, #04316A);
+  border-top: none;
   padding-top: 0.5em;
 }
-.wp-block-rrze-elements-notice .notice div:nth-child(2) h1, .wp-block-rrze-elements-notice .notice div:nth-child(2) h2, .wp-block-rrze-elements-notice .notice div:nth-child(2) h3, .wp-block-rrze-elements-notice .notice div:nth-child(2) h4, .wp-block-rrze-elements-notice .notice div:nth-child(2) h5, .wp-block-rrze-elements-notice .notice div:nth-child(2) h6 {
+.wp-block-rrze-elements-notice .notice div:nth-child(2) h1,
+.wp-block-rrze-elements-notice .notice div:nth-child(2) h2,
+.wp-block-rrze-elements-notice .notice div:nth-child(2) h3,
+.wp-block-rrze-elements-notice .notice div:nth-child(2) h4,
+.wp-block-rrze-elements-notice .notice div:nth-child(2) h5,
+.wp-block-rrze-elements-notice .notice div:nth-child(2) h6 {
   padding-bottom: 0;
+}
+@media screen and (min-width: 300px) {
+  .wp-block-rrze-elements-notice .notice div:nth-child(2) {
+    border-top: 3px solid var(--color-zentral-basis, #04316A);
+  }
 }
 
 /*
