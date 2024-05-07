@@ -4,15 +4,15 @@ import {
   InnerBlocks,
   BlockControls,
   InspectorControls,
-  ContrastChecker
+  ContrastChecker,
 } from "@wordpress/block-editor";
 
 import {
   StandardColorSwitcher,
+  ExtendedColorSwitcher,
   StandardColorSwitcherToolbar,
   BorderColorPicker,
 } from "../components/CustomColorSwitcher";
-
 
 import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
 
@@ -36,6 +36,8 @@ interface EditProps {
     border: boolean;
     color: string;
     textColor: string;
+    colorSlug?: string;
+    usesMargin: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -55,8 +57,15 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
 
-  const { numberOfColumns, rule, width, borderColor, border } = attributes;
-
+  const {
+    numberOfColumns,
+    rule,
+    width,
+    borderColor,
+    border,
+    color,
+    colorSlug,
+  } = attributes;
   const onChangeRangeControl = (numberOfColumns: number) => {
     setAttributes({ numberOfColumns });
   };
@@ -97,31 +106,48 @@ export default function Edit({
     {
       color: "#f2dede",
       slug: "danger",
-      name: __(
-        "Danger",
-        "rrze-elements-b"
-      ),
+      name: __("Danger", "rrze-elements-b"),
     },
   ];
 
-    // Style calculation moved outside JSX for clarity and optimization
-    const style = {
-      ...props.style,
-      columnCount: numberOfColumns,
-      columnWidth: width,
-      ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
-      ...(border ? { border: `1px solid ${borderColor}` } : {}),
-      // color: attributes.textColor
-    };
-
-    useEffect(() => {
-      if (!attributes.color) {
-        setAttributes({ textColor: undefined });
+  // Lookup color slug based on hex value
+  useEffect(() => {
+    if (!color) {
+      setAttributes({ colorSlug: "colorless" });
+    } else {
+      const colorEntry = colorDataAlert.find(
+        (c) => c.color.toUpperCase() === color.toUpperCase()
+      );
+      if (colorEntry) {
+        setAttributes({ colorSlug: colorEntry.slug });
       }
-    }, [attributes.color]);
+    }
+  }, [color, setAttributes]);
+
+  // Style calculation moved outside JSX for clarity and optimization
+  const style = {
+    ...props.style,
+    columnCount: numberOfColumns,
+    columnWidth: width,
+    ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
+    ...(border ? { border: `1px solid ${borderColor}` } : {}),
+    // color: attributes.textColor
+  };
+
+  useEffect(() => {
+    if (!attributes.color) {
+      setAttributes({ textColor: undefined, color: "default" });
+    }
+  }, [attributes.color]);
+
+  console.log(style);
 
   return (
-    <div {...props} className={`${props.className} ${attributes.color}`} style={style}>
+    <div
+      {...props}
+      className={`${props.className} ${attributes.colorSlug} ${attributes?.usesMargin ? "uses-margin" : ""}`}
+      style={style}
+    >
       <InspectorControls>
         <PanelBody
           title={__("Display settings", "rrze-elements-b")}
@@ -136,7 +162,7 @@ export default function Edit({
             step={1}
             value={numberOfColumns}
           />
-          <RangeControl
+          {/* <RangeControl
             label={__("Minimum Width of Columns", "rrze-elements-b")}
             marks={[
               {
@@ -149,8 +175,7 @@ export default function Edit({
             onChange={onChangeWidthControl}
             step={1}
             value={width}
-          />
-          
+          /> */}
           <ToggleControl
             checked={rule}
             label={__("Show Rule", "rrze-elements-b")}
@@ -161,17 +186,25 @@ export default function Edit({
             label={__("Show Border", "rrze-elements-b")}
             onChange={onChangeBorder}
           /> */}
+          <ToggleControl
+            checked={attributes.usesMargin}
+            label="Margin on neutral color"
+            onChange={() => setAttributes({ usesMargin: !attributes.usesMargin })}
+          />
           <StandardColorSwitcher
-          attributes={{ color: attributes.color }}
-          setAttributes={setAttributes}
-          colorData={colorDataAlert}
-          hex={false}
-          useStyle={true}
-          customColor={false}
-          useTextColor={true}
-          clearButton = {true}
-        />
-        <ContrastChecker textColor={attributes.textColor} backgroundColor={attributes.color} />
+            attributes={{ color: attributes.color }}
+            setAttributes={setAttributes}
+            colorData={colorDataAlert}
+            hex={true}
+            useStyle={true}
+            customColor={false}
+            useTextColor={true}
+            clearButton={true}
+          />
+          <ContrastChecker
+            textColor={attributes.textColor}
+            backgroundColor={attributes.color}
+          />
         </PanelBody>
         {/* { (rule || border) && (
           <BorderColorPicker

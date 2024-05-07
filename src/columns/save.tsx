@@ -9,6 +9,7 @@ interface SaveProps {
     border: boolean;
     textColor?: string;
     color?: string;
+    colorSlug?: string;
   };
 }
 
@@ -23,14 +24,12 @@ export default function save({ attributes }: SaveProps) {
     columnCount: numberOfColumns,
     columnWidth: width,
     ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
-    ...(border ? { border: `1px solid ${borderColor}` } : {}),
-    backgroundColor: attributes.color,
-    // color: attributes.textColor,
+    ...(border ? { border: `1px solid ${borderColor}` } : {})
   };
 
   return (
     <>
-      <div {...blockProps} className={`${blockProps.className} ${attributes.color}`} style={style}>
+      <div {...blockProps} className={`${blockProps.className} ${attributes.colorSlug}`} style={style}>
         <InnerBlocks.Content />
       </div>
     </>

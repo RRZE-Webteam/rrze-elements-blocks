@@ -14847,6 +14847,8 @@ ul[class^=rrze-elements-icon-list-] li:before {
   padding: 15px;
   column-gap: 1.5em;
   padding-bottom: 1em;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .elements-textcolumns .font-light * p,
 .wp-block-rrze-elements-columns .font-light * p {
@@ -14861,6 +14863,7 @@ ul[class^=rrze-elements-icon-list-] li:before {
   hyphens: auto;
   orphans: 3;
   widows: 3;
+  display: inline-block;
 }
 .elements-textcolumns figure,
 .wp-block-rrze-elements-columns figure {
@@ -14871,6 +14874,13 @@ ul[class^=rrze-elements-icon-list-] li:before {
 .wp-block-rrze-elements-columns.font-light * {
   color: #fff;
   letter-spacing: 0.02em;
+}
+@media (min-width: 768px) {
+  .elements-textcolumns,
+  .wp-block-rrze-elements-columns {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 .elements-textcolumns.success,
 .wp-block-rrze-elements-columns.success {
