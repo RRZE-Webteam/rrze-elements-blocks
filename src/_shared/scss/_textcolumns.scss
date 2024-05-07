@@ -50,10 +50,6 @@
     }
 
     // Specific styles for different types of info
-    &.undefined {
-        @include color-variation(var(--wp--preset--color--default, #e9edf2), #e9edf2);
-    }
-
     &.default {
         @include color-variation(var(--wp--preset--color--default, #e9edf2), #e9edf2);
     }
@@ -74,9 +70,11 @@
         @include color-variation(var(--wp--preset--color--danger, #f2dede), #f2dede);
     }
 
-    &.uses-margin {
+    &:not(.info):not(.warning):not(.danger):not(.success):not(.undefined) {
         margin-left: 0;
-        margin-right: 0;       
+        margin-right: 0;     
+        padding-left: 0;
+        padding-right: 0;  
     }
 
 }

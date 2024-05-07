@@ -37,7 +37,6 @@ interface EditProps {
     color: string;
     textColor: string;
     colorSlug?: string;
-    usesMargin: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -135,6 +134,7 @@ export default function Edit({
   };
 
   useEffect(() => {
+    props.className = props.className.replace(/\binfo\b|\bwarning\b|\bdefault\b|\bdanger\b|\bsuccess\b/g, '');
     if (!attributes.color) {
       setAttributes({ textColor: undefined, color: "default" });
     }
@@ -145,7 +145,7 @@ export default function Edit({
   return (
     <div
       {...props}
-      className={`${props.className} ${attributes.colorSlug} ${attributes?.usesMargin ? "uses-margin" : ""}`}
+      className={`${props.className} ${attributes.colorSlug}`}
       style={style}
     >
       <InspectorControls>
@@ -186,11 +186,6 @@ export default function Edit({
             label={__("Show Border", "rrze-elements-b")}
             onChange={onChangeBorder}
           /> */}
-          <ToggleControl
-            checked={attributes.usesMargin}
-            label="Margin on neutral color"
-            onChange={() => setAttributes({ usesMargin: !attributes.usesMargin })}
-          />
           <StandardColorSwitcher
             attributes={{ color: attributes.color }}
             setAttributes={setAttributes}
@@ -219,9 +214,30 @@ export default function Edit({
             "core/paragraph",
             {
               placeholder:
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.",
             },
           ],
+          [
+            "core/paragraph",
+            {
+              placeholder:
+                "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.",
+            },
+          ],
+          [
+            "core/paragraph",
+            {
+              placeholder:
+                "Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.",
+            },
+          ],
+          [
+            "core/paragraph",
+            {
+              placeholder:
+                "Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.",
+            },
+          ]
         ]}
       />
     </div>

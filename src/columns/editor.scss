@@ -44,4 +44,11 @@
     //     }
     // }
 
+    &:not(.info):not(.warning):not(.danger):not(.success):not(.undefined) {
+        .block-editor-block-list__layout {
+            padding-left: 0px;
+            padding-right: 5px;
+        }
+    
+    }
 }

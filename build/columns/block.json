@@ -41,10 +41,6 @@
     "coloSlug": {
       "type": "string",
       "default": ""
-    },
-    "usesMargin": {
-      "type": "boolean",
-      "default": "false"
     }
   },
   "textdomain": "rrze-elements-b",
