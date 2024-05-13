@@ -1,5 +1,7 @@
 .elements-textcolumns,
 .wp-block-rrze-elements-columns {
+
+    .rrze-elements-blocks-text-column {
     padding: 15px;
 
     .font-light * {
@@ -27,7 +29,7 @@
         page-break-inside: avoid;
     }
 
-    &.font-light {
+    .font-light {
         * {
             color: #fff;
             letter-spacing: .02em;
@@ -70,11 +72,12 @@
         @include color-variation(var(--wp--preset--color--danger, #f2dede), #f2dede);
     }
 
-    &:not(.info):not(.warning):not(.danger):not(.success):not(.undefined) {
+    &:not(.info):not(.warning):not(.danger):not(.success):not(.undefined):not(.default) {
         margin-left: 0;
         margin-right: 0;     
         padding-left: 0;
         padding-right: 0;  
     }
 
+}
 }

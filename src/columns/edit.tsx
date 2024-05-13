@@ -65,6 +65,7 @@ export default function Edit({
     color,
     colorSlug,
   } = attributes;
+
   const onChangeRangeControl = (numberOfColumns: number) => {
     setAttributes({ numberOfColumns });
   };
@@ -134,18 +135,15 @@ export default function Edit({
   };
 
   useEffect(() => {
-    props.className = props.className.replace(/\binfo\b|\bwarning\b|\bdefault\b|\bdanger\b|\bsuccess\b/g, '');
     if (!attributes.color) {
       setAttributes({ textColor: undefined, color: "default" });
     }
   }, [attributes.color]);
 
-  console.log(style);
-
   return (
+    <div {...props}>
     <div
-      {...props}
-      className={`${props.className} ${attributes.colorSlug}`}
+      className={`rrze-elements-blocks-text-column ${attributes.colorSlug}`}
       style={style}
     >
       <InspectorControls>
@@ -240,6 +238,7 @@ export default function Edit({
           ]
         ]}
       />
+    </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@
       "type": "string",
       "default": ""
     },
-    "coloSlug": {
+    "colorSlug": {
       "type": "string",
       "default": ""
     }

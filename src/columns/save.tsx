@@ -27,16 +27,11 @@ export default function save({ attributes }: SaveProps) {
     ...(border ? { border: `1px solid ${borderColor}` } : {})
   };
 
-  let colorClass = attributes.colorSlug || "colorless";
-  if(colorClass === "undefined" || colorClass === "colorless") {
-    colorClass = "";
-  }
-  
   return (
-    <>
-      <div {...blockProps} className={`${blockProps.className} ${colorClass}`} style={style}>
+    <div {...blockProps}>
+      <div className={`rrze-elements-blocks-text-column ${attributes.colorSlug}`} style={style}>
         <InnerBlocks.Content />
       </div>
-    </>
+    </div>
   );
 }
