@@ -72,7 +72,7 @@
         @include color-variation(var(--wp--preset--color--danger, #f2dede), #f2dede);
     }
 
-    &:not(.info):not(.warning):not(.danger):not(.success):not(.undefined):not(.default) {
+    &:not(.bg-info):not(.bg-warning):not(.bg-danger):not(.bg-success):not(.bg-undefined):not(.bg-default) {
         margin-left: 0;
         margin-right: 0;     
         padding-left: 0;

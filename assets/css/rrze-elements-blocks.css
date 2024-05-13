@@ -14912,8 +14912,8 @@ ul[class^=rrze-elements-icon-list-] li:before {
   color: #000;
   border-color: #f2dede;
 }
-.elements-textcolumns .rrze-elements-blocks-text-column:not(.info):not(.warning):not(.danger):not(.success):not(.undefined):not(.default),
-.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column:not(.info):not(.warning):not(.danger):not(.success):not(.undefined):not(.default) {
+.elements-textcolumns .rrze-elements-blocks-text-column:not(.bg-info):not(.bg-warning):not(.bg-danger):not(.bg-success):not(.bg-undefined):not(.bg-default),
+.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column:not(.bg-info):not(.bg-warning):not(.bg-danger):not(.bg-success):not(.bg-undefined):not(.bg-default) {
   margin-left: 0;
   margin-right: 0;
   padding-left: 0;
