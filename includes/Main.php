@@ -67,6 +67,9 @@ class Main
                 'href' => true,
                 'data-name' => true,
             ],
+            'img' => [
+                'decoding' => true,
+            ]
             // 'svg' => [
             //     'xmlns' => true,
             //     'fill' => true,

@@ -58,8 +58,12 @@
   "styles": [
     {
       "name": "no-background",
-      "label": "No Background",
+      "label": "Normal",
       "isDefault": true
+    },
+    {
+      "name": "small",
+      "label": "Small"
     }
   ],
   "textdomain": "rrze-elementsb",

@@ -90,9 +90,9 @@ export default function Edit({
       if (hasNeedle("is-style-no-background")) {
         setAttributes({ background: "" });
       } else if (hasNeedle("is-style-small")) {
-        setAttributes({ background: "bg-1 style-small" });
+        setAttributes({ background: "style-small" });
       } else {
-        setAttributes({ background: "bg-1" });
+        setAttributes({ background: "" });
       }
     }
   }, [props.className]);
@@ -171,7 +171,7 @@ export default function Edit({
             )}
           </ToolbarGroup>
         </BlockControls>
-      <InspectorControls>
+      {/* <InspectorControls>
         <PanelBody
           title={__("Advanced Options", "rrze-elements-b")}
           initialOpen={true}
@@ -182,7 +182,7 @@ export default function Edit({
             onChange={updateIsSearch}
           />
         </PanelBody>
-      </InspectorControls>
+      </InspectorControls> */}
       {isLinkTag && isSelected && (isEditingURL || isURLSet) && (
         <Popover
           placement="bottom"
@@ -244,44 +244,6 @@ export default function Edit({
                 &nbsp;
                 <span className={"fa-solid fa-arrow-right rrze-elements-cta-icon"}></span>
               </a>
-            </div>
-            )}
-            {isSearch && (
-              <div className="cta-search-container">
-              <form
-                itemProp="potentialAction"
-                itemType="https://schema.org/SearchAction"
-                role="search"
-                aria-label="Search on /"
-                method="get"
-                className="cta-search searchform"
-                action="/"
-              >
-                <label htmlFor="cta_search_442333">
-                  {__(
-                    "Please enter the search term for searching on /:",
-                    "rrze-elements-b"
-                  )}
-                </label>
-                <meta itemProp="target" content="/?s={s}" />
-                <input
-                  itemProp="query-input"
-                  id="442333"
-                  type="text"
-                  value={buttonText}
-                  name="s"
-                  placeholder={__("Search for...", "rrze-elements-b")}
-                  required
-                  onChange={onChangeSearchBoxText}
-                />
-                {/* @ts-ignore */}
-                <button ref={setUrlPopoverAnchor} type="submit" value="">
-                  <span className={"fa-solid fa-magnifying-glass rrze-elements-cta-icon"}></span>
-                  <span className="sr-only">
-                    {__("Find", "rrze-elements-b")}
-                  </span>
-                </button>
-              </form>
             </div>
             )}
       </div>
