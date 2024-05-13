@@ -29,7 +29,7 @@ export default function save({ attributes }: SaveProps) {
 
   return (
     <div {...blockProps}>
-      <div className={`rrze-elements-blocks-text-column ${attributes.colorSlug}`} style={style}>
+      <div className={`rrze-elements-blocks-text-column bg-${attributes.colorSlug}`} style={style}>
         <InnerBlocks.Content />
       </div>
     </div>

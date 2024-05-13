@@ -52,23 +52,23 @@
     }
 
     // Specific styles for different types of info
-    &.default {
+    &.bg-default {
         @include color-variation(var(--wp--preset--color--default, #e9edf2), #e9edf2);
     }
 
-    &.success {
+    &.bg-success {
         @include color-variation(var(--wp--preset--color--success, #dff0db), #d6e9c6);
     }
 
-    &.info {
+    &.bg-info {
         @include color-variation(var(--wp--preset--color--info, #d9edf7), #d9edf7);
     }
 
-    &.warning {
+    &.bg-warning {
         @include color-variation(var(--wp--preset--color--warning, #fcf8e3), #fcf8e3);
     }
 
-    &.danger {
+    &.bg-danger {
         @include color-variation(var(--wp--preset--color--danger, #f2dede), #f2dede);
     }
 
@@ -78,6 +78,8 @@
         padding-left: 0;
         padding-right: 0;  
     }
+
+
 
 }
 }
