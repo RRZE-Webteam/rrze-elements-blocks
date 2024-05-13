@@ -47,7 +47,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
               className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
               data-name={output}
-              // @ts-ignore
+              //@ts-ignore
               href={`#${output}`}
             >
               {(svgString &&
@@ -59,9 +59,8 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
           <div
             id={`collapse_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
-            // @ts-ignore
+            //@ts-ignore
             name={output} 
-            // style={loadOpen ? {} : { display: "none" }}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />

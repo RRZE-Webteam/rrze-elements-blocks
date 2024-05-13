@@ -1,4 +1,7 @@
-.elements-textcolumns, .wp-block-rrze-elements-columns {
+.elements-textcolumns,
+.wp-block-rrze-elements-columns {
+
+    .rrze-elements-blocks-text-column {
     padding: 15px;
 
     .font-light * {
@@ -6,26 +9,75 @@
             color: #fff;
         }
     }
-    
+
     column-gap: 1.5em;
     padding-bottom: 1em;
-    > * {
+
+    >* {
         margin-top: 0;
     }
+
     p {
-        hyphens:auto;
+        hyphens: auto;
         orphans: 3;
         widows: 3;
+        display: inline-block;
     }
+
     figure {
         break-inside: avoid;
         page-break-inside: avoid;
     }
-    &.font-light {
+
+    .font-light {
         * {
             color: #fff;
             letter-spacing: .02em;
         }
     }
-}
+    
+    margin-left: -15px;
+    margin-right: -15px;
 
+    @media (min-width: 768px){
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    // Mixin for color variations
+    @mixin color-variation($background-color, $border-color) {
+        background-color: $background-color;
+        color: #000; // Common text color
+        border-color: $border-color;
+    }
+
+    // Specific styles for different types of info
+    &.default {
+        @include color-variation(var(--wp--preset--color--default, #e9edf2), #e9edf2);
+    }
+
+    &.success {
+        @include color-variation(var(--wp--preset--color--success, #dff0db), #d6e9c6);
+    }
+
+    &.info {
+        @include color-variation(var(--wp--preset--color--info, #d9edf7), #d9edf7);
+    }
+
+    &.warning {
+        @include color-variation(var(--wp--preset--color--warning, #fcf8e3), #fcf8e3);
+    }
+
+    &.danger {
+        @include color-variation(var(--wp--preset--color--danger, #f2dede), #f2dede);
+    }
+
+    &:not(.info):not(.warning):not(.danger):not(.success):not(.undefined):not(.default) {
+        margin-left: 0;
+        margin-right: 0;     
+        padding-left: 0;
+        padding-right: 0;  
+    }
+
+}
+}

@@ -6,23 +6,45 @@ interface SaveProps {
     tabsUid: string;
     blockId: string;
     title: string;
+    description: string;
+    buttonText: string;
+    duration: number;
+    stagger: number;
+    fontSize: string;
+    buttonUrl: string;
   };
 }
 
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
   return (
-    <>
-      <div {...blockProps}>
-        <div>Animation</div>
-        <div className="fau-counter-data" data-start="0" data-duration="4" data-ease="power1.in" data-stagger="1.0">1900000</div>
-        <div className="fau-counter-data" data-start="1" data-duration="2" data-ease="power1.in" data-stagger="1.0">1000000000</div>
-        <div className="data">1000</div>
-        <div>End result</div>
-        <div className="">1,900,000</div>
-        <div className="">1,000,000,000</div>
-        <div className="">1,000</div>
+    <div {...blockProps}>
+      <div className="rrze--counter-element-container">
+        <dl className="rrze-elements-counter">
+          <dt>
+            <span
+              className={`fau-counter-data rrze-counter-${attributes.fontSize || "large"} `}
+              data-duration={attributes.duration}
+              data-stagger={attributes.stagger}
+            >
+              {attributes.title}
+            </span>
+          </dt>
+          <dd>
+            {attributes.description}
+            <br />
+            {attributes.buttonUrl && (
+            <a
+              className="standard-btn ghost-btn"
+              href={attributes.buttonUrl}
+              data-wpel-link="internal"
+            >
+              {attributes.buttonText}
+            </a>
+            )}
+          </dd>
+        </dl>
       </div>
-    </>
+    </div>
   );
 }

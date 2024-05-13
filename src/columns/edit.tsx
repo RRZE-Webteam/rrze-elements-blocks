@@ -4,15 +4,15 @@ import {
   InnerBlocks,
   BlockControls,
   InspectorControls,
-  ContrastChecker
+  ContrastChecker,
 } from "@wordpress/block-editor";
 
 import {
   StandardColorSwitcher,
+  ExtendedColorSwitcher,
   StandardColorSwitcherToolbar,
   BorderColorPicker,
 } from "../components/CustomColorSwitcher";
-
 
 import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
 
@@ -36,6 +36,7 @@ interface EditProps {
     border: boolean;
     color: string;
     textColor: string;
+    colorSlug?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -55,7 +56,15 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
 
-  const { numberOfColumns, rule, width, borderColor, border } = attributes;
+  const {
+    numberOfColumns,
+    rule,
+    width,
+    borderColor,
+    border,
+    color,
+    colorSlug,
+  } = attributes;
 
   const onChangeRangeControl = (numberOfColumns: number) => {
     setAttributes({ numberOfColumns });
@@ -97,32 +106,46 @@ export default function Edit({
     {
       color: "#f2dede",
       slug: "danger",
-      name: __(
-        "Danger",
-        "rrze-elements-b"
-      ),
+      name: __("Danger", "rrze-elements-b"),
     },
   ];
 
-    // Style calculation moved outside JSX for clarity and optimization
-    const style = {
-      ...props.style,
-      columnCount: numberOfColumns,
-      columnWidth: width,
-      ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
-      ...(border ? { border: `1px solid ${borderColor}` } : {}),
-      backgroundColor: attributes.color,
-      // color: attributes.textColor
-    };
-
-    useEffect(() => {
-      if (!attributes.color) {
-        setAttributes({ textColor: undefined });
+  // Lookup color slug based on hex value
+  useEffect(() => {
+    if (!color) {
+      setAttributes({ colorSlug: "colorless" });
+    } else {
+      const colorEntry = colorDataAlert.find(
+        (c) => c.color.toUpperCase() === color.toUpperCase()
+      );
+      if (colorEntry) {
+        setAttributes({ colorSlug: colorEntry.slug });
       }
-    }, [attributes.color]);
+    }
+  }, [color, setAttributes]);
+
+  // Style calculation moved outside JSX for clarity and optimization
+  const style = {
+    ...props.style,
+    columnCount: numberOfColumns,
+    columnWidth: width,
+    ...(rule ? { columnRule: `1px solid ${borderColor}` } : {}),
+    ...(border ? { border: `1px solid ${borderColor}` } : {}),
+    // color: attributes.textColor
+  };
+
+  useEffect(() => {
+    if (!attributes.color) {
+      setAttributes({ textColor: undefined, color: "default" });
+    }
+  }, [attributes.color]);
 
   return (
-    <div {...props} style={style}>
+    <div {...props}>
+    <div
+      className={`rrze-elements-blocks-text-column ${attributes.colorSlug}`}
+      style={style}
+    >
       <InspectorControls>
         <PanelBody
           title={__("Display settings", "rrze-elements-b")}
@@ -137,7 +160,7 @@ export default function Edit({
             step={1}
             value={numberOfColumns}
           />
-          <RangeControl
+          {/* <RangeControl
             label={__("Minimum Width of Columns", "rrze-elements-b")}
             marks={[
               {
@@ -150,8 +173,7 @@ export default function Edit({
             onChange={onChangeWidthControl}
             step={1}
             value={width}
-          />
-          
+          /> */}
           <ToggleControl
             checked={rule}
             label={__("Show Rule", "rrze-elements-b")}
@@ -163,16 +185,19 @@ export default function Edit({
             onChange={onChangeBorder}
           /> */}
           <StandardColorSwitcher
-          attributes={{ color: attributes.color }}
-          setAttributes={setAttributes}
-          colorData={colorDataAlert}
-          hex={true}
-          useStyle={true}
-          customColor={false}
-          useTextColor={true}
-          clearButton = {true}
-        />
-        <ContrastChecker textColor={attributes.textColor} backgroundColor={attributes.color} />
+            attributes={{ color: attributes.color }}
+            setAttributes={setAttributes}
+            colorData={colorDataAlert}
+            hex={true}
+            useStyle={true}
+            customColor={false}
+            useTextColor={true}
+            clearButton={true}
+          />
+          <ContrastChecker
+            textColor={attributes.textColor}
+            backgroundColor={attributes.color}
+          />
         </PanelBody>
         {/* { (rule || border) && (
           <BorderColorPicker
@@ -187,11 +212,33 @@ export default function Edit({
             "core/paragraph",
             {
               placeholder:
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.",
             },
           ],
+          [
+            "core/paragraph",
+            {
+              placeholder:
+                "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.",
+            },
+          ],
+          [
+            "core/paragraph",
+            {
+              placeholder:
+                "Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.",
+            },
+          ],
+          [
+            "core/paragraph",
+            {
+              placeholder:
+                "Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.",
+            },
+          ]
         ]}
       />
+    </div>
     </div>
   );
 }

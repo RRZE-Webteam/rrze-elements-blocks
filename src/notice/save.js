@@ -11,20 +11,31 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      {" "}
-      <>
-        <div 
-        className={`notice ${attributes.style ? `${attributes.style}` : ''}`}
-        style={attributes.style ? {} : {backgroundColor: attributes.color, color: attributes.textColor, border: `1px solid ${attributes.borderColor}`}}
-    >
-    
-          
+      <div className="notice">
+        <>
+          {/* <div
+          className={`notice ${attributes.style ? `${attributes.style}` : ""}`}
+          style={
+            attributes.style
+              ? {}
+              : {
+                  backgroundColor: attributes.color,
+                  color: attributes.textColor,
+                  border: `1px solid ${attributes.borderColor}`,
+                }
+          }
+        > */}
+          <div>
             {/* Render the icon if a matching variation is found */}
-            {matchedVariation?.icon}
-          
-        <InnerBlocks.Content />
+            <span
+              className={`${matchedVariation?.iconClass} rrze-elements-icon`}
+            ></span>
+          </div>
+          <div>
+            <InnerBlocks.Content />
+          </div>
+        </>
       </div>
-      </>
     </div>
   );
 }

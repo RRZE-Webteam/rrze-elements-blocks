@@ -1,6 +1,4 @@
 import {
-  SVG,
-  Path,
   Spinner,
   Popover,
   ToolbarGroup,
@@ -20,7 +18,6 @@ import { __ } from "@wordpress/i18n";
 import { isBlobURL } from "@wordpress/blob";
 import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { link, linkOff } from "@wordpress/icons";
-
 import { CustomMediaReplaceFlow } from "../components/CustomMediaReplaceFlow";
 
 interface EditProps {
@@ -93,9 +90,9 @@ export default function Edit({
       if (hasNeedle("is-style-no-background")) {
         setAttributes({ background: "" });
       } else if (hasNeedle("is-style-small")) {
-        setAttributes({ background: "bg-1 style-small" });
+        setAttributes({ background: "style-small" });
       } else {
-        setAttributes({ background: "bg-1" });
+        setAttributes({ background: "" });
       }
     }
   }, [props.className]);
@@ -137,7 +134,6 @@ export default function Edit({
     // Rest of your logic...
     setAttributes({ buttonText: newButtonText });
   };
-  
 
   const updateIsSearch = () => {
     setAttributes({ isSearch: !attributes.isSearch });
@@ -175,7 +171,7 @@ export default function Edit({
             )}
           </ToolbarGroup>
         </BlockControls>
-      <InspectorControls>
+      {/* <InspectorControls>
         <PanelBody
           title={__("Advanced Options", "rrze-elements-b")}
           initialOpen={true}
@@ -186,7 +182,7 @@ export default function Edit({
             onChange={updateIsSearch}
           />
         </PanelBody>
-      </InspectorControls>
+      </InspectorControls> */}
       {isLinkTag && isSelected && (isEditingURL || isURLSet) && (
         <Popover
           placement="bottom"
@@ -203,7 +199,6 @@ export default function Edit({
           />
         </Popover>
       )}
-
       <div className={`rrze-elements-cta ${imageClass} ${background}`}>
             <div className="cta-content">
               <RichText
@@ -247,79 +242,8 @@ export default function Edit({
                   className="cta-button-text"
                 />
                 &nbsp;
-                <SVG
-                  height="1em"
-                  width="1em"
-                  className="rrze-elements-icon"
-                  aria-hidden="true"
-                  focusable="false"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  style={{
-                    fill: "currentcolor",
-                    fontSize: "2em",
-                    marginLeft: "1em",
-                  }}
-                >
-                  {/* <!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --> */}
-                  <Path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></Path>
-                </SVG>
+                <span className={"fa-solid fa-arrow-right rrze-elements-cta-icon"}></span>
               </a>
-            </div>
-            )}
-            {isSearch && (
-              <div className="cta-search-container">
-              <form
-                itemProp="potentialAction"
-                itemType="https://schema.org/SearchAction"
-                role="search"
-                aria-label="Search on /"
-                method="get"
-                className="cta-search searchform"
-                action="/"
-              >
-                <label htmlFor="cta_search_442333">
-                  {__(
-                    "Please enter the search term for searching on /:",
-                    "rrze-elements-b"
-                  )}
-                </label>
-                <meta itemProp="target" content="/?s={s}" />
-                <input
-                  itemProp="query-input"
-                  id="442333"
-                  type="text"
-                  value={buttonText}
-                  name="s"
-                  placeholder={__("Search for...", "rrze-elements-b")}
-                  required
-                  onChange={onChangeSearchBoxText}
-                />
-                {/* @ts-ignore */}
-                <button ref={setUrlPopoverAnchor} type="submit" value="">
-                  <svg
-                    height="1em"
-                    width="1em"
-                    className="rrze-elements-icon"
-                    // @ts-ignore
-                    style={{
-                      fill: "currentcolor",
-                      fontSize: "2em",
-                      marginLeft: "1em",
-                    }}
-                    aria-hidden="true"
-                    focusable="false"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                  >
-                    {/* <!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --> */}
-                    <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"></path>
-                  </svg>
-                  <span className="sr-only">
-                    {__("Find", "rrze-elements-b")}
-                  </span>
-                </button>
-              </form>
             </div>
             )}
       </div>

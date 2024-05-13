@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "rrze-elements/block-blueprint",
+  "name": "rrze-elements/rrze-counter",
   "version": "1.0.0",
   "title": "Counter",
   "category": "rrze_elements",
@@ -11,13 +11,41 @@
   },
   "attributes": {
     "title": {
+      "type": "number",
+      "default": 0
+    },
+    "description": {
       "type": "string",
       "default": "Blueprint"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Blueprint"
+    },
+    "duration": {
+      "type": "number",
+      "default": 1.0
+    },
+    "fontSize": {
+      "type": "string",
+      "default": "large"
+    },
+    "buttonUrl": {
+      "type": "string"
+    },
+    "buttonOpensInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "target": {
+      "type": "string",
+      "default": "_self"
     }
   },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "viewScript": "rrze-counter"
+  "viewScript": "rrze-counter",
+  "parent": ["rrze-elements/counter-row"]
 }

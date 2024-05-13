@@ -33,6 +33,14 @@
     "border": {
       "type": "boolean",
       "default": false
+    },
+    "color": {
+      "type": "string",
+      "default": ""
+    },
+    "colorSlug": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "rrze-elements-b",

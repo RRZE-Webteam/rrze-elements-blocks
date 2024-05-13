@@ -48,15 +48,18 @@
   "supports": {
     "html": false
   },
+  "example": {
+		"attributes": {
+			"title": "Your CTA title",
+			"buttonText": "Button Text",
+			"subtitle": "Your CTA subtitl"
+		}
+	},
   "styles": [
     {
-      "name": "background",
-      "label": "With Background",
-      "isDefault": true
-    },
-    {
       "name": "no-background",
-      "label": "No Background"
+      "label": "Normal",
+      "isDefault": true
     },
     {
       "name": "small",
