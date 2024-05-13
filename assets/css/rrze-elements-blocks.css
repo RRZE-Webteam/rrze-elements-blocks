@@ -14882,32 +14882,32 @@ ul[class^=rrze-elements-icon-list-] li:before {
     margin-right: 0;
   }
 }
-.elements-textcolumns .rrze-elements-blocks-text-column.default,
-.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.default {
+.elements-textcolumns .rrze-elements-blocks-text-column.bg-default,
+.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.bg-default {
   background-color: var(--wp--preset--color--default, #e9edf2);
   color: #000;
   border-color: #e9edf2;
 }
-.elements-textcolumns .rrze-elements-blocks-text-column.success,
-.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.success {
+.elements-textcolumns .rrze-elements-blocks-text-column.bg-success,
+.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.bg-success {
   background-color: var(--wp--preset--color--success, #dff0db);
   color: #000;
   border-color: #d6e9c6;
 }
-.elements-textcolumns .rrze-elements-blocks-text-column.info,
-.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.info {
+.elements-textcolumns .rrze-elements-blocks-text-column.bg-info,
+.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.bg-info {
   background-color: var(--wp--preset--color--info, #d9edf7);
   color: #000;
   border-color: #d9edf7;
 }
-.elements-textcolumns .rrze-elements-blocks-text-column.warning,
-.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.warning {
+.elements-textcolumns .rrze-elements-blocks-text-column.bg-warning,
+.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.bg-warning {
   background-color: var(--wp--preset--color--warning, #fcf8e3);
   color: #000;
   border-color: #fcf8e3;
 }
-.elements-textcolumns .rrze-elements-blocks-text-column.danger,
-.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.danger {
+.elements-textcolumns .rrze-elements-blocks-text-column.bg-danger,
+.wp-block-rrze-elements-columns .rrze-elements-blocks-text-column.bg-danger {
   background-color: var(--wp--preset--color--danger, #f2dede);
   color: #000;
   border-color: #f2dede;

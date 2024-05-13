@@ -143,7 +143,7 @@ export default function Edit({
   return (
     <div {...props}>
     <div
-      className={`rrze-elements-blocks-text-column ${attributes.colorSlug}`}
+      className={`rrze-elements-blocks-text-column bg-${attributes.colorSlug}`}
       style={style}
     >
       <InspectorControls>
