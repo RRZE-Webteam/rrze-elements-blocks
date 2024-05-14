@@ -15,6 +15,8 @@ class Patterns
 
     public function register_fau_custom_wp_block_patterns()
     {
+        Helper::debug(ThemeSniffer::getThemeGroup('fauthemes'));
+        Helper::debug(ThemeSniffer::getThemeGroup());
         if (ThemeSniffer::getThemeGroup('fauthemes')) {
             $this->register_block_pattern(
                 'example-pattern',
