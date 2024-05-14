@@ -14,6 +14,7 @@ Text Domain:     rrze-elements-b
 */
 
 namespace RRZE\ElementsB;
+
 use RRZE\Elements\News\News;
 
 defined('ABSPATH') || exit('No direct script access allowed');
@@ -105,19 +106,21 @@ function deactivation()
  * @param array $attributes Attributes for the news block.
  * @return string HTML content for the news block.
  */
-function render_news_block($attributes) {
+function render_news_block($attributes)
+{
     if (class_exists('RRZE\Elements\News\News')) {
         $news_instance = new News();
         return $news_instance->shortcodeCustomNews($attributes);
     }
-    
+
     return '';
 }
 
 /**
  * Registers blocks and localizations.
  */
-function rrze_register_blocks_and_translations() {
+function rrze_register_blocks_and_translations()
+{
     $blocks = [
         'collapsibles', 'collapse', 'accordions', 'accordion', 'alert', 'notice', 'iconbox',
         'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'counter-row'
@@ -126,10 +129,10 @@ function rrze_register_blocks_and_translations() {
     foreach ($blocks as $block) {
         register_block_type(__DIR__ . '/build/' . $block);
 
-        load_plugin_textdomain( 'rrze-elements-b', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+        load_plugin_textdomain('rrze-elements-b', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
-        $script_handle = generate_block_asset_handle( 'rrze-elements/'. $block, 'editorScript' );
-        wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
+        $script_handle = generate_block_asset_handle('rrze-elements/' . $block, 'editorScript');
+        wp_set_script_translations($script_handle, 'rrze-elements-b', plugin_dir_path(__FILE__) . 'languages');
     }
 
     // Register global styles and scripts here.
@@ -140,7 +143,8 @@ function rrze_register_blocks_and_translations() {
 /**
  * Initializes the block registration and sets up localization.
  */
-function rrze_rrze_elements_block_init() {
+function rrze_rrze_elements_block_init()
+{
     rrze_register_blocks_and_translations();
 
     // Additional logic for blocks with custom render callbacks.
@@ -148,10 +152,10 @@ function rrze_rrze_elements_block_init() {
         register_block_type(__DIR__ . '/build/news', array(
             'render_callback' => 'RRZE\ElementsB\render_news_block',
         ));
-        load_plugin_textdomain( 'rrze-elements-b', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+        load_plugin_textdomain('rrze-elements-b', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
-        $script_handle = generate_block_asset_handle( 'rrze-elements/'. 'news', 'editorScript' );
-        wp_set_script_translations( $script_handle, 'rrze-elements-b', plugin_dir_path( __FILE__ ) . 'languages' );
+        $script_handle = generate_block_asset_handle('rrze-elements/' . 'news', 'editorScript');
+        wp_set_script_translations($script_handle, 'rrze-elements-b', plugin_dir_path(__FILE__) . 'languages');
     }
 }
 
@@ -162,18 +166,39 @@ function rrze_rrze_elements_block_init() {
  * @param WP_Post $post Current post object.
  * @return array Modified block categories.
  */
-function my_custom_block_category( $categories, $post ) {
-    return array_merge(
-        $categories,
+function my_custom_block_category($categories, $post)
+{
+    $custom_category = array(
         array(
-            array(
-                'slug'  => 'rrze_elements',
-                'title' => __( 'RRZE Elements', 'rrze-elements-b' ),
-                'icon'  => 'layout',
-            ),
+            'slug'  => 'rrze_elements',
+            'title' => __('RRZE Elements', 'rrze-elements-b'),
+            'icon'  => 'layout',
+        ),
+    );
+
+    // Use array_unshift to prepend the custom category to the categories array
+    array_unshift($categories, $custom_category[0]);
+
+    return $categories;
+}
+
+/**
+ * Register pattern categories.
+ */
+
+function twentytwentyfour_pattern_categories()
+{
+    register_block_pattern_category(
+        'page',
+        array(
+            'label'       => _x('Pages', 'Block pattern category'),
+            'description' => __('A collection of full page layouts.'),
         )
     );
 }
+
+
+
 
 /**
  * Plugin loaded actions including system requirement checks and initialization.
@@ -195,9 +220,10 @@ function loaded()
         });
     } else {
         add_action('init', 'RRZE\ElementsB\rrze_rrze_elements_block_init');
-        add_filter( 'block_categories_all', 'RRZE\ElementsB\my_custom_block_category', 10, 2 );
+        add_filter('block_categories_all', 'RRZE\ElementsB\my_custom_block_category', 10, 2);
+        add_action('init', 'RRZE\ElementsB\twentytwentyfour_pattern_categories');
         new Main(__FILE__);
         new Patterns();
-        add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
+        add_action('init', 'RRZE\ElementsB\rrze_rrze_elements_block_init');
     }
 }

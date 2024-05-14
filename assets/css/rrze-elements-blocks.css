@@ -15180,6 +15180,7 @@ Functions and Mixins
 .rrze-elements-cta .cta-image img {
   box-shadow: none;
   height: 100%;
+  width: 100%;
   object-fit: cover;
 }
 @media screen and (min-width: 992px) {
