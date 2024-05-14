@@ -10,13 +10,12 @@ class Patterns
 {
     public function __construct()
     {
-        add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
+
+        add_action('init', [$this, 'register_fau_custom_wp_block_patterns'], 20);
     }
 
     public function register_fau_custom_wp_block_patterns()
     {
-        Helper::debug(ThemeSniffer::getThemeGroup('fauthemes'));
-        Helper::debug(ThemeSniffer::getThemeGroup());
         if (ThemeSniffer::getThemeGroup('fauthemes')) {
             $this->register_block_pattern(
                 'example-pattern',
