@@ -15,7 +15,7 @@ class Patterns
 
     public function register_fau_custom_wp_block_patterns()
     {
-        if (ThemeSniffer::getThemeGroup('fauthemes') === 1) {
+        if (ThemeSniffer::getThemeGroup('fauthemes')) {
             $this->register_block_pattern(
                 'example-pattern',
                 'rrze-elements-blocks/example-pattern',
@@ -62,15 +62,11 @@ class Patterns
                 __('Imagefilm', 'rrze-elementsb'),
                 _x('FAU Imagefilm.', 'Block pattern description', 'rrze-elements-b'),
                 array('portfolio', 'about'),
-                array('page', 'wp_template'),
-                'no',
-                array('starter'),
-                array('core/post-content')
             );
 
             $this->register_block_pattern(
-                'landing-1',
-                'rrze-elements-blocks/landing-1',
+                'page-home-fau',
+                'rrze-elements-blocks/page-home-fau',
                 __('Landing page template 1', 'rrze-elementsb'),
                 _x('A landingpage template for FAU.', 'Block pattern description', 'rrze-elements-b'),
                 array('page'),

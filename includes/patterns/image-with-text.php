@@ -5,11 +5,10 @@
 
 <!-- wp:columns {"verticalAlignment":null} -->
 <div class="wp-block-columns"><!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:rrze-elements/block-contentwidthlimiter {"width":481} -->
-<div class="limit-width wp-block-rrze-elements-block-contentwidthlimiter" style="max-width:min(60ch, 100%);margin-right:auto"><!-- wp:image {"id":48,"sizeSlug":"large","linkDestination":"none"} -->
+<div class="wp-block-column is-vertically-aligned-center">
+<!-- wp:image {"id":48,"sizeSlug":"large","linkDestination":"none"} -->
 <figure class="wp-block-image size-large"><img src="https://www.wordpress.rrze.fau.de/files/2024/01/Pattern-platzhalter.jpg" alt="" class="wp-image-48"/></figure>
 <!-- /wp:image --></div>
-<!-- /wp:rrze-elements/block-contentwidthlimiter --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"center"} -->
