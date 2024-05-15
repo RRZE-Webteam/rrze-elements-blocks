@@ -16,7 +16,7 @@ class Patterns
 
     public function register_fau_custom_wp_block_patterns()
     {
-        if (ThemeSniffer::getThemeGroup('fauthemes')) {
+        // if (ThemeSniffer::getThemeGroup('fauthemes')) {
             $this->register_block_pattern(
                 'example-pattern',
                 'rrze-elements-blocks/example-pattern',
@@ -78,7 +78,7 @@ class Patterns
             );
             // Add more patterns here
 
-        }
+        // }
     }
 
     private function register_block_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = array(), $inserter = 'yes', $keywords = array(), $blockTypes = array())
