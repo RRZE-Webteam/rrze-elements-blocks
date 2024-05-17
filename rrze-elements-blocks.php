@@ -15,9 +15,8 @@ Text Domain:     rrze-elements-b
 
 namespace RRZE\ElementsB;
 
-use RRZE\Elements\News\News;
-
 defined('ABSPATH') || exit('No direct script access allowed');
+use RRZE\Elements\News\News;
 
 // Require necessary configuration files.
 require_once 'config/config.php';
@@ -93,114 +92,6 @@ function activation()
 }
 
 /**
- * Plugin deactivation callback
- */
-function deactivation()
-{
-    // Add deactivation logic if necessary.
-}
-
-/**
- * Renders the news block.
- * 
- * @param array $attributes Attributes for the news block.
- * @return string HTML content for the news block.
- */
-function render_news_block($attributes)
-{
-    if (class_exists('RRZE\Elements\News\News')) {
-        $news_instance = new News();
-        return $news_instance->shortcodeCustomNews($attributes);
-    }
-
-    return '';
-}
-
-/**
- * Registers blocks and localizations.
- */
-function rrze_register_blocks_and_translations()
-{
-    $blocks = [
-        'collapsibles', 'collapse', 'accordions', 'accordion', 'alert', 'notice', 'iconbox',
-        'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'counter-row'
-    ];
-
-    foreach ($blocks as $block) {
-        register_block_type(__DIR__ . '/build/' . $block);
-
-        load_plugin_textdomain('rrze-elements-b', false, dirname(plugin_basename(__FILE__)) . '/languages');
-
-        $script_handle = generate_block_asset_handle('rrze-elements/' . $block, 'editorScript');
-        wp_set_script_translations($script_handle, 'rrze-elements-b', plugin_dir_path(__FILE__) . 'languages');
-    }
-
-    // Register global styles and scripts here.
-    wp_enqueue_style('fontawesome');
-    wp_enqueue_style('rrze-elements-blocks');
-}
-
-/**
- * Initializes the block registration and sets up localization.
- */
-function rrze_rrze_elements_block_init()
-{
-    rrze_register_blocks_and_translations();
-
-    // Additional logic for blocks with custom render callbacks.
-    if (class_exists('RRZE\Elements\News\News')) {
-        register_block_type(__DIR__ . '/build/news', array(
-            'render_callback' => 'RRZE\ElementsB\render_news_block',
-        ));
-        load_plugin_textdomain('rrze-elements-b', false, dirname(plugin_basename(__FILE__)) . '/languages');
-
-        $script_handle = generate_block_asset_handle('rrze-elements/' . 'news', 'editorScript');
-        wp_set_script_translations($script_handle, 'rrze-elements-b', plugin_dir_path(__FILE__) . 'languages');
-    }
-}
-
-/**
- * Adds custom block category for grouping RRZE elements in the block editor.
- *
- * @param array $categories Existing block categories.
- * @param WP_Post $post Current post object.
- * @return array Modified block categories.
- */
-function my_custom_block_category($categories, $post)
-{
-    $custom_category = array(
-        array(
-            'slug'  => 'rrze_elements',
-            'title' => __('RRZE Elements', 'rrze-elements-b'),
-            'icon'  => 'layout',
-        ),
-    );
-
-    // Use array_unshift to prepend the custom category to the categories array
-    array_unshift($categories, $custom_category[0]);
-
-    return $categories;
-}
-
-/**
- * Register pattern categories.
- */
-
-function elementsBlocks_pattern_categories()
-{
-    register_block_pattern_category(
-        'page',
-        array(
-            'label'       => _x('Pages', 'Block pattern category'),
-            'description' => __('A collection of full page layouts.'),
-        )
-    );
-}
-
-
-
-
-/**
  * Plugin loaded actions including system requirement checks and initialization.
  * @return void
  */
@@ -219,10 +110,6 @@ function loaded()
             printf('<div class="notice notice-error"><p>%1$s: %2$s</p></div>', esc_html($plugin_name), esc_html($error));
         });
     } else {
-        add_action('init', 'RRZE\ElementsB\rrze_rrze_elements_block_init');
-        add_filter('block_categories_all', 'RRZE\ElementsB\my_custom_block_category', 10, 2);
-        add_action('init', 'RRZE\ElementsB\elementsBlocks_pattern_categories');
         new Main(__FILE__);
-        new Patterns();
     }
 }
