@@ -15190,10 +15190,6 @@ Functions and Mixins
     min-width: 200px;
   }
 }
-.rrze-elements-cta img.attachment-large.size-large {
-  width: 320px;
-  height: 320px;
-}
 .rrze-elements-cta img {
   border: 0;
   height: auto;

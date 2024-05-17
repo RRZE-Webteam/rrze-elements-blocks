@@ -10,8 +10,46 @@ class Patterns
 {
     public function __construct()
     {
-
+        add_action('init', [$this, 'elementsBlocks_pattern_categories']);
+        add_filter('block_categories_all', [$this, 'my_custom_block_category'], 10, 2);
         add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
+    }
+
+    /**
+     * Register pattern categories.
+     */
+    public function elementsBlocks_pattern_categories()
+    {
+        register_block_pattern_category(
+            'page',
+            array(
+                'label'       => _x('Pages', 'Block pattern category'),
+                'description' => __('A collection of full page layouts.'),
+            )
+        );
+    }
+
+    /**
+     * Adds custom block category for grouping RRZE elements in the block editor underneath RRZE Elements.
+     *
+     * @param array $categories Existing block categories.
+     * @param WP_Post $post Current post object.
+     * @return array Modified block categories.
+     */
+    public function my_custom_block_category($categories, $post)
+    {
+        $custom_category = array(
+            array(
+                'slug'  => 'rrze_elements',
+                'title' => __('RRZE Elements', 'rrze-elements-b'),
+                'icon'  => 'layout',
+            ),
+        );
+
+        // Use array_unshift to prepend the custom category to the categories array
+        array_unshift($categories, $custom_category[0]);
+
+        return $categories;
     }
 
     public function register_fau_custom_wp_block_patterns()
@@ -80,7 +118,7 @@ class Patterns
         }
     }
 
-    private function elements_register_block_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = array(), $blockTypes = array())
+    public function elements_register_block_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = array(), $blockTypes = array())
     {
         $pattern_path = plugin_dir_path(__FILE__) . 'patterns/' . $file_name . '.php';
         $pattern_content = file_get_contents($pattern_path);
