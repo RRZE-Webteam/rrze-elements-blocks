@@ -11,13 +11,13 @@ class Patterns
     public function __construct()
     {
 
-        add_action('init', [$this, 'register_fau_custom_wp_block_patterns'], 20);
+        add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
     }
 
     public function register_fau_custom_wp_block_patterns()
     {
-        // if (ThemeSniffer::getThemeGroup('fauthemes')) {
-            $this->register_block_pattern(
+        if (ThemeSniffer::getThemeGroup('fauthemes')) {
+            $this->elements_register_block_pattern(
                 'example-pattern',
                 'rrze-elements-blocks/example-pattern',
                 __('Example Pattern', 'rrze-elementsb'),
@@ -25,7 +25,7 @@ class Patterns
                 array('portfolio', 'about')
             );
 
-            $this->register_block_pattern(
+            $this->elements_register_block_pattern(
                 'image-with-accordion-h2',
                 'rrze-elements-blocks/image-w-accordion-h2',
                 __('Image with Accordion', 'rrze-elementsb'),
@@ -33,7 +33,7 @@ class Patterns
                 array('portfolio', 'about')
             );
 
-            $this->register_block_pattern(
+            $this->elements_register_block_pattern(
                 'custom-news-h2',
                 'rrze-elements-blocks/custom-news-h2',
                 __('Custom News section 3-Column Layout', 'rrze-elementsb'),
@@ -41,7 +41,7 @@ class Patterns
                 array('posts')
             );
 
-            $this->register_block_pattern(
+            $this->elements_register_block_pattern(
                 'cta-1',
                 'rrze-elements-blocks/cta',
                 __('Call to Action', 'rrze-elementsb'),
@@ -49,7 +49,7 @@ class Patterns
                 array('call-to-action')
             );
 
-            $this->register_block_pattern(
+            $this->elements_register_block_pattern(
                 'image-with-text',
                 'rrze-elements-blocks/image-w-text',
                 __('Image with Text', 'rrze-elementsb'),
@@ -57,7 +57,7 @@ class Patterns
                 array('portfolio', 'about')
             );
 
-            $this->register_block_pattern(
+            $this->elements_register_block_pattern(
                 'imagefilm',
                 'rrze-elements-blocks/imagefilm',
                 __('Imagefilm', 'rrze-elementsb'),
@@ -65,7 +65,7 @@ class Patterns
                 array('portfolio', 'about'),
             );
 
-            $this->register_block_pattern(
+            $this->elements_register_block_pattern(
                 'page-home-fau',
                 'rrze-elements-blocks/page-home-fau',
                 __('Landing page template 1', 'rrze-elementsb'),
@@ -77,27 +77,27 @@ class Patterns
                 array('core/post-content')
             );
             // Add more patterns here
-
-        // }
+        }
     }
 
-    private function register_block_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = array(), $inserter = 'yes', $keywords = array(), $blockTypes = array())
+    private function elements_register_block_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = array(), $blockTypes = array())
     {
         $pattern_path = plugin_dir_path(__FILE__) . 'patterns/' . $file_name . '.php';
         $pattern_content = file_get_contents($pattern_path);
-
-        register_block_pattern(
-            $pattern_name,
-            array(
-                'title'       => $title,
-                'description' => $description,
-                'content'     => $pattern_content,
-                'categories'  => $categories,
-                'postTypes'   => $postTypes,
-                'inserter'    => $inserter,
-                'keywords'    => $keywords,
-                'blockTypes'  => $blockTypes
-            )
-        );
+        if (function_exists('register_block_pattern')) {
+            register_block_pattern(
+                $pattern_name,
+                array(
+                    'title'       => $title,
+                    'description' => $description,
+                    'content'     => $pattern_content,
+                    'categories'  => $categories,
+                    'postTypes'   => $postTypes,
+                    'inserter'    => $inserter,
+                    'keywords'    => $keywords,
+                    'blockTypes'  => $blockTypes
+                )
+            );
+        }
     }
 }

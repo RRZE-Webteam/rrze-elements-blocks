@@ -186,7 +186,7 @@ function my_custom_block_category($categories, $post)
  * Register pattern categories.
  */
 
-function twentytwentyfour_pattern_categories()
+function elementsBlocks_pattern_categories()
 {
     register_block_pattern_category(
         'page',
@@ -221,9 +221,8 @@ function loaded()
     } else {
         add_action('init', 'RRZE\ElementsB\rrze_rrze_elements_block_init');
         add_filter('block_categories_all', 'RRZE\ElementsB\my_custom_block_category', 10, 2);
-        add_action('init', 'RRZE\ElementsB\twentytwentyfour_pattern_categories');
+        add_action('init', 'RRZE\ElementsB\elementsBlocks_pattern_categories');
         new Main(__FILE__);
         new Patterns();
-        add_action('init', 'RRZE\ElementsB\rrze_rrze_elements_block_init');
     }
 }
