@@ -1,0 +1,30 @@
+@import "../_shared/scss/alert";
+
+.alert {
+    line-height: 1.5;
+    & p {
+        margin: 0;
+    }
+}
+
+.rrzeElementsBFakColorSelector{
+    &.dff0d8{
+        background-color: #dff0d8;
+    }
+    &.e9edf2{
+        background-color: #e9edf2;
+    }
+    &.d9edf7{
+        background-color: #d9edf7;
+    }
+    &.fcf8e3{
+        background-color: #fcf8e3;
+    }
+    &.f2dede{
+        background-color: #f2dede;
+    }
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+    font-family: 'Roboto', sans-serif;
+}

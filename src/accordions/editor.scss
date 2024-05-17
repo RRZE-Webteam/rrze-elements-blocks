@@ -1,5 +1,9 @@
-@use "variables" as v;
-@use "mixins" as m;
+@use "../_shared/scss/variables" as v;
+@use "../_shared/scss/mixins" as m;
+
+@import "../_shared/scss/variables";
+@import "../_shared/scss/mixins";
+@import "../_shared/scss/accordion";
 
 
 /**
@@ -12,10 +16,6 @@
 /*!
  * Accordion
  */
-* {
-	font-family: Roboto;
-}
-
 h1.accordion-heading,
 h2.accordion-heading,
 h3.accordion-heading,
@@ -398,9 +398,9 @@ button.expand-all.standard-btn {
 .accordion-body.active {
 	height: auto;
 	/* Change this to a specific height if needed */
-	margin-top: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	//margin-top: 10px;
+	padding: 15px 20px;
+	background: var(--color-ContentRegions, #f5f7f9);
 }
 
 

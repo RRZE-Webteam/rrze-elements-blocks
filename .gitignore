@@ -3,7 +3,6 @@ nbproject*
 .sass-cache
 .DS_Store
 /node_modules/
-/package-lock.json
 
 ### vscode ###
 .vscode/
@@ -15,7 +14,6 @@ nbproject*
 .DS_Store
 ### Node ###
 node_modules/
-package-lock.json
 ### Composer ###
 composer.lock
 ### WordPress ###
@@ -69,3 +67,10 @@ bin/install-wp-tests.sh
 .phpcs.xml.dist
 .phpunit.xml.dist
 phpunit.xml.dist.bak
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+/tests/authStorage.json
+*.authStorage.json

@@ -4,27 +4,31 @@
 Plugin Name:     RRZE Elements Blocks
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-elements
 Description:     Advanced design elements for WordPress BlockEditor.
-Version:         0.0.1
+Version:         1.0.0
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
 License URI:     http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path:     /languages
-Text Domain:     rrze-elementsB
+Text Domain:     rrze-elements-b
 */
 
 namespace RRZE\ElementsB;
 
-defined('ABSPATH') || exit;
+defined('ABSPATH') || exit('No direct script access allowed');
+use RRZE\Elements\News\News;
 
+// Require necessary configuration files.
 require_once 'config/config.php';
 
 use RRZE\ElementsB\Main;
 
+// Define plugin version requirements.
 const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
-const RRZE_ELEMENTS_VERSION = '1.0.0';
+const RRZE_ELEMENTSB_VERSION = '1.0.0';
 
+// Autoloads plugin classes.
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
     $base_dir = __DIR__ . '/includes/';
@@ -42,42 +46,40 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Register activation and deactivation hooks.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');
 register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
-register_activation_hook(__FILE__, 'RRZE\ElementsB\activation');
-register_deactivation_hook(__FILE__, 'RRZE\ElementsB\deactivation');
-
-add_action('plugins_loaded', 'RRZE\ElementsB\loaded');
-
 /**
- * [loadTextdomain description]
+ * Loads the plugin text domain for translation.
  * @return void
  */
 function loadTextdomain()
 {
-    load_plugin_textdomain('rrze-elementsB', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+    load_plugin_textdomain('rrze-elements-b', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /**
- * [systemRequirements description]
- * @return string [description]
+ * Checks system requirements like PHP and WordPress version.
+ * 
+ * @return string Error message if requirements are not met.
  */
 function systemRequirements()
 {
     $error = '';
+
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
-        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elementsB'), PHP_VERSION, RRZE_PHP_VERSION);
+        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elements-b'), PHP_VERSION, RRZE_PHP_VERSION);
     } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
-        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elementsB'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
+        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elements-b'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
     }
+
     return $error;
 }
 
 /**
- * [activation description]
- * @return void
+ * Plugin activation callback
  */
 function activation()
 {
@@ -90,31 +92,7 @@ function activation()
 }
 
 /**
- * [deactivation description]
- * @return [type] [description]
- */
-function deactivation()
-{
-}
-
-/**
- * Register Block
- *
- * @return void
- */
-function rrze_rrze_elements_block_init() {
-    register_block_type( __DIR__ . '/build/collapsibles');
-    register_block_type( __DIR__ . '/build/collapse');
-    register_block_type( __DIR__ . '/build/accordions');
-    register_block_type( __DIR__ . '/build/accordion');
-    register_block_type( __DIR__ . '/build/notice');
-
-    wp_enqueue_style('fontawesome');
-    wp_enqueue_style('rrze-elements');
-}
-
-/**
- * [loaded description]
+ * Plugin loaded actions including system requirement checks and initialization.
  * @return void
  */
 function loaded()
@@ -133,17 +111,5 @@ function loaded()
         });
     } else {
         new Main(__FILE__);
-        add_action( 'init', 'RRZE\ElementsB\rrze_rrze_elements_block_init' );
-        add_action('rest_api_init', function () {
-            register_rest_route('rrze-elements-blocks/v1', '/plugin-directory', array(
-                'methods' => 'GET',
-                'callback' => function () {
-                    return array(
-                        'directory' => plugin_dir_url(__FILE__)
-                    );
-                }
-            ));
-        });
     }
-
 }

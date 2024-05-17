@@ -2,10 +2,9 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
-  "version": "1.25.10",
-  "title": "Akkordeonreiter",
+  "version": "1.0.0",
+  "title": "Accordion-item",
   "category": "design",
-  "icon": "align-center",
   "description": "Creates an accordion block",
   "parent": [
     "rrze-elements/collapsibles"
@@ -44,7 +43,7 @@
     },
     "title": {
       "type": "string",
-      "default": "Enter your Title"
+      "default": ""
     },
     "color": {
       "type": "string",
@@ -67,10 +66,6 @@
       "default": ""
     },
     "svgString": {
-      "type": "string",
-      "default": ""
-    },
-    "directory": {
       "type": "string",
       "default": ""
     }

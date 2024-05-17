@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/cta",
+  "version": "1.0.0",
+  "title": "Call to action",
+  "category": "rrze_elements",
+  "description": "Creates an Call to action box.",
+  "attributes": {
+    "id": {
+      "type": "number"
+    },
+    "url": {
+      "type": "string"
+    },
+    "buttonUrl": {
+      "type": "string"
+    },
+    "buttonOpensInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "target": {
+      "type": "string",
+      "default": "_self"
+    },
+    "alt": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "background": {
+      "type": "string",
+      "default": ""
+    },
+    "isSearch": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "example": {
+		"attributes": {
+			"title": "Your CTA title",
+			"buttonText": "Button Text",
+			"subtitle": "Your CTA subtitl"
+		}
+	},
+  "styles": [
+    {
+      "name": "no-background",
+      "label": "Normal",
+      "isDefault": true
+    },
+    {
+      "name": "small",
+      "label": "Small"
+    }
+  ],
+  "textdomain": "rrze-elementsb",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

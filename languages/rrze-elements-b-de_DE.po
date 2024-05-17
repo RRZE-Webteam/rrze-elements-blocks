@@ -1,0 +1,809 @@
+# Copyright (C) 2024 RRZE Webteam
+# This file is distributed under the GNU General Public License v2.
+msgid ""
+msgstr ""
+"Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-b\n"
+"Last-Translator: \n"
+"Language-Team: Deutsch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-01-23T15:01:34+00:00\n"
+"PO-Revision-Date: 2024-01-29 12:42+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: rrze-elements-b\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.6.6; wp-6.4.2"
+
+#: build/contentwidthlimiter/index.js:1
+msgid " (Außerhalb des sichtbaren Bereichs)"
+msgstr "(Außerhalb des sichtbaren Bereichs)"
+
+#: build/contentwidthlimiter/index.js:1
+msgid " (Ideale Leselänge)"
+msgstr "(Ideale Leselänge)"
+
+#: build/contentwidthlimiter/index.js:1
+msgid " Zeichen"
+msgstr "Characters"
+
+#: build/alert/index.js:1 build/notice/index.js:1
+msgid "Add a description…"
+msgstr "Füge eine Beschreibung hinzu…"
+
+#: build/notice/index.js:1
+msgid "Add a Headline"
+msgstr "Überschrift festlegen"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+msgid "Add an icon"
+msgstr "Icon hinzufügen"
+
+#: build/tab/index.js:1
+msgid "Add an Label"
+msgstr "Label festlegen"
+
+#: build/cta/index.js:1
+msgid "Add Image"
+msgstr "Bild auswählen"
+
+#: build/textslideritem/index.js:1
+msgid "Add text…"
+msgstr "Text hinzufügen…"
+
+#: build/contentwidthlimiter/index.js:1
+msgid "Add your content here..."
+msgstr "Inhalte hinzufügen…"
+
+#: build/news/index.js:1
+msgid "Additional classes"
+msgstr "Zusätzliche CSS-Klassen"
+
+#. Description of the plugin
+msgid "Advanced design elements for WordPress BlockEditor."
+msgstr "Erweiterte Designelemente für den WordPress BlockEditor."
+
+#: build/cta/index.js:1
+msgid "Advanced Options"
+msgstr "Erweiterte Einstellungen"
+
+#: build/collapse/index.js:1
+msgid "Advanced Settings"
+msgstr "Erweiterte Einstellungen"
+
+#: build/contentwidthlimiter/index.js:1 build/insertion/index.js:1
+msgid "Align center"
+msgstr "Zentrieren"
+
+#: build/contentwidthlimiter/index.js:1 build/insertion/index.js:1
+msgid "Align left"
+msgstr "Links ausrichten"
+
+#: build/contentwidthlimiter/index.js:1 build/insertion/index.js:1
+msgid "Align right"
+msgstr "Rechts ausrichten"
+
+#: build/news/index.js:1
+msgid ""
+"An error occured inside the ServerSideRender component of this block. Try "
+"adjusting the block settings, save your draft and refresh the page."
+msgstr ""
+"Ein Fehler ist in der ServerSideRender-Komponente dieses Blocks aufgetreten. "
+"Versuche die Block-Einstellungen anzupassen, speichere den Beitrag und "
+"aktualisiere die Seite, um die Darstellung wiederherzustellen."
+
+#: build/collapsibles/index.js:1
+msgid ""
+"Apparently you really love accordions. Great! But please don't use more than "
+"20 items inside a collapsible. This can cause performance and User "
+"Experience issues."
+msgstr ""
+"Anscheinend mögen Sie wirklich Accordions. Super! Aber bitte nutzen Sie "
+"nicht mehr als 20 Elemente in einem Accordion, damit Ihre Seite performant "
+"und nutzerfreundlich bleibt."
+
+#: build/notice/index.js:1
+msgid "Audio"
+msgstr "Audio"
+
+#: build/block-blueprint/block.json build/textslider/block.json
+msgctxt "block description"
+msgid "Creates a blueprint block."
+msgstr "Erzeugt einen Vorlagen-Block"
+
+#: build/columns/block.json
+msgctxt "block description"
+msgid "Creates a columns block which dynamically breaks."
+msgstr "Erstellt einen Spalten-Block, der dynamisch umbricht."
+
+#: build/contentwidthlimiter/block.json
+msgctxt "block description"
+msgid "Creates a contentwidthlimiter block."
+msgstr ""
+"Erstellt einen Inhaltsbegrenzer, um die Inhaltsbreite von Texten und "
+"Inhalten zu begrenzen."
+
+#: build/news/block.json
+msgctxt "block description"
+msgid "Creates a news block."
+msgstr "Gibt die neusten Beiträge aus."
+
+#: build/textslideritem/block.json
+msgctxt "block description"
+msgid "Creates a textslideritem block."
+msgstr "Legt ein weiteres Element für den Textstlider an."
+
+#: build/collapse/block.json build/collapsibles/block.json
+msgctxt "block description"
+msgid "Creates an accordion block"
+msgstr "Legt ein Accordion (Inhaltsfächer) an."
+
+#: build/alert/block.json
+msgctxt "block description"
+msgid "Creates an alert box."
+msgstr "Erstellt eine Hinweisbox."
+
+#: build/accordions/block.json
+msgctxt "block description"
+msgid "Creates an inner accordion block"
+msgstr "Erstellt ein verschachteltes Accordion."
+
+#: build/accordion/block.json
+msgctxt "block description"
+msgid "Creates an inner accordion item"
+msgstr "Legt ein inneres Accordionelement an."
+
+#: build/insertion/block.json
+msgctxt "block description"
+msgid "Creates an insertion."
+msgstr "Erzeugt einen Einschub bei Texten."
+
+#: build/notice/block.json
+msgctxt "block description"
+msgid "Creates an notice."
+msgstr "Erzeugt eine Hinweisbox mit Icon."
+
+#: build/tab/block.json build/tabs/block.json
+msgctxt "block description"
+msgid "Creates an tabs block."
+msgstr "Legt einen Registerfächer an."
+
+#: build/accordion/block.json build/collapse/block.json
+msgctxt "block keyword"
+msgid "accordion"
+msgstr "accordion"
+
+#: build/accordion/block.json build/collapse/block.json
+msgctxt "block keyword"
+msgid "collapse"
+msgstr "collapse"
+
+#: build/accordion/block.json build/collapse/block.json
+msgctxt "block keyword"
+msgid "expand"
+msgstr "öffnen"
+
+#: build/accordion/block.json build/collapse/block.json
+msgctxt "block keyword"
+msgid "toggle"
+msgstr "Schalter"
+
+#: build/collapsibles/block.json
+msgctxt "block title"
+msgid "Accordion"
+msgstr "Accordion"
+
+#: build/accordion/block.json
+msgctxt "block title"
+msgid "Accordion item"
+msgstr "Accordionelement"
+
+#: build/collapse/block.json
+msgctxt "block title"
+msgid "Accordion-item"
+msgstr "Accordionelement"
+
+#: build/alert/block.json
+msgctxt "block title"
+msgid "Alert"
+msgstr "Hinweis"
+
+#: build/block-blueprint/block.json
+msgctxt "block title"
+msgid "Blueprint"
+msgstr "Vorlage"
+
+#: build/contentwidthlimiter/block.json
+msgctxt "block title"
+msgid "Content Width Limiter"
+msgstr "Inhaltsbreite begrenzen"
+
+#: build/accordions/block.json
+msgctxt "block title"
+msgid "Inner Accordion"
+msgstr "Inneres Accordion"
+
+#: build/insertion/block.json
+msgctxt "block title"
+msgid "Insertion"
+msgstr "Einschub"
+
+#: build/news/block.json
+msgctxt "block title"
+msgid "News"
+msgstr "Nachrichten"
+
+#: build/notice/block.json
+msgctxt "block title"
+msgid "Notice"
+msgstr "Notice"
+
+#: build/tab/block.json build/tabs/block.json
+msgctxt "block title"
+msgid "Tabs"
+msgstr "Tabs"
+
+#: build/columns/block.json
+msgctxt "block title"
+msgid "Text Columns"
+msgstr "Textspalten"
+
+#: build/textslider/block.json build/textslideritem/block.json
+msgctxt "block title"
+msgid "Text-Slider"
+msgstr "Text-Slider"
+
+#: build/alert/index.js:1 build/columns/index.js:1 build/notice/index.js:1
+msgid "Border Settings"
+msgstr "Rahmenoptionen"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Central institution"
+msgstr "Zentrale Einrichtung"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+msgid "Change the icon"
+msgstr "Icon anpassen"
+
+#: build/tab/index.js:1
+msgid "Change the Label"
+msgstr "Label anpassen"
+
+#: build/notice/index.js:1
+msgid "Change the style"
+msgstr "Darstellung anpassen"
+
+#: build/tab/index.js:1
+msgid "Change the Tab Label"
+msgstr "Tab Label anpassen"
+
+#: build/tab/index.js:1
+msgid "Click here and press / to enter content inside your Tab"
+msgstr ""
+"Klicken Sie hier und drücken Sie / oder die Enter-Taste, um Inhalte "
+"hinzuzufügen."
+
+#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+msgid "Close"
+msgstr "Schließen"
+
+#: build/collapse/index.js:1
+msgid "Collapse on page load"
+msgstr "Einklappen beim Laden der Seite"
+
+#: build/collapsibles/index.js:1
+msgid "Collapsibles Settings"
+msgstr "Accordion-Einstellungen"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
+msgid "Color Settings"
+msgstr "Farbeinstellung"
+
+#: build/news/index.js:1
+msgid "Comma separated list of tags"
+msgstr "Kommaseparierte Liste von Schlagwörtern"
+
+#: build/collapsibles/index.js:1 build/news/index.js:1
+msgid "Controls the heading level of the accordion"
+msgstr "Steuert die Überschriftebene von Accordions"
+
+#: build/cta/index.js:1
+msgid "CTA Button Text"
+msgstr "CTA Button Text"
+
+#: build/cta/index.js:1
+msgid "CTA Subtitle"
+msgstr "CTA Untertitel"
+
+#: build/cta/index.js:1
+msgid "CTA Title"
+msgstr "CTA Titel "
+
+#: build/alert/index.js:1 build/columns/index.js:1
+msgid "Danger"
+msgstr "Gefahr"
+
+#: build/alert/index.js:1 build/columns/index.js:1
+msgid "Default"
+msgstr "Standard"
+
+#: build/news/index.js:1
+msgid "Display as List"
+msgstr "Als Liste ausgeben"
+
+#: build/contentwidthlimiter/index.js:1 build/insertion/index.js:1
+#: build/tabs/index.js:1
+msgid "Display options for the Editor"
+msgstr "Darstellungsoptionen für den Editor"
+
+#: build/cta/index.js:1
+msgid "Display Search box instead of CTA"
+msgstr "Als Suchbox anzeigen"
+
+#: build/columns/index.js:1
+msgid "Display settings"
+msgstr "Darstellungsoptionen"
+
+#: build/notice/index.js:1
+msgid "Download"
+msgstr "Download"
+
+#: build/notice/index.js:1
+msgid "Download-icon"
+msgstr "Download-icon"
+
+#: build/tab/index.js:1
+msgid "Enter your Tab Label"
+msgstr "Tab Label hinzufügen"
+
+#: build/tab/index.js:1
+msgid "Enter your Tab Label."
+msgstr "Tab Label hinzufügen."
+
+#: build/tab/index.js:1
+msgid ""
+"Enter your Tab title. You can change it later through the block settings "
+"inside the Toolbar."
+msgstr ""
+"Label festlegen. Das Label kann später über die Einstellungen in der Toolbar "
+"angepasst werden."
+
+#: build/accordion/index.js:1 build/collapse/index.js:1
+msgid "Enter your Title…"
+msgstr "Accordion-Titel vergeben…"
+
+#: build/collapsibles/index.js:1
+msgid "Expand All"
+msgstr "Alle öffnen"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Faculty of Business, Economics, and Law"
+msgstr "Rechts- und Wirtschaftswissenschaftliche Fakultät"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Faculty of Engineering"
+msgstr "Technische Fakultät"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Faculty of Humanities, Social Sciences, and Theology"
+msgstr "Philosophische Fakultät und Fachbereich Theologie"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Faculty of Medicine"
+msgstr "Medizinische Fakultät"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Faculty of Sciences"
+msgstr "Naturwissenschaftliche Fakultät"
+
+#: build/notice/index.js:1
+msgid "FAUbox"
+msgstr "FAUbox"
+
+#: build/notice/index.js:1
+msgid "FAUbox-icon"
+msgstr "FAUbox-Icon"
+
+#: build/news/index.js:1
+msgid "Filter"
+msgstr "Filter"
+
+#: build/cta/index.js:1
+msgid "Find"
+msgstr "Suchen"
+
+#: build/collapsibles/index.js:1
+msgid ""
+"For performance and User Experience reasons, we do not recommend using too "
+"many items in a collapsible."
+msgstr ""
+"Für eine bessere Performanz empfehlen wir Ihnen, nicht zu viele Elemente in "
+"einem einzelnen Accordion zu platzieren."
+
+#: build/collapsibles/index.js:1 build/news/index.js:1
+msgid "Heading level"
+msgstr "Überschriftsebene"
+
+#: build/collapsibles/index.js:1
+msgid "Heading Settings"
+msgstr "Überschrift | Einstellungen"
+
+#: build/news/index.js:1
+msgid "Hide Category"
+msgstr "Kategorie ausblenden"
+
+#: build/news/index.js:1
+msgid "Hide Date"
+msgstr "Datum ausblenden"
+
+#: build/news/index.js:1
+msgid "Hide duplicate posts"
+msgstr "Doppelte Beiträge ausblenden"
+
+#: build/tab/index.js:1
+msgid "Hide Label settings"
+msgstr "Beschriftung ausblenden"
+
+#: build/news/index.js:1
+msgid "Hide meta"
+msgstr "Meta ausblenden"
+
+#: build/news/index.js:1
+msgid "Hide Options"
+msgstr "Darstellungsoptionen"
+
+#: build/news/index.js:1
+msgid "Hide Thumbnail"
+msgstr "Beitragsbild ausblenden"
+
+#. Author URI of the plugin
+msgid "https://blogs.fau.de/webworking/"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/RRZE-Webteam/rrze-elements"
+msgstr ""
+
+#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+msgid "Icon Settings"
+msgstr "Icon | Einstellungen"
+
+#: build/notice/index.js:1
+msgid "Idea"
+msgstr "Idee"
+
+#: build/news/index.js:1
+msgid "Image alignment"
+msgstr "Bildausrichtung"
+
+#: build/news/index.js:1
+msgid "Img first"
+msgstr "Bild zuerst"
+
+#: build/alert/index.js:1 build/columns/index.js:1
+msgid "Info"
+msgstr "Info"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+msgid "Inherit color"
+msgstr "Farbe erben"
+
+#: build/insertion/index.js:1
+msgid "Insertion"
+msgstr "Einschub"
+
+#: build/collapse/index.js:1
+msgid "Jump Link Name"
+msgstr "Beschriftung der Sprungmarke"
+
+#: build/collapse/index.js:1
+msgid "Jump Link Settings"
+msgstr "Sprungmarke | Einstellungen"
+
+#: build/collapse/index.js:1
+msgid ""
+"Jump Links allow your users to jump to this collapse by adding "
+"/#jumplinkname to the end of the URL."
+msgstr ""
+"Sprungmarken erlauben es den Nutzern, schnell zu einem Accordioneintrag zu "
+"springen, indem Sie /#sprungmarkenlabel am Ende der URL hinzufügen."
+
+#: build/tab/index.js:1
+msgid "Label settings"
+msgstr "Label | Einstellungen"
+
+#: build/news/index.js:1
+msgid "Layout"
+msgstr "Layout"
+
+#: build/news/index.js:1
+msgid "left"
+msgstr "links"
+
+#. translators: accessibility text. 1: heading level. 2: heading title.
+#: build/collapse/index.js:2
+msgid "Level %1$s. %2$s"
+msgstr ""
+
+#. translators: accessibility text. %s: heading level.
+#: build/collapse/index.js:3
+msgid "Level %s. Empty."
+msgstr ""
+
+#: build/notice/index.js:1
+msgid "Lightbulb icon"
+msgstr "Glühbirne als Icon"
+
+#: build/cta/index.js:1
+msgid "Link"
+msgstr "Link"
+
+#: build/notice/index.js:1
+msgid "Loudspeaker icon"
+msgstr "Lautsprecher Icon"
+
+#: build/notice/index.js:1
+msgid "Maintenance"
+msgstr "Wartung"
+
+#: build/columns/index.js:1
+msgid "Minimum Width of Columns"
+msgstr "Minimale Spaltbreite"
+
+#: build/notice/index.js:1
+msgid "Minus icon"
+msgstr "Minus Icon"
+
+#: build/notice/index.js:1
+msgid "Negative"
+msgstr "Negativ"
+
+#: build/notice/index.js:1
+msgid "Notice"
+msgstr "Notice"
+
+#: build/notice/index.js:1
+msgid "Notice with hint-icon"
+msgstr "Notice mit Hinweis"
+
+#: build/notice/index.js:1
+msgid "Notice with wrench icon"
+msgstr "Notice mit Wartungsicon"
+
+#: build/news/index.js:1
+msgid "Number of Columns"
+msgstr "Anzahl der Spalten"
+
+#: build/columns/index.js:1
+msgid "Number of columns"
+msgstr "Anzahl der Spalten"
+
+#: build/news/index.js:1
+msgid "Number of days"
+msgstr "Anzahl der Tage"
+
+#: build/tabs/index.js:1
+msgid "Only show active tabs inside the editor"
+msgstr "Nur aktive Tabs im Editor anzeigen"
+
+#: build/news/index.js:1
+msgid "Only show posts with thumbnails"
+msgstr "Nur Beiträge mit Beitragsbild ausgeben"
+
+#: build/news/index.js:1
+msgid "Only show sticky posts"
+msgstr "Nur festgehaltene Beiträge ausgeben (sticky posts)"
+
+#: build/collapse/index.js:1
+msgid "Open collapse on Page load"
+msgstr "Reiter bei erstem Laden der Seite automatisch öffnen"
+
+#: build/collapse/index.js:1
+msgid "Open on page load"
+msgstr "Bei Laden der Seite automatisch öffnen"
+
+#: build/cta/index.js:1
+msgid "Please enter the search term for searching on /:"
+msgstr "Suche nach…"
+
+#: build/cta/index.js:1
+msgid "Please enter the search term for searching on /: "
+msgstr "Suche nach…"
+
+#: build/notice/index.js:1
+msgid "Plus-icon"
+msgstr "Plus-icon"
+
+#: build/notice/index.js:1
+msgid "Positive"
+msgstr "Positiv"
+
+#: build/notice/index.js:1
+msgid "Question"
+msgstr "Frage"
+
+#: build/notice/index.js:1
+msgid "Questionmark"
+msgstr "Fragezeichen"
+
+#: build/news/index.js:1
+msgid "Ratio image"
+msgstr "Bildanteil"
+
+#: build/news/index.js:1
+msgid "Ratio text & metadata"
+msgstr "Verhältnis Bild zu Text"
+
+#: build/cta/index.js:1
+msgid "Remove image"
+msgstr "Bild entfernen"
+
+#: build/cta/index.js:1
+msgid "Replace Image"
+msgstr "Bild ersetzen"
+
+#: build/tabs/index.js:1
+msgid "Reveal all tabs inside the Editor (X-ray)"
+msgstr "Zeige alle Tabs im ausgeklappten Zustand im Editor (x-ray)."
+
+#: build/news/index.js:1
+msgid "right"
+msgstr "rechts"
+
+#. Plugin Name of the plugin
+msgid "RRZE Elements Blocks"
+msgstr "RRZE Elements Blocks"
+
+#. Author of the plugin
+msgid "RRZE Webteam"
+msgstr "RRZE Webteam"
+
+#: build/notice/index.js:1
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: build/cta/index.js:1
+msgid "Search for..."
+msgstr "Suchen nach…"
+
+#: build/cta/index.js:1
+msgid "Search on "
+msgstr "Suchen nach…"
+
+#: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
+#: build/tabs/index.js:1
+msgid "Select a Color"
+msgstr "Farbe auswählen…"
+
+#: build/notice/index.js:1
+msgid "Select a style"
+msgstr "Style auswählen"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1 build/notice/index.js:1
+#: build/tab/index.js:1
+msgid "Select an Icon"
+msgstr "Icon auswählen"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+msgid "Select an icon"
+msgstr "Icon auswählen"
+
+#: build/collapse/index.js:1
+msgid "Set Jump Link"
+msgstr "Sprungmarke festlegen"
+
+#: build/tabs/index.js:1
+msgid "Show / Hide all inactive tabs inside the editor."
+msgstr "Zeige/Verstecke alle inaktiven Tabs in der Bearbeitungsansicht."
+
+#: build/columns/index.js:1
+msgid "Show Border"
+msgstr "Rahmen anzeigen."
+
+#: build/collapsibles/index.js:1
+msgid "Show Expand-All-Link"
+msgstr "Zeige \"Alle öffnen\"-Button"
+
+#: build/news/index.js:1
+msgid "Show more articles button"
+msgstr "Zeige \"Mehr Beiträge anzeigen\"-Button"
+
+#: build/columns/index.js:1
+msgid "Show Rule"
+msgstr "Zeige Trennlinien"
+
+#: build/notice/index.js:1
+msgid "Style Settings"
+msgstr "Style Einstellungen"
+
+#: build/alert/index.js:1 build/columns/index.js:1
+msgid "Success"
+msgstr "Erfolg"
+
+#: build/tab/index.js:1
+msgid "Tab Label Settings"
+msgstr "Tab Label Einstellungen"
+
+#: build/news/index.js:1
+msgid "tags"
+msgstr "Schlagwörter"
+
+#: rrze-elements-blocks.php:72
+msgid ""
+"The server is running PHP version %1$s. The Plugin requires at least PHP "
+"version %2$s."
+msgstr ""
+
+#: rrze-elements-blocks.php:74
+msgid ""
+"The server is running WordPress version %1$s. The Plugin requires at least "
+"WordPress version %2$s."
+msgstr ""
+
+#: build/notice/index.js:1
+msgid "Thumbs down"
+msgstr "Daumen nach unten"
+
+#: build/notice/index.js:1
+msgid "Thumbs down icon"
+msgstr "Daumen nach untern Icon"
+
+#: build/notice/index.js:1
+msgid "Thumbs up"
+msgstr "Daumen nach oben"
+
+#: build/notice/index.js:1
+msgid "Thumps up icon"
+msgstr "Daumen nach oben Icon"
+
+#: build/cta/index.js:1
+msgid "Unlink"
+msgstr "Verlinkung aufheben"
+
+#: build/collapse/index.js:1
+msgid "Update the Jump Link"
+msgstr "Sprungmarke aktualisieren"
+
+#: build/notice/index.js:1
+msgid "Video"
+msgstr "Video"
+
+#: build/notice/index.js:1
+msgid "Video-icon"
+msgstr "Video-icon"
+
+#: build/alert/index.js:1 build/columns/index.js:1 build/notice/index.js:1
+msgid "Warning"
+msgstr "Warnung"
+
+#: build/tabs/index.js:1
+msgid "We recommend using a maximum of 4 tabs for the best User Experience."
+msgstr ""
+"Für eine bessere Nutzererfahrung empfehlen wir maximal 4 Reiter auf einmal "
+"zu nutzen."
+
+#: build/tabs/index.js:1
+msgid "X-ray"
+msgstr "X-ray"
+
+#: build/collapsibles/index.js:1
+msgid ""
+"You have more than 20 items inside a collapsible. This can cause performance "
+"and User Experience issues."
+msgstr ""
+"Sie nutzen aktuell mehr als 20 Elemente in einem Accordion. Dies kann für "
+"Endnutzer zu Performanzproblemen und einer schlechten Nutzererfahrung führen."
+
+#: build/accordion/index.js:1 build/collapse/index.js:1
+msgid "Your Text"
+msgstr "Dein Text"

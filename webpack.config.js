@@ -8,36 +8,53 @@ let optimization = defaultConfig.optimization;
 if (isProduction) {
   optimization = {
     ...defaultConfig.optimization,
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-        svgIcons: {
-          test: /svg[\\/]/,
-          name: 'svg-icons',
-          chunks: 'async',
-          reuseExistingChunk: true,
-        },
-      },
-    },
   };
 }
 
+// Set the devtool based on the build environment
+const devtool = isProduction ? false : 'eval-source-map';
+
 module.exports = {
   ...defaultConfig,
+  devtool: devtool,
   module: {
     ...defaultConfig.module,
     rules: [
       ...defaultConfig.module.rules,
+      // TypeScript loader
       {
-        test: /\.svg$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.svg$/i,
+        type: 'asset',
+        resourceQuery: /url/, // *.svg?url
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        resourceQuery: { not: [/url/] }, // exclude react component if *.svg?url
         use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'webfonts/[name][ext][query]'
+        }
       },
     ],
   },
+  // Erweitern Sie die Dateierweiterungen, die Webpack verarbeiten wird
+  resolve: {
+    ...defaultConfig.resolve,
+    extensions: ['.tsx', '.ts', '.js', '.json'],
+  },
   optimization: optimization,
+  performance: {
+    ...defaultConfig.performance,
+    hints: false
+  },
 };

@@ -2,13 +2,19 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/accordion",
-  "version": "1.25.10",
+  "version": "1.0.0",
   "title": "Accordion item",
-  "category": "design",
-  "icon": "align-center",
+  "category": "rrze_elements",
   "description": "Creates an inner accordion item",
-  "parent": ["rrze-elements/accordions"],
-  "keywords": ["accordion", "collapse", "expand", "toggle"],
+  "parent": [
+    "rrze-elements/accordions"
+  ],
+  "keywords": [
+    "accordion",
+    "collapse",
+    "expand",
+    "toggle"
+  ],
   "usesContext": [
     "rrze-elements/collapseSBlockCount",
     "rrze-elements/collapseTotalChildrenCount",
@@ -16,11 +22,6 @@
     "rrze-elements/accordion-hstart"
   ],
   "attributes": {
-    "message": {
-      "type": "string",
-      "source": "text",
-      "selector": "div"
-    },
     "expandAllLink": {
       "type": "boolean",
       "default": false
@@ -39,13 +40,11 @@
     },
     "title": {
       "type": "string",
-      "source": "html",
-      "selector": "button",
       "default": "Enter your Title"
     },
     "color": {
       "type": "string",
-      "default": ""
+      "default": "inherit"
     },
     "totalChildrenCount": {
       "type": "integer",
@@ -62,14 +61,8 @@
     "svgString": {
       "type": "string",
       "default": ""
-    },
-
-    "directory": {
-      "type": "string",
-      "default": ""
     }
   },
-
   "supports": {
     "html": false
   },

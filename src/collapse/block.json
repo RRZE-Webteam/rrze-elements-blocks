@@ -2,13 +2,19 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
-  "version": "1.25.10",
-  "title": "Akkordeonreiter",
+  "version": "1.0.0",
+  "title": "Accordion-item",
   "category": "design",
-  "icon": "align-center",
   "description": "Creates an accordion block",
-  "parent": ["rrze-elements/collapsibles"],
-  "keywords": ["accordion", "collapse", "expand", "toggle"],
+  "parent": [
+    "rrze-elements/collapsibles"
+  ],
+  "keywords": [
+    "accordion",
+    "collapse",
+    "expand",
+    "toggle"
+  ],
   "attributes": {
     "message": {
       "type": "string",
@@ -37,7 +43,7 @@
     },
     "title": {
       "type": "string",
-      "default": "Enter your Title"
+      "default": ""
     },
     "color": {
       "type": "string",
@@ -62,20 +68,16 @@
     "svgString": {
       "type": "string",
       "default": ""
-    },
-    "directory": {
-      "type": "string",
-      "default": ""
     }
   },
-
   "providesContext": {
     "rrze-elements/collapseSBlockCount": "sameBlockCount",
     "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount",
     "rrze-elements/collapseColor": "color"
   },
-  "usesContext": ["rrze-elements/accordion-hstart"],
-
+  "usesContext": [
+    "rrze-elements/accordion-hstart"
+  ],
   "supports": {
     "html": false
   },

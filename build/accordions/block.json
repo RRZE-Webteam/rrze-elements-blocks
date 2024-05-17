@@ -2,20 +2,14 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/accordions",
-  "version": "1.25.10",
+  "version": "1.0.0",
   "title": "Inner Accordion",
-  "category": "design",
-  "icon": "align-center",
+  "category": "rrze_elements",
   "parent": [
     "rrze-elements/collapse"
   ],
   "description": "Creates an inner accordion block",
   "attributes": {
-    "message": {
-      "type": "string",
-      "source": "text",
-      "selector": "div"
-    },
     "expandAllLink": {
       "type": "boolean",
       "default": false
@@ -46,7 +40,6 @@
   },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.js",
-  "script": "rrze-accordions",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
 }
