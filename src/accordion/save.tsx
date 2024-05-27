@@ -38,7 +38,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className="accordion-toggle"
               data-toggle="collapse"
-              data-href={`#collapse_${
+              data-href={`#panel_${
                 sameBlockCount + totalChildrenCount + ancestorCount
               }`}
             >
@@ -47,7 +47,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </button>
           </HeadingComponent>
           <div
-            id={`collapse_${
+            id={`panel_${
               sameBlockCount + totalChildrenCount + ancestorCount
             }`}
             className="accordion-body"
