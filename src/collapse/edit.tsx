@@ -344,6 +344,7 @@ const Edit: React.FC<SaveProps> = ({
                   "core/rss",
                   "core/search",
                   "core/tag-cloud",
+                  "rrze-elements/alert"
                 ]}
               />
             </div>

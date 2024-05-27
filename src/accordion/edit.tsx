@@ -304,6 +304,7 @@ const Edit: React.FC<SaveProps> = ({
                   "core/shortcode",
                   "core/calendar",
                   "core/rss",
+                  "rrze-elements/alert"
                 ]}
               />
             </div>
