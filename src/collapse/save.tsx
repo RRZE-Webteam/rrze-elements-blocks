@@ -60,7 +60,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             id={`panel_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
             //@ts-ignore
-            name={output} 
+            name={output}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />

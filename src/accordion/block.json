@@ -27,7 +27,7 @@
       "default": false
     },
     "hstart": {
-      "type": "integer",
+      "type": "number",
       "default": 3
     },
     "register": {
@@ -35,7 +35,7 @@
       "default": false
     },
     "sameBlockCount": {
-      "type": "integer",
+      "type": "number",
       "default": 0
     },
     "title": {
@@ -47,11 +47,11 @@
       "default": "inherit"
     },
     "totalChildrenCount": {
-      "type": "integer",
+      "type": "number",
       "default": 0
     },
     "ancestorCount": {
-      "type": "integer",
+      "type": "number",
       "default": 0
     },
     "icon": {

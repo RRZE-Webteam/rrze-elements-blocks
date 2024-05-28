@@ -2,15 +2,16 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import HeadingComponent from "../components/HeadingComponent";
 
 interface Attributes {
-  sameBlockCount: number;
-  totalChildrenCount: number;
-  color: string;
-  title: string;
-  jumpName: string;
-  loadOpen: boolean;
+  expandAllLink: boolean;
   hstart: number;
-  svgString?: string;
-  ancestorCount?: number;
+  register: boolean;
+  sameBlockCount: number;
+  title: string;
+  color: string;
+  totalChildrenCount: number;
+  ancestorCount: number;
+  icon: string;
+  svgString: string;
 }
 
 interface SaveProps {

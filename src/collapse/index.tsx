@@ -12,13 +12,27 @@ import { __, sprintf } from "@wordpress/i18n";
  */
 import Edit from "./edit";
 import save from "./save";
+import deprecated from "./deprecated";
 import metadata from "./block.json";
 
-interface BlockAttributes {
-  title?: string;
-  hstart?: number;
-  // ... add other attribute types here if needed
+interface AttributesV1 {
+  message: string;
+  loadOpen: boolean;
+  expandAllLink: boolean;
+  hstart: number;
+  register: boolean;
+  sameBlockCount: number;
+  title: string;
+  color: string;
+  totalChildrenCount: number;
+  childrenCount: number;
+  jumpName: string;
+  icon: string;
+  svgString: string;
 }
+
+//type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;
+type BlockAttributes = AttributesV1;
 
 interface LabelContext {
   context: string;
@@ -33,6 +47,7 @@ registerBlockType(metadata.name as any, {
   edit: Edit,
   //@ts-ignore
   save,
+  deprecated,
   icon: {
     src: (
       <svg
