@@ -1,23 +1,20 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import HeadingComponent from "../components/HeadingComponent";
+import { BlockSaveProps } from "@wordpress/blocks";
+import HeadingComponent from "../../components/HeadingComponent";
 
 interface Attributes {
-  totalChildrenCount?: number;
-  sameBlockCount?: number;
-  title: string;
+  sameBlockCount: number;
+  totalChildrenCount: number;
   color: string;
+  title: string;
+  jumpName: string;
   loadOpen: boolean;
-  icon: string;
-  hstart?: number;
-  jumpName?: string;
+  hstart: number;
   svgString?: string;
   ancestorCount?: number;
 }
 
-interface SaveProps {
-  attributes: Attributes;
-}
-const Save: React.FC<SaveProps> = ({ attributes }) => {
+const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,
@@ -39,7 +36,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className="accordion-toggle"
               data-toggle="collapse"
-              data-href={`#panel_${
+              data-href={`#collapse_${
                 sameBlockCount + totalChildrenCount + ancestorCount
               }`}
             >
@@ -48,7 +45,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </button>
           </HeadingComponent>
           <div
-            id={`panel_${
+            id={`collapse_${
               sameBlockCount + totalChildrenCount + ancestorCount
             }`}
             className="accordion-body"
