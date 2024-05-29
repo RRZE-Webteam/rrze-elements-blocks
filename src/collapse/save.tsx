@@ -23,7 +23,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
 
   let output = '';
   if (jumpName === ''){
-      output = `collapse_${sameBlockCount + totalChildrenCount}`;
+      output = `panel_${sameBlockCount + totalChildrenCount}`;
   } else { 
       output = `${jumpName}`;
   }
@@ -57,10 +57,10 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </button>
           </HeadingComponent>
           <div
-            id={`collapse_${sameBlockCount + totalChildrenCount}`}
+            id={`panel_${sameBlockCount + totalChildrenCount}`}
             className={`accordion-body ${loadOnPageLoad}`}
             //@ts-ignore
-            name={output} 
+            name={output}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />
