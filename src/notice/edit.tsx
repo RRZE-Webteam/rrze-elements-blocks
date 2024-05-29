@@ -91,17 +91,20 @@ export default function Edit({
           />
         </PanelBody>
       </InspectorControls>
-      <BlockControls controls>
+      <BlockControls>
         <ToolbarGroup>
           <ToolbarItem>
             {() => (
               <>
                 <ToolbarButton
                   icon={symbol}
-                  label={icon === ""
-                    ? __("Select a style", "rrze-elements-b")
-                    : __("Change the style", "rrze-elements-b")}
-                  onClick={openModal} placeholder={undefined}                />
+                  label={
+                    icon === ""
+                      ? __("Select a style", "rrze-elements-b")
+                      : __("Change the style", "rrze-elements-b")
+                  }
+                  onClick={openModal}
+                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}
@@ -125,7 +128,10 @@ export default function Edit({
       </BlockControls>
 
       {!attributes.style && (
-        <Placeholder icon="admin-plugins" label={__("Notice", "rrze-elements-b")}>
+        <Placeholder
+          icon="admin-plugins"
+          label={__("Notice", "rrze-elements-b")}
+        >
           <BlockVariationPicker
             variations={variations}
             onSelect={(variation) => {
@@ -151,19 +157,30 @@ export default function Edit({
         <div>
           <div>
             {/* Render the icon if a matching variation is found */}
-            <span className={`${matchedVariation?.iconClass} rrze-elements-icon`}></span>
+            <span
+              className={`${matchedVariation?.iconClass} rrze-elements-icon`}
+            ></span>
           </div>
         </div>
         {attributes.style && (
           <div>
-          <InnerBlocks
-            template={[
-              ["core/heading", { placeholder: __("Add a Headline", "rrze-elements-b"), level: 3, }],
-              ["core/paragraph", { placeholder: __("Add a description…", "rrze-elements-b") }],
-            ]}
-            allowedBlocks={["core/heading", "core/paragraph"]}
-            templateLock={false}
-          />
+            <InnerBlocks
+              template={[
+                [
+                  "core/heading",
+                  {
+                    placeholder: __("Add a Headline", "rrze-elements-b"),
+                    level: 3,
+                  },
+                ],
+                [
+                  "core/paragraph",
+                  { placeholder: __("Add a description…", "rrze-elements-b") },
+                ],
+              ]}
+              allowedBlocks={["core/heading", "core/paragraph"]}
+              templateLock={false}
+            />
           </div>
         )}
       </div>

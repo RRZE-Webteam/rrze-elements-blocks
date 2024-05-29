@@ -6,7 +6,7 @@ import {
   ToolbarItem,
   Modal,
   Button,
-  PanelBody
+  PanelBody,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -48,7 +48,7 @@ interface SaveProps {
   };
   setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
   clientId: string;
-  context: { [key: string]: any }; 
+  context: { [key: string]: any };
 }
 
 type WPBlock = {
@@ -71,9 +71,8 @@ const Edit: React.FC<SaveProps> = ({
   clientId,
   context,
 }) => {
-
   const { __unstableMarkNextChangeAsNotPersistent } =
-  useDispatch( blockEditorStore );
+    useDispatch(blockEditorStore);
 
   // Use the useSelect hook to gather necessary data from the WordPress block editor.
   const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
@@ -206,71 +205,76 @@ const Edit: React.FC<SaveProps> = ({
 
   return (
     <>
-    <div {...props}>
-      <BlockControls controls>
-        <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
-        <ToolbarGroup>
-          {/* {isTextInString("Title", attributes.show) && (
+      <div {...props}>
+        <BlockControls>
+          <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
+          <ToolbarGroup>
+            {/* {isTextInString("Title", attributes.show) && (
             <HeadingSelector attributes={attributes} setAttributes={setAttributes} />
           )} */}
-          <ToolbarItem>
-            {() => (
-              <>
-                <ToolbarButton
+            <ToolbarItem>
+              {() => (
+                <>
+                  <ToolbarButton
                     icon={loadOpen ? seen : unseen}
-                    label={loadOpen
-                      ? __("Collapse on page load", "rrze-elements-b")
-                      : __("Open on page load", "rrze-elements-b")}
-                    onClick={loadOpenToggle} placeholder={undefined}                />
-                <ToolbarButton
+                    label={
+                      loadOpen
+                        ? __("Collapse on page load", "rrze-elements-b")
+                        : __("Open on page load", "rrze-elements-b")
+                    }
+                    onClick={loadOpenToggle}
+                  />
+                  <ToolbarButton
                     icon={symbol}
-                    label={icon === ""
-                      ? __("Add an icon", "rrze-elements-b")
-                      : __("Change the icon", "rrze-elements-b")}
-                    onClick={openModal} placeholder={undefined}                />
-                {isOpen && (
-                  <Modal
-                    title={__("Select an Icon", "rrze-elements-b")}
-                    onRequestClose={closeModal}
-                  >
-                    <IconPicker
-                      attributes={{
-                        icon: attributes.icon,
-                        svgString: attributes.svgString,
-                      }}
-                      setAttributes={setAttributes}
-                    />
-                    <Button variant="primary" onClick={closeModal}>
-                      {__("Close", "rrze-elements-b")}
-                    </Button>
-                  </Modal>
-                )}
-              </>
-            )}
-          </ToolbarItem>
-        </ToolbarGroup>
-      </BlockControls>
+                    label={
+                      icon === ""
+                        ? __("Add an icon", "rrze-elements-b")
+                        : __("Change the icon", "rrze-elements-b")
+                    }
+                    onClick={openModal}
+                  />
+                  {isOpen && (
+                    <Modal
+                      title={__("Select an Icon", "rrze-elements-b")}
+                      onRequestClose={closeModal}
+                    >
+                      <IconPicker
+                        attributes={{
+                          icon: attributes.icon,
+                          svgString: attributes.svgString,
+                        }}
+                        setAttributes={setAttributes}
+                      />
+                      <Button variant="primary" onClick={closeModal}>
+                        {__("Close", "rrze-elements-b")}
+                      </Button>
+                    </Modal>
+                  )}
+                </>
+              )}
+            </ToolbarItem>
+          </ToolbarGroup>
+        </BlockControls>
 
-      <InspectorControls>
-        <JumpLinkSelector
-          attributes={{
-            jumpName: attributes.jumpName,
-          }}
-          setAttributes={setAttributes}
-        />
-        <ColorSwitcher {...{ attributes, setAttributes }} />
-        <AdvancedSettings {...{ attributes, setAttributes }} />
-        <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
-          <IconPicker
+        <InspectorControls>
+          <JumpLinkSelector
             attributes={{
-              icon: attributes.icon,
-              svgString: attributes.svgString,
+              jumpName: attributes.jumpName,
             }}
             setAttributes={setAttributes}
           />
-        </PanelBody>
-      </InspectorControls>
-
+          <ColorSwitcher {...{ attributes, setAttributes }} />
+          <AdvancedSettings {...{ attributes, setAttributes }} />
+          <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
+            <IconPicker
+              attributes={{
+                icon: attributes.icon,
+                svgString: attributes.svgString,
+              }}
+              setAttributes={setAttributes}
+            />
+          </PanelBody>
+        </InspectorControls>
 
         <div className={`accordion-group ${color}`}>
           <HeadingComponent
@@ -344,7 +348,7 @@ const Edit: React.FC<SaveProps> = ({
                   "core/rss",
                   "core/search",
                   "core/tag-cloud",
-                  "rrze-elements/alert"
+                  "rrze-elements/alert",
                 ]}
               />
             </div>

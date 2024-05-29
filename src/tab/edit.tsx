@@ -178,7 +178,7 @@ export default function Edit({
                   label={icon === ""
                     ? __("Add an icon", "rrze-elements-b")
                     : __("Change the icon", "rrze-elements-b")}
-                  onClick={openModal} placeholder={undefined}                />
+                  onClick={openModal} />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}

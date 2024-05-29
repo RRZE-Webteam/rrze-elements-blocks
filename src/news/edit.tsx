@@ -223,7 +223,7 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <BlockControls controls>
+      <BlockControls>
         <HeadingSelector
           attributes={{ hstart: attributes.hstart }}
           setAttributes={setAttributes}

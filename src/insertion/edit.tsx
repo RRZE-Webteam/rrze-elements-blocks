@@ -42,7 +42,7 @@ export default function Edit({
 
   return (
     <div {...props} >
-      <BlockControls controls>
+      <BlockControls>
         <AlignmentBar
           attributes={{alignment}}
           setAttributes={setAttributes}

@@ -238,7 +238,7 @@ export default function Edit({
           attributes={{ xray: attributes.xray, color: attributes.color }}
           setAttributes={setAttributes}
         />
-        <BlockControls controls>
+        <BlockControls>
           <XrayBar
             attributes={{ xray: attributes.xray }}
             setAttributes={setAttributes}

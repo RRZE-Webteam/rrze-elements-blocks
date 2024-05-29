@@ -8,14 +8,18 @@ import {
   __experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 
-import { FontSizePicker, PanelBody, Popover, ToolbarGroup, ToolbarButton } from "@wordpress/components";
+import {
+  FontSizePicker,
+  PanelBody,
+  Popover,
+  ToolbarGroup,
+  ToolbarButton,
+} from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
 import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
-
-
 
 /**
  * Interface representing the properties for the Edit component.
@@ -49,13 +53,11 @@ export default function Edit({
   blockProps,
   attributes,
   setAttributes,
-  isSelected
+  isSelected,
 }: EditProps) {
   const props = useBlockProps();
 
-  const {
-    buttonUrl
-  } = attributes;
+  const { buttonUrl } = attributes;
 
   const onChangeTitle = (title: string) => {
     if (isNaN(parseInt(title))) {
@@ -102,26 +104,28 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <BlockControls controls>
-      <ToolbarGroup>
-            {!isURLSet && isLinkTag && (
-              <ToolbarButton
+      <BlockControls>
+        <ToolbarGroup>
+          {!isURLSet && isLinkTag && (
+            <ToolbarButton
               label="link"
               icon={link}
               title={__("Link", "rrze-elements-b")}
               shortcut={displayShortcut.primary("k")}
-              onClick={startEditing} placeholder={undefined}              />
-            )}
-            {isURLSet && isLinkTag && (
-              <ToolbarButton
+              onClick={startEditing}
+            />
+          )}
+          {isURLSet && isLinkTag && (
+            <ToolbarButton
               label="link"
               icon={linkOff}
               title={__("Unlink", "rrze-elements-b")}
               shortcut={displayShortcut.primaryShift("k")}
               onClick={unlink}
-              isActive={true} placeholder={undefined}              />
-            )}
-          </ToolbarGroup>
+              isActive={true}
+            />
+          )}
+        </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
         <PanelBody title={__("Font Size", "rrze-elements-blocks")}>
@@ -173,18 +177,20 @@ export default function Edit({
         <dl className="rrze-elements-counter">
           <dt>
             {isSelected && (
-            <RichText
-              tagName="span"
-              value={attributes.title.toString()}
-              onChange={onChangeTitle}
-              allowedFormats={[]}
-              className={`fau-counter-editor-data rrze-counter-${attributes.fontSize || "large"} `}
-            />
+              <RichText
+                tagName="span"
+                value={attributes.title.toString()}
+                onChange={onChangeTitle}
+                allowedFormats={[]}
+                className={`fau-counter-editor-data rrze-counter-${attributes.fontSize || "large"} `}
+              />
             )}
             {!isSelected && (
-            <span className={`fau-counter-data rrze-counter-${attributes.fontSize || "large"} `}>
-              {attributes.title.toString()}
-            </span>
+              <span
+                className={`fau-counter-data rrze-counter-${attributes.fontSize || "large"} `}
+              >
+                {attributes.title.toString()}
+              </span>
             )}
           </dt>
           <dd>
@@ -196,15 +202,15 @@ export default function Edit({
             />
             <br />
             {isURLSet && isLinkTag && (
-            <a className="standard-btn ghost-btn">
-              <RichText
-                tagName="span"
-                value={attributes.buttonText}
-                onChange={(buttonText) => setAttributes({ buttonText })}
-                allowedFormats={[]}
-                ref={setUrlPopoverAnchor}
-              />
-            </a>
+              <a className="standard-btn ghost-btn">
+                <RichText
+                  tagName="span"
+                  value={attributes.buttonText}
+                  onChange={(buttonText) => setAttributes({ buttonText })}
+                  allowedFormats={[]}
+                  ref={setUrlPopoverAnchor}
+                />
+              </a>
             )}
           </dd>
         </dl>

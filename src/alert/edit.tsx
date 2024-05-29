@@ -129,7 +129,7 @@ export default function Edit({
           />
         </PanelBody>
       </InspectorControls>
-      <BlockControls controls>
+      <BlockControls>
         <StandardColorSwitcherToolbar
           attributes={{ color: attributes.color, style: attributes.style }}
           setAttributes={setAttributes}

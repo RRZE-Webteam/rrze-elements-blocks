@@ -82,7 +82,7 @@ const CustomMediaReplaceFlow = ({
   };
 
   return (
-    <BlockControls controls>
+    <BlockControls>
       <ToolbarGroup>
         <MediaReplaceFlow
           mediaId={id}
@@ -104,7 +104,7 @@ const CustomMediaReplaceFlow = ({
               <ToolbarButton
                 icon={trash}
                 label={__("Remove image", "rrze-elements-b")}
-                onClick={onClearMedia} placeholder={undefined}              />
+                onClick={onClearMedia} />
             )}
           </ToolbarItem>
         )}
