@@ -48,7 +48,7 @@ spl_autoload_register(function ($class) {
 
 // Register activation and deactivation hooks.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');
-register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
+// register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
 /**

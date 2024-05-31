@@ -9,7 +9,7 @@ import {
 } from "@wordpress/components";
 import { color as colorIcon } from "@wordpress/icons";
 //@ts-ignore
-import { useSettings } from "@wordpress/block-editor";
+import { useSetting } from "@wordpress/block-editor";
 import Color from "color";
 
 /**
@@ -139,7 +139,7 @@ const ColorSwitcher = ({
   // const colorPalette = useSetting( 'color.palette' );
   // console.log(colorPalette);
   const themeColorPalette = !overwriteThemeColors
-  ? useSettings('color.palette') as { color: string; slug: string; name: string }[]
+  ? useSetting('color.palette') as { color: string; slug: string; name: string }[]
   : null;
   const colorData = themeColorPalette || standardColorData;
 
@@ -185,7 +185,7 @@ const ColorSwitcherToolbar = ({
   overwriteThemeColors = false,
 }: ColorSwitcherProps) => {
   const themeColorPalette = !overwriteThemeColors
-    ? useSettings('color.palette') as { color: string; slug: string; name: string }[]
+    ? useSetting('color.palette') as { color: string; slug: string; name: string }[]
     : null;
 
   const effectiveColorData = themeColorPalette || colorData;
