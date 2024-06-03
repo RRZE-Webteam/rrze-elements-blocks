@@ -69,6 +69,7 @@ class Blocks
      */
     public function render_news_block($attributes)
     {
+        Helper::debug($attributes);
         if (class_exists('RRZE\Elements\News\News')) {
             $news_instance = new News();
             return $news_instance->shortcodeCustomNews($attributes);
