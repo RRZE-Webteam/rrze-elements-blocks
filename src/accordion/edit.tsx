@@ -12,7 +12,7 @@ import {
   BlockControls,
   InnerBlocks,
   InspectorControls,
-  store as blockEditorStore
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -124,17 +124,16 @@ const Edit: React.FC<SaveProps> = ({
 
   useEffect(() => {
     let color = context["rrze-elements/collapseColor"];
-  
+
     if (color !== attributes.color) {
       color = attributes.color;
     }
-  
+
     setAttributes({
-      color: color
+      color: color,
     });
-  
   }, [context["rrze-elements/collapseColor"], attributes.color]);
-  
+
   let sameTypeSiblingsBefore = 0;
   useEffect(() => {
     if (selectedBlock && blockParents.length > 0) {
@@ -191,11 +190,14 @@ const Edit: React.FC<SaveProps> = ({
     }
   };
 
-  let finalColor = attributes.color === "inherit" ? context["rrze-elements/collapseColor"] : attributes.color;
+  let finalColor =
+    attributes.color === "inherit"
+      ? context["rrze-elements/collapseColor"]
+      : attributes.color;
 
   return (
     <>
-      <BlockControls controls>
+      <BlockControls>
         <ExtendedColorSwitcherToolbar
           attributes={attributes}
           setAttributes={setAttributes}
@@ -209,10 +211,13 @@ const Edit: React.FC<SaveProps> = ({
               <>
                 <ToolbarButton
                   icon={symbol}
-                  label={icon === ""
-                    ? __("Add an icon", "rrze-elements-b")
-                    : __("Change the icon", "rrze-elements-b")}
-                  onClick={openModal} placeholder={undefined}                />
+                  label={
+                    icon === ""
+                      ? __("Add an icon", "rrze-elements-b")
+                      : __("Change the icon", "rrze-elements-b")
+                  }
+                  onClick={openModal}
+                />
                 {isOpen && (
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}
@@ -237,7 +242,10 @@ const Edit: React.FC<SaveProps> = ({
       </BlockControls>
       <InspectorControls>
         {/* <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
-        <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} />
+        <ExtendedColorSwitcher
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
         <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
           <IconPicker
             attributes={{
@@ -304,6 +312,7 @@ const Edit: React.FC<SaveProps> = ({
                   "core/shortcode",
                   "core/calendar",
                   "core/rss",
+                  "rrze-elements/alert",
                 ]}
               />
             </div>

@@ -13,7 +13,7 @@ import {
   PanelBody,
   RangeControl,
   Button,
-  __experimentalNumberControl as NumberControl
+  __experimentalNumberControl as NumberControl,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -66,12 +66,12 @@ export default function Edit({
 
   const onChangeColumns = (columns: number) => {
     setAttributes({ columns });
-  }
+  };
 
   const onChangeStartValue = (startValue: string) => {
     const output = parseInt(startValue, 10);
-    setAttributes({ startValue: output});
-  }
+    setAttributes({ startValue: output });
+  };
 
   const onClickPlay = () => {
     if (isSelected) {
@@ -111,18 +111,17 @@ export default function Edit({
   return (
     <div {...props}>
       <section className="fauCustomResearchHighlights">
-        <BlockControls controls>
+        <BlockControls>
           <ToolbarItem>
-          {() => (
-            <>
-            <ToolbarButton
-              icon={play}
-              title={__("Preview Animation", "rrze-elements-b")}
-              onClick={onClickPlay}
-              placeholder={undefined}
-            />
-            </>
-          )}
+            {() => (
+              <>
+                <ToolbarButton
+                  icon={play}
+                  title={__("Preview Animation", "rrze-elements-b")}
+                  onClick={onClickPlay}
+                />
+              </>
+            )}
           </ToolbarItem>
         </BlockControls>
         <InspectorControls>
@@ -156,7 +155,7 @@ export default function Edit({
               onMouseMove={function noRefCheck() {}}
               step={1}
             />
-            <NumberControl 
+            <NumberControl
               label={__("Start value", "rrze-elements-b")}
               value={attributes.startValue}
               onChange={onChangeStartValue}
@@ -166,7 +165,12 @@ export default function Edit({
             <Button onClick={onClickPlay}>Preview Animation</Button>
           </PanelBody>
         </InspectorControls>
-        <InnerBlocks allowedBlocks={["rrze-elements/rrze-counter", "rrze-elements/rrze-iconbox"]} />
+        <InnerBlocks
+          allowedBlocks={[
+            "rrze-elements/rrze-counter",
+            "rrze-elements/rrze-iconbox",
+          ]}
+        />
       </section>
     </div>
   );

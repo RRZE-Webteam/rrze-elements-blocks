@@ -180,7 +180,7 @@ export default function Edit({
         className="accordion-notice"
       />
       <div {...props}>
-        <BlockControls controls>
+        <BlockControls>
           <HeadingSelector
             attributes={attributes}
             setAttributes={setAttributes}

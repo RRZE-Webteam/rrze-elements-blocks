@@ -1,4 +1,6 @@
-import { registerBlockType } from "@wordpress/blocks";
+import {
+  registerBlockType
+} from "@wordpress/blocks";
 import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
@@ -8,15 +10,38 @@ import { __, sprintf } from "@wordpress/i18n";
 import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
+import deprecated from "./deprecated";
+
+interface AttributesV1 {
+  totalChildrenCount?: number;
+  sameBlockCount?: number;
+  title: string;
+  color: string;
+  loadOpen: boolean;
+  icon: string;
+  hstart?: number;
+  jumpName?: string;
+  svgString?: string;
+  ancestorCount?: number;
+}
+
+//type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;
+type BlockAttributes = AttributesV1;
+
+interface LabelContext {
+  context: string;
+}
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType(metadata.name, {
+registerBlockType(metadata.name as any, {
   edit: Edit,
+  //@ts-ignore
   save,
+  deprecated,
   icon: {
     src: (
       <svg
@@ -62,7 +87,11 @@ registerBlockType(metadata.name, {
       </svg>
     ),
   },
-  __experimentalLabel: (attributes, { context }) => {
+  //@ts-ignore: The `attributes` property is not yet supported.
+  __experimentalLabel: (
+    attributes: BlockAttributes,
+    { context }: LabelContext
+  ) => {
     const { title, hstart } = attributes;
 
     // In the list view, use the block's title as the label.
@@ -75,12 +104,12 @@ registerBlockType(metadata.name, {
       return !title || title.length === 0
         ? sprintf(
             /* translators: accessibility text. %s: heading level. */
-            __("Level %s. Empty."),
+            __("Level %s. Empty.", "rrze-elements-b"),
             hstart
           )
         : sprintf(
             /* translators: accessibility text. 1: heading level. 2: heading title. */
-            __("Level %1$s. %2$s"),
+            __("Level %1$s. %2$s", "rrze-elements-b"),
             hstart,
             title
           );

@@ -128,9 +128,11 @@ export default function Edit({
     setAttributes({ buttonText: newButtonText });
   };
 
-  const onChangeSearchBoxText = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeSearchBoxText = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const newButtonText = event.target.value;
-  
+
     // Rest of your logic...
     setAttributes({ buttonText: newButtonText });
   };
@@ -141,36 +143,38 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <BlockControls controls>
-          <CustomMediaReplaceFlow
-            attributes={{
-              id: id,
-              url: url,
-              alt: alt,
-              srcset: srcset,
-            }}
-            setAttributes={setAttributes}
-          />
-          <ToolbarGroup>
-            {!isURLSet && isLinkTag && (
-              <ToolbarButton
+      <BlockControls>
+        <CustomMediaReplaceFlow
+          attributes={{
+            id: id,
+            url: url,
+            alt: alt,
+            srcset: srcset,
+          }}
+          setAttributes={setAttributes}
+        />
+        <ToolbarGroup>
+          {!isURLSet && isLinkTag && (
+            <ToolbarButton
               label="link"
               icon={link}
               title={__("Link", "rrze-elements-b")}
               shortcut={displayShortcut.primary("k")}
-              onClick={startEditing} placeholder={undefined}              />
-            )}
-            {isURLSet && isLinkTag && (
-              <ToolbarButton
+              onClick={startEditing}
+            />
+          )}
+          {isURLSet && isLinkTag && (
+            <ToolbarButton
               label="link"
               icon={linkOff}
               title={__("Unlink", "rrze-elements-b")}
               shortcut={displayShortcut.primaryShift("k")}
               onClick={unlink}
-              isActive={true} placeholder={undefined}              />
-            )}
-          </ToolbarGroup>
-        </BlockControls>
+              isActive={true}
+            />
+          )}
+        </ToolbarGroup>
+      </BlockControls>
       {/* <InspectorControls>
         <PanelBody
           title={__("Advanced Options", "rrze-elements-b")}
@@ -200,52 +204,48 @@ export default function Edit({
         </Popover>
       )}
       <div className={`rrze-elements-cta ${imageClass} ${background}`}>
-            <div className="cta-content">
+        <div className="cta-content">
+          <RichText
+            tagName="span"
+            value={title}
+            onChange={onChangeTitle}
+            placeholder={__("CTA Title", "rrze-elements-b")}
+            allowedFormats={[]}
+            className="cta-title"
+          />
+          <RichText
+            tagName="span"
+            value={subtitle}
+            onChange={onChangeSubtitle}
+            placeholder={__("CTA Subtitle", "rrze-elements-b")}
+            allowedFormats={[]}
+            className="cta-subtitle"
+          />
+        </div>
+        {url && (
+          <div className={`cta-image ${isBlobURL(url) ? " is-loading" : ""}`}>
+            <img src={url} className="attachment-large size-large" alt={alt} />
+            {isBlobURL(url) && <Spinner />}
+          </div>
+        )}
+        {!isSearch && (
+          <div className="cta-button-container">
+            <a ref={setUrlPopoverAnchor} href="#" className="btn cta-button">
               <RichText
                 tagName="span"
-                value={title}
-                onChange={onChangeTitle}
-                placeholder={__("CTA Title", "rrze-elements-b")}
+                value={buttonText}
+                onChange={onChangeButtonText}
+                placeholder={__("CTA Button Text", "rrze-elements-b")}
                 allowedFormats={[]}
-                className="cta-title"
+                className="cta-button-text"
               />
-              <RichText
-                tagName="span"
-                value={subtitle}
-                onChange={onChangeSubtitle}
-                placeholder={__("CTA Subtitle", "rrze-elements-b")}
-                allowedFormats={[]}
-                className="cta-subtitle"
-              />
-            </div>
-            {url && (
-              <div
-                className={`cta-image ${isBlobURL(url) ? " is-loading" : ""}`}
-              >
-                <img
-                  src={url}
-                  className="attachment-large size-large"
-                  alt={alt}
-                />
-                {isBlobURL(url) && <Spinner />}
-              </div>
-            )}
-            {!isSearch && (
-            <div className="cta-button-container">
-              <a ref={setUrlPopoverAnchor} href="#" className="btn cta-button">
-                <RichText
-                  tagName="span"
-                  value={buttonText}
-                  onChange={onChangeButtonText}
-                  placeholder={__("CTA Button Text", "rrze-elements-b")}
-                  allowedFormats={[]}
-                  className="cta-button-text"
-                />
-                &nbsp;
-                <span className={"fa-solid fa-arrow-right rrze-elements-cta-icon"}></span>
-              </a>
-            </div>
-            )}
+              &nbsp;
+              <span
+                className={"fa-solid fa-arrow-right rrze-elements-cta-icon"}
+              ></span>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

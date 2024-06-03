@@ -108,7 +108,7 @@ export default function Edit({
 
   return (
     <div {...props} className={`${props.className}` }>
-      <BlockControls controls>
+      <BlockControls>
         <AlignmentBar
           attributes={{alignment}}
           setAttributes={setAttributes}

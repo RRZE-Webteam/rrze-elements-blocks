@@ -113,7 +113,7 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <BlockControls controls>
+      <BlockControls>
         <ToolbarGroup>
           {!isURLSet && isLinkTag && (
             <ToolbarButton
@@ -122,7 +122,6 @@ export default function Edit({
               title={__("Link", "rrze-elements-b")}
               shortcut={displayShortcut.primary("k")}
               onClick={startEditing}
-              placeholder={undefined}
             />
           )}
           {isURLSet && isLinkTag && (
@@ -133,7 +132,6 @@ export default function Edit({
               shortcut={displayShortcut.primaryShift("k")}
               onClick={unlink}
               isActive={true}
-              placeholder={undefined}
             />
           )}
           <ToolbarButton
@@ -144,7 +142,6 @@ export default function Edit({
                 : __("Change the icon", "rrze-elements-b")
             }
             onClick={openModal}
-            placeholder={undefined}
           />
           {isOpen && (
             <Modal
