@@ -1,6 +1,7 @@
 <?php
 
 namespace RRZE\ElementsB;
+
 use const RRZE\ElementsB\RRZE_ELEMENTSB_VERSION;
 
 defined('ABSPATH') || exit;
@@ -23,29 +24,12 @@ class Main
      */
     public function __construct($pluginFile)
     {
-        $is_gutenberg_enabled = $this->my_plugin_is_gutenberg_enabled();
-        $this->pluginFile = $pluginFile;
+        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+        add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
+        add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
 
-        if ($is_gutenberg_enabled) {
-            add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
-            add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
-            add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
-
-            new Blocks();
-            new Patterns();
-        } else {
-            Helper::debug('Gutenberg is not enabled.');
-        }
-    }
-
-    public function my_plugin_is_gutenberg_enabled() {
-        Helper::debug('Gutenberg is.');
-        Helper::debug(has_filter('is_gutenberg_enabled'));
-        if (has_filter('is_gutenberg_enabled')) {
-            return apply_filters('is_gutenberg_enabled', false);
-        } 
-        
-        return true;
+        new Blocks();
+        new Patterns();
     }
 
     /**
@@ -116,7 +100,7 @@ class Main
         if (is_404() || is_search()) {
             return;
         }
-        
+
         wp_register_style(
             'rrze-elements-blocks',
             plugins_url('assets/css/rrze-elements-blocks.css', plugin_basename($this->pluginFile)),

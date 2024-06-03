@@ -24,8 +24,6 @@ class Blocks
 
             // Additional logic for blocks with custom render callbacks.
             if (class_exists('RRZE\Elements\News\News')) {
-                Helper::debug('News block loaded.');
-                Helper::debug(plugin_dir_path(__DIR__) . 'build/news');
                 register_block_type(plugin_dir_path(__DIR__) . 'build/news', array(
                     'render_callback' => [$this, 'render_news_block'],
                 ));
