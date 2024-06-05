@@ -13,6 +13,7 @@ class Patterns
         add_action('init', [$this, 'elementsBlocks_pattern_categories']);
         add_filter('block_categories_all', [$this, 'my_custom_block_category'], 10, 2);
         add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
+        add_action('init', [$this, 'register_dev_patterns']);
     }
 
     /**
@@ -50,6 +51,23 @@ class Patterns
         array_unshift($categories, $custom_category[0]);
 
         return $categories;
+    }
+
+    public function register_dev_patterns()
+    {
+        if (ThemeSniffer::getThemeGroup('fauthemes')) {
+            $this->elements_register_block_pattern(
+                'dev-counter-row',
+                'rrze-elements-blocks/dev-counter-iconbox',
+                __('DEV: Counter and Iconbox', 'rrze-elementsb'),
+                _x('A testing template for Counter and Iconbox.', 'DEV Template', 'rrze-elements-b'),
+                array('page'),
+                array('page', 'wp_template'),
+                true,
+                array('starter'),
+                array('core/post-content')
+            );
+        }
     }
 
     public function register_fau_custom_wp_block_patterns()
