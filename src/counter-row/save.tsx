@@ -4,11 +4,16 @@ interface SaveProps {
   attributes: {
     stagger: number;
     startValue: number;
+    columns: number;
   };
 }
 
 export default function save({ attributes }: SaveProps) {
-  const blockProps = useBlockProps.save();
+  const dynamicClass = `rrze-elements-column-${attributes.columns}`;
+  const blockProps = useBlockProps.save({
+    className: dynamicClass,
+  });
+
   return (
       <>
           <div {...blockProps}

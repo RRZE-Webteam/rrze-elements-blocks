@@ -33,7 +33,7 @@ svg.elements-tabs-icon-modal {
 
         .block-editor-block-list__layout {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, 1fr);
 
 
 
@@ -43,10 +43,10 @@ svg.elements-tabs-icon-modal {
 
     @for $i from 1 through 5 {
 
-        &.rrze-elements-column-span-#{$i} {
+        &.rrze-elements-column-#{$i} {
             .fauCustomResearchHighlights {
                 .block-editor-block-list__layout {
-                    grid-template-columns: repeat($i, minmax(280px, 1fr));
+                    grid-template-columns: repeat($i, 1fr);
                 }
             }
         }

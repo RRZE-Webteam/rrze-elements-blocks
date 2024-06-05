@@ -45,7 +45,7 @@
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
+  "style": "rrze-elements-blocks",
   "viewScript": "rrze-counter",
   "parent": ["rrze-elements/counter-row"]
 }

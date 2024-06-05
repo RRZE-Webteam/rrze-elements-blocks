@@ -26,12 +26,12 @@
   "styles": [
     {
       "name": "outlined",
-      "label": "Outlined",
-      "isDefault": true
+      "label": "Outlined"
     },
     {
       "name": "colorblock",
-      "label": "Colorblock"
+      "label": "Colorblock",
+      "isDefault": true
     }
   ],
   "textdomain": "rrze-elements-b",
