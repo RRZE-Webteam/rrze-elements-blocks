@@ -24,6 +24,7 @@ class Main
      */
     public function __construct($pluginFile)
     {
+        $this->pluginFile = $pluginFile;
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
         add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
         add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
@@ -89,7 +90,6 @@ class Main
         $custom_styles = ['display', 'fill', 'margin', 'padding', 'color', 'background-color', 'font-size'];
         return array_merge($styles, $custom_styles);
     }
-
 
     /**
      * [enqueueScripts description]
