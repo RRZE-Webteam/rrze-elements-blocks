@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/accordion",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "title": "Accordion item",
   "category": "rrze_elements",
   "description": "Creates an inner accordion item",
