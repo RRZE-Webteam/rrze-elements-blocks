@@ -54,7 +54,7 @@ export default function Edit({
   setAttributes,
 }: EditProps) {
   gsap.registerPlugin(ScrollTrigger);
-  const dynamicClass = `rrze-elements-column-span-${attributes.columns}`;
+  const dynamicClass = `rrze-elements-column-${attributes.columns}`;
 
   const props = useBlockProps({
     className: dynamicClass,

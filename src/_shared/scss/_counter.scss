@@ -75,17 +75,18 @@ dt {
         background-color: var(--color-white, #fff);
         color: var(--color-KontrastDunkel, #222);
         border: 1px solid var(--color-primary-basis, #04316a);
-        
+
         dt {
             a {
                 color: var(--color-KontrastDunkel, #222);
             }
         }
-    
-    
+
+
         a.standard-btn.ghost-btn {
             color: var(--color-KontrastDunkel, #222);
         }
+
         a.standard-btn.ghost-btn:hover {
             color: var(--color-white, #fff);
             background-color: var(--color-primary-basis, #04316a);
@@ -132,3 +133,20 @@ dt {
 //     color: var(--color-primary-basis, #04316a);
 //     text-decoration: none;
 // }
+
+@media (min-width: 992px) {
+    .wp-block-rrze-elements-counter-row {
+        float: none !important;
+        @for $i from 1 through 5 {
+
+            &.rrze-elements-column-#{$i} {
+                .rrze--counter-element {
+                    grid-template-columns: repeat($i, 1fr);
+
+                }
+            }
+        }
+
+        margin-left: 0 !important;
+    }
+}
