@@ -33,30 +33,40 @@ test.describe(() => {
         await expect(blockDiv).toBeVisible();
     });
 
-    test('Notice Block has a Placeholder with 13 options', async ({ page, admin, editor }) => {
+    test('Notice Block has a Placeholder with 13 options in English or German', async ({ page, admin, editor }) => {
         await admin.visitAdminPage('/');
         await page.goto(process.env.WP_PLAYWRIGHT_TESTPAGE);
-        // await page.goto('/wp-admin/post.php?post=' + createdPageId + '&action=edit');
-        // await page.goto(process.env.WP_PLAYWRIGHT_TESTPAGE);
 
         await editor.insertBlock({
             name: 'rrze-elements/notice'
-        })
+        });
 
         const blockDiv = page.locator('div.wp-block-rrze-elements-notice');
         await expect(blockDiv).toBeVisible();
 
         const noticeOptions = [
-            "Warning", "Hint", "Maintenance", "Question", "Negative",
-            "Positive", "Idea", "Download", "FAUbox", "Audio", "Video",
-            "Thumbs up", "Thumbs down"
+            { en: "Warning", de: "Warnung" },
+            { en: "Hint", de: "Hinweis" },
+            { en: "Maintenance", de: "Wartung" },
+            { en: "Question", de: "Frage" },
+            { en: "Negative", de: "Negativ" },
+            { en: "Positive", de: "Positiv" },
+            { en: "Idea", de: "Idee" },
+            { en: "Download", de: "Herunterladen" },
+            { en: "FAUbox", de: "FAUbox" },
+            { en: "Audio", de: "Audio" },
+            { en: "Video", de: "Video" },
+            { en: "Thumbs up", de: "Daumen nach oben" },
+            { en: "Thumbs down", de: "Daumen nach unten" }
         ];
 
         for (const noticeOption of noticeOptions) {
-            const spanLocator = blockDiv.locator(`span.block-editor-block-variation-picker__variation-label`, { hasText: noticeOption });
+            const spanLocator = blockDiv.locator('span.block-editor-block-variation-picker__variation-label', {
+                hasText: new RegExp(`${noticeOption.en}|${noticeOption.de}`, 'i')
+            });
 
             await expect(spanLocator).toBeVisible();
-            await expect(spanLocator).toHaveText(noticeOption);
+            await expect(spanLocator).toHaveText(new RegExp(`(${noticeOption.en}|${noticeOption.de})`));
         }
     });
 
@@ -72,7 +82,7 @@ test.describe(() => {
         const blockDiv = page.locator('div.wp-block-rrze-elements-notice');
         await expect(blockDiv).toBeVisible();
 
-        const buttonLocator = blockDiv.locator('button[aria-label="Warning"]');
+        const buttonLocator = blockDiv.locator('button[aria-label="Warning"], button[aria-label="Warnung"]');
         await expect(buttonLocator).toBeVisible();
 
         await buttonLocator.click();
@@ -81,7 +91,7 @@ test.describe(() => {
         await expect(noticeDiv).toBeVisible();
 
         // await editor.clickBlockToolbarButton('Change the style');
-        const buttonLocatorStyleChanger = page.locator('button[aria-label="Change the style"]');
+        const buttonLocatorStyleChanger = page.locator('button[aria-label="Change the style"], button[aria-label="Darstellung anpassen"]');
         await expect(buttonLocatorStyleChanger).toBeVisible();
         await buttonLocatorStyleChanger.click();
 
@@ -90,12 +100,12 @@ test.describe(() => {
         await expect(modalLocator).toBeVisible();
 
         // Now locate the button inside the modal
-        const buttonLocatorNotice = modalLocator.locator('button[aria-label="Notice with hint-icon"]');
+        const buttonLocatorNotice = modalLocator.locator('button[aria-label="Notice with hint-icon"], button[aria-label="Notice mit Hinweis"]');
         await expect(buttonLocatorNotice).toBeVisible();
-        
-        const buttonLocatorSave = modalLocator.locator('button', { hasText: 'Save changes' });
+
+        const buttonLocatorSave = modalLocator.locator('button', { hasText: /Save changes|Änderungen speichern/ });
         await expect(buttonLocatorSave).toBeVisible();
-        
+
         await buttonLocatorNotice.click();
         await buttonLocatorSave.click();
 
