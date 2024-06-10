@@ -89,19 +89,14 @@ test.describe(() => {
     });
 
     test('Accordion automated JumpLink is working as expected', async ({ page }) => {
-        // Set a higher timeout for the test
         test.setTimeout(60000);
 
-        // Get the current URL
         const currentUrl = await page.url();
 
-        // Append '#panel_0' to the URL, ensuring no duplicate slashes
         const newUrl = currentUrl.replace(/\/+$/, '') + '/#panel_0';
 
-        // Navigate to the new URL
         await page.goto(newUrl);
 
-        // Wait for 2 seconds
         await page.waitForTimeout(2000);
 
         // Check if div with id panel_0 does not have display: none
@@ -109,14 +104,12 @@ test.describe(() => {
             const panel0 = await page.waitForSelector('div#panel_0', { timeout: 10000 });
             expect(panel0).not.toBeNull();
 
-            // Retrieve the style attribute of the element
             const style = await panel0.getAttribute('style');
             expect(style).not.toContain('display: none');
 
             const panel1 = await page.waitForSelector('div#panel_1', { timeout: 10000 });
             expect(panel1).not.toBeNull();
 
-            // Retrieve the style attribute of the element
             const style1 = await panel1.getAttribute('style');
             expect(style1).toContain('display: none');
         } catch (error) {
@@ -126,22 +119,16 @@ test.describe(() => {
     });
 
     test('Accordion automated named JumpLink is working as expected', async ({ page }) => {
-        // Set a higher timeout for the test
         test.setTimeout(60000);
 
-        // Get the current URL
         const currentUrl = await page.url();
 
-        // Append '#panel_0' to the URL, ensuring no duplicate slashes
         const newUrl = currentUrl.replace(/\/+$/, '') + '/#sprungmarke-1';
 
-        // Navigate to the new URL
         await page.goto(newUrl);
 
-        // Wait for 2 seconds
         await page.waitForTimeout(2000);
 
-        // Check if div with id panel_0 does not have display: none
         try {
             const panel0 = await page.waitForSelector('div#sprungmarke-1', { timeout: 10000 });
             expect(panel0).not.toBeNull();
