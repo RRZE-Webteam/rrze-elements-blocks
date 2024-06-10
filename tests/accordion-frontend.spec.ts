@@ -71,7 +71,7 @@ test.describe(() => {
         await page.waitForTimeout(2000); // Increased timeout
 
         try {
-
+            await page.waitForTimeout(3000);
             // Check if <button class="accordion-toggle active" data-toggle="collapse" data-name="panel_2" href="#panel_2">Accordion Tab 1</button> is visible
             const accordionTab1 = await page.waitForSelector('button.accordion-toggle[data-name="panel_2"]');
 
@@ -88,4 +88,89 @@ test.describe(() => {
         }
     });
 
+    test('Accordion automated JumpLink is working as expected', async ({ page }) => {
+        // Set a higher timeout for the test
+        test.setTimeout(60000);
+
+        // Get the current URL
+        const currentUrl = await page.url();
+
+        // Append '#panel_0' to the URL, ensuring no duplicate slashes
+        const newUrl = currentUrl.replace(/\/+$/, '') + '/#panel_0';
+
+        // Navigate to the new URL
+        await page.goto(newUrl);
+
+        // Wait for 2 seconds
+        await page.waitForTimeout(2000);
+
+        // Check if div with id panel_0 does not have display: none
+        try {
+            const panel0 = await page.waitForSelector('div#panel_0', { timeout: 10000 });
+            expect(panel0).not.toBeNull();
+
+            // Retrieve the style attribute of the element
+            const style = await panel0.getAttribute('style');
+            expect(style).not.toContain('display: none');
+
+            const panel1 = await page.waitForSelector('div#panel_1', { timeout: 10000 });
+            expect(panel1).not.toBeNull();
+
+            // Retrieve the style attribute of the element
+            const style1 = await panel1.getAttribute('style');
+            expect(style1).toContain('display: none');
+        } catch (error) {
+            console.error('Error locating or verifying the style of div#panel_0:', error);
+            throw error; // Rethrow the error to ensure the test fails
+        }
+    });
+
+    test('Accordion automated named JumpLink is working as expected', async ({ page }) => {
+        // Set a higher timeout for the test
+        test.setTimeout(60000);
+
+        // Get the current URL
+        const currentUrl = await page.url();
+
+        // Append '#panel_0' to the URL, ensuring no duplicate slashes
+        const newUrl = currentUrl.replace(/\/+$/, '') + '/#sprungmarke-1';
+
+        // Navigate to the new URL
+        await page.goto(newUrl);
+
+        // Wait for 2 seconds
+        await page.waitForTimeout(2000);
+
+        // Check if div with id panel_0 does not have display: none
+        try {
+            const panel0 = await page.waitForSelector('div#sprungmarke-1', { timeout: 10000 });
+            expect(panel0).not.toBeNull();
+
+            // Retrieve the style attribute of the element
+            const style = await panel0.getAttribute('style');
+            expect(style).not.toContain('display: none');
+        } catch (error) {
+            console.error('Error locating or verifying the style of div#sprungmarke-1:', error);
+            throw error; // Rethrow the error to ensure the test fails
+        }
+    });
+
+});
+
+
+
+test.afterEach(async ({ page, admin, editor }) => {
+    await page.waitForTimeout(2000);
+    const editPage = await page.waitForSelector('.ab-item[role="menuitem"][href*="action=edit"]', { state: 'visible' });
+    await editPage.click();
+
+    const editPost = await page.waitForSelector('[aria-controls="edit-post:document"]');
+    await editPost.click();
+
+    const trash = await page.waitForSelector('button.editor-post-trash');
+    await trash.click();
+
+    await page.waitForTimeout(3000);
+    const okButton2 = await page.waitForSelector('button.is-primary:has-text("OK")');
+    await okButton2.click();
 });
