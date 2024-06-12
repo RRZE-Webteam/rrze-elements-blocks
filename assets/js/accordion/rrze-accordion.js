@@ -1,5 +1,5 @@
 /**
- * RRZE Accordion 1.0.0
+ * RRZE Elements Blocks - Accordion 1.0.4
  * Refactored and documented for efficiency and readability.
  * Uses jQuery for DOM manipulation and event handling.
  */
@@ -34,7 +34,16 @@ jQuery(document).ready(function($) {
      * @returns {string} The target selector for the accordion to be toggled.
      */
     function getAccordionTarget($elem) {
-        return $elem.data('href') || $elem.attr('href');
+        return sanitizeSelector($elem.data('href') || $elem.attr('href'));
+    }
+
+    /**
+     * Sanitizes a jQuery selector to prevent jQuery selector injection.
+     * @param {string} selector - The selector to sanitize.
+     * @returns {string} The sanitized selector.
+     */
+    function sanitizeSelector(selector) {
+        return selector.replace(/[^a-zA-Z0-9_\-#]/g, '');
     }
 
     /**
@@ -65,6 +74,52 @@ jQuery(document).ready(function($) {
         const $slick = $group.find(".slick-slider");
         if ($slick.length) {
             $slick.slick("refresh");
+        }
+    }
+
+    /**
+     * Opens an accordion based on a target anchor link and scrolls to the accordion.
+     * @param {jQuery} $target - The target accordion body element to be opened.
+     */
+    function openAnchorAccordion($target) {
+        if ($target.closest('.accordion').parent().closest('.accordion-group')) {
+            const $thisgroup = $($target).closest('.accordion-group');
+            const $othergroups = $($target).closest('.accordion').find('.accordion-group').not($thisgroup);
+            $($othergroups).find('.accordion-toggle').removeClass('active');
+            $($othergroups).find('.accordion-body').not('.accordion-body.stayopen').slideUp();
+            $($thisgroup).find('.accordion-toggle:first').not('.active').addClass('active');
+            $($thisgroup).find('.accordion-body:first').slideDown();
+            $($thisgroup).parents('.accordion-group').find('.accordion-toggle:first').not('.active').addClass('active');
+            $($thisgroup).parents('.accordion-body').slideDown();
+        }
+        const offset = $target.offset();
+        const $scrolloffset = offset.top - 300;
+        $('html,body').animate({
+            scrollTop: $scrolloffset
+        }, 'slow');
+    }
+
+    /**
+     * Checks if the URL contains a hash and opens the corresponding accordion if it exists.
+     */
+    if (window.location.hash) {
+        const identifier = window.location.hash.split('_')[0];
+        const inpagenum = window.location.hash.split('_')[1];
+        let $target;
+
+        if (identifier === '#collapse' || identifier === '#panel') {
+            const prefix = identifier === '#collapse' ? 'collapse_' : 'panel_';
+            if (inpagenum) {
+                const $findid = prefix + inpagenum;
+                $target = $('body').find('#' + sanitizeSelector($findid));
+            }
+        } else {
+            const $findname = window.location.hash.replace('#', '');
+            $target = $('body').find('div[name=' + sanitizeSelector($findname) + ']');
+        }
+        
+        if ($target && $target.length > 0) {
+            openAnchorAccordion($target);
         }
     }
 
@@ -117,6 +172,35 @@ jQuery(document).ready(function($) {
             $link.addClass('active');
             $tabs.find('.assistant-tab-pane').removeClass('assistant-tab-pane-active');
             $($paneId).addClass('assistant-tab-pane-active');
+        }
+    });
+
+    /**
+     * Handles clicks on links and opens the corresponding accordion if it exists.
+     */
+    $('a:not(.prev, .next)').click(function(e) {
+        if (($('[id^=accordion-]').length) &&
+            (!$(this).hasClass("accordion-toggle")) &&
+            (!$(this).hasClass("accordion-tabs-nav-toggle"))) {
+            const $hash = $(this).prop("hash");
+            const identifier = $hash.split('_')[0];
+            const inpagenum = $hash.split('_')[1];
+            let $target;
+
+            if (identifier === '#collapse' || identifier === '#panel') {
+                const prefix = identifier === '#collapse' ? 'collapse_' : 'panel_';
+                if (inpagenum) {
+                    const $findid = prefix + inpagenum;
+                    $target = $('body').find('#' + sanitizeSelector($findid));
+                }
+            } else {
+                const $findname = identifier.replace('#', '');
+                $target = $('body').find('div[name=' + sanitizeSelector($findname) + ']');
+            }
+
+            if ($target && $target.length > 0) {
+                openAnchorAccordion($target);
+            }
         }
     });
 });
