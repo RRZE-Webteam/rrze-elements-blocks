@@ -21,6 +21,9 @@ import './editor.scss';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import deprecated from "./deprecated";
+
+
 
 /**
  * Every block starts by registering a new block type definition.
@@ -50,4 +53,5 @@ registerBlockType( metadata.name as any, {
 	 */
 	//@ts-ignore
 	save,
+	deprecated
 } );
