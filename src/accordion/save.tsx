@@ -27,7 +27,15 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
     svgString,
     ancestorCount,
     hstart,
+    jumpName
   } = attributes;
+
+  let output = '';
+  if (jumpName === ''){
+      output = `#panel_${sameBlockCount + totalChildrenCount + ancestorCount}`;
+  } else { 
+      output = `${jumpName}`;
+  }
 
   return (
     <div {...blockProps}>
@@ -39,18 +47,16 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className="accordion-toggle"
               data-toggle="collapse"
-              data-href={`#panel_${
-                sameBlockCount + totalChildrenCount + ancestorCount
-              }`}
+              data-name={output}
+              //@ts-ignore
+              href={`#${output}`}
             >
               {svgString && <span className={svgString}></span>}
               {title || "…"}
             </button>
           </HeadingComponent>
           <div
-            id={`panel_${
-              sameBlockCount + totalChildrenCount + ancestorCount
-            }`}
+            id={output}
             className="accordion-body"
             style={{ display: "none" }}
           >

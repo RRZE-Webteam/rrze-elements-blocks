@@ -74,7 +74,14 @@
     .accordion-heading .accordion-toggle:hover {
         color: #fff;
     }
+}
 
+.rrzeElementsBFakColorSelector{
+    border: 1px solid #000;
+
+    button {
+        border-radius: 0;
+    }
 }
 
 // .rrzeElementsBFakColorSelector button{
@@ -93,7 +100,6 @@
     button {
         background-color: #fdb735;
         color: #000;
-
     }
 }
 
@@ -101,7 +107,6 @@
     button {
         background-color: #c50f3c;
         color: #fff;
-
     }
 }
 
@@ -109,7 +114,6 @@
     button {
         background-color: #18b4f1;
         color: #000;
-
     }
 }
 
@@ -117,7 +121,6 @@
     button {
         background-color: #7bb725;
         color: #000;
-
     }
 }
 
@@ -125,7 +128,6 @@
     button {
         background-color: #8c9fb1;
         color: #000;
-
     }
 }
 

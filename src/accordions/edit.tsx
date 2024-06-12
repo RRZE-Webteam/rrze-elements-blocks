@@ -34,11 +34,11 @@ type WPBlock = {
   clientId?: string;
 };
 
-export default function Edit({
+const Edit: React.FC<SaveProps> = ({
   attributes,
   setAttributes,
   ...ownProps
-}: SaveProps) {
+}) => {
   const props = useBlockProps();
   const { sameBlockCount, previousBlockIds } = attributes;
   const { __unstableMarkNextChangeAsNotPersistent } =
@@ -62,7 +62,6 @@ export default function Edit({
         const CollapsiblesBlockClientIds = allBlocks
           .filter((block: WPBlock) => block.name === "rrze-elements/accordion")
           .map((block: WPBlock) => block.clientId);
-
         const currentBlockIndex = CollapsiblesBlockClientIds.indexOf(
           selectedBlockClientId
         );
@@ -111,3 +110,5 @@ export default function Edit({
     </>
   );
 }
+
+export default Edit;

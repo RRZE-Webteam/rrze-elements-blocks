@@ -104,6 +104,7 @@ const Edit: React.FC<SaveProps> = ({
   const title = attributes.title || __("Enter your Title…", "rrze-elements-b");
 
   const [isActive, setIsActive] = useState(false);
+  const [uid, setUid] = useState("");
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
   const [pluginDir, setPluginDir] = useState("");
@@ -121,6 +122,12 @@ const Edit: React.FC<SaveProps> = ({
     context["rrze-elements/collapseSBlockCount"],
     context["rrze-elements/collapseTotalChildrenCount"],
   ]);
+
+  useEffect(() => {
+    setAttributes({
+      jumpName: `panel_${clientId?.slice(-8)}`,
+    });
+  }, [clientId]);
 
   useEffect(() => {
     let color = context["rrze-elements/collapseColor"];
