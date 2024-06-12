@@ -61,6 +61,10 @@
     "svgString": {
       "type": "string",
       "default": ""
+    },
+    "jumpName": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {

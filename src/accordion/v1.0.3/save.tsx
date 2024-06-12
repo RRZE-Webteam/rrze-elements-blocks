@@ -1,23 +1,12 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import HeadingComponent from "../components/HeadingComponent";
-
-interface Attributes {
-  totalChildrenCount?: number;
-  sameBlockCount?: number;
-  title: string;
-  color: string;
-  loadOpen: boolean;
-  icon: string;
-  hstart?: number;
-  jumpName?: string;
-  svgString?: string;
-  ancestorCount?: number;
-}
+import { BlockSaveProps } from "@wordpress/blocks";
+import HeadingComponent from "../../components/HeadingComponent";
+import { AttributesV1 } from "../v1/attributes";
 
 interface SaveProps {
-  attributes: Attributes;
+  attributes: AttributesV1;
 }
-const Save: React.FC<SaveProps> = ({ attributes }) => {
+const Save: React.FC<BlockSaveProps<AttributesV1>> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,
@@ -27,15 +16,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
     svgString,
     ancestorCount,
     hstart,
-    jumpName
   } = attributes;
-
-  let output = '';
-  if (jumpName === ''){
-      output = `#panel_${sameBlockCount + totalChildrenCount + ancestorCount}`;
-  } else { 
-      output = `${jumpName}`;
-  }
 
   return (
     <div {...blockProps}>
@@ -47,16 +28,16 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className="accordion-toggle"
               data-toggle="collapse"
-              data-name={output}
-              //@ts-ignore
-              href={`#${output}`}
+              data-href={`#panel_${
+                sameBlockCount + totalChildrenCount + ancestorCount
+              }`}
             >
               {svgString && <span className={svgString}></span>}
               {title || "…"}
             </button>
           </HeadingComponent>
           <div
-            id={output}
+            id={`panel_${sameBlockCount + totalChildrenCount + ancestorCount}`}
             className="accordion-body"
             style={{ display: "none" }}
           >
