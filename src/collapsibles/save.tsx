@@ -16,7 +16,7 @@ export default function save({ attributes }: SaveProps) {
     <div {...blockProps}>
       {" "}
       <>
-        <div className="accordion" id={`accordion-${sameBlockCount}`}>
+        <div className="accordion">
         {expandAllLink && (
           <div className="button-container-right">
             <button className="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">{__("Expand All", "rrze-elements-b")}</button>

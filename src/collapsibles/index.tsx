@@ -23,6 +23,7 @@ import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
 import iconJson from "../components/assets/fontawesome/fontawesomeIconNames.json";
+import deprecated from "./deprecated";
 
 type SaveProps = {
   attributes: {
@@ -92,5 +93,6 @@ registerBlockType(
      * @see ./save.js
      */
     save,
+    deprecated
   } as any
 );

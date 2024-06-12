@@ -1,6 +1,6 @@
 {
   "name": "rrze-elements",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
   "main": "build/index.js",
   "textdomain": "rrze-elementsb",
@@ -51,7 +51,7 @@
     "@types/wordpress__blocks": "^12.5.14",
     "@wordpress/api-fetch": "^6.55.0",
     "@wordpress/babel-plugin-makepot": "^5.42.0",
-    "@wordpress/e2e-test-utils-playwright": "^0.26.0",
+    "@wordpress/e2e-test-utils-playwright": "^1.0.0",
     "@wordpress/eslint-plugin": "^18.1.0",
     "@wordpress/i18n": "^4.58.0",
     "@wordpress/icons": "^9.49.0",
@@ -63,13 +63,10 @@
     "dotenv": "^16.4.5",
     "eslint": "^8.50.0",
     "eslint-plugin-react": "^7.34.2",
-    "file-loader": "^6.2.0",
     "inquirer": "^9.2.22",
     "semver": "^7.6.2",
-    "svg-sprite-loader": "^6.0.11",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.4.5",
-    "url-loader": "^4.1.1"
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "@wordpress/compose": "^6.35.0",

@@ -57,7 +57,7 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </button>
           </HeadingComponent>
           <div
-            id={`panel_${sameBlockCount + totalChildrenCount}`}
+            id={output}
             className={`accordion-body ${loadOnPageLoad}`}
             //@ts-ignore
             name={output}
