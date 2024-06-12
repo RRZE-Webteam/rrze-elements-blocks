@@ -74,7 +74,14 @@
     .accordion-heading .accordion-toggle:hover {
         color: #fff;
     }
+}
 
+.rrzeElementsBFakColorSelector{
+    border: 1px solid #000;
+
+    button {
+        border-radius: 0;
+    }
 }
 
 // .rrzeElementsBFakColorSelector button{
