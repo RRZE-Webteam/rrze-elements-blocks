@@ -3,7 +3,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1"} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1"} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group "><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="panel_0" href="#panel_0">Accordion Tab 1</button></h2><div id="panel_0" class="accordion-body " name="panel_0"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -69,7 +69,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"childrenCount":2,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/collapse {"loadOpen":true,"title":"Accordion Tab 1","totalChildrenCount":2} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><!-- wp:rrze-elements/collapse {"loadOpen":true,"title":"Accordion Tab 1","totalChildrenCount":2} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group "><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle active" data-toggle="collapse" data-name="panel_2" href="#panel_2">Accordion Tab 1</button></h2><div id="panel_2" class="accordion-body open" name="panel_2"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -135,7 +135,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"childrenCount":5,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda","ef72062a-c6a6-4c9b-95e8-54a80541cb6e"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":4} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":4} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group phil"><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="panel_4" href="#panel_4">Accordion Tab 1</button></h2><div id="panel_4" class="accordion-body " name="panel_4"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -291,7 +291,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"childrenCount":5,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda","ef72062a-c6a6-4c9b-95e8-54a80541cb6e","4ca341fd-a2ab-40a5-8bb5-809c45e21ba9"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":9,"icon":"solid angle-up","svgString":"fa-solid fa-angle-up"} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":9,"icon":"solid angle-up","svgString":"fa-solid fa-angle-up"} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group phil"><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="panel_9" href="#panel_9"><span class="fa-solid fa-angle-up"></span>Accordion Tab 1</button></h2><div id="panel_9" class="accordion-body " name="panel_9"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -447,7 +447,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"childrenCount":15,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda","ef72062a-c6a6-4c9b-95e8-54a80541cb6e","4ca341fd-a2ab-40a5-8bb5-809c45e21ba9","1a23d97b-a5d2-483f-b379-c6c753800833"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":14} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":14} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group phil"><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="panel_14" href="#panel_14">Accordion Tab 1</button></h2><div id="panel_14" class="accordion-body " name="panel_14"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -465,7 +465,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":15} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":15} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_15">Hello World!</button></h3><div id="panel_15" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -507,7 +507,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":15} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":15} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_15">Hello World!</button></h3><div id="panel_15" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -563,7 +563,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":20} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":20} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_20">Hello World!</button></h3><div id="panel_20" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -601,7 +601,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":20} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":20} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_20">Hello World!</button></h3><div id="panel_20" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -691,7 +691,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":26} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":26} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_26">Hello World!</button></h3><div id="panel_26" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -773,7 +773,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"childrenCount":5,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda","ef72062a-c6a6-4c9b-95e8-54a80541cb6e","4ca341fd-a2ab-40a5-8bb5-809c45e21ba9","1a23d97b-a5d2-483f-b379-c6c753800833","1e1bbde9-f039-490e-922b-f2075bddf04e"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"fau","totalChildrenCount":29,"jumpName":"sprungmarke-1"} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"fau","totalChildrenCount":29,"jumpName":"sprungmarke-1"} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group fau"><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="sprungmarke-1" href="#sprungmarke-1">Accordion Tab 1</button></h2><div id="panel_29" class="accordion-body " name="sprungmarke-1"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -933,7 +933,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/collapsibles {"expandAllLink":true,"childrenCount":15,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda","ef72062a-c6a6-4c9b-95e8-54a80541cb6e","4ca341fd-a2ab-40a5-8bb5-809c45e21ba9","1a23d97b-a5d2-483f-b379-c6c753800833","1e1bbde9-f039-490e-922b-f2075bddf04e","482bac7f-46ea-4ab4-b5af-257329d3d51a"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><div class="button-container-right"><button class="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">Alle öffnen</button></div><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":34} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><div class="button-container-right"><button class="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">Alle öffnen</button></div><!-- wp:rrze-elements/collapse {"title":"Accordion Tab 1","color":"phil","totalChildrenCount":34} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group phil"><h2 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="panel_34" href="#panel_34">Accordion Tab 1</button></h2><div id="panel_34" class="accordion-body " name="panel_34"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -951,7 +951,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":35} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":35} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_35">Hello World!</button></h3><div id="panel_35" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -993,7 +993,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":35} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":35} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_35">Hello World!</button></h3><div id="panel_35" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1049,7 +1049,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":40} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":40} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_40">Hello World!</button></h3><div id="panel_40" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1087,7 +1087,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":40} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":40} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_40">Hello World!</button></h3><div id="panel_40" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1177,7 +1177,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":46} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"hstart":2,"title":"Hello World!","ancestorCount":46} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h3 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_46">Hello World!</button></h3><div id="panel_46" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1259,7 +1259,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:rrze-elements/collapsibles {"expandAllLink":true,"hstart":3,"childrenCount":15,"previousBlockIds":["6cc9cecd-d88a-45bf-93b1-58a9dcfc4cda","ef72062a-c6a6-4c9b-95e8-54a80541cb6e","4ca341fd-a2ab-40a5-8bb5-809c45e21ba9","1a23d97b-a5d2-483f-b379-c6c753800833","1e1bbde9-f039-490e-922b-f2075bddf04e","482bac7f-46ea-4ab4-b5af-257329d3d51a","c0395bec-747c-43a1-a087-2328f3c32ebb"]} -->
-<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion" id="accordion-0"><div class="button-container-right"><button class="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">Alle öffnen</button></div><!-- wp:rrze-elements/collapse {"hstart":3,"title":"Accordion Tab 1","color":"phil","totalChildrenCount":49} -->
+<div class="wp-block-rrze-elements-collapsibles"> <div class="accordion"><div class="button-container-right"><button class="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">Alle öffnen</button></div><!-- wp:rrze-elements/collapse {"hstart":3,"title":"Accordion Tab 1","color":"phil","totalChildrenCount":49} -->
 <div class="wp-block-rrze-elements-collapse"> <div class="accordion-group phil"><h3 class="accordion-heading"><span class="read-mode-only">Accordion Tab 1</span><button class="accordion-toggle " data-toggle="collapse" data-name="panel_49" href="#panel_49">Accordion Tab 1</button></h3><div id="panel_49" class="accordion-body " name="panel_49"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 <!-- /wp:paragraph -->
@@ -1277,7 +1277,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":50} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":50} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h4 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_50">Hello World!</button></h4><div id="panel_50" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1319,7 +1319,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":50} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":50} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h4 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_50">Hello World!</button></h4><div id="panel_50" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1375,7 +1375,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":55} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":55} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h4 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_55">Hello World!</button></h4><div id="panel_55" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1413,7 +1413,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":55} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":55} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h4 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_55">Hello World!</button></h4><div id="panel_55" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->
@@ -1503,7 +1503,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:rrze-elements/accordions {"childrenCount":2} -->
-<div class="wp-block-rrze-elements-accordions"> <div class="accordion" id="accordion-0"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":61} -->
+<div class="wp-block-rrze-elements-accordions"> <div class="accordion"><!-- wp:rrze-elements/accordion {"title":"Hello World!","ancestorCount":61} -->
 <div class="wp-block-rrze-elements-accordion"> <div class="accordion-group inherit"><h4 class="accordion-heading"><span class="read-mode-only">Hello World!</span><button class="accordion-toggle" data-toggle="collapse" data-href="#panel_61">Hello World!</button></h4><div id="panel_61" class="accordion-body" style="display:none"><div class="accordion-inner clearfix"><!-- wp:paragraph -->
 <p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</p>
 <!-- /wp:paragraph -->

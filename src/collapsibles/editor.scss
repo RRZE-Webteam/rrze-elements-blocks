@@ -5,61 +5,67 @@
 @import "../_shared/scss/accordion";
 
 .wp-block-rrze-elements-collapsibles {
-		padding-bottom: 2em;
-		margin-bottom: 2em;
-		// .block-editor-inserter{
-		// 	top: 24px;
-		// }
-		padding-top: 2em;
-		padding-bottom: em;
+	padding-bottom: 2em;
+	margin-bottom: 2em;
+	// .block-editor-inserter{
+	// 	top: 24px;
+	// }
+	padding-top: 2em;
+
+	div.wp-block-rrze-elements-collapsibles {
+		padding-bottom: 0em;
+		padding-top: 0em;
+		margin-bottom: 0em;
 	}
 
-
-	.accordion-heading .accordion-toggle.active {
-		color: #fff;
+	.accordion-notice {
+		margin-bottom: 0.5rem;
 	}
+}
 
-	.accordion-heading .accordion-toggle:hover {
-		color: #fff;
-	}
+.accordion-heading .accordion-toggle.active {
+	color: #fff;
+}
 
+.accordion-heading .accordion-toggle:hover {
+	color: #fff;
+}
 
-	.accordion-heading .accordion-toggle.active input {
-		color: #fff;
-	}
+.accordion-heading .accordion-toggle.active input {
+	color: #fff;
+}
 
-	.accordion-heading .accordion-toggle:hover input {
-		color: #fff;
-	}
+.accordion-heading .accordion-toggle:hover input {
+	color: #fff;
+}
 
-	.accordion-group {
-		background-color: #fffe;
-	}
+.accordion-group {
+	background-color: #fffe;
+}
 
-	button.expand-all {
-		box-shadow: none;
-		transition: -webkit-text-decoration 0.1s ease;
-		transition: text-decoration 0.1s ease;
-		transition: text-decoration 0.1s ease, -webkit-text-decoration 0.1s ease;
-		padding: 0;
-		text-decoration: underline;
-		color: currentcolor;
-		text-decoration-color: currentcolor;
-		text-underline-offset: 0.3rem;
-		text-decoration-thickness: 0.15rem;
-		display: inline-block;
-		font-size: 0.938rem;
-		line-height: 1.416rem;
-		color: var(--color-button-text);
-		background-color: var(--color-button-bg);
-		border: none;
-		padding: 10px 18px;
-		text-decoration: none;
-		border-radius: var(--border-radius-buttons, 3px);
-		font-size: 1rem;
-		line-height: 1.5;
-		text-align: center;
-		font-weight: normal;
-		margin: 5px 0;
-	}
-
+button.expand-all {
+	box-shadow: none;
+	transition: -webkit-text-decoration 0.1s ease;
+	transition: text-decoration 0.1s ease;
+	transition: text-decoration 0.1s ease, -webkit-text-decoration 0.1s ease;
+	padding: 0;
+	text-decoration: underline;
+	color: currentcolor;
+	text-decoration-color: currentcolor;
+	text-underline-offset: 0.3rem;
+	text-decoration-thickness: 0.15rem;
+	display: inline-block;
+	font-size: 0.938rem;
+	line-height: 1.416rem;
+	color: var(--color-button-text);
+	background-color: var(--color-button-bg);
+	border: none;
+	padding: 10px 18px;
+	text-decoration: none;
+	border-radius: var(--border-radius-buttons, 3px);
+	font-size: 1rem;
+	line-height: 1.5;
+	text-align: center;
+	font-weight: normal;
+	margin: 5px 0;
+}

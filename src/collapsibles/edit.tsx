@@ -145,7 +145,7 @@ export default function Edit({
   }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);
 
   return (
-    <>
+    <div {...props}>
       <InputWarning
         warning={__(
           "For performance and User Experience reasons, we do not recommend using too many items in a collapsible.",
@@ -206,7 +206,7 @@ export default function Edit({
             />
           </PanelBody>
         </InspectorControls>
-        <div className="accordion" id={`accordion-`}>
+        <div className="accordion">
           {attributes.expandAllLink && (
             <div className="button-container-right">
               <button
@@ -226,6 +226,6 @@ export default function Edit({
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
