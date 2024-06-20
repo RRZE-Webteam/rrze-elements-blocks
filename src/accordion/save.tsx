@@ -39,8 +39,6 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
 
   return (
     <div {...blockProps}>
-      {" "}
-      <>
         <div className={`accordion-group ${attributes.color}`}>
           <HeadingComponent level={hstart + 1} className="accordion-heading">
             <span className="read-mode-only">{title}</span>
@@ -65,7 +63,6 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </div>
           </div>
         </div>
-      </>
     </div>
   );
 };

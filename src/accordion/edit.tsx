@@ -203,7 +203,7 @@ const Edit: React.FC<SaveProps> = ({
       : attributes.color;
 
   return (
-    <>
+    <div {...props}>
       <BlockControls>
         <ExtendedColorSwitcherToolbar
           attributes={attributes}
@@ -263,70 +263,67 @@ const Edit: React.FC<SaveProps> = ({
           />
         </PanelBody>
       </InspectorControls>
-
-      <div {...props}>
-        <div className={`accordion-group ${finalColor} `}>
-          <HeadingComponent
-            level={attributes.hstart + 1}
-            className="accordion-heading"
-            onClick={toggleActive}
+      <div className={`accordion-group ${finalColor} `}>
+        <HeadingComponent
+          level={attributes.hstart + 1}
+          className="accordion-heading"
+          onClick={toggleActive}
+        >
+          <div
+            className={`accordion-toggle ${
+              isActive || loadOpen ? "active" : ""
+            }`}
           >
-            <div
-              className={`accordion-toggle ${
-                isActive || loadOpen ? "active" : ""
-              }`}
-            >
-              {attributes.icon && (
-                <IconMarkComponent
-                  type={iconType}
-                  iconName={iconName}
-                  attributes={{
-                    icon: attributes.icon,
-                    svgString: attributes.svgString,
-                  }}
-                  setAttributes={setAttributes}
-                />
-              )}
-              <TextControl
-                onChange={onChangeTitle}
-                value={title}
-                placeholder={__("Your Text", "rrze-elements-b")}
-                className="elements-blocks-input-following-icon"
+            {attributes.icon && (
+              <IconMarkComponent
+                type={iconType}
+                iconName={iconName}
+                attributes={{
+                  icon: attributes.icon,
+                  svgString: attributes.svgString,
+                }}
+                setAttributes={setAttributes}
               />
-            </div>
-          </HeadingComponent>
-          <div className={`accordion-body ${isActive ? "active" : ""}`}>
-            <div className="accordion-inner clearfix">
-              <InnerBlocks
-                allowedBlocks={[
-                  "rrze/rrze-video",
-                  "core/paragraph",
-                  "core/heading",
-                  "core/list",
-                  "core/image",
-                  "core/quote",
-                  "core/file",
-                  "core/audio",
-                  "core/cover",
-                  "core/table",
-                  "core/freeform",
-                  "core/preformatted",
-                  "core/pullquote",
-                  "core/verse",
-                  "core/code",
-                  "core/separator",
-                  "core/spacer",
-                  "core/shortcode",
-                  "core/calendar",
-                  "core/rss",
-                  "rrze-elements/alert",
-                ]}
-              />
-            </div>
+            )}
+            <TextControl
+              onChange={onChangeTitle}
+              value={title}
+              placeholder={__("Your Text", "rrze-elements-b")}
+              className="elements-blocks-input-following-icon"
+            />
+          </div>
+        </HeadingComponent>
+        <div className={`accordion-body ${isActive ? "active" : ""}`}>
+          <div className="accordion-inner clearfix">
+            <InnerBlocks
+              allowedBlocks={[
+                "rrze/rrze-video",
+                "core/paragraph",
+                "core/heading",
+                "core/list",
+                "core/image",
+                "core/quote",
+                "core/file",
+                "core/audio",
+                "core/cover",
+                "core/table",
+                "core/freeform",
+                "core/preformatted",
+                "core/pullquote",
+                "core/verse",
+                "core/code",
+                "core/separator",
+                "core/spacer",
+                "core/shortcode",
+                "core/calendar",
+                "core/rss",
+                "rrze-elements/alert",
+              ]}
+            />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

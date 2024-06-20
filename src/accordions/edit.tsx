@@ -1,5 +1,9 @@
 import { useEffect } from "@wordpress/element";
-import { useBlockProps, InnerBlocks, store as blockEditorStore } from "@wordpress/block-editor";
+import {
+  useBlockProps,
+  InnerBlocks,
+  store as blockEditorStore,
+} from "@wordpress/block-editor";
 import { isEqual } from "lodash";
 import { withSelect, useDispatch, useSelect } from "@wordpress/data";
 
@@ -95,20 +99,18 @@ const Edit: React.FC<SaveProps> = ({
   }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);
 
   return (
-    <>
-      <div {...props}>
-        <div className="accordion" id={`accordion-`}>
-          <InnerBlocks
-            allowedBlocks={["rrze-elements/accordion"]}
-            template={[
-              ["rrze-elements/accordion", {}],
-              ["rrze-elements/accordion", {}],
-            ]}
-          />
-        </div>
+    <div {...props}>
+      <div className="accordion" id={`accordion-`}>
+        <InnerBlocks
+          allowedBlocks={["rrze-elements/accordion"]}
+          template={[
+            ["rrze-elements/accordion", {}],
+            ["rrze-elements/accordion", {}],
+          ]}
+        />
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default Edit;

@@ -1,6 +1,6 @@
 {
   "name": "rrze-elements",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
   "main": "build/index.js",
   "textdomain": "rrze-elementsb",
@@ -14,7 +14,7 @@
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
-    "build-all": "sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
+    "build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
     "update-version": "node update-version.js && npm run build",
     "preinstall": "npx npm-force-resolutions"
   },
@@ -64,6 +64,7 @@
     "eslint": "^8.50.0",
     "eslint-plugin-react": "^7.34.2",
     "inquirer": "^9.2.22",
+    "prompt": "^1.3.0",
     "semver": "^7.6.2",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5"
