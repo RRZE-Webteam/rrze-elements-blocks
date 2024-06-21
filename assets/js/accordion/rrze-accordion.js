@@ -203,4 +203,15 @@ jQuery(document).ready(function($) {
             }
         }
     });
+
+  /**
+   * Open all Accordions when Ctrl + F is pressed
+   */
+  document.addEventListener('keydown', function(event) {
+    console.log("fired");
+    if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
+      $('.accordion-body').slideDown();
+      $('.accordion-toggle').addClass('active');
+    }
+  });
 });
