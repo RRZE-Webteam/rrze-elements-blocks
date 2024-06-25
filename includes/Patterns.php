@@ -83,7 +83,8 @@ class Patterns
                 'postTypes'   => ['page'],
                 'inserter'    => true,
                 'keywords'    => [],
-                'blockTypes'  => []
+                'blockTypes'  => [],
+                'isPhp'       => true
             ],
             [
                 'file_name'   => 'dev-accordion',
@@ -109,6 +110,7 @@ class Patterns
                 $pattern['inserter'],
                 $pattern['keywords'],
                 $pattern['blockTypes'],
+                $pattern['isPhp'],
                 'dev-patterns'
             );
         }
@@ -137,6 +139,7 @@ class Patterns
                 'title'       => __('Image with Accordion', 'rrze-elementsb'),
                 'description' => _x('Description for Image with Accordion', 'Block pattern description', 'rrze-elements-b'),
                 'categories'  => ['portfolio', 'about'],
+
             ],
             [
                 'file_name'   => 'custom-news-h2',
@@ -190,6 +193,7 @@ class Patterns
                 $pattern['inserter'] ?? true,
                 $pattern['keywords'] ?? [],
                 $pattern['blockTypes'] ?? [],
+                $pattern['isPhp'],
                 'patterns'
             );
         }
@@ -198,9 +202,16 @@ class Patterns
     /**
      * Register a block pattern.
      */
-    private function register_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = [], $blockTypes = [], $directory = 'patterns')
+    private function register_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = [], $blockTypes = [], $isPhp = false, $directory = 'patterns')
     {
-        $pattern_path = plugin_dir_path(__FILE__) . $directory . '/' . $file_name . '.php';
+
+        if ($isPhp) {
+            $extension = '.php';
+        } else {
+            $extension = '.html';
+        }
+
+        $pattern_path = plugin_dir_path(__FILE__) . $directory . '/' . $file_name . $extension;
 
         if (!file_exists($pattern_path)) {
             return;
