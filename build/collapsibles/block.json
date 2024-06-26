@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/collapsibles",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "title": "Accordion",
   "category": "rrze_elements",
   "description": "Creates an accordion block",
