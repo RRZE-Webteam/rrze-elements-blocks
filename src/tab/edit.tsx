@@ -18,7 +18,7 @@ import { symbol } from "@wordpress/icons";
 import { useDispatch } from "@wordpress/data";
 
 // Custom components for enhancing block controls.
-import { IconPicker } from "../components/IconPicker";
+import { IconPicker, IconMarkComponent, IconPickerModalInset } from "../components/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   TitleModal,
@@ -183,8 +183,9 @@ export default function Edit({
                   <Modal
                     title={__("Select an Icon", "rrze-elements-b")}
                     onRequestClose={closeModal}
+                    size="large"
                   >
-                    <IconPicker
+                    <IconPickerModalInset
                       attributes={{
                         icon: attributes.icon,
                         svgString: attributes.svgString,

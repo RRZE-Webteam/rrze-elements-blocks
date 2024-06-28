@@ -110,7 +110,7 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <section className="fauCustomResearchHighlights">
+      <section className="rrze-elements-b-counter-row">
         <BlockControls>
           <ToolbarItem>
             {() => (

@@ -155,3 +155,14 @@
         font-size: 1.25em !important;
     }
 }
+
+button.is-compact.elements-blocks-icon-Button, button.is-pressed.elements-blocks-icon-Button{
+	font-size: 1.5rem;
+	padding: 0.25rem;	
+	height: 55px;
+	width: 55px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

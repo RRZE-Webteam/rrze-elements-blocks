@@ -22,7 +22,7 @@ import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
-import { IconPicker, IconMarkComponent } from "../components/IconPicker";
+import { IconPicker, IconMarkComponent, IconPickerModalInset } from "../components/IconPicker";
 
 /**
  * Interface representing the properties for the Edit component.
@@ -147,8 +147,9 @@ export default function Edit({
             <Modal
               title={__("Select an Icon", "rrze-elements-b")}
               onRequestClose={closeModal}
+              size="large"
             >
-              <IconPicker
+              <IconPickerModalInset
                 attributes={{
                   icon: attributes.icon,
                   svgString: attributes.svgString,
