@@ -350,7 +350,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
         </Spacer>
         <Divider />
         <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__("Brands Icons", "rrze-elements-b")}</Heading>
+          <Heading>{__("Brand Icons", "rrze-elements-b")}</Heading>
           <Grid columns={12}>
             {brandIcons.map((iconOption) => (
               <Button
