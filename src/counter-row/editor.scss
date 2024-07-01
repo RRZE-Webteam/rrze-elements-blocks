@@ -22,13 +22,8 @@ svg.elements-tabs-icon-modal {
     flex-wrap: wrap;
 }
 
-// .is-selected.wp-block-rrze-elements-tab{
-//     padding-top: 4em;
-//     margin-top: -4em;
-// }
-
 .wp-block-rrze-elements-counter-row {
-    .fauCustomResearchHighlights {
+    .rrze-elements-b-counter-row {
         display: initial;
 
         .block-editor-block-list__layout {
@@ -44,7 +39,7 @@ svg.elements-tabs-icon-modal {
     @for $i from 1 through 5 {
 
         &.rrze-elements-column-#{$i} {
-            .fauCustomResearchHighlights {
+            .rrze-elements-b-counter-row {
                 .block-editor-block-list__layout {
                     grid-template-columns: repeat($i, 1fr);
                 }

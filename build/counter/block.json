@@ -16,11 +16,11 @@
     },
     "description": {
       "type": "string",
-      "default": "Blueprint"
+      "default": ""
     },
     "buttonText": {
       "type": "string",
-      "default": "Blueprint"
+      "default": ""
     },
     "duration": {
       "type": "number",

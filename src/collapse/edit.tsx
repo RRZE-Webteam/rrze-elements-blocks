@@ -28,7 +28,7 @@ import {
   StandardColorSwitcherToolbar as ColorSwitcherToolbar,
 } from "../components/CustomColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
-import { IconPicker, IconMarkComponent } from "../components/IconPicker";
+import { IconPicker, IconMarkComponent, IconPickerModalInset } from "../components/IconPicker";
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -237,8 +237,9 @@ const Edit: React.FC<SaveProps> = ({
                     <Modal
                       title={__("Select an Icon", "rrze-elements-b")}
                       onRequestClose={closeModal}
+                      size="large"
                     >
-                      <IconPicker
+                      <IconPickerModalInset
                         attributes={{
                           icon: attributes.icon,
                           svgString: attributes.svgString,

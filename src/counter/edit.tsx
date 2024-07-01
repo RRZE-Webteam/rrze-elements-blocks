@@ -198,6 +198,7 @@ export default function Edit({
               tagName="span"
               value={attributes.description}
               onChange={(description) => setAttributes({ description })}
+              placeholder={__("Beschreibung", "rrze-elements-b")}
               allowedFormats={[]}
             />
             <br />
@@ -209,6 +210,7 @@ export default function Edit({
                   onChange={(buttonText) => setAttributes({ buttonText })}
                   allowedFormats={[]}
                   ref={setUrlPopoverAnchor}
+                  placeholder={__("Button Text", "rrze-elements-b")}
                 />
               </a>
             )}
