@@ -93,6 +93,160 @@ registerBlockType(
      * @see ./save.js
      */
     save,
-    deprecated
+    deprecated,
+    transforms: {
+      from: [
+        {
+          type: "shortcode",
+          tag: "collapsibles",
+          attributes: {
+            hstart: {
+              type: "integer",
+              shortcode: (attributes: { named: { hstart?: number } }) => {
+                return attributes.named.hstart || 2;
+              },
+            },
+          },
+          priority: 1,
+          transform: (attributes: any, data: any) => {
+            console.log(data);
+            const blocks = [];
+            const globalInnerBlocks: any[] = [];
+
+            const cleanData = data.shortcode?.content.replace(/<\/?p>/g, "");
+            const regexCollapse =
+              /\[collapse(?=\s)((?:\s+\w+=(?:'[^']*'|"[^"]*"|“[^”]*”))*)\]([\s\S]*?)\[\/collapse\]/g;
+            const matchesCollapseContent = [
+              ...cleanData.matchAll(regexCollapse),
+            ];
+            let collapseAttributes: { [key: string]: string } = {}; // <-- Declare outside the loop
+
+            matchesCollapseContent.forEach((match) => {
+              const collapseAttributesString = match[1];
+              const attributesRegex = /(\w+)="([^"]*)"/g;
+              let attributeMatches;
+              while (
+                (attributeMatches = attributesRegex.exec(
+                  collapseAttributesString
+                )) !== null
+              ) {
+                const key = attributeMatches[1];
+                const value = attributeMatches[2];
+                collapseAttributes[key] = value; // <-- Populate the object
+              }
+
+              const contentInsideCollapse = match[2].trim();
+
+              let collapseInnerBlocks: any[] = [];
+
+              const accordionRegex =
+                /\[accordion(?=\s|\])(?:\s+\w+="[^"]*")*\]([\s\S]*?)\[\/accordion\]/g;
+              const splitContents = contentInsideCollapse.split(accordionRegex);
+              splitContents.forEach((splitContent: string, index: number) => {
+                if (index % 2 === 0) {
+                  // This should be freeform content outside of the accordions
+                  if (splitContent.trim()) {
+                    collapseInnerBlocks.push(
+                      createBlock("core/freeform", {
+                        content: splitContent.trim(),
+                      })
+                    );
+                  }
+                } else {
+                  // This should be content inside an accordion
+                  const accordionItemsRegex =
+                    /\[accordion-item(?=\s)((?:\s+\w+=(?:'[^']*'|"[^"]*"|“[^”]*”))*)\]([\s\S]*?)\[\/accordion-item\]/g;
+                  const accordionItemMatches = [
+                    ...splitContent.matchAll(accordionItemsRegex),
+                  ];
+
+                  let innerAccordionBlocks: any = [];
+
+                  accordionItemMatches.forEach((accordionItem) => {
+                    const accordionAttributesString = accordionItem[1];
+                    const accordionContent = accordionItem[2].trim();
+
+                    const accordionAttributeMatches =
+                      accordionAttributesString.match(
+                        /(\w+)=('[^']*'|"[^"]*"|“[^”]*”)/g
+                      );
+                    let accordionAttributes: { [key: string]: string } = {};
+
+                    accordionAttributeMatches?.forEach((attr) => {
+                      const [key, fullValue] = attr.split("=");
+                      const actualValue = fullValue.slice(1, -1);
+                      let accordionAttributes: { [key: string]: string } = {};
+                    });
+
+                    innerAccordionBlocks.push(
+                      createBlock(
+                        "rrze-elements/accordion",
+                        { title: accordionAttributes.title || "Enter a title" },
+                        [
+                          createBlock("core/freeform", {
+                            content: accordionContent,
+                          }),
+                        ]
+                      )
+                    );
+                  });
+
+                  if (innerAccordionBlocks.length) {
+                    collapseInnerBlocks.push(
+                      createBlock(
+                        "rrze-elements/accordions",
+                        {},
+                        innerAccordionBlocks
+                      )
+                    );
+                  }
+                }
+              });
+
+              const colorChoice = (color: string) => {
+                switch (color) {
+                  case "tf":
+                    return "tf";
+                  case "nat":
+                    return "nat";
+                  case "phil":
+                    return "phil";
+                  case "med":
+                    return "med";
+                  case "rw":
+                    return "rw";
+                  default:
+                    return "";
+                }
+              };
+
+              globalInnerBlocks.push(
+                createBlock(
+                  "rrze-elements/collapse",
+                  {
+                    title: collapseAttributes.title || "Enter a title",
+                    color: colorChoice(collapseAttributes.color),
+                    jumpName: collapseAttributes.name || "",
+                    icon: validateIcon(collapseAttributes.icon) || "",
+                  },
+                  collapseInnerBlocks
+                )
+              );
+            });
+
+            const hstart = parseInt(attributes.named.hstart, 10) || 2;
+            blocks.push(
+              createBlock(
+                "rrze-elements/collapsibles",
+                { hstart: hstart },
+                globalInnerBlocks
+              )
+            );
+
+            return blocks;
+          },
+        },
+      ]
+    }
   } as any
 );
