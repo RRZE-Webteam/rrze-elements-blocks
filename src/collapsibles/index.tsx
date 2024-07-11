@@ -25,12 +25,6 @@ import metadata from "./block.json";
 import iconJson from "../components/assets/fontawesome/fontawesomeIconNames.json";
 import deprecated from "./deprecated";
 
-type SaveProps = {
-  attributes: {
-    hstart: number;
-  };
-};
-
 /**
  * Helper Functions
  */
@@ -76,13 +70,49 @@ registerBlockType(
      * Used to construct a preview for the block to be shown in the block inserter.
      */
     icon: {
-      src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <g opacity=".5">
-        <rect x="75.86" y="131.85" width="360.29" height="142.31" fillRule="evenodd" strokeWidth="0"/>
-        </g>
-        <path d="m81.59,109.83h348.82c3.16,0,5.73,2.57,5.73,5.73v25.16H75.86v-25.16c0-3.16,2.57-5.73,5.73-5.73Z" fillRule="evenodd" strokeWidth="0"/>
-        <rect x="75.86" y="298.32" width="360.28" height="39.9" rx="5.73" ry="5.73" fillRule="evenodd" strokeWidth="0"/><rect x="75.86" y="362.27" width="360.28" height="39.9" rx="5.73" ry="5.73" fillRule="evenodd" strokeWidth="0"/>
+      src: (
+        <svg
+          id="Ebene_1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <g opacity=".5">
+            <rect
+              x="75.86"
+              y="131.85"
+              width="360.29"
+              height="142.31"
+              fillRule="evenodd"
+              strokeWidth="0"
+            />
+          </g>
+          <path
+            d="m81.59,109.83h348.82c3.16,0,5.73,2.57,5.73,5.73v25.16H75.86v-25.16c0-3.16,2.57-5.73,5.73-5.73Z"
+            fillRule="evenodd"
+            strokeWidth="0"
+          />
+          <rect
+            x="75.86"
+            y="298.32"
+            width="360.28"
+            height="39.9"
+            rx="5.73"
+            ry="5.73"
+            fillRule="evenodd"
+            strokeWidth="0"
+          />
+          <rect
+            x="75.86"
+            y="362.27"
+            width="360.28"
+            height="39.9"
+            rx="5.73"
+            ry="5.73"
+            fillRule="evenodd"
+            strokeWidth="0"
+          />
         </svg>
+      ),
     },
     /**
      * @see ./edit.js
@@ -109,8 +139,7 @@ registerBlockType(
           },
           priority: 1,
           transform: (attributes: any, data: any) => {
-            console.log(data);
-            const blocks = [];
+            let blocks = [];
             const globalInnerBlocks: any[] = [];
 
             const cleanData = data.shortcode?.content.replace(/<\/?p>/g, "");
@@ -119,12 +148,15 @@ registerBlockType(
             const matchesCollapseContent = [
               ...cleanData.matchAll(regexCollapse),
             ];
-            let collapseAttributes: { [key: string]: string } = {}; // <-- Declare outside the loop
+            let titleStore: { title: string; type: string; level: number; items?: any[] }[] = [];
+            console.log(data);
+            const originalContent = data?.content || "";
 
-            matchesCollapseContent.forEach((match) => {
+            matchesCollapseContent.forEach((match, collapseIndex) => {
               const collapseAttributesString = match[1];
               const attributesRegex = /(\w+)="([^"]*)"/g;
               let attributeMatches;
+              let collapseAttributes: { [key: string]: string } = {};
               while (
                 (attributeMatches = attributesRegex.exec(
                   collapseAttributesString
@@ -132,12 +164,13 @@ registerBlockType(
               ) {
                 const key = attributeMatches[1];
                 const value = attributeMatches[2];
-                collapseAttributes[key] = value; // <-- Populate the object
+                collapseAttributes[key] = value;
               }
 
               const contentInsideCollapse = match[2].trim();
 
               let collapseInnerBlocks: any[] = [];
+              let accordionTitles: { title: string; type: string; level: number }[] = [];
 
               const accordionRegex =
                 /\[accordion(?=\s|\])(?:\s+\w+="[^"]*")*\]([\s\S]*?)\[\/accordion\]/g;
@@ -162,7 +195,7 @@ registerBlockType(
 
                   let innerAccordionBlocks: any = [];
 
-                  accordionItemMatches.forEach((accordionItem) => {
+                  accordionItemMatches.forEach((accordionItem, accordionIndex) => {
                     const accordionAttributesString = accordionItem[1];
                     const accordionContent = accordionItem[2].trim();
 
@@ -175,8 +208,16 @@ registerBlockType(
                     accordionAttributeMatches?.forEach((attr) => {
                       const [key, fullValue] = attr.split("=");
                       const actualValue = fullValue.slice(1, -1);
-                      let accordionAttributes: { [key: string]: string } = {};
+                      accordionAttributes[key] = actualValue; // <-- Populate the object correctly
                     });
+
+                    accordionTitles.push(
+                      {
+                        title: accordionAttributes.title || "No title detected",
+                        type: "accordion",
+                        level: 2
+                      }
+                    );
 
                     innerAccordionBlocks.push(
                       createBlock(
@@ -220,6 +261,13 @@ registerBlockType(
                 }
               };
 
+              titleStore.push({
+                title: collapseAttributes.title || `Collapse #${collapseIndex + 1}`,
+                type: "collapse",
+                level: 1,
+                items: accordionTitles,
+              });
+
               globalInnerBlocks.push(
                 createBlock(
                   "rrze-elements/collapse",
@@ -243,10 +291,34 @@ registerBlockType(
               )
             );
 
+            // Create the list of titles with bullet points
+            const formatTitles = (items: any[], level = 0): string =>
+              items
+                .map((item) => `${'  '.repeat(level)}• ${item.title}\n${item.items ? formatTitles(item.items, level + 1) : ''}`)
+                .join("");
+
+            const titleList: string = formatTitles(titleStore);
+
+            // Ask user if they want to proceed and show the array of titles as bullet points
+            const proceed: boolean = confirm(
+              `Do you want to proceed with the following titles:\n\n${titleList}`
+            );
+
+            if (!proceed) {
+              // else return it in a freeformblock
+              // empty blocks
+              blocks = [];
+              blocks.push(
+                createBlock("core/freeform", {
+                  content: originalContent,
+                })
+              );
+            }
+
             return blocks;
           },
         },
-      ]
-    }
+      ],
+    },
   } as any
 );

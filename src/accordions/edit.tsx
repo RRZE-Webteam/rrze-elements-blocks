@@ -44,59 +44,9 @@ const Edit: React.FC<SaveProps> = ({
   ...ownProps
 }) => {
   const props = useBlockProps();
-  const { sameBlockCount, previousBlockIds } = attributes;
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
-
-  const { selectedBlock, numberChildren, blockIndex, previousBlockClients } =
-    useSelect(
-      (select) => {
-        const { getBlock, getBlocks, getBlockIndex } = select(
-          "core/block-editor"
-        ) as {
-          getBlock: Function;
-          getBlocks: Function;
-          getBlockIndex: Function;
-        };
-        const selectedBlockClientId = ownProps.clientId;
-        const numberChildren = getBlocks(selectedBlockClientId).length;
-        const blockIndex = getBlockIndex(selectedBlockClientId);
-        const allBlocks = getBlocks();
-
-        const CollapsiblesBlockClientIds = allBlocks
-          .filter((block: WPBlock) => block.name === "rrze-elements/accordion")
-          .map((block: WPBlock) => block.clientId);
-        const currentBlockIndex = CollapsiblesBlockClientIds.indexOf(
-          selectedBlockClientId
-        );
-        const previousBlockClients = CollapsiblesBlockClientIds.slice(
-          0,
-          currentBlockIndex
-        );
-
-        return {
-          selectedBlock: getBlock(selectedBlockClientId),
-          numberChildren,
-          blockIndex,
-          previousBlockClients,
-        };
-      },
-      [ownProps.clientId]
-    );
-
-  useEffect(() => {
-    if (attributes.childrenCount !== numberChildren) {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ childrenCount: numberChildren });
-    }
-  }, [numberChildren, setAttributes, attributes.childrenCount]);
-
-  useEffect(() => {
-    if (!isEqual(attributes.previousBlockIds, previousBlockClients)) {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ previousBlockIds: previousBlockClients });
-    }
-  }, [previousBlockClients, setAttributes, attributes.previousBlockClients]);
+  const { clientId } = ownProps;
 
   return (
     <div {...props}>
