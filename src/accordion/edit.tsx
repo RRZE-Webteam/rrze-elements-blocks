@@ -13,6 +13,7 @@ import {
   InnerBlocks,
   InspectorControls,
   store as blockEditorStore,
+  RichText,
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -73,7 +74,7 @@ const Edit: React.FC<SaveProps> = ({
 
   const props = useBlockProps();
   const { sameBlockCount, color, loadOpen, icon } = attributes;
-  const title = attributes.title || __("Enter your Title…", "rrze-elements-b");
+  const title = attributes.title;
 
   const { clientId } = ownProps;
   const [isActive, setIsActive] = useState(false);
@@ -178,7 +179,6 @@ const Edit: React.FC<SaveProps> = ({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        {/* <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
         <ExtendedColorSwitcher
           attributes={attributes}
           setAttributes={setAttributes}
@@ -215,10 +215,12 @@ const Edit: React.FC<SaveProps> = ({
                 setAttributes={setAttributes}
               />
             )}
-            <TextControl
-              onChange={onChangeTitle}
+            <RichText
+              tagName="p"
               value={title}
-              placeholder={__("Your Text", "rrze-elements-b")}
+              onChange={onChangeTitle}
+              placeholder={__("Enter your Title…", "rrze-elements-b")}
+              allowedFormats={[]}
               className="elements-blocks-input-following-icon"
             />
           </div>

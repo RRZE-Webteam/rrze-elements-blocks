@@ -13,6 +13,7 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  RichText,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
@@ -82,7 +83,7 @@ const Edit: React.FC<SaveProps> = ({
 
   const props = useBlockProps();
   const { color, loadOpen, icon } = attributes;
-  const title = attributes.title || __("Enter your Title…", "rrze-elements-b");
+  const title = attributes.title;
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
@@ -128,7 +129,7 @@ const Edit: React.FC<SaveProps> = ({
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
-      setAttributes({ title: " " });
+      setAttributes({ title: "" });
     } else {
       setAttributes({ title: newText });
     }
@@ -233,10 +234,12 @@ const Edit: React.FC<SaveProps> = ({
                   setAttributes={setAttributes}
                 />
               )}
-              <TextControl
-                onChange={onChangeTitle}
+              <RichText
+                tagName="p"
                 value={title}
-                placeholder={__("Your Text", "rrze-elements-b")}
+                onChange={onChangeTitle}
+                placeholder={__("Enter your Title…", "rrze-elements-b")}
+                allowedFormats={[]}
                 className="elements-blocks-input-following-icon"
               />
             </div>
