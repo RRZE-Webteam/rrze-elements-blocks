@@ -358,7 +358,7 @@ Functions and Mixins
 }
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var«-36125:1», var«36125:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+    transform: rotate3d(var«-3215:1», var«3215:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
   }
 }
 @keyframes fa-shake {
@@ -11126,7 +11126,7 @@ button.is-compact.elements-blocks-icon-Button, button.is-pressed.elements-blocks
 }
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var«-36205:1», var«36205:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+    transform: rotate3d(var«-3295:1», var«3295:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
   }
 }
 @keyframes fa-shake {

@@ -301,7 +301,7 @@ registerBlockType(
 
             // Ask user if they want to proceed and show the array of titles as bullet points
             const proceed: boolean = confirm(
-              `Do you want to proceed with the following titles:\n\n${titleList}`
+              `Wichtiger Hinweis\n\nBitte überprüfen Sie Ihre Akkordeonstruktur, um sicherzustellen, dass alle Elemente vorhanden sind.\n\n${titleList}\n\nBestätigen Sie mit Ok, damit die Umwandlung in einen Block durchgeführt wird.`
             );
 
             if (!proceed) {
