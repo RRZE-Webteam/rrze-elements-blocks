@@ -13,6 +13,7 @@ import {
   InnerBlocks,
   InspectorControls,
   store as blockEditorStore,
+  RichText,
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -23,7 +24,11 @@ import {
   ExtendedColorSwitcherToolbar,
 } from "../components/CustomColorSwitcher";
 import HeadingComponent from "../components/HeadingComponent";
-import { IconPicker, IconMarkComponent, IconPickerModalInset } from "../components/IconPicker";
+import {
+  IconPicker,
+  IconMarkComponent,
+  IconPickerModalInset,
+} from "../components/IconPicker";
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -59,50 +64,19 @@ type WPBlock = {
 const Edit: React.FC<SaveProps> = ({
   attributes,
   setAttributes,
-  clientId,
   context,
+  ...ownProps
 }) => {
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
 
   /////////// Use Selects ///////////
-  const { selectedBlock, blockParents, siblingBlocks, totalChildrenCount } =
-    useSelect(
-      (select) => {
-        const { getBlock, getBlockParents, getBlocks } = select(
-          "core/block-editor"
-        ) as {
-          getBlock: Function;
-          getBlockParents: Function;
-          getBlocks: Function;
-        };
-        const blockParents = getBlockParents(clientId, true);
-        const parentClientId = blockParents[0];
-        const siblingBlocks = getBlocks(parentClientId);
-        const collapsiblesBeforeMe =
-          getBlock(parentClientId)?.attributes?.previousBlockIds || [];
-
-        let totalChildrenCount = 0;
-        collapsiblesBeforeMe.forEach((blockClientId: string) => {
-          const childrenCount =
-            getBlock(blockClientId)?.attributes?.childrenCount || 0;
-          totalChildrenCount += childrenCount;
-        });
-
-        return {
-          selectedBlock: getBlock(clientId),
-          blockParents,
-          siblingBlocks,
-          totalChildrenCount,
-        };
-      },
-      [clientId] // only rerun if clientId changes
-    );
 
   const props = useBlockProps();
   const { sameBlockCount, color, loadOpen, icon } = attributes;
-  const title = attributes.title || __("Enter your Title…", "rrze-elements-b");
+  const title = attributes.title;
 
+  const { clientId } = ownProps;
   const [isActive, setIsActive] = useState(false);
   const [uid, setUid] = useState("");
   const [iconType, iconName] = icon?.split(" ") || [];
@@ -110,23 +84,12 @@ const Edit: React.FC<SaveProps> = ({
   const [pluginDir, setPluginDir] = useState("");
 
   //////////////// Use Effects ////////////////
-  useEffect(() => {
-    __unstableMarkNextChangeAsNotPersistent();
-    setAttributes({
-      ancestorCount:
-        context["rrze-elements/collapseSBlockCount"] +
-        context["rrze-elements/collapseTotalChildrenCount"] +
-        1,
-    });
-  }, [
-    context["rrze-elements/collapseSBlockCount"],
-    context["rrze-elements/collapseTotalChildrenCount"],
-  ]);
 
   useEffect(() => {
     setAttributes({
       jumpName: `panel_${clientId?.slice(-8)}`,
     });
+    console.log("clientId", clientId);
   }, [clientId]);
 
   useEffect(() => {
@@ -140,39 +103,6 @@ const Edit: React.FC<SaveProps> = ({
       color: color,
     });
   }, [context["rrze-elements/collapseColor"], attributes.color]);
-
-  let sameTypeSiblingsBefore = 0;
-  useEffect(() => {
-    if (selectedBlock && blockParents.length > 0) {
-      for (const block of siblingBlocks) {
-        if (block.clientId === selectedBlock.clientId) {
-          break;
-        }
-        if (block.name === selectedBlock.name) {
-          if (
-            block?.innerBlocks?.forEach((innerBlock: WPBlock) => {
-              if (innerBlock.name === "rrze-elements/accordions") {
-                sameTypeSiblingsBefore =
-                  sameTypeSiblingsBefore + innerBlock?.innerBlocks.length;
-              }
-            })
-            // @ts-ignore
-          );
-          sameTypeSiblingsBefore++;
-        }
-      }
-      if (sameTypeSiblingsBefore !== attributes.sameBlockCount) {
-        __unstableMarkNextChangeAsNotPersistent();
-        setAttributes({ sameBlockCount: sameTypeSiblingsBefore });
-      }
-    }
-  }, [
-    selectedBlock,
-    blockParents,
-    siblingBlocks,
-    attributes.sameBlockCount,
-    setAttributes,
-  ]);
 
   useEffect(() => {
     setAttributes({
@@ -190,11 +120,7 @@ const Edit: React.FC<SaveProps> = ({
   };
 
   const onChangeTitle = (newText: string) => {
-    if (newText === "") {
-      setAttributes({ title: " " });
-    } else {
-      setAttributes({ title: newText });
-    }
+    setAttributes({ title: newText });
   };
 
   let finalColor =
@@ -249,7 +175,6 @@ const Edit: React.FC<SaveProps> = ({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        {/* <ExtendedColorSwitcher attributes={attributes} setAttributes={setAttributes} /> */}
         <ExtendedColorSwitcher
           attributes={attributes}
           setAttributes={setAttributes}
@@ -286,10 +211,12 @@ const Edit: React.FC<SaveProps> = ({
                 setAttributes={setAttributes}
               />
             )}
-            <TextControl
-              onChange={onChangeTitle}
+            <RichText
+              tagName="p"
               value={title}
-              placeholder={__("Your Text", "rrze-elements-b")}
+              onChange={onChangeTitle}
+              placeholder={__("Enter your Title…", "rrze-elements-b")}
+              allowedFormats={[]}
               className="elements-blocks-input-following-icon"
             />
           </div>

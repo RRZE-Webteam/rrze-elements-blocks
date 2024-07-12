@@ -20,14 +20,6 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
   const blockProps = useBlockProps.save();
   const { sameBlockCount, totalChildrenCount, color, title, jumpName, svgString, loadOpen, hstart } = attributes;
 
-
-  let output = '';
-  if (jumpName === ''){
-      output = `panel_${sameBlockCount + totalChildrenCount}`;
-  } else { 
-      output = `${jumpName}`;
-  }
-
   let loadOnPageLoad = '';
   let activeOnPageLoad = '';
 
@@ -46,9 +38,9 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             <button
               className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
-              data-name={output}
+              data-name={jumpName}
               //@ts-ignore
-              href={`#${output}`}
+              href={`#${jumpName}`}
             >
               {(svgString &&
                 <span className={svgString}></span>
@@ -57,10 +49,10 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </button>
           </HeadingComponent>
           <div
-            id={output}
+            id={jumpName}
             className={`accordion-body ${loadOnPageLoad}`}
             //@ts-ignore
-            name={output}
+            name={jumpName}
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />

@@ -110,7 +110,7 @@ class Patterns
                 $pattern['inserter'],
                 $pattern['keywords'],
                 $pattern['blockTypes'],
-                $pattern['isPhp'],
+                $pattern['isPhp'] ?? false,
                 'dev-patterns'
             );
         }
@@ -193,7 +193,7 @@ class Patterns
                 $pattern['inserter'] ?? true,
                 $pattern['keywords'] ?? [],
                 $pattern['blockTypes'] ?? [],
-                $pattern['isPhp'],
+                $pattern['isPhp'] ?? false,
                 'patterns'
             );
         }

@@ -69,3 +69,19 @@ button.expand-all {
 	font-weight: normal;
 	margin: 5px 0;
 }
+
+.wp-block-rrze-elements-collapsibles {
+	.accordion .accordion-toggle {
+		display: flex;
+  		align-items: center;
+		  justify-content: start;
+  
+		padding: 2px 35px 2px 10px;
+	}
+
+	.accordion .accordion-toggle > span[class*="fa-"] {
+		padding-right: 10px;
+	}
+
+
+}
