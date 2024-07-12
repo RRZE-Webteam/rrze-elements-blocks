@@ -120,11 +120,7 @@ const Edit: React.FC<SaveProps> = ({
   };
 
   const onChangeTitle = (newText: string) => {
-    if (newText === "") {
-      setAttributes({ title: " " });
-    } else {
-      setAttributes({ title: newText });
-    }
+    setAttributes({ title: newText });
   };
 
   let finalColor =
