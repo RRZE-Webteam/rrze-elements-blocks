@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/block-contentwidthlimiter",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "title": "Content Width Limiter",
   "category": "rrze_elements",
   "description": "Creates a contentwidthlimiter block.",
