@@ -69,6 +69,5 @@
   "textdomain": "rrze-elementsb",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
-  "script": "file:./index.js"
+  "style": "file:./style-index.css"
 }

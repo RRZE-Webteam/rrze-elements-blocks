@@ -59,6 +59,5 @@
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "parent": ["rrze-elements/counter-row"],
-  "script": "file:./index.tsx"
+  "parent": ["rrze-elements/counter-row"]
 }

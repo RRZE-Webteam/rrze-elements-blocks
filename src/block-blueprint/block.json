@@ -18,6 +18,5 @@
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
-  "script": "file:./index.tsx"
+  "style": "file:./style-index.css"
 }

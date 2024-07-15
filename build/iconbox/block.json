@@ -60,6 +60,5 @@
   "style": "file:./style-index.css",
   "parent": [
     "rrze-elements/counter-row"
-  ],
-  "script": "file:./index.js"
+  ]
 }
