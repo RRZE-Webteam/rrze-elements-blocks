@@ -27,6 +27,7 @@
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
+  "script": "file:./index.tsx",
   "example": {
     "attributes": {
       "title": "Content Width Limiter",

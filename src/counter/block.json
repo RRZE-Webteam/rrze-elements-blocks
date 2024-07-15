@@ -47,5 +47,6 @@
   "editorStyle": "file:./index.css",
   "style": "rrze-elements-blocks",
   "viewScript": "rrze-counter",
-  "parent": ["rrze-elements/counter-row"]
+  "parent": ["rrze-elements/counter-row"],
+  "script": "file:./index.tsx"
 }

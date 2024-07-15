@@ -42,5 +42,6 @@
   "editorScript": "file:./index.js",
   "viewScript": "rrze-accordions",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "script": "file:./index.tsx"
 }

@@ -49,5 +49,6 @@
   "viewScript": "rrze-counter",
   "parent": [
     "rrze-elements/counter-row"
-  ]
+  ],
+  "script": "file:./index.js"
 }
