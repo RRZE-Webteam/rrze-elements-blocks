@@ -29,24 +29,6 @@ class Main
         add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
         add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
 
-        add_action(
-            'enqueue_block_editor_assets',
-            function () {
-                $format_api_file = plugin_dir_path( $this->pluginFile ) . 'build/format-api-f14b86.asset.php';
-        
-                if ( file_exists( $format_api_file ) ) {
-                    $assets = include $format_api_file;
-                    wp_enqueue_script(
-                        'format-api-f14b86',
-                        plugin_dir_url( $this->pluginFile ) . '/build/format-api-f14b86.js',
-                        $assets['dependencies'],
-                        $assets['version'],
-                        true
-                    );
-                }
-            }
-        );
-
         new Blocks();
         new Patterns();
     }

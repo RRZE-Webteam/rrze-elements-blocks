@@ -21,7 +21,6 @@ module.exports = {
   ...defaultConfig,
   entry: {
 		...getWebpackEntryPoints('script')(),
-    'format-api-f14b86': './src/format-api-f14b86.js',
 	},
   devtool: devtool,
   module: {
