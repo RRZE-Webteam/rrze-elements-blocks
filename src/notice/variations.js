@@ -46,7 +46,7 @@ const variations = [
   },
   {
     name: "notice-hinweis",
-    title: __("Hint"),
+    title: __("Hint", "rrze-elements-b"),
     description: __("Notice with hint-icon", "rrze-elements-b"),
     iconClass: "fa-solid fa-info",
     icon: (

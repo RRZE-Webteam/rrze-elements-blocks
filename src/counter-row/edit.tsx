@@ -127,7 +127,7 @@ export default function Edit({
         <InspectorControls>
           <PanelBody title={__("Animation Settings", "rrze-elements-b")}>
             <RangeControl
-              label="Stagger between Animations (seconds)"
+              label={__("Stagger between Animations (seconds)", "rrze-elements-b")}
               marks
               max={0.5}
               min={0}

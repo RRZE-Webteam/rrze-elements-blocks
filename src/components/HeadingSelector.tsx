@@ -57,7 +57,7 @@ const HeadingSelector = ({ attributes, setAttributes }: SaveProps) => {
   return (
     <ToolbarDropdownMenu
       icon={checkHeadingLevelIcon(attributes.hstart)}
-      label="Select heading level"
+      label={__("Select heading level", "rrze-elements-b")}
       controls={[
         {
           title: "H2",

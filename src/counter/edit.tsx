@@ -133,17 +133,17 @@ export default function Edit({
             disableCustomFontSizes
             fontSizes={[
               {
-                name: "Small",
+                name: `${__("Small", "rrze-elements-blocks")}`,
                 size: "normal",
                 slug: "small",
               },
               {
-                name: "Normal",
+                name: `${__("Normal", "rrze-elements-blocks")}`,
                 size: "medium",
                 slug: "normal",
               },
               {
-                name: "Big",
+                name: `${__("Big", "rrze-elements-blocks")}`,
                 size: "large",
                 slug: "big",
               },

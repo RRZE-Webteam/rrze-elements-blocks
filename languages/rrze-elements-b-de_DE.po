@@ -10,12 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-01-23T15:01:34+00:00\n"
-"PO-Revision-Date: 2024-01-29 12:42+0000\n"
+"PO-Revision-Date: 2024-07-19 10:51+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: rrze-elements-b\n"
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Loco-Version: 2.6.6; wp-6.4.2"
+"X-Loco-Version: 2.6.10; wp-6.5.5"
 
 #: build/contentwidthlimiter/index.js:1
 msgid " (Außerhalb des sichtbaren Bereichs)"
@@ -29,6 +29,15 @@ msgstr "(Ideale Leselänge)"
 msgid " Zeichen"
 msgstr "Characters"
 
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid ""
+". You can search for an icon by typing its Font Awesome name in the search "
+"field below."
+msgstr ""
+". Sie können nach einem Symbol suchen, indem Sie den zugehörigen Font "
+"Awesome Namen in das untenstehende Suchfeld eingeben."
+
 #: build/alert/index.js:1 build/notice/index.js:1
 msgid "Add a description…"
 msgstr "Füge eine Beschreibung hinzu…"
@@ -37,7 +46,18 @@ msgstr "Füge eine Beschreibung hinzu…"
 msgid "Add a Headline"
 msgstr "Überschrift festlegen"
 
-#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+#: build/alert/index.js:1
+msgid "Add a Label"
+msgstr "Beschriftung hinzufügen"
+
+#: build/alert/index.js:1
+msgid "Add a Label for your Alert. This changes the style to example"
+msgstr ""
+"Füge eine Beschriftung hinzu. Dies verändert den Style der Hinweisbox zu "
+"\"Example\"."
+
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1
 msgid "Add an icon"
 msgstr "Icon hinzufügen"
 
@@ -65,10 +85,6 @@ msgstr "Zusätzliche CSS-Klassen"
 msgid "Advanced design elements for WordPress BlockEditor."
 msgstr "Erweiterte Designelemente für den WordPress BlockEditor."
 
-#: build/cta/index.js:1
-msgid "Advanced Options"
-msgstr "Erweiterte Einstellungen"
-
 #: build/collapse/index.js:1
 msgid "Advanced Settings"
 msgstr "Erweiterte Einstellungen"
@@ -94,19 +110,26 @@ msgstr ""
 "Versuche die Block-Einstellungen anzupassen, speichere den Beitrag und "
 "aktualisiere die Seite, um die Darstellung wiederherzustellen."
 
-#: build/collapsibles/index.js:1
-msgid ""
-"Apparently you really love accordions. Great! But please don't use more than "
-"20 items inside a collapsible. This can cause performance and User "
-"Experience issues."
-msgstr ""
-"Anscheinend mögen Sie wirklich Accordions. Super! Aber bitte nutzen Sie "
-"nicht mehr als 20 Elemente in einem Accordion, damit Ihre Seite performant "
-"und nutzerfreundlich bleibt."
+#: build/counter-row/index.js:1
+msgid "Animation Settings"
+msgstr "Animation – Einstellungen"
 
 #: build/notice/index.js:1
 msgid "Audio"
 msgstr "Audio"
+
+#: build/iconbox/index.js:1
+msgid "Begriff"
+msgstr ""
+
+#: build/counter/index.js:1
+msgid "Beschreibung"
+msgstr ""
+
+#: build/counter-row/block.json
+msgctxt "block description"
+msgid "Create a Row for Counters"
+msgstr "Erstellt eine Info-Leiste für Counter & Iconboxen"
 
 #: build/block-blueprint/block.json build/textslider/block.json
 msgctxt "block description"
@@ -124,6 +147,20 @@ msgid "Creates a contentwidthlimiter block."
 msgstr ""
 "Erstellt einen Inhaltsbegrenzer, um die Inhaltsbreite von Texten und "
 "Inhalten zu begrenzen."
+
+#: build/counter/block.json
+msgctxt "block description"
+msgid "Creates a Counter block."
+msgstr ""
+"Erstellt einen Zähler Block der bis zu einer bestimmten Zahl hoch oder "
+"herunter zählt"
+
+#: build/iconbox/block.json
+msgctxt "block description"
+msgid "Creates a Iconbox block."
+msgstr ""
+"Erstellt eine Infoxbox mit Icon, Definition und Beschreibung zur Darstellung "
+"kurzer Informationen."
 
 #: build/news/block.json
 msgctxt "block description"
@@ -190,6 +227,51 @@ msgctxt "block keyword"
 msgid "toggle"
 msgstr "Schalter"
 
+#: includes/Patterns.php:148
+msgctxt "Block pattern description"
+msgid "A 3 Column Layout for custom News on Landing pages"
+msgstr "Ein 3-spaltiges Layout für Custom News für Landing pages"
+
+#: includes/Patterns.php:176
+msgctxt "Block pattern description"
+msgid "A landingpage template for FAU."
+msgstr "Ein Landingpage Template für die FAU"
+
+#: includes/Patterns.php:155
+msgctxt "Block pattern description"
+msgid "Call to Action section"
+msgstr "Call to Action Vorlage"
+
+#: includes/Patterns.php:133
+msgctxt "Block pattern description"
+msgid "Description for Example Pattern"
+msgstr "Beschreibung für eine Beispiel-Vorlage"
+
+#: includes/Patterns.php:140
+msgctxt "Block pattern description"
+msgid "Description for Image with Accordion"
+msgstr "Vorlage für ein Bild mit Accordion"
+
+#: includes/Patterns.php:169
+msgctxt "Block pattern description"
+msgid "FAU Imagefilm."
+msgstr "FAU Imagefilm"
+
+#: includes/Patterns.php:162
+msgctxt "Block pattern description"
+msgid "Two column layout: Image left, text right column."
+msgstr "Ein zweispaltiges Layout: Linksbündiges Bild, Textspalte rechts"
+
+#: build/counter-row/block.json
+msgctxt "block style label"
+msgid "Colorblock"
+msgstr "Colorblock"
+
+#: build/counter-row/block.json
+msgctxt "block style label"
+msgid "Outlined"
+msgstr "Outlined"
+
 #: build/collapsibles/block.json
 msgctxt "block title"
 msgid "Accordion"
@@ -219,6 +301,21 @@ msgstr "Vorlage"
 msgctxt "block title"
 msgid "Content Width Limiter"
 msgstr "Inhaltsbreite begrenzen"
+
+#: build/counter/block.json
+msgctxt "block title"
+msgid "Counter"
+msgstr "Zähler-Box"
+
+#: build/counter-row/block.json
+msgctxt "block title"
+msgid "Counter Row"
+msgstr "Info-Leiste"
+
+#: build/iconbox/block.json
+msgctxt "block title"
+msgid "Iconbox"
+msgstr "Info-Box"
 
 #: build/accordions/block.json
 msgctxt "block title"
@@ -255,16 +352,26 @@ msgctxt "block title"
 msgid "Text-Slider"
 msgstr "Text-Slider"
 
-#: build/alert/index.js:1 build/columns/index.js:1 build/notice/index.js:1
+#: build/alert/index.js:1
 msgid "Border Settings"
 msgstr "Rahmenoptionen"
 
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Brand Icons"
+msgstr "Firmen Icons (Brand)"
+
+#: build/counter/index.js:1 build/iconbox/index.js:1
+msgid "Button Text"
+msgstr "Buttontext"
+
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Central institution"
 msgstr "Zentrale Einrichtung"
 
-#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1
 msgid "Change the icon"
 msgstr "Icon anpassen"
 
@@ -286,7 +393,8 @@ msgstr ""
 "Klicken Sie hier und drücken Sie / oder die Enter-Taste, um Inhalte "
 "hinzuzufügen."
 
-#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1
 msgid "Close"
 msgstr "Schließen"
 
@@ -302,6 +410,10 @@ msgstr "Accordion-Einstellungen"
 #: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Color Settings"
 msgstr "Farbeinstellung"
+
+#: build/counter-row/index.js:1
+msgid "Column number"
+msgstr "Spaltenanzahl"
 
 #: build/news/index.js:1
 msgid "Comma separated list of tags"
@@ -331,6 +443,20 @@ msgstr "Gefahr"
 msgid "Default"
 msgstr "Standard"
 
+#: build/iconbox/index.js:1
+msgid "Definition"
+msgstr "Definition"
+
+#: includes/Patterns.php:93
+msgctxt "DEV Template"
+msgid "A testing template for Accordions."
+msgstr "A testing template for Accordions."
+
+#: includes/Patterns.php:81
+msgctxt "DEV Template"
+msgid "A testing template for Counter and Iconbox."
+msgstr "A testing template for Counter and Iconbox."
+
 #: build/news/index.js:1
 msgid "Display as List"
 msgstr "Als Liste ausgeben"
@@ -339,10 +465,6 @@ msgstr "Als Liste ausgeben"
 #: build/tabs/index.js:1
 msgid "Display options for the Editor"
 msgstr "Darstellungsoptionen für den Editor"
-
-#: build/cta/index.js:1
-msgid "Display Search box instead of CTA"
-msgstr "Als Suchbox anzeigen"
 
 #: build/columns/index.js:1
 msgid "Display settings"
@@ -381,27 +503,27 @@ msgid "Expand All"
 msgstr "Alle öffnen"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Faculty of Business, Economics, and Law"
 msgstr "Rechts- und Wirtschaftswissenschaftliche Fakultät"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Faculty of Engineering"
 msgstr "Technische Fakultät"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Faculty of Humanities, Social Sciences, and Theology"
 msgstr "Philosophische Fakultät und Fachbereich Theologie"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Faculty of Medicine"
 msgstr "Medizinische Fakultät"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Faculty of Sciences"
 msgstr "Naturwissenschaftliche Fakultät"
 
@@ -417,17 +539,9 @@ msgstr "FAUbox-Icon"
 msgid "Filter"
 msgstr "Filter"
 
-#: build/cta/index.js:1
-msgid "Find"
-msgstr "Suchen"
-
-#: build/collapsibles/index.js:1
-msgid ""
-"For performance and User Experience reasons, we do not recommend using too "
-"many items in a collapsible."
-msgstr ""
-"Für eine bessere Performanz empfehlen wir Ihnen, nicht zu viele Elemente in "
-"einem einzelnen Accordion zu platzieren."
+#: build/counter-row/index.js:1
+msgid "Grid Settings"
+msgstr "Raster – Einstellungen"
 
 #: build/collapsibles/index.js:1 build/news/index.js:1
 msgid "Heading level"
@@ -477,13 +591,14 @@ msgstr ""
 msgid "Icon Settings"
 msgstr "Icon | Einstellungen"
 
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Icons are provided by "
+msgstr "Icons werden bereitgestellt durch "
+
 #: build/notice/index.js:1
 msgid "Idea"
 msgstr "Idee"
-
-#: build/news/index.js:1
-msgid "Image alignment"
-msgstr "Bildausrichtung"
 
 #: build/news/index.js:1
 msgid "Img first"
@@ -494,7 +609,7 @@ msgid "Info"
 msgstr "Info"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
-#: build/columns/index.js:1 build/notice/index.js:1 build/tabs/index.js:1
+#: build/columns/index.js:1 build/tabs/index.js:1
 msgid "Inherit color"
 msgstr "Farbe erben"
 
@@ -518,7 +633,7 @@ msgstr ""
 "Sprungmarken erlauben es den Nutzern, schnell zu einem Accordioneintrag zu "
 "springen, indem Sie /#sprungmarkenlabel am Ende der URL hinzufügen."
 
-#: build/tab/index.js:1
+#: build/alert/index.js:1 build/tab/index.js:1
 msgid "Label settings"
 msgstr "Label | Einstellungen"
 
@@ -526,25 +641,21 @@ msgstr "Label | Einstellungen"
 msgid "Layout"
 msgstr "Layout"
 
-#: build/news/index.js:1
-msgid "left"
-msgstr "links"
-
 #. translators: accessibility text. 1: heading level. 2: heading title.
-#: build/collapse/index.js:2
+#: build/accordion/index.js:2 build/collapse/index.js:2
 msgid "Level %1$s. %2$s"
-msgstr ""
+msgstr "Ebene %1$s. %2$s"
 
 #. translators: accessibility text. %s: heading level.
-#: build/collapse/index.js:3
+#: build/accordion/index.js:3 build/collapse/index.js:3
 msgid "Level %s. Empty."
-msgstr ""
+msgstr "Ebene %s. Leer."
 
 #: build/notice/index.js:1
 msgid "Lightbulb icon"
 msgstr "Glühbirne als Icon"
 
-#: build/cta/index.js:1
+#: build/counter/index.js:1 build/cta/index.js:1 build/iconbox/index.js:1
 msgid "Link"
 msgstr "Link"
 
@@ -556,10 +667,6 @@ msgstr "Lautsprecher Icon"
 msgid "Maintenance"
 msgstr "Wartung"
 
-#: build/columns/index.js:1
-msgid "Minimum Width of Columns"
-msgstr "Minimale Spaltbreite"
-
 #: build/notice/index.js:1
 msgid "Minus icon"
 msgstr "Minus Icon"
@@ -567,6 +674,12 @@ msgstr "Minus Icon"
 #: build/notice/index.js:1
 msgid "Negative"
 msgstr "Negativ"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "No icons found. Please try a different search term."
+msgstr ""
+"Es wurden keine Icons gefunden. Versuchen Sie einen anderen Suchbegriff."
 
 #: build/notice/index.js:1
 msgid "Notice"
@@ -588,10 +701,6 @@ msgstr "Anzahl der Spalten"
 msgid "Number of columns"
 msgstr "Anzahl der Spalten"
 
-#: build/news/index.js:1
-msgid "Number of days"
-msgstr "Anzahl der Tage"
-
 #: build/tabs/index.js:1
 msgid "Only show active tabs inside the editor"
 msgstr "Nur aktive Tabs im Editor anzeigen"
@@ -612,14 +721,6 @@ msgstr "Reiter bei erstem Laden der Seite automatisch öffnen"
 msgid "Open on page load"
 msgstr "Bei Laden der Seite automatisch öffnen"
 
-#: build/cta/index.js:1
-msgid "Please enter the search term for searching on /:"
-msgstr "Suche nach…"
-
-#: build/cta/index.js:1
-msgid "Please enter the search term for searching on /: "
-msgstr "Suche nach…"
-
 #: build/notice/index.js:1
 msgid "Plus-icon"
 msgstr "Plus-icon"
@@ -627,6 +728,10 @@ msgstr "Plus-icon"
 #: build/notice/index.js:1
 msgid "Positive"
 msgstr "Positiv"
+
+#: build/counter-row/index.js:1
+msgid "Preview Animation"
+msgstr "Animation Vorschau"
 
 #: build/notice/index.js:1
 msgid "Question"
@@ -644,6 +749,11 @@ msgstr "Bildanteil"
 msgid "Ratio text & metadata"
 msgstr "Verhältnis Bild zu Text"
 
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Regular Icons"
+msgstr "Regular Icons"
+
 #: build/cta/index.js:1
 msgid "Remove image"
 msgstr "Bild entfernen"
@@ -656,9 +766,9 @@ msgstr "Bild ersetzen"
 msgid "Reveal all tabs inside the Editor (X-ray)"
 msgstr "Zeige alle Tabs im ausgeklappten Zustand im Editor (x-ray)."
 
-#: build/news/index.js:1
-msgid "right"
-msgstr "rechts"
+#: includes/Patterns.php:58
+msgid "RRZE Elements"
+msgstr "RRZE Elements"
 
 #. Plugin Name of the plugin
 msgid "RRZE Elements Blocks"
@@ -672,13 +782,20 @@ msgstr "RRZE Webteam"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: build/cta/index.js:1
-msgid "Search for..."
-msgstr "Suchen nach…"
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Search for an Icon"
+msgstr "Nach einem Icon suchen"
 
-#: build/cta/index.js:1
-msgid "Search on "
-msgstr "Suchen nach…"
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Search for Icons"
+msgstr "Nach Icons suchen"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Search Results"
+msgstr "Suchergebnisse"
 
 #: build/accordion/index.js:1 build/alert/index.js:1 build/collapse/index.js:1
 #: build/tabs/index.js:1
@@ -689,12 +806,13 @@ msgstr "Farbe auswählen…"
 msgid "Select a style"
 msgstr "Style auswählen"
 
-#: build/accordion/index.js:1 build/collapse/index.js:1 build/notice/index.js:1
-#: build/tab/index.js:1
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/notice/index.js:1 build/tab/index.js:1
 msgid "Select an Icon"
 msgstr "Icon auswählen"
 
-#: build/accordion/index.js:1 build/collapse/index.js:1 build/tab/index.js:1
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
 msgid "Select an icon"
 msgstr "Icon auswählen"
 
@@ -705,10 +823,6 @@ msgstr "Sprungmarke festlegen"
 #: build/tabs/index.js:1
 msgid "Show / Hide all inactive tabs inside the editor."
 msgstr "Zeige/Verstecke alle inaktiven Tabs in der Bearbeitungsansicht."
-
-#: build/columns/index.js:1
-msgid "Show Border"
-msgstr "Rahmen anzeigen."
 
 #: build/collapsibles/index.js:1
 msgid "Show Expand-All-Link"
@@ -721,6 +835,15 @@ msgstr "Zeige \"Mehr Beiträge anzeigen\"-Button"
 #: build/columns/index.js:1
 msgid "Show Rule"
 msgstr "Zeige Trennlinien"
+
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Solid Icons"
+msgstr "Solid Icons"
+
+#: build/counter-row/index.js:1
+msgid "Start value"
+msgstr "Startwert"
 
 #: build/notice/index.js:1
 msgid "Style Settings"
@@ -738,17 +861,21 @@ msgstr "Tab Label Einstellungen"
 msgid "tags"
 msgstr "Schlagwörter"
 
-#: rrze-elements-blocks.php:72
+#: rrze-elements-blocks.php:73
 msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
 "version %2$s."
 msgstr ""
+"Auf dem Server läuft PHP Version %1$s. Das Plugin braucht mindestens PHP "
+"Version %2$s."
 
-#: rrze-elements-blocks.php:74
+#: rrze-elements-blocks.php:75
 msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."
 msgstr ""
+"Auf dem Server läuft WordPress Version  %1$s. Das Plugin benötigt mindestens "
+"WordPress Version %2$s."
 
 #: build/notice/index.js:1
 msgid "Thumbs down"
@@ -766,7 +893,7 @@ msgstr "Daumen nach oben"
 msgid "Thumps up icon"
 msgstr "Daumen nach oben Icon"
 
-#: build/cta/index.js:1
+#: build/counter/index.js:1 build/cta/index.js:1 build/iconbox/index.js:1
 msgid "Unlink"
 msgstr "Verlinkung aufheben"
 
@@ -795,15 +922,3 @@ msgstr ""
 #: build/tabs/index.js:1
 msgid "X-ray"
 msgstr "X-ray"
-
-#: build/collapsibles/index.js:1
-msgid ""
-"You have more than 20 items inside a collapsible. This can cause performance "
-"and User Experience issues."
-msgstr ""
-"Sie nutzen aktuell mehr als 20 Elemente in einem Accordion. Dies kann für "
-"Endnutzer zu Performanzproblemen und einer schlechten Nutzererfahrung führen."
-
-#: build/accordion/index.js:1 build/collapse/index.js:1
-msgid "Your Text"
-msgstr "Dein Text"

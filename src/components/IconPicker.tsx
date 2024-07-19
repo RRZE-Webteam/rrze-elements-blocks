@@ -117,7 +117,7 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
               variant="secondary"
               onClick={() => setAttributes({ icon: "", svgString: "" })}
             >
-              Remove Icon
+              {__("Remove Icon", "rrze-elements-b")}
             </Button>
           </Fragment>
         )}
@@ -254,7 +254,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
                   variant="secondary"
                   onClick={() => setAttributes({ icon: "", svgString: "" })}
                 >
-                  Remove Icon
+                  {__("Remove Icon", "rrze-elements-b")}
                 </Button>
               </Fragment>
             </>
