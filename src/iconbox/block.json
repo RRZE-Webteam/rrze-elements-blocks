@@ -55,6 +55,13 @@
       "default": ""
     }
   },
+  "example": {
+    "attributes": {
+      "title": "Term",
+      "description": "Description",
+      "icon": "solid eye"
+    }
+  },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",

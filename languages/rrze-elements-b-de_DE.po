@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-01-23T15:01:34+00:00\n"
-"PO-Revision-Date: 2024-07-19 10:51+0000\n"
+"PO-Revision-Date: 2024-08-09 10:46+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: rrze-elements-b\n"
 "Language: de_DE\n"
@@ -73,15 +73,12 @@ msgstr "Bild auswählen"
 msgid "Add text…"
 msgstr "Text hinzufügen…"
 
-#: build/contentwidthlimiter/index.js:1
-msgid "Add your content here..."
-msgstr "Inhalte hinzufügen…"
-
 #: build/news/index.js:1
 msgid "Additional classes"
 msgstr "Zusätzliche CSS-Klassen"
 
 #. Description of the plugin
+#: rrze-elements-blocks.php
 msgid "Advanced design elements for WordPress BlockEditor."
 msgstr "Erweiterte Designelemente für den WordPress BlockEditor."
 
@@ -120,11 +117,11 @@ msgstr "Audio"
 
 #: build/iconbox/index.js:1
 msgid "Begriff"
-msgstr ""
+msgstr "Begriff"
 
 #: build/counter/index.js:1
-msgid "Beschreibung"
-msgstr ""
+msgid "Big"
+msgstr "Groß"
 
 #: build/counter-row/block.json
 msgctxt "block description"
@@ -177,10 +174,10 @@ msgctxt "block description"
 msgid "Creates an accordion block"
 msgstr "Legt ein Accordion (Inhaltsfächer) an."
 
-#: build/alert/block.json
+#: build/cta/block.json
 msgctxt "block description"
-msgid "Creates an alert box."
-msgstr "Erstellt eine Hinweisbox."
+msgid "Creates an Call to action box."
+msgstr "Erstellt einen Handlungsaufruf."
 
 #: build/accordions/block.json
 msgctxt "block description"
@@ -206,6 +203,11 @@ msgstr "Erzeugt eine Hinweisbox mit Icon."
 msgctxt "block description"
 msgid "Creates an tabs block."
 msgstr "Legt einen Registerfächer an."
+
+#: build/alert/block.json
+msgctxt "block description"
+msgid "Used to highlight important information and warnings."
+msgstr "Hervorheben wichtiger Informationen und Warnhinweise."
 
 #: build/accordion/block.json build/collapse/block.json
 msgctxt "block keyword"
@@ -267,10 +269,20 @@ msgctxt "block style label"
 msgid "Colorblock"
 msgstr "Colorblock"
 
+#: build/cta/block.json
+msgctxt "block style label"
+msgid "Normal"
+msgstr "Normal"
+
 #: build/counter-row/block.json
 msgctxt "block style label"
 msgid "Outlined"
 msgstr "Outlined"
+
+#: build/cta/block.json
+msgctxt "block style label"
+msgid "Small"
+msgstr "Klein"
 
 #: build/collapsibles/block.json
 msgctxt "block title"
@@ -296,6 +308,11 @@ msgstr "Hinweis"
 msgctxt "block title"
 msgid "Blueprint"
 msgstr "Vorlage"
+
+#: build/cta/block.json
+msgctxt "block title"
+msgid "Call to action"
+msgstr "Handlungsaufruf"
 
 #: build/contentwidthlimiter/block.json
 msgctxt "block title"
@@ -447,6 +464,10 @@ msgstr "Standard"
 msgid "Definition"
 msgstr "Definition"
 
+#: build/counter/index.js:1
+msgid "Description"
+msgstr "Beschreibung"
+
 #: includes/Patterns.php:93
 msgctxt "DEV Template"
 msgid "A testing template for Accordions."
@@ -539,6 +560,10 @@ msgstr "FAUbox-Icon"
 msgid "Filter"
 msgstr "Filter"
 
+#: build/counter/index.js:1 build/iconbox/index.js:1
+msgid "Font Size"
+msgstr "Schriftgröße"
+
 #: build/counter-row/index.js:1
 msgid "Grid Settings"
 msgstr "Raster – Einstellungen"
@@ -579,11 +604,17 @@ msgstr "Darstellungsoptionen"
 msgid "Hide Thumbnail"
 msgstr "Beitragsbild ausblenden"
 
+#: build/notice/index.js:1
+msgid "Hint"
+msgstr "Hinweis"
+
 #. Author URI of the plugin
+#: rrze-elements-blocks.php
 msgid "https://blogs.fau.de/webworking/"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: rrze-elements-blocks.php
 msgid "https://github.com/RRZE-Webteam/rrze-elements"
 msgstr ""
 
@@ -637,6 +668,10 @@ msgstr ""
 msgid "Label settings"
 msgstr "Label | Einstellungen"
 
+#: build/iconbox/index.js:1
+msgid "Large"
+msgstr "Groß"
+
 #: build/news/index.js:1
 msgid "Layout"
 msgstr "Layout"
@@ -667,6 +702,10 @@ msgstr "Lautsprecher Icon"
 msgid "Maintenance"
 msgstr "Wartung"
 
+#: build/iconbox/index.js:1
+msgid "Medium"
+msgstr "Medium"
+
 #: build/notice/index.js:1
 msgid "Minus icon"
 msgstr "Minus Icon"
@@ -680,6 +719,10 @@ msgstr "Negativ"
 msgid "No icons found. Please try a different search term."
 msgstr ""
 "Es wurden keine Icons gefunden. Versuchen Sie einen anderen Suchbegriff."
+
+#: build/counter/index.js:1
+msgid "Normal"
+msgstr "Normal"
 
 #: build/notice/index.js:1
 msgid "Notice"
@@ -754,6 +797,11 @@ msgstr "Verhältnis Bild zu Text"
 msgid "Regular Icons"
 msgstr "Regular Icons"
 
+#: build/accordion/index.js:1 build/collapse/index.js:1
+#: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
+msgid "Remove Icon"
+msgstr "Icon entfernen"
+
 #: build/cta/index.js:1
 msgid "Remove image"
 msgstr "Bild entfernen"
@@ -771,10 +819,12 @@ msgid "RRZE Elements"
 msgstr "RRZE Elements"
 
 #. Plugin Name of the plugin
+#: rrze-elements-blocks.php
 msgid "RRZE Elements Blocks"
 msgstr "RRZE Elements Blocks"
 
 #. Author of the plugin
+#: rrze-elements-blocks.php
 msgid "RRZE Webteam"
 msgstr "RRZE Webteam"
 
@@ -816,6 +866,10 @@ msgstr "Icon auswählen"
 msgid "Select an icon"
 msgstr "Icon auswählen"
 
+#: build/collapsibles/index.js:1 build/news/index.js:1
+msgid "Select heading level"
+msgstr "Überschriftebene auswählen"
+
 #: build/collapse/index.js:1
 msgid "Set Jump Link"
 msgstr "Sprungmarke festlegen"
@@ -836,10 +890,18 @@ msgstr "Zeige \"Mehr Beiträge anzeigen\"-Button"
 msgid "Show Rule"
 msgstr "Zeige Trennlinien"
 
+#: build/counter/index.js:1 build/iconbox/index.js:1
+msgid "Small"
+msgstr "Klein"
+
 #: build/accordion/index.js:1 build/collapse/index.js:1
 #: build/iconbox/index.js:1 build/tab/index.js:1 build/tabs/index.js:1
 msgid "Solid Icons"
 msgstr "Solid Icons"
+
+#: build/counter-row/index.js:1
+msgid "Stagger between Animations (seconds)"
+msgstr "Zeitversatz zwischen Animationen in Sekunden"
 
 #: build/counter-row/index.js:1
 msgid "Start value"
@@ -861,7 +923,7 @@ msgstr "Tab Label Einstellungen"
 msgid "tags"
 msgstr "Schlagwörter"
 
-#: rrze-elements-blocks.php:73
+#: rrze-elements-blocks.php:74
 msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
 "version %2$s."
@@ -869,7 +931,7 @@ msgstr ""
 "Auf dem Server läuft PHP Version %1$s. Das Plugin braucht mindestens PHP "
 "Version %2$s."
 
-#: rrze-elements-blocks.php:75
+#: rrze-elements-blocks.php:76
 msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."

@@ -22,7 +22,11 @@ import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
-import { IconPicker, IconMarkComponent, IconPickerModalInset } from "../components/IconPicker";
+import {
+  IconPicker,
+  IconMarkComponent,
+  IconPickerModalInset,
+} from "../components/IconPicker";
 
 /**
  * Interface representing the properties for the Edit component.
@@ -164,22 +168,22 @@ export default function Edit({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Font Size", "rrze-elements-blocks")}>
+        <PanelBody title={__("Font Size", "rrze-elements-b")}>
           <FontSizePicker
             disableCustomFontSizes
             fontSizes={[
               {
-                name: `${__("Small", "rrze-elements-blocks")}`,
+                name: `${__("Small", "rrze-elements-b")}`,
                 size: "normal",
                 slug: "normal",
               },
               {
-                name: `${__("Medium", "rrze-elements-blocks")}`,
+                name: `${__("Medium", "rrze-elements-b")}`,
                 size: "medium",
                 slug: "medium",
               },
               {
-                name: `${__("Large", "rrze-elements-blocks")}`,
+                name: `${__("Large", "rrze-elements-b")}`,
                 size: "large",
                 slug: "large",
               },

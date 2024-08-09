@@ -128,22 +128,22 @@ export default function Edit({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Font Size", "rrze-elements-blocks")}>
+        <PanelBody title={__("Font Size", "rrze-elements-b")}>
           <FontSizePicker
             disableCustomFontSizes
             fontSizes={[
               {
-                name: `${__("Small", "rrze-elements-blocks")}`,
+                name: `${__("Small", "rrze-elements-b")}`,
                 size: "normal",
                 slug: "small",
               },
               {
-                name: `${__("Normal", "rrze-elements-blocks")}`,
+                name: `${__("Normal", "rrze-elements-b")}`,
                 size: "medium",
                 slug: "normal",
               },
               {
-                name: `${__("Big", "rrze-elements-blocks")}`,
+                name: `${__("Big", "rrze-elements-b")}`,
                 size: "large",
                 slug: "big",
               },
@@ -198,7 +198,7 @@ export default function Edit({
               tagName="span"
               value={attributes.description}
               onChange={(description) => setAttributes({ description })}
-              placeholder={__("Beschreibung", "rrze-elements-b")}
+              placeholder={__("Description", "rrze-elements-b")}
               allowedFormats={[]}
             />
             <br />

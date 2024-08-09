@@ -57,6 +57,7 @@ add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
  */
 function loadTextdomain()
 {
+    unload_textdomain('rrze-elements-b');
     load_plugin_textdomain('rrze-elements-b', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 

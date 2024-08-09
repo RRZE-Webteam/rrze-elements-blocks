@@ -127,7 +127,10 @@ export default function Edit({
         <InspectorControls>
           <PanelBody title={__("Animation Settings", "rrze-elements-b")}>
             <RangeControl
-              label={__("Stagger between Animations (seconds)", "rrze-elements-b")}
+              label={__(
+                "Stagger between Animations (seconds)",
+                "rrze-elements-b"
+              )}
               marks
               max={0.5}
               min={0}
@@ -139,7 +142,9 @@ export default function Edit({
               onMouseMove={function noRefCheck() {}}
               step={0.05}
             />
-            <Button onClick={onClickPlay}>Preview Animation</Button>
+            <Button onClick={onClickPlay}>
+              {__("Preview Animation", "rrze-elements-b")}
+            </Button>
           </PanelBody>
           <PanelBody title={__("Grid Settings", "rrze-elements-b")}>
             <RangeControl
@@ -162,10 +167,19 @@ export default function Edit({
               min={0}
               max={Number.MAX_VALUE}
             />
-            <Button onClick={onClickPlay}>Preview Animation</Button>
+            <Button onClick={onClickPlay}>
+              {__("Preview Animation", "rrze-elements-b")}
+            </Button>
           </PanelBody>
         </InspectorControls>
         <InnerBlocks
+          template={[
+            ["rrze-elements/rrze-counter", { title: 920} ],
+            ["rrze-elements/rrze-counter", { title: 1040}],
+            ["rrze-elements/rrze-counter", { title: 1160}],
+            ["rrze-elements/rrze-counter", { title: 1280}],
+            ["rrze-elements/rrze-counter", { title: 1340}],
+          ]}
           allowedBlocks={[
             "rrze-elements/rrze-counter",
             "rrze-elements/rrze-iconbox",

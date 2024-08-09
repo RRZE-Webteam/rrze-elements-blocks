@@ -34,6 +34,36 @@
       "isDefault": true
     }
   ],
+  "example": {
+    "attributes": {
+      "stagger": 0,
+      "columns": 3,
+      "startValue": 0
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/rrze-counter",
+        "attributes": {
+          "title": "49000",
+          "description": "Students"
+        }
+      },
+      {
+        "name": "rrze-elements/rrze-counter",
+        "attributes": {
+          "title": "5352",
+          "description": "Employees"
+        }
+      },
+      {
+        "name": "rrze-elements/rrze-counter",
+        "attributes": {
+          "title": "135",
+          "description": "Courses"
+        }
+      }
+    ]
+  },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",

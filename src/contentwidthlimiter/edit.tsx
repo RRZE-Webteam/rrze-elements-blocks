@@ -5,9 +5,7 @@ import {
   BlockControls,
 } from "@wordpress/block-editor";
 
-import {
-  ResizableBox,
-} from "@wordpress/components";
+import { ResizableBox } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
@@ -17,7 +15,7 @@ import { AlignmentBar } from "../components/Alignment";
 
 /**
  * Interface representing the properties for the Edit component.
- * 
+ *
  * @interface EditProps
  * @property {Object} attributes - The block attributes.
  */
@@ -41,40 +39,55 @@ interface EditProps {
 export default function Edit({
   blockProps,
   attributes,
-  setAttributes
+  setAttributes,
 }: EditProps) {
   const props = useBlockProps();
-   // Initialize state with the width from attributes
-   const [width, setWidth] = useState(attributes.width);
-   const [background, setBackground] = useState("transparent");
-   const [active, setActive] = useState(false);
-   const alignment = attributes.alignment;
+  // Initialize state with the width from attributes
+  const [width, setWidth] = useState(attributes.width);
+  const [background, setBackground] = useState("transparent");
+  const [active, setActive] = useState(false);
+  const alignment = attributes.alignment;
 
-   const onChangeResizerStart = (event: MouseEvent, direction: string, elementRef: HTMLElement): void => {
-  };
-  
-  const onChangeResizer = (event: MouseEvent, direction: string, elementRef: HTMLElement, delta: { height: number, width: number }): void => {
+  const onChangeResizerStart = (
+    event: MouseEvent,
+    direction: string,
+    elementRef: HTMLElement
+  ): void => {};
+
+  const onChangeResizer = (
+    event: MouseEvent,
+    direction: string,
+    elementRef: HTMLElement,
+    delta: { height: number; width: number }
+  ): void => {
     const newWidth = elementRef.offsetWidth;
-    
-    if(newWidth >= 300 && newWidth <= 1040){
+
+    if (newWidth >= 300 && newWidth <= 1040) {
       setWidth(newWidth);
     }
     setActive(true);
-    
-    if(Math.round(newWidth * 0.125) >= 50 && Math.round(newWidth * 0.125) <= 75){
+
+    if (
+      Math.round(newWidth * 0.125) >= 50 &&
+      Math.round(newWidth * 0.125) <= 75
+    ) {
       setBackground("#cfedd8");
-    } else if (newWidth <= 300 || newWidth >= 1040){
+    } else if (newWidth <= 300 || newWidth >= 1040) {
       setBackground("#E61607");
-    }
-    else {
+    } else {
       setBackground("#f2ded1");
     }
   };
-  
-  const onChangeResizerStop = (event: MouseEvent, direction: string, elementRef: HTMLElement, delta: { height: number, width: number }): void => {
+
+  const onChangeResizerStop = (
+    event: MouseEvent,
+    direction: string,
+    elementRef: HTMLElement,
+    delta: { height: number; width: number }
+  ): void => {
     const finalWidth = elementRef.offsetWidth;
     // Finalize the width when resizing stops
-    if(finalWidth >= 300 && finalWidth <= 1040){
+    if (finalWidth >= 300 && finalWidth <= 1040) {
       setWidth(finalWidth);
       setAttributes({ width: finalWidth });
     }
@@ -84,21 +97,20 @@ export default function Edit({
   };
 
   let hint = "";
-  if(Math.round(width * 0.125) >= 50 && Math.round(width * 0.125) <= 75){
+  if (Math.round(width * 0.125) >= 50 && Math.round(width * 0.125) <= 75) {
     hint = __(" (Ideale Leselänge)", "rrze-elements-b");
-  } else if (width <= 300 || width >= 1040){
+  } else if (width <= 300 || width >= 1040) {
     hint = __(" (Außerhalb des sichtbaren Bereichs)", "rrze-elements-b");
   } else {
-    hint = ""; 
+    hint = "";
   }
 
   let showHandleLeft = false;
   let showHandleRight = false;
-  if(alignment === "right"){
+  if (alignment === "right") {
     showHandleLeft = true;
     showHandleRight = false;
-
-  } else if (alignment === "center"){
+  } else if (alignment === "center") {
     showHandleLeft = true;
     showHandleRight = true;
   } else {
@@ -107,54 +119,58 @@ export default function Edit({
   }
 
   return (
-    <div {...props} className={`${props.className}` }>
+    <div {...props} className={`${props.className}`}>
       <BlockControls>
         <AlignmentBar
-          attributes={{alignment}}
+          attributes={{ alignment }}
           setAttributes={setAttributes}
           showCenterAlign={true}
         />
       </BlockControls>
-      {active && (
-        __("Ca. ") + Math.round(width * 0.125) + __(" Zeichen", "rrze-elements-b") + hint
-      )}
+      {active &&
+        __("Ca. ") +
+          Math.round(width * 0.125) +
+          __(" Zeichen", "rrze-elements-b") +
+          hint}
       <ResizableBox
-      className={`limit-width cwl-${alignment}`}
-  enable={{
-    bottom: false,
-    bottomLeft: false,
-    bottomRight: false,
-    left: showHandleLeft,
-    right: showHandleRight,
-    top: false,
-    topLeft: false,
-    topRight: false
-  }}
-  onResizeStop={onChangeResizerStop}
-  // onResizeStart={ onChangeResizerStart }
-  onResize={ onChangeResizer }
-  size={{
-    height: 'auto',
-    width: width
-  }}
->
-  <div
-    style={{
-      alignItems: 'center',
-      background: background,
-      display: 'flex',
-      height: '100%',
-      justifyContent: 'left',
-      width: (Math.round(width * 0.125)) + 'ch',
-    }}
-  >
-    <InnerBlocks
-      template={[
-        ["core/paragraph", { placeholder: __("Add your content here...", "rrze-elements-b") }],
-      ]}
-    />
-  </div>
-</ResizableBox>
+        className={`limit-width cwl-${alignment}`}
+        enable={{
+          bottom: false,
+          bottomLeft: false,
+          bottomRight: false,
+          left: showHandleLeft,
+          right: showHandleRight,
+          top: false,
+          topLeft: false,
+          topRight: false,
+        }}
+        onResizeStop={onChangeResizerStop}
+        // onResizeStart={ onChangeResizerStart }
+        onResize={onChangeResizer}
+        size={{
+          height: "auto",
+          width: width,
+        }}
+      >
+        <div
+          style={{
+            alignItems: "center",
+            background: background,
+            display: "flex",
+            height: "100%",
+            justifyContent: "left",
+            width: Math.round(width * 0.125) + "ch",
+          }}
+        >
+          <InnerBlocks
+            template={[
+              [
+                "core/paragraph"
+              ],
+            ]}
+          />
+        </div>
+      </ResizableBox>
     </div>
   );
 }
