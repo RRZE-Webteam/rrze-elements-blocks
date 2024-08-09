@@ -175,10 +175,7 @@ class Patterns
                 'title'       => __('Landing page template 1', 'rrze-elementsb'),
                 'description' => _x('A landingpage template for FAU.', 'Block pattern description', 'rrze-elements-b'),
                 'categories'  => ['page'],
-                'postTypes'   => ['page', 'wp_template'],
-                'inserter'    => true,
-                'keywords'    => ['starter'],
-                'blockTypes'  => ['core/post-content']
+                'postTypes'   => ['page'],
             ]
         ];
 
