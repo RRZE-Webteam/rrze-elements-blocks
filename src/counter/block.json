@@ -42,6 +42,12 @@
       "default": "_self"
     }
   },
+  "example": {
+    "attributes": {
+      "title": "49000",
+      "description": "Students"
+    }
+  },
   "textdomain": "rrze-elements-b",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",

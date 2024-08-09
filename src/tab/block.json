@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/tab",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "title": "Tabs",
   "category": "rrze_elements",
   "description": "Creates an tabs block.",

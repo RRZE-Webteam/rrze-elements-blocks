@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/collapsibles",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "title": "Accordion",
   "category": "rrze_elements",
   "description": "Creates an accordion block",
@@ -42,5 +42,52 @@
   "editorScript": "file:./index.js",
   "viewScript": "rrze-accordions",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "example": {
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Accordionreiter 1",
+          "loadOpen": true
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Accordionreiter 2"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Accordionreiter 3"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      }
+    ]
+  }
 }

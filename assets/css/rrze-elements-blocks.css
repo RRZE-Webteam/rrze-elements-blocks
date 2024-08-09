@@ -15384,13 +15384,13 @@ dt span.fau-counter-data.rrze-counter-large {
     grid-template-columns: repeat(5, 1fr);
   }
 }
-dt span.fau-iconbox-data.rrze-counter-normal {
+dt span.fau-iconbox-data.rrze-counter-normal, dt span.fau-iconbox-data.rrze-iconbox-normal {
   font-size: var(--wp--preset--font-size--normal, 1rem);
 }
-dt span.fau-iconbox-data.rrze-counter-medium {
+dt span.fau-iconbox-data.rrze-counter-medium, dt span.fau-iconbox-data.rrze-iconbox-medium {
   font-size: var(--wp--preset--font-size--medium, 1.25rem);
 }
-dt span.fau-iconbox-data.rrze-counter-large {
+dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconbox-large {
   font-size: var(--wp--preset--font-size--large, 4rem);
 }
 

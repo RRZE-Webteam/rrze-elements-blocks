@@ -4,7 +4,24 @@ All notable changes to this project will be documented in this file.
  
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+ ## [1.0.8] - 2024-08-09
  
+Quality of Life improvements
+ 
+### Updated
+- [Updated #143](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/143)
+  Further improved the automatic block transforms for Accordions
+
+### Fixed
+- [Fixed #151](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/151)
+  Fixed an issue, where the Font size was not applied to Icon boxes.
+- [Fixed #150](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/150)
+  Fixed the translation & Minor Usablity Issues inside all Elements Blocks
+
+### Removed
+- Removed the starter templates for patterns, waiting for the new design in 2025 to establish the feature.
+
 ## [1.0.7] - 2024-07-12
  
 Improvements for the Accordion & Collapsible-Blocks. UI-Improvements

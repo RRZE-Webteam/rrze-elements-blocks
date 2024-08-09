@@ -2,10 +2,10 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/alert",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "title": "Alert",
   "category": "rrze_elements",
-  "description": "Creates an alert box.",
+  "description": "Used to highlight important information and warnings.",
   "attributes": {
     "style": {
       "type": "string",
