@@ -15,7 +15,7 @@
       "default": "Blueprint"
     }
   },
-  "textdomain": "rrze-elements-b",
+  "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"

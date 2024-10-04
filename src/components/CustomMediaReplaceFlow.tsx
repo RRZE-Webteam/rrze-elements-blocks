@@ -94,8 +94,8 @@ const CustomMediaReplaceFlow = ({
           useFeaturedImage={false}
           name={
             !url
-              ? __("Add Image", "rrze-elements-b")
-              : __("Replace Image", "rrze-elements-b")
+              ? __("Add Image", "rrze-elements-blocks")
+              : __("Replace Image", "rrze-elements-blocks")
           }
         />
         {url && (
@@ -103,7 +103,7 @@ const CustomMediaReplaceFlow = ({
             {() => (
               <ToolbarButton
                 icon={trash}
-                label={__("Remove image", "rrze-elements-b")}
+                label={__("Remove image", "rrze-elements-blocks")}
                 onClick={onClearMedia} />
             )}
           </ToolbarItem>

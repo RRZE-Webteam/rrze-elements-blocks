@@ -225,7 +225,7 @@ export default function Edit({
       <InputWarning
         warning={__(
           "We recommend using a maximum of 4 tabs for the best User Experience.",
-          "rrze-elements-b"
+          "rrze-elements-blocks"
         )}
         min={5}
         max={null}
@@ -290,7 +290,7 @@ export default function Edit({
               role="tab"
             >
               <span className={"fa-solid fa-plus"}></span>
-              {/* {__(" Add new tab", "rrze-elements-b")} */}
+              {/* {__(" Add new tab", "rrze-elements-blocks")} */}
             </Button>
           </div>
           <InnerBlocks

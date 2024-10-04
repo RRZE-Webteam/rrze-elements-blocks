@@ -123,7 +123,7 @@ export default function Edit({
             <ToolbarButton
               label="link"
               icon={link}
-              title={__("Link", "rrze-elements-b")}
+              title={__("Link", "rrze-elements-blocks")}
               shortcut={displayShortcut.primary("k")}
               onClick={startEditing}
             />
@@ -132,7 +132,7 @@ export default function Edit({
             <ToolbarButton
               label="link"
               icon={linkOff}
-              title={__("Unlink", "rrze-elements-b")}
+              title={__("Unlink", "rrze-elements-blocks")}
               shortcut={displayShortcut.primaryShift("k")}
               onClick={unlink}
               isActive={true}
@@ -142,14 +142,14 @@ export default function Edit({
             icon={symbol}
             label={
               icon === ""
-                ? __("Add an icon", "rrze-elements-b")
-                : __("Change the icon", "rrze-elements-b")
+                ? __("Add an icon", "rrze-elements-blocks")
+                : __("Change the icon", "rrze-elements-blocks")
             }
             onClick={openModal}
           />
           {isOpen && (
             <Modal
-              title={__("Select an Icon", "rrze-elements-b")}
+              title={__("Select an Icon", "rrze-elements-blocks")}
               onRequestClose={closeModal}
               size="large"
             >
@@ -161,29 +161,29 @@ export default function Edit({
                 setAttributes={setAttributes}
               />
               <Button variant="primary" onClick={closeModal}>
-                {__("Close", "rrze-elements-b")}
+                {__("Close", "rrze-elements-blocks")}
               </Button>
             </Modal>
           )}
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Font Size", "rrze-elements-b")}>
+        <PanelBody title={__("Font Size", "rrze-elements-blocks")}>
           <FontSizePicker
             disableCustomFontSizes
             fontSizes={[
               {
-                name: `${__("Small", "rrze-elements-b")}`,
+                name: `${__("Small", "rrze-elements-blocks")}`,
                 size: "normal",
                 slug: "normal",
               },
               {
-                name: `${__("Medium", "rrze-elements-b")}`,
+                name: `${__("Medium", "rrze-elements-blocks")}`,
                 size: "medium",
                 slug: "medium",
               },
               {
-                name: `${__("Large", "rrze-elements-b")}`,
+                name: `${__("Large", "rrze-elements-blocks")}`,
                 size: "large",
                 slug: "large",
               },
@@ -244,7 +244,7 @@ export default function Edit({
                 value={attributes.title}
                 onChange={onChangeTitle}
                 allowedFormats={[]}
-                placeholder={__("Begriff", "rrze-elements-b")}
+                placeholder={__("Begriff", "rrze-elements-blocks")}
                 className={`fau-iconbox-editor-data rrze-iconbox-${attributes.fontSize || "large"} `}
               />
             </dt>
@@ -253,7 +253,7 @@ export default function Edit({
                 tagName="span"
                 value={attributes.description}
                 onChange={(description) => setAttributes({ description })}
-                placeholder={__("Definition", "rrze-elements-b")}
+                placeholder={__("Definition", "rrze-elements-blocks")}
                 allowedFormats={[]}
               />
               <br />
@@ -264,7 +264,7 @@ export default function Edit({
                     value={attributes.buttonText}
                     onChange={(buttonText) => setAttributes({ buttonText })}
                     allowedFormats={[]}
-                    placeholder={__("Button Text", "rrze-elements-b")}
+                    placeholder={__("Button Text", "rrze-elements-blocks")}
                     ref={setUrlPopoverAnchor}
                   />
                 </a>

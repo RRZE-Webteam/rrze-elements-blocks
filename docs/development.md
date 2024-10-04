@@ -23,7 +23,7 @@ If you want to extend blocks in the src folder, follow these simple steps:
 2. Publish your changes via a feature branch as pull-request to the dev-branch on GitHub
 
 ### Translation
-1. Update the pot file `wp i18n make-pot . languages/rrze-elements-b.pot --slug=rrze-elements-b --domain=rrze-elements-b --exclude=node_modules,src` via WPcli
+1. Update the pot file `wp i18n make-pot . languages/rrze-elements-blocks.pot --slug=rrze-elements-blocks --domain=rrze-elements-blocks --exclude=node_modules,src` via WPcli
 2. Transalte the missing strings for example via LocoTranslate or poEdit
 3. Bundle the translation strings and map them to the json files: `wp i18n make-json languages/ --no-purge`
 4. Push your Changes to the GitHub Repository as feature branch and Start a PullRequest into the dev branch

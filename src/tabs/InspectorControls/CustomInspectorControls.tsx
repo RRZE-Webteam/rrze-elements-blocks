@@ -34,11 +34,11 @@ const CustomInspectorControls = ({
   return (
     <>
       <InspectorControls>
-        <PanelBody title={__("X-ray", "rrze-elements-b")} initialOpen={false}>
+        <PanelBody title={__("X-ray", "rrze-elements-blocks")} initialOpen={false}>
           <ToggleControl
             label={__(
               "Show / Hide all inactive tabs inside the editor.",
-              "rrze-elements-b"
+              "rrze-elements-blocks"
             )}
             checked={xray}
             onChange={(xray) => setAttributes({ xray })}

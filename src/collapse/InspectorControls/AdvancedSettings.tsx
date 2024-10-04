@@ -30,9 +30,9 @@ const AdvancedSettings = ({ attributes, setAttributes }: AdvancedSettingsProps) 
   };
 
   return (
-    <PanelBody title={__("Advanced Settings", "rrze-elements-b")}>
+    <PanelBody title={__("Advanced Settings", "rrze-elements-blocks")}>
       <CheckboxControl
-        label={__("Open collapse on Page load", "rrze-elements-b")}
+        label={__("Open collapse on Page load", "rrze-elements-blocks")}
         checked={attributes.loadOpen}
         onChange={() => updateloadOpen()}
       />

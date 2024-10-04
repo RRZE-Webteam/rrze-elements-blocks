@@ -68,7 +68,7 @@ const JumpLinkSelector: React.FC<JumpLinkSelectorProps> = ({
 
   return (
     <PanelBody
-      title={__("Jump Link Settings", "rrze-elements-b")}
+      title={__("Jump Link Settings", "rrze-elements-blocks")}
       initialOpen={false}
       icon={<Icon icon={link} />}
     >
@@ -76,14 +76,14 @@ const JumpLinkSelector: React.FC<JumpLinkSelectorProps> = ({
         <Text>
           {__(
             "Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL.",
-            "rrze-elements-b"
+            "rrze-elements-blocks"
           )}
         </Text>
       </Spacer>
 
       <form onSubmit={handleToggleSubmit}>
         <BaseControl
-          label={__("Jump Link Name", "rrze-elements-b")}
+          label={__("Jump Link Name", "rrze-elements-blocks")}
           id="rrze-elements"
         >
           <input
@@ -91,12 +91,12 @@ const JumpLinkSelector: React.FC<JumpLinkSelectorProps> = ({
             type="text"
             value={inputURL}
             onChange={onChangeURL}
-            placeholder={__("Update the Jump Link", "rrze-elements-b")}
+            placeholder={__("Update the Jump Link", "rrze-elements-blocks")}
             style={{ width: "100%" }}
           />
         </BaseControl>
         <Button variant="primary" type="submit" disabled={disabled}>
-          {__("Set Jump Link", "rrze-elements-b")}
+          {__("Set Jump Link", "rrze-elements-blocks")}
         </Button>
       </form>
     </PanelBody>

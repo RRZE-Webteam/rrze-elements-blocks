@@ -3,7 +3,7 @@
   "version": "1.0.8",
   "description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
   "main": "build/index.js",
-  "textdomain": "rrze-elementsb",
+  "textdomain": "rrze-elements-blocks",
   "license": "GPL-3.0-or-later",
   "private": true,
   "scripts": {

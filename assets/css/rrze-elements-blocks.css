@@ -15447,10 +15447,10 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   /* Resets default margin for clean alignment */
 }
 
-.rrze-elements-b-counter-row {
+.rrze-elements-blocks-counter-row {
   display: initial;
 }
-.rrze-elements-b-counter-row .block-editor-block-list__layout {
+.rrze-elements-blocks-counter-row .block-editor-block-list__layout {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   column-gap: 0.15rem;

@@ -47,27 +47,27 @@ export default function Edit({
     {
       color: "#e9edf2",
       slug: "default",
-      name: __("Default", "rrze-elements-b"),
+      name: __("Default", "rrze-elements-blocks"),
     },
     {
       color: "#dff0d8",
       slug: "success",
-      name: __("Success", "rrze-elements-b"),
+      name: __("Success", "rrze-elements-blocks"),
     },
     {
       color: "#d9edf7",
       slug: "info",
-      name: __("Info", "rrze-elements-b"),
+      name: __("Info", "rrze-elements-blocks"),
     },
     {
       color: "#fcf8e3",
       slug: "warning",
-      name: __("Warning", "rrze-elements-b"),
+      name: __("Warning", "rrze-elements-blocks"),
     },
     {
       color: "#f2dede",
       slug: "danger",
-      name: __("Danger", "rrze-elements-b"),
+      name: __("Danger", "rrze-elements-blocks"),
     },
   ];
 
@@ -114,17 +114,17 @@ export default function Edit({
           />
         )}
         <PanelBody
-          title={__("Label settings", "rrze-elements-b")}
+          title={__("Label settings", "rrze-elements-blocks")}
           initialOpen={true}
         >
           <Spacer>
-            <Text>{__("Add a Label for your Alert. This changes the style to example", "rrze-elements-b")}</Text>
+            <Text>{__("Add a Label for your Alert. This changes the style to example", "rrze-elements-blocks")}</Text>
           </Spacer>
 
           <TextControl
             value={attributes.title}
             onChange={onChangeTitle}
-            placeholder={__("Add a Label", "rrze-elements-b")}
+            placeholder={__("Add a Label", "rrze-elements-blocks")}
             className="elements-blocks-input-following-icon"
           />
         </PanelBody>
@@ -157,7 +157,7 @@ export default function Edit({
           template={[
             [
               "core/paragraph",
-              { placeholder: __("Add a description…", "rrze-elements-b") },
+              { placeholder: __("Add a description…", "rrze-elements-blocks") },
             ],
           ]}
           allowedBlocks={["core/paragraph", "core/heading", "core/list"]}

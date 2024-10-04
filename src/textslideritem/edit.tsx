@@ -48,7 +48,7 @@ export default function Edit({
           [
             "core/paragraph",
             {
-              placeholder: __("Add text…", "rrze-elements-b"),
+              placeholder: __("Add text…", "rrze-elements-blocks"),
             },
           ],
         ]}

@@ -23,7 +23,7 @@ svg.elements-tabs-icon-modal {
 }
 
 .wp-block-rrze-elements-counter-row {
-    .rrze-elements-b-counter-row {
+    .rrze-elements-blocks-counter-row {
         display: initial;
 
         .block-editor-block-list__layout {
@@ -39,7 +39,7 @@ svg.elements-tabs-icon-modal {
     @for $i from 1 through 5 {
 
         &.rrze-elements-column-#{$i} {
-            .rrze-elements-b-counter-row {
+            .rrze-elements-blocks-counter-row {
                 .block-editor-block-list__layout {
                     grid-template-columns: repeat($i, 1fr);
                 }

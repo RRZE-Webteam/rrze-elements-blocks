@@ -16,8 +16,8 @@ import { WPBlockVariation } from "@wordpress/blocks";
 const variations = [
   {
     name: "notice-attention",
-    title: __("Warning", "rrze-elements-b"),
-    description: __("Warning", "rrze-elements-b"),
+    title: __("Warning", "rrze-elements-blocks"),
+    description: __("Warning", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-triangle-exclamation",
     icon: (
       <SVG
@@ -46,8 +46,8 @@ const variations = [
   },
   {
     name: "notice-hinweis",
-    title: __("Hint", "rrze-elements-b"),
-    description: __("Notice with hint-icon", "rrze-elements-b"),
+    title: __("Hint", "rrze-elements-blocks"),
+    description: __("Notice with hint-icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-info",
     icon: (
       <SVG
@@ -77,8 +77,8 @@ const variations = [
   },
   {
     name: "notice-baustelle",
-    title: __("Maintenance", "rrze-elements-b"),
-    description: __("Notice with wrench icon", "rrze-elements-b"),
+    title: __("Maintenance", "rrze-elements-blocks"),
+    description: __("Notice with wrench icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-screwdriver-wrench",
     icon: (
       <SVG
@@ -107,8 +107,8 @@ const variations = [
   },
   {
     name: "notice-question",
-    title: __("Question", "rrze-elements-b"),
-    description: __("Questionmark", "rrze-elements-b"),
+    title: __("Question", "rrze-elements-blocks"),
+    description: __("Questionmark", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-question",
     icon: (
       <SVG
@@ -137,8 +137,8 @@ const variations = [
   },
   {
     name: "notice-minus",
-    title: __("Negative", "rrze-elements-b"),
-    description: __("Minus icon", "rrze-elements-b"),
+    title: __("Negative", "rrze-elements-blocks"),
+    description: __("Minus icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-minus",
     icon: (
       <SVG
@@ -167,8 +167,8 @@ const variations = [
   },
   {
     name: "notice-plus",
-    title: __("Positive", "rrze-elements-b"),
-    description: __("Plus-icon", "rrze-elements-b"),
+    title: __("Positive", "rrze-elements-blocks"),
+    description: __("Plus-icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-plus",
     icon: (
       <SVG
@@ -197,8 +197,8 @@ const variations = [
   },
   {
     name: "notice-idea",
-    title: __("Idea", "rrze-elements-b"),
-    description: __("Lightbulb icon", "rrze-elements-b"),
+    title: __("Idea", "rrze-elements-blocks"),
+    description: __("Lightbulb icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-lightbulb",
     icon: (
       <SVG
@@ -227,8 +227,8 @@ const variations = [
   },
   {
     name: "notice-download",
-    title: __("Download", "rrze-elements-b"),
-    description: __("Download-icon", "rrze-elements-b"),
+    title: __("Download", "rrze-elements-blocks"),
+    description: __("Download-icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-download",
     icon: (
       <SVG
@@ -257,8 +257,8 @@ const variations = [
   },
   {
     name: "notice-faubox",
-    title: __("FAUbox", "rrze-elements-b"),
-    description: __("FAUbox-icon", "rrze-elements-b"),
+    title: __("FAUbox", "rrze-elements-blocks"),
+    description: __("FAUbox-icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-cloud-arrow-down",
     icon: (
       <SVG
@@ -287,8 +287,8 @@ const variations = [
   },
   {
     name: "notice-audio",
-    title: __("Audio", "rrze-elements-b"),
-    description: __("Loudspeaker icon", "rrze-elements-b"),
+    title: __("Audio", "rrze-elements-blocks"),
+    description: __("Loudspeaker icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-headphones",
     icon: (
       <SVG
@@ -317,8 +317,8 @@ const variations = [
   },
   {
     name: "notice-video",
-    title: __("Video", "rrze-elements-b"),
-    description: __("Video-icon", "rrze-elements-b"),
+    title: __("Video", "rrze-elements-blocks"),
+    description: __("Video-icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-video",
     icon: (
       <SVG
@@ -347,8 +347,8 @@ const variations = [
   },
   {
     name: "notice-thumbs-up",
-    title: __("Thumbs up", "rrze-elements-b"),
-    description: __("Thumps up icon", "rrze-elements-b"),
+    title: __("Thumbs up", "rrze-elements-blocks"),
+    description: __("Thumps up icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-thumbs-up",
     icon: (
       <SVG
@@ -377,8 +377,8 @@ const variations = [
   },
   {
     name: "notice-thumbs-down",
-    title: __("Thumbs down", "rrze-elements-b"),
-    description: __("Thumbs down icon", "rrze-elements-b"),
+    title: __("Thumbs down", "rrze-elements-blocks"),
+    description: __("Thumbs down icon", "rrze-elements-blocks"),
     iconClass: "fa-solid fa-thumbs-down",
     icon: (
       <SVG

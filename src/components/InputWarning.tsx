@@ -29,7 +29,7 @@ const InputWarning: React.FC<InputWarningProps> = ({ warning, min, max, count, s
             isDismissible={false}
             className={className}
         >
-            {__(warning, "rrze-elements-b")}
+            {__(warning, "rrze-elements-blocks")}
         </Notice>
     ) : null;
 };

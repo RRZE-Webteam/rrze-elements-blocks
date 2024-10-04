@@ -41,7 +41,7 @@ const CustomInspectorControls = ({
         <>
         <InspectorControls>
         <TitleInspectorControls attributes={{title: attributes.title}} setAttributes={setAttributes} />
-        <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
+        <PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
           <IconPicker
             attributes={{
               icon: attributes.icon,

@@ -57,7 +57,7 @@ const HeadingSelector = ({ attributes, setAttributes }: SaveProps) => {
   return (
     <ToolbarDropdownMenu
       icon={checkHeadingLevelIcon(attributes.hstart)}
-      label={__("Select heading level", "rrze-elements-b")}
+      label={__("Select heading level", "rrze-elements-blocks")}
       controls={[
         {
           title: "H2",
@@ -102,7 +102,7 @@ const HeadingSelectorInspector = ({ attributes, setAttributes }: SaveProps) => {
   return (
     <>
       <ToggleGroupControl
-        label={__("Heading level", "rrze-elements-b")}
+        label={__("Heading level", "rrze-elements-blocks")}
         value={attributes.hstart}
         onChange={handleToggleHeadingGroup}
         isBlock
@@ -114,7 +114,7 @@ const HeadingSelectorInspector = ({ attributes, setAttributes }: SaveProps) => {
         <ToggleGroupControlOption value={6} label="H6" />
       </ToggleGroupControl>
       <Text>
-        {__("Controls the heading level of the accordion", "rrze-elements-b")}
+        {__("Controls the heading level of the accordion", "rrze-elements-blocks")}
     </Text>
       <Divider />
     </>

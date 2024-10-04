@@ -230,7 +230,7 @@ export default function Edit({
         />
       </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Filter", "rrze-elements-b")} initialOpen={true}>
+        <PanelBody title={__("Filter", "rrze-elements-blocks")} initialOpen={true}>
           <CustomQueryControls
             attributes={{
               cat: attributes.cat,
@@ -239,40 +239,40 @@ export default function Edit({
             setAttributes={setAttributes}
           />
           <TextControl
-            label={__("tags", "rrze-elements-b")}
-            help={__("Comma separated list of tags", "rrze-elements-b")}
+            label={__("tags", "rrze-elements-blocks")}
+            help={__("Comma separated list of tags", "rrze-elements-blocks")}
             value={tag}
             onChange={(value) => setAttributes({ tag: value })}
           />
           <TextControl
-            label={__("Additional classes", "rrze-elements-b")}
+            label={__("Additional classes", "rrze-elements-blocks")}
             value={divclass}
             onChange={(value) => setAttributes({ divclass: value })}
           />
           <CheckboxControl
-            label={__("Hide duplicate posts", "rrze-elements-b")}
+            label={__("Hide duplicate posts", "rrze-elements-blocks")}
             checked={attributes.hideduplicates ?? false}
             onChange={(value) => setAttributes({ hideduplicates: value })}
           />
           <CheckboxControl
-            label={__("Only show posts with thumbnails", "rrze-elements-b")}
+            label={__("Only show posts with thumbnails", "rrze-elements-blocks")}
             checked={attributes.has_thumbnail}
             onChange={(value) => setAttributes({ has_thumbnail: value })}
           />
           <CheckboxControl
-            label={__("Only show sticky posts", "rrze-elements-b")}
+            label={__("Only show sticky posts", "rrze-elements-blocks")}
             checked={attributes.sticky_only ?? false}
             onChange={(value) => setAttributes({ sticky_only: value })}
           />
           {/* <RangeControl
-            label={__("Number of days", "rrze-elements-b")}
+            label={__("Number of days", "rrze-elements-blocks")}
             value={attributes.days}
             onChange={onChangeDays}
             min={0}
             max={365}
           /> */}
         </PanelBody>
-        <PanelBody title={__("Layout", "rrze-elements-b")} initialOpen={false}>
+        <PanelBody title={__("Layout", "rrze-elements-blocks")} initialOpen={false}>
           <HeadingSelectorInspector
             attributes={{ hstart: attributes.hstart }}
             setAttributes={setAttributes}
@@ -283,78 +283,78 @@ export default function Edit({
             onChange={(value) => setAttributes({ title: value })}
           />
           <CheckboxControl
-            label={__("Img first", "rrze-elements-b")}
+            label={__("Img first", "rrze-elements-blocks")}
             checked={attributes.type?.includes("img_first") ?? false}
             onChange={onChangeType("img_first")}
           />
           <CheckboxControl
-            label={__("Show more articles button", "rrze-elements-b")}
+            label={__("Show more articles button", "rrze-elements-blocks")}
             checked={attributes.type?.includes("show_more") ?? false}
             onChange={onChangeType("show_more")}
           />
           <CheckboxControl
-            label={__("Display as List", "rrze-elements-b")}
+            label={__("Display as List", "rrze-elements-blocks")}
             checked={attributes.display?.includes("list") ?? false}
             onChange={onChangeDisplay}
           />
           <RangeControl
-            label={__("Ratio image", "rrze-elements-b")}
+            label={__("Ratio image", "rrze-elements-blocks")}
             value={leftColumnWidth}
             onChange={onChangeLeftColumnWidth}
             min={0}
             max={3}
           />
           <RangeControl
-            label={__("Ratio text & metadata", "rrze-elements-b")}
+            label={__("Ratio text & metadata", "rrze-elements-blocks")}
             value={rightColumnWidth}
             onChange={onChangeRightColumnWidth}
             min={0}
             max={3}
           />
           <RangeControl
-            label={__("Number of Columns", "rrze-elements-b")}
+            label={__("Number of Columns", "rrze-elements-blocks")}
             value={attributes.columns}
             onChange={onChangeColumns}
             min={1}
             max={4}
           />
           {/* <ToggleGroupControl
-            label={__("Image alignment", "rrze-elements-b")}
+            label={__("Image alignment", "rrze-elements-blocks")}
             value={attributes.hstart}
             onChange={handleToggleImgAlignment}
             isBlock
           >
             <ToggleGroupControlOption
               value={"left"}
-              label={__("left", "rrze-elements-b")}
+              label={__("left", "rrze-elements-blocks")}
             />
             <ToggleGroupControlOption
               value={"right"}
-              label={__("right", "rrze-elements-b")}
+              label={__("right", "rrze-elements-blocks")}
             />
           </ToggleGroupControl> */}
         </PanelBody>
         <PanelBody
-          title={__("Hide Options", "rrze-elements-b")}
+          title={__("Hide Options", "rrze-elements-blocks")}
           initialOpen={false}
         >
           <CheckboxControl
-            label={__("Hide Date", "rrze-elements-b")}
+            label={__("Hide Date", "rrze-elements-blocks")}
             checked={attributes.hide?.includes("date") ?? false}
             onChange={() => toggleHideValue("date")}
           />
           <CheckboxControl
-            label={__("Hide Thumbnail", "rrze-elements-b")}
+            label={__("Hide Thumbnail", "rrze-elements-blocks")}
             checked={attributes.hide?.includes("thumbnail") ?? false}
             onChange={() => toggleHideValue("thumbnail")}
           />
           <CheckboxControl
-            label={__("Hide Category", "rrze-elements-b")}
+            label={__("Hide Category", "rrze-elements-blocks")}
             checked={attributes.hide?.includes("category") ?? false}
             onChange={() => toggleHideValue("category")}
           />
           <CheckboxControl
-            label={__("Hide meta", "rrze-elements-b")}
+            label={__("Hide meta", "rrze-elements-blocks")}
             checked={attributes.hidemeta ?? false}
             onChange={(value) => setAttributes({ hidemeta: value })}
           />
@@ -366,7 +366,7 @@ export default function Edit({
             <p>
               {__(
                 "An error occured inside the ServerSideRender component of this block. Try adjusting the block settings, save your draft and refresh the page.",
-                "rrze-elements-b"
+                "rrze-elements-blocks"
               )}
             </p>
           </div>

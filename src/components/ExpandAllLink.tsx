@@ -22,7 +22,7 @@ const ExpandAllLinkSelector = ({attributes, setAttributes}: SaveProps) => {
 
   return (
       <CheckboxControl
-        label={__("Show Expand-All-Link", "rrze-elements-b")}
+        label={__("Show Expand-All-Link", "rrze-elements-blocks")}
         checked={attributes.expandAllLink}
         onChange={updateExpandAllLink}
       />

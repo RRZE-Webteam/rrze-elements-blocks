@@ -19,7 +19,7 @@ export default function save({ attributes }: SaveProps) {
         <div className="accordion">
         {expandAllLink && (
           <div className="button-container-right">
-            <button className="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">{__("Expand All", "rrze-elements-b")}</button>
+            <button className="expand-all standard-btn primary-btn xsmall-btn" data-status="closed">{__("Expand All", "rrze-elements-blocks")}</button>
           </div>
           )}
           <InnerBlocks.Content />

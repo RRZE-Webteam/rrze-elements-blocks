@@ -146,14 +146,14 @@ const Edit: React.FC<SaveProps> = ({
                   icon={symbol}
                   label={
                     icon === ""
-                      ? __("Add an icon", "rrze-elements-b")
-                      : __("Change the icon", "rrze-elements-b")
+                      ? __("Add an icon", "rrze-elements-blocks")
+                      : __("Change the icon", "rrze-elements-blocks")
                   }
                   onClick={openModal}
                 />
                 {isOpen && (
                   <Modal
-                    title={__("Select an Icon", "rrze-elements-b")}
+                    title={__("Select an Icon", "rrze-elements-blocks")}
                     onRequestClose={closeModal}
                     size="large"
                   >
@@ -165,7 +165,7 @@ const Edit: React.FC<SaveProps> = ({
                       setAttributes={setAttributes}
                     />
                     <Button variant="primary" onClick={closeModal}>
-                      {__("Close", "rrze-elements-b")}
+                      {__("Close", "rrze-elements-blocks")}
                     </Button>
                   </Modal>
                 )}
@@ -179,7 +179,7 @@ const Edit: React.FC<SaveProps> = ({
           attributes={attributes}
           setAttributes={setAttributes}
         />
-        <PanelBody title={__("Icon Settings", "rrze-elements-b")}>
+        <PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
           <IconPicker
             attributes={{
               icon: attributes.icon,
@@ -215,7 +215,7 @@ const Edit: React.FC<SaveProps> = ({
               tagName="p"
               value={title}
               onChange={onChangeTitle}
-              placeholder={__("Enter your Title…", "rrze-elements-b")}
+              placeholder={__("Enter your Title…", "rrze-elements-blocks")}
               allowedFormats={[]}
               className="elements-blocks-input-following-icon"
             />

@@ -27,10 +27,10 @@ class Blocks
                 register_block_type(plugin_dir_path(__DIR__) . 'build/news', array(
                     'render_callback' => [$this, 'render_news_block'],
                 ));
-                load_plugin_textdomain('rrze-elements-b', false, plugin_dir_path(__DIR__) . 'languages');
+                load_plugin_textdomain('rrze-elements-blocks', false, plugin_dir_path(__DIR__) . 'languages');
 
                 $script_handle = generate_block_asset_handle('rrze-elements/' . 'news', 'editorScript');
-                wp_set_script_translations($script_handle, 'rrze-elements-b', plugin_dir_path(__DIR__) . 'languages');
+                wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
             }
         }
     }
@@ -48,10 +48,10 @@ class Blocks
         foreach ($blocks as $block) {
             register_block_type(plugin_dir_path(__DIR__) . 'build/' . $block);
 
-            load_plugin_textdomain('rrze-elements-b', false, dirname(plugin_basename(__DIR__)) . 'languages');
+            load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
 
             $script_handle = generate_block_asset_handle('rrze-elements/' . $block, 'editorScript');
-            wp_set_script_translations($script_handle, 'rrze-elements-b', plugin_dir_path(__DIR__) . 'languages');
+            wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
         }
 
         // Register global styles and scripts here.

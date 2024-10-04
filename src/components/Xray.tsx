@@ -60,12 +60,12 @@ const XrayBar = ({ attributes, setAttributes }: XrayTogglerProps) => {
         {() => (
           <ToolbarDropdownMenu
             icon={xray ? ActivexrayIcon : inactiveXrayIcon}
-            label={__("Display options for the Editor", "rrze-elements-b")}
+            label={__("Display options for the Editor", "rrze-elements-blocks")}
             controls={[
               {
                 title: __(
                   "Reveal all tabs inside the Editor (X-ray)",
-                  "rrze-elements-b"
+                  "rrze-elements-blocks"
                 ),
                 icon: ActivexrayIcon,
                 onClick: () => toggleXray(true),
@@ -73,7 +73,7 @@ const XrayBar = ({ attributes, setAttributes }: XrayTogglerProps) => {
               {
                 title: __(
                   "Only show active tabs inside the editor",
-                  "rrze-elements-b"
+                  "rrze-elements-blocks"
                 ),
                 icon: inactiveXrayIcon,
                 onClick: () => toggleXray(false),

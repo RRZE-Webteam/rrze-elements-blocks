@@ -45,7 +45,7 @@
   "supports": {
     "html": false
   },
-  "textdomain": "rrze-elements-b",
+  "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "viewScript": "rrze-tabs",
   "editorStyle": "file:./index.css",
