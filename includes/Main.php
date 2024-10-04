@@ -111,38 +111,43 @@ class Main
             'rrze-accordions',
             plugins_url('assets/js/accordion/rrze-accordion-min.js', plugin_basename($this->pluginFile)),
             ['jquery', 'wp-i18n'],
-            RRZE_ELEMENTSB_VERSION
+            RRZE_ELEMENTSB_VERSION,
+            true
         );
         wp_register_script(
             'rrze-tabs',
             plugins_url('assets/js/tabs/rrze-tabs-min.js', plugin_basename($this->pluginFile)),
             ['jquery'],
-            RRZE_ELEMENTSB_VERSION
+            RRZE_ELEMENTSB_VERSION,
+            true
         );
         wp_register_script(
             'rrze-gsap',
             plugins_url('assets/js/gsap/gsap.min.js', plugin_basename($this->pluginFile)),
             [],
-            RRZE_ELEMENTSB_VERSION
+            RRZE_ELEMENTSB_VERSION,
+            true
         );
         wp_register_script(
             'rrze-gsap-scrolltrigger',
             plugins_url('assets/js/gsap/ScrollTrigger.min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap'],
             RRZE_ELEMENTSB_VERSION,
-            true // Assuming you want it in the footer
+            true
         );
         wp_register_script(
             'rrze-counter',
             plugins_url('assets/js/counter/rrze-counter.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
-            RRZE_ELEMENTSB_VERSION
+            RRZE_ELEMENTSB_VERSION,
+            true
         );
         wp_register_script(
             'rrze-scrollstories',
             plugins_url('assets/js/scrollstories/scrollstories.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
-            RRZE_ELEMENTSB_VERSION
+            RRZE_ELEMENTSB_VERSION,
+            true
         );
     }
 }
