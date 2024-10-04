@@ -1,11 +1,11 @@
 <?php
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit;
 
 use RRZE\Elements\News\News;
-use RRZE\ElementsB\ThemeSniffer;
+use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
 {

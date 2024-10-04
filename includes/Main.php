@@ -1,8 +1,8 @@
 <?php
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
-use const RRZE\ElementsB\RRZE_ELEMENTSB_VERSION;
+use const RRZE\ElementsBlocks\RRZE_ELEMENTSB_VERSION;
 
 defined('ABSPATH') || exit;
 

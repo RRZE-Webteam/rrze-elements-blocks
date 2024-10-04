@@ -13,7 +13,7 @@ Domain Path:     /languages
 Text Domain:     rrze-elements-blocks
 */
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit('No direct script access allowed');
 use RRZE\Elements\News\News;
@@ -21,7 +21,7 @@ use RRZE\Elements\News\News;
 // Require necessary configuration files.
 require_once 'config/config.php';
 
-use RRZE\ElementsB\Main;
+use RRZE\ElementsBlocks\Main;
 
 // Define plugin version requirements.
 const RRZE_PHP_VERSION = '8.0';
