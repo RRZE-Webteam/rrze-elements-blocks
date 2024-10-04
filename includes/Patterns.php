@@ -214,6 +214,7 @@ class Patterns
             return;
         }
 
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
         $pattern_content = file_get_contents($pattern_path);
 
         $pattern_content = $this->replace_random_numbers($pattern_content);
@@ -243,7 +244,7 @@ class Patterns
             $pair_index = intval($counter / 2);
 
             if (!isset($random_numbers[$pair_index])) {
-                $random_numbers[$pair_index] = rand(100, 1000);
+                $random_numbers[$pair_index] = wp_rand(100, 1000);
             }
 
             $counter++;
