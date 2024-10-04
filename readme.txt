@@ -2,7 +2,7 @@
 Contributors: RRZE-Webteam
 Tags: blocks, gutenberg, design, elements
 Requires at least: 6.0
-Tested up to: 6.3
+Tested up to: 6.6
 Requires PHP: 8.0
 Stable tag: 1.0.8
 License: GPLv2 or later
