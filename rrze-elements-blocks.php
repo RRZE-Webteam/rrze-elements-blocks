@@ -71,8 +71,10 @@ function systemRequirements()
     $error = '';
 
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
+        /* translators: 1: current PHP version, 2: required PHP version */
         $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elements-blocks'), PHP_VERSION, RRZE_PHP_VERSION);
     } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
+        /* translators: 1: current WordPress version, 2: required WordPress version */
         $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elements-blocks'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
     }
 
@@ -88,7 +90,7 @@ function activation()
 
     if ($error = systemRequirements()) {
         deactivate_plugins(plugin_basename(__FILE__), false, true);
-        wp_die($error);
+        wp_die(esc_html($error));
     }
 }
 
