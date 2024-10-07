@@ -11467,12 +11467,14 @@ button.expand-all.standard-btn {
   display: none;
 }
 
+#content main .accordion-body:target,
 .admin-bar #content main .accordion-body:target {
   padding-top: 0;
+  background-color: cornflowerblue;
 }
 
-.accordion-body[hidden] {
-  display: none;
+#content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {
+  padding-top: 8px;
 }
 
 .rrze-elements-tabs {
