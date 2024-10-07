@@ -34,11 +34,14 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
       <>
         <div className={`accordion-group ${color}`}>
           <HeadingComponent level={hstart} className="accordion-heading">
-            <span className="read-mode-only">{title}</span>
             <button
               className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
               data-name={jumpName}
+              type="button"
+              aria-expanded={loadOpen ? 'true' : 'false'}
+              aria-controls={`${jumpName}-section`}
+              id={jumpName}
               //@ts-ignore
               href={`#${jumpName}`}
             >
@@ -49,8 +52,10 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
             </button>
           </HeadingComponent>
           <div
-            id={jumpName}
+            id={`${jumpName}-section`}
             className={`accordion-body ${loadOnPageLoad}`}
+            aria-labelledby={jumpName}
+            role="region"
             //@ts-ignore
             name={jumpName}
           >

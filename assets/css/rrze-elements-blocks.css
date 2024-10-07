@@ -11471,6 +11471,10 @@ button.expand-all.standard-btn {
   padding-top: 0;
 }
 
+.accordion-body[hidden] {
+  display: none;
+}
+
 .rrze-elements-tabs {
   margin-bottom: 1em;
   /*

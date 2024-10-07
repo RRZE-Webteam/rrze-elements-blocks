@@ -313,3 +313,7 @@ button.expand-all.standard-btn {
 .admin-bar #content main .accordion-body:target {
     padding-top: 0;
 }
+
+.accordion-body[hidden]{
+    display: none;
+}

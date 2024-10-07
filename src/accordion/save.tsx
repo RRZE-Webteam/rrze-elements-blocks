@@ -46,6 +46,9 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
               className="accordion-toggle"
               data-toggle="collapse"
               data-name={output}
+              type="button"
+              aria-expanded={'false'}
+              aria-controls={output}
               //@ts-ignore
               href={`#${output}`}
             >
@@ -56,7 +59,8 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
           <div
             id={output}
             className="accordion-body"
-            style={{ display: "none" }}
+            aria-labelledby={jumpName}
+            role="region"
           >
             <div className="accordion-inner clearfix">
               <InnerBlocks.Content />

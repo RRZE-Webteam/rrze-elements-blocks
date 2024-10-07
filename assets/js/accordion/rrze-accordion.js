@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
      * Initially hides all accordion bodies except those marked as open or should stay open,
      * and marks the corresponding toggles as active.
      */
-    $('.accordion-body').not(".open, .stayopen").hide();
+    $('.accordion-body').not(".open, .stayopen").prop('hidden', true);
     $('.accordion-body.open').each(function() {
         $(this).closest('.accordion-group').find('.accordion-toggle').first().addClass('active');
     });
@@ -56,11 +56,17 @@ jQuery(document).ready(function($) {
         const $directToggle = $group.children('.accordion-heading').children('.accordion-toggle');
         const $otherGroups = $group.siblings();
 
-        $otherGroups.children('.accordion-heading').children('.accordion-toggle').removeClass('active');
-        $otherGroups.children('.accordion-body').not('.accordion-body.stayopen').slideUp();
+        const isExpanded = $directToggle.hasClass('active');
 
-        $directToggle.toggleClass('active');
-        $directBody.slideToggle();
+        $otherGroups.children('.accordion-heading').children('.accordion-toggle').removeClass('active').attr('aria-expanded', 'false');
+        $otherGroups.children('.accordion-body').not('.accordion-body.stayopen').prop('hidden', false);
+
+        $directToggle.toggleClass('active').attr('aria-expanded', !isExpanded);
+        if (isExpanded) {
+            $directBody.prop('hidden', true);
+        } else {
+            $directBody.prop('hidden', false);
+        }
 
         refreshSlickGallery($group);
     }
@@ -82,20 +88,19 @@ jQuery(document).ready(function($) {
      * @param {jQuery} $target - The target accordion body element to be opened.
      */
     function openAnchorAccordion($target) {
-        if ($target.closest('.accordion').parent().closest('.accordion-group')) {
-            const $thisgroup = $($target).closest('.accordion-group');
-            const $othergroups = $($target).closest('.accordion').find('.accordion-group').not($thisgroup);
-            $($othergroups).find('.accordion-toggle').removeClass('active');
-            $($othergroups).find('.accordion-body').not('.accordion-body.stayopen').slideUp();
-            $($thisgroup).find('.accordion-toggle:first').not('.active').addClass('active');
-            $($thisgroup).find('.accordion-body:first').slideDown();
-            $($thisgroup).parents('.accordion-group').find('.accordion-toggle:first').not('.active').addClass('active');
-            $($thisgroup).parents('.accordion-body').slideDown();
-        }
+        const $thisgroup = $target.closest('.accordion-group');
+        const $othergroups = $target.closest('.accordion').find('.accordion-group').not($thisgroup);
+        $othergroups.find('.accordion-toggle').removeClass('active').attr('aria-expanded', 'false');
+        $othergroups.find('.accordion-body').not('.accordion-body.stayopen').prop('hidden', true);
+        $thisgroup.find('.accordion-toggle:first').addClass('active').attr('aria-expanded', 'true');
+        $thisgroup.find('.accordion-body:first').prop('hidden', false);
+        $thisgroup.parents('.accordion-group').find('.accordion-toggle:first').addClass('active').attr('aria-expanded', 'true');
+        $thisgroup.parents('.accordion-body').prop('hidden', false);
+
         const offset = $target.offset();
-        const $scrolloffset = offset.top - 300;
+        const scrolloffset = offset.top - 300;
         $('html,body').animate({
-            scrollTop: $scrolloffset
+            scrollTop: scrolloffset
         }, 'slow');
     }
 
@@ -203,15 +208,4 @@ jQuery(document).ready(function($) {
             }
         }
     });
-
-  /**
-   * Open all Accordions when Ctrl + F is pressed
-   */
-  document.addEventListener('keydown', function(event) {
-    console.log("fired");
-    if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
-      $('.accordion-body').slideDown();
-      $('.accordion-toggle').addClass('active');
-    }
-  });
 });
