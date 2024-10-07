@@ -46,11 +46,10 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
               className="accordion-toggle"
               data-toggle="collapse"
               data-name={output}
+              data-href={`#${output}`}
               type="button"
               aria-expanded={'false'}
               aria-controls={output}
-              //@ts-ignore
-              href={`#${output}`}
             >
               {svgString && <span className={svgString}></span>}
               {title || "…"}

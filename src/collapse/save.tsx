@@ -38,12 +38,11 @@ const Save: React.FC<SaveProps> = ({ attributes }) => {
               className={`accordion-toggle ${activeOnPageLoad}`}
               data-toggle="collapse"
               data-name={jumpName}
+              data-href={`#${jumpName}`}
               type="button"
               aria-expanded={loadOpen ? 'true' : 'false'}
               aria-controls={`${jumpName}-section`}
               id={jumpName}
-              //@ts-ignore
-              href={`#${jumpName}`}
             >
               {(svgString &&
                 <span className={svgString}></span>
