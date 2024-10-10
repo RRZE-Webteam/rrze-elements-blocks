@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+ ## [1.0.0] - 2024-10-10
+ 
+Accessibility improvements for the Accordion-Block inside the Frontend.
+ 
+### Fixed
+- Fixed a11y-issues like missing aria-Tags and roles for full Voice Over Support. The script follows the a11y-Update from the RRZE Element suite, still sharing the same JS for backwards compatibility.
+
+### Added
+- German Formal Translation for better coverage
+
  ## [1.0.8] - 2024-08-09
  
 Quality of Life improvements
