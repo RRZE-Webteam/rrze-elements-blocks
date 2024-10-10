@@ -1,6 +1,6 @@
 <?php
 
-namespace RRZE\ElementsB\Config;
+namespace RRZE\ElementsBlocks\Config;
 
 defined('ABSPATH') || exit;
 

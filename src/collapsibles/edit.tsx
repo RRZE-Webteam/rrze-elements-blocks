@@ -82,7 +82,7 @@ export default function Edit({
       </BlockControls>
       <InspectorControls>
         <PanelBody
-          title={__("Heading Settings", "rrze-elements-b")}
+          title={__("Heading Settings", "rrze-elements-blocks")}
           initialOpen={true}
         >
           <HeadingSelectorInspector
@@ -91,7 +91,7 @@ export default function Edit({
           />
         </PanelBody>
         <PanelBody
-          title={__("Collapsibles Settings", "rrze-elements-b")}
+          title={__("Collapsibles Settings", "rrze-elements-blocks")}
           initialOpen={true}
         >
           <ExpandAllLink
@@ -107,7 +107,7 @@ export default function Edit({
               className="expand-all standard-btn primary-btn xsmall-btn"
               data-status="closed"
             >
-              {__("Expand All", "rrze-elements-b")}
+              {__("Expand All", "rrze-elements-blocks")}
             </button>
           </div>
         )}

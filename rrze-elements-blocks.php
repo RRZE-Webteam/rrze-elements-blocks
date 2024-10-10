@@ -4,16 +4,16 @@
 Plugin Name:     RRZE Elements Blocks
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-elements
 Description:     Advanced design elements for WordPress BlockEditor.
-Version:         1.0.8
+Version:         1.0.9
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
 License URI:     http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path:     /languages
-Text Domain:     rrze-elements-b
+Text Domain:     rrze-elements-blocks
 */
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit('No direct script access allowed');
 use RRZE\Elements\News\News;
@@ -21,12 +21,12 @@ use RRZE\Elements\News\News;
 // Require necessary configuration files.
 require_once 'config/config.php';
 
-use RRZE\ElementsB\Main;
+use RRZE\ElementsBlocks\Main;
 
 // Define plugin version requirements.
 const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
-const RRZE_ELEMENTSB_VERSION = '1.0.8';
+const RRZE_ELEMENTSB_VERSION = '1.0.9';
 
 // Autoloads plugin classes.
 spl_autoload_register(function ($class) {
@@ -57,8 +57,8 @@ add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
  */
 function loadTextdomain()
 {
-    unload_textdomain('rrze-elements-b');
-    load_plugin_textdomain('rrze-elements-b', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+    unload_textdomain('rrze-elements-blocks');
+    load_plugin_textdomain('rrze-elements-blocks', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /**
@@ -71,9 +71,11 @@ function systemRequirements()
     $error = '';
 
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
-        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elements-b'), PHP_VERSION, RRZE_PHP_VERSION);
+        /* translators: 1: current PHP version, 2: required PHP version */
+        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-elements-blocks'), PHP_VERSION, RRZE_PHP_VERSION);
     } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
-        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elements-b'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
+        /* translators: 1: current WordPress version, 2: required WordPress version */
+        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-elements-blocks'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
     }
 
     return $error;
@@ -88,7 +90,7 @@ function activation()
 
     if ($error = systemRequirements()) {
         deactivate_plugins(plugin_basename(__FILE__), false, true);
-        wp_die($error);
+        wp_die(esc_html($error));
     }
 }
 

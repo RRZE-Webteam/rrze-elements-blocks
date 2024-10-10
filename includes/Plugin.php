@@ -1,6 +1,6 @@
 <?php
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit;
 
@@ -197,7 +197,7 @@ class Plugin
                 ]
             );
             if (defined('WP_DEBUG') && WP_DEBUG) {
-                throw new \Exception($message);
+                throw new \Exception(esc_html($message));
             }
         }
     }

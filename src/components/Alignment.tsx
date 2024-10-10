@@ -39,17 +39,17 @@ const AlignmentBar = ({
 
   const alignmentControls = [
     showLeftAlign && {
-      title: __("Align left", "rrze-elements-b"),
+      title: __("Align left", "rrze-elements-blocks"),
       icon: alignLeft,
       onClick: () => toggleAlignment('left'),
     },
     showCenterAlign && {
-      title: __("Align center", "rrze-elements-b"),
+      title: __("Align center", "rrze-elements-blocks"),
       icon: alignCenter,
       onClick: () => toggleAlignment('center'),
     },
     showRightAlign && {
-      title: __("Align right", "rrze-elements-b"),
+      title: __("Align right", "rrze-elements-blocks"),
       icon: alignRight,
       onClick: () => toggleAlignment('right'),
     },
@@ -61,7 +61,7 @@ const AlignmentBar = ({
         {() => (
           <ToolbarDropdownMenu
             icon={(alignment === 'left') ? alignLeft : (alignment === 'center') ? alignCenter : alignRight}
-            label={__("Display options for the Editor", "rrze-elements-b")}
+            label={__("Display options for the Editor", "rrze-elements-blocks")}
             controls={alignmentControls}
           />
         )}

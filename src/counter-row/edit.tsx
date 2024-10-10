@@ -110,14 +110,14 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <section className="rrze-elements-b-counter-row">
+      <section className="rrze-elements-blocks-counter-row">
         <BlockControls>
           <ToolbarItem>
             {() => (
               <>
                 <ToolbarButton
                   icon={play}
-                  title={__("Preview Animation", "rrze-elements-b")}
+                  title={__("Preview Animation", "rrze-elements-blocks")}
                   onClick={onClickPlay}
                 />
               </>
@@ -125,11 +125,11 @@ export default function Edit({
           </ToolbarItem>
         </BlockControls>
         <InspectorControls>
-          <PanelBody title={__("Animation Settings", "rrze-elements-b")}>
+          <PanelBody title={__("Animation Settings", "rrze-elements-blocks")}>
             <RangeControl
               label={__(
                 "Stagger between Animations (seconds)",
-                "rrze-elements-b"
+                "rrze-elements-blocks"
               )}
               marks
               max={0.5}
@@ -143,12 +143,12 @@ export default function Edit({
               step={0.05}
             />
             <Button onClick={onClickPlay}>
-              {__("Preview Animation", "rrze-elements-b")}
+              {__("Preview Animation", "rrze-elements-blocks")}
             </Button>
           </PanelBody>
-          <PanelBody title={__("Grid Settings", "rrze-elements-b")}>
+          <PanelBody title={__("Grid Settings", "rrze-elements-blocks")}>
             <RangeControl
-              label={__("Column number", "rrze-elements-b")}
+              label={__("Column number", "rrze-elements-blocks")}
               marks
               max={5}
               min={1}
@@ -161,14 +161,14 @@ export default function Edit({
               step={1}
             />
             <NumberControl
-              label={__("Start value", "rrze-elements-b")}
+              label={__("Start value", "rrze-elements-blocks")}
               value={attributes.startValue}
               onChange={onChangeStartValue}
               min={0}
               max={Number.MAX_VALUE}
             />
             <Button onClick={onClickPlay}>
-              {__("Preview Animation", "rrze-elements-b")}
+              {__("Preview Animation", "rrze-elements-blocks")}
             </Button>
           </PanelBody>
         </InspectorControls>

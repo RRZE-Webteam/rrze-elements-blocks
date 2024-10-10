@@ -1,0 +1,10 @@
+# Exclude GitHub-specific files
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.github/ export-ignore
+
+# Exclude other hidden files
+.* export-ignore
+
+# Exclude GitHub templates (if applicable)
+/.github/* export-ignore

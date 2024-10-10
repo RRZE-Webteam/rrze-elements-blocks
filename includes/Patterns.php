@@ -1,10 +1,10 @@
 <?php
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit;
 
-use RRZE\ElementsB\ThemeSniffer;
+use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Patterns
 {
@@ -30,8 +30,8 @@ class Patterns
     public function elementsBlocks_pattern_categories()
     {
         register_block_pattern_category('page', [
-            'label'       => _x('Pages', 'Block pattern category'),
-            'description' => __('A collection of full page layouts.'),
+            'label'       => _x('Pages', 'Block pattern category','rrze-elements-blocks'),
+            'description' => __('A collection of full page layouts.', 'rrze-elements-blocks'),
         ]);
 
         if (!$this->is_development_environment() || !ThemeSniffer::getThemeGroup('fauthemes')) {
@@ -39,8 +39,8 @@ class Patterns
         }
 
         register_block_pattern_category('dev', [
-            'label'       => _x('DEVELOPMENT', 'Block pattern category'),
-            'description' => __('A collection of DEV layouts for automated testing.'),
+            'label'       => _x('DEVELOPMENT', 'Block pattern category', 'rrze-elements-blocks'),
+            'description' => __('A collection of DEV layouts for automated testing.', 'rrze-elements-blocks'),
         ]);
     }
 
@@ -55,7 +55,7 @@ class Patterns
     {
         $custom_category = [
             'slug'  => 'rrze_elements',
-            'title' => __('RRZE Elements', 'rrze-elements-b'),
+            'title' => __('RRZE Elements', 'rrze-elements-blocks'),
             'icon'  => 'layout',
         ];
 
@@ -77,8 +77,8 @@ class Patterns
             [
                 'file_name'   => 'dev-counter-row',
                 'pattern_name' => 'rrze-elements-blocks/dev-counter-iconbox',
-                'title'       => __('DEV: Counter and Iconbox', 'rrze-elementsb'),
-                'description' => _x('A testing template for Counter and Iconbox.', 'DEV Template', 'rrze-elements-b'),
+                'title'       => __('DEV: Counter and Iconbox', 'rrze-elements-blocks'),
+                'description' => _x('A testing template for Counter and Iconbox.', 'DEV Template', 'rrze-elements-blocks'),
                 'categories'  => ['dev'],
                 'postTypes'   => ['page'],
                 'inserter'    => true,
@@ -89,8 +89,8 @@ class Patterns
             [
                 'file_name'   => 'dev-accordion',
                 'pattern_name' => 'rrze-elements-blocks/dev-accordion',
-                'title'       => __('DEV: Accordion', 'rrze-elementsb'),
-                'description' => _x('A testing template for Accordions.', 'DEV Template', 'rrze-elements-b'),
+                'title'       => __('DEV: Accordion', 'rrze-elements-blocks'),
+                'description' => _x('A testing template for Accordions.', 'DEV Template', 'rrze-elements-blocks'),
                 'categories'  => ['dev'],
                 'postTypes'   => ['page'],
                 'inserter'    => true,
@@ -129,51 +129,51 @@ class Patterns
             [
                 'file_name'   => 'example-pattern',
                 'pattern_name' => 'rrze-elements-blocks/example-pattern',
-                'title'       => __('Example Pattern', 'rrze-elementsb'),
-                'description' => _x('Description for Example Pattern', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Example Pattern', 'rrze-elements-blocks'),
+                'description' => _x('Description for Example Pattern', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['portfolio', 'about'],
             ],
             [
                 'file_name'   => 'image-with-accordion-h2',
                 'pattern_name' => 'rrze-elements-blocks/image-w-accordion-h2',
-                'title'       => __('Image with Accordion', 'rrze-elementsb'),
-                'description' => _x('Description for Image with Accordion', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Image with Accordion', 'rrze-elements-blocks'),
+                'description' => _x('Description for Image with Accordion', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['portfolio', 'about'],
 
             ],
             [
                 'file_name'   => 'custom-news-h2',
                 'pattern_name' => 'rrze-elements-blocks/custom-news-h2',
-                'title'       => __('Custom News section 3-Column Layout', 'rrze-elementsb'),
-                'description' => _x('A 3 Column Layout for custom News on Landing pages', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Custom News section 3-Column Layout', 'rrze-elements-blocks'),
+                'description' => _x('A 3 Column Layout for custom News on Landing pages', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['posts'],
             ],
             [
                 'file_name'   => 'cta-1',
                 'pattern_name' => 'rrze-elements-blocks/cta',
-                'title'       => __('Call to Action', 'rrze-elementsb'),
-                'description' => _x('Call to Action section', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Call to Action', 'rrze-elements-blocks'),
+                'description' => _x('Call to Action section', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['call-to-action'],
             ],
             [
                 'file_name'   => 'image-with-text',
                 'pattern_name' => 'rrze-elements-blocks/image-w-text',
-                'title'       => __('Image with Text', 'rrze-elementsb'),
-                'description' => _x('Two column layout: Image left, text right column.', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Image with Text', 'rrze-elements-blocks'),
+                'description' => _x('Two column layout: Image left, text right column.', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['portfolio', 'about'],
             ],
             [
                 'file_name'   => 'imagefilm',
                 'pattern_name' => 'rrze-elements-blocks/imagefilm',
-                'title'       => __('Imagefilm', 'rrze-elementsb'),
-                'description' => _x('FAU Imagefilm.', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Imagefilm', 'rrze-elements-blocks'),
+                'description' => _x('FAU Imagefilm.', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['portfolio', 'about'],
             ],
             [
                 'file_name'   => 'page-home-fau',
                 'pattern_name' => 'rrze-elements-blocks/page-home-fau',
-                'title'       => __('Landing page template 1', 'rrze-elementsb'),
-                'description' => _x('A landingpage template for FAU.', 'Block pattern description', 'rrze-elements-b'),
+                'title'       => __('Landing page template 1', 'rrze-elements-blocks'),
+                'description' => _x('A landingpage template for FAU.', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['page'],
                 'postTypes'   => ['page'],
             ]
@@ -214,6 +214,7 @@ class Patterns
             return;
         }
 
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
         $pattern_content = file_get_contents($pattern_path);
 
         $pattern_content = $this->replace_random_numbers($pattern_content);
@@ -243,7 +244,7 @@ class Patterns
             $pair_index = intval($counter / 2);
 
             if (!isset($random_numbers[$pair_index])) {
-                $random_numbers[$pair_index] = rand(100, 1000);
+                $random_numbers[$pair_index] = wp_rand(100, 1000);
             }
 
             $counter++;

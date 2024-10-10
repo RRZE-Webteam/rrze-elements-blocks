@@ -176,12 +176,12 @@ export default function Edit({
                 <ToolbarButton
                   icon={symbol}
                   label={icon === ""
-                    ? __("Add an icon", "rrze-elements-b")
-                    : __("Change the icon", "rrze-elements-b")}
+                    ? __("Add an icon", "rrze-elements-blocks")
+                    : __("Change the icon", "rrze-elements-blocks")}
                   onClick={openModal} />
                 {isOpen && (
                   <Modal
-                    title={__("Select an Icon", "rrze-elements-b")}
+                    title={__("Select an Icon", "rrze-elements-blocks")}
                     onRequestClose={closeModal}
                     size="large"
                   >
@@ -193,7 +193,7 @@ export default function Edit({
                       setAttributes={setAttributes}
                     />
                     <Button variant="primary" onClick={closeModal}>
-                      {__("Close", "rrze-elements-b")}
+                      {__("Close", "rrze-elements-blocks")}
                     </Button>
                   </Modal>
                 )}
@@ -228,7 +228,7 @@ export default function Edit({
               {
                 placeholder: __(
                   "Click here and press / to enter content inside your Tab",
-                  "rrze-elements-b"
+                  "rrze-elements-blocks"
                 ),
               },
             ],

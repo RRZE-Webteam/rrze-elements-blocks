@@ -158,7 +158,7 @@ export default function Edit({
             <ToolbarButton
               label="link"
               icon={link}
-              title={__("Link", "rrze-elements-b")}
+              title={__("Link", "rrze-elements-blocks")}
               shortcut={displayShortcut.primary("k")}
               onClick={startEditing}
             />
@@ -167,7 +167,7 @@ export default function Edit({
             <ToolbarButton
               label="link"
               icon={linkOff}
-              title={__("Unlink", "rrze-elements-b")}
+              title={__("Unlink", "rrze-elements-blocks")}
               shortcut={displayShortcut.primaryShift("k")}
               onClick={unlink}
               isActive={true}
@@ -177,11 +177,11 @@ export default function Edit({
       </BlockControls>
       {/* <InspectorControls>
         <PanelBody
-          title={__("Advanced Options", "rrze-elements-b")}
+          title={__("Advanced Options", "rrze-elements-blocks")}
           initialOpen={true}
         >
           <CheckboxControl
-            label={__("Display Search box instead of CTA", "rrze-elements-b")}
+            label={__("Display Search box instead of CTA", "rrze-elements-blocks")}
             checked={attributes.isSearch}
             onChange={updateIsSearch}
           />
@@ -209,7 +209,7 @@ export default function Edit({
             tagName="span"
             value={title}
             onChange={onChangeTitle}
-            placeholder={__("CTA Title", "rrze-elements-b")}
+            placeholder={__("CTA Title", "rrze-elements-blocks")}
             allowedFormats={[]}
             className="cta-title"
           />
@@ -217,7 +217,7 @@ export default function Edit({
             tagName="span"
             value={subtitle}
             onChange={onChangeSubtitle}
-            placeholder={__("CTA Subtitle", "rrze-elements-b")}
+            placeholder={__("CTA Subtitle", "rrze-elements-blocks")}
             allowedFormats={[]}
             className="cta-subtitle"
           />
@@ -235,7 +235,7 @@ export default function Edit({
                 tagName="span"
                 value={buttonText}
                 onChange={onChangeButtonText}
-                placeholder={__("CTA Button Text", "rrze-elements-b")}
+                placeholder={__("CTA Button Text", "rrze-elements-blocks")}
                 allowedFormats={[]}
                 className="cta-button-text"
               />

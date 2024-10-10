@@ -83,7 +83,7 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
   return (
     <ToolbarGroup>
       <ToolbarButton
-        label={__("Show / Hide Label Settings", "rrze-elements-b")}
+        label={__("Show / Hide Label Settings", "rrze-elements-blocks")}
         onClick={onChangeLabelHint}
         icon={labelIcon} />
     </ToolbarGroup>
@@ -124,12 +124,12 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
       <ToolbarButton
         icon={labelIcon}
         label={attributes.title === ""
-          ? __("Add an Label", "rrze-elements-b")
-          : __("Change the Label", "rrze-elements-b")}
+          ? __("Add an Label", "rrze-elements-blocks")
+          : __("Change the Label", "rrze-elements-blocks")}
         onClick={openModal} />
       {isOpen && (
         <Modal
-          title={__("Change the Tab Label", "rrze-elements-b")}
+          title={__("Change the Tab Label", "rrze-elements-blocks")}
           onRequestClose={closeModal}
         >
           <div>
@@ -147,12 +147,12 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
             <TextControl
               value={attributes.title}
               onChange={onChangeTitle}
-              placeholder={__("Enter your Tab Label", "rrze-elements-b")}
+              placeholder={__("Enter your Tab Label", "rrze-elements-blocks")}
               className="elements-blocks-input-following-icon"
             />
 
             <Button variant="primary" onClick={closeModal}>
-              {__("Close", "rrze-elements-b")}
+              {__("Close", "rrze-elements-blocks")}
             </Button>
           </div>
         </Modal>
@@ -193,8 +193,8 @@ const TitlePlaceholder = ({
   return (
     <Placeholder
       icon={labelIcon}
-      instructions={__("Enter your Tab title. You can change it later through the block settings inside the Toolbar.", "rrze-elements-b")}
-      label={__("Tab Label Settings", "rrze-elements-b")}
+      instructions={__("Enter your Tab title. You can change it later through the block settings inside the Toolbar.", "rrze-elements-blocks")}
+      label={__("Tab Label Settings", "rrze-elements-blocks")}
     >
       <div className="rrze-elements-tabs-modal-container">
         {attributes.icon && (
@@ -212,11 +212,11 @@ const TitlePlaceholder = ({
         <TextControl
           value={attributes.title}
           onChange={onChangeTitle}
-          placeholder={__("Enter your Tab Label", "rrze-elements-b")}
+          placeholder={__("Enter your Tab Label", "rrze-elements-blocks")}
           className="elements-tabs-icon-modal-input"
         />
         <Button variant="primary" onClick={onChangeLabelHint}>
-          {__("Hide Label settings", "rrze-elements-b")}
+          {__("Hide Label settings", "rrze-elements-blocks")}
         </Button>
       </div>
     </Placeholder>
@@ -247,17 +247,17 @@ const TitleInspectorControls = ({
 
   return (
     <PanelBody
-      title={__("Label settings", "rrze-elements-b")}
+      title={__("Label settings", "rrze-elements-blocks")}
       initialOpen={true}
     >
       <Spacer>
-        <Text>{__("Enter your Tab Label.", "rrze-elements-b")}</Text>
+        <Text>{__("Enter your Tab Label.", "rrze-elements-blocks")}</Text>
       </Spacer>
 
       <TextControl
         value={attributes.title}
         onChange={onChangeTitle}
-        placeholder={__("Enter your Tab Label", "rrze-elements-b")}
+        placeholder={__("Enter your Tab Label", "rrze-elements-blocks")}
         className="elements-blocks-input-following-icon"
       />
     </PanelBody>

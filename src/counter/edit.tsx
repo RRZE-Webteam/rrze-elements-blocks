@@ -110,7 +110,7 @@ export default function Edit({
             <ToolbarButton
               label="link"
               icon={link}
-              title={__("Link", "rrze-elements-b")}
+              title={__("Link", "rrze-elements-blocks")}
               shortcut={displayShortcut.primary("k")}
               onClick={startEditing}
             />
@@ -119,7 +119,7 @@ export default function Edit({
             <ToolbarButton
               label="link"
               icon={linkOff}
-              title={__("Unlink", "rrze-elements-b")}
+              title={__("Unlink", "rrze-elements-blocks")}
               shortcut={displayShortcut.primaryShift("k")}
               onClick={unlink}
               isActive={true}
@@ -128,22 +128,22 @@ export default function Edit({
         </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
-        <PanelBody title={__("Font Size", "rrze-elements-b")}>
+        <PanelBody title={__("Font Size", "rrze-elements-blocks")}>
           <FontSizePicker
             disableCustomFontSizes
             fontSizes={[
               {
-                name: `${__("Small", "rrze-elements-b")}`,
+                name: `${__("Small", "rrze-elements-blocks")}`,
                 size: "normal",
                 slug: "small",
               },
               {
-                name: `${__("Normal", "rrze-elements-b")}`,
+                name: `${__("Normal", "rrze-elements-blocks")}`,
                 size: "medium",
                 slug: "normal",
               },
               {
-                name: `${__("Big", "rrze-elements-b")}`,
+                name: `${__("Big", "rrze-elements-blocks")}`,
                 size: "large",
                 slug: "big",
               },
@@ -198,7 +198,7 @@ export default function Edit({
               tagName="span"
               value={attributes.description}
               onChange={(description) => setAttributes({ description })}
-              placeholder={__("Description", "rrze-elements-b")}
+              placeholder={__("Description", "rrze-elements-blocks")}
               allowedFormats={[]}
             />
             <br />
@@ -210,7 +210,7 @@ export default function Edit({
                   onChange={(buttonText) => setAttributes({ buttonText })}
                   allowedFormats={[]}
                   ref={setUrlPopoverAnchor}
-                  placeholder={__("Button Text", "rrze-elements-b")}
+                  placeholder={__("Button Text", "rrze-elements-blocks")}
                 />
               </a>
             )}

@@ -1,0 +1,39 @@
+name: 'build-test'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Prepare Plugin Files
+        run: |
+          mkdir plugin-package
+          rsync -av --exclude='.*' \
+                    --exclude='node_modules' \
+                    --exclude='tests' \
+                    --exclude='docs' \
+                    --exclude='package.json' \
+                    --exclude='package-lock.json' \
+                    --exclude='webpack.config.js' \
+                    --exclude='README.md' \
+                    --exclude='composer.json' \
+                    --exclude='composer.lock' \
+                    --exclude='phpunit.xml' \
+                    --exclude='phpcs.xml' \
+                    --exclude='.git*' \
+                    . plugin-package/
+
+      - name: WordPress Plugin Check
+        uses: WordPress/plugin-check-action@v1
+        env:
+          PLUGIN_DIR: ${{ github.workspace }}/plugin-package

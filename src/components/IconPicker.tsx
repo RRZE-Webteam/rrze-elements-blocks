@@ -100,7 +100,7 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
     return (
       <>
         <ComboboxControl
-          label={__("Select an icon", "rrze-elements-b")}
+          label={__("Select an icon", "rrze-elements-blocks")}
           onChange={(newIcon) => setAttributes({ icon: newIcon })}
           value={attributes.icon}
           options={allIconsOptions}
@@ -117,7 +117,7 @@ const IconPicker: React.ComponentType<IconPickerProps> = memo(
               variant="secondary"
               onClick={() => setAttributes({ icon: "", svgString: "" })}
             >
-              {__("Remove Icon", "rrze-elements-b")}
+              {__("Remove Icon", "rrze-elements-blocks")}
             </Button>
           </Fragment>
         )}
@@ -211,7 +211,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
     return (
       <>
         <p>
-          {__("Icons are provided by ", "rrze-elements-b")}
+          {__("Icons are provided by ", "rrze-elements-blocks")}
           <a
             href="https://fontawesome.com"
             target="_blank"
@@ -221,15 +221,15 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
           </a>
           {__(
             ". You can search for an icon by typing its Font Awesome name in the search field below.",
-            "rrze-elements-b"
+            "rrze-elements-blocks"
           )}
         </p>
         <Spacer paddingTop="1rem" paddingBottom="1rem">
           <Spacer paddingTop="1rem" paddingBottom="1rem">
-            <Heading>{__("Search for an Icon", "rrze-elements-b")}</Heading>
+            <Heading>{__("Search for an Icon", "rrze-elements-blocks")}</Heading>
           </Spacer>
           <SearchControl
-            label={__("Select an icon", "rrze-elements-b")}
+            label={__("Select an icon", "rrze-elements-blocks")}
             value={searchQuery}
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
@@ -237,7 +237,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
           />
 
           <Button key="searchButton" variant="secondary" onClick={handleSearch}>
-            {__("Search for Icons", "rrze-elements-b")}
+            {__("Search for Icons", "rrze-elements-blocks")}
           </Button>
           {attributes.icon !== "" && (
             <>
@@ -254,7 +254,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
                   variant="secondary"
                   onClick={() => setAttributes({ icon: "", svgString: "" })}
                 >
-                  {__("Remove Icon", "rrze-elements-b")}
+                  {__("Remove Icon", "rrze-elements-blocks")}
                 </Button>
               </Fragment>
             </>
@@ -264,7 +264,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
           <>
             <Divider />
             <Spacer paddingTop="1rem" paddingBottom="1rem">
-              <Heading>{__("Search Results", "rrze-elements-b")}</Heading>
+              <Heading>{__("Search Results", "rrze-elements-blocks")}</Heading>
               {filteredIcons.length > 0 ? (
                 <Grid columns={12}>
                   {filteredIcons.map((iconOption) => (
@@ -291,7 +291,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
                 <p>
                   {__(
                     "No icons found. Please try a different search term.",
-                    "rrze-elements-b"
+                    "rrze-elements-blocks"
                   )}
                 </p>
               )}
@@ -300,7 +300,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
         )}
         <Divider />
         <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__("Solid Icons", "rrze-elements-b")}</Heading>
+          <Heading>{__("Solid Icons", "rrze-elements-blocks")}</Heading>
           <Grid columns={12}>
             {solidIcons.map((iconOption) => (
               <Button
@@ -325,7 +325,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
         </Spacer>
         <Divider />
         <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__("Regular Icons", "rrze-elements-b")}</Heading>
+          <Heading>{__("Regular Icons", "rrze-elements-blocks")}</Heading>
           <Grid columns={12}>
             {regularIcons.map((iconOption) => (
               <Button
@@ -350,7 +350,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
         </Spacer>
         <Divider />
         <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__("Brand Icons", "rrze-elements-b")}</Heading>
+          <Heading>{__("Brand Icons", "rrze-elements-blocks")}</Heading>
           <Grid columns={12}>
             {brandIcons.map((iconOption) => (
               <Button

@@ -1,6 +1,6 @@
 <?php
 
-namespace RRZE\ElementsB;
+namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit;
 
@@ -91,7 +91,7 @@ class Helper
                 $level = 'Info';
         }
         error_log(
-            date("[d-M-Y H:i:s \U\T\C]")
+            gmdate("[d-M-Y H:i:s \U\T\C]")
                 . " WP $level: "
                 . basename(__FILE__) . ' '
                 . $input

@@ -80,7 +80,7 @@ export default function Edit({
     <div {...props}>
       <InspectorControls>
         <PanelBody
-          title={__("Style Settings", "rrze-elements-b")}
+          title={__("Style Settings", "rrze-elements-blocks")}
           initialOpen={true}
         >
           <BlockVariationPicker
@@ -100,14 +100,14 @@ export default function Edit({
                   icon={symbol}
                   label={
                     icon === ""
-                      ? __("Select a style", "rrze-elements-b")
-                      : __("Change the style", "rrze-elements-b")
+                      ? __("Select a style", "rrze-elements-blocks")
+                      : __("Change the style", "rrze-elements-blocks")
                   }
                   onClick={openModal}
                 />
                 {isOpen && (
                   <Modal
-                    title={__("Select an Icon", "rrze-elements-b")}
+                    title={__("Select an Icon", "rrze-elements-blocks")}
                     onRequestClose={closeModal}
                   >
                     <BlockVariationPicker
@@ -117,7 +117,7 @@ export default function Edit({
                       }}
                     />
                     <Button variant="primary" onClick={closeModal}>
-                      {__("Save changes", "rrze-elements-b")}
+                      {__("Save changes", "rrze-elements-blocks")}
                     </Button>
                   </Modal>
                 )}
@@ -130,7 +130,7 @@ export default function Edit({
       {!attributes.style && (
         <Placeholder
           icon="admin-plugins"
-          label={__("Notice", "rrze-elements-b")}
+          label={__("Notice", "rrze-elements-blocks")}
         >
           <BlockVariationPicker
             variations={variations}
@@ -169,13 +169,13 @@ export default function Edit({
                 [
                   "core/heading",
                   {
-                    placeholder: __("Add a Headline", "rrze-elements-b"),
+                    placeholder: __("Add a Headline", "rrze-elements-blocks"),
                     level: 3,
                   },
                 ],
                 [
                   "core/paragraph",
-                  { placeholder: __("Add a description…", "rrze-elements-b") },
+                  { placeholder: __("Add a description…", "rrze-elements-blocks") },
                 ],
               ]}
               allowedBlocks={["core/heading", "core/paragraph"]}

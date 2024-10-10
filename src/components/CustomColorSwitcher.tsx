@@ -148,7 +148,7 @@ const ColorSwitcher = ({
     : colorData.find((entry) => entry.slug === attributes.color)?.color;
 
   return (
-    <PanelBody title={__("Color Settings", "rrze-elements-b")}>
+    <PanelBody title={__("Color Settings", "rrze-elements-blocks")}>
       <ColorPalette
         colors={colorData}
         value={value}
@@ -204,7 +204,7 @@ const ColorSwitcherToolbar = ({
           <ToolbarDropdownMenu
             icon={colorIcon}
             className={classLabel}
-            label={__("Select a Color", "rrze-elements-b")}
+            label={__("Select a Color", "rrze-elements-blocks")}
             controls={effectiveColorData.map((entry) => ({
               key: entry.slug,
               title: entry.name,
@@ -247,7 +247,7 @@ const BorderColorPicker = ({
 
   // Render ColorSwitcher component
   return (
-    <PanelBody title={__("Border Settings", "rrze-elements-b")} initialOpen={false}>
+    <PanelBody title={__("Border Settings", "rrze-elements-blocks")} initialOpen={false}>
       <ColorPicker color={attributes.borderColor} onChange={onChangeColor} />
     </PanelBody>
   );
@@ -258,35 +258,35 @@ const standardColorData = [
   {
     color: "#04316A",
     slug: "",
-    name: __("Central institution", "rrze-elements-b"),
+    name: __("Central institution", "rrze-elements-blocks"),
   },
   {
     color: "#C50F3C",
     slug: "rw",
-    name: __("Faculty of Business, Economics, and Law", "rrze-elements-b"),
+    name: __("Faculty of Business, Economics, and Law", "rrze-elements-blocks"),
   },
   {
     color: "#7bb725",
     slug: "nat",
-    name: __("Faculty of Sciences", "rrze-elements-b"),
+    name: __("Faculty of Sciences", "rrze-elements-blocks"),
   },
   {
     color: "#18B4F1",
     slug: "med",
-    name: __("Faculty of Medicine", "rrze-elements-b"),
+    name: __("Faculty of Medicine", "rrze-elements-blocks"),
   },
   {
     color: "#FDB735",
     slug: "phil",
     name: __(
       "Faculty of Humanities, Social Sciences, and Theology",
-      "rrze-elements-b"
+      "rrze-elements-blocks"
     ),
   },
   {
     color: "#8C9FB1",
     slug: "tf",
-    name: __("Faculty of Engineering", "rrze-elements-b"),
+    name: __("Faculty of Engineering", "rrze-elements-blocks"),
   },
 ];
 
@@ -294,7 +294,7 @@ const extendedColorData: { color: string; slug: string; name: string }[] = [
   {
     color: "#fff",
     slug: "inherit",
-    name: __("Inherit color", "rrze-elements-b"),
+    name: __("Inherit color", "rrze-elements-blocks"),
   },
   ...standardColorData,
 ];

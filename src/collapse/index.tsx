@@ -109,12 +109,12 @@ registerBlockType(metadata.name as any, {
       return !title || title.length === 0
         ? sprintf(
             /* translators: accessibility text. %s: heading level. */
-            __("Level %s. Empty.", "rrze-elements-b"),
+            __("Level %s. Empty.", "rrze-elements-blocks"),
             hstart
           )
         : sprintf(
             /* translators: accessibility text. 1: heading level. 2: heading title. */
-            __("Level %1$s. %2$s", "rrze-elements-b"),
+            __("Level %1$s. %2$s", "rrze-elements-blocks"),
             hstart,
             title
           );
