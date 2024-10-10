@@ -23,7 +23,7 @@ const Save: React.FC<BlockSaveProps<SaveProps>> = ({ attributes }) => {
                 className="expand-all standard-btn primary-btn xsmall-btn"
                 data-status="closed"
               >
-                {__("Expand All", "rrze-elements-blocks")}
+                {__("Expand All", "rrze-elements-b")}
               </button>
             </div>
           )}
