@@ -252,6 +252,7 @@ const Edit: React.FC<SaveProps> = ({
               <InnerBlocks
                 allowedBlocks={[
                   "rrze-elements/accordions",
+                  "rrze-elements/notice",
                   "rrze/rrze-video",
                   "core/paragraph",
                   "core/columns",
@@ -286,6 +287,7 @@ const Edit: React.FC<SaveProps> = ({
                   "core/search",
                   "core/tag-cloud",
                   "rrze-elements/alert",
+                  "rrze/rrze-video",
                 ]}
               />
             </div>
