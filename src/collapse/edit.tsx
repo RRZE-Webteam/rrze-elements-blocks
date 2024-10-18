@@ -34,6 +34,7 @@ import {
   IconMarkComponent,
   IconPickerModalInset,
 } from "../components/IconPicker";
+import { speak } from '@wordpress/a11y';
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -124,6 +125,11 @@ const Edit: React.FC<SaveProps> = ({
 
   const toggleActive = () => {
     setIsActive(!isActive);
+    if (isActive){
+      speak(__('reduced. Button.', 'rrze-elements-blocks'))
+    } else if (!isActive) {
+      speak(__('extended. Button.', 'rrze-elements-blocks'));
+    }
   };
 
   // Function to handle the change of the title attribute.
