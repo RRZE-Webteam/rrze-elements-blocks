@@ -105,7 +105,6 @@ const Edit: React.FC<SaveProps> = ({
       setAttributes({
         jumpName: `panel_${clientId?.slice(-8)}`,
       });
-      console.log("clientId", clientId);
     }
   }, [clientId]);
 
