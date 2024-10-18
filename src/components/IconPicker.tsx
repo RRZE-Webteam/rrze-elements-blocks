@@ -16,6 +16,7 @@ import {
   Fragment,
 } from "@wordpress/element";
 import fontawesomeIconNames from "./assets/fontawesome/fontawesomeIconNames.json";
+import { speak } from '@wordpress/a11y';
 
 // You probably already include the core styles
 // @import "../<components/assets/fontawesome/scss/fontawesome.scss";
@@ -202,6 +203,7 @@ const IconPickerModalInset: React.ComponentType<IconPickerProps> = memo(
       });
       setFilteredIcons(filteredIcons);
       setShowSearchResults(true);
+      speak(__('The search results got updated.', 'rrze-elements-blocks'));
     };
 
     const onSearchChange = (searchQuery: string) => {
