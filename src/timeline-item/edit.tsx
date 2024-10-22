@@ -15,9 +15,11 @@ import {
 
 type SaveProps = {
   attributes: {
+    title: string;
     hstart: number;
   };
   setAttributes: (newAttributes: {
+    title: string;
     hstart: number;
   }) => void;
   clientId?: string;
@@ -33,33 +35,24 @@ export default function Edit({
     useDispatch(blockEditorStore);
 
   return (
-    <div {...props}>
-      <BlockControls>
-        <HeadingSelector
-          attributes={attributes}
-          setAttributes={setAttributes}
-        />
-      </BlockControls>
-      <InspectorControls>
-        <PanelBody
-          title={__("Heading Settings", "rrze-elements-blocks")}
-          initialOpen={true}
-        >
-          <HeadingSelectorInspector
-            attributes={attributes}
-            setAttributes={setAttributes}
-          />
-        </PanelBody>
-      </InspectorControls>
-      <ol className="timeline">
+    <li {...props}>
+      <div className="tooltip">
+        <div className="tooltip-arrow"></div>
         <InnerBlocks
-          allowedBlocks={["rrze-elements/timeline-item"]}
           template={[
-            ["rrze-elements/timeline-item", {}],
-            ["rrze-elements/timeline-item", {}],
+            [
+              "core/heading",
+              { placeholder: __("Add a label", "rrze-elements-blocks") },
+            ],
+            [
+              "core/paragraph",
+              { placeholder: __("Add a description…", "rrze-elements-blocks") },
+            ],
           ]}
+          allowedBlocks={["core/paragraph", "core/heading"]}
+          templateLock={false}
         />
-      </ol>
-    </div>
+      </div>
+    </li>
   );
 }

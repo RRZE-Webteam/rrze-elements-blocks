@@ -1,19 +1,17 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "rrze-elements/timeline",
+  "name": "rrze-elements/timeline-item",
   "version": "1.0.10",
-  "title": "Timeline",
+  "title": "Timeline-Entry",
   "category": "rrze_elements",
-  "description": "Creates a Timeline block",
+  "description": "Creates a Timeline Item",
+  "parent": ["rrze-elements/timeline"],
   "attributes": {
-    "hstart": {
-      "type": "integer",
-      "default": 2
+    "title": {
+      "type": "string",
+      "default": ""
     }
-  },
-  "providesContext": {
-    "rrze-elements/timeline-hstart": "hstart"
   },
   "supports": {
     "html": false
