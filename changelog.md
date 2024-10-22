@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+ ## [1.0.10] - 2024-10-22
+ 
+Minor improvements
+ 
+### Fixed
+- [#98 A11y-improvements for the icon picker.](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/98)
+
+### Added
+- [Added #154](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/154)
+
+
  ## [1.0.9] - 2024-10-10
  
 Accessibility improvements for the Accordion-Block inside the Frontend.
