@@ -18,6 +18,9 @@
   "supports": {
     "html": false
   },
+  "usesContext": [
+    "rrze-elements/timeline-hstart"
+  ],
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",

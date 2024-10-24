@@ -1,5 +1,6 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
+import HeadingComponent from "../components/HeadingComponent";
 
 type SaveProps = {
   attributes: {
@@ -21,6 +22,9 @@ export default function save({ attributes }: SaveProps) {
     <li {...blockProps}>
       <div className="tooltip">
       <div className="tooltip-arrow"></div>
+          <HeadingComponent level={attributes.hstart} className="timeline-label">
+            {attributes.title}
+          </HeadingComponent>
           <InnerBlocks.Content />
           </div>
     </li>

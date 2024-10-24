@@ -14670,7 +14670,9 @@ main aside.align-right {
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip :first-child {
   margin-top: 0;
 }
-.wp-block-rrze-elements-timeline ol.timeline div.tooltip p,
+.wp-block-rrze-elements-timeline ol.timeline div.tooltip p {
+  color: #fff;
+}
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h1,
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h2,
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h3,
@@ -14679,6 +14681,7 @@ main aside.align-right {
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h6 {
   margin-top: 0;
   color: #fff;
+  font-size: 1.313rem;
 }
 
 .elements-gallery .gallery-grid {
