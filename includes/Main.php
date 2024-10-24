@@ -137,14 +137,14 @@ class Main
         );
         wp_register_script(
             'rrze-counter',
-            plugins_url('assets/js/counter/rrze-counter.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/counter/rrze-counter-min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
             RRZE_ELEMENTSB_VERSION,
             true
         );
         wp_register_script(
             'rrze-timeline',
-            plugins_url('assets/js/timeline/rrze-timeline.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/timeline/rrze-timeline-min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
             RRZE_ELEMENTSB_VERSION,
             true
