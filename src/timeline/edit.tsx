@@ -34,23 +34,6 @@ export default function Edit({
 
   return (
     <div {...props}>
-      <BlockControls>
-        <HeadingSelector
-          attributes={attributes}
-          setAttributes={setAttributes}
-        />
-      </BlockControls>
-      <InspectorControls>
-        <PanelBody
-          title={__("Heading Settings", "rrze-elements-blocks")}
-          initialOpen={true}
-        >
-          <HeadingSelectorInspector
-            attributes={attributes}
-            setAttributes={setAttributes}
-          />
-        </PanelBody>
-      </InspectorControls>
       <ol className="timeline">
         <InnerBlocks
           allowedBlocks={["rrze-elements/timeline-item"]}

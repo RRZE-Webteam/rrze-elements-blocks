@@ -1,0 +1,100 @@
+:root {
+    --ecl-spacing-m: 1rem;
+    --ecl-spacing-xl: 2rem;
+    --ecl-max-width: 80ch;
+    --s-m: var(--ecl-spacing-m);
+    --s-xl: var(--ecl-spacing-xl);
+    --max-w: var(--ecl-max-width);
+}
+
+.wp-block-rrze-elements-timeline {
+    ol.timeline {
+        max-width: var(--max-w);
+        padding-bottom: var(--s-xl);
+        -webkit-pading-start: calc(var(--s-m) + .5rem);
+        padding-inline-start: calc(var(--s-m) + .5rem);
+        position: relative;
+        list-style: none;
+        margin-left: 0;
+
+        li {
+            text-align: match-parent;
+            padding-bottom: var(--s-xl);
+            padding-inline-start: calc(var(--s-m) + .5rem);
+            -webkit-padding-start: calc(var(--s-m) + .5rem);
+            position: relative;
+            list-style: none;
+        }
+
+        li:before {
+            border-inline-start: .125rem solid var(--color-primary-dunkelste, #041E42);
+            -webkit-border-start: .125rem solid var(--color-primary-dunkelste, #041E42);
+            content: "";
+            left: -0.15rem;
+            position: absolute;
+            height: 100%;
+            top: 0;
+        }
+
+        li:after {
+            background-color: #fff;
+            border: .125rem solid var(--color-primary-dunkelste, #041E42);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px #fff;
+            content: "";
+            height: 1rem;
+            left: -.5rem;
+            position: absolute;
+            top: 8%;
+            width: 1rem;
+        }
+
+        li>div {
+            color: #fff !important;
+            padding: 1rem;
+            border: .15rem solid var(--color-primary-dunkelste, #041E42);
+        }
+
+        div.tooltip-arrow:after {
+            background: #041E42;
+            content: "";
+            height: 10px;
+            left: 50%;
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            width: 10px;
+        }
+
+        div.tooltip-arrow {
+            height: 15px;
+            left: 0;
+            overflow: hidden;
+            position: absolute;
+            top: 10%;
+            transform: translateX(-100%) rotate(90deg);
+            width: 15px;
+            border: none;
+        }
+
+        div.tooltip {
+            position: relative;
+            background-color: var(--color-primary-dunkelste, #041E42);
+
+            :first-child {
+                margin-top: 0;
+            }
+
+            p,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin-top: 0;
+                color: #fff;
+            }
+        }
+    }
+}

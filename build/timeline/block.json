@@ -6,20 +6,12 @@
   "title": "Timeline",
   "category": "rrze_elements",
   "description": "Creates a Timeline block",
-  "attributes": {
-    "hstart": {
-      "type": "integer",
-      "default": 2
-    }
-  },
-  "providesContext": {
-    "rrze-elements/timeline-hstart": "hstart"
-  },
   "supports": {
     "html": false
   },
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "viewScript": "rrze-timeline"
 }
