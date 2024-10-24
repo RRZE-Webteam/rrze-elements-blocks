@@ -24,8 +24,8 @@ ol.timeline {
     }
 
     li:before {
-        border-inline-start: .125rem solid #04316a;
-        -webkit-border-start: .125rem solid #04316a;
+        border-inline-start: .125rem solid var(--color-primary-dunkelste, #041E42);
+        -webkit-border-start: .125rem solid var(--color-primary-dunkelste, #041E42);
         content: "";
         left: -0.15rem;
         position: absolute;
@@ -35,7 +35,7 @@ ol.timeline {
 
     li:after {
         background-color: #fff;
-        border: .125rem solid #04316a;
+        border: .125rem solid var(--color-primary-dunkelste, #041E42);
         border-radius: 50%;
         box-shadow: 0 0 0 2px #fff;
         content: "";
@@ -49,11 +49,11 @@ ol.timeline {
     li>div {
         color: #fff !important;
         padding: 1rem;
-        border: .15rem solid #04316a;
+        border: .15rem solid var(--color-primary-dunkelste, #041E42);
     }
 
     div.tooltip-arrow:after {
-        background: #04316a;
+        background: var(--color-primary-dunkelste, #041E42);
         box-shadow: 0 0 6px rgba(14, 71, 203, .2);
         content: "";
         height: 10px;
@@ -77,14 +77,19 @@ ol.timeline {
 
     div.tooltip{
         position: relative;
-        background-color: #04316a;
+        background-color: var(--color-primary-dunkelste, #041E42);
 
         :first-child {
             margin-top: 0;
         }
-        
-        p, h1, h2, h3, h4, h5, h6 {
+        p{
             color: #fff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1.313rem;
+            margin-bottom: 1rem;
         }
     }
 }
