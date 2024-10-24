@@ -14680,6 +14680,7 @@ main aside.align-right {
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h5,
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h6 {
   margin-top: 0;
+  margin-bottom: 1rem;
   color: #fff;
   font-size: 1.313rem;
 }
