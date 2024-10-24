@@ -18,12 +18,11 @@ export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
 
   return (
-    <div {...blockProps}>
-      <>
-        <ol className="timeline">
+    <li {...blockProps}>
+      <div className="tooltip">
+      <div className="tooltip-arrow"></div>
           <InnerBlocks.Content />
-        </ol>
-      </>
-    </div>
+          </div>
+    </li>
   );
 }

@@ -143,6 +143,13 @@ class Main
             true
         );
         wp_register_script(
+            'rrze-timeline',
+            plugins_url('assets/js/timeline/rrze-timeline.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap-scrolltrigger'],
+            RRZE_ELEMENTSB_VERSION,
+            true
+        );
+        wp_register_script(
             'rrze-scrollstories',
             plugins_url('assets/js/scrollstories/scrollstories.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
