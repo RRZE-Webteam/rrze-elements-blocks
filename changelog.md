@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+ ## [1.0.11] - 2024-11-08
+ 
+New Timeline Block with gsap animation
+ 
+### Added
+- [#164 Timeline for the Block Editor.](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/164)
+
+### Removed
+- React & React-dom from the package.json
+
  ## [1.0.10] - 2024-10-22
  
 Minor improvements

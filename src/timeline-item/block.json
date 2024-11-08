@@ -2,11 +2,13 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/timeline-item",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "title": "Timeline-Entry",
   "category": "rrze_elements",
   "description": "Creates a Timeline Item",
-  "parent": ["rrze-elements/timeline"],
+  "parent": [
+    "rrze-elements/timeline"
+  ],
   "attributes": {
     "title": {
       "type": "string",
