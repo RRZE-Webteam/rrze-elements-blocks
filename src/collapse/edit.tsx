@@ -113,7 +113,7 @@ const Edit: React.FC<SaveProps> = ({
    */
   useEffect(() => {
     setAttributes({
-      hstart: context["rrze-elements/accordion-hstart"],
+      hstart: context["rrze-elements/"],
     });
   }),
     [context["rrze-elements/hstart"]];

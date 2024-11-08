@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/block-blueprint",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "title": "Blueprint",
   "category": "rrze_elements",
   "description": "Creates a blueprint block.",
