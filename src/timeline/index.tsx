@@ -49,7 +49,7 @@ registerBlockType(
             rx="5.73"
             ry="5.73"
             transform="translate(372.52 -139.48) rotate(90)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <rect
             x="199.53"
@@ -59,7 +59,7 @@ registerBlockType(
             rx="5.73"
             ry="5.73"
             transform="translate(512) rotate(90)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <rect
             x="199.53"
@@ -69,7 +69,7 @@ registerBlockType(
             rx="5.73"
             ry="5.73"
             transform="translate(651.48 139.48) rotate(90)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <line
             x1="80.6"
@@ -78,9 +78,9 @@ registerBlockType(
             y2="451.28"
             fill="none"
             stroke="black"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="8"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="8"
           />
           <rect
             x="66.87"
@@ -89,7 +89,7 @@ registerBlockType(
             height="27.46"
             rx="11.29"
             ry="11.29"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <rect
             x="66.87"
@@ -98,7 +98,7 @@ registerBlockType(
             height="27.46"
             rx="11.29"
             ry="11.29"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <rect
             x="66.87"
@@ -107,7 +107,7 @@ registerBlockType(
             height="27.46"
             rx="11.29"
             ry="11.29"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
         </svg>
       ),

@@ -10486,14 +10486,14 @@ readers do not read off random characters that represent icons */
 .fau-theme .content-slider.flexslider.carousel .slides > li:hover, .fau-theme .content-slider.flexslider.carousel .slides > li:focus,
 .fau-theme #content .content-slider.flexslider.carousel .slides > li:hover,
 .fau-theme #content .content-slider.flexslider.carousel .slides > li:focus {
-  background-color: #cbd7e8;
+  background-color: rgb(203.306122449, 215.4693877551, 232.193877551);
 }
 .rrze-2019 .content-slider.flexslider.carousel .slides > li:hover, .fau-events .content-slider.flexslider.carousel .slides > li:hover, .rrze-2019 .content-slider.flexslider.carousel .slides > li:focus, .fau-events .content-slider.flexslider.carousel .slides > li:focus,
 .rrze-2019 #content .content-slider.flexslider.carousel .slides > li:hover,
 .fau-events #content .content-slider.flexslider.carousel .slides > li:hover,
 .rrze-2019 #content .content-slider.flexslider.carousel .slides > li:focus,
 .fau-events #content .content-slider.flexslider.carousel .slides > li:focus {
-  background-color: #e1e1e7;
+  background-color: rgb(224.9310344828, 224.9310344828, 230.5689655172);
 }
 .content-slider.flexslider.carousel .slides .image-container,
 #content .content-slider.flexslider.carousel .slides .image-container {
@@ -11436,7 +11436,7 @@ button.expand-all.standard-btn {
   background-color: #f5f7f9;
 }
 .fau-theme .accordion-group .accordion-body .accordion-inner .accordion-inner {
-  background-color: #e8edf1;
+  background-color: rgb(232.25, 236.8, 241.35);
 }
 
 @media print {
@@ -12459,7 +12459,7 @@ Functions and Mixins
   text-decoration-color: inherit;
 }
 .alert.font-light a:hover, .alert.font-light a:focus, .alert.font-light a:active {
-  color: #e6e6e6;
+  color: rgb(229.5, 229.5, 229.5);
 }
 .alert a.standard-btn {
   margin-bottom: 0;
@@ -12638,31 +12638,31 @@ button.standard-btn.primary-btn,
 a.standard-btn.primary-btn {
   background: var(--color-primary-ci-hell, #245783);
   color: var(--color-primary-ci-hell-kontrast, #fff);
-  border-color: #1f4a6f;
+  border-color: rgb(30.502994012, 73.7155688623, 110.997005988);
 }
 button.standard-btn.primary-btn:hover, button.standard-btn.primary-btn:focus, button.standard-btn.primary-btn:active,
 a.standard-btn.primary-btn:hover,
 a.standard-btn.primary-btn:focus,
 a.standard-btn.primary-btn:active {
-  background: var(--color-button-hover-bg, #193c5b);
+  background: var(--color-button-hover-bg, rgb(25.005988024, 60.4311377246, 90.994011976));
   color: var(--color-button-hover-text, #fff);
 }
 button.standard-btn.blue-btn,
 a.standard-btn.blue-btn {
   background: #245783;
-  border-color: #1f4a6f;
+  border-color: rgb(30.502994012, 73.7155688623, 110.997005988);
 }
 button.standard-btn.blue-btn:hover, button.standard-btn.blue-btn:focus, button.standard-btn.blue-btn:active,
 a.standard-btn.blue-btn:hover,
 a.standard-btn.blue-btn:focus,
 a.standard-btn.blue-btn:active {
-  background: #193c5b;
+  background: rgb(25.005988024, 60.4311377246, 90.994011976);
 }
 button.standard-btn.success-btn, button.standard-btn.green-btn,
 a.standard-btn.success-btn,
 a.standard-btn.green-btn {
   background: #115c39;
-  border-color: #0d462c;
+  border-color: rgb(13.0229357798, 70.4770642202, 43.6651376147);
 }
 button.standard-btn.success-btn:hover, button.standard-btn.success-btn:focus, button.standard-btn.success-btn:active, button.standard-btn.green-btn:hover, button.standard-btn.green-btn:focus, button.standard-btn.green-btn:active,
 a.standard-btn.success-btn:hover,
@@ -12671,25 +12671,25 @@ a.standard-btn.success-btn:active,
 a.standard-btn.green-btn:hover,
 a.standard-btn.green-btn:focus,
 a.standard-btn.green-btn:active {
-  background: #072819;
+  background: rgb(7.4550458716, 40.3449541284, 24.9963302752);
 }
 button.standard-btn.info-btn,
 a.standard-btn.info-btn {
   background: #0dcaf0;
-  border-color: #0cb6d8;
+  border-color: rgb(11.6897233202, 181.6403162055, 215.8102766798);
   color: #000000;
 }
 button.standard-btn.info-btn:hover, button.standard-btn.info-btn:focus, button.standard-btn.info-btn:active,
 a.standard-btn.info-btn:hover,
 a.standard-btn.info-btn:focus,
 a.standard-btn.info-btn:active {
-  background: #0a99b6;
+  background: rgb(9.8553359684, 153.1367588933, 181.9446640316);
 }
 button.standard-btn.warning-btn, button.standard-btn.yellow-btn,
 a.standard-btn.warning-btn,
 a.standard-btn.yellow-btn {
   background: #ffc107;
-  border-color: #edb100;
+  border-color: rgb(236.5, 177.375, 0);
   color: #000000;
 }
 button.standard-btn.warning-btn:hover, button.standard-btn.warning-btn:focus, button.standard-btn.warning-btn:active, button.standard-btn.yellow-btn:hover, button.standard-btn.yellow-btn:focus, button.standard-btn.yellow-btn:active,
@@ -12699,13 +12699,13 @@ a.standard-btn.warning-btn:active,
 a.standard-btn.yellow-btn:hover,
 a.standard-btn.yellow-btn:focus,
 a.standard-btn.yellow-btn:active {
-  background: #c99700;
+  background: rgb(200.8, 150.6, 0);
 }
 button.standard-btn.danger-btn, button.standard-btn.red-btn,
 a.standard-btn.danger-btn,
 a.standard-btn.red-btn {
   background: #921925;
-  border-color: #7c151f;
+  border-color: rgb(124.2280701754, 21.2719298246, 31.4824561404);
 }
 button.standard-btn.danger-btn:hover, button.standard-btn.danger-btn:focus, button.standard-btn.danger-btn:active, button.standard-btn.red-btn:hover, button.standard-btn.red-btn:focus, button.standard-btn.red-btn:active,
 a.standard-btn.danger-btn:hover,
@@ -12714,7 +12714,7 @@ a.standard-btn.danger-btn:active,
 a.standard-btn.red-btn:hover,
 a.standard-btn.red-btn:focus,
 a.standard-btn.red-btn:active {
-  background: #5e1018;
+  background: rgb(93.7473684211, 16.0526315789, 23.7578947368);
 }
 button.standard-btn.secondary-btn, button.standard-btn.grey-btn,
 a.standard-btn.secondary-btn,
@@ -12728,7 +12728,7 @@ a.standard-btn.secondary-btn:active,
 a.standard-btn.grey-btn:hover,
 a.standard-btn.grey-btn:focus,
 a.standard-btn.grey-btn:active {
-  background: #303438;
+  background: rgb(47.8109090909, 52.2145454545, 55.9890909091);
 }
 button.standard-btn.black-btn,
 a.standard-btn.black-btn {
@@ -12739,7 +12739,7 @@ button.standard-btn.black-btn:hover, button.standard-btn.black-btn:focus, button
 a.standard-btn.black-btn:hover,
 a.standard-btn.black-btn:focus,
 a.standard-btn.black-btn:active {
-  background: #060607;
+  background: rgb(5.7081081081, 6.4, 7.0918918919);
   color: #fff;
 }
 button.standard-btn.ghost-btn,
@@ -14037,8 +14037,8 @@ main aside.pull-left,
 main aside.pull-right {
   margin-bottom: 15px;
   color: black;
-  border-top: 2px solid #4e5862;
-  border-bottom: 1px solid #4e5862;
+  border-top: 2px solid rgb(78.4864864865, 88, 97.5135135135);
+  border-bottom: 1px solid rgb(78.4864864865, 88, 97.5135135135);
   padding: 10px 5px;
   position: relative;
   z-index: 1;

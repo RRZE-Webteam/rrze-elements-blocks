@@ -63,7 +63,7 @@ registerBlockType(
               rx="5.73"
               ry="5.73"
               transform="translate(372.52 -139.48) rotate(90)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </g>
           <rect
@@ -74,7 +74,7 @@ registerBlockType(
             rx="5.73"
             ry="5.73"
             transform="translate(512) rotate(90)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <g opacity=".25">
             <rect
@@ -85,7 +85,7 @@ registerBlockType(
               rx="5.73"
               ry="5.73"
               transform="translate(651.48 139.48) rotate(90)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </g>
           <line
@@ -96,9 +96,9 @@ registerBlockType(
             fill="none"
             opacity=".25"
             stroke="black"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="8"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="8"
           />
           <rect
             x="66.87"
@@ -107,7 +107,7 @@ registerBlockType(
             height="27.46"
             rx="11.29"
             ry="11.29"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity=".25"
           />
           <rect
@@ -117,7 +117,7 @@ registerBlockType(
             height="27.46"
             rx="11.29"
             ry="11.29"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <rect
             x="66.87"
@@ -126,7 +126,7 @@ registerBlockType(
             height="27.46"
             rx="11.29"
             ry="11.29"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity=".25"
           />
           <line
@@ -136,9 +136,9 @@ registerBlockType(
             y2="327.3"
             fill="none"
             stroke="black"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="8"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="8"
           />
         </svg>
       ),

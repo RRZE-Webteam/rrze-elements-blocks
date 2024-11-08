@@ -47,7 +47,7 @@ export default function Edit({
       hstart: context["rrze-elements/timeline-hstart"],
     });
   }),
-    [context["rrze-elements/hstart"]];
+    [context["rrze-elements/timeline-hstart"]];
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {

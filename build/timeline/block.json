@@ -18,6 +18,53 @@
   "providesContext": {
     "rrze-elements/timeline-hstart": "hstart"
   },
+  "example": {
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/timeline-item",
+        "attributes": {
+          "title": "2016",
+          "loadOpen": true
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/timeline-item",
+        "attributes": {
+          "title": "2024"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/timeline-item",
+        "attributes": {
+          "title": "2030"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      }
+    ]
+  },
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",

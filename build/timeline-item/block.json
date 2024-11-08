@@ -13,6 +13,10 @@
     "title": {
       "type": "string",
       "default": ""
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 3
     }
   },
   "supports": {
