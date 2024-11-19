@@ -8,7 +8,6 @@ import {
 
 import {
   ToolbarButton,
-  ToolbarGroup,
   ToolbarItem,
   PanelBody,
   RangeControl,
@@ -17,7 +16,6 @@ import {
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
 import { update as play } from "@wordpress/icons";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

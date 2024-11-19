@@ -1,6 +1,5 @@
 // Imports from WordPress core components and hooks.
 import {
-  TextControl,
   ToolbarButton,
   ToolbarGroup,
   ToolbarItem,
@@ -16,10 +15,10 @@ import {
   RichText,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
-import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
+import { seen, unseen, symbol } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { useSelect, useDispatch } from "@wordpress/data";
+import { useDispatch } from "@wordpress/data";
 import HeadingComponent from "../components/HeadingComponent";
 
 // Imports of custom components and helper functions.

@@ -11,7 +11,7 @@ import {
   BlockControls,
   ContrastChecker,
 } from "@wordpress/block-editor";
-// import { useEffect, useState } from "@wordpress/element";
+
 import { __ } from "@wordpress/i18n";
 import { useDispatch } from "@wordpress/data";
 import { store as blockEditorStore } from "@wordpress/block-editor";

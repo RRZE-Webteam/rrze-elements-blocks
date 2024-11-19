@@ -1,20 +1,13 @@
 import {
   useBlockProps,
   InnerBlocks,
-  InspectorControls,
-  BlockControls,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
 
 import { RichText } from "@wordpress/block-editor";
-import { PanelBody } from "@wordpress/components";
 import { useDispatch } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import HeadingComponent from "../components/HeadingComponent";
-import {
-  HeadingSelector,
-  HeadingSelectorInspector,
-} from "../components/HeadingSelector";
 import { useEffect } from "@wordpress/element";
 
 type SaveProps = {

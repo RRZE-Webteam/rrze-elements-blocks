@@ -8,8 +8,7 @@ import {
 import { ResizableBox } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
+import { useState } from "@wordpress/element";
 
 import { AlignmentBar } from "../components/Alignment";
 

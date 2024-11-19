@@ -6,7 +6,7 @@ import {
   ToolbarGroup,
 } from "@wordpress/components";
 import { store as noticesStore } from "@wordpress/notices";
-import { getBlobTypeByURL, isBlobURL, revokeBlobURL } from "@wordpress/blob";
+import { isBlobURL, revokeBlobURL } from "@wordpress/blob";
 import { useDispatch } from "@wordpress/data";
 import { trash } from "@wordpress/icons";
 import { useEffect, useState } from "@wordpress/element";
@@ -28,7 +28,7 @@ const CustomMediaReplaceFlow = ({
   setAttributes,
 }: CustomMediaReplaceFlowProps) => {
 
-  const { id, alt, url } = attributes;
+  const { id, url } = attributes;
   const { createErrorNotice } = useDispatch(noticesStore);
   const [blobURL, setBlobURL] = useState<string | undefined>();
 

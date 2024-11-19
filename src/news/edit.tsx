@@ -18,13 +18,10 @@ import {
   TextControl,
   CheckboxControl,
   RangeControl,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
 import { CustomQueryControls } from "../components/QueryControls";
 
 /**

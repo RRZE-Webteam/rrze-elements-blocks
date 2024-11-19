@@ -1,14 +1,11 @@
 // Import required WordPress packages and components
 import { __ } from "@wordpress/i18n";
 import {
-  ColorPalette,
-  PanelBody,
   ToolbarDropdownMenu,
   ToolbarItem,
   ToolbarGroup,
   SVG,
   Path,
-  Icon,
 } from "@wordpress/components";
 
 // Define TypeScript interface for component props

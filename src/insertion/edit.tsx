@@ -4,13 +4,8 @@ import {
   InnerBlocks,
   BlockControls,
 } from "@wordpress/block-editor";
-import {
-  Placeholder
-} from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
 import { AlignmentBar } from "../components/Alignment";
 
 /**

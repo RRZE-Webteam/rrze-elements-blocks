@@ -18,7 +18,7 @@ import { symbol } from "@wordpress/icons";
 import { useDispatch } from "@wordpress/data";
 
 // Custom components for enhancing block controls.
-import { IconPicker, IconMarkComponent, IconPickerModalInset } from "../components/IconPicker";
+import { IconPickerModalInset } from "../components/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   TitleModal,

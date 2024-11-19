@@ -6,9 +6,7 @@ import {
 } from "@wordpress/block-editor";
 
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
-import { useSelect, useDispatch } from "@wordpress/data";
+import { useSelect } from "@wordpress/data";
 
 /**
  * Interface representing the properties for the Edit component.

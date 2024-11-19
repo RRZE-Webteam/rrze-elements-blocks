@@ -3,12 +3,9 @@ import {
   Popover,
   ToolbarGroup,
   ToolbarButton,
-  CheckboxControl,
-  PanelBody,
 } from "@wordpress/components";
 import {
   useBlockProps,
-  InspectorControls,
   BlockControls,
   RichText,
   __experimentalLinkControl as LinkControl,
@@ -16,7 +13,7 @@ import {
 import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { isBlobURL } from "@wordpress/blob";
-import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
+import { displayShortcut } from "@wordpress/keycodes";
 import { link, linkOff } from "@wordpress/icons";
 import { CustomMediaReplaceFlow } from "../components/CustomMediaReplaceFlow";
 

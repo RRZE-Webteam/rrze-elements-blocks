@@ -5,10 +5,9 @@ import {
   InspectorControls,
   BlockControls,
   __experimentalBlockVariationPicker as BlockVariationPicker,
-  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { store as blocksStore } from "@wordpress/blocks";
-import { useEffect, useState } from "@wordpress/element";
+import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
 import {
@@ -22,12 +21,6 @@ import {
 } from "@wordpress/components";
 
 import { symbol } from "@wordpress/icons";
-
-import {
-  StandardColorSwitcher,
-  StandardColorSwitcherToolbar,
-  BorderColorPicker,
-} from "../components/CustomColorSwitcher";
 
 // @ts-ignore
 import variations from "./variations";

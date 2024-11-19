@@ -25,7 +25,6 @@ import "./assets/fontawesome/scss/fontawesome.scss";
 import "./assets/fontawesome/scss/solid.scss";
 import "./assets/fontawesome/scss/brands.scss";
 import "./assets/fontawesome/scss/regular.scss";
-import { set } from "lodash";
 
 interface BlockAttributes {
   icon: string;

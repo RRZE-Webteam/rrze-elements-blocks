@@ -1,5 +1,4 @@
 import {
-  TextControl,
   ToolbarButton,
   ToolbarGroup,
   ToolbarItem,
@@ -17,8 +16,8 @@ import {
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { seen, unseen, symbol, color as colorIcon } from "@wordpress/icons";
-import { useSelect, useDispatch } from "@wordpress/data";
+import { symbol } from "@wordpress/icons";
+import { useDispatch } from "@wordpress/data";
 import {
   ExtendedColorSwitcher,
   ExtendedColorSwitcherToolbar,
@@ -46,7 +45,6 @@ interface SaveProps {
     hstart?: number;
     jumpName?: string;
     svgString?: string;
-    ancestorCount?: number;
   };
   setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
   clientId: string;
@@ -74,15 +72,13 @@ const Edit: React.FC<SaveProps> = ({
   /////////// Use Selects ///////////
 
   const props = useBlockProps();
-  const { sameBlockCount, color, loadOpen, icon } = attributes;
+  const { loadOpen, icon } = attributes;
   const title = attributes.title;
 
   const { clientId } = ownProps;
   const [isActive, setIsActive] = useState(false);
-  const [uid, setUid] = useState("");
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
-  const [pluginDir, setPluginDir] = useState("");
 
   //////////////// Use Effects ////////////////
 

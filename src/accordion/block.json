@@ -22,17 +22,9 @@
     "rrze-elements/accordion-hstart"
   ],
   "attributes": {
-    "expandAllLink": {
-      "type": "boolean",
-      "default": false
-    },
     "hstart": {
       "type": "number",
       "default": 3
-    },
-    "register": {
-      "type": "boolean",
-      "default": false
     },
     "sameBlockCount": {
       "type": "number",
@@ -65,6 +57,10 @@
     "jumpName": {
       "type": "string",
       "default": ""
+    },
+    "loadOpen": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

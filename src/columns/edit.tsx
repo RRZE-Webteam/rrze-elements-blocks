@@ -2,23 +2,18 @@
 import {
   useBlockProps,
   InnerBlocks,
-  BlockControls,
   InspectorControls,
   ContrastChecker,
 } from "@wordpress/block-editor";
 
 import {
   StandardColorSwitcher,
-  ExtendedColorSwitcher,
-  StandardColorSwitcherToolbar,
-  BorderColorPicker,
 } from "../components/CustomColorSwitcher";
 
 import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
+import { useEffect } from "@wordpress/element";
 
 /**
  * Interface representing the properties for the Edit component.
@@ -63,7 +58,6 @@ export default function Edit({
     borderColor,
     border,
     color,
-    colorSlug,
   } = attributes;
 
   const onChangeRangeControl = (numberOfColumns: number) => {

@@ -1,7 +1,6 @@
 // Imports from WordPress libraries
 import {
   useBlockProps,
-  InnerBlocks,
   BlockControls,
   InspectorControls,
   RichText,
@@ -18,7 +17,7 @@ import {
   Button,
 } from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
-import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
+import { displayShortcut } from "@wordpress/keycodes";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";

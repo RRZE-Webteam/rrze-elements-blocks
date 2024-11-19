@@ -1,11 +1,9 @@
-import { useEffect } from "@wordpress/element";
 import {
   useBlockProps,
   InnerBlocks,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
-import { isEqual } from "lodash";
-import { withSelect, useDispatch, useSelect } from "@wordpress/data";
+import { useDispatch } from "@wordpress/data";
 
 type SaveProps = {
   attributes: {
@@ -46,7 +44,6 @@ const Edit: React.FC<SaveProps> = ({
   const props = useBlockProps();
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
-  const { clientId } = ownProps;
 
   return (
     <div {...props}>

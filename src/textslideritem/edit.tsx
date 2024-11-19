@@ -2,12 +2,9 @@
 import {
   useBlockProps,
   InnerBlocks,
-  BlockControls,
 } from "@wordpress/block-editor";
 
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
 
 /**
  * Interface representing the properties for the Edit component.
