@@ -1,4 +1,3 @@
-// Imports from WordPress libraries
 import {
   useBlockProps,
   InnerBlocks,
@@ -20,12 +19,6 @@ import { update as play } from "@wordpress/icons";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-/**
- * Interface representing the properties for the Edit component.
- *
- * @interface EditProps
- * @property {Object} attributes - The block attributes.
- */
 interface EditProps {
   blockProps: string[];
   isSelected: boolean;
@@ -42,11 +35,10 @@ interface EditProps {
  *
  * Provides controls for customizing the Blueprint-block and renders the block inside the editor.
  *
- * @param {EditProps} props - The properties passed to the component.
- * @returns {JSX.Element} The JSX representation of the component.
+ * @param props - The properties passed to the component.
+ * @returns     - The JSX representation of the component.
  */
 export default function Edit({
-  blockProps,
   isSelected,
   attributes,
   setAttributes,
@@ -73,26 +65,10 @@ export default function Edit({
 
   const onClickPlay = () => {
     if (isSelected) {
-      function numberWithDots(x: any) {
-        if (x == null) {
-          return "0";
-        }
-
-        let cleanInput = x.toString().replace(/\./g, ""); // Remove any dots in the string
-        const number = parseInt(cleanInput, 10);
-        if (isNaN(number)) {
-          console.log("Conversion to number failed");
-          return "Invalid number";
-        }
-
-        const numberAsString = number.toString();
-        return numberAsString.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
-      // Select an element with id
+      /* eslint-disable-next-line */
       const container = document.querySelector(`#${props.id}`);
 
       if (container) {
-        // Select all items with class
         const items = container.querySelectorAll(".fau-counter-data");
 
         gsap.from(items, {

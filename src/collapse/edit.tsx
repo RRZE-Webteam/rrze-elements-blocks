@@ -13,12 +13,10 @@ import {
   InspectorControls,
   BlockControls,
   RichText,
-  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { seen, unseen, symbol } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
-import { useDispatch } from "@wordpress/data";
 import HeadingComponent from "../components/HeadingComponent";
 
 // Imports of custom components and helper functions.
@@ -39,7 +37,7 @@ import { speak } from '@wordpress/a11y';
  * Interface for the SaveProps containing the structure of the attributes and other properties
  * passed to the Edit component.
  */
-interface SaveProps {
+interface EditProps {
   attributes: {
     totalChildrenCount?: number;
     sameBlockCount?: number;
@@ -51,36 +49,19 @@ interface SaveProps {
     jumpName?: string;
     svgString?: string;
   };
-  setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
+  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
   context: { [key: string]: any };
 }
 
-type WPBlock = {
-  innerBlocks: WPBlock[];
-  name?: string;
-  attributes?: {
-    childrenCount?: number;
-  };
-  clientId?: string;
-};
-
-/**
- * Edit component responsible for the editor side rendering and logic of the custom block.
- *
- * @param {SaveProps} props - The properties and attributes of the block.
- */
-const Edit: React.FC<SaveProps> = ({
+const Edit= ({
   attributes,
   setAttributes,
   clientId,
   context,
-}) => {
-  const { __unstableMarkNextChangeAsNotPersistent } =
-    useDispatch(blockEditorStore);
+}: EditProps) => {
 
   // Local state and destructuring of attributes.
-
   const props = useBlockProps();
   const { color, loadOpen, icon } = attributes;
   const title = attributes.title;
@@ -88,14 +69,6 @@ const Edit: React.FC<SaveProps> = ({
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
-
-  /**
-   * Function to handle the toggle of color.
-   * @param {string} newTag - The new color to be set.
-   */
-  const handleToggleColor = (newTag: string) => {
-    setAttributes({ color: newTag });
-  };
 
   let sameTypeSiblingsBefore = 0;
 

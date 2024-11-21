@@ -11,13 +11,11 @@ import {
   BlockControls,
   InnerBlocks,
   InspectorControls,
-  store as blockEditorStore,
   RichText,
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { symbol } from "@wordpress/icons";
-import { useDispatch } from "@wordpress/data";
 import {
   ExtendedColorSwitcher,
   ExtendedColorSwitcherToolbar,
@@ -30,11 +28,7 @@ import {
 } from "../components/IconPicker";
 import { speak } from '@wordpress/a11y';
 
-/**
- * Interface for the SaveProps containing the structure of the attributes and other properties
- * passed to the Edit component.
- */
-interface SaveProps {
+interface EditProps {
   attributes: {
     totalChildrenCount?: number;
     sameBlockCount?: number;
@@ -46,28 +40,17 @@ interface SaveProps {
     jumpName?: string;
     svgString?: string;
   };
-  setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
+  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
   context: { [key: string]: any }; // You might want to further specify the shape of context if known
 }
 
-type WPBlock = {
-  innerBlocks: WPBlock[];
-  name?: string;
-  attributes?: {
-    childrenCount?: number;
-  };
-  clientId?: string;
-};
-
-const Edit: React.FC<SaveProps> = ({
+const Edit = ({
   attributes,
   setAttributes,
   context,
   ...ownProps
-}) => {
-  const { __unstableMarkNextChangeAsNotPersistent } =
-    useDispatch(blockEditorStore);
+}: EditProps) => {
 
   /////////// Use Selects ///////////
 

@@ -4,7 +4,6 @@ import { PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 // Import custom components
-import { StandardColorSwitcher as ColorSwitcher } from "../../components/CustomColorSwitcher";
 import { StandardColorSwitcher } from "../../components/CustomColorSwitcher";
 
 // Define TypeScript interface for component props
@@ -18,13 +17,13 @@ interface EditProps {
 
 /**
  * CustomInspectorControls component - Adds custom inspector controls to the block editor.
- * @param {EditProps} props - React props.
- * @returns {JSX.Element} The rendered CustomInspectorControls component.
+ * @param  props  - React props.
+ * @returns       - The rendered CustomInspectorControls component.
  */
 const CustomInspectorControls = ({
   attributes,
   setAttributes,
-}: EditProps): JSX.Element => {
+}: EditProps) => {
   const { xray } = attributes;
 
   /**

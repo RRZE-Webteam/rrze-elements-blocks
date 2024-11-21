@@ -1,18 +1,9 @@
 /**
  * WordPress dependencies
  */
-import { Path, SVG } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { WPBlockVariation } from "@wordpress/blocks";
 
-/** 
-@typedef {import('@wordpress/blocks').WPBlockVariation} WPBlockVariation */
-
-/**
- * Template option choices for predefined columns layouts.
- *
- * @type {WPBlockVariation[]}
- */
+//variations for the notice block - icons and text
 const variations = [
   {
     name: "notice-attention",

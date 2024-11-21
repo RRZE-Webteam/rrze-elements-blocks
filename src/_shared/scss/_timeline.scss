@@ -177,11 +177,6 @@
                 font-size: 1.25rem;
                 line-height: 1.5;
             }
-            h1, h2, h3, h4, h5, h6 {
-                /*@media screen and (min-width: 45em) {
-                    margin: 0 70px;
-                }*/
-            }
             p:not(.wp-caption-text) {
                 font-size: 1rem;
                 font-weight: normal;
@@ -240,7 +235,7 @@
         font-size: 70px;
         width: 27px;
         height: 44px;
-        vertical-align: top;
+        // vertical-align: top;
         @media screen and (min-width: 45em) {
             opacity: .9;
         }
@@ -376,7 +371,6 @@
         .toggle-autoplay {
             display: inline-block;
             margin: 0 .5em 0 0;
-            float: right;
             & > svg.rrze-elements-icon {
                 padding: 0;
                 border: 0;

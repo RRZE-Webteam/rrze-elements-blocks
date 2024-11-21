@@ -1,9 +1,9 @@
+//eslint-disable-next-line
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import variations from "./variations";
 
 export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, style } = attributes;
 
   const matchedVariation = variations.find(
     (variation) => variation.name === attributes.style

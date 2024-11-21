@@ -10,7 +10,7 @@ type SaveProps = {
 
 export default function save({ attributes }: SaveProps) {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, expandAllLink } = attributes;
+  const { expandAllLink } = attributes;
 
   return (
     <div {...blockProps}>

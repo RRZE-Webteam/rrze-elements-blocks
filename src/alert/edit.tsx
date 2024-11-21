@@ -36,7 +36,6 @@ interface EditProps {
 }
 
 export default function Edit({
-  blockProps,
   attributes,
   setAttributes,
 }: EditProps) {

@@ -27,23 +27,6 @@ import {
 
 /**
  * Interface representing the properties for the Edit component.
- * 
- * @interface EditProps
- * @property {Object} attributes - The block attributes.
- * @property {string} [attributes.style] - The style of the block.
- * @property {string} [attributes.color] - The color of the block.
- * @property {string} [attributes.title] - The title of the block.
- * @property {string} attributes.icon - The icon of the block.
- * @property {string} [attributes.svgString] - SVG string for the icon.
- * @property {boolean} [attributes.active] - Whether the block is active.
- * @property {boolean} [attributes.xray] - Whether x-ray is enabled for the block.
- * @property {boolean} [attributes.labelSettings] - Whether label settings are enabled.
- * @property {string} [attributes.blockId] - The block ID.
- * @property {string} [attributes.tabsUid] - The UID for tabs.
- * @property {Function} setAttributes - Function to set new attributes.
- * @property {string} clientId - Unique client ID of the block.
- * @property {Object} context - Context provided by block context.
- * @property {any} blockProps - Additional block properties.
  */
 interface EditProps {
   attributes: {
@@ -66,28 +49,17 @@ interface EditProps {
   blockParents: any;
 }
 
-type WPBlock = {
-  innerBlocks: WPBlock[];
-  name?: string;
-  attributes?: {
-    childrenCount?: number;
-  };
-  clientId?: string;
-};
-
 /**
  * Edit component for the Tab block.
  *
  * Provides controls for customizing the Tab-block and renders the block inside the editor.
  *
- * @param {EditProps} props - The properties passed to the component.
- * @returns {JSX.Element} The JSX representation of the component.
+ * @param props - The properties passed to the component.
+ * @returns     - The JSX representation of the component.
  */
 export default function Edit({
-  blockProps,
   attributes,
   setAttributes,
-  clientId,
   context,
 }: EditProps) {
   const { __unstableMarkNextChangeAsNotPersistent } =

@@ -1,24 +1,8 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
- */
 import { registerBlockType } from "@wordpress/blocks";
 import { createBlock } from "@wordpress/blocks";
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor. All other files
- * get applied to the editor only.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
 import "./editor.scss";
 
-/**
- * Internal dependencies
- */
 import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
@@ -58,11 +42,6 @@ function validateIcon(iconStr: string) {
   return "";
 }
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
- */
 registerBlockType(
   metadata.name as any,
   {
@@ -149,7 +128,6 @@ registerBlockType(
               ...cleanData.matchAll(regexCollapse),
             ];
             let titleStore: { title: string; type: string; level: number; items?: any[] }[] = [];
-            console.log(data);
             const originalContent = data?.content || "";
 
             matchesCollapseContent.forEach((match, collapseIndex) => {
@@ -195,7 +173,7 @@ registerBlockType(
 
                   let innerAccordionBlocks: any = [];
 
-                  accordionItemMatches.forEach((accordionItem, accordionIndex) => {
+                  accordionItemMatches.forEach((accordionItem) => {
                     const accordionAttributesString = accordionItem[1];
                     const accordionContent = accordionItem[2].trim();
 
@@ -300,6 +278,7 @@ registerBlockType(
             const titleList: string = formatTitles(titleStore);
 
             // Ask user if they want to proceed and show the array of titles as bullet points
+            // eslint-disable-next-line
             const proceed: boolean = confirm(
               `Wichtiger Hinweis\n\nBitte überprüfen Sie Ihre Akkordeonstruktur, um sicherzustellen, dass alle Elemente vorhanden sind.\n\n${titleList}\n\nBestätigen Sie mit Ok, damit die Umwandlung in einen Block durchgeführt wird.`
             );

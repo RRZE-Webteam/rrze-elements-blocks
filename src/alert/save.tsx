@@ -1,4 +1,5 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import type { CSSProperties } from 'react';
 
 interface SaveProps {
   attributes: {
@@ -18,7 +19,7 @@ export default function save({ attributes }: SaveProps) {
       return {};
     }
 
-    const styleObj: React.CSSProperties = {
+    const styleObj: CSSProperties = {
       backgroundColor: attributes.color,
       color: attributes.textColor,
     };

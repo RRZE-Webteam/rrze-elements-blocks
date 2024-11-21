@@ -9,32 +9,6 @@
     "rrze-elements/collapse"
   ],
   "description": "Creates an inner accordion block",
-  "attributes": {
-    "expandAllLink": {
-      "type": "boolean",
-      "default": false
-    },
-    "hstart": {
-      "type": "integer",
-      "default": 2
-    },
-    "register": {
-      "type": "boolean",
-      "default": false
-    },
-    "sameBlockCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "childrenCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "previousBlockIds": {
-      "type": "array",
-      "default": []
-    }
-  },
   "supports": {
     "html": false
   },

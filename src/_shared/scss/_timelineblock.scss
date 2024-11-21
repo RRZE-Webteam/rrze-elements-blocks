@@ -27,8 +27,8 @@
         }
 
         li:before {
-            border-inline-start: .125rem solid var(--color-primary-dunkelste, #041E42);
-            -webkit-border-start: .125rem solid var(--color-primary-dunkelste, #041E42);
+            border-inline-start: .125rem solid var(--color-primary-basis, #04316a);
+            -webkit-border-start: .125rem solid var(--color-primary-basis, #04316a);
             content: "";
             left: -0.15rem;
             position: absolute;
@@ -38,7 +38,7 @@
 
         li:after {
             background-color: #fff;
-            border: .125rem solid var(--color-primary-dunkelste, #041E42);
+            border: .125rem solid var(--color-primary-basis, #04316a);
             border-radius: 50%;
             box-shadow: 0 0 0 2px #fff;
             content: "";
@@ -50,13 +50,13 @@
         }
 
         li>div {
-            color: #fff !important;
+            color: var(--color-primary-basis-kontrast, #fff) !important;
             padding: 1rem;
-            border: .15rem solid var(--color-primary-dunkelste, #041E42);
+            border: .15rem solid var(--color-primary-basis, #04316a);
         }
 
         div.tooltip-arrow:after {
-            background: #041E42;
+            background: var(--color-primary-basis, #04316a);
             content: "";
             height: 10px;
             left: 50%;
@@ -79,14 +79,14 @@
 
         div.tooltip {
             position: relative;
-            background-color: var(--color-primary-dunkelste, #041E42);
+            background-color: var(--color-primary-basis, #04316a);
 
             :first-child {
                 margin-top: 0;
             }
 
             p{
-                color: #fff;
+                color: var(--color-primary-basis-kontrast, #fff);
             }
             h1,
             h2,

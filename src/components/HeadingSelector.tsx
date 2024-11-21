@@ -24,7 +24,7 @@ type SaveProps = {
 
 /**
  * Checks the heading level and returns the corresponding icon
- * @param {*} hstart
+ * @param hstart - The heading level
  * @returns
  */
 const checkHeadingLevelIcon = (hstart: number) => {
@@ -46,7 +46,7 @@ const checkHeadingLevelIcon = (hstart: number) => {
 
 /**
  * Creates a Selector for hstart inside the Blockeditor
- * @param {*} props
+ * @param props - The properties passed to the component
  * @returns JSX element
  */
 const HeadingSelector = ({ attributes, setAttributes }: SaveProps) => {
@@ -91,7 +91,7 @@ const HeadingSelector = ({ attributes, setAttributes }: SaveProps) => {
 
 /**
  * Creates a Dropdown HeadingSelector for hstart inside the BlockControls
- * @param {*} props
+ * @param props - The properties passed to the component
  * @returns JSX element
  */
 const HeadingSelectorInspector = ({ attributes, setAttributes }: SaveProps) => {

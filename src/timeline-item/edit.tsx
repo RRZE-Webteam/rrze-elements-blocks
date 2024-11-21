@@ -1,11 +1,9 @@
 import {
   useBlockProps,
   InnerBlocks,
-  store as blockEditorStore,
 } from "@wordpress/block-editor";
 
 import { RichText } from "@wordpress/block-editor";
-import { useDispatch } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import HeadingComponent from "../components/HeadingComponent";
 import { useEffect } from "@wordpress/element";
@@ -24,12 +22,8 @@ export default function Edit({
   attributes,
   setAttributes,
   context,
-  ...ownProps
 }: SaveProps) {
   const props = useBlockProps();
-  const { __unstableMarkNextChangeAsNotPersistent } =
-    useDispatch(blockEditorStore);
-
   const title = attributes.title;
 
   /**

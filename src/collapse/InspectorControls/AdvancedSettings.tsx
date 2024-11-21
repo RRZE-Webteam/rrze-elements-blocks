@@ -1,12 +1,6 @@
 import {
   PanelBody,
   CheckboxControl,
-  __experimentalText as Text,
-  __experimentalDivider as Divider,
-  __experimentalHeading as Heading,
-  __experimentalSpacer as Spacer,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
@@ -19,8 +13,8 @@ type AdvancedSettingsProps = {
 
 /**
  * Handles the Expand All Link selection inside the InspectorControls
- * @param {*} attributes
- * @param {*} setAttributes
+ * @param attributes - The attributes of the block
+ * @param setAttributes - The function to set the attributes of the block
  * @returns JSX element
  * @see edit.js
  */
