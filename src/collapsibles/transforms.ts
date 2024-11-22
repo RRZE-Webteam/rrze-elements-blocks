@@ -1,16 +1,80 @@
 import { regexp, next, attrs, ShortcodeMatch } from "@wordpress/shortcode";
 import { createBlock } from "@wordpress/blocks";
 import { BlockInstance } from "@wordpress/blocks";
+import { parse } from "path";
 
 /**
- * Utility function to strip HTML tags from a string.
- * You can enhance this function as needed.
+ * Utility function to strip wpAutop generated HTML tags.
  */
 function stripHTML(html: string): string {
-	const div = document.createElement("div");
-	div.innerHTML = html;
-	return div.textContent || div.innerText || "";
+    // Remove <p> and </p> tags
+    let stripped = html.replace(/<\/?p>/g, "");
+
+    // Remove <br> tags (self-closing and non-self-closing)
+    stripped = stripped.replace(/<br\s*\/?>/g, "");
+
+    return stripped.trim();
 }
+
+interface ShortcodeMatches {
+    attributes: {
+        named: {
+            [key: string]: string | boolean | undefined;
+        };
+        numeric: number[];
+    };
+    content: string;
+}
+
+interface ParsedShortcode {
+    attributes: {
+        named: { [key: string]: string | boolean | undefined };
+        numeric: number[];
+    };
+    content: string;
+}
+
+/**
+ * Function to parse an array of ShortcodeMatch objects based on the provided shortcode tag.
+ */
+const parseShortcodeMatches = (shortcodeTag: string, content: string): ParsedShortcode[] => {
+    const matchRegex: RegExp = regexp(shortcodeTag);
+    const matches: string[] = content.match(matchRegex) || [];
+    const parsedMatches: ParsedShortcode[] = [];
+
+    matches.forEach((match) => {
+        const attrMatch = match.match(new RegExp(`${shortcodeTag}\\s+([^\\]]+)`));
+        const contentMatch = match.match(/\]([\s\S]*?)\[\/collapse\]/);
+
+        if (attrMatch && attrMatch[1]) {
+            const attributeString = attrMatch[1];
+            const parsedAttributes = attrs(attributeString) as unknown as ShortcodeMatches["attributes"]; // Safe cast with `unknown`
+
+            // Safely convert numeric strings to numbers
+            const numericAttributes = (parsedAttributes.numeric || []).map((value) => {
+                if (typeof value === "string") {
+                    const numberValue = parseFloat(value);
+                    return isNaN(numberValue) ? 0 : numberValue; // Fallback to 0 if conversion fails
+                }
+                return value;
+            });
+            
+            //Strip HTML tags from the inner content
+            const innerContent = contentMatch ? stripHTML(contentMatch[1]) : "";
+
+            parsedMatches.push({
+                attributes: {
+                    named: parsedAttributes.named,
+                    numeric: numericAttributes,
+                },
+                content: innerContent,
+            });
+        }
+    });
+
+    return parsedMatches;
+};
+
 
 const transforms = {
     from: [
@@ -31,53 +95,16 @@ const transforms = {
                 console.log("data: ", data);
                 console.log("content: ", data.shortcode.content);
 
-                const collabsibleData: any = [];
-
                 const exampleContent = data.shortcode.content || "";
 
-                console.log("Parser started");
-                const matchRegex: RegExp = regexp("collapse");
-                console.log("matchRegex: ", matchRegex);
-
-                const matches: RegExpExecArray = matchRegex.exec(exampleContent);
-                console.log("matches: ", matches);
-
-                const matchedMatches: string[] =
-                    exampleContent.match(matchRegex) || [];
-                console.log("matchedMatches: ");
-                console.log(matchedMatches);
-
-                // Iterate over each match to extract and log attributes
-                matchedMatches.forEach((match, index) => {
-                    console.log(`Processing match #${index + 1}:`, match);
-
-                    // Extract the attributes string from the match
-                    const attrMatch = match.match(/collapse\s+([^\]]+)/);
-                    const contentMatch = match.match(/\]([\s\S]*?)\[\/collapse\]/);
-
-                    if (attrMatch && attrMatch[1]) {
-                        const attributeString = attrMatch[1];
-                        console.log("Raw attribute string:", attributeString);
-
-                        // Parse the attributes using `attrs()`
-                        const parsedAttributes = attrs(attributeString);
-                        console.log("Parsed attributes:", parsedAttributes);
-
-                        const content = contentMatch ? contentMatch[1] : '';
-                        console.log("Inner content:", content); // maybe remove p-tags...?
-
-                        // Push extracted data into array
-                        collabsibleData.push({
-                            attributes: parsedAttributes,
-                            content: content, // Optionally strip HTML
-                        });
-                    } else {
-                        console.log(`No attributes found for match #${index + 1}`);
-                    }
-                });
-
-
-                console.log("Extracted Collapsibles Data:", collabsibleData);
+                const collapseExample = parseShortcodeMatches("collapse", exampleContent);
+                console.log("The collapse example: ");
+                console.log(collapseExample);
+                console.log("The value fed to parseShortcodeMatches: ");
+                
+                console.log("The parsed accordion : ");
+                const accordionExample = parseShortcodeMatches("accordion", collapseExample[0].content);
+                console.log(accordionExample);
 
                 return [];
             },
