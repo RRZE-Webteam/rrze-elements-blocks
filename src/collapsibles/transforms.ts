@@ -7,10 +7,7 @@ import { parse } from "path";
  * Utility function to strip wpAutop generated HTML tags.
  */
 function stripHTML(html: string): string {
-    // Remove <p> and </p> tags
     let stripped = html.replace(/<\/?p>/g, "");
-
-    // Remove <br> tags (self-closing and non-self-closing)
     stripped = stripped.replace(/<br\s*\/?>/g, "");
 
     return stripped.trim();
@@ -43,38 +40,37 @@ const parseShortcodeMatches = (shortcodeTag: string, content: string): ParsedSho
     const parsedMatches: ParsedShortcode[] = [];
 
     matches.forEach((match) => {
+        console.log("The match: ");
+        console.log(match);
+
         const attrMatch = match.match(new RegExp(`${shortcodeTag}\\s+([^\\]]+)`));
-        const contentMatch = match.match(/\]([\s\S]*?)\[\/collapse\]/);
+        const contentMatch = match.match(new RegExp(`\\]([\\s\\S]*?)\\[\\/${shortcodeTag}\\]`)); // Dynamic closing tag
 
-        if (attrMatch && attrMatch[1]) {
-            const attributeString = attrMatch[1];
-            const parsedAttributes = attrs(attributeString) as unknown as ShortcodeMatches["attributes"]; // Safe cast with `unknown`
+        const parsedAttributes = attrMatch && attrMatch[1]
+            ? (attrs(attrMatch[1]) as unknown as ShortcodeMatches["attributes"]) 
+            : { named: {}, numeric: [] };
 
-            // Safely convert numeric strings to numbers
-            const numericAttributes = (parsedAttributes.numeric || []).map((value) => {
-                if (typeof value === "string") {
-                    const numberValue = parseFloat(value);
-                    return isNaN(numberValue) ? 0 : numberValue; // Fallback to 0 if conversion fails
-                }
-                return value;
-            });
-            
-            //Strip HTML tags from the inner content
-            const innerContent = contentMatch ? stripHTML(contentMatch[1]) : "";
+        const numericAttributes = (parsedAttributes.numeric || []).map((value) => {
+            if (typeof value === "string") {
+                const numberValue = parseFloat(value);
+                return isNaN(numberValue) ? 0 : numberValue;
+            }
+            return value;
+        });
 
-            parsedMatches.push({
-                attributes: {
-                    named: parsedAttributes.named,
-                    numeric: numericAttributes,
-                },
-                content: innerContent,
-            });
-        }
+        const innerContent = contentMatch ? contentMatch[1] : "";
+
+        parsedMatches.push({
+            attributes: {
+                named: parsedAttributes.named,
+                numeric: numericAttributes,
+            },
+            content: innerContent,
+        });
     });
 
     return parsedMatches;
 };
-
 
 const transforms = {
     from: [
@@ -101,10 +97,24 @@ const transforms = {
                 console.log("The collapse example: ");
                 console.log(collapseExample);
                 console.log("The value fed to parseShortcodeMatches: ");
+                console.log(collapseExample[0].content);
                 
                 console.log("The parsed accordion : ");
                 const accordionExample = parseShortcodeMatches("accordion", collapseExample[0].content);
                 console.log(accordionExample);
+
+                const exampleAccordion = `[accordion]
+                    [accordion-item title="Beispiel 2"]
+                    Etwas Text
+                    [/accordion-item]
+                    [accordion-item title="Beispiel 3"]
+                    Etwas Text
+                    [/accordion-item]
+                    [/accordion]
+                    `;
+
+                console.log("The modified accordion parsed :")
+                console.log(parseShortcodeMatches("accordion", exampleAccordion));
 
                 return [];
             },
