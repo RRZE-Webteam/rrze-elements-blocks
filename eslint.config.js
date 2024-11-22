@@ -26,6 +26,9 @@ module.exports = [
         version: 'detect',
       },
     },
+    env: {
+      browser: true,
+    },
     rules: {
       'react/jsx-key': 'error',
       'tsdoc/syntax': 'warn',
@@ -56,7 +59,8 @@ module.exports = [
     rules: {
       // TypeScript-spezifische Regeln
       "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["error"]
+      "@typescript-eslint/no-unused-vars": ["error"],
+      'no-console': 'off'
       // Weitere TypeScript-Regeln
     },
   },
@@ -75,6 +79,7 @@ module.exports = [
     },
     rules: {
       'no-unused-vars': 'error',
+      'no-console': 'off', 
     },
   },
 ];
