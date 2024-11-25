@@ -1,9 +1,19 @@
+/* eslint-disable */
 /**
  * WordPress dependencies
  */
+import { Path, SVG } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
+import { WPBlockVariation } from "@wordpress/blocks";
 
-//variations for the notice block - icons and text
+/** 
+@typedef {import('@wordpress/blocks').WPBlockVariation} WPBlockVariation */
+
+/**
+ * Template option choices for predefined columns layouts.
+ *
+ * @type {WPBlockVariation[]}
+ */
 const variations = [
   {
     name: "notice-attention",
