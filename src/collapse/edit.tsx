@@ -263,6 +263,7 @@ const Edit= ({
                   "core/rss",
                   "core/search",
                   "core/tag-cloud",
+                  "core/table",
                   "rrze-elements/alert",
                   "rrze/rrze-video",
                 ]}
