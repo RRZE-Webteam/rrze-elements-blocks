@@ -4,8 +4,8 @@
 .rrze-elements-cta {
     position: relative;
     margin: 2em 0;
-    color: #fff;
-    background-color: var(--color-zentral-primary, #04316a);
+    color: var(--color-primary-basis-kontrast, #fff);
+    background-color: var(--color-primary-basis, #04316a);
     $backgrounds: '1', 'rrze';
     @each $background in $backgrounds {
         &.bg-#{$background} {

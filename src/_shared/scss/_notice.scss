@@ -228,8 +228,8 @@
 
             span:before {
                 display: block;
-                color: #fff;
-                background-color: var(--color-zentral-basis, #04316A);
+                color: var(--color-primary-basis-kontrast, #fff);
+                background-color: var(--color-primary-basis, #04316A);
                 aspect-ratio: 1/1;
                 padding: 1em 0.5em;
             }
@@ -254,7 +254,7 @@
             }
             border-top: none;
             @media screen and (min-width: 300px) {
-                border-top: 3px solid var(--color-zentral-basis, #04316A);
+                border-top: 3px solid var(--color-primary-basis, #04316A);
             }
 
             padding-top: 0.5em;
