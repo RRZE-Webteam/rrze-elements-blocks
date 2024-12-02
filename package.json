@@ -1,90 +1,96 @@
 {
-  "name": "rrze-elements",
-  "version": "1.0.11",
-  "description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
-  "main": "build/index.js",
-  "textdomain": "rrze-elements-blocks",
-  "license": "GPL-3.0-or-later",
-  "private": true,
-  "scripts": {
-    "build": "wp-scripts build",
-    "format": "wp-scripts format",
-    "lint:css": "wp-scripts lint-style",
-    "lint:js": "wp-scripts lint-js",
-    "packages-update": "wp-scripts packages-update",
-    "plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start",
-    "build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
-    "update-version": "node update-version.js && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RRZE-Webteam/rrze-elements",
-    "issues": "https://github.com/RRZE-Webteam/rrze-elements/issues",
-    "clone": "git+https://github.com/RRZE-Webteam/rrze-elements.git"
-  },
-  "browserslist": [
-    "last 3 years",
-    "ie 11"
-  ],
-  "supports": {
-    "email": "webmaster@fau.de",
-    "docs": "https://www.wordpress.rrze.fau.de/plugins/fau-und-rrze-plugins/elements/"
-  },
-  "author": {
-    "name": "RRZE-Webteam <webmaster@fau.de>",
-    "url": "https://www.wordpress.rrze.fau.de/person/webmaster"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.25.7",
-    "@babel/preset-env": "^7.25.7",
-    "@babel/preset-react": "^7.25.7",
-    "@playwright/test": "^1.48.0",
-    "@svgr/webpack": "^8.1.0",
-    "@types/color": "^3.0.6",
-    "@types/lodash": "^4.17.10",
-    "@types/node": "^22.7.5",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
-    "@types/wordpress__block-editor": "^11.5.15",
-    "@types/wordpress__blocks": "^12.5.14",
-    "@wordpress/api-fetch": "^7.9.0",
-    "@wordpress/babel-plugin-makepot": "^6.9.0",
-    "@wordpress/compose": "^7.9.0",
-    "@wordpress/data": "^10.9.0",
-    "@wordpress/e2e-test-utils-playwright": "^1.9.0",
-    "@wordpress/eslint-plugin": "^21.2.0",
-    "@wordpress/i18n": "^5.9.0",
-    "@wordpress/icons": "^10.9.0",
-    "@wordpress/keycodes": "^4.9.0",
-    "@wordpress/notices": "^5.9.0",
-    "@wordpress/scripts": "^30.1.0",
-    "@wordpress/server-side-render": "^5.9.0",
-    "autoprefixer": "^10.4.20",
-    "babel-loader": "^9.2.1",
-    "dotenv": "^16.4.5",
-    "eslint": "^9.12.0",
-    "eslint-plugin-react": "^7.37.1",
-    "inquirer": "^12.0.0",
-    "prompt": "^1.3.0",
-    "semver": "^7.6.3",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3"
-  },
-  "dependencies": {
-    "@wordpress/a11y": "^4.10.0",
-    "color": "^4.2.3",
-    "gsap": "^3.12.5",
-    "lodash": "^4.17.21",
-    "react-error-boundary": "^4.0.13"
-  },
-  "resolutions": {
-    "postcss": "8.4.38",
-    "svg-baker": "1.7.0",
-    "svg-baker-runtime": "1.4.7"
-  },
-  "engines": {
-    "node": ">=21.7.3",
-    "npm": ">=10.8.0"
-  }
+	"name": "rrze-elements",
+	"version": "1.0.12",
+	"description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
+	"main": "build/index.js",
+	"textdomain": "rrze-elements-blocks",
+	"license": "GPL-3.0-or-later",
+	"private": true,
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start",
+		"build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
+		"update-version": "node update-version.js && npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/RRZE-Webteam/rrze-elements",
+		"issues": "https://github.com/RRZE-Webteam/rrze-elements/issues",
+		"clone": "git+https://github.com/RRZE-Webteam/rrze-elements.git"
+	},
+	"browserslist": [
+		"last 3 years",
+		"ie 11"
+	],
+	"supports": {
+		"email": "webmaster@fau.de",
+		"docs": "https://www.wordpress.rrze.fau.de/plugins/fau-und-rrze-plugins/elements/"
+	},
+	"author": {
+		"name": "RRZE-Webteam <webmaster@fau.de>",
+		"url": "https://www.wordpress.rrze.fau.de/person/webmaster"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.25.7",
+		"@babel/preset-env": "^7.25.7",
+		"@babel/preset-react": "^7.25.7",
+		"@eslint/eslintrc": "^3.2.0",
+		"@eslint/js": "^9.15.0",
+		"@playwright/test": "^1.48.0",
+		"@svgr/webpack": "^8.1.0",
+		"@types/color": "^3.0.6",
+		"@types/lodash": "^4.17.10",
+		"@types/node": "^22.7.5",
+		"@types/react": "^18.3.11",
+		"@types/react-dom": "^18.3.0",
+		"@types/wordpress__block-editor": "^11.5.15",
+		"@types/wordpress__blocks": "^12.5.14",
+		"@typescript-eslint/eslint-plugin": "^8.14.0",
+		"@typescript-eslint/parser": "^8.14.0",
+		"@wordpress/api-fetch": "^7.9.0",
+		"@wordpress/babel-plugin-makepot": "^6.9.0",
+		"@wordpress/compose": "^7.9.0",
+		"@wordpress/data": "^10.9.0",
+		"@wordpress/e2e-test-utils-playwright": "^1.9.0",
+		"@wordpress/eslint-plugin": "^21.5.0",
+		"@wordpress/i18n": "^5.9.0",
+		"@wordpress/icons": "^10.9.0",
+		"@wordpress/keycodes": "^4.9.0",
+		"@wordpress/notices": "^5.9.0",
+		"@wordpress/scripts": "^30.1.0",
+		"@wordpress/server-side-render": "^5.9.0",
+		"autoprefixer": "^10.4.20",
+		"babel-loader": "^9.2.1",
+		"dotenv": "^16.4.5",
+		"eslint": "^9.12.0",
+		"eslint-plugin-react": "^7.37.2",
+		"eslint-plugin-tsdoc": "^0.3.0",
+		"inquirer": "^12.0.0",
+		"prompt": "^1.3.0",
+		"semver": "^7.6.3",
+		"ts-loader": "^9.5.1",
+		"typescript": "^5.6.3"
+	},
+	"dependencies": {
+		"@wordpress/a11y": "^4.10.0",
+		"@wordpress/shortcode": "^4.12.0",
+		"color": "^4.2.3",
+		"gsap": "^3.12.5",
+		"lodash": "^4.17.21",
+		"react-error-boundary": "^4.0.13"
+	},
+	"resolutions": {
+		"postcss": "8.4.38",
+		"svg-baker": "1.7.0",
+		"svg-baker-runtime": "1.4.7"
+	},
+	"engines": {
+		"node": ">=21.7.3",
+		"npm": ">=10.8.0"
+	}
 }

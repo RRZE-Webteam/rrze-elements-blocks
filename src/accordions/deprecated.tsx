@@ -1,6 +1,4 @@
 import { BlockDeprecation } from "@wordpress/blocks";
-import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import HeadingComponent from "../components/HeadingComponent";
 
 import saveV1_0_3 from "./v1.0.3/save";
 import migrateV1_0_3 from "./v1.0.3/migrate";

@@ -15,7 +15,7 @@ dt {
 
 .rrze--iconbox-element-container {
     background-color: var(--color-primary-basis, #04316a);
-    color: #fff;
+    color: var(--color-primary-basis-kontrast, #fff);
     border: 1px solid var(--color-primary-basis, #04316a);
     padding: 0.5rem 1rem;
     height: 100%;
@@ -32,20 +32,20 @@ dt {
 
     dt {
         a {
-            color: #fff;
+            color: var(--color-primary-basis-kontrast, #fff);
             text-decoration: none;
         }
     }
 
 
     a.standard-btn.ghost-btn {
-        color: #fff;
+        color: var(--color-primary-basis-kontrast, #fff);
         text-decoration: none;
         margin-top: 1rem;
     }
 
     a.standard-btn.ghost-btn:hover {
-        background-color: var(--color-white, #fff);
+        color: var(--color-primary-basis-kontrast, #fff);
         color: var(--color-KontrastDunkel, #222);
         border: 1px solid var(--color-primary-basis, #04316a);
     }
@@ -53,10 +53,9 @@ dt {
 
 .is-style-outlined {
     .rrze--iconbox-element-container {
-        background-color: var(--color-white, #fff);
-        color: var(--color-KontrastDunkel, #222);
+        color: var(--text, #222);
         border: 1px solid var(--color-primary-basis, #04316a);
-        
+        background-color: var(--color-white, #fff);
         dt {
             a {
                 color: var(--color-KontrastDunkel, #222);
@@ -68,7 +67,7 @@ dt {
             color: var(--color-KontrastDunkel, #222);
         }
         a.standard-btn.ghost-btn:hover {
-            color: var(--color-white, #fff);
+            color: var(--color-primary-basis-kontrast, #fff);
             background-color: var(--color-primary-basis, #04316a);
             border: 1px solid var(--color-primary-basis, #04316a);
         }

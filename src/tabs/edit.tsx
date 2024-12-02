@@ -72,22 +72,19 @@ type WPBlock = {
  *
  * Provides controls for customizing the block and renders the block inside the editor.
  *
- * @param {EditProps} props - The properties passed to the component.
- * @returns {JSX.Element} The JSX representation of the component.
+ * @param props - The properties passed to the component.
+ * @returns     - The JSX representation of the component.
  */
 export default function Edit({
-  blockProps,
   attributes,
   setAttributes,
   clientId,
-  context,
 }: EditProps) {
   // WordPress hooks and other logic here.
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
   const props = useBlockProps();
   const blockId = props["data-block"];
-  const { tabs } = attributes;
 
   const { insertBlock } = useDispatch("core/block-editor");
   const { selectBlock } = useDispatch("core/block-editor");
@@ -97,7 +94,7 @@ export default function Edit({
     // retrieve the inner client ids of the current block
     useSelect(
       (select) => {
-        const { getBlock, getBlocks, getBlockIndex } = select(
+        const { getBlocks } = select(
           "core/block-editor"
         ) as {
           getBlock: Function;
@@ -203,8 +200,8 @@ export default function Edit({
 
   /**
    * Function to determine if a tab is currently selected.
-   * @param {number} index - The index of the tab.
-   * @returns {boolean} - Whether the tab is selected.
+   * @param index  - The index of the tab.
+   * @returns      - Whether the tab is selected.
    */
   const ariaSelected: any = (index: number) => {
     if (innerClientIds[index] === undefined) {

@@ -24,17 +24,15 @@ type TaxonomySelectorProps = {
 /**
  * Displays a SelectorControl with all available post categories
  * 
- * Use this component inside InspectorControls > PanelBody or inside a Modal Component
+ * Use this component inside InspectorControls inside a PanelBody or inside a Modal Component
  * Users can select a category from the dropdown. Pass it your category attribute and the * set Attributes function.
- * @param {TaxonomySelectorProps} props
- * @returns {JSX.Element} The JSX representation of the component.
+ * @param props - The properties passed to the component.
+ * @returns     - The JSX representation of the component.
  */
 const CategorySelectorControl = ({
   attributes,
   setAttributes,
 }: TaxonomySelectorProps) => {
-  const cat = attributes.cat || "";
-
   const { categories } = useSelect((select) => {
     const { getEntityRecords } = select("core") as {
       getEntityRecords: (

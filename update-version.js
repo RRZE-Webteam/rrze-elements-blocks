@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * This script updates the version number for the main php file and all block.json files
  */
@@ -53,8 +54,6 @@ const filesToUpdate = [
   "./src/notice/block.json",
   "./src/tab/block.json",
   "./src/tabs/block.json",
-  "./src/textslider/block.json",
-  "./src/textslideritem/block.json",
   "./src/timeline/block.json",
   "./src/timeline-item/block.json",
 ]; // usw.

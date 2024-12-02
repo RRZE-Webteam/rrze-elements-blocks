@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * WordPress dependencies
  */
@@ -61,11 +62,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->*/}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(200, 128) scale(0.5)"
           d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z"
         />
@@ -92,9 +93,9 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
       {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           fillRule="evenodd"
           clipRule="evenodd"
           transform="translate(128, 128) scale(0.5)"
@@ -122,9 +123,9 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
       {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           fillRule="evenodd"
           clipRule="evenodd"
           transform="translate(170, 128) scale(0.5)"
@@ -152,9 +153,9 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           fillRule="evenodd"
           clipRule="evenodd"
           transform = "translate(140, 128) scale(0.5)"
@@ -182,9 +183,9 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
       {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           fillRule="evenodd"
           clipRule="evenodd"
           transform="translate(140, 128) scale(0.5)"
@@ -212,9 +213,9 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
       {/*<!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->*/}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           fillRule="evenodd"
           clipRule="evenodd"
           transform="translate(160, 128) scale(0.5)"
@@ -242,11 +243,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(128, 128) scale(0.5)"
           d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
         />
@@ -272,11 +273,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(100, 128) scale(0.5)"
           d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z"
         />
@@ -302,11 +303,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(128, 128) scale(0.5)"
           d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80V384 336 288C0 146.6 114.6 32 256 32s256 114.6 256 256v48 48 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"
         />
@@ -332,11 +333,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(110, 128) scale(0.5)"
           d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"
         />
@@ -362,11 +363,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(128, 128) scale(0.5)"
           d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"
         />
@@ -392,11 +393,11 @@ const variations = [
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
-        <rect width="512" height="512" fill="#04316a" />
+        <rect width="512" height="512" fill="var(--color-primary-basis, #04316a)" />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="#fff"
+          fill="var(--color-primary-basis-kontrast, #fff)"
           transform="translate(128, 128) scale(0.5)"
           d="M313.4 479.1c26-5.2 42.9-30.5 37.7-56.5l-2.3-11.4c-5.3-26.7-15.1-52.1-28.8-75.2H464c26.5 0 48-21.5 48-48c0-18.5-10.5-34.6-25.9-42.6C497 236.6 504 223.1 504 208c0-23.4-16.8-42.9-38.9-47.1c4.4-7.3 6.9-15.8 6.9-24.9c0-21.3-13.9-39.4-33.1-45.6c.7-3.3 1.1-6.8 1.1-10.4c0-26.5-21.5-48-48-48H294.5c-19 0-37.5 5.6-53.3 16.1L202.7 73.8C176 91.6 160 121.6 160 153.7V192v48 24.9c0 29.2 13.3 56.7 36 75l7.4 5.9c26.5 21.2 44.6 51 51.2 84.2l2.3 11.4c5.2 26 30.5 42.9 56.5 37.7zM32 384H96c17.7 0 32-14.3 32-32V128c0-17.7-14.3-32-32-32H32C14.3 96 0 110.3 0 128V352c0 17.7 14.3 32 32 32z"
         />

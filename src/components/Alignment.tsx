@@ -1,14 +1,9 @@
 // Import required WordPress packages and components
 import { __ } from "@wordpress/i18n";
 import {
-  ColorPalette,
-  PanelBody,
   ToolbarDropdownMenu,
   ToolbarItem,
-  ToolbarGroup,
-  SVG,
-  Path,
-  Icon,
+  ToolbarGroup
 } from "@wordpress/components";
 
 import { alignLeft, alignRight, alignCenter } from "@wordpress/icons"

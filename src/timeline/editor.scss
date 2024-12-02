@@ -24,8 +24,8 @@ ol.timeline {
     }
 
     li:before {
-        border-inline-start: .125rem solid var(--color-primary-dunkelste, #041E42);
-        -webkit-border-start: .125rem solid var(--color-primary-dunkelste, #041E42);
+        border-inline-start: .125rem solid var(--color-primary-basis, #04316a);
+        -webkit-border-start: .125rem solid var(--color-primary-basis, #04316a);
         content: "";
         left: -0.15rem;
         position: absolute;
@@ -34,8 +34,8 @@ ol.timeline {
     }
 
     li:after {
-        background-color: #fff;
-        border: .125rem solid var(--color-primary-dunkelste, #041E42);
+        background-color: var(--color-primary-basis, #04316a);
+        border: .125rem solid var(--color-primary-basis, #04316a);
         border-radius: 50%;
         box-shadow: 0 0 0 2px #fff;
         content: "";
@@ -47,14 +47,14 @@ ol.timeline {
     }
 
     li>div {
-        color: #fff !important;
+        color: var(--color-primary-basis-kontrast, #fff) !important;
         padding: 1rem;
-        border: .15rem solid var(--color-primary-dunkelste, #041E42);
+        border: .15rem solid var(--color-primary-basis, #04316a);
     }
 
     div.tooltip-arrow:after {
-        background: var(--color-primary-dunkelste, #041E42);
-        box-shadow: 0 0 6px rgba(14, 71, 203, .2);
+        background: var(--color-primary-basis, #04316a);
+        // box-shadow: 0 0 6px rgba(14, 71, 203, .2);
         content: "";
         height: 10px;
         left: 50%;
@@ -77,17 +77,18 @@ ol.timeline {
 
     div.tooltip{
         position: relative;
-        background-color: var(--color-primary-dunkelste, #041E42);
+        z-index: 10;
+        background-color: var(--color-primary-basis, #04316a);
 
         :first-child {
             margin-top: 0;
         }
         p{
-            color: #fff;
+            color: var(--color-primary-basis-kontrast, #fff);
         }
         h1, h2, h3, h4, h5, h6 {
             margin-top: 0;
-            color: #fff;
+            color: var(--color-primary-basis-kontrast, #fff);
             font-size: 1.313rem;
             margin-bottom: 1rem;
         }

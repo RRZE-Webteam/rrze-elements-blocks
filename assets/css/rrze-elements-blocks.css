@@ -12382,8 +12382,8 @@ button.expand-all.standard-btn {
 }
 .wp-block-rrze-elements-notice .notice :first-child span:before {
   display: block;
-  color: #fff;
-  background-color: var(--color-zentral-basis, #04316A);
+  color: var(--color-primary-basis-kontrast, #fff);
+  background-color: var(--color-primary-basis, #04316A);
   aspect-ratio: 1/1;
   padding: 1em 0.5em;
 }
@@ -12406,7 +12406,7 @@ button.expand-all.standard-btn {
 }
 @media screen and (min-width: 300px) {
   .wp-block-rrze-elements-notice .notice div:nth-child(2) {
-    border-top: 3px solid var(--color-zentral-basis, #04316A);
+    border-top: 3px solid var(--color-primary-basis, #04316A);
   }
 }
 
@@ -14357,11 +14357,6 @@ main aside.align-right {
   font-size: 1.25rem;
   line-height: 1.5;
 }
-[id^=timeline] .issues li h1, [id^=timeline] .issues li h2, [id^=timeline] .issues li h3, [id^=timeline] .issues li h4, [id^=timeline] .issues li h5, [id^=timeline] .issues li h6 {
-  /*@media screen and (min-width: 45em) {
-      margin: 0 70px;
-  }*/
-}
 [id^=timeline] .issues li p:not(.wp-caption-text) {
   font-size: 1rem;
   font-weight: normal;
@@ -14413,7 +14408,6 @@ main aside.align-right {
   font-size: 70px;
   width: 27px;
   height: 44px;
-  vertical-align: top;
 }
 @media screen and (min-width: 45em) {
   [id^=timeline] .next,
@@ -14562,7 +14556,6 @@ main aside.align-right {
 [id^=timeline] .timeline-nav .toggle-autoplay {
   display: inline-block;
   margin: 0 0.5em 0 0;
-  float: right;
 }
 [id^=timeline] .timeline-nav .toggle-autoplay > svg.rrze-elements-icon {
   padding: 0;
@@ -14618,8 +14611,8 @@ main aside.align-right {
   list-style: none;
 }
 .wp-block-rrze-elements-timeline ol.timeline li:before {
-  border-inline-start: 0.125rem solid var(--color-primary-dunkelste, #041E42);
-  -webkit-border-start: 0.125rem solid var(--color-primary-dunkelste, #041E42);
+  border-inline-start: 0.125rem solid var(--color-primary-basis, #04316a);
+  -webkit-border-start: 0.125rem solid var(--color-primary-basis, #04316a);
   content: "";
   left: -0.15rem;
   position: absolute;
@@ -14628,7 +14621,7 @@ main aside.align-right {
 }
 .wp-block-rrze-elements-timeline ol.timeline li:after {
   background-color: #fff;
-  border: 0.125rem solid var(--color-primary-dunkelste, #041E42);
+  border: 0.125rem solid var(--color-primary-basis, #04316a);
   border-radius: 50%;
   box-shadow: 0 0 0 2px #fff;
   content: "";
@@ -14639,12 +14632,12 @@ main aside.align-right {
   width: 1rem;
 }
 .wp-block-rrze-elements-timeline ol.timeline li > div {
-  color: #fff !important;
+  color: var(--color-primary-basis-kontrast, #fff) !important;
   padding: 1rem;
-  border: 0.15rem solid var(--color-primary-dunkelste, #041E42);
+  border: 0.15rem solid var(--color-primary-basis, #04316a);
 }
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip-arrow:after {
-  background: #041E42;
+  background: var(--color-primary-basis, #04316a);
   content: "";
   height: 10px;
   left: 50%;
@@ -14665,13 +14658,13 @@ main aside.align-right {
 }
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip {
   position: relative;
-  background-color: var(--color-primary-dunkelste, #041E42);
+  background-color: var(--color-primary-basis, #04316a);
 }
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip :first-child {
   margin-top: 0;
 }
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip p {
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
 }
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h1,
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h2,
@@ -14681,7 +14674,7 @@ main aside.align-right {
 .wp-block-rrze-elements-timeline ol.timeline div.tooltip h6 {
   margin-top: 0;
   margin-bottom: 1rem;
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   font-size: 1.313rem;
 }
 
@@ -15084,8 +15077,8 @@ Functions and Mixins
 .rrze-elements-cta {
   position: relative;
   margin: 2em 0;
-  color: #fff;
-  background-color: var(--color-zentral-primary, #04316a);
+  color: var(--color-primary-basis-kontrast, #fff);
+  background-color: var(--color-primary-basis, #04316a);
 }
 .rrze-elements-cta.bg-1 {
   background-image: url("../svg/cta/background-1.svg?url");
@@ -15415,7 +15408,7 @@ dt span.fau-counter-data.rrze-counter-large {
 
 .rrze--counter-element-container {
   background-color: var(--color-primary-basis, #04316a);
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   border: 1px solid var(--color-primary-basis, #04316a);
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
@@ -15426,33 +15419,33 @@ dt span.fau-counter-data.rrze-counter-large {
   margin: 0.5rem;
 }
 .rrze--counter-element-container dt a {
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   text-decoration: none;
 }
 .rrze--counter-element-container a.standard-btn.ghost-btn {
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   text-decoration: none;
   margin-top: 1rem;
 }
 .rrze--counter-element-container a.standard-btn.ghost-btn:hover {
-  background-color: var(--color-white, #fff);
+  color: var(--color-primary-basis-kontrast, #fff);
   color: var(--color-KontrastDunkel, #222);
   border: 1px solid var(--color-primary-basis, #04316a);
 }
 
 .is-style-outlined .rrze--counter-element-container {
-  background-color: var(--color-white, #fff);
-  color: var(--color-KontrastDunkel, #222);
+  color: var(--text, #222);
   border: 1px solid var(--color-primary-basis, #04316a);
+  background-color: var(--color-white, #fff);
 }
 .is-style-outlined .rrze--counter-element-container dt a {
-  color: var(--color-KontrastDunkel, #222);
+  color: var(--text, #222);
 }
 .is-style-outlined .rrze--counter-element-container a.standard-btn.ghost-btn {
   color: var(--color-KontrastDunkel, #222);
 }
 .is-style-outlined .rrze--counter-element-container a.standard-btn.ghost-btn:hover {
-  color: var(--color-white, #fff);
+  color: var(--color-primary-basis-kontrast, #fff);
   background-color: var(--color-primary-basis, #04316a);
   border: 1px solid var(--color-primary-basis, #04316a);
 }
@@ -15496,7 +15489,7 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 
 .rrze--iconbox-element-container {
   background-color: var(--color-primary-basis, #04316a);
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   border: 1px solid var(--color-primary-basis, #04316a);
   padding: 0.5rem 1rem;
   height: 100%;
@@ -15510,24 +15503,24 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   margin: 0.5rem;
 }
 .rrze--iconbox-element-container dt a {
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   text-decoration: none;
 }
 .rrze--iconbox-element-container a.standard-btn.ghost-btn {
-  color: #fff;
+  color: var(--color-primary-basis-kontrast, #fff);
   text-decoration: none;
   margin-top: 1rem;
 }
 .rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
-  background-color: var(--color-white, #fff);
+  color: var(--color-primary-basis-kontrast, #fff);
   color: var(--color-KontrastDunkel, #222);
   border: 1px solid var(--color-primary-basis, #04316a);
 }
 
 .is-style-outlined .rrze--iconbox-element-container {
-  background-color: var(--color-white, #fff);
-  color: var(--color-KontrastDunkel, #222);
+  color: var(--text, #222);
   border: 1px solid var(--color-primary-basis, #04316a);
+  background-color: var(--color-white, #fff);
 }
 .is-style-outlined .rrze--iconbox-element-container dt a {
   color: var(--color-KontrastDunkel, #222);
@@ -15536,7 +15529,7 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   color: var(--color-KontrastDunkel, #222);
 }
 .is-style-outlined .rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
-  color: var(--color-white, #fff);
+  color: var(--color-primary-basis-kontrast, #fff);
   background-color: var(--color-primary-basis, #04316a);
   border: 1px solid var(--color-primary-basis, #04316a);
 }

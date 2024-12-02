@@ -1,5 +1,4 @@
 import { useSelect } from "@wordpress/data";
-import { __ } from "@wordpress/i18n";
 import { QueryControls } from "@wordpress/components";
 
 type CustomQueryControlsProps = {
@@ -48,15 +47,6 @@ const CustomQueryControls = ({
         {} as Record<string, Category>
       )
     : {};
-
-  const categoryOptions = categories
-    ? categories.map((category) => ({
-        id: category.id,
-        name: category.name,
-        parent: category.parent,
-        slug: category.slug,
-      }))
-    : [];
 
   const selectedCategorySlugs = cat.split(",");
 

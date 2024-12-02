@@ -1,7 +1,6 @@
 // Imports from WordPress libraries
 import {
   useBlockProps,
-  InnerBlocks,
   BlockControls,
   InspectorControls,
   RichText,
@@ -18,7 +17,7 @@ import {
   Button,
 } from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
-import { displayShortcut, isKeyboardEvent } from "@wordpress/keycodes";
+import { displayShortcut } from "@wordpress/keycodes";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { symbol } from "@wordpress/icons";
@@ -28,12 +27,6 @@ import {
   IconPickerModalInset,
 } from "../components/IconPicker";
 
-/**
- * Interface representing the properties for the Edit component.
- *
- * @interface EditProps
- * @property {Object} attributes - The block attributes.
- */
 interface EditProps {
   blockProps: string[];
   attributes: {
@@ -55,11 +48,10 @@ interface EditProps {
  *
  * Provides controls for customizing the Blueprint-block and renders the block inside the editor.
  *
- * @param {EditProps} props - The properties passed to the component.
- * @returns {JSX.Element} The JSX representation of the component.
+ * @param props - The properties passed to the component.
+ * @returns     - The JSX representation of the component.
  */
 export default function Edit({
-  blockProps,
   attributes,
   setAttributes,
   isSelected,
@@ -89,7 +81,6 @@ export default function Edit({
 
   const [UrlPopoverAnchor, setUrlPopoverAnchor] = useState(null);
   const [isEditingURL, setIsEditingURL] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [isOpen, setOpen] = useState(false);
 
   const TagName = "a";

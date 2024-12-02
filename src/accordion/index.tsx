@@ -4,9 +4,6 @@ import {
 import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
-/**
- * Internal dependencies
- */
 import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
@@ -32,14 +29,8 @@ interface LabelContext {
   context: string;
 }
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
- */
 registerBlockType(metadata.name as any, {
   edit: Edit,
-  //@ts-ignore
   save,
   deprecated,
   icon: {

@@ -16,9 +16,9 @@ interface SaveProps {
   attributes: Attributes;
 }
 
-const Save: React.FC<SaveProps> = ({ attributes }) => {
+const Save = ({ attributes }: SaveProps) => {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount, totalChildrenCount, color, title, jumpName, svgString, loadOpen, hstart } = attributes;
+  const { color, title, jumpName, svgString, loadOpen, hstart } = attributes;
 
   let loadOnPageLoad = '';
   let activeOnPageLoad = '';

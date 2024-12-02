@@ -14,7 +14,7 @@ interface SaveProps {
 }
 
 export default function save({ attributes }: SaveProps) {
-  const { numberOfColumns, borderColor, width, rule, border, textColor } = attributes;
+  const { numberOfColumns, borderColor, width, rule, border } = attributes;
   
   const blockProps = useBlockProps.save({
     className: 'elements-textcolumns',

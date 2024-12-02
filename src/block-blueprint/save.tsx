@@ -15,7 +15,7 @@ export default function save({ attributes }: SaveProps) {
       <>
           <div {...blockProps}
           >
-            <h2>Hello World!</h2>
+            <h2>Hello World! {attributes.title}</h2>
           </div>
       </>
   );
