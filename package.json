@@ -1,6 +1,6 @@
 {
 	"name": "rrze-elements",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
 	"main": "build/index.js",
 	"textdomain": "rrze-elements-blocks",
