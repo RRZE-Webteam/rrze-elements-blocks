@@ -1,0 +1,46 @@
+@import "../../_shared/scss/variables";
+@import "../../_shared/scss/mixins";
+@import "../../_shared/scss/news";
+@import "../../_shared/scss/columns";
+
+.wp-block-rrze-elements-news {
+    .rrze-elements-news {
+        font-family: 'Roboto', sans-serif;
+
+        .entry-title {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.313 rem;
+            }
+
+            h4 {
+                font-size: 1.188rem;
+            }
+
+            h5 {
+                font-size: 1.125rem;
+            }
+
+            h6 {
+                font-size: 1.063rem;
+            }
+
+            a {
+                color: rgb(34, 34, 34);
+                text-decoration: none;
+            }
+        }
+
+        .entry-content {
+            a {
+                color: rgb(34, 34, 34);
+                text-decoration: underline;
+                text-decoration-color: var(--color-primary-ci-hell);
+                text-decoration-thickness: .3rem;
+            }
+        }
+    }
+}

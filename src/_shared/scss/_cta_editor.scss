@@ -9,7 +9,7 @@
     $backgrounds: '1', 'rrze';
     @each $background in $backgrounds {
         &.bg-#{$background} {
-            background-image: url("../../assets/svg/cta/background-#{$background}.svg?url");
+            background-image: url("../../../assets/svg/cta/background-#{$background}.svg?url");
             background-position: bottom 50% left;
             background-size: 100%;
             background-repeat: no-repeat;
