@@ -119,7 +119,7 @@ const Edit= ({
 
   return (
     <>
-      <div {...props} onDragEnd={() => { console.log('Drag is over'); }}>
+      <div {...props}>
         <BlockControls>
           <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
           <ToolbarGroup>

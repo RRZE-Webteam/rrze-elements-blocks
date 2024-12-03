@@ -1,48 +1,10 @@
-import { registerBlockType, BlockInstance } from "@wordpress/blocks";
-
-
-
+import { registerBlockType } from "@wordpress/blocks";
 import "./editor.scss";
-
 import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
-import iconJson from "../components/assets/fontawesome/fontawesomeIconNames.json";
 import deprecated from "./deprecated";
 import transforms from "./transforms";
-
-/**
- * Helper Functions
- */
-function validateIcon(iconStr: string): string {
-	// Splitting the string to see if it has a prefix.
-	if (!iconStr) return "";
-
-	const parts = iconStr.split(" ");
-
-	let prefix: string, iconName: string;
-
-	if (parts.length === 1) {
-		// If only icon name is provided, use "solid" as the default prefix.
-		prefix = "solid";
-		iconName = parts[0];
-	} else if (parts.length === 2) {
-		prefix = parts[0];
-		iconName = parts[1];
-	} else {
-		// Invalid icon string format
-		return "";
-	}
-
-	if (["brands", "regular", "solid"].includes(prefix)) {
-		const key = prefix as keyof typeof iconJson;
-		if (iconJson[key].includes(iconName)) {
-			return `${prefix} ${iconName}`;
-		}
-	}
-
-	return "";
-}
 
 registerBlockType(
 	metadata.name as any,
