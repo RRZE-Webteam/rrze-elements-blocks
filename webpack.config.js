@@ -1,3 +1,4 @@
+/* eslint-disable */
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 
 // Import the helper to find and generate the entry points in the src directory
@@ -21,6 +22,7 @@ module.exports = {
   ...defaultConfig,
   entry: {
 		...getWebpackEntryPoints('script')(),
+    'stores/store-rrze-elements-jumpnames': './src/stores/jumpNames.ts',
 	},
   devtool: devtool,
   module: {
