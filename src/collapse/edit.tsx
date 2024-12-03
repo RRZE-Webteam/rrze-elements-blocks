@@ -58,7 +58,7 @@ const Edit= ({
   attributes,
   setAttributes,
   clientId,
-  context,
+  context
 }: EditProps) => {
 
   // Local state and destructuring of attributes.
@@ -119,7 +119,7 @@ const Edit= ({
 
   return (
     <>
-      <div {...props}>
+      <div {...props} onDragEnd={() => { console.log('Drag is over'); }}>
         <BlockControls>
           <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
           <ToolbarGroup>
