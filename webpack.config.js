@@ -22,7 +22,7 @@ module.exports = {
   ...defaultConfig,
   entry: {
 		...getWebpackEntryPoints('script')(),
-    'stores/store-rrze-elements-jumpnames': './src/stores/jumpNames.ts',
+    'stores/store-rrze-elements-jumpnames': './src/stores/jumpNameStore.ts',
 	},
   devtool: devtool,
   module: {

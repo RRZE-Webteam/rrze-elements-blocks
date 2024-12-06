@@ -48,17 +48,15 @@ interface EditProps {
 const Edit = ({
   attributes,
   setAttributes,
-  context,
-  ...ownProps
+  clientId,
+  context
 }: EditProps) => {
 
   /////////// Use Selects ///////////
 
   const props = useBlockProps();
-  const { loadOpen, icon } = attributes;
+  const { loadOpen, icon, jumpName } = attributes;
   const title = attributes.title;
-
-  const { clientId } = ownProps;
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
@@ -66,9 +64,11 @@ const Edit = ({
   //////////////// Use Effects ////////////////
 
   useEffect(() => {
-    setAttributes({
-      jumpName: `panel_${clientId?.slice(-8)}`,
-    });
+    if (jumpName === "") {
+      setAttributes({
+        jumpName: `panel_${clientId?.slice(-8)}`,
+      });
+    }
   }, [clientId]);
 
   useEffect(() => {

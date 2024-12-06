@@ -1,3 +1,4 @@
+import "../../stores/jumpNameStore";
 // Imports from WordPress core components and hooks.
 import {
   ToolbarButton,
@@ -32,6 +33,7 @@ import {
   IconPickerModalInset,
 } from "../../components/IconPicker";
 import { speak } from '@wordpress/a11y';
+import { useSelect, useDispatch } from '@wordpress/data';
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -54,6 +56,11 @@ interface EditProps {
   context: { [key: string]: any };
 }
 
+interface RrzeElementsBlocksSelectors {
+  getJumpNames(): string[];
+  jumpNameExists(jumpName: string): boolean;
+}
+
 const Edit= ({
   attributes,
   setAttributes,
@@ -61,9 +68,8 @@ const Edit= ({
   context
 }: EditProps) => {
 
-  // Local state and destructuring of attributes.
   const props = useBlockProps();
-  const { color, loadOpen, icon } = attributes;
+  const { color, loadOpen, icon, jumpName } = attributes;
   const title = attributes.title;
 
   const [isActive, setIsActive] = useState(false);
@@ -72,23 +78,48 @@ const Edit= ({
 
   let sameTypeSiblingsBefore = 0;
 
-  useEffect(() => {
-    if (attributes.jumpName === "") {
-      setAttributes({
-        jumpName: `panel_${clientId?.slice(-8)}`,
-      });
-    }
-  }, [clientId]);
+  const { addJumpName, removeJumpName } = useDispatch('rrze/elements-blocks');
 
-  /**
-   * Set the heading level attribute based on the global setting.
-   */
+  const jumpNames = useSelect((select) => {
+    const store = select('rrze/elements-blocks') as RrzeElementsBlocksSelectors;
+    return store.getJumpNames();
+  }, []);
+
+  const jumpNameExists = useSelect((select) => {
+    const store = select('rrze/elements-blocks') as RrzeElementsBlocksSelectors;
+    return jumpName ? store.jumpNameExists(jumpName) : false;
+}, [jumpName]); 
+
   useEffect(() => {
-    setAttributes({
-      hstart: context["rrze-elements/"],
-    });
-  }),
-    [context["rrze-elements/hstart"]];
+    if (jumpNames.length > 0) {
+        console.log('Current jumpNames in store:', jumpNames);
+    }
+}, [jumpNames]); 
+
+  useEffect(() => {
+    if (!jumpName || jumpName === "") {
+        setAttributes({
+            jumpName: `panel_${clientId?.slice(-8)}`,
+        });
+    }
+}, []);
+
+
+  useEffect(() => {
+    if (jumpName && !jumpNameExists) {
+        addJumpName(jumpName);
+    }
+    // Optionale Bereinigung
+    return () => {
+        if (jumpName) {
+            removeJumpName(jumpName);
+        }
+    };
+}, []);
+
+  useEffect(() => {
+    setAttributes({ hstart: context["rrze-elements/hstart"] });
+  }, [context["rrze-elements/hstart"]]);  
 
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);

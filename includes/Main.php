@@ -31,6 +31,18 @@ class Main
 
         new Blocks();
         new Patterns();
+
+        add_action('rest_api_init', function () {
+            register_rest_route('rrze-elements-blocks/v1', '/jump-names', [
+                'methods' => 'GET',
+                'callback' => [$this, 'getJumpNames'], // Use a method within the class
+                'permission_callback' => '__return_true', // Allow public access
+            ]);
+        });
+    }
+
+    public function getJumpNames() {
+        return rest_ensure_response(['panel_abc123', 'panel_xyz456']);
     }
 
     /**
@@ -90,6 +102,8 @@ class Main
         $custom_styles = ['display', 'fill', 'margin', 'padding', 'color', 'background-color', 'font-size'];
         return array_merge($styles, $custom_styles);
     }
+
+
 
     /**
      * [enqueueScripts description]
