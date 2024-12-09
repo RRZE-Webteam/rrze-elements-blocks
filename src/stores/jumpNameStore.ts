@@ -33,6 +33,12 @@ const actions = {
             jumpName
         };
     },
+    removeJumpNameByClientId(clientId: string) {
+        return {
+            type: "REMOVE_JUMP_NAME_BY_CLIENT_ID" as const,
+            clientId
+        };
+    },
     setJumpNames(jumpNames: JumpNameEntry[]) {
         return {
             type: "SET_JUMP_NAMES" as const,
@@ -88,6 +94,11 @@ const store = createReduxStore<State, typeof actions, typeof selectors>("rrze/el
                     ...state,
                     jumpNames: state.jumpNames.filter((entry: JumpNameEntry) => entry.jumpName !== action.jumpName)
                 };
+                case 'REMOVE_JUMP_NAME_BY_CLIENT_ID':
+                    return {
+                        ...state,
+                        jumpNames: state.jumpNames.filter((entry: JumpNameEntry) => entry.clientId !== action.clientId)
+                    };
             case 'SET_JUMP_NAMES':
                 if (action.jumpNames.length === 0 && state.jumpNames.length > 0) {
                     console.warn('Attempted to overwrite with empty jumpNames array');

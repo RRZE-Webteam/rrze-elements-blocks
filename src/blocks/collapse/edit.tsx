@@ -78,7 +78,7 @@ const Edit= ({
 
   let sameTypeSiblingsBefore = 0;
 
-  const { addJumpName, removeJumpName } = useDispatch('rrze/elements-blocks');
+  const { addJumpName, removeJumpNameByClientId } = useDispatch('rrze/elements-blocks');
 
   const jumpNames = useSelect((select) => {
     const store = select('rrze/elements-blocks') as RrzeElementsBlocksSelectors;
@@ -102,19 +102,18 @@ const Edit= ({
         setAttributes({
             jumpName: `panel_${clientId?.slice(-8)}`,
         });
-    }
-}, []);
-
-  useEffect(() => {
-    if (jumpName && clientId && !jumpNameExists) {
+        if (clientId && !jumpNameExists) {
+          addJumpName(`panel_${clientId?.slice(-8)}`, clientId);
+        }
+    } else if (jumpName && clientId && !jumpNameExists) {
       addJumpName(jumpName, clientId);
     }
 
     return () => {
-        if (jumpName) {
-            removeJumpName(jumpName);
-        }
-    };
+      if (jumpName) {
+          removeJumpNameByClientId(clientId);
+      }
+  };
 }, []);
 
   useEffect(() => {
