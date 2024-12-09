@@ -1,4 +1,3 @@
-//Imports for necessary WordPress libraries
 import { __ } from "@wordpress/i18n";
 import {
 	Button,
@@ -6,11 +5,27 @@ import {
 	BaseControl,
 	__experimentalText as Text,
 	__experimentalSpacer as Spacer,
+	Icon,
 } from "@wordpress/components";
-import { useState } from "@wordpress/element";
-import { ChangeEvent, FormEvent } from "react";
-import { Icon } from "@wordpress/components";
 import { link } from "@wordpress/icons";
+import { useState } from "@wordpress/element";
+import { FormEvent, ChangeEvent } from "react";
+import { useSelect, useDispatch } from "@wordpress/data";
+
+interface JumpNameEntry {
+	jumpName: string;
+	clientId: string;
+}
+
+interface RrzeElementsBlocksSelectors {
+	jumpNameExists(jumpName: string): boolean;
+	getJumpNames(): JumpNameEntry[];
+}
+
+interface RrzeElementsBlocksActions {
+	addJumpName(jumpName: string, clientId: string): { type: string; jumpName: string; clientId: string; };
+	removeJumpName(jumpName: string): { type: string; jumpName: string; };
+}
 
 interface JumpLinkSelectorProps {
 	attributes: {
@@ -20,18 +35,23 @@ interface JumpLinkSelectorProps {
 	clientId: string;
 }
 
-/**
- * Adds an input field to set individual jump links for collapses.
- * @param attributes      - The attributes of the block
- * @param setAttributes   - The function to set the attributes of the block
- * @returns JSX element
- */
 const JumpLinkSelector = ({
 	attributes,
 	setAttributes,
+	clientId,
 }: JumpLinkSelectorProps) => {
 	const [inputURL, setInputURL] = useState(attributes.jumpName);
-	const [disabled, setDisabled] = useState(false);
+	const [disabled, setDisabled] = useState(true);
+	const [error, setError] = useState<string | null>(null);
+
+	// Dispatch
+	const { addJumpName, removeJumpName } = useDispatch('rrze/elements-blocks') as unknown as RrzeElementsBlocksActions;
+
+	// Select
+	const store = useSelect((select) => {
+		// Cast the returned store to your selectors interface
+		return select('rrze/elements-blocks') as unknown as RrzeElementsBlocksSelectors;
+	}, []);
 
 	/**
 	 * Sanitizes the input string for use in an href attribute.
@@ -42,25 +62,51 @@ const JumpLinkSelector = ({
 		return input
 			.trim()
 			.toLowerCase()
-			.replace(/\s+/g, "-") // Replace spaces with hyphens
-			.replace(/[^a-z0-9]/g, ""); // Remove non-alphanumeric characters except hyphens
+			.replace(/\s+/g, "-")
+			.replace(/[^a-z0-9-]/g, "");
 	};
 
-	/**
-	 * Handles the submit event of the form for the video url
-	 * @param event - The form event
-	 */
 	const handleToggleSubmit = (event: FormEvent) => {
 		event.preventDefault();
-		const sanitizedURL = sanitizeInput(inputURL);
-		setAttributes({ jumpName: sanitizedURL });
-		setDisabled(sanitizedURL === sanitizeInput(attributes.jumpName));
+
+		const oldName = attributes.jumpName;
+		const newName = sanitizeInput(inputURL);
+
+		// If no change, do nothing
+		if (newName === oldName) {
+			return;
+		}
+
+		// Check if newName already exists and is not the oldName
+		if (newName && store.jumpNameExists(newName) && newName !== oldName) {
+			setError(__("This jump link name is already taken.", "rrze-elements-blocks"));
+			return;
+		}
+
+		setError(null);
+
+		if (oldName && oldName !== "" && oldName !== newName) {
+			removeJumpName(oldName);
+		}
+
+		if (newName && newName !== "") {
+			addJumpName(newName, clientId);
+			setAttributes({ jumpName: newName });
+		}
+
+		setDisabled(true);
 	};
 
 	const onChangeURL = (event: ChangeEvent<HTMLInputElement>) => {
 		const url = event.target.value;
 		setInputURL(url);
-		setDisabled(sanitizeInput(url) === sanitizeInput(attributes.jumpName));
+		const sanitized = sanitizeInput(url);
+		const isSameAsCurrent = sanitized === sanitizeInput(attributes.jumpName);
+		setDisabled(isSameAsCurrent);
+
+		if (!isSameAsCurrent) {
+			setError(null);
+		}
 	};
 
 	return (
@@ -92,6 +138,9 @@ const JumpLinkSelector = ({
 						style={{ width: "100%" }}
 					/>
 				</BaseControl>
+				{error && (
+					<p style={{ color: "red" }}>{error}</p>
+				)}
 				<Button variant="primary" type="submit" disabled={disabled}>
 					{__("Set Jump Link", "rrze-elements-blocks")}
 				</Button>
