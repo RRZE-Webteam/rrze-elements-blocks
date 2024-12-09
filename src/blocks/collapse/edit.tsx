@@ -87,8 +87,9 @@ const Edit= ({
 
   const jumpNameExists = useSelect((select) => {
     const store = select('rrze/elements-blocks') as RrzeElementsBlocksSelectors;
+    console.log('jumpNameExists:', jumpName ? store.jumpNameExists(jumpName) : false);
     return jumpName ? store.jumpNameExists(jumpName) : false;
-}, [jumpName]); 
+}, [jumpName]);
 
   useEffect(() => {
     if (jumpNames.length > 0) {
@@ -104,12 +105,11 @@ const Edit= ({
     }
 }, []);
 
-
   useEffect(() => {
-    if (jumpName && !jumpNameExists) {
-        addJumpName(jumpName);
+    if (jumpName && clientId && !jumpNameExists) {
+      addJumpName(jumpName, clientId);
     }
-    // Optionale Bereinigung
+
     return () => {
         if (jumpName) {
             removeJumpName(jumpName);
@@ -119,7 +119,7 @@ const Edit= ({
 
   useEffect(() => {
     setAttributes({ hstart: context["rrze-elements/hstart"] });
-  }, [context["rrze-elements/hstart"]]);  
+  }, [context["rrze-elements/hstart"]]);
 
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
@@ -205,6 +205,7 @@ const Edit= ({
               jumpName: attributes.jumpName,
             }}
             setAttributes={setAttributes}
+            clientId={clientId}
           />
           <ColorSwitcher {...{ attributes, setAttributes }} />
           <AdvancedSettings {...{ attributes, setAttributes }} />

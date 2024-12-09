@@ -1,8 +1,13 @@
 import apiFetch from "@wordpress/api-fetch";
 import { createReduxStore, register } from "@wordpress/data";
 
+export interface JumpNameEntry {
+    jumpName: string;
+    clientId: string;
+}
+
 interface State {
-    jumpNames: string[];
+    jumpNames: JumpNameEntry[];
 }
 
 const DEFAULT_STATE: State = {
@@ -15,10 +20,11 @@ const actions = {
             type: "GET_JUMP_NAMES" as const
         };
     },
-    addJumpName(jumpName: string) {
+    addJumpName(jumpName: string, clientId: string) {
         return {
             type: "ADD_JUMP_NAME" as const,
-            jumpName
+            jumpName,
+            clientId
         };
     },
     removeJumpName(jumpName: string) {
@@ -27,7 +33,7 @@ const actions = {
             jumpName
         };
     },
-    setJumpNames(jumpNames: string[]) {
+    setJumpNames(jumpNames: JumpNameEntry[]) {
         return {
             type: "SET_JUMP_NAMES" as const,
             jumpNames
@@ -39,7 +45,7 @@ type Action = ReturnType<typeof actions[keyof typeof actions]>;
 
 const selectors = {
     jumpNameExists(state: State, jumpName: string) {
-        return state.jumpNames.includes(jumpName);
+        return state.jumpNames.some(entry => entry.jumpName === jumpName);
     },
     getJumpNames(state: State) {
         return state.jumpNames;
@@ -50,44 +56,47 @@ const resolvers = {
     *getJumpNames(): Generator<any, void, any> {
         try {
             const response = yield apiFetch({ path: '/rrze-elements-blocks/v1/jump-names' });
-            const jumpNamesArray = Array.isArray(response) ? response : [];
-            yield actions.setJumpNames(jumpNamesArray); // Ensure state update happens here
+            const jumpNamesArray: JumpNameEntry[] = Array.isArray(response)
+                ? response.filter((entry) => entry && entry.jumpName && entry.clientId)
+                : [];
+            yield actions.setJumpNames(jumpNamesArray);
         } catch (error) {
             console.error('Error fetching jump names:', error);
-            yield actions.setJumpNames([]); // Avoid resetting state unnecessarily
+            yield actions.setJumpNames([]); // Reset state to empty on error
         }
     }
 };
-
 
 const store = createReduxStore<State, typeof actions, typeof selectors>("rrze/elements-blocks", {
     reducer(state = DEFAULT_STATE, action: Action): State {
         switch (action.type) {
             case 'ADD_JUMP_NAME':
-                if (state.jumpNames.includes(action.jumpName)) {
-                    console.log('Duplicate jumpName detected:', action.jumpName); // Debug duplicates
+                if (!action.jumpName || !action.clientId) {
+                    console.warn('Invalid jumpName or clientId:', action);
+                    return state;
+                }
+                if (state.jumpNames.some((entry: JumpNameEntry) => entry.jumpName === action.jumpName)) {
+                    console.log('Duplicate jumpName detected:', action.jumpName);
                     return state;
                 }
                 return {
                     ...state,
-                    jumpNames: [...state.jumpNames, action.jumpName]
+                    jumpNames: [...state.jumpNames, { jumpName: action.jumpName, clientId: action.clientId }]
                 };
             case 'REMOVE_JUMP_NAME':
                 return {
                     ...state,
-                    jumpNames: state.jumpNames.filter((name: string) => name !== action.jumpName)
+                    jumpNames: state.jumpNames.filter((entry: JumpNameEntry) => entry.jumpName !== action.jumpName)
                 };
-
             case 'SET_JUMP_NAMES':
                 if (action.jumpNames.length === 0 && state.jumpNames.length > 0) {
                     console.warn('Attempted to overwrite with empty jumpNames array');
-                    return state; // Skip state update if jumpNames is empty
+                    return state;
                 }
                 return {
                     ...state,
                     jumpNames: action.jumpNames
-                };
-
+                }
             default:
                 return state;
         }

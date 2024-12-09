@@ -17,6 +17,7 @@ interface JumpLinkSelectorProps {
 		jumpName: string;
 	};
 	setAttributes: (attributes: { jumpName: string }) => void;
+	clientId: string;
 }
 
 /**
@@ -56,7 +57,6 @@ const JumpLinkSelector = ({
 		setDisabled(sanitizedURL === sanitizeInput(attributes.jumpName));
 	};
 
-	//eslint-disable-next-line
 	const onChangeURL = (event: ChangeEvent<HTMLInputElement>) => {
 		const url = event.target.value;
 		setInputURL(url);
