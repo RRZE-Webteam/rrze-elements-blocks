@@ -1,4 +1,3 @@
-import "../../stores/jumpNameStore";
 // Imports from WordPress core components and hooks.
 import {
   ToolbarButton,
@@ -33,7 +32,8 @@ import {
   IconPickerModalInset,
 } from "../../components/IconPicker";
 import { speak } from '@wordpress/a11y';
-import { useSelect, useDispatch } from '@wordpress/data';
+
+import { useJumpNameStore } from '../../hooks/useJumpNameStore'
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -50,15 +50,31 @@ interface EditProps {
     hstart?: number;
     jumpName?: string;
     svgString?: string;
+    isCustomJumpname?: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
   context: { [key: string]: any };
 }
 
-interface RrzeElementsBlocksSelectors {
-  getJumpNames(): string[];
-  jumpNameExists(jumpName: string): boolean;
+/**
+ * Utility function to create JumpName out of title attributes
+ */
+export function sanitizeTitleToJumpName(title: string): string {
+  if (!title) return "";
+  let sanitized = title.toLowerCase();
+
+  sanitized = sanitized
+    .replace(/ö/g, 'oe')
+    .replace(/ä/g, 'ae')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss');
+
+  sanitized = sanitized
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+  return sanitized;
 }
 
 const Edit= ({
@@ -76,45 +92,25 @@ const Edit= ({
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
 
-  let sameTypeSiblingsBefore = 0;
+  let computedDefaultJumpName = jumpName;
+  if (!jumpName || jumpName === "") {
+    computedDefaultJumpName = sanitizeTitleToJumpName(title) || `panel_${clientId?.slice(-8)}`;
+    setAttributes({ jumpName: computedDefaultJumpName });
+  }
 
-  const { addJumpName, removeJumpNameByClientId } = useDispatch('rrze/elements-blocks');
+  useJumpNameStore({
+    clientId,
+    jumpName: computedDefaultJumpName,
+    setAttributes: (attrs) => setAttributes(attrs)
+  });
 
-  const jumpNames = useSelect((select) => {
-    const store = select('rrze/elements-blocks') as RrzeElementsBlocksSelectors;
-    return store.getJumpNames();
+  useEffect(() => {
+    if (jumpName && (jumpName.startsWith("panel_") || jumpName.startsWith("accordion_"))) {
+      setAttributes({ isCustomJumpname: false });
+    }
   }, []);
 
-  const jumpNameExists = useSelect((select) => {
-    const store = select('rrze/elements-blocks') as RrzeElementsBlocksSelectors;
-    console.log('jumpNameExists:', jumpName ? store.jumpNameExists(jumpName) : false);
-    return jumpName ? store.jumpNameExists(jumpName) : false;
-}, [jumpName]);
-
-  useEffect(() => {
-    if (jumpNames.length > 0) {
-        console.log('Current jumpNames in store:', jumpNames);
-    }
-}, [jumpNames]); 
-
-  useEffect(() => {
-    if (!jumpName || jumpName === "") {
-        setAttributes({
-            jumpName: `panel_${clientId?.slice(-8)}`,
-        });
-        if (clientId && !jumpNameExists) {
-          addJumpName(`panel_${clientId?.slice(-8)}`, clientId);
-        }
-    } else if (jumpName && clientId && !jumpNameExists) {
-      addJumpName(jumpName, clientId);
-    }
-
-    return () => {
-      if (jumpName) {
-          removeJumpNameByClientId(clientId);
-      }
-  };
-}, []);
+  let sameTypeSiblingsBefore = 0;
 
   useEffect(() => {
     setAttributes({ hstart: context["rrze-elements/hstart"] });
@@ -139,6 +135,13 @@ const Edit= ({
       setAttributes({ title: "" });
     } else {
       setAttributes({ title: newText });
+    }
+  };
+
+  const onChangeTitleFocus = () => {
+    const newJumpName = sanitizeTitleToJumpName(title);
+    if (newJumpName && newJumpName !== jumpName) {
+      setAttributes({ jumpName: newJumpName });
     }
   };
 
@@ -249,6 +252,7 @@ const Edit= ({
                 placeholder={__("Enter your Title…", "rrze-elements-blocks")}
                 allowedFormats={[]}
                 className="elements-blocks-input-following-icon"
+                onBlur={onChangeTitleFocus}
               />
             </div>
           </HeadingComponent>

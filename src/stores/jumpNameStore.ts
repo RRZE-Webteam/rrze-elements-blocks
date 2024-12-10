@@ -1,6 +1,13 @@
 import apiFetch from "@wordpress/api-fetch";
 import { createReduxStore, register } from "@wordpress/data";
 
+/**
+ * Why do we need this store?
+ * 
+ * The JumpNameStore is used across Elements Blocks blocks to prevent duplicate jump names.
+ * s. also hooks/useJumpNameStore.tsx
+ */
+
 export interface JumpNameEntry {
     jumpName: string;
     clientId: string;

@@ -132,7 +132,6 @@ const IconPickerModalInset = memo(
 		const [filteredIcons, setFilteredIcons] = useState([]);
 		const [searchQuery, setSearchQuery] = useState("");
 		const [showSearchResults, setShowSearchResults] = useState(false);
-    //eslint-disable-next-line
 		const searchInputRef = useRef<HTMLInputElement>(null);
 
 		const [type, iconName] = attributes.icon.split(" ");

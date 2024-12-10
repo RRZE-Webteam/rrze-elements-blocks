@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import "../stores/jumpNameStore";
 import {
 	Button,
 	PanelBody,
@@ -30,8 +31,9 @@ interface RrzeElementsBlocksActions {
 interface JumpLinkSelectorProps {
 	attributes: {
 		jumpName: string;
+		isCustomJumpname?: boolean;
 	};
-	setAttributes: (attributes: { jumpName: string }) => void;
+	setAttributes: <Partial>(attributes: Partial) => void;
 	clientId: string;
 }
 
@@ -91,7 +93,7 @@ const JumpLinkSelector = ({
 
 		if (newName && newName !== "") {
 			addJumpName(newName, clientId);
-			setAttributes({ jumpName: newName });
+			setAttributes({ jumpName: newName, isCustomJumpname: true });
 		}
 
 		setDisabled(true);

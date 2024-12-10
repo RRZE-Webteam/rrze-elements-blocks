@@ -29,8 +29,12 @@ interface AttributesV1 {
   svgString: string;
 }
 
+interface AttributesV1_0_12 extends AttributesV1 {
+  isCustomJumpname: boolean;
+}
+
 //type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;
-type BlockAttributes = AttributesV1;
+type BlockAttributes = AttributesV1_0_12;
 
 interface LabelContext {
   context: string;
@@ -43,7 +47,7 @@ interface LabelContext {
  */
 registerBlockType(metadata.name as any, {
   edit: Edit,
-  //@ts-ignore
+  // @ts-ignore
   save,
   deprecated,
   icon: {
@@ -91,6 +95,7 @@ registerBlockType(metadata.name as any, {
       </svg>
     ),
   },
+  // @ts-ignore
   __experimentalLabel: (
     attributes: BlockAttributes,
     { context }: LabelContext

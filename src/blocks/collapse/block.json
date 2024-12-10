@@ -68,6 +68,10 @@
     "svgString": {
       "type": "string",
       "default": ""
+    },
+    "isCustomJumpname": {
+      "type": "boolean",
+      "default": false
     }
   },
   "providesContext": {
