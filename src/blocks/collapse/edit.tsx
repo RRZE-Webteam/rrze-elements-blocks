@@ -34,6 +34,8 @@ import {
 import { speak } from '@wordpress/a11y';
 
 import { useJumpNameStore } from '../../hooks/useJumpNameStore'
+import { JumpNameEntry } from "../../stores/jumpNameStore";
+
 
 /**
  * Interface for the SaveProps containing the structure of the attributes and other properties
@@ -94,21 +96,19 @@ const Edit= ({
 
   let computedDefaultJumpName = jumpName;
   if (!jumpName || jumpName === "") {
-    computedDefaultJumpName = sanitizeTitleToJumpName(title) || `panel_${clientId?.slice(-8)}`;
+    computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
     setAttributes({ jumpName: computedDefaultJumpName });
   }
 
-  useJumpNameStore({
+  const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
     clientId,
     jumpName: computedDefaultJumpName,
     setAttributes: (attrs) => setAttributes(attrs)
   });
-
-  useEffect(() => {
-    if (jumpName && (jumpName.startsWith("panel_") || jumpName.startsWith("accordion_"))) {
-      setAttributes({ isCustomJumpname: false });
-    }
-  }, []);
+  
+  const doesJumpNameExist = (name: string): boolean => {
+    return jumpNames.some((entry: JumpNameEntry) => entry.jumpName === name);
+  };
 
   let sameTypeSiblingsBefore = 0;
 
@@ -140,8 +140,13 @@ const Edit= ({
 
   const onChangeTitleFocus = () => {
     const newJumpName = sanitizeTitleToJumpName(title);
-    if (newJumpName && newJumpName !== jumpName) {
+    console.log(newJumpName);
+    console.log(doesJumpNameExist(newJumpName));
+    console.log(jumpNames);
+    if (newJumpName && newJumpName !== jumpName && !doesJumpNameExist(newJumpName)) {
       setAttributes({ jumpName: newJumpName });
+    } else {
+      console.log('JumpName already exists or is empty');
     }
   };
 

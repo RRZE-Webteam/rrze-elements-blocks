@@ -1,6 +1,6 @@
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
-
+import { JumpNameEntry } from "../stores/jumpNameStore";
 /**
  * Use this hook to manage the jump names in the store.
  * On mount, it will add the jump name to the store if it doesn't exist.
@@ -14,8 +14,8 @@ import { useSelect, useDispatch } from "@wordpress/data";
  */
 
 interface RrzeElementsBlocksSelectors {
-	getJumpNames(): string[];
-	jumpNameExists(jumpName: string): boolean;
+    getJumpNames(): JumpNameEntry[];
+    jumpNameExists(jumpName: string): boolean;
 }
 
 interface UseJumpNameStoreParams {
@@ -36,7 +36,7 @@ export function useJumpNameStore({
 	const jumpNames = useSelect((select) => {
 		const store = select("rrze/elements-blocks") as RrzeElementsBlocksSelectors;
 		return store.getJumpNames();
-	}, []);
+	}, []);	
 
 	const jumpNameExists = useSelect(
 		(select) => {
