@@ -13,6 +13,8 @@ import { useState } from "@wordpress/element";
 import { FormEvent, ChangeEvent } from "react";
 import { useSelect, useDispatch } from "@wordpress/data";
 
+import { sanitizeTitleToJumpName as sanitizeInput } from "../utility/utils";
+
 interface JumpNameEntry {
 	jumpName: string;
 	clientId: string;
@@ -51,30 +53,17 @@ const JumpLinkSelector = ({
 
 	// Select
 	const store = useSelect((select) => {
-		// Cast the returned store to your selectors interface
 		return select('rrze/elements-blocks') as unknown as RrzeElementsBlocksSelectors;
 	}, []);
-
-	/**
-	 * Sanitizes the input string for use in an href attribute.
-	 * @param input - The user input string
-	 * @returns Sanitized string
-	 */
-	const sanitizeInput = (input: string): string => {
-		return input
-			.trim()
-			.toLowerCase()
-			.replace(/\s+/g, "-")
-			.replace(/[^a-z0-9-]/g, "");
-	};
 
 	const handleToggleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 
 		const oldName = attributes.jumpName;
 		const newName = sanitizeInput(inputURL);
-
-		// If no change, do nothing
+		console.log(oldName);
+		console.log(newName);
+		
 		if (newName === oldName) {
 			return;
 		}

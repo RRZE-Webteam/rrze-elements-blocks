@@ -61,6 +61,10 @@
     "loadOpen": {
       "type": "boolean",
       "default": false
+    },
+    "isCustomJumpname":{
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

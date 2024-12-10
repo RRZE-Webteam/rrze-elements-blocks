@@ -1,4 +1,4 @@
-import { useEffect } from "@wordpress/element";
+import { useEffect, useRef } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
 import { JumpNameEntry } from "../stores/jumpNameStore";
 /**
@@ -48,26 +48,32 @@ export function useJumpNameStore({
 		[jumpName],
 	);
 
-	useEffect(() => {
-		if (!jumpName || jumpName === "") {
-			const defaultName = `panel_${clientId?.slice(-8)}`;
-			setAttributes({ jumpName: defaultName });
-			if (clientId && !jumpNameExists) {
-				addJumpName(defaultName, clientId);
-			}
-		} else if (jumpName && clientId && !jumpNameExists) {
-			addJumpName(jumpName, clientId);
-		}
+	const lastJumpNameRef = useRef(jumpName);
 
-		return () => {
-			if (jumpName) {
-				removeJumpNameByClientId(clientId);
-			}
-		};
-	}, [clientId, jumpName]);
+    useEffect(() => {
+        lastJumpNameRef.current = jumpName;
+        if (!jumpName || jumpName === "") {
+            const defaultName = `panel_${clientId?.slice(-8)}`;
+            setAttributes({ jumpName: defaultName });
+            if (clientId && !jumpNameExists) {
+                addJumpName(defaultName, clientId);
+            }
+        } else if (jumpName && clientId && !jumpNameExists) {
+            addJumpName(jumpName, clientId);
+        }
+    }, [clientId, jumpName, jumpNameExists, addJumpName, setAttributes]);
 
-	return {
-		jumpNames,
-		jumpNameExists,
-	};
+    useEffect(() => {
+        return () => {
+            const finalJumpName = lastJumpNameRef.current;
+            if (finalJumpName) {
+                removeJumpNameByClientId(clientId);
+            }
+        };
+    }, [clientId, removeJumpNameByClientId]);
+
+    return {
+        jumpNames,
+        jumpNameExists,
+    };
 }
