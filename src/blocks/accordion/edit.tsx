@@ -55,8 +55,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
 	/////////// Use Selects ///////////
 
 	const props = useBlockProps();
-	const { loadOpen, icon, jumpName } = attributes;
-	const title = attributes.title;
+	const { loadOpen, icon, jumpName, title, isCustomJumpname } = attributes;
 	const [isActive, setIsActive] = useState(false);
 	const [iconType, iconName] = icon?.split(" ") || [];
 	const [isOpen, setOpen] = useState(false);
@@ -67,10 +66,15 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
 	};
 
 	let computedDefaultJumpName = jumpName;
-	if (!jumpName || jumpName === "") {
-		computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
-		setAttributes({ jumpName: computedDefaultJumpName });
-	}
+  useEffect(() => {
+    if (!attributes.jumpName || attributes.jumpName === "") {
+      const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
+      setAttributes({ jumpName: computedDefaultJumpName });
+    }
+    if (jumpName && jumpName.startsWith("panel_")) {
+      setAttributes({ isCustomJumpname: false });
+    }
+  }, [attributes.jumpName, clientId, setAttributes]);
 
 	const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
 		clientId,
@@ -126,18 +130,14 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
 
 	const onChangeTitleFocus = () => {
 		const newJumpName = sanitizeTitleToJumpName(title);
-		console.log(newJumpName);
-		console.log(doesJumpNameExist(newJumpName));
-		console.log(jumpNames);
 		if (
 			newJumpName &&
 			newJumpName !== jumpName &&
-			!doesJumpNameExist(newJumpName)
+			!doesJumpNameExist(newJumpName) &&
+      !isCustomJumpname
 		) {
 			setAttributes({ jumpName: newJumpName });
-		} else {
-			console.log("JumpName already exists or is empty");
-		}
+		} 
 	};
 
 	let finalColor =
@@ -195,6 +195,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
 				<JumpLinkSelector
 					attributes={{
 						jumpName: attributes.jumpName,
+            isCustomJumpname: attributes.isCustomJumpname,
 					}}
 					setAttributes={setAttributes}
 					clientId={clientId}

@@ -14,6 +14,7 @@ import {
   BlockControls,
   RichText,
 } from "@wordpress/block-editor";
+import { BlockEditProps } from '@wordpress/blocks';
 import { seen, unseen, symbol } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -37,38 +38,17 @@ import { useJumpNameStore } from '../../hooks/useJumpNameStore'
 import { JumpNameEntry } from "../../stores/jumpNameStore";
 import { sanitizeTitleToJumpName } from "../../utility/utils";
 
-
-/**
- * Interface for the SaveProps containing the structure of the attributes and other properties
- * passed to the Edit component.
- */
-interface EditProps {
-  attributes: {
-    totalChildrenCount?: number;
-    sameBlockCount?: number;
-    title: string;
-    color: string;
-    loadOpen: boolean;
-    icon: string;
-    hstart?: number;
-    jumpName?: string;
-    svgString?: string;
-    isCustomJumpname?: boolean;
-  };
-  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
-  clientId: string;
-  context: { [key: string]: any };
-}
+import { AttributesV1_0_12 as BlockAttributes } from './index';
 
 const Edit= ({
   attributes,
   setAttributes,
   clientId,
   context
-}: EditProps) => {
+}: BlockEditProps<BlockAttributes>) => {
 
   const props = useBlockProps();
-  const { color, loadOpen, icon, jumpName } = attributes;
+  const { color, loadOpen, icon, jumpName, isCustomJumpname } = attributes;
   const title = attributes.title;
 
   const [isActive, setIsActive] = useState(false);
@@ -76,10 +56,15 @@ const Edit= ({
   const [isOpen, setOpen] = useState(false);
 
   let computedDefaultJumpName = jumpName;
-  if (!jumpName || jumpName === "") {
-    computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
-    setAttributes({ jumpName: computedDefaultJumpName });
-  }
+  useEffect(() => {
+    if (!attributes.jumpName || attributes.jumpName === "") {
+      const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
+      setAttributes({ jumpName: computedDefaultJumpName });
+    }
+    if (jumpName && jumpName.startsWith("panel_")) {
+      setAttributes({ isCustomJumpname: false });
+    }
+  }, [attributes.jumpName, clientId, setAttributes]);
 
   const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
     clientId,
@@ -94,7 +79,7 @@ const Edit= ({
   let sameTypeSiblingsBefore = 0;
 
   useEffect(() => {
-    setAttributes({ hstart: context["rrze-elements/hstart"] });
+    setAttributes({ hstart: context["rrze-elements/hstart"] as number });
   }, [context["rrze-elements/hstart"]]);
 
   // Functions to handle the opening and closing of the icon picker modal.
@@ -121,14 +106,9 @@ const Edit= ({
 
   const onChangeTitleFocus = () => {
     const newJumpName = sanitizeTitleToJumpName(title);
-    console.log(newJumpName);
-    console.log(doesJumpNameExist(newJumpName));
-    console.log(jumpNames);
-    if (newJumpName && newJumpName !== jumpName && !doesJumpNameExist(newJumpName)) {
+    if (newJumpName && newJumpName !== jumpName && !doesJumpNameExist(newJumpName) && !isCustomJumpname) {
       setAttributes({ jumpName: newJumpName });
-    } else {
-      console.log('JumpName already exists or is empty');
-    }
+    } 
   };
 
   // Function to handle the toggle of the loadOpen attribute.
@@ -191,6 +171,7 @@ const Edit= ({
           <JumpLinkSelector
             attributes={{
               jumpName: attributes.jumpName,
+              isCustomJumpname: attributes.isCustomJumpname,
             }}
             setAttributes={setAttributes}
             clientId={clientId}

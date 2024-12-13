@@ -7,6 +7,7 @@ import {
 	__experimentalText as Text,
 	__experimentalSpacer as Spacer,
 	Icon,
+	ToggleControl,
 } from "@wordpress/components";
 import { link } from "@wordpress/icons";
 import { useState } from "@wordpress/element";
@@ -26,8 +27,11 @@ interface RrzeElementsBlocksSelectors {
 }
 
 interface RrzeElementsBlocksActions {
-	addJumpName(jumpName: string, clientId: string): { type: string; jumpName: string; clientId: string; };
-	removeJumpName(jumpName: string): { type: string; jumpName: string; };
+	addJumpName(
+		jumpName: string,
+		clientId: string,
+	): { type: string; jumpName: string; clientId: string };
+	removeJumpName(jumpName: string): { type: string; jumpName: string };
 }
 
 interface JumpLinkSelectorProps {
@@ -49,11 +53,15 @@ const JumpLinkSelector = ({
 	const [error, setError] = useState<string | null>(null);
 
 	// Dispatch
-	const { addJumpName, removeJumpName } = useDispatch('rrze/elements-blocks') as unknown as RrzeElementsBlocksActions;
+	const { addJumpName, removeJumpName } = useDispatch(
+		"rrze/elements-blocks",
+	) as unknown as RrzeElementsBlocksActions;
 
 	// Select
 	const store = useSelect((select) => {
-		return select('rrze/elements-blocks') as unknown as RrzeElementsBlocksSelectors;
+		return select(
+			"rrze/elements-blocks",
+		) as unknown as RrzeElementsBlocksSelectors;
 	}, []);
 
 	const handleToggleSubmit = (event: FormEvent) => {
@@ -61,16 +69,16 @@ const JumpLinkSelector = ({
 
 		const oldName = attributes.jumpName;
 		const newName = sanitizeInput(inputURL);
-		console.log(oldName);
-		console.log(newName);
-		
+
 		if (newName === oldName) {
 			return;
 		}
 
 		// Check if newName already exists and is not the oldName
 		if (newName && store.jumpNameExists(newName) && newName !== oldName) {
-			setError(__("This jump link name is already taken.", "rrze-elements-blocks"));
+			setError(
+				__("This jump link name is already taken.", "rrze-elements-blocks"),
+			);
 			return;
 		}
 
@@ -129,13 +137,20 @@ const JumpLinkSelector = ({
 						style={{ width: "100%" }}
 					/>
 				</BaseControl>
-				{error && (
-					<p style={{ color: "red" }}>{error}</p>
-				)}
+				{error && <p style={{ color: "red" }}>{error}</p>}
 				<Button variant="primary" type="submit" disabled={disabled}>
 					{__("Set Jump Link", "rrze-elements-blocks")}
 				</Button>
 			</form>
+			<Spacer />
+			<ToggleControl
+				checked={attributes.isCustomJumpname}
+				label={__("Lock Jump Link Name", "rrze-elements-blocks")}
+				help={__("If enabled, the jump link will not generated automatically any longer. ", "rrze-elements-blocks")}
+				onChange={(isCustomJumpname) =>
+					setAttributes({ isCustomJumpname })
+				}
+			/>
 		</PanelBody>
 	);
 };

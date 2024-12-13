@@ -1,6 +1,6 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
-import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
+import { BlockSaveProps } from "@wordpress/blocks";
 
 interface Attributes {
   sameBlockCount: number;
@@ -13,11 +13,7 @@ interface Attributes {
   svgString?: string;
 }
 
-interface SaveProps {
-  attributes: Attributes;
-}
-
-const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<Attributes>) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,

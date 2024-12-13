@@ -1,6 +1,12 @@
 import apiFetch from "@wordpress/api-fetch";
 import { createReduxStore, register } from "@wordpress/data";
 
+declare global {
+    interface Window {
+        __RRZE_ELEMENTS_BLOCKS_STORE_REGISTERED__?: boolean;
+    }
+}
+
 /**
  * Why do we need this store?
  * 
@@ -124,4 +130,7 @@ const store = createReduxStore<State, typeof actions, typeof selectors>("rrze/el
     resolvers
 });
 
-register(store);
+if (!window.__RRZE_ELEMENTS_BLOCKS_STORE_REGISTERED__) {
+    register(store);
+    window.__RRZE_ELEMENTS_BLOCKS_STORE_REGISTERED__ = true;
+}

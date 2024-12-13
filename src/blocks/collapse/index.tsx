@@ -29,7 +29,7 @@ interface AttributesV1 {
   svgString: string;
 }
 
-interface AttributesV1_0_12 extends AttributesV1 {
+export interface AttributesV1_0_12 extends AttributesV1 {
   isCustomJumpname: boolean;
 }
 

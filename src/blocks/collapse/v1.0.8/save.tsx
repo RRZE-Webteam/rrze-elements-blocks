@@ -13,12 +13,9 @@ interface Attributes {
   svgString?: string;
 }
 
-interface SaveProps {
-  attributes: Attributes;
-}
-
-const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<Attributes>) => {
   const blockProps = useBlockProps.save();
+  // eslint-disable-next-line
   const { sameBlockCount, totalChildrenCount, color, title, jumpName, svgString, loadOpen, hstart } = attributes;
 
   let loadOnPageLoad = '';
