@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/timeline",
+  "version": "1.0.13",
+  "title": "Timeline",
+  "category": "rrze_elements",
+  "description": "Creates a Timeline block",
+  "attributes": {
+    "hstart": {
+      "type": "integer",
+      "default": 3
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "providesContext": {
+    "rrze-elements/timeline-hstart": "hstart"
+  },
+  "example": {
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/timeline-item",
+        "attributes": {
+          "title": "2016",
+          "loadOpen": true
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/timeline-item",
+        "attributes": {
+          "title": "2024"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/timeline-item",
+        "attributes": {
+          "title": "2030"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "rrze-timeline"
+}

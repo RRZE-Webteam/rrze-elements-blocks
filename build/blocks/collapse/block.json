@@ -1,0 +1,92 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/collapse",
+  "version": "1.0.13",
+  "title": "Accordion-item",
+  "category": "design",
+  "description": "Creates an accordion block",
+  "parent": [
+    "rrze-elements/collapsibles"
+  ],
+  "keywords": [
+    "accordion",
+    "collapse",
+    "expand",
+    "toggle"
+  ],
+  "attributes": {
+    "message": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    },
+    "loadOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "expandAllLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 2
+    },
+    "register": {
+      "type": "boolean",
+      "default": false
+    },
+    "sameBlockCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "color": {
+      "type": "string",
+      "default": ""
+    },
+    "totalChildrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "childrenCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "jumpName": {
+      "type": "string",
+      "default": ""
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    },
+    "svgString": {
+      "type": "string",
+      "default": ""
+    },
+    "isCustomJumpname": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "providesContext": {
+    "rrze-elements/collapseSBlockCount": "sameBlockCount",
+    "rrze-elements/collapseTotalChildrenCount": "totalChildrenCount",
+    "rrze-elements/collapseColor": "color"
+  },
+  "usesContext": [
+    "rrze-elements/accordion-hstart"
+  ],
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

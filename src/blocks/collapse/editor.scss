@@ -1,0 +1,185 @@
+@use "../../_shared/scss/variables" as v;
+@use "../../_shared/scss/mixins" as m;
+
+
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+// @import "../../_shared/scss/variables";
+// @import "../../_shared/scss/mixins";
+@import "../../_shared/fontawesome/scss/fontawesome";
+@import "../../_shared/fontawesome/scss/regular";
+@import "../../_shared/fontawesome/scss/solid";
+@import "../../_shared/fontawesome/scss/brands";
+// @import "../../_shared/scss/accordion";
+
+.wp-block-rrze-elements-collapsibles {
+	.block-editor-block-list__layout:last-child {
+		padding-bottom: 1.5rem;
+	}
+}
+
+.accordion-toggle span[class^="fa"] {
+	float: left;
+	line-height: 2em;
+}
+
+// read mode
+.read-mode-only {
+	display: none;
+}
+
+.admin-bar #content main .accordion-body:target {
+	padding-top: 0;
+}
+
+.accordion-body {
+	height: 0;
+	overflow: hidden;
+	transition: height 0.5s ease-in-out;
+	margin-top: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.accordion-body.active {
+	height: auto;
+	/* Change this to a specific height if needed */
+	//margin-top: 10px;
+	padding: 15px 20px;
+	background: var(--color-ContentRegions, #f5f7f9);
+	// * {
+	// 	background: var(--color-ContentRegions, #f5f7f9);
+	// }
+}
+
+.wp-block-rrze-elements-collapse {
+	.accordion-heading .components-text-control__input {
+		background-color: #fff0;
+		border-color: #fff0;
+		font-size: inherit;
+		padding-bottom: 0;
+	}
+
+	.accordion-heading .components-text-control__input:focus {
+		background-color: #fff;
+		color: #000;
+		border-color: #000;
+		font-size: inherit;
+		padding-bottom: 0;
+	}
+
+	.accordion-heading .accordion-toggle.active {
+		color: #fff;
+	}
+
+	.accordion-heading .accordion-toggle:hover {
+		color: #fff;
+	}
+
+}
+
+// .rrzeElementsBFakColorSelector button{
+// 	padding-left:1em !important;
+// 	padding-right:1em !important;
+// }
+
+.rrzeElementsBFakColorSelector.central {
+	button {
+		background-color: #04316A;
+		color: #fff;
+	}
+}
+
+.rrzeElementsBFakColorSelector.phil {
+	button {
+		background-color: #fdb735;
+		color: #000;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.rw {
+	button {
+		background-color: #c50f3c;
+		color: #fff;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.med {
+	button {
+		background-color: #18b4f1;
+		color: #000;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.nat {
+	button {
+		background-color: #7bb725;
+		color: #000;
+
+	}
+}
+
+.rrzeElementsBFakColorSelector.tf {
+	button {
+		background-color: #8c9fb1;
+		color: #000;
+
+	}
+}
+
+.elements-blocks-icon-selector-display {
+	max-width: 3em;
+	//background-color: #04316a;
+	padding: 0.5em;
+	//fill: #fff;
+	margin-right: 1em;
+	float: right;
+	clear: both;
+}
+
+.elements-blocks-icon-insideEditor {
+	float: left;
+	clear: both;
+	max-height: 1.5em;
+	max-width: 1.5em;
+	padding-top: 0.25em;
+}
+
+// .elements-blocks-icon-insideEditorModal{
+// 	font-size: 1.5rem;
+// 	margin-bottom: 0.5rem;
+// }
+
+button.is-compact.elements-blocks-icon-Button, button.is-pressed.elements-blocks-icon-Button{
+	font-size: 1.5rem;
+	padding: 0.25rem;	
+	height: 55px;
+	width: 55px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.elements-blocks-input-following-icon {
+	input {
+		max-width: 90%;
+		font-size: 1.25em !important;
+	}
+}
+
+.rrzeElementsBFakColorSelector{
+    border: 1px solid #000;
+
+	button{
+		border-radius: 0;
+	}
+}
+

@@ -48,7 +48,7 @@ Functions and Mixins
   }
   
   @mixin svg-content($svg, $subset: 'solid') {
-      content: url("../../assets/svg/#{$subset}/#{$svg}.svg");
+      content: url("../../../assets/svg/#{$subset}/#{$svg}.svg");
       display: inline-block;
       width: 1em;
       margin-right: 5px;

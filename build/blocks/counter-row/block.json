@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/counter-row",
+  "version": "1.0.13",
+  "title": "Counter Row",
+  "category": "rrze_elements",
+  "description": "Create a Row for Counters",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "stagger": {
+      "type": "number",
+      "default": 0
+    },
+    "columns": {
+      "type": "number",
+      "default": 5
+    },
+    "startValue": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "styles": [
+    {
+      "name": "outlined",
+      "label": "Outlined"
+    },
+    {
+      "name": "colorblock",
+      "label": "Colorblock",
+      "isDefault": true
+    }
+  ],
+  "example": {
+    "attributes": {
+      "stagger": 0,
+      "columns": 3,
+      "startValue": 0
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/rrze-counter",
+        "attributes": {
+          "title": "49000",
+          "description": "Students"
+        }
+      },
+      {
+        "name": "rrze-elements/rrze-counter",
+        "attributes": {
+          "title": "5352",
+          "description": "Employees"
+        }
+      },
+      {
+        "name": "rrze-elements/rrze-counter",
+        "attributes": {
+          "title": "135",
+          "description": "Courses"
+        }
+      }
+    ]
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

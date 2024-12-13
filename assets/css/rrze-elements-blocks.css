@@ -12496,7 +12496,6 @@ Functions and Mixins
 }
 
 .alert.alert-danger p {
-  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -12552,9 +12551,6 @@ Functions and Mixins
 }
 .fau-theme #content .alert p {
   padding: 5px 0;
-}
-.fau-theme #content .alert.alert-danger p {
-  font-size: 1.1rem;
 }
 @media (min-width: 768px) {
   .fau-theme #content .alert {
@@ -13914,7 +13910,7 @@ body.rrze-expo.fau-theme .fancybox-thumbs__list a.fancybox-thumbs-active::before
   width: 100%;
 }
 .rrze-elements-news .entry-date:before {
-  content: url("../../assets/svg/regular/calendar.svg");
+  content: url("../../../assets/svg/regular/calendar.svg");
   display: inline-block;
   width: 1em;
   margin-right: 5px;
@@ -13922,7 +13918,7 @@ body.rrze-expo.fau-theme .fancybox-thumbs__list a.fancybox-thumbs-active::before
   top: 2px;
 }
 .rrze-elements-news .entry-cats:before {
-  content: url("../../assets/svg/solid/tag.svg");
+  content: url("../../../assets/svg/solid/tag.svg");
   display: inline-block;
   width: 1em;
   margin-right: 5px;
@@ -15019,7 +15015,7 @@ table.sorttable th {
 }
 table.sorttable th:after,
 table.sorttable th:after {
-  content: url("../../assets/svg/solid/sort.svg");
+  content: url("../../../assets/svg/solid/sort.svg");
   display: inline-block;
   width: 1em;
   margin-right: 5px;

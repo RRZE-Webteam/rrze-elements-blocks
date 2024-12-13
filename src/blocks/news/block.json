@@ -1,0 +1,99 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/news",
+  "version": "1.0.13",
+  "title": "News",
+  "category": "rrze_elements",
+  "description": "Creates a news block.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "cat": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "num": {
+      "type": "number",
+      "default": 5
+    },
+    "divclass": {
+      "type": "string"
+    },
+    "hidemeta": {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart": {
+      "type": "number",
+      "default": 2
+    },
+    "type": {
+      "type": "string"
+    },
+    "hideduplicates": {
+      "type": "boolean"
+    },
+    "has_thumbnail": {
+      "type": "boolean",
+      "default": false
+    },
+    "days": {
+      "type": "number",
+      "default": 0
+    },
+    "id": {
+      "type": "array"
+    },
+    "display": {
+      "type": "string",
+      "default": ""
+    },
+    "hide": {
+      "type": "string"
+    },
+    "imgfloat": {
+      "type": "string",
+      "default": "left"
+    },
+    "columns": {
+      "type": "number",
+      "default": 0
+    },
+    "sticky_only": {
+      "type": "boolean"
+    },
+    "grid": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "example": {
+    "attributes": {
+      "num": 5,
+      "hidemeta": false,
+      "hstart": 2,
+      "type": "cols_3-1",
+      "hideduplicates": false,
+      "has_thumbnail": false,
+      "days": 0,
+      "id": [],
+      "display": "list",
+      "hide": "",
+      "imgfloat": "left",
+      "columns": 0,
+      "sticky_only": false,
+      "grid": false
+    }
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.ts",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

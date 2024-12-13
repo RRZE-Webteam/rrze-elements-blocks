@@ -24,7 +24,7 @@ class Blocks
 
             // Additional logic for blocks with custom render callbacks.
             if (class_exists('RRZE\Elements\News\News')) {
-                register_block_type(plugin_dir_path(__DIR__) . 'build/news', array(
+                register_block_type(plugin_dir_path(__DIR__) . 'build/blocks/news', array(
                     'render_callback' => [$this, 'render_news_block'],
                 ));
                 load_plugin_textdomain('rrze-elements-blocks', false, plugin_dir_path(__DIR__) . 'languages');
@@ -46,7 +46,7 @@ class Blocks
         ];
 
         foreach ($blocks as $block) {
-            register_block_type(plugin_dir_path(__DIR__) . 'build/' . $block);
+            register_block_type(plugin_dir_path(__DIR__) . 'build/blocks/' . $block);
 
             load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
 
