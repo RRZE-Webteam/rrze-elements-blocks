@@ -7,13 +7,6 @@ declare global {
     }
 }
 
-/**
- * Why do we need this store?
- * 
- * The JumpNameStore is used across Elements Blocks blocks to prevent duplicate jump names.
- * s. also hooks/useJumpNameStore.tsx
- */
-
 export interface JumpNameEntry {
     jumpName: string;
     clientId: string;
@@ -91,11 +84,9 @@ const store = createReduxStore<State, typeof actions, typeof selectors>("rrze/el
         switch (action.type) {
             case 'ADD_JUMP_NAME':
                 if (!action.jumpName || !action.clientId) {
-                    console.warn('Invalid jumpName or clientId:', action);
                     return state;
                 }
                 if (state.jumpNames.some((entry: JumpNameEntry) => entry.jumpName === action.jumpName)) {
-                    console.log('Duplicate jumpName detected:', action.jumpName);
                     return state;
                 }
                 return {
@@ -114,7 +105,6 @@ const store = createReduxStore<State, typeof actions, typeof selectors>("rrze/el
                     };
             case 'SET_JUMP_NAMES':
                 if (action.jumpNames.length === 0 && state.jumpNames.length > 0) {
-                    console.warn('Attempted to overwrite with empty jumpNames array');
                     return state;
                 }
                 return {
