@@ -50,7 +50,7 @@ module.exports = {
         test: /\.(woff(2)?|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'webfonts/[name][ext][query]'
+          filename: 'src/webfonts/[name][ext][query]'
         }
       },
     ],
