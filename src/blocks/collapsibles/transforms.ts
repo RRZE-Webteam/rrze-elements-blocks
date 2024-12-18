@@ -15,11 +15,8 @@ interface CollapsiblesBlockAttributes {
  */
 function flattenBlockToHeadingsAndInnerBlocks(block: BlockInstance): BlockInstance[] {
   const output: BlockInstance[] = [];
-
-  // Name of the block, e.g. 'rrze-elements/collapse' or 'rrze-elements/accordion'
   const { name, attributes, innerBlocks } = block;
 
-  // If it's a collapse block, read `title` attribute and convert to a heading
   if (name === 'rrze-elements/collapse') {
     const { title } = attributes as { title?: string };
     if (title) {
@@ -27,24 +24,20 @@ function flattenBlockToHeadingsAndInnerBlocks(block: BlockInstance): BlockInstan
         createBlock('core/heading', { content: title })
       );
     }
-    // Recursively flatten all children
-    innerBlocks.forEach((child) => {
+      innerBlocks.forEach((child) => {
       output.push(...flattenBlockToHeadingsAndInnerBlocks(child));
     });
 
     return output;
   }
 
-  // If it's an accordions container
   if (name === 'rrze-elements/accordions') {
-    // Usually rrze-elements/accordions has multiple accordion children
     innerBlocks.forEach((accordionBlock) => {
       output.push(...flattenBlockToHeadingsAndInnerBlocks(accordionBlock));
     });
     return output;
   }
 
-  // If it's a single accordion block (similar to collapse)
   if (name === 'rrze-elements/accordion') {
     const { title } = attributes as { title?: string };
     if (title) {
@@ -52,7 +45,6 @@ function flattenBlockToHeadingsAndInnerBlocks(block: BlockInstance): BlockInstan
         createBlock('core/heading', { content: title })
       );
     }
-    // Flatten any inner blocks inside this accordion
     innerBlocks.forEach((child) => {
       output.push(...flattenBlockToHeadingsAndInnerBlocks(child));
     });
@@ -60,32 +52,17 @@ function flattenBlockToHeadingsAndInnerBlocks(block: BlockInstance): BlockInstan
     return output;
   }
 
-  // If it's some other generic block, we simply replicate it as-is
-  // (or transform it further if desired).
-  // If you want truly raw flattening, just push it to output.
-  // But if that block also has inner blocks, you might want to flatten those too.
-  // If you do NOT want recursion for normal blocks, just push it directly:
-  //   output.push(block);
-  // But here's a version that also recursively flattens their children:
   if (innerBlocks?.length) {
-    // The block has children, so let's replicate it but flatten the children
     const flattenedChildren: BlockInstance[] = [];
     innerBlocks.forEach((child) => {
       flattenedChildren.push(...flattenBlockToHeadingsAndInnerBlocks(child));
     });
-
-    // Return both the top-level block (minus children) and the flattened children,
-    // or just the children. Up to your design. For a truly "flattened" approach,
-    // we might skip the wrapper block entirely and push only children. But that
-    // would lose the block's attributes. Alternatively, replicate the block with
-    // the flattened children as `innerBlocks`.
     output.push(createBlock(
       name,
       attributes,
       flattenedChildren
     ));
   } else {
-    // No innerBlocks, just push the block as is
     output.push(block);
   }
 

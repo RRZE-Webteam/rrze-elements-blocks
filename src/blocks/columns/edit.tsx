@@ -12,6 +12,8 @@ import {
 import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
+import { useDispatch } from "@wordpress/data";
+import { store as blockEditorStore } from "@wordpress/block-editor";
 
 interface EditProps {
   blockProps: string[];
@@ -41,6 +43,8 @@ export default function Edit({
   setAttributes,
 }: EditProps) {
   const props = useBlockProps();
+  const { __unstableMarkNextChangeAsNotPersistent } =
+  useDispatch(blockEditorStore);
 
   const {
     numberOfColumns,
@@ -90,12 +94,14 @@ export default function Edit({
   // Lookup color slug based on hex value
   useEffect(() => {
     if (!color) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ colorSlug: "colorless" });
     } else {
       const colorEntry = colorDataAlert.find(
         (c) => c.color.toUpperCase() === color.toUpperCase()
       );
       if (colorEntry) {
+        __unstableMarkNextChangeAsNotPersistent();
         setAttributes({ colorSlug: colorEntry.slug });
       }
     }
@@ -113,6 +119,7 @@ export default function Edit({
 
   useEffect(() => {
     if (!attributes.color) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ textColor: undefined, color: "default" });
     }
   }, [attributes.color]);
@@ -137,30 +144,11 @@ export default function Edit({
               step={1}
               value={numberOfColumns}
             />
-            {/* <RangeControl
-            label={__("Minimum Width of Columns", "rrze-elements-blocks")}
-            marks={[
-              {
-                label: "240 (Default)",
-                value: 240,
-              },
-            ]}
-            max={400}
-            min={200}
-            onChange={onChangeWidthControl}
-            step={1}
-            value={width}
-          /> */}
             <ToggleControl
               checked={rule}
               label={__("Show Rule", "rrze-elements-blocks")}
               onChange={onChangeRuler}
             />
-            {/* <ToggleControl
-            checked={border}
-            label={__("Show Border", "rrze-elements-blocks")}
-            onChange={onChangeBorder}
-          /> */}
             <StandardColorSwitcher
               attributes={{ color: attributes.color }}
               setAttributes={setAttributes}
