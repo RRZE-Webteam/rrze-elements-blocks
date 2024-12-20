@@ -1,0 +1,119 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Fixing existing Blocks",
+  "steps": [
+    {
+      "file": "package.json",
+      "description": "Step 1: Install all required dependencies by changing into the working directory in your terminal and running ```npm install```.",
+      "line": 38
+    },
+    {
+      "file": "package.json",
+      "description": "Step 2: Start the development process via ```npm run start``` - If you are finished with your changes, run ```npm run build-all``` (or ```npm run build``` )",
+      "line": 16
+    },
+    {
+      "file": "package.json",
+      "description": "Step 3: Make sure to bump up the version number and update it throughout the plugin via ```npm run update-version```. Readme.txt and readme.md need to be updated manually.",
+      "line": 3
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "Blocks can be always found in the src/blocks-directory.\n\nThis is the Edit.tsx-File. This file controls the Editor behavior of the block.\nWe are using TypeScript to reduce errors during the development process.",
+      "line": 1
+    },
+    {
+      "file": "src/blocks/alert/editor.scss",
+      "description": "Styling for the backend. It imports the Frontent Styling partially from src/_shared/scss/alert.",
+      "line": 1
+    },
+    {
+      "file": "src/blocks/alert/index.tsx",
+      "description": "The index.tsx brings all together. We can see that we reference the edit.tsx and save.tsx in here",
+      "line": 35
+    },
+    {
+      "file": "src/blocks/alert/index.tsx",
+      "description": "We can also see, that there is a Transformation set via transforms.ts",
+      "line": 44
+    },
+    {
+      "file": "src/blocks/alert/block.json",
+      "description": "The attributes of the plugin. Whenever you change one of those, make sure that you remember to add a Deprecation via WordPress Deprecation API! This is mandatory (even if it is no fun)",
+      "line": 9
+    },
+    {
+      "file": "src/blocks/alert/block.json",
+      "description": "The textdomain of our plugin",
+      "line": 56
+    },
+    {
+      "file": "src/blocks/alert/save.tsx",
+      "description": "Our save-Function. It runs every time the Editor autosaves, or whenever a user opens the editor to retrieve the content.\nWhenever you change the save.tsx, remember to add a deprecation Array via WordPress Deprecation API. This is mandatory.\n\nDon't do complex computation inside the save.tsx. Instead rely on the attributes available.",
+      "line": 14
+    },
+    {
+      "file": "src/blocks/alert/transforms.ts",
+      "description": "transforms allow conversion from one block to another.",
+      "line": 22
+    },
+    {
+      "file": "src/blocks/alert/transforms.ts",
+      "description": "From shortcode [alert] to this block.",
+      "line": 25
+    },
+    {
+      "file": "src/blocks/alert/transforms.ts",
+      "description": "Or from paragraph-blocks to this block. Multi-Select allows selection of several paragraphs for example...\n\nThis is not mandatory. But it is nice to have to increase UX",
+      "line": 87
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "Inside Edit.tsx return-statement we can see what components are used and output inside our block for the Editor-view.",
+      "line": 92
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "InspectorControls as the Editor Sidebar panel",
+      "line": 94
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "Containing a StandardColorSwitcher (a custom component)",
+      "line": 95
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "WordPress' ContrastChecker Component",
+      "line": 104
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "BlockControls, die Block-Werkzeugleiste über dem Block",
+      "line": 131
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "Output of inner blocks via InnerBlocks. This allows interacting and adding other blocks inside the block's content.",
+      "line": 155
+    },
+    {
+      "file": "src/blocks/alert/edit.tsx",
+      "description": "This is used, to tell the BlockEditor to NOT create a Undo-Layer after updating the attribute.\n\nElse blocks might create a almost endless Undo-Layer-cycle which prevents users from going back via Ctrl+Z ",
+      "line": 84
+    },
+    {
+      "directory": "src/components",
+      "description": "All custom written components are stored inside src/components for global use inside the project."
+    },
+    {
+      "directory": "src/stores",
+      "description": "All custom stores are placed inside src/stores. Redux."
+    },
+    {
+      "file": "package.json",
+      "description": "Do not forget to ```npm run build-all``` or ```npm run build``` after adding your changes.",
+      "line": 17
+    }
+  ]
+}

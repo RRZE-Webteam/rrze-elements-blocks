@@ -1,19 +1,10 @@
 import { registerBlockType } from "@wordpress/blocks";
-import { createBlock } from "@wordpress/blocks";
 
 import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
+import transforms from "./transforms";
 import "./editor.scss";
-
-interface ShortcodeTransformAttributes {
-  named: {
-    number?: string;
-    title?: string;
-  };
-  number: string;
-  content: string;
-}
 
 registerBlockType(
   metadata.name as any,
@@ -76,29 +67,6 @@ registerBlockType(
      * @see ./save.js
      */
     save,
-    transforms: {
-      from: [
-        {
-          type: "shortcode",
-          tag: "text-columns",
-          transform: (attributes: ShortcodeTransformAttributes, data: any) => {
-            let cleanData = data.shortcode?.content;
-            const numberChoice = (number: string) => {
-              return parseInt(number);
-            };
-            const blockContent = createBlock("core/freeform", {
-              content: cleanData,
-            });
-            return createBlock(
-              metadata.name,
-              {
-                numberOfColumns: numberChoice(attributes.named.number) || 2,
-              },
-              [blockContent]
-            );
-          },
-        },
-      ],
-    },
+    transforms: transforms
   } as any
 );

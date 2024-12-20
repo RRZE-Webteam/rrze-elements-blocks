@@ -15,21 +15,9 @@
       "type": "integer",
       "default": 2
     },
-    "register": {
-      "type": "boolean",
-      "default": false
-    },
-    "sameBlockCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "childrenCount": {
-      "type": "integer",
-      "default": 0
-    },
-    "previousBlockIds": {
-      "type": "array",
-      "default": []
+    "expandLabel": {
+      "type": "string",
+      "default": "Expand All"
     }
   },
   "providesContext": {

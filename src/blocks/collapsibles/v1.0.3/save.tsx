@@ -3,12 +3,7 @@ import { BlockSaveProps } from "@wordpress/blocks";
 import { AttributesV1 } from "./attributes";
 import { __ } from "@wordpress/i18n";
 
-type SaveProps = {
-  sameBlockCount: number;
-  expandAllLink: boolean;
-};
-
-const Save: React.FC<BlockSaveProps<SaveProps>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<AttributesV1>) => {
   const blockProps = useBlockProps.save();
   const { sameBlockCount, expandAllLink } = attributes;
 

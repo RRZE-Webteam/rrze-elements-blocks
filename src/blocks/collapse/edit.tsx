@@ -14,7 +14,7 @@ import {
   BlockControls,
   RichText,
 } from "@wordpress/block-editor";
-import { BlockEditProps } from '@wordpress/blocks';
+import { BlockEditProps } from "@wordpress/blocks";
 import { seen, unseen, symbol } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -32,21 +32,22 @@ import {
   IconMarkComponent,
   IconPickerModalInset,
 } from "../../components/IconPicker";
-import { speak } from '@wordpress/a11y';
+import { speak } from "@wordpress/a11y";
 
-import { useJumpNameStore } from '../../hooks/useJumpNameStore'
+import { useJumpNameStore } from "../../hooks/useJumpNameStore";
 import { JumpNameEntry } from "../../stores/jumpNameStore";
 import { sanitizeTitleToJumpName } from "../../utility/utils";
+import { useDispatch } from "@wordpress/data";
+import { store as blockEditorStore } from "@wordpress/block-editor";
 
-import { AttributesV1_0_12 as BlockAttributes } from './index';
+import { AttributesV1_0_12 as BlockAttributes } from "./index";
 
-const Edit= ({
+const Edit = ({
   attributes,
   setAttributes,
   clientId,
-  context
+  context,
 }: BlockEditProps<BlockAttributes>) => {
-
   const props = useBlockProps();
   const { color, loadOpen, icon, jumpName, isCustomJumpname } = attributes;
   const title = attributes.title;
@@ -54,14 +55,18 @@ const Edit= ({
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
+  const { __unstableMarkNextChangeAsNotPersistent } =
+    useDispatch(blockEditorStore);
 
   let computedDefaultJumpName = jumpName;
   useEffect(() => {
     if (!attributes.jumpName || attributes.jumpName === "") {
       const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ jumpName: computedDefaultJumpName });
     }
     if (jumpName && jumpName.startsWith("panel_")) {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ isCustomJumpname: false });
     }
   }, [attributes.jumpName, clientId, setAttributes]);
@@ -69,9 +74,9 @@ const Edit= ({
   const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
     clientId,
     jumpName: computedDefaultJumpName,
-    setAttributes: (attrs) => setAttributes(attrs)
+    setAttributes: (attrs) => setAttributes(attrs),
   });
-  
+
   const doesJumpNameExist = (name: string): boolean => {
     return jumpNames.some((entry: JumpNameEntry) => entry.jumpName === name);
   };
@@ -79,8 +84,14 @@ const Edit= ({
   let sameTypeSiblingsBefore = 0;
 
   useEffect(() => {
-    setAttributes({ hstart: context["rrze-elements/hstart"] as number });
-  }, [context["rrze-elements/hstart"]]);
+    if (
+      context["rrze-elements/accordion-hstart"] &&
+      context["rrze-elements/accordion-hstart"] !== attributes.hstart
+    ) {
+      __unstableMarkNextChangeAsNotPersistent();
+      setAttributes({ hstart: context["rrze-elements/accordion-hstart"] as number });
+    }
+  }, [context["rrze-elements/accordion-hstart"]]);
 
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);
@@ -88,27 +99,34 @@ const Edit= ({
 
   const toggleActive = () => {
     setIsActive(!isActive);
-    if (isActive){
-      speak(__('reduced. Button.', 'rrze-elements-blocks'))
+    if (isActive) {
+      speak(__("reduced. Button.", "rrze-elements-blocks"));
     } else if (!isActive) {
-      speak(__('extended. Button.', 'rrze-elements-blocks'));
+      speak(__("extended. Button.", "rrze-elements-blocks"));
     }
   };
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: "" });
     } else {
+      __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };
 
   const onChangeTitleFocus = () => {
     const newJumpName = sanitizeTitleToJumpName(title);
-    if (newJumpName && newJumpName !== jumpName && !doesJumpNameExist(newJumpName) && !isCustomJumpname) {
+    if (
+      newJumpName &&
+      newJumpName !== jumpName &&
+      !doesJumpNameExist(newJumpName) &&
+      !isCustomJumpname
+    ) {
       setAttributes({ jumpName: newJumpName });
-    } 
+    }
   };
 
   // Function to handle the toggle of the loadOpen attribute.

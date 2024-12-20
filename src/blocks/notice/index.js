@@ -5,6 +5,7 @@ import save from './save';
 import metadata from './block.json';
 import './editor.scss';
 import variations from './variations';
+import transforms from './transforms';
 
 registerBlockType( metadata.name, {
 	icon: {
@@ -15,4 +16,5 @@ registerBlockType( metadata.name, {
 	edit: Edit,
 	// @see ./save.js
 	save,
+	transforms: transforms,
 } );

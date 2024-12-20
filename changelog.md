@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.14] - 2024-12-19
+ 
+Improved transformation behavior from and to blocks to ease the working process inside the editor.
+Fixed an issue, where users with different language settings might get a Block Deprecation inside the editor.
+ 
+### Added
+- [#175 Transformation of Blocks](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/175)
+
+### Fixed
+- [#86 Expand-All-Link Deprecation](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues/176)
+
+
 ## [1.0.13] - 2024-12-13
  
 A new store for managing the jumpNames throughout the Element Block suite minimizes duplicate id's and errors. 

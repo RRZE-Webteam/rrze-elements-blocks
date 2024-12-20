@@ -1,16 +1,10 @@
+import { BlockSaveProps } from "@wordpress/blocks";
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { AttributesV1_0_13 } from "./attributes";
 
-type SaveProps = {
-  attributes: {
-    sameBlockCount: number;
-    expandAllLink: boolean;
-    expandLabel: string;
-  };
-};
-
-export default function save({ attributes }: SaveProps) {
+const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_13>) => {
   const blockProps = useBlockProps.save();
-  const { expandAllLink, expandLabel } = attributes;
+  const { expandAllLink } = attributes;
 
   return (
     <div {...blockProps}>
@@ -23,7 +17,7 @@ export default function save({ attributes }: SaveProps) {
                 className="expand-all standard-btn primary-btn xsmall-btn"
                 data-status="closed"
               >
-                {expandLabel}
+                {"Expand All"}
               </button>
             </div>
           )}
@@ -32,4 +26,6 @@ export default function save({ attributes }: SaveProps) {
       </>
     </div>
   );
-}
+};
+
+export default Save;
