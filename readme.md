@@ -1,6 +1,6 @@
 [![Aktuelle Version](https://img.shields.io/github/package-json/v/rrze-webteam/rrze-elements-blocks/main?label=Version)](https://github.com/RRZE-Webteam/rrze-elements-blocks) [![Release Version](https://img.shields.io/github/v/release/rrze-webteam/rrze-elements-blocks?label=Release+Version)](https://github.com/rrze-webteam/rrze-elements-blocks/releases/) [![GitHub License](https://img.shields.io/github/license/rrze-webteam/rrze-elements-blocks)](https://github.com/RRZE-Webteam/rrze-elements-blocks) [![GitHub issues](https://img.shields.io/github/issues/RRZE-Webteam/rrze-elements-blocks)](https://github.com/RRZE-Webteam/rrze-elements-blocks/issues)
-![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/RRZE-Webteam/RRZE-Elements-blocks/14)
 ![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/RRZE-Webteam/RRZE-Elements-blocks/15)
+![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/RRZE-Webteam/RRZE-Elements-blocks/16)
 
 # RRZE Elements Blocks
 RRZE Elements Blocks ermöglicht die Nutzung der RRZE Elements-Suite im Gutenberg BlockEditor. Die folgenden Elemente / Blöcke werden unterstützt:
