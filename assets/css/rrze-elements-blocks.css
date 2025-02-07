@@ -37,12 +37,18 @@ Functions and Mixins
 .fa-classic,
 .fa-sharp,
 .fas,
-.accordion .accordion-toggle.active:hover:before,
-.accordion .accordion-toggle.active:focus:before,
-.accordion .accordion-toggle:hover:before,
-.accordion .accordion-toggle:focus:before,
-.accordion .accordion-toggle.active:before,
-.accordion .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:before,
 .fa-solid,
 .far,
 .fa-regular,
@@ -57,7 +63,13 @@ Functions and Mixins
   text-rendering: auto;
 }
 
-.fas, .accordion .accordion-toggle.active:hover:before, .accordion .accordion-toggle.active:focus:before, .accordion .accordion-toggle:hover:before, .accordion .accordion-toggle:focus:before, .accordion .accordion-toggle.active:before, .accordion .accordion-toggle:before,
+.fas, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:focus:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:before,
 .fa-classic,
 .fa-solid,
 .far,
@@ -1640,7 +1652,10 @@ readers do not read off random characters that represent icons */
   content: "\f1e6";
 }
 
-.fa-chevron-up::before {
+.fa-chevron-up::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:focus::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active::before {
   content: "\f077";
 }
 
@@ -2740,7 +2755,7 @@ readers do not read off random characters that represent icons */
   content: "\f6c8";
 }
 
-.fa-caret-up::before, .accordion .accordion-toggle.active:hover::before, .accordion .accordion-toggle.active:focus::before, .accordion .accordion-toggle.active::before {
+.fa-caret-up::before {
   content: "\f0d8";
 }
 
@@ -5356,7 +5371,7 @@ readers do not read off random characters that represent icons */
   content: "\f11c";
 }
 
-.fa-caret-down::before, .accordion .accordion-toggle:hover::before, .accordion .accordion-toggle:focus::before, .accordion .accordion-toggle.active::before, .accordion .accordion-toggle::before {
+.fa-caret-down::before {
   content: "\f0d7";
 }
 
@@ -6440,7 +6455,11 @@ readers do not read off random characters that represent icons */
   content: "\e53f";
 }
 
-.fa-chevron-down::before {
+.fa-chevron-down::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active::before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle::before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2::before {
   content: "\f078";
 }
 
@@ -8306,7 +8325,13 @@ readers do not read off random characters that represent icons */
   font-display: block;
   src: url("../../webfonts/fa-solid-900.woff2") format("woff2"), url("../../webfonts/fa-solid-900.ttf") format("truetype");
 }
-.fas, .accordion .accordion-toggle.active:hover:before, .accordion .accordion-toggle.active:focus:before, .accordion .accordion-toggle:hover:before, .accordion .accordion-toggle:focus:before, .accordion .accordion-toggle.active:before, .accordion .accordion-toggle:before,
+.fas, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:focus:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:before,
 .fa-solid {
   font-weight: 900;
 }
@@ -11120,7 +11145,7 @@ aside .gallery-slider-thumbs .flex-control-nav li {
 #content .sidebar-inline + .content-inline .content-slider.flexslider .slides:after {
   clear: left;
 }
-#content .sidebar-inline + .content-inline .content-slider.flexslider.clearfix:after, #content .sidebar-inline + .content-inline .accordion .accordion-body .content-slider.flexslider.accordion-inner:after, .accordion .accordion-body #content .sidebar-inline + .content-inline .content-slider.flexslider.accordion-inner:after {
+#content .sidebar-inline + .content-inline .content-slider.flexslider.clearfix:after, #content .sidebar-inline + .content-inline div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .content-slider.flexslider.accordion-inner:after, div.wp-block-rrze-elements-collapsibles .accordion .accordion-body #content .sidebar-inline + .content-inline .content-slider.flexslider.accordion-inner:after {
   clear: left;
 }
 
@@ -11154,327 +11179,240 @@ aside .gallery-slider-thumbs .flex-control-nav li {
 /*!
  * Accordion
  */
-h1.accordion-heading,
-h2.accordion-heading,
-h3.accordion-heading,
-h4.accordion-heading,
-h5.accordion-heading,
-h6.accordion-heading {
+div.wp-block-rrze-elements-collapsibles h1.accordion-heading,
+div.wp-block-rrze-elements-collapsibles h2.accordion-heading,
+div.wp-block-rrze-elements-collapsibles h3.accordion-heading,
+div.wp-block-rrze-elements-collapsibles h4.accordion-heading,
+div.wp-block-rrze-elements-collapsibles h5.accordion-heading,
+div.wp-block-rrze-elements-collapsibles h6.accordion-heading {
   width: auto;
-  padding: 0 !important;
+  padding: 0;
   margin: 0;
   border: none;
   text-align: left;
 }
-
-button.accordion-toggle {
+div.wp-block-rrze-elements-collapsibles button.accordion-toggle {
   width: 100%;
   border: none;
   text-align: left;
   margin: 0;
 }
-
-button.expand-all.standard-btn {
+div.wp-block-rrze-elements-collapsibles button.expand-all.standard-btn {
   margin: 5px 0;
   float: none;
 }
-
-.button-container-right {
+div.wp-block-rrze-elements-collapsibles .button-container-right {
   text-align: right;
 }
-
-.button-container-left {
+div.wp-block-rrze-elements-collapsibles .button-container-left {
   text-align: left;
 }
-
-.accordion .accordion {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion {
   margin: 0;
 }
-.accordion .accordion-register {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-register {
   padding-left: 0;
   margin: 0 0 0.5em;
   border-top: 1px solid #C3C3CB;
   border-bottom: 1px solid #C3C3CB;
 }
-.accordion .accordion-register li {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-register li {
   float: left;
   list-style-type: none;
   padding: 0.25em 0.5em;
 }
-.accordion .accordion-suffix {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-suffix {
   font-weight: bold;
 }
-.accordion .accordion-group {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group {
   border: none;
   margin-bottom: 5px;
 }
-.accordion .accordion-toggle {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 {
   display: block;
-  border-left: 10px solid var(--color-primary-ci-hell, #04316A);
-  background: var(--color-ContentBorders, #d2ddeb);
-  color: var(--color-Text, #444);
-  font-size: 1rem;
+  background: none;
+  font-size: var(--FAU-H-Heading-4, 1.25rem);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 2%;
+  font-family: "Sans Source Pro", sans-serif;
+  color: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
   text-decoration: none;
-  padding: 8px 35px 8px 10px;
+  padding: var(--FAU-Spacing-6x, 1.5rem) var(--FAU-Spacing-05x, 0.125rem) var(--FAU-Spacing-6x, 1.5rem) 0;
+  border-top: 1px solid var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
   position: relative;
+  padding-right: 80px;
 }
-.accordion .accordion-toggle:before {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:before {
   position: absolute;
-  top: calc(50% - 0.5em);
+  top: calc(30% - 0.5em);
+  transition: top 0.3s ease-in-out;
   right: 12px;
+  background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+  padding: 1rem;
+  color: #fff;
 }
-.accordion .accordion-toggle:hover, .accordion .accordion-toggle:focus, .accordion .accordion-toggle.active {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active {
   text-decoration: none;
-  background-color: var(--color-primary-ci-hell, #04316A);
+}
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:before {
+  position: absolute;
+  top: calc(35% - 0.5em);
+  transition: top 0.3s ease-in-out;
+  right: 12px;
+  background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+  padding: 1rem;
+  color: #fff;
+}
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover *, .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus *, .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active *,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover *,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus *,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active * {
   color: var(--color-primary-ci-hell-kontrast, #fff);
 }
-.accordion .accordion-toggle:hover:before, .accordion .accordion-toggle:focus:before, .accordion .accordion-toggle.active:before {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:before {
   position: absolute;
-  top: calc(50% - 0.5em);
+  top: calc(30% - 0.5em);
   right: 12px;
+  background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+  padding: 1rem;
+  color: #fff;
 }
-.alert.font-light .accordion .accordion-toggle:hover *, .alert.font-light .accordion .accordion-toggle:focus *, .alert.font-light .accordion .accordion-toggle.active * {
-  color: var(--color-primary-ci-hell-kontrast, #fff);
-}
-.accordion .accordion-toggle.active:before {
-  position: absolute;
-  top: calc(50% - 0.5em);
-  right: 12px;
-}
-.accordion .accordion-toggle.active:hover, .accordion .accordion-toggle.active:focus {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:focus {
   border-color: var(--color-primary-dunkler, #004A9F);
-  background-color: var(--color-primary-dunkler, #004A9F);
-  color: var(--color-primary-ci-hell-kontrast, #fff);
 }
-.accordion .accordion-toggle.active:hover:before, .accordion .accordion-toggle.active:focus:before {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover:before, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:focus:before {
   position: absolute;
-  top: calc(50% - 0.5em);
+  top: calc(30% - 0.5em);
   right: 12px;
+  background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+  padding: 1rem;
+  color: #fff;
 }
-.accordion .accordion-toggle svg.rrze-elements-icon {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle svg.rrze-elements-icon,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 svg.rrze-elements-icon {
   margin-right: 3px;
 }
-.accordion .accordion-toggle span[class^=fa] {
-  margin-right: 5px;
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle span[class^=fa],
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 span[class^=fa] {
+  margin-right: 1ch;
+  border-right: 1px solid #04316a;
+  padding-right: 1ch;
 }
-.alert.font-light .accordion .accordion-toggle {
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 {
   color: var(--color-Text, #444);
 }
-.alert.font-light .accordion .accordion-toggle * {
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle *,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 * {
   color: var(--color-Text, #444);
 }
-.alert.font-light .accordion .accordion-toggle:hover, .alert.font-light .accordion .accordion-toggle:focus, .alert.font-light .accordion .accordion-toggle.active {
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover, .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus, .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:focus,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active {
   color: var(--color-primary-ci-hell-kontrast, #fff);
 }
-.accordion .phil .accordion-heading .accordion-toggle,
-.accordion .philfak .accordion-heading .accordion-toggle,
-.accordion .gold .accordion-heading .accordion-toggle {
-  border-color: var(--color-phil-ci-hell, #FDB735);
-}
-.accordion .phil .accordion-heading .accordion-toggle:hover, .accordion .phil .accordion-heading .accordion-toggle:focus, .accordion .phil .accordion-heading .accordion-toggle.active,
-.accordion .philfak .accordion-heading .accordion-toggle:hover,
-.accordion .philfak .accordion-heading .accordion-toggle:focus,
-.accordion .philfak .accordion-heading .accordion-toggle.active,
-.accordion .gold .accordion-heading .accordion-toggle:hover,
-.accordion .gold .accordion-heading .accordion-toggle:focus,
-.accordion .gold .accordion-heading .accordion-toggle.active {
-  border-color: var(--color-phil-ci-hell, #FDB735);
-  background-color: var(--color-phil-ci-hell, #FDB735);
-  color: var(--color-phil-ci-hell-kontrast, #000);
-}
-.accordion .phil .accordion-heading .accordion-toggle.active:hover, .accordion .phil .accordion-heading .accordion-toggle.active:focus,
-.accordion .philfak .accordion-heading .accordion-toggle.active:hover,
-.accordion .philfak .accordion-heading .accordion-toggle.active:focus,
-.accordion .gold .accordion-heading .accordion-toggle.active:hover,
-.accordion .gold .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-phil-dunkler, #e87722);
-  background-color: var(--color-phil-dunkler, #e87722);
-  color: var(--color-phil-ci-hell-kontrast, #000);
-}
-.accordion .rw .accordion-heading .accordion-toggle,
-.accordion .rwfak .accordion-heading .accordion-toggle,
-.accordion .red .accordion-heading .accordion-toggle {
-  border-color: var(--color-rw-ci-hell, #C50F3C);
-}
-.accordion .rw .accordion-heading .accordion-toggle:hover, .accordion .rw .accordion-heading .accordion-toggle:focus, .accordion .rw .accordion-heading .accordion-toggle.active,
-.accordion .rwfak .accordion-heading .accordion-toggle:hover,
-.accordion .rwfak .accordion-heading .accordion-toggle:focus,
-.accordion .rwfak .accordion-heading .accordion-toggle.active,
-.accordion .red .accordion-heading .accordion-toggle:hover,
-.accordion .red .accordion-heading .accordion-toggle:focus,
-.accordion .red .accordion-heading .accordion-toggle.active {
-  border-color: var(--color-rw-ci-hell, #C50F3C);
-  background-color: var(--color-rw-ci-hell, #C50F3C);
-  color: var(--color-rw-ci-hell-kontrast, #fff);
-}
-.accordion .rw .accordion-heading .accordion-toggle.active:hover, .accordion .rw .accordion-heading .accordion-toggle.active:focus,
-.accordion .rwfak .accordion-heading .accordion-toggle.active:hover,
-.accordion .rwfak .accordion-heading .accordion-toggle.active:focus,
-.accordion .red .accordion-heading .accordion-toggle.active:hover,
-.accordion .red .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-rw-dunkler, #971B2F);
-  background-color: var(--color-rw-dunkler, #971B2F);
-  color: var(--color-rw-ci-hell-kontrast, #fff);
-}
-.accordion .med .accordion-heading .accordion-toggle,
-.accordion .medfak .accordion-heading .accordion-toggle,
-.accordion .blue .accordion-heading .accordion-toggle {
-  border-color: var(--color-med-ci-hell, #18B4F1);
-}
-.accordion .med .accordion-heading .accordion-toggle:hover, .accordion .med .accordion-heading .accordion-toggle:focus, .accordion .med .accordion-heading .accordion-toggle.active,
-.accordion .medfak .accordion-heading .accordion-toggle:hover,
-.accordion .medfak .accordion-heading .accordion-toggle:focus,
-.accordion .medfak .accordion-heading .accordion-toggle.active,
-.accordion .blue .accordion-heading .accordion-toggle:hover,
-.accordion .blue .accordion-heading .accordion-toggle:focus,
-.accordion .blue .accordion-heading .accordion-toggle.active {
-  border-color: var(--color-med-ci-hell, #18B4F1);
-  background-color: var(--color-med-ci-hell, #18B4F1);
-  color: var(--color-med-ci-hell-kontrast, #000);
-}
-.accordion .med .accordion-heading .accordion-toggle.active:hover, .accordion .med .accordion-heading .accordion-toggle.active:focus,
-.accordion .medfak .accordion-heading .accordion-toggle.active:hover,
-.accordion .medfak .accordion-heading .accordion-toggle.active:focus,
-.accordion .blue .accordion-heading .accordion-toggle.active:hover,
-.accordion .blue .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-med-dunkler, #005287);
-  background-color: var(--color-med-dunkler, #005287);
-  color: var(--color-med-ci-dunkel-kontrast, #fff);
-}
-.accordion .nat .accordion-heading .accordion-toggle,
-.accordion .natfak .accordion-heading .accordion-toggle,
-.accordion .green .accordion-heading .accordion-toggle {
-  border-color: var(--color-nat-ci-hell, #7BB725);
-}
-.accordion .nat .accordion-heading .accordion-toggle:hover, .accordion .nat .accordion-heading .accordion-toggle:focus, .accordion .nat .accordion-heading .accordion-toggle.active, .accordion .nat .accordion-heading .accordion-toggle.active:focus,
-.accordion .natfak .accordion-heading .accordion-toggle:hover,
-.accordion .natfak .accordion-heading .accordion-toggle:focus,
-.accordion .natfak .accordion-heading .accordion-toggle.active,
-.accordion .natfak .accordion-heading .accordion-toggle.active:focus,
-.accordion .green .accordion-heading .accordion-toggle:hover,
-.accordion .green .accordion-heading .accordion-toggle:focus,
-.accordion .green .accordion-heading .accordion-toggle.active,
-.accordion .green .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-nat-ci-hell, #7BB725);
-  background-color: var(--color-nat-ci-hell, #7BB725);
-  color: var(--color-nat-ci-hell-kontrast, #000);
-}
-.accordion .nat .accordion-heading .accordion-toggle.active:hover, .accordion .nat .accordion-heading .accordion-toggle.active:focus,
-.accordion .natfak .accordion-heading .accordion-toggle.active:hover,
-.accordion .natfak .accordion-heading .accordion-toggle.active:focus,
-.accordion .green .accordion-heading .accordion-toggle.active:hover,
-.accordion .green .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-nat-dunkler, #266141);
-  background-color: var(--color-nat-dunkler, #266141);
-  color: var(--color-nat-ci-dunkel-kontrast, #fff);
-}
-.accordion .tf .accordion-heading .accordion-toggle,
-.accordion .techfak .accordion-heading .accordion-toggle,
-.accordion .grey .accordion-heading .accordion-toggle {
-  border-color: var(--color-tf-ci-hell, #8C9FB1);
-}
-.accordion .tf .accordion-heading .accordion-toggle:hover, .accordion .tf .accordion-heading .accordion-toggle:focus, .accordion .tf .accordion-heading .accordion-toggle.active,
-.accordion .techfak .accordion-heading .accordion-toggle:hover,
-.accordion .techfak .accordion-heading .accordion-toggle:focus,
-.accordion .techfak .accordion-heading .accordion-toggle.active,
-.accordion .grey .accordion-heading .accordion-toggle:hover,
-.accordion .grey .accordion-heading .accordion-toggle:focus,
-.accordion .grey .accordion-heading .accordion-toggle.active {
-  border-color: var(--color-tf-ci-hell, #8C9FB1);
-  background-color: var(--color-tf-ci-hell, #8C9FB1);
-  color: var(--color-tf-ci-dunkel-kontrast, #000);
-}
-.accordion .tf .accordion-heading .accordion-toggle.active:hover, .accordion .tf .accordion-heading .accordion-toggle.active:focus,
-.accordion .techfak .accordion-heading .accordion-toggle.active:hover,
-.accordion .techfak .accordion-heading .accordion-toggle.active:focus,
-.accordion .grey .accordion-heading .accordion-toggle.active:hover,
-.accordion .grey .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-tf-dunkler, #2F586E);
-  background-color: var(--color-tf-dunkler, #2F586E);
-  color: var(--color-tf-ci-dunkel-kontrast, #fff);
-}
-.accordion .fau .accordion-heading .accordion-toggle,
-.accordion .default .accordion-heading .accordion-toggle {
-  border-color: var(--color-zentral-ci-hell, #04316A);
-}
-.accordion .fau .accordion-heading .accordion-toggle:hover, .accordion .fau .accordion-heading .accordion-toggle:focus, .accordion .fau .accordion-heading .accordion-toggle.active,
-.accordion .default .accordion-heading .accordion-toggle:hover,
-.accordion .default .accordion-heading .accordion-toggle:focus,
-.accordion .default .accordion-heading .accordion-toggle.active {
-  border-color: var(--color-zentral-ci-hell, #04316A);
-  background-color: var(--color-zentral-ci-hell, #04316A);
-  color: var(--color-zentral-ci-hell-kontrast, #fff);
-}
-.accordion .fau .accordion-heading .accordion-toggle.active:hover, .accordion .fau .accordion-heading .accordion-toggle.active:focus,
-.accordion .default .accordion-heading .accordion-toggle.active:hover,
-.accordion .default .accordion-heading .accordion-toggle.active:focus {
-  border-color: var(--color-zentral-dunkler, #004A9F);
-  background-color: var(--color-zentral-dunkler, #004A9F);
-  color: var(--color-zentral-ci-hell-kontrast, #fff);
-}
-.accordion .accordion-body {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-body {
   display: block;
   overflow: hidden;
 }
-.accordion .accordion-body .accordion-inner {
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner {
   border: none;
   background-color: #fff;
-  padding: 15px 20px;
+  padding: 0;
+  padding-bottom: var(--FAU-Spacing-6x, 1.5rem);
 }
-.alert.font-light .accordion .accordion-body .accordion-inner {
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner {
   color: var(--color-Text, #222);
 }
-.alert.font-light .accordion .accordion-body .accordion-inner h1, .alert.font-light .accordion .accordion-body .accordion-inner h2, .alert.font-light .accordion .accordion-body .accordion-inner h3, .alert.font-light .accordion .accordion-body .accordion-inner h4, .alert.font-light .accordion .accordion-body .accordion-inner h5, .alert.font-light .accordion .accordion-body .accordion-inner p, .alert.font-light .accordion .accordion-body .accordion-inner li, .alert.font-light .accordion .accordion-body .accordion-inner a, .alert.font-light .accordion .accordion-body .accordion-inner span, .alert.font-light .accordion .accordion-body .accordion-inner blockquote, .alert.font-light .accordion .accordion-body .accordion-inner code, .alert.font-light .accordion .accordion-body .accordion-inner pre, .alert.font-light .accordion .accordion-body .accordion-inner th, .alert.font-light .accordion .accordion-body .accordion-inner td, .alert.font-light .accordion .accordion-body .accordion-inner strong, .alert.font-light .accordion .accordion-body .accordion-inner em {
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner h1,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner h2,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner h3,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner h4,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner h5,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner p,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner li,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner a,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner span,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner blockquote,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner code,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner pre,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner th,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner td,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner strong,
+.alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner em {
   color: var(--color-Text, #222);
 }
-
-.fau-theme .accordion-toggle {
+div.wp-block-rrze-elements-collapsibles .fau-theme .accordion-toggle {
   border-radius: var(--border-radius, 4px);
   background-clip: padding-box;
 }
-.fau-theme .accordion-body .accordion-inner {
+div.wp-block-rrze-elements-collapsibles .fau-theme .accordion-body .accordion-inner {
   background-color: #f5f7f9;
 }
-.fau-theme .accordion-group .accordion-body .accordion-inner .accordion-inner {
+div.wp-block-rrze-elements-collapsibles .fau-theme .accordion-group .accordion-body .accordion-inner .accordion-inner {
   background-color: rgb(232.25, 236.8, 241.35);
 }
-
 @media print {
-  .accordion {
+  div.wp-block-rrze-elements-collapsibles .accordion {
     position: relative;
     display: block;
     overflow: visible;
   }
-  .accordion-group,
-  .accordion-body,
-  .accordion-inner,
-  .accordion-inner p {
+  div.wp-block-rrze-elements-collapsibles .accordion-group,
+  div.wp-block-rrze-elements-collapsibles .accordion-body,
+  div.wp-block-rrze-elements-collapsibles .accordion-inner,
+  div.wp-block-rrze-elements-collapsibles .accordion-inner p {
     position: relative;
     display: block !important;
     page-break-inside: avoid;
     break-inside: avoid;
     overflow: visible;
   }
-  button.expand-all.standard-btn {
+  div.wp-block-rrze-elements-collapsibles button.expand-all.standard-btn {
     display: none;
   }
-  h3.accordion-heading,
-  h4.accordion-heading {
+  div.wp-block-rrze-elements-collapsibles h3.accordion-heading,
+  div.wp-block-rrze-elements-collapsibles h4.accordion-heading {
     margin-bottom: 0 !important;
   }
 }
-.read-mode-only {
+div.wp-block-rrze-elements-collapsibles .read-mode-only {
   display: none;
 }
-
-#content main .accordion-body:target,
-.admin-bar #content main .accordion-body:target {
+div.wp-block-rrze-elements-collapsibles #content main .accordion-body:target,
+div.wp-block-rrze-elements-collapsibles .admin-bar #content main .accordion-body:target {
   padding-top: 0;
   background-color: cornflowerblue;
 }
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {
-  padding-top: 8px;
+  padding-top: var(--FAU-Spacing-6x, 1.5rem);
+}
+
+#content div.wp-block-rrze-elements-accordions {
+  margin-left: 1rem;
+  border-left: 8px solid #04316a;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+#content div.wp-block-rrze-elements-accordions div.accordion-body {
+  padding-top: 0;
 }
 
 .rrze-elements-tabs {

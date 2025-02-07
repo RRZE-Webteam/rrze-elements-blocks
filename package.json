@@ -14,6 +14,7 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
+		"watch-css": "sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css --watch",
 		"build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
 		"update-version": "node update-version.js && npm run build"
 	},
