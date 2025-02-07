@@ -11326,6 +11326,31 @@ div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 span[cla
 .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active {
   color: var(--color-primary-ci-hell-kontrast, #fff);
 }
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.phil .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.phil .accordion-toggle h2:before {
+  background: var(--FAU_Col_Phil-Gelb_100, #FDB735);
+  color: #000;
+}
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.rw .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.rw .accordion-toggle h2:before {
+  background: var(--FAU_Col_RW-Dunkelrot_100, #971b2f);
+  color: #fff;
+}
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.med .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.med .accordion-toggle h2:before {
+  background: var(--FAU_Col_Med-Blau_100, #18b4f1);
+  color: #000;
+}
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.nat .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.nat .accordion-toggle h2:before {
+  background: var(--FAU_Col_Nat-Gruen_100, #7bb725);
+  color: #000;
+}
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.tf .accordion-toggle:before,
+div.wp-block-rrze-elements-collapsibles .accordion .accordion-group.tf .accordion-toggle h2:before {
+  background: var(--FAU_Col_TF-Metallic_100, #8c9fb1);
+  color: #000;
+}
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-body {
   display: block;
   overflow: hidden;

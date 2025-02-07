@@ -177,131 +177,60 @@ div.wp-block-rrze-elements-collapsibles {
 
         }
 
-        // .phil .accordion-heading .accordion-toggle,
-        // .philfak .accordion-heading .accordion-toggle,
-        // .gold .accordion-heading .accordion-toggle {
-        //     border-color: var(--color-phil-ci-hell, $colorPhilFak);
+        .accordion-group.phil {
+            .accordion-toggle,
+            .accordion-toggle h2 {
 
-        //     &:hover,
-        //     &:focus,
-        //     &.active {
-        //         border-color: var(--color-phil-ci-hell, $colorPhilFak);
-        //         background-color: var(--color-phil-ci-hell, $colorPhilFak);
-        //         color: var(--color-phil-ci-hell-kontrast, #000);
-        //     }
+                &:before {
+                    background: var(--FAU_Col_Phil-Gelb_100, #FDB735);
+                    color: #000;
+                }
+            }
+        }
 
-        //     &.active:hover,
-        //     &.active:focus {
-        //         border-color: var(--color-phil-dunkler, $colorPhilFakDunkler);
-        //         background-color: var(--color-phil-dunkler, $colorPhilFakDunkler);
-        //         color: var(--color-phil-ci-hell-kontrast, #000);
-        //     }
-        // }
+        .accordion-group.rw {
+            .accordion-toggle,
+            .accordion-toggle h2 {
 
-        // .rw .accordion-heading .accordion-toggle,
-        // .rwfak .accordion-heading .accordion-toggle,
-        // .red .accordion-heading .accordion-toggle {
-        //     border-color: var(--color-rw-ci-hell, $colorRwFak);
+                &:before {
+                    background: var(--FAU_Col_RW-Dunkelrot_100, #971b2f);
+                    color: #fff;
+                }
+            }
+        }
 
-        //     &:hover,
-        //     &:focus,
-        //     &.active {
-        //         border-color: var(--color-rw-ci-hell, $colorRwFak);
-        //         background-color: var(--color-rw-ci-hell, $colorRwFak);
-        //         color: var(--color-rw-ci-hell-kontrast, #fff);
-        //     }
+        .accordion-group.med {
+            .accordion-toggle,
+            .accordion-toggle h2 {
 
-        //     &.active:hover,
-        //     &.active:focus {
-        //         border-color: var(--color-rw-dunkler, $colorRwFakDunkler);
-        //         background-color: var(--color-rw-dunkler, $colorRwFakDunkler);
-        //         color: var(--color-rw-ci-hell-kontrast, #fff);
-        //     }
-        // }
+                &:before {
+                    background: var(--FAU_Col_Med-Blau_100, #18b4f1);
+                    color: #000;
+                }
+            }
+        }
 
-        // .med .accordion-heading .accordion-toggle,
-        // .medfak .accordion-heading .accordion-toggle,
-        // .blue .accordion-heading .accordion-toggle {
-        //     border-color: var(--color-med-ci-hell, $colorMedFak);
+        .accordion-group.nat {
+            .accordion-toggle,
+            .accordion-toggle h2 {
 
-        //     &:hover,
-        //     &:focus,
-        //     &.active {
-        //         border-color: var(--color-med-ci-hell, $colorMedFak);
-        //         background-color: var(--color-med-ci-hell, $colorMedFak);
-        //         color: var(--color-med-ci-hell-kontrast, #000);
-        //     }
+                &:before {
+                    background: var(--FAU_Col_Nat-Gruen_100, #7bb725);
+                    color: #000;
+                }
+            }
+        }
 
-        //     &.active:hover,
-        //     &.active:focus {
-        //         border-color: var(--color-med-dunkler, $colorMedFakDunkler);
-        //         background-color: var(--color-med-dunkler, $colorMedFakDunkler);
-        //         color: var(--color-med-ci-dunkel-kontrast, #fff);
-        //     }
-        // }
+        .accordion-group.tf {
+            .accordion-toggle,
+            .accordion-toggle h2 {
 
-        // .nat .accordion-heading .accordion-toggle,
-        // .natfak .accordion-heading .accordion-toggle,
-        // .green .accordion-heading .accordion-toggle {
-        //     border-color: var(--color-nat-ci-hell, $colorNatFak);
-
-        //     &:hover,
-        //     &:focus,
-        //     &.active,
-        //     &.active:focus {
-        //         border-color: var(--color-nat-ci-hell, $colorNatFak);
-        //         background-color: var(--color-nat-ci-hell, $colorNatFak);
-        //         color: var(--color-nat-ci-hell-kontrast, #000);
-        //     }
-
-        //     &.active:hover,
-        //     &.active:focus {
-        //         border-color: var(--color-nat-dunkler, $colorNatFakDunkler);
-        //         background-color: var(--color-nat-dunkler, $colorNatFakDunkler);
-        //         color: var(--color-nat-ci-dunkel-kontrast, #fff);
-        //     }
-        // }
-
-        // .tf .accordion-heading .accordion-toggle,
-        // .techfak .accordion-heading .accordion-toggle,
-        // .grey .accordion-heading .accordion-toggle {
-        //     border-color: var(--color-tf-ci-hell, $colorTechFak);
-
-        //     &:hover,
-        //     &:focus,
-        //     &.active {
-        //         border-color: var(--color-tf-ci-hell, $colorTechFak);
-        //         background-color: var(--color-tf-ci-hell, $colorTechFak);
-        //         color: var(--color-tf-ci-dunkel-kontrast, #000);
-        //     }
-
-        //     &.active:hover,
-        //     &.active:focus {
-        //         border-color: var(--color-tf-dunkler, $colorTechFakDunkler);
-        //         background-color: var(--color-tf-dunkler, $colorTechFakDunkler);
-        //         color: var(--color-tf-ci-dunkel-kontrast, #fff);
-        //     }
-        // }
-
-        // .fau .accordion-heading .accordion-toggle,
-        // .default .accordion-heading .accordion-toggle {
-        //     border-color: var(--color-zentral-ci-hell, $colorDefault);
-
-        //     &:hover,
-        //     &:focus,
-        //     &.active {
-        //         border-color: var(--color-zentral-ci-hell, $colorDefault);
-        //         background-color: var(--color-zentral-ci-hell, $colorDefault);
-        //         color: var(--color-zentral-ci-hell-kontrast, #fff);
-        //     }
-
-        //     &.active:hover,
-        //     &.active:focus {
-        //         border-color: var(--color-zentral-dunkler, $colorDefaultDunkler);
-        //         background-color: var(--color-zentral-dunkler, $colorDefaultDunkler);
-        //         color: var(--color-zentral-ci-hell-kontrast, #fff);
-        //     }
-        // }
+                &:before {
+                    background: var(--FAU_Col_TF-Metallic_100, #8c9fb1);
+                    color: #000;
+                }
+            }
+        }
 
         .accordion-body {
             display: block; // none;
@@ -410,7 +339,7 @@ div.wp-block-rrze-elements-collapsibles {
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    div.accordion-body{
+    div.accordion-body {
         padding-top: 0;
     }
 }
