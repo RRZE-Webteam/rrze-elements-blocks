@@ -11251,8 +11251,9 @@ div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:before {
   transition: top 0.3s ease-in-out;
   right: 12px;
   background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-  padding: 1rem;
+  padding: 0.75rem;
   color: #fff;
+  font-size: 1rem;
 }
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active,
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover,
@@ -11269,8 +11270,9 @@ div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:b
   transition: top 0.3s ease-in-out;
   right: 12px;
   background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-  padding: 1rem;
+  padding: 0.75rem;
   color: #fff;
+  font-size: 1rem;
 }
 .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:hover *, .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle:focus *, .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active *,
 .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2:hover *,
@@ -11284,8 +11286,9 @@ div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:b
   top: calc(30% - 0.5em);
   right: 12px;
   background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-  padding: 1rem;
+  padding: 0.75rem;
   color: #fff;
+  font-size: 1rem;
 }
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover, div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus,
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:hover,
@@ -11299,8 +11302,9 @@ div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2.active:f
   top: calc(30% - 0.5em);
   right: 12px;
   background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-  padding: 1rem;
+  padding: 0.75rem;
   color: #fff;
+  font-size: 1rem;
 }
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle svg.rrze-elements-icon,
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 svg.rrze-elements-icon {

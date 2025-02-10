@@ -87,8 +87,9 @@ div.wp-block-rrze-elements-collapsibles {
                 transition: top 0.3s ease-in-out;
                 right: 12px;
                 background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-                padding: 1rem;
+                padding: 0.75rem;
                 color: #fff;
+                font-size: 1rem;
                 @extend .fas !optional;
                 @extend .fa-chevron-down !optional;
             }
@@ -106,8 +107,9 @@ div.wp-block-rrze-elements-collapsibles {
                     transition: top 0.3s ease-in-out;
                     right: 12px;
                     background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-                    padding: 1rem;
+                    padding: 0.75rem;
                     color: #fff;
+                    font-size: 1rem;
                     @extend .fas !optional;
                     @extend .fa-chevron-down !optional;
                 }
@@ -126,8 +128,9 @@ div.wp-block-rrze-elements-collapsibles {
                     top: calc(30% - .5em);
                     right: 12px;
                     background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-                    padding: 1rem;
+                    padding: 0.75rem;
                     color: #fff;
+                    font-size: 1rem;
                     @extend .fas !optional;
                     @extend .fa-chevron-up !optional;
                 }
@@ -144,8 +147,9 @@ div.wp-block-rrze-elements-collapsibles {
                     top: calc(30% - .5em);
                     right: 12px;
                     background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
-                    padding: 1rem;
+                    padding: 0.75rem;
                     color: #fff;
+                    font-size: 1rem;
                     @extend .fas !optional;
                     @extend .fa-chevron-up !optional;
                 }
