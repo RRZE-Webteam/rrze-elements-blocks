@@ -1,119 +1,128 @@
 @use "variables" as v;
 @use "mixins" as m;
 
-.alert {
-    padding: 15px;
+div.wp-block-rrze-elements-alert div.alert {
+    padding: var(--FAU-Spacing-6x, 1.5rem);
     margin-bottom: 20px;
     border: 1px solid transparent;
     font-weight: normal;
-    background-color: #e9edf2;
+    background-color: #DFE2E7;
     overflow: hidden;
     color: #000;
-    p, strong {
+
+    p,
+    strong {
         color: inherit;
     }
-    &.font-light  {
+
+    &.font-light {
         color: #fff;
         letter-spacing: 0.03em;
+
         * {
             color: #fff;
             letter-spacing: 0.03em;
         }
+
         a {
             color: #fff;
             text-decoration-color: inherit;
-            &:hover, &:focus, &:active{
+
+            &:hover,
+            &:focus,
+            &:active {
                 color: darken(#fff, 10%);
 
             }
         }
     }
+
     a.standard-btn {
         margin-bottom: 0;
     }
+
     :last-child {
         margin-bottom: 0;
     }
+
     p:last-child {
         padding-bottom: 0; // für FAU-Themes
     }
-}
-.alert-success, .alert-success *:not(code, pre) {
-    color: #315f31;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
-.alert-info, .alert-info *:not(code, pre) {
-    color: #245269  ;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-}
-.alert-warning, .alert-warning *:not(code, pre) {
-    color: #66512c;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
-}
-.alert-danger, .alert-danger *:not(code, pre) {
-    color: #78302f;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-}
-.alert.alert-danger p {
-    line-height: 1.5;
+
+    div.alert-success,
+    .alert-success *:not(code, pre),
+    div.alert-info,
+    .alert-info *:not(code, pre),
+    div.alert-warning,
+    .alert-warning *:not(code, pre),
+    div.alert-danger,
+    .alert-danger *:not(code, pre) {
+        background-color: #DFE2E7;
+        color: #000;
+    }
 }
 
-.alert-example,
+div.wp-block-rrze-elements-alert div.alert-example,
 #content .alert-example {
-    margin: 30px 20px 40px;
-    padding: 30px 10px 5px;
+    // margin: 30px 20px 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: var(--FAU-Spacing-6x, 1.5rem);
     position: relative;
-    background: #fff;
+    // background: #fff;
     overflow: initial;
-    border: 1px dashed var(--color-TextLight, v.$medium-grey);
+    // border: 2px solid var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);;
     border-radius: var(--border-radius, 3px);
+
     &:after {
-        background: #fff;
-        border: 1px dashed var(--color-TextLight, v.$medium-grey);
-        color: var(--color-Text);
+        background: #DFE2E7;
+        // border-bottom: 2px solid #fff;
+        color: #000;
         content: "Beispiel";
         font-family: sans-serif;
         font-size: .8rem;
         line-height: inherit;
         font-weight: 700;
-        padding: 3px 10px;
+        padding: var(--FAU-Spacing-2x, 0.5rem) var(--FAU-Spacing-3x, 0.75rem);
         position: absolute;
         right: 20px;
-        text-transform: uppercase;
         top: -1.2rem;
         z-index: 1;
         overflow: auto;
+        font-size: 1rem;
+
         :lang(en) & {
             content: 'Example';
         }
+
         .fau-events & {
             width: auto;
             height: auto;
             visibility: initial;
         }
     }
+
     &[title]:after {
         content: attr(title);
     }
 }
 
-.fau-theme {
-    #content .alert {
-        h2 {
-            padding-top: 7px;
-        }
-        p {
-            padding: 5px 0;
-        }
-        margin-left: calc(var(--gutter-halfwidth, 15px) * -1);
-        margin-right: calc(var(--gutter-halfwidth, 15px) * -1);
-        @media (min-width: 768px) {
-            margin-left: 0;
-            margin-right: 0;
-        }
-    }
-}
+// .fau-theme {
+//     #content div.wp-block-rrze-elements-alert .alert {
+//         h2 {
+//             padding-top: 7px;
+//         }
+
+//         p {
+//             padding: 5px 0;
+//         }
+
+//         margin-left: calc(var(--gutter-halfwidth, 15px) * -1);
+//         margin-right: calc(var(--gutter-halfwidth, 15px) * -1);
+
+//         @media (min-width: 768px) {
+//             margin-left: 0;
+//             margin-right: 0;
+//         }
+//     }
+// }

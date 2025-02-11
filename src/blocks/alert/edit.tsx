@@ -70,12 +70,12 @@ export default function Edit({
     },
   ];
 
-  let borderStyle = attributes.borderColor
-    ? { border: `1px solid ${attributes.borderColor}` }
-    : {};
-  if (attributes.style === "example") {
-    borderStyle = { border: `1px dashed var(--color-TextLight, #707070)` };
-  }
+  // let borderStyle = attributes.borderColor
+  //   ? { border: `1px solid ${attributes.borderColor}` }
+  //   : {};
+  // if (attributes.style === "example") {
+  //   borderStyle = { border: `1px dashed var(--color-TextLight, #707070)` };
+  // }
 
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
@@ -92,7 +92,7 @@ export default function Edit({
   return (
     <div {...props}>
       <InspectorControls>
-        <StandardColorSwitcher
+        {/* <StandardColorSwitcher
           attributes={{ color: attributes.color }}
           setAttributes={setAttributes}
           colorData={colorDataAlert}
@@ -104,7 +104,7 @@ export default function Edit({
         <ContrastChecker
           textColor={attributes.textColor}
           backgroundColor={attributes.color}
-        />
+        /> */}
 
         {attributes.style ? null : (
           <BorderColorPicker
@@ -128,7 +128,7 @@ export default function Edit({
           />
         </PanelBody>
       </InspectorControls>
-      <BlockControls>
+      {/* <BlockControls>
         <StandardColorSwitcherToolbar
           attributes={{ color: attributes.color, style: attributes.style }}
           setAttributes={setAttributes}
@@ -136,7 +136,7 @@ export default function Edit({
           hex={true}
           useStyle={true}
         />
-      </BlockControls>
+      </BlockControls> */}
       <div
         className={`alert clearfix clear ${
           attributes.style ? `alert-${attributes.style}` : ""
@@ -148,7 +148,7 @@ export default function Edit({
                 backgroundColor: attributes.color,
                 color: attributes.textColor,
               }),
-          ...borderStyle,
+          // ...borderStyle,
         }}
         title={attributes.title}
       >
