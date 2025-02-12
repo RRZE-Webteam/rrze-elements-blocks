@@ -55,7 +55,7 @@
 
 .accordion-toggle span[class^="fa"] {
 	float: left;
-	line-height: 2em;
+	line-height: 1.5;
 }
 
 // read mode
@@ -245,12 +245,12 @@ button.is-pressed.elements-blocks-icon-Button {
 	justify-content: center;
 }
 
-.elements-blocks-input-following-icon {
-	input {
-		max-width: 90%;
-		font-size: 1.25em !important;
-	}
-}
+// .elements-blocks-input-following-icon {
+// 	input {
+// 		max-width: 90%;
+// 		font-size: 1.25em !important;
+// 	}
+// }
 
 .rrzeElementsBFakColorSelector {
 	border: 1px solid #000;

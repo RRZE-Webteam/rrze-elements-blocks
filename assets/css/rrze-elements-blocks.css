@@ -11313,8 +11313,6 @@ div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 svg.rrze
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle span[class^=fa],
 div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 span[class^=fa] {
   margin-right: 1ch;
-  border-right: 1px solid #04316a;
-  padding-right: 1ch;
 }
 .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle,
 .alert.font-light div.wp-block-rrze-elements-collapsibles .accordion .accordion-toggle h2 {
@@ -12452,7 +12450,8 @@ div.wp-block-rrze-elements-alert div.alert .alert-danger *:not(code, pre) {
 
 div.wp-block-rrze-elements-alert div.alert-example,
 #content .alert-example {
-  margin: 30px 20px 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   padding: var(--FAU-Spacing-6x, 1.5rem);
   position: relative;
   overflow: initial;
@@ -12488,23 +12487,6 @@ div.wp-block-rrze-elements-alert div.alert-example:after,
 div.wp-block-rrze-elements-alert div.alert-example[title]:after,
 #content .alert-example[title]:after {
   content: attr(title);
-}
-
-.fau-theme #content div.wp-block-rrze-elements-alert .alert {
-  margin-left: calc(var(--gutter-halfwidth, 15px) * -1);
-  margin-right: calc(var(--gutter-halfwidth, 15px) * -1);
-}
-.fau-theme #content div.wp-block-rrze-elements-alert .alert h2 {
-  padding-top: 7px;
-}
-.fau-theme #content div.wp-block-rrze-elements-alert .alert p {
-  padding: 5px 0;
-}
-@media (min-width: 768px) {
-  .fau-theme #content div.wp-block-rrze-elements-alert .alert {
-    margin-left: 0;
-    margin-right: 0;
-  }
 }
 
 /*!
