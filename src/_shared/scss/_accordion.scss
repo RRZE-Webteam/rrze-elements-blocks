@@ -330,6 +330,11 @@ div.wp-block-rrze-elements-collapsibles {
         padding-top: 0;
         background-color: cornflowerblue;
     }
+
+    .wp-block-rrze-elements-collapse:last-child {
+        border-bottom: 1px solid #04316a;
+        margin-bottom: var(--FAU-Spacing-6x, 1.5rem);
+    }
 }
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {

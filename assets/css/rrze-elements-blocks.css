@@ -11426,6 +11426,10 @@ div.wp-block-rrze-elements-collapsibles .admin-bar #content main .accordion-body
   padding-top: 0;
   background-color: cornflowerblue;
 }
+div.wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse:last-child {
+  border-bottom: 1px solid #04316a;
+  margin-bottom: var(--FAU-Spacing-6x, 1.5rem);
+}
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {
   padding-top: var(--FAU-Spacing-6x, 1.5rem);
