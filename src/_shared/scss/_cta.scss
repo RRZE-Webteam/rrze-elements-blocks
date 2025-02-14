@@ -186,6 +186,51 @@ div.wp-block-rrze-elements-cta {
             }
         }
     }
+
+    &.is-style-light{
+        div.rrze-elements-cta {
+            color: var(--color-primary-basis, #04316a);
+            background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
+        }
+    
+        .cta-image::before {
+                background: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
+        }
+    
+        .cta-button {
+            display: inline-block;
+            background: var(--FAU-Col-FAU-Dunkelblau-100, #041E42);
+            color: var(--FAU-Col-FAU-Weiss-100 #FFFFFF);
+        }
+    
+        .cta-button-container {
+            span.rrze-elements-cta-icon {
+                color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
+    
+                &::before{
+                    background: var(--color-primary-basis, #04316a);
+                    color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
+                }
+            }
+        }
+    
+        @media screen and (max-width: 768px) {
+            div.rrze-elements-cta{
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 3rem auto auto auto auto auto 3rem;
+            }   
+    
+            .cta-image{
+                grid-row: 1/1;
+                grid-column: 1/2;
+    
+                &::before {
+                    content: "";
+                    background: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
+                }
+            }
+        }
+    }
 }
 
 // .rrze-elements-cta {
