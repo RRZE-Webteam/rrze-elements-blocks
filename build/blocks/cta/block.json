@@ -58,12 +58,12 @@
   "styles": [
     {
       "name": "no-background",
-      "label": "Normal",
+      "label": "Dark",
       "isDefault": true
     },
     {
-      "name": "small",
-      "label": "Small"
+      "name": "light",
+      "label": "Light"
     }
   ],
   "textdomain": "rrze-elements-blocks",
