@@ -46,6 +46,7 @@ export default function Edit({
               "core/heading",
               "core/list",
               "core/image",
+              "rrze-faudir/block",
             ]}
             template={[
               [

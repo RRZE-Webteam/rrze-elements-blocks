@@ -250,6 +250,7 @@ const Edit = ({
                 allowedBlocks={[
                   "rrze-elements/accordions",
                   "rrze-elements/notice",
+                  "rrze-elements/alert",
                   "rrze/rrze-video",
                   "core/paragraph",
                   "core/columns",
@@ -267,6 +268,8 @@ const Edit = ({
                   "core/preformatted",
                   "core/pullquote",
                   "core/verse",
+                  "core/buttons",
+                  "core/button",
                   "core/code",
                   "core/columns",
                   "core/column",
@@ -286,6 +289,7 @@ const Edit = ({
                   "core/table",
                   "rrze-elements/alert",
                   "rrze/rrze-video",
+                  "rrze-faudir/block"
                 ]}
               />
             </div>
