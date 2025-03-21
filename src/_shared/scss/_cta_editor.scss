@@ -10,8 +10,8 @@ div.wp-block-rrze-elements-cta {
     grid-template-columns: 1fr 1fr 1fr 1.5fr;
     grid-template-rows: 3rem auto auto auto auto auto 3rem;
     margin: 2em 0;
-    color: var(--color-primary-basis-kontrast, #fff);
-    background-color: var(--color-primary-basis, #04316a);
+    color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
   }
 
   .cta-content {
@@ -68,6 +68,7 @@ div.wp-block-rrze-elements-cta {
       height: 100%;
       width: 100%;
       object-fit: cover;
+      aspect-ratio: 3/2;
     }
   }
 
@@ -105,6 +106,7 @@ div.wp-block-rrze-elements-cta {
     position: relative;
     padding-top: 1.05rem;
     padding-bottom: 1.05rem;
+    height: fit-content;
 
     &:hover,
     &:focus,
@@ -188,7 +190,7 @@ div.wp-block-rrze-elements-cta {
 
   &.is-style-light {
     div.rrze-elements-cta {
-      color: var(--color-primary-basis, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, #04316a);
       background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
     }
 
@@ -211,7 +213,7 @@ div.wp-block-rrze-elements-cta {
         color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
 
         &::before {
-          background: var(--color-primary-basis, #04316a);
+          background: var(--FAU-Col-FAU-Blau-100, #04316a);
           color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
         }
       }

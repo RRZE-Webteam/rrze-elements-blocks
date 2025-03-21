@@ -14426,14 +14426,17 @@ table.filtertable .tablesorter-filter-row input {
 /*!
 Functions and Mixins
 */
+div.wp-block-rrze-elements-cta {
+  -webkit-print-color-adjust: exact;
+}
 div.wp-block-rrze-elements-cta div.rrze-elements-cta {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1.5fr;
   grid-template-rows: 3rem auto auto auto auto auto 3rem;
   margin: 2em 0;
-  color: var(--color-primary-basis-kontrast, #fff);
-  background-color: var(--color-primary-basis, #04316a);
+  color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
 }
 div.wp-block-rrze-elements-cta div.rrze-elements-cta.bg-1 {
   background-image: url("../svg/cta/background-1.svg?url");
@@ -14495,6 +14498,7 @@ div.wp-block-rrze-elements-cta .cta-image img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  aspect-ratio: 3/2;
 }
 div.wp-block-rrze-elements-cta img {
   border: 0;
@@ -14512,7 +14516,7 @@ div.wp-block-rrze-elements-cta .cta-button-container {
   display: flex;
   margin-top: var(--Spacing-8x, 2rem);
 }
-div.wp-block-rrze-elements-cta .cta-button {
+div.wp-block-rrze-elements-cta a.cta-button {
   display: inline-block;
   background: var(--FAU-Col-FAU-Dunkelblau-100, #041E42);
   color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
@@ -14525,12 +14529,13 @@ div.wp-block-rrze-elements-cta .cta-button {
   border-radius: 0;
   padding-right: 2.5rem;
   position: relative;
+  height: fit-content;
 }
-div.wp-block-rrze-elements-cta .cta-button:hover .rrze-elements-cta-icon, div.wp-block-rrze-elements-cta .cta-button:focus .rrze-elements-cta-icon, div.wp-block-rrze-elements-cta .cta-button:active .rrze-elements-cta-icon {
+div.wp-block-rrze-elements-cta a.cta-button:hover .rrze-elements-cta-icon, div.wp-block-rrze-elements-cta a.cta-button:focus .rrze-elements-cta-icon, div.wp-block-rrze-elements-cta a.cta-button:active .rrze-elements-cta-icon {
   padding-left: 1.5rem;
   transition: padding-left 0.3s ease-in-out;
 }
-.rrze-2019 div.wp-block-rrze-elements-cta .cta-button {
+.rrze-2019 div.wp-block-rrze-elements-cta a.cta-button {
   color: #768944;
 }
 div.wp-block-rrze-elements-cta .cta-button-container span.rrze-elements-cta-icon {
@@ -14584,7 +14589,7 @@ div.wp-block-rrze-elements-cta .cta-button-container span.rrze-elements-cta-icon
   }
 }
 div.wp-block-rrze-elements-cta.is-style-light div.rrze-elements-cta {
-  color: var(--color-primary-basis, #04316a);
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
   background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
 }
 div.wp-block-rrze-elements-cta.is-style-light .cta-image::before {
@@ -14599,7 +14604,7 @@ div.wp-block-rrze-elements-cta.is-style-light .cta-button-container span.rrze-el
   color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
 }
 div.wp-block-rrze-elements-cta.is-style-light .cta-button-container span.rrze-elements-cta-icon::before {
-  background: var(--color-primary-basis, #04316a);
+  background: var(--FAU-Col-FAU-Blau-100, #04316a);
   color: var(--FAU-Col-FAU-Weiss-100, #FFFFFF);
 }
 @media screen and (max-width: 768px) {
