@@ -45,11 +45,11 @@
 		"@svgr/webpack": "^8.1.0",
 		"@types/color": "^4.2.0",
 		"@types/lodash": "^4.17.16",
-		"@types/node": "^22.13.14",
+		"@types/node": "^22.13.15",
 		"@types/wordpress__block-editor": "^11.5.16",
 		"@types/wordpress__blocks": "^12.5.17",
-		"@typescript-eslint/eslint-plugin": "^8.28.0",
-		"@typescript-eslint/parser": "^8.28.0",
+		"@typescript-eslint/eslint-plugin": "^8.29.0",
+		"@typescript-eslint/parser": "^8.29.0",
 		"@wordpress/api-fetch": "^7.21.0",
 		"@wordpress/babel-plugin-makepot": "^6.21.0",
 		"@wordpress/compose": "^7.21.0",
@@ -60,7 +60,7 @@
 		"@wordpress/icons": "^10.21.0",
 		"@wordpress/keycodes": "^4.21.0",
 		"@wordpress/notices": "^5.21.0",
-		"@wordpress/scripts": "^30.14.0",
+		"@wordpress/scripts": "^30.14.1",
 		"@wordpress/server-side-render": "^5.21.0",
 		"autoprefixer": "^10.4.21",
 		"babel-loader": "^10.0.0",
@@ -81,11 +81,6 @@
 		"gsap": "^3.12.7",
 		"lodash": "^4.17.21",
 		"react-error-boundary": "^5.0.0"
-	},
-	"resolutions": {
-		"postcss": "8.4.38",
-		"svg-baker": "1.7.0",
-		"svg-baker-runtime": "1.4.7"
 	},
 	"engines": {
 		"node": ">=21.7.3",
