@@ -1,1116 +1,1162 @@
-# Copyright (C) 2024 RRZE Webteam
+# Copyright (C) 2025 RRZE Webteam
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-"
-"blocks\n"
-"POT-Creation-Date: 2025-04-01T11:22:36+00:00\n"
-"PO-Revision-Date: 2025-04-01 13:25+0200\n"
-"Last-Translator: \n"
-"Language-Team: Deutsch\n"
-"Language: de_DE\n"
+"Project-Id-Version: RRZE Elements Blocks 1.0.17\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-blocks\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.6\n"
+"POT-Creation-Date: 2025-04-01T11:22:36+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: rrze-elements-blocks\n"
-"X-Loco-Version: 2.6.11; wp-6.7.1\n"
 
 #. Plugin Name of the plugin
 #: rrze-elements-blocks.php
 msgid "RRZE Elements Blocks"
-msgstr "RRZE Elements Blocks"
+msgstr ""
 
 #. Plugin URI of the plugin
 #: rrze-elements-blocks.php
 msgid "https://github.com/RRZE-Webteam/rrze-elements"
-msgstr "https://github.com/RRZE-Webteam/rrze-elements"
+msgstr ""
 
 #. Description of the plugin
 #: rrze-elements-blocks.php
 msgid "Advanced design elements for WordPress BlockEditor."
-msgstr "Erweiterte Designelemente für den WordPress BlockEditor."
+msgstr ""
 
 #. Author of the plugin
 #: rrze-elements-blocks.php
 msgid "RRZE Webteam"
-msgstr "RRZE Webteam"
+msgstr ""
 
 #. Author URI of the plugin
 #: rrze-elements-blocks.php
 msgid "https://blogs.fau.de/webworking/"
-msgstr "https://blogs.fau.de/webworking/"
+msgstr ""
 
 #: includes/Patterns.php:33
 msgctxt "Block pattern category"
 msgid "Pages"
-msgstr "Seiten"
+msgstr ""
 
 #: includes/Patterns.php:34
 msgid "A collection of full page layouts."
-msgstr "Eine Sammlung von Fullsite-Templates"
+msgstr ""
 
 #: includes/Patterns.php:42
 msgctxt "Block pattern category"
 msgid "DEVELOPMENT"
-msgstr "DEVELOPMENT"
+msgstr ""
 
 #: includes/Patterns.php:43
 msgid "A collection of DEV layouts for automated testing."
-msgstr "A collection of DEV layouts for automated testing."
+msgstr ""
 
 #: includes/Patterns.php:58
 msgid "RRZE Elements"
-msgstr "RRZE Elements"
+msgstr ""
 
 #: includes/Patterns.php:80
 msgid "DEV: Counter and Iconbox"
-msgstr "DEV: Zähl- und Iconbox"
+msgstr ""
 
 #: includes/Patterns.php:81
 msgctxt "DEV Template"
 msgid "A testing template for Counter and Iconbox."
-msgstr "A testing template for Counter and Iconbox."
+msgstr ""
 
 #: includes/Patterns.php:92
 msgid "DEV: Accordion"
-msgstr "DEV: Accordion"
+msgstr ""
 
 #: includes/Patterns.php:93
 msgctxt "DEV Template"
 msgid "A testing template for Accordions."
-msgstr "A testing template for Accordions."
+msgstr ""
 
 #: includes/Patterns.php:132
 msgid "Example Pattern"
-msgstr "Beispiel-Pattern"
+msgstr ""
 
 #: includes/Patterns.php:133
 msgctxt "Block pattern description"
 msgid "Description for Example Pattern"
-msgstr "Beschreibung für eine Beispiel-Vorlage"
+msgstr ""
 
 #: includes/Patterns.php:139
 msgid "Image with Accordion"
-msgstr "Bild mit Accordion"
+msgstr ""
 
 #: includes/Patterns.php:140
 msgctxt "Block pattern description"
 msgid "Description for Image with Accordion"
-msgstr "Vorlage für ein Bild mit Accordion"
+msgstr ""
 
 #: includes/Patterns.php:147
 msgid "Custom News section 3-Column Layout"
-msgstr "Neuste Beiträge 3-spaltiges Layout"
+msgstr ""
 
 #: includes/Patterns.php:148
 msgctxt "Block pattern description"
 msgid "A 3 Column Layout for custom News on Landing pages"
-msgstr "Ein 3-spaltiges Layout für Custom News für Landing pages"
+msgstr ""
 
 #: includes/Patterns.php:154
 msgid "Call to Action"
-msgstr "Call to Action"
+msgstr ""
 
 #: includes/Patterns.php:155
 msgctxt "Block pattern description"
 msgid "Call to Action section"
-msgstr "Call to Action Vorlage"
+msgstr ""
 
 #: includes/Patterns.php:161
 msgid "Image with Text"
-msgstr "Bild mit Text"
+msgstr ""
 
 #: includes/Patterns.php:162
 msgctxt "Block pattern description"
 msgid "Two column layout: Image left, text right column."
-msgstr "Ein zweispaltiges Layout: Linksbündiges Bild, Textspalte rechts"
+msgstr ""
 
 #: includes/Patterns.php:168
 msgid "Imagefilm"
-msgstr "Imagefilm"
+msgstr ""
 
 #: includes/Patterns.php:169
 msgctxt "Block pattern description"
 msgid "FAU Imagefilm."
-msgstr "FAU Imagefilm"
+msgstr ""
 
 #: includes/Patterns.php:175
 msgid "Landing page template 1"
-msgstr "Landingpage Template 1"
+msgstr ""
 
 #: includes/Patterns.php:176
 msgctxt "Block pattern description"
 msgid "A landingpage template for FAU."
-msgstr "Ein Landingpage Template für die FAU"
+msgstr ""
 
 #. translators: 1: current PHP version, 2: required PHP version
 #: rrze-elements-blocks.php:75
-msgid ""
-"The server is running PHP version %1$s. The Plugin requires at least PHP "
-"version %2$s."
+msgid "The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s."
 msgstr ""
-"Auf dem Server läuft PHP Version %1$s. Das Plugin braucht mindestens PHP "
-"Version %2$s."
 
 #. translators: 1: current WordPress version, 2: required WordPress version
 #: rrze-elements-blocks.php:78
-msgid ""
-"The server is running WordPress version %1$s. The Plugin requires at least "
-"WordPress version %2$s."
+msgid "The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s."
 msgstr ""
-"Auf dem Server läuft WordPress Version  %1$s. Das Plugin benötigt mindestens "
-"WordPress Version %2$s."
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Color Settings"
-msgstr "Farbeinstellung"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/tabs/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/tabs/index.js:1
 msgid "Select a Color"
-msgstr "Farbe auswählen…"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Central institution"
-msgstr "Zentrale Einrichtung"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Faculty of Business, Economics, and Law"
-msgstr "Rechts- und Wirtschaftswissenschaftliche Fakultät"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Faculty of Sciences"
-msgstr "Naturwissenschaftliche Fakultät"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Faculty of Medicine"
-msgstr "Medizinische Fakultät"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Faculty of Humanities, Social Sciences, and Theology"
-msgstr "Philosophische Fakultät und Fachbereich Theologie"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Faculty of Engineering"
-msgstr "Technische Fakultät"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
-#: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Inherit color"
-msgstr "Farbe erben"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Select an icon"
-msgstr "Icon auswählen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Remove Icon"
-msgstr "Icon entfernen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "The search results got updated."
-msgstr "Die Suchergebnisse wurden aktualisiert."
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Icons are provided by "
-msgstr "Icons werden bereitgestellt durch "
-
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
-#: build/blocks/tabs/index.js:1
-msgid ""
-". You can search for an icon by typing its Font Awesome name in the search "
-"field below."
 msgstr ""
-". Sie können nach einem Symbol suchen, indem Sie den zugehörigen Font "
-"Awesome Namen in das untenstehende Suchfeld eingeben."
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
+#: build/blocks/tabs/index.js:1
+msgid ". You can search for an icon by typing its Font Awesome name in the search field below."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Search for an Icon"
-msgstr "Nach einem Icon suchen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Search for Icons"
-msgstr "Nach Icons suchen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Search Results"
-msgstr "Suchergebnisse"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "No icons found. Please try a different search term."
 msgstr ""
-"Es wurden keine Icons gefunden. Versuchen Sie einen anderen Suchbegriff."
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Solid Icons"
-msgstr "Solid Icons"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Regular Icons"
-msgstr "Regular Icons"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Brand Icons"
-msgstr "Firmen Icons (Brand)"
-
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-msgid "Jump Link Settings"
-msgstr "Sprungmarke | Einstellungen"
-
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-msgid ""
-"Jump Links allow your users to jump to this collapse by adding /"
-"#jumplinkname to the end of the URL."
 msgstr ""
-"Sprungmarken erlauben es den Nutzern, schnell zu einem Accordioneintrag zu "
-"springen, indem Sie /#sprungmarkenlabel am Ende der URL hinzufügen."
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Jump Link Settings"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "This jump link name is already taken."
-msgstr "Diese Sprungmarke ist bereits vergeben."
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "Jump Link Name"
-msgstr "Beschriftung der Sprungmarke"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "Update the Jump Link"
-msgstr "Sprungmarke aktualisieren"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "Set Jump Link"
-msgstr "Sprungmarke festlegen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "Lock Jump Link Name"
-msgstr "Name der Sprungmarke sperren"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "If enabled, the jump link will not generated automatically any longer. "
-msgstr "Falls aktiviert, wird die Sprungmarke nicht mehr automatisch generiert"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 msgid "Add an icon"
-msgstr "Icon hinzufügen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 msgid "Change the icon"
-msgstr "Icon anpassen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/notice/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 msgid "Select an Icon"
-msgstr "Icon auswählen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/iconbox/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
 msgid "Close"
-msgstr "Schließen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 #: build/blocks/tab/index.js:1
 msgid "Icon Settings"
-msgstr "Icon | Einstellungen"
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "reduced. Button."
-msgstr "Reduziert. Taste."
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "extended. Button."
-msgstr "Erweitert. Taste."
+msgstr ""
 
-#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "Enter your Title…"
-msgstr "Accordion-Titel vergeben…"
+msgstr ""
 
 #. translators: accessibility text. 1: heading level. 2: heading title.
-#: build/blocks/accordion/index.js:2 build/blocks/collapse/index.js:2
+#: build/blocks/accordion/index.js:2
+#: build/blocks/collapse/index.js:2
 #: build/blocks/timeline-item/index.js:2
 msgid "Level %1$s. %2$s"
-msgstr "Ebene %1$s. %2$s"
+msgstr ""
 
 #. translators: accessibility text. %s: heading level.
-#: build/blocks/accordion/index.js:3 build/blocks/collapse/index.js:3
+#: build/blocks/accordion/index.js:3
+#: build/blocks/collapse/index.js:3
 #: build/blocks/timeline-item/index.js:3
 msgid "Level %s. Empty."
-msgstr "Ebene %s. Leer."
+msgstr ""
 
 #: build/blocks/alert/index.js:1
 msgid "Border Settings"
-msgstr "Rahmenoptionen"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/columns/index.js:1
 msgid "Default"
-msgstr "Standard"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/columns/index.js:1
 msgid "Success"
-msgstr "Erfolg"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/columns/index.js:1
 msgid "Info"
-msgstr "Info"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/columns/index.js:1
 #: build/blocks/notice/index.js:1
 msgid "Warning"
-msgstr "Warnung"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/columns/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/columns/index.js:1
 msgid "Danger"
-msgstr "Gefahr"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/tab/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/tab/index.js:1
 msgid "Label settings"
-msgstr "Label | Einstellungen"
+msgstr ""
 
 #: build/blocks/alert/index.js:1
 msgid "Add a Label for your Alert. This changes the style to example"
 msgstr ""
-"Füge eine Beschriftung hinzu. Dies verändert den Style der Hinweisbox zu "
-"\"Example\"."
 
 #: build/blocks/alert/index.js:1
 msgid "Add a Label"
-msgstr "Beschriftung hinzufügen"
+msgstr ""
 
-#: build/blocks/alert/index.js:1 build/blocks/notice/index.js:1
+#: build/blocks/alert/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/timeline-item/index.js:1
 msgid "Add a description…"
-msgstr "Füge eine Beschreibung hinzu…"
+msgstr ""
 
 #: build/blocks/collapse/index.js:1
 msgid "Advanced Settings"
-msgstr "Erweiterte Einstellungen"
+msgstr ""
 
 #: build/blocks/collapse/index.js:1
 msgid "Open collapse on Page load"
-msgstr "Reiter bei erstem Laden der Seite automatisch öffnen"
+msgstr ""
 
 #: build/blocks/collapse/index.js:1
 msgid "Collapse on page load"
-msgstr "Einklappen beim Laden der Seite"
+msgstr ""
 
 #: build/blocks/collapse/index.js:1
 msgid "Open on page load"
-msgstr "Bei Laden der Seite automatisch öffnen"
+msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 msgid "Show Expand-All-Link"
-msgstr "Zeige \"Alle öffnen\"-Button"
+msgstr ""
 
-#: build/blocks/collapsibles/index.js:1 build/blocks/news/index.js:1
+#: build/blocks/collapsibles/index.js:1
+#: build/blocks/news/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Select heading level"
-msgstr "Überschriftebene auswählen"
+msgstr ""
 
-#: build/blocks/collapsibles/index.js:1 build/blocks/news/index.js:1
+#: build/blocks/collapsibles/index.js:1
+#: build/blocks/news/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Heading level"
-msgstr "Überschriftsebene"
+msgstr ""
 
-#: build/blocks/collapsibles/index.js:1 build/blocks/news/index.js:1
+#: build/blocks/collapsibles/index.js:1
+#: build/blocks/news/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Controls the heading level of the accordion"
-msgstr "Steuert die Überschriftebene von Accordions"
+msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 msgid "Untitled Collapse"
-msgstr "Akkordeonreiter ohne Titel"
+msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 msgid "Expand All"
-msgstr "Alle öffnen"
+msgstr ""
 
-#: build/blocks/collapsibles/index.js:1 build/blocks/timeline/index.js:1
+#: build/blocks/collapsibles/index.js:1
+#: build/blocks/timeline/index.js:1
 msgid "Heading Settings"
-msgstr "Überschrift | Einstellungen"
+msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 msgid "Collapsibles Settings"
-msgstr "Accordion-Einstellungen"
+msgstr ""
 
 #: build/blocks/columns/index.js:1
 msgid "Display settings"
-msgstr "Darstellungsoptionen"
+msgstr ""
 
 #: build/blocks/columns/index.js:1
 msgid "Number of columns"
-msgstr "Anzahl der Spalten"
+msgstr ""
 
 #: build/blocks/columns/index.js:1
 msgid "Show Rule"
-msgstr "Zeige Trennlinien"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
 #: build/blocks/insertion/index.js:1
 msgid "Align left"
-msgstr "Links ausrichten"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
 #: build/blocks/insertion/index.js:1
 msgid "Align center"
-msgstr "Zentrieren"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
 #: build/blocks/insertion/index.js:1
 msgid "Align right"
-msgstr "Rechts ausrichten"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
-#: build/blocks/insertion/index.js:1 build/blocks/tabs/index.js:1
+#: build/blocks/insertion/index.js:1
+#: build/blocks/tabs/index.js:1
 msgid "Display options for the Editor"
-msgstr "Darstellungsoptionen für den Editor"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
 msgid " (Ideale Leselänge)"
-msgstr "(Ideale Leselänge)"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
 msgid " (Außerhalb des sichtbaren Bereichs)"
-msgstr "(Außerhalb des sichtbaren Bereichs)"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
 msgid " Zeichen"
-msgstr "Characters"
+msgstr ""
 
 #: build/blocks/counter-row/index.js:1
 msgid "Preview Animation"
-msgstr "Animation Vorschau"
+msgstr ""
 
 #: build/blocks/counter-row/index.js:1
 msgid "Animation Settings"
-msgstr "Animation – Einstellungen"
+msgstr ""
 
 #: build/blocks/counter-row/index.js:1
 msgid "Stagger between Animations (seconds)"
-msgstr "Zeitversatz zwischen Animationen in Sekunden"
+msgstr ""
 
 #: build/blocks/counter-row/index.js:1
 msgid "Grid Settings"
-msgstr "Raster – Einstellungen"
+msgstr ""
 
 #: build/blocks/counter-row/index.js:1
 msgid "Column number"
-msgstr "Spaltenanzahl"
+msgstr ""
 
 #: build/blocks/counter-row/index.js:1
 msgid "Start value"
-msgstr "Startwert"
+msgstr ""
 
-#: build/blocks/counter/index.js:1 build/blocks/cta/index.js:1
+#: build/blocks/counter/index.js:1
+#: build/blocks/cta/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Link"
-msgstr "Link"
+msgstr ""
 
-#: build/blocks/counter/index.js:1 build/blocks/cta/index.js:1
+#: build/blocks/counter/index.js:1
+#: build/blocks/cta/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Unlink"
-msgstr "Verlinkung aufheben"
+msgstr ""
 
-#: build/blocks/counter/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/counter/index.js:1
+#: build/blocks/iconbox/index.js:1
 msgid "Font Size"
-msgstr "Schriftgröße"
+msgstr ""
 
-#: build/blocks/counter/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/counter/index.js:1
+#: build/blocks/iconbox/index.js:1
 msgid "Small"
-msgstr "Klein"
+msgstr ""
 
 #: build/blocks/counter/index.js:1
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: build/blocks/counter/index.js:1
 msgid "Big"
-msgstr "Groß"
+msgstr ""
 
 #: build/blocks/counter/index.js:1
 msgid "Description"
-msgstr "Beschreibung"
+msgstr ""
 
-#: build/blocks/counter/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/counter/index.js:1
+#: build/blocks/iconbox/index.js:1
 msgid "Button Text"
-msgstr "Buttontext"
+msgstr ""
 
 #: build/blocks/cta/index.js:1
 msgid "Replace Image"
-msgstr "Bild ersetzen"
+msgstr ""
 
 #: build/blocks/cta/index.js:1
 msgid "Add Image"
-msgstr "Bild auswählen"
+msgstr ""
 
 #: build/blocks/cta/index.js:1
 msgid "Remove image"
-msgstr "Bild entfernen"
+msgstr ""
 
 #: build/blocks/cta/index.js:1
 msgid "CTA Title"
-msgstr "CTA Titel "
+msgstr ""
 
 #: build/blocks/cta/index.js:1
 msgid "CTA Subtitle"
-msgstr "CTA Untertitel"
+msgstr ""
 
 #: build/blocks/cta/index.js:1
 msgid "CTA Button Text"
-msgstr "CTA Button Text"
+msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Medium"
-msgstr "Medium"
+msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Large"
-msgstr "Groß"
+msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Begriff"
-msgstr "Begriff"
+msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Definition"
-msgstr "Definition"
+msgstr ""
 
 #: build/blocks/insertion/index.js:1
 msgid "Insertion"
-msgstr "Einschub"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Filter"
-msgstr "Filter"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "tags"
-msgstr "Schlagwörter"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Comma separated list of tags"
-msgstr "Kommaseparierte Liste von Schlagwörtern"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Additional classes"
-msgstr "Zusätzliche CSS-Klassen"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Hide duplicate posts"
-msgstr "Doppelte Beiträge ausblenden"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Only show posts with thumbnails"
-msgstr "Nur Beiträge mit Beitragsbild ausgeben"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Only show sticky posts"
-msgstr "Nur festgehaltene Beiträge ausgeben (sticky posts)"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Layout"
-msgstr "Layout"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Img first"
-msgstr "Bild zuerst"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Show more articles button"
-msgstr "Zeige \"Mehr Beiträge anzeigen\"-Button"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Display as List"
-msgstr "Als Liste ausgeben"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Ratio image"
-msgstr "Bildanteil"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Ratio text & metadata"
-msgstr "Verhältnis Bild zu Text"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Number of Columns"
-msgstr "Anzahl der Spalten"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Hide Options"
-msgstr "Darstellungsoptionen"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Hide Date"
-msgstr "Datum ausblenden"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Hide Thumbnail"
-msgstr "Beitragsbild ausblenden"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Hide Category"
-msgstr "Kategorie ausblenden"
+msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Hide meta"
-msgstr "Meta ausblenden"
+msgstr ""
 
 #: build/blocks/news/index.js:1
-msgid ""
-"An error occured inside the ServerSideRender component of this block. Try "
-"adjusting the block settings, save your draft and refresh the page."
+msgid "An error occured inside the ServerSideRender component of this block. Try adjusting the block settings, save your draft and refresh the page."
 msgstr ""
-"Ein Fehler ist in der ServerSideRender-Komponente dieses Blocks aufgetreten. "
-"Versuche die Block-Einstellungen anzupassen, speichere den Beitrag und "
-"aktualisiere die Seite, um die Darstellung wiederherzustellen."
 
 #: build/blocks/notice/index.js:1
 msgid "Hint"
-msgstr "Hinweis"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Notice with hint-icon"
-msgstr "Notice mit Hinweis"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Maintenance"
-msgstr "Wartung"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Notice with wrench icon"
-msgstr "Notice mit Wartungsicon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Question"
-msgstr "Frage"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Questionmark"
-msgstr "Fragezeichen"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Negative"
-msgstr "Negativ"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Minus icon"
-msgstr "Minus Icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Positive"
-msgstr "Positiv"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Plus-icon"
-msgstr "Plus-icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Idea"
-msgstr "Idee"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Lightbulb icon"
-msgstr "Glühbirne als Icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Download"
-msgstr "Download"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Download-icon"
-msgstr "Download-icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "FAUbox"
-msgstr "FAUbox"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "FAUbox-icon"
-msgstr "FAUbox-Icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Audio"
-msgstr "Audio"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Loudspeaker icon"
-msgstr "Lautsprecher Icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Video"
-msgstr "Video"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Video-icon"
-msgstr "Video-icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Thumbs up"
-msgstr "Daumen nach oben"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Thumps up icon"
-msgstr "Daumen nach oben Icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Thumbs down"
-msgstr "Daumen nach unten"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Thumbs down icon"
-msgstr "Daumen nach untern Icon"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Style Settings"
-msgstr "Style Einstellungen"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Select a style"
-msgstr "Style auswählen"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Change the style"
-msgstr "Darstellung anpassen"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Save changes"
-msgstr "Änderungen speichern"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Notice"
-msgstr "Notice"
+msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Add a Headline"
-msgstr "Überschrift festlegen"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Add an Label"
-msgstr "Label festlegen"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Change the Label"
-msgstr "Label anpassen"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Change the Tab Label"
-msgstr "Tab Label anpassen"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Enter your Tab Label"
-msgstr "Tab Label hinzufügen"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
-msgid ""
-"Enter your Tab title. You can change it later through the block settings "
-"inside the Toolbar."
+msgid "Enter your Tab title. You can change it later through the block settings inside the Toolbar."
 msgstr ""
-"Label festlegen. Das Label kann später über die Einstellungen in der Toolbar "
-"angepasst werden."
 
 #: build/blocks/tab/index.js:1
 msgid "Tab Label Settings"
-msgstr "Tab Label Einstellungen"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Hide Label settings"
-msgstr "Beschriftung ausblenden"
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Enter your Tab Label."
-msgstr "Tab Label hinzufügen."
+msgstr ""
 
 #: build/blocks/tab/index.js:1
 msgid "Click here and press / to enter content inside your Tab"
 msgstr ""
-"Klicken Sie hier und drücken Sie / oder die Enter-Taste, um Inhalte "
-"hinzuzufügen."
 
 #: build/blocks/tabs/index.js:1
 msgid "Reveal all tabs inside the Editor (X-ray)"
-msgstr "Zeige alle Tabs im ausgeklappten Zustand im Editor (x-ray)."
+msgstr ""
 
 #: build/blocks/tabs/index.js:1
 msgid "Only show active tabs inside the editor"
-msgstr "Nur aktive Tabs im Editor anzeigen"
+msgstr ""
 
 #: build/blocks/tabs/index.js:1
 msgid "X-ray"
-msgstr "X-ray"
+msgstr ""
 
 #: build/blocks/tabs/index.js:1
 msgid "Show / Hide all inactive tabs inside the editor."
-msgstr "Zeige/Verstecke alle inaktiven Tabs in der Bearbeitungsansicht."
+msgstr ""
 
 #: build/blocks/tabs/index.js:1
 msgid "We recommend using a maximum of 4 tabs for the best User Experience."
 msgstr ""
-"Für eine bessere Nutzererfahrung empfehlen wir maximal 4 Reiter auf einmal "
-"zu nutzen."
 
 #: build/blocks/timeline-item/index.js:1
 msgid "Enter a Date or Label"
-msgstr "Vergeben Sie ein Datum oder eine Beschriftung"
+msgstr ""
 
 #: build/blocks/accordion/block.json
 msgctxt "block title"
 msgid "Accordion item"
-msgstr "Accordionelement"
+msgstr ""
 
 #: build/blocks/accordion/block.json
 msgctxt "block description"
 msgid "Creates an inner accordion item"
-msgstr "Legt ein inneres Accordionelement an."
+msgstr ""
 
-#: build/blocks/accordion/block.json build/blocks/collapse/block.json
+#: build/blocks/accordion/block.json
+#: build/blocks/collapse/block.json
 msgctxt "block keyword"
 msgid "accordion"
-msgstr "accordion"
+msgstr ""
 
-#: build/blocks/accordion/block.json build/blocks/collapse/block.json
+#: build/blocks/accordion/block.json
+#: build/blocks/collapse/block.json
 msgctxt "block keyword"
 msgid "collapse"
-msgstr "collapse"
+msgstr ""
 
-#: build/blocks/accordion/block.json build/blocks/collapse/block.json
+#: build/blocks/accordion/block.json
+#: build/blocks/collapse/block.json
 msgctxt "block keyword"
 msgid "expand"
-msgstr "öffnen"
+msgstr ""
 
-#: build/blocks/accordion/block.json build/blocks/collapse/block.json
+#: build/blocks/accordion/block.json
+#: build/blocks/collapse/block.json
 msgctxt "block keyword"
 msgid "toggle"
-msgstr "Schalter"
+msgstr ""
 
 #: build/blocks/accordions/block.json
 msgctxt "block title"
 msgid "Inner Accordion"
-msgstr "Inneres Accordion"
+msgstr ""
 
 #: build/blocks/accordions/block.json
 msgctxt "block description"
 msgid "Creates an inner accordion block"
-msgstr "Erstellt ein verschachteltes Accordion."
+msgstr ""
 
 #: build/blocks/alert/block.json
 msgctxt "block title"
 msgid "Alert"
-msgstr "Hinweis"
+msgstr ""
 
 #: build/blocks/alert/block.json
 msgctxt "block description"
 msgid "Used to highlight important information and warnings."
-msgstr "Hervorheben wichtiger Informationen und Warnhinweise."
+msgstr ""
 
 #: build/blocks/block-blueprint/block.json
 msgctxt "block title"
 msgid "Blueprint"
-msgstr "Vorlage"
+msgstr ""
 
 #: build/blocks/block-blueprint/block.json
 msgctxt "block description"
 msgid "Creates a blueprint block."
-msgstr "Erzeugt einen Vorlagen-Block"
+msgstr ""
 
 #: build/blocks/collapse/block.json
 msgctxt "block title"
 msgid "Accordion-item"
-msgstr "Accordionelement"
+msgstr ""
 
-#: build/blocks/collapse/block.json build/blocks/collapsibles/block.json
+#: build/blocks/collapse/block.json
+#: build/blocks/collapsibles/block.json
 msgctxt "block description"
 msgid "Creates an accordion block"
-msgstr "Legt ein Accordion (Inhaltsfächer) an."
+msgstr ""
 
 #: build/blocks/collapsibles/block.json
 msgctxt "block title"
 msgid "Accordion"
-msgstr "Accordion"
+msgstr ""
 
 #: build/blocks/columns/block.json
 msgctxt "block title"
 msgid "Text Columns"
-msgstr "Textspalten"
+msgstr ""
 
 #: build/blocks/columns/block.json
 msgctxt "block description"
 msgid "Creates a columns block which dynamically breaks."
-msgstr "Erstellt einen Spalten-Block, der dynamisch umbricht."
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/block.json
 msgctxt "block title"
 msgid "Content Width Limiter"
-msgstr "Inhaltsbreite begrenzen"
+msgstr ""
 
 #: build/blocks/contentwidthlimiter/block.json
 msgctxt "block description"
 msgid "Creates a contentwidthlimiter block."
 msgstr ""
-"Erstellt einen Inhaltsbegrenzer, um die Inhaltsbreite von Texten und "
-"Inhalten zu begrenzen."
 
 #: build/blocks/counter-row/block.json
 msgctxt "block title"
 msgid "Counter Row"
-msgstr "Info-Leiste"
+msgstr ""
 
 #: build/blocks/counter-row/block.json
 msgctxt "block description"
 msgid "Create a Row for Counters"
-msgstr "Erstellt eine Info-Leiste für Counter & Iconboxen"
+msgstr ""
 
 #: build/blocks/counter-row/block.json
 msgctxt "block style label"
 msgid "Outlined"
-msgstr "Outlined"
+msgstr ""
 
 #: build/blocks/counter-row/block.json
 msgctxt "block style label"
 msgid "Colorblock"
-msgstr "Colorblock"
+msgstr ""
 
 #: build/blocks/counter/block.json
 msgctxt "block title"
 msgid "Counter"
-msgstr "Zähler-Box"
+msgstr ""
 
 #: build/blocks/counter/block.json
 msgctxt "block description"
 msgid "Creates a Counter block."
 msgstr ""
-"Erstellt einen Zähler Block der bis zu einer bestimmten Zahl hoch oder "
-"herunter zählt"
 
 #: build/blocks/cta/block.json
 msgctxt "block title"
 msgid "Call to action"
-msgstr "Handlungsaufruf"
+msgstr ""
 
 #: build/blocks/cta/block.json
 msgctxt "block description"
 msgid "Creates an Call to action box."
-msgstr "Erstellt einen Handlungsaufruf."
+msgstr ""
 
 #: build/blocks/cta/block.json
 msgctxt "block style label"
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: build/blocks/cta/block.json
 msgctxt "block style label"
 msgid "Small"
-msgstr "Klein"
+msgstr ""
 
 #: build/blocks/iconbox/block.json
 msgctxt "block title"
 msgid "Iconbox"
-msgstr "Info-Box"
+msgstr ""
 
 #: build/blocks/iconbox/block.json
 msgctxt "block description"
 msgid "Creates a Iconbox block."
 msgstr ""
-"Erstellt eine Infoxbox mit Icon, Definition und Beschreibung zur Darstellung "
-"kurzer Informationen."
 
 #: build/blocks/insertion/block.json
 msgctxt "block title"
 msgid "Insertion"
-msgstr "Einschub"
+msgstr ""
 
 #: build/blocks/insertion/block.json
 msgctxt "block description"
 msgid "Creates an insertion."
-msgstr "Erzeugt einen Einschub bei Texten."
+msgstr ""
 
 #: build/blocks/news/block.json
 msgctxt "block title"
 msgid "News"
-msgstr "Nachrichten"
+msgstr ""
 
 #: build/blocks/news/block.json
 msgctxt "block description"
 msgid "Creates a news block."
-msgstr "Gibt die neusten Beiträge aus."
+msgstr ""
 
 #: build/blocks/notice/block.json
 msgctxt "block title"
 msgid "Notice"
-msgstr "Notice"
+msgstr ""
 
 #: build/blocks/notice/block.json
 msgctxt "block description"
 msgid "Creates an notice."
-msgstr "Erzeugt eine Hinweisbox mit Icon."
+msgstr ""
 
-#: build/blocks/tab/block.json build/blocks/tabs/block.json
+#: build/blocks/tab/block.json
+#: build/blocks/tabs/block.json
 msgctxt "block title"
 msgid "Tabs"
-msgstr "Tabs"
+msgstr ""
 
-#: build/blocks/tab/block.json build/blocks/tabs/block.json
+#: build/blocks/tab/block.json
+#: build/blocks/tabs/block.json
 msgctxt "block description"
 msgid "Creates an tabs block."
-msgstr "Legt einen Registerfächer an."
+msgstr ""
 
 #: build/blocks/timeline-item/block.json
 msgctxt "block title"
 msgid "Timeline-Entry"
-msgstr "Zeitstrahl-Eintrag"
+msgstr ""
 
 #: build/blocks/timeline-item/block.json
 msgctxt "block description"
 msgid "Creates a Timeline Item"
-msgstr "Erstellt einen Eintrag für den Zeitstrahl"
+msgstr ""
 
 #: build/blocks/timeline/block.json
 msgctxt "block title"
 msgid "Timeline"
-msgstr "Zeitstrahl"
+msgstr ""
 
 #: build/blocks/timeline/block.json
 msgctxt "block description"
 msgid "Creates a Timeline block"
-msgstr "Erzeugt einen Timeline-Block"
+msgstr ""
