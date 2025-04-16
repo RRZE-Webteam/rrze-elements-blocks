@@ -105,7 +105,7 @@ button.expand-all.standard-btn {
         &.active:focus {
             border-color: var(--color-primary-dunkler, $colorDefaultDunkler);
             background-color: var(--color-primary-dunkler, $colorDefaultDunkler);
-            color: var(--color-primary-ci-hell-kontrast, #fff);
+            color: var(--color-primary-dunkler-kontrast, #fff);
             &:before {
                 position: absolute;
                 top: calc(50% - .5em);
@@ -203,7 +203,7 @@ button.expand-all.standard-btn {
         &.active:focus {
             border-color: var(--color-nat-dunkler, $colorNatFakDunkler);
             background-color: var(--color-nat-dunkler, $colorNatFakDunkler);
-            color: var(--color-nat-ci-dunkel-kontrast, #fff);
+            color: var(--color-nat-dunkler-kontrast, #fff);
         }
     }
     .tf .accordion-heading .accordion-toggle,
@@ -238,7 +238,7 @@ button.expand-all.standard-btn {
         &.active:focus {
             border-color: var(--color-zentral-dunkler, $colorDefaultDunkler);
             background-color: var(--color-zentral-dunkler, $colorDefaultDunkler);
-            color: var(--color-zentral-ci-hell-kontrast, #fff);
+            color: var(--color-zentral-ci-dunkler-kontrast, #fff);
         }
     }
 
