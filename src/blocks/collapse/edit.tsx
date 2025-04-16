@@ -62,11 +62,11 @@ const Edit = ({
   useEffect(() => {
     if (!attributes.jumpName || attributes.jumpName === "") {
       const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
-      __unstableMarkNextChangeAsNotPersistent();
+      void __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ jumpName: computedDefaultJumpName });
     }
     if (jumpName && jumpName.startsWith("panel_")) {
-      __unstableMarkNextChangeAsNotPersistent();
+      void __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ isCustomJumpname: false });
     }
   }, [attributes.jumpName, clientId, setAttributes]);
@@ -88,7 +88,7 @@ const Edit = ({
       context["rrze-elements/accordion-hstart"] &&
       context["rrze-elements/accordion-hstart"] !== attributes.hstart
     ) {
-      __unstableMarkNextChangeAsNotPersistent();
+      void __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ hstart: context["rrze-elements/accordion-hstart"] as number });
     }
   }, [context["rrze-elements/accordion-hstart"]]);
@@ -109,10 +109,10 @@ const Edit = ({
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
-      __unstableMarkNextChangeAsNotPersistent();
+      void __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: "" });
     } else {
-      __unstableMarkNextChangeAsNotPersistent();
+      void __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ title: newText });
     }
   };

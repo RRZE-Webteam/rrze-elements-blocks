@@ -81,6 +81,7 @@
 		"color": "^5.0.0",
 		"gsap": "^3.12.7",
 		"lodash": "^4.17.21",
+		"material-symbols": "^0.31.1",
 		"react-error-boundary": "^5.0.0"
 	},
 	"resolutions": {
