@@ -32,6 +32,10 @@ export interface AttributesV1_0_12 extends AttributesV1 {
   isCustomJumpname: boolean;
 }
 
+export interface AttributesV2 extends AttributesV1_0_12 {
+  materialSymbol: string;
+}
+
 //type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;
 type BlockAttributes = AttributesV1_0_12;
 

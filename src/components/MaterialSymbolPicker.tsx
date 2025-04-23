@@ -1,8 +1,9 @@
-import materialSymbolNames from "./assets/fontawesome/materialSymbolNames.json";
+import materialSymbolNames from "./assets/materialSymbolNames.json";
+import supportedSymbolNames from "./assets/supported-icons-index.json";
 import {Fragment, memo, useRef, useState} from '@wordpress/element';
 import {__} from "@wordpress/i18n";
 import {
-  __experimentalDivider as Divider,
+  __experimentalDivider as Divider, __experimentalGrid as Grid,
   __experimentalHeading as Heading,
   __experimentalSpacer as Spacer,
   Button,
@@ -102,10 +103,39 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
                 {__("Remove Icon", "rrze-elements-blocks")}
               </Button>
             </Fragment>
+            <Spacer paddingTop="1rem" paddingBottom="1rem">
+              <Heading>{__("Solid Icons", "rrze-elements-blocks")}</Heading>
+              <Grid columns={12}>
+                {supportedSymbolNames
+                  .map((iconOption) => (
+                    <Button
+                    key={iconOption.name}
+                    isPressed={iconOption.name === attributes.materialSymbol}
+                    onClick={() => setAttributes({materialSymbol: iconOption.name})}
+                    size="compact"
+                    className="elements-blocks-icon-Button"
+                    label={iconOption.name}
+                    showTooltip={true}
+                  >
+                    <span
+                      key={iconOption.name}
+                      className={`material-symbols-outlined ${iconOption.name}`}
+                    >{iconOption.name}</span>
+                    {/*<IconMarkComponent*/}
+                    {/*  type={iconOption.value.split(" ")[0]}*/}
+                    {/*  iconName={iconOption.value.split(" ")[1]}*/}
+                    {/*  attributes={attributes}*/}
+                    {/*  className="elements-blocks-icon-insideEditor elements-blocks-icon-insideEditorModal"*/}
+                    {/*  iconValue={iconOption.value}*/}
+                    {/*/>*/}
+                  </Button>
+                ))}
+              </Grid>
+            </Spacer>
           </>
         )}
       </Spacer>
     </>
   )
 }
-export { MaterialSymbolPicker };
+export {MaterialSymbolPicker};

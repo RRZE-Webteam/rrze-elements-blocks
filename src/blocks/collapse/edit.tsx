@@ -14,11 +14,12 @@ import {
   BlockControls,
   RichText,
 } from "@wordpress/block-editor";
-import { BlockEditProps } from "@wordpress/blocks";
-import { seen, unseen, symbol } from "@wordpress/icons";
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import {BlockEditProps} from "@wordpress/blocks";
+import {seen, unseen, symbol} from "@wordpress/icons";
+import {useState, useEffect} from "@wordpress/element";
+import {__} from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
+import 'material-symbols/outlined.css'
 
 // Imports of custom components and helper functions.
 import JumpLinkSelector from "../../components/JumpLinkSelector";
@@ -32,30 +33,31 @@ import {
   IconMarkComponent,
   IconPickerModalInset,
 } from "../../components/IconPicker";
-import { speak } from "@wordpress/a11y";
+import {speak} from "@wordpress/a11y";
 
-import { useJumpNameStore } from "../../hooks/useJumpNameStore";
-import { JumpNameEntry } from "../../stores/jumpNameStore";
-import { sanitizeTitleToJumpName } from "../../utility/utils";
-import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
+import {useJumpNameStore} from "../../hooks/useJumpNameStore";
+import {JumpNameEntry} from "../../stores/jumpNameStore";
+import {sanitizeTitleToJumpName} from "../../utility/utils";
+import {useDispatch} from "@wordpress/data";
+import {store as blockEditorStore} from "@wordpress/block-editor";
 
-import { AttributesV1_0_12 as BlockAttributes } from "./index";
+import {AttributesV2 as BlockAttributes} from "./index";
+import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 
 const Edit = ({
-  attributes,
-  setAttributes,
-  clientId,
-  context,
-}: BlockEditProps<BlockAttributes>) => {
+                attributes,
+                setAttributes,
+                clientId,
+                context,
+              }: BlockEditProps<BlockAttributes>) => {
   const props = useBlockProps();
-  const { color, loadOpen, icon, jumpName, isCustomJumpname } = attributes;
+  const {color, loadOpen, icon, jumpName, isCustomJumpname} = attributes;
   const title = attributes.title;
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
-  const { __unstableMarkNextChangeAsNotPersistent } =
+  const {__unstableMarkNextChangeAsNotPersistent} =
     useDispatch(blockEditorStore);
 
   let computedDefaultJumpName = jumpName;
@@ -63,15 +65,15 @@ const Edit = ({
     if (!attributes.jumpName || attributes.jumpName === "") {
       const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
       void __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ jumpName: computedDefaultJumpName });
+      setAttributes({jumpName: computedDefaultJumpName});
     }
     if (jumpName && jumpName.startsWith("panel_")) {
       void __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ isCustomJumpname: false });
+      setAttributes({isCustomJumpname: false});
     }
   }, [attributes.jumpName, clientId, setAttributes]);
 
-  const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
+  const {jumpNames}: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
     clientId,
     jumpName: computedDefaultJumpName,
     setAttributes: (attrs) => setAttributes(attrs),
@@ -89,7 +91,7 @@ const Edit = ({
       context["rrze-elements/accordion-hstart"] !== attributes.hstart
     ) {
       void __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ hstart: context["rrze-elements/accordion-hstart"] as number });
+      setAttributes({hstart: context["rrze-elements/accordion-hstart"] as number});
     }
   }, [context["rrze-elements/accordion-hstart"]]);
 
@@ -110,10 +112,10 @@ const Edit = ({
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
       void __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ title: "" });
+      setAttributes({title: ""});
     } else {
       void __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ title: newText });
+      setAttributes({title: newText});
     }
   };
 
@@ -125,20 +127,20 @@ const Edit = ({
       !doesJumpNameExist(newJumpName) &&
       !isCustomJumpname
     ) {
-      setAttributes({ jumpName: newJumpName });
+      setAttributes({jumpName: newJumpName});
     }
   };
 
   // Function to handle the toggle of the loadOpen attribute.
   const loadOpenToggle = () => {
-    setAttributes({ loadOpen: !loadOpen });
+    setAttributes({loadOpen: !loadOpen});
   };
 
   return (
     <>
       <div {...props}>
         <BlockControls>
-          <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
+          <ColorSwitcherToolbar {...{attributes, setAttributes}} />
           <ToolbarGroup>
             <ToolbarItem>
               {() => (
@@ -167,13 +169,16 @@ const Edit = ({
                       onRequestClose={closeModal}
                       size="large"
                     >
-                      <IconPickerModalInset
-                        attributes={{
-                          icon: attributes.icon,
-                          svgString: attributes.svgString,
-                        }}
-                        setAttributes={setAttributes}
-                      />
+                      <>
+                        <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes}/>
+                        <IconPickerModalInset
+                          attributes={{
+                            icon: attributes.icon,
+                            svgString: attributes.svgString,
+                          }}
+                          setAttributes={setAttributes}
+                        />
+                      </>
                       <Button variant="primary" onClick={closeModal}>
                         {__("Close", "rrze-elements-blocks")}
                       </Button>
@@ -194,8 +199,8 @@ const Edit = ({
             setAttributes={setAttributes}
             clientId={clientId}
           />
-          <ColorSwitcher {...{ attributes, setAttributes }} />
-          <AdvancedSettings {...{ attributes, setAttributes }} />
+          <ColorSwitcher {...{attributes, setAttributes}} />
+          <AdvancedSettings {...{attributes, setAttributes}} />
           <PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
             <IconPicker
               attributes={{
