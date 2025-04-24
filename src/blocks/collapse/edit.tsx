@@ -171,13 +171,13 @@ const Edit = ({
                     >
                       <>
                         <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes}/>
-                        <IconPickerModalInset
-                          attributes={{
-                            icon: attributes.icon,
-                            svgString: attributes.svgString,
-                          }}
-                          setAttributes={setAttributes}
-                        />
+                        {/*<IconPickerModalInset*/}
+                        {/*  attributes={{*/}
+                        {/*    icon: attributes.icon,*/}
+                        {/*    svgString: attributes.svgString,*/}
+                        {/*  }}*/}
+                        {/*  setAttributes={setAttributes}*/}
+                        {/*/>*/}
                       </>
                       <Button variant="primary" onClick={closeModal}>
                         {__("Close", "rrze-elements-blocks")}

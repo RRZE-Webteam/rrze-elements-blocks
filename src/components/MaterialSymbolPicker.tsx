@@ -1,9 +1,12 @@
-import materialSymbolNames from "./assets/materialSymbolNames.json";
 import supportedSymbolNames from "./assets/supported-icons-index.json";
-import {Fragment, memo, useRef, useState} from '@wordpress/element';
+import materialSymbolNamesByAlphabeticalOrder from "./assets/materialSymbolAlphabeticalNames.json";
+import materialSymbolNamesByPopularity from "./assets/materialSymbolPopularityNames.json";
+import keywordIndex from "./assets/keyword-index-outlined-only.json";
+import {Fragment, memo, useRef, useState} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import {
-  __experimentalDivider as Divider, __experimentalGrid as Grid,
+  __experimentalDivider as Divider,
+  __experimentalGrid as Grid,
   __experimentalHeading as Heading,
   __experimentalSpacer as Spacer,
   Button,
@@ -16,25 +19,51 @@ interface MaterialSymbolPickerProps {
   attributes: {
     materialSymbol: string;
   };
-  setAttributes: {
-    (attributes: { materialSymbol: string }): void;
-  };
+  setAttributes: (attributes: { materialSymbol: string }) => void;
 }
 
 const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerProps) => {
   const {materialSymbol} = attributes;
-  const materialSymbolNamesArray = Object.keys(materialSymbolNames);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchResults, setShowSearchResults] = useState(false);
-  const [allIcons, setAllIcons] = useState([]);
-  const [filteredIcons, setFilteredIcons] = useState([]);
+  const [filteredIcons, setFilteredIcons] = useState<string[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const keywordIndexData: Record<string, string[]> = keywordIndex as Record<string, string[]>;
 
-  console.log(materialSymbolNamesArray);
+  const searchIcons = (query: string): string[] => {
+    const q = query.toLowerCase().trim();
 
-  const handleSearchChange = (searchQuery: string) => {
-    return "";
-  }
+    if (!q) {
+      return materialSymbolNamesByPopularity;
+    }
+
+    const resultSet = new Set<string>();
+
+    Object.keys(keywordIndexData).forEach((key) => {
+      if (key.toLowerCase().includes(q)) {
+        keywordIndexData[key].forEach((icon: string) => resultSet.add(icon));
+      }
+    });
+
+    if (resultSet.size === 0) {
+      materialSymbolNamesByAlphabeticalOrder.forEach((icon: string) => {
+        if (icon.toLowerCase().includes(q)) {
+          resultSet.add(icon);
+        }
+      });
+    }
+
+    return Array.from(resultSet).sort((a, b) => {
+      return (
+        materialSymbolNamesByPopularity.indexOf(a) -
+        materialSymbolNamesByPopularity.indexOf(b)
+      );
+    });
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+  };
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Enter") {
@@ -43,15 +72,19 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
   };
 
   const handleSearch = () => {
-    const query = searchQuery.toLowerCase();
-    const filteredIcons = allIcons.filter(({value}) => {
-      const [type, iconName] = value.split(" ");
-      return type.includes(query) || iconName.includes(query);
-    });
-    setFilteredIcons(filteredIcons);
+    const results = searchIcons(searchQuery);
+    setFilteredIcons(results);
     setShowSearchResults(true);
     speak(__("The search results got updated.", "rrze-elements-blocks"));
   };
+
+  const onClickIconButton = (iconValue: string) => {
+    if (iconValue === materialSymbol) {
+      setAttributes({materialSymbol: ""});
+    } else {
+      setAttributes({materialSymbol: iconValue})
+    }
+  }
 
   return (
     <>
@@ -66,15 +99,15 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
         </a>
         {__(
           ". You can search for an icon by typing its name or relevant keywords in the search field below.",
-          "rrze-elements-blocks",
+          "rrze-elements-blocks"
         )}
       </p>
+
       <Spacer paddingTop="1rem" paddingBottom="1rem">
         <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>
-            {__("Search for an Icon", "rrze-elements-blocks")}
-          </Heading>
+          <Heading>{__("Search for an Icon", "rrze-elements-blocks")}</Heading>
         </Spacer>
+
         <SearchControl
           label={__("Select an icon", "rrze-elements-blocks")}
           value={searchQuery}
@@ -85,16 +118,37 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
         <Button key="searchButton" variant="secondary" onClick={handleSearch}>
           {__("Search for Icons", "rrze-elements-blocks")}
         </Button>
-        {attributes.materialSymbol !== "" && (
+        {showSearchResults && (
+          <Spacer paddingTop="1rem" paddingBottom="1rem">
+            <Heading>{__("Search Results", "rrze-elements-blocks")}</Heading>
+            <Grid columns={12}>
+              {filteredIcons.map((iconOption: string) => (
+                <Button
+                  key={iconOption}
+                  isPressed={iconOption === materialSymbol}
+                  onClick={() => onClickIconButton(iconOption)}
+                  size="compact"
+                  className="elements-blocks-icon-Button"
+                  label={iconOption}
+                  showTooltip={true}
+                >
+                  <span className={`material-symbols-outlined ${iconOption}`}>
+                    {iconOption}
+                  </span>
+                </Button>
+              ))}
+            </Grid>
+          </Spacer>
+        )}
           <>
             <Spacer paddingBottom="1rem" paddingTop="1rem">
               <Divider/>
             </Spacer>
             <Fragment key="iconFragment">
-								<span
-                  key={attributes.materialSymbol}
-                  className={`elements-blocks-icon-selector-display ${attributes.materialSymbol}`}
-                ></span>
+              <span
+                key={materialSymbol}
+                className={`elements-blocks-icon-selector-display ${materialSymbol}`}
+              ></span>
               <Button
                 key="removeButton"
                 variant="secondary"
@@ -103,39 +157,31 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
                 {__("Remove Icon", "rrze-elements-blocks")}
               </Button>
             </Fragment>
+
             <Spacer paddingTop="1rem" paddingBottom="1rem">
               <Heading>{__("Solid Icons", "rrze-elements-blocks")}</Heading>
               <Grid columns={12}>
-                {supportedSymbolNames
-                  .map((iconOption) => (
-                    <Button
-                    key={iconOption.name}
-                    isPressed={iconOption.name === attributes.materialSymbol}
-                    onClick={() => setAttributes({materialSymbol: iconOption.name})}
+                {materialSymbolNamesByPopularity.map((iconOption: string) => (
+                  <Button
+                    key={iconOption}
+                    isPressed={iconOption === materialSymbol}
+                    onClick={() => onClickIconButton(iconOption)}
                     size="compact"
                     className="elements-blocks-icon-Button"
-                    label={iconOption.name}
+                    label={iconOption}
                     showTooltip={true}
                   >
-                    <span
-                      key={iconOption.name}
-                      className={`material-symbols-outlined ${iconOption.name}`}
-                    >{iconOption.name}</span>
-                    {/*<IconMarkComponent*/}
-                    {/*  type={iconOption.value.split(" ")[0]}*/}
-                    {/*  iconName={iconOption.value.split(" ")[1]}*/}
-                    {/*  attributes={attributes}*/}
-                    {/*  className="elements-blocks-icon-insideEditor elements-blocks-icon-insideEditorModal"*/}
-                    {/*  iconValue={iconOption.value}*/}
-                    {/*/>*/}
+                    <span className={`material-symbols-outlined ${iconOption}`}>
+                      {iconOption}
+                    </span>
                   </Button>
                 ))}
               </Grid>
             </Spacer>
           </>
-        )}
       </Spacer>
     </>
-  )
-}
+  );
+};
+
 export {MaterialSymbolPicker};
