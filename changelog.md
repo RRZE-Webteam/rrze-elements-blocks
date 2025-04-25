@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.18] - 2025-04-25
+
+Minor usability and design improvements.
+
+### Added
+- #224 Automatic transformation for Notice (Info-Box) Blocks
+
+### Fixed
+- #223 Animation preview inside counter blocks not working
+- #222 Fix the design for the hover state for Buttons within the counter row
+
 ## [1.0.16] - 2025-03-14
 
 Changed the allowed inner blocks for Collapsibles, Alerts and Notices.
