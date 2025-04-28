@@ -15508,9 +15508,9 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   margin-top: 1rem;
 }
 .rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
-  color: var(--color-primary-basis-kontrast, #fff);
-  color: var(--color-KontrastDunkel, #222);
-  border: 1px solid var(--color-primary-basis, #04316a);
+  color: #222;
+  background-color: #fff;
+  border: 1px solid #fff;
 }
 
 .is-style-outlined .rrze--iconbox-element-container {

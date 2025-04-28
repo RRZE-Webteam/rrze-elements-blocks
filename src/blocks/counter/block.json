@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/rrze-counter",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "title": "Counter",
   "category": "rrze_elements",
   "description": "Creates a Counter block.",

@@ -19,6 +19,8 @@ import { update as play } from "@wordpress/icons";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useRef } from "@wordpress/element";
+
 interface EditProps {
   blockProps: string[];
   isSelected: boolean;
@@ -46,6 +48,8 @@ export default function Edit({
   gsap.registerPlugin(ScrollTrigger);
   const dynamicClass = `rrze-elements-column-${attributes.columns}`;
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const props = useBlockProps({
     className: dynamicClass,
   });
@@ -64,27 +68,22 @@ export default function Edit({
   };
 
   const onClickPlay = () => {
-    if (isSelected) {
-      /* eslint-disable-next-line */
-      const container = document.querySelector(`#${props.id}`);
+    if (isSelected && containerRef.current) {
+      const items = containerRef.current.querySelectorAll(".fau-counter-data");
 
-      if (container) {
-        const items = container.querySelectorAll(".fau-counter-data");
-
-        gsap.from(items, {
-          textContent: attributes.startValue || 0,
-          duration: 2,
-          ease: "power3.inOut",
-          stagger: attributes.stagger || 0,
-          snap: { textContent: 1 },
-        });
-      }
+      gsap.from(items, {
+        textContent: attributes.startValue || 0,
+        duration: 2,
+        ease: "power3.inOut",
+        stagger: attributes.stagger || 0,
+        snap: { textContent: 1 },
+      });
     }
   };
 
   return (
     <div {...props}>
-      <section className="rrze-elements-blocks-counter-row">
+      <section className="rrze-elements-blocks-counter-row" ref={containerRef}>
         <BlockControls>
           <ToolbarItem>
             {() => (

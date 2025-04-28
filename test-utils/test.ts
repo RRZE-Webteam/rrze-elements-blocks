@@ -30,6 +30,7 @@ const test = base.extend<{
         await use(new Editor({ page }));
     },
     async pageUtils({ page }, use) {
+      // @ts-ignore
         await use(new PageUtils({ page, browserName: 'chromium' }));
     },
     async requestUtils({}, use) {
