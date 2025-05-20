@@ -86,7 +86,7 @@ export default function Edit({
               { placeholder: __("Add a description…", "rrze-elements-blocks") },
             ],
           ]}
-          allowedBlocks={["core/paragraph", "core/heading", "core/list", "core/buttons", "core/button", "rrze-faudir/block"]}
+          allowedBlocks={["core/paragraph", "core/heading", "core/list"]}
           templateLock={false}
         />
       </div>

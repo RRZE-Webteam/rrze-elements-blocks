@@ -33,7 +33,8 @@ export default function Edit({
     setAttributes({
       hstart: context["rrze-elements/timeline-hstart"],
     });
-  },[context["rrze-elements/timeline-hstart"]]);
+  }),
+    [context["rrze-elements/timeline-hstart"]];
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {
@@ -65,7 +66,7 @@ export default function Edit({
               { placeholder: __("Add a description…", "rrze-elements-blocks") },
             ],
           ]}
-          allowedBlocks={["core/paragraph", "core/heading", "core/image", "core/list", "core/buttons", "core/button", "core/quote", "core/quotes"]}
+          allowedBlocks={["core/paragraph"]}
           templateLock={false}
         />
       </div>
