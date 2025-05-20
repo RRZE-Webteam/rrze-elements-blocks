@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/collapsibles",
+  "version": "1.0.15",
+  "title": "Accordion",
+  "category": "rrze_elements",
+  "description": "Creates an accordion block",
+  "attributes": {
+    "expandAllLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 2
+    },
+    "expandLabel": {
+      "type": "string",
+      "default": "Expand All"
+    }
+  },
+  "providesContext": {
+    "rrze-elements/accordion-hstart": "hstart"
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "viewScript": "rrze-accordions",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "example": {
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Accordionreiter 1",
+          "loadOpen": true
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Accordionreiter 2"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      },
+      {
+        "name": "rrze-elements/collapse",
+        "attributes": {
+          "title": "Accordionreiter 3"
+        },
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "content": "This is a Paragraph."
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

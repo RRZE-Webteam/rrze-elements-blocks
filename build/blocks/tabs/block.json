@@ -1,0 +1,119 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/tabs",
+  "version": "1.0.15",
+  "title": "Tabs",
+  "category": "rrze_elements",
+  "description": "Creates an tabs block.",
+  "attributes": {
+    "message": {
+      "type": "string",
+      "source": "text"
+    },
+    "expandAllLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "color": {
+      "type": "string",
+      "default": ""
+    },
+    "innerClientIds": {
+      "type": "array",
+      "default": []
+    },
+    "active": {
+      "type": "string",
+      "default": ""
+    },
+    "xray": {
+      "type": "boolean",
+      "default": false
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "providesContext": {
+    "rrze-elements/tabs-order": "innerClientIds",
+    "rrze-elements/tabs-active": "active",
+    "rrze-elements/tabs-xray": "xray",
+    "rrze-elements/tabs-uid": "blockId"
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "viewScript": "rrze-tabs",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "example": {
+    "attributes": {
+      "color": "phil",
+      "innerClientIds": [
+        {
+          "clientId": "e6f5ee3a-396e-4fb8-a826-31d483362cf8",
+          "title": "Zweiter Reiter",
+          "position": 0,
+          "icon": "solid arrows-down-to-people",
+          "svgString": "fa-solid fa-arrows-down-to-people"
+        },
+        {
+          "clientId": "81392d09-74ff-4646-9d98-011e3e51eafa",
+          "title": "Dritter Reiter",
+          "position": 1,
+          "icon": "solid bacterium",
+          "svgString": "fa-solid fa-bacterium"
+        },
+        {
+          "clientId": "eabf0d78-b231-4cb3-8d3e-02840f1a8e68",
+          "title": "Vierter Reiter",
+          "position": 2,
+          "icon": "solid angles-up",
+          "svgString": "fa-solid fa-angles-up"
+        },
+        {
+          "clientId": "2619dc21-5378-4b02-a4f2-c95addd23beb",
+          "title": "",
+          "position": 3,
+          "icon": "",
+          "svgString": ""
+        }
+      ],
+      "active": "e6f5ee3a-396e-4fb8-a826-31d483362cf8",
+      "blockId": "26cc109c-2"
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/tab",
+        "attributes": {
+          "title": "Zweiter Reiter",
+          "icon": "solid arrows-down-to-people",
+          "svgString": "fa-solid fa-arrows-down-to-people",
+          "blockId": "e6f5ee3a-396e-4fb8-a826-31d483362cf8"
+        }
+      },
+      {
+        "name": "rrze-elements/tab",
+        "attributes": {
+          "title": "Dritter Reiter",
+          "icon": "solid bacterium",
+          "svgString": "fa-solid fa-bacterium",
+          "blockId": "81392d09-74ff-4646-9d98-011e3e51eafa"
+        }
+      },
+      {
+        "name": "rrze-elements/tab",
+        "attributes": {
+          "title": "Vierter Reiter",
+          "icon": "solid angles-up",
+          "svgString": "fa-solid fa-angles-up",
+          "blockId": "eabf0d78-b231-4cb3-8d3e-02840f1a8e68"
+        }
+      }
+    ]
+  }
+}

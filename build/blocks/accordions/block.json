@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/accordions",
+  "version": "1.0.15",
+  "title": "Inner Accordion",
+  "category": "rrze_elements",
+  "parent": [
+    "rrze-elements/collapse"
+  ],
+  "description": "Creates an inner accordion block",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js"
+}
