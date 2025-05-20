@@ -168,7 +168,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 									},
 								],
 							]}
-							allowedBlocks={["core/heading", "core/paragraph"]}
+							allowedBlocks={["core/heading", "core/paragraph", "core/list", "core/buttons", "core/button"]}
 							templateLock={false}
 						/>
 					</div>

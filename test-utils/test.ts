@@ -30,7 +30,8 @@ const test = base.extend<{
         await use(new Editor({ page }));
     },
     async pageUtils({ page }, use) {
-        await use(new PageUtils({ page }));
+      // @ts-ignore
+        await use(new PageUtils({ page, browserName: 'chromium' }));
     },
     async requestUtils({}, use) {
         // We want to make all REST API calls as authenticated users.

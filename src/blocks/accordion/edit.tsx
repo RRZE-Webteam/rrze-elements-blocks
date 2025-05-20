@@ -286,6 +286,8 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
                 "core/rss",
                 "rrze-elements/alert",
                 "rrze-elements/notice",
+                "core/buttons",
+                "core/button"
               ]}
             />
           </div>

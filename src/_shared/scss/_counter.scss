@@ -64,9 +64,9 @@ dt {
     }
 
     a.standard-btn.ghost-btn:hover {
-        color: var(--color-primary-basis-kontrast, #fff);
-        color: var(--color-KontrastDunkel, #222);
-        border: 1px solid var(--color-primary-basis, #04316a);
+        color: #222;
+        background-color: #fff;
+        border: 1px solid #fff;
     }
 }
 
