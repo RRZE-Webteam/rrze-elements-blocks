@@ -224,7 +224,7 @@ const Edit = ({
                 isActive || loadOpen ? "active" : ""
               }`}
             >
-              {attributes.icon && (
+              {attributes.icon || attributes.materialSymbol.length > 0 && (
                 <IconMarkComponent
                   type={iconType}
                   iconName={iconName}
@@ -233,6 +233,12 @@ const Edit = ({
                     svgString: attributes.svgString,
                   }}
                   setAttributes={setAttributes}
+                  materialSymbol={attributes.materialSymbol}
+                  style={{
+                    float: "left",
+                    lineHeight: "24px",
+                    paddingRight: "1rem",
+                  }}
                 />
               )}
               <RichText

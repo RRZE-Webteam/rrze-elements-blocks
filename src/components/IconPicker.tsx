@@ -17,7 +17,7 @@ import {
 } from "@wordpress/element";
 import fontawesomeIconNames from "./assets/fontawesome/fontawesomeIconNames.json";
 import { speak } from "@wordpress/a11y";
-import type { KeyboardEvent } from "react";
+import type { KeyboardEvent, CSSProperties } from "react";
 
 // You probably already include the core styles
 // @import "../<components/assets/fontawesome/scss/fontawesome.scss";
@@ -378,6 +378,8 @@ interface IconMarkComponentProps {
 	className?: string;
 	onClick?: () => void;
 	iconValue?: string;
+  materialSymbol?: string;
+  style?: CSSProperties;
 }
 
 /**
@@ -391,6 +393,8 @@ const IconMarkComponent = ({
 	className = "",
 	onClick,
 	iconValue = "",
+  materialSymbol = "",
+  style
 }: IconMarkComponentProps) => {
 	const handleOnClick = () => {
 		if (onClick) {
@@ -401,6 +405,18 @@ const IconMarkComponent = ({
 	//turn solid iconname into the right font-awesome class iconValue contains solid iconname
 	const faType = iconValue.split(" ")[0] || "";
 	const faIconName = iconValue.split(" ")[1] || "";
+
+  console.log(materialSymbol);
+  if (materialSymbol.length > 0) {
+    return (
+      <span
+        key={materialSymbol}
+        className={`material-symbols-outlined ${materialSymbol}`}
+        onClick={handleOnClick}
+        style={{ ...style }}
+      >{materialSymbol}</span>
+    )
+  }
 
 	if (iconValue === "") {
 		return (

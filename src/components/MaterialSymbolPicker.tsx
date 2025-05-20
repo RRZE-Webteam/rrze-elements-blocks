@@ -140,48 +140,56 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
             </Grid>
           </Spacer>
         )}
-          <>
-            <Spacer paddingBottom="1rem" paddingTop="1rem">
-              <Divider/>
-            </Spacer>
-            <Fragment key="iconFragment">
+        <>
+          {materialSymbol && (
+            <>
+              <Spacer paddingBottom="1rem" paddingTop="1rem" marginTop="1rem" marginBottom="1rem">
+              <Divider marginStart="1rem" marginEnd="1rem"/>
+
+              <Fragment key="iconFragment">
               <span
                 key={materialSymbol}
-                className={`elements-blocks-icon-selector-display ${materialSymbol}`}
-              ></span>
-              <Button
-                key="removeButton"
-                variant="secondary"
-                onClick={() => setAttributes({materialSymbol: ""})}
-              >
-                {__("Remove Icon", "rrze-elements-blocks")}
-              </Button>
-            </Fragment>
-
-            <Spacer paddingTop="1rem" paddingBottom="1rem">
-              <Heading>{__("Solid Icons", "rrze-elements-blocks")}</Heading>
-              <Grid columns={12}>
-                {materialSymbolNamesByPopularity.map((iconOption: string) => (
-                  <Button
-                    key={iconOption}
-                    isPressed={iconOption === materialSymbol}
-                    onClick={() => onClickIconButton(iconOption)}
-                    size="compact"
-                    className="elements-blocks-icon-Button"
-                    label={iconOption}
-                    showTooltip={true}
-                  >
+                className={`elements-blocks-icon-selector-display material-symbols-outlined ${materialSymbol}`}
+              >{materialSymbol}</span>
+                <Button
+                  key="removeButton"
+                  variant="secondary"
+                  onClick={() => setAttributes({materialSymbol: ""})}
+                >
+                  {__("Remove Icon", "rrze-elements-blocks")}
+                </Button>
+              </Fragment>
+              <Divider marginStart="1rem" marginEnd="1rem0"/>
+              </Spacer>
+            </>
+          )}
+          <Spacer paddingTop="1rem" paddingBottom="1rem">
+            <Heading>{__("Solid Icons", "rrze-elements-blocks")}</Heading>
+            <Grid columns={12}>
+              {materialSymbolNamesByPopularity.map((iconOption: string) => (
+                <Button
+                  key={iconOption}
+                  isPressed={iconOption === materialSymbol}
+                  onClick={() => onClickIconButton(iconOption)}
+                  size="compact"
+                  className="elements-blocks-icon-Button"
+                  label={iconOption}
+                  showTooltip={true}
+                >
                     <span className={`material-symbols-outlined ${iconOption}`}>
                       {iconOption}
                     </span>
-                  </Button>
-                ))}
-              </Grid>
-            </Spacer>
-          </>
+                </Button>
+              ))}
+            </Grid>
+          </Spacer>
+        </>
       </Spacer>
     </>
-  );
+  )
+    ;
 };
 
-export {MaterialSymbolPicker};
+export {
+  MaterialSymbolPicker
+};
