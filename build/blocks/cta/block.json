@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/cta",
-  "version": "1.0.18",
+  "version": "1.0.15",
   "title": "Call to action",
   "category": "rrze_elements",
   "description": "Creates an Call to action box.",
@@ -58,12 +58,12 @@
   "styles": [
     {
       "name": "no-background",
-      "label": "Normal",
+      "label": "Dark",
       "isDefault": true
     },
     {
-      "name": "small",
-      "label": "Small"
+      "name": "light",
+      "label": "Light"
     }
   ],
   "textdomain": "rrze-elements-blocks",

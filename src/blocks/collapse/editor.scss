@@ -20,11 +20,42 @@
 	.block-editor-block-list__layout:last-child {
 		padding-bottom: 1.5rem;
 	}
+
+	.wp-block-rrze-elements-accordions{
+		border-left: 8px solid #04316a;
+		padding-left: 1rem;
+		margin-top: 1rem;
+		.block-editor-block-list__layout:last-child {
+			padding-bottom: 0;
+		}
+	}
+}
+
+.wp-block-rrze-elements-collapse .accordion-heading {
+	position: relative;
+
+	p {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	&:before {
+		position: absolute;
+		top: calc(35% - .5em);
+		transition: top 0.3s ease-in-out;
+		right: 12px;
+		background: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+		padding: 0.75rem;
+		color: #fff;
+		font-size: 1rem;
+		@extend .fas !optional;
+		@extend .fa-chevron-down !optional;
+	}
 }
 
 .accordion-toggle span[class^="fa"] {
 	float: left;
-	line-height: 2em;
+	line-height: 1.5;
 }
 
 // read mode
@@ -47,13 +78,6 @@
 
 .accordion-body.active {
 	height: auto;
-	/* Change this to a specific height if needed */
-	//margin-top: 10px;
-	padding: 15px 20px;
-	background: var(--color-ContentRegions, #f5f7f9);
-	// * {
-	// 	background: var(--color-ContentRegions, #f5f7f9);
-	// }
 }
 
 .wp-block-rrze-elements-collapse {
@@ -65,27 +89,13 @@
 	}
 
 	.accordion-heading .components-text-control__input:focus {
-		background-color: #fff;
+		// background-color: #fff;
 		color: #000;
 		border-color: #000;
 		font-size: inherit;
 		padding-bottom: 0;
 	}
-
-	.accordion-heading .accordion-toggle.active {
-		color: #fff;
-	}
-
-	.accordion-heading .accordion-toggle:hover {
-		color: #fff;
-	}
-
 }
-
-// .rrzeElementsBFakColorSelector button{
-// 	padding-left:1em !important;
-// 	padding-right:1em !important;
-// }
 
 .rrzeElementsBFakColorSelector.central {
 	button {
@@ -94,27 +104,87 @@
 	}
 }
 
+.accordion-group{
+	&.phil{
+		.accordion-heading:before{
+			background-color: #fdb735;
+			color: #000;
+		}
+	}
+
+	&.rw{
+		.accordion-heading:before{
+			background-color: #c50f3c;
+			color: #fff;
+		}
+	}
+
+	&.med{
+		.accordion-heading:before{
+			background-color: #18b4f1;
+			color: #000;
+		}
+	}
+
+	&.nat{
+		.accordion-heading:before{
+			background-color: #7bb725;
+			color: #000;
+		}
+	}
+
+	&.tf{
+		.accordion-heading:before{
+			background-color: #7bb725;
+			color: #000;
+		}
+	}
+}
+
 .rrzeElementsBFakColorSelector.phil {
 	button {
 		background-color: #fdb735;
 		color: #000;
+	}
+	.wp-block-rrze-elements-collapse .accordion-heading {
+		position: relative;
+
+		p {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		&:before {
+			background-color: #fdb735;
+			color: #000;
+		}
 
 	}
 }
 
 .rrzeElementsBFakColorSelector.rw {
-	button {
+	button{
 		background-color: #c50f3c;
 		color: #fff;
-
+	}
+	.wp-block-rrze-elements-collapse .accordion-heading {
+		&:before {
+			background-color: #c50f3c;
+			color: #fff;
+		}
 	}
 }
 
 .rrzeElementsBFakColorSelector.med {
-	button {
-		background-color: #18b4f1;
-		color: #000;
-
+	.wp-block-rrze-elements-collapse .accordion-heading {
+		button{
+			background-color: #18b4f1;
+			color: #000;
+		}
+		&:before {
+			background-color: #18b4f1;
+			color: #000;
+		}
 	}
 }
 
@@ -122,15 +192,26 @@
 	button {
 		background-color: #7bb725;
 		color: #000;
-
+	}
+	.wp-block-rrze-elements-collapse .accordion-heading {
+		&:before {
+			background-color: #7bb725;
+			color: #000;
+		}
 	}
 }
 
 .rrzeElementsBFakColorSelector.tf {
-	button {
-		background-color: #8c9fb1;
+	button{
+		background-color: #7bb725;
 		color: #000;
+	}
 
+	.wp-block-rrze-elements-collapse .accordion-heading {
+		&:before {
+			background-color: #7bb725;
+			color: #000;
+		}
 	}
 }
 
@@ -152,14 +233,10 @@
 	padding-top: 0.25em;
 }
 
-// .elements-blocks-icon-insideEditorModal{
-// 	font-size: 1.5rem;
-// 	margin-bottom: 0.5rem;
-// }
-
-button.is-compact.elements-blocks-icon-Button, button.is-pressed.elements-blocks-icon-Button{
+button.is-compact.elements-blocks-icon-Button,
+button.is-pressed.elements-blocks-icon-Button {
 	font-size: 1.5rem;
-	padding: 0.25rem;	
+	padding: 0.25rem;
 	height: 55px;
 	width: 55px;
 
@@ -168,18 +245,17 @@ button.is-compact.elements-blocks-icon-Button, button.is-pressed.elements-blocks
 	justify-content: center;
 }
 
-.elements-blocks-input-following-icon {
-	input {
-		max-width: 90%;
-		font-size: 1.25em !important;
-	}
-}
+// .elements-blocks-input-following-icon {
+// 	input {
+// 		max-width: 90%;
+// 		font-size: 1.25em !important;
+// 	}
+// }
 
-.rrzeElementsBFakColorSelector{
-    border: 1px solid #000;
+.rrzeElementsBFakColorSelector {
+	border: 1px solid #000;
 
-	button{
+	button {
 		border-radius: 0;
 	}
 }
-

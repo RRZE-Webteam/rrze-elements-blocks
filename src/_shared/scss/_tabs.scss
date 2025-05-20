@@ -1,259 +1,175 @@
-.rrze-elements-tabs {
-    margin-bottom: 1em;
-    /*
-    * {
-        color: inherit;
-        //margin: 0;
-        &:focus {
-            //outline: none;
-            //box-shadow: inset 0 0 0 4px lightBlue;
-        }
-    }
-    margin: 1em 0;
+div.wp-block-rrze-elements-tabs div.rrze-elements-tabs {
+  -webkit-print-color-adjust: exact;
 
-    [role="tablist"] {
-        margin: 0;
-        li,
-        a {
-            display: block;
-            @media (min-width: 550px) {
-                display: inline-block;
-            }
-        }
-        li {
-            padding: 0;
-        }
-        a {
-            transition: none;
-            box-shadow: none;
-            text-decoration: none;
-            padding: .25em;
-            @media (min-width: 550px) {
-                text-decoration: none;
-                padding: 0.5rem 1em;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-            }
-            & > svg.rrze-elements-icon {
-                padding: 0;
-                border-radius: 0 !important;
-                color: unset;
-                margin-right: .4em;
-                max-width: 2em;
-            }
-            &:hover, &:focus, &:active {
-                box-shadow: none;
-                text-decoration: none;
-                > svg.rrze-elements-icon {
-                    background-color: unset;
-                }
-            }
-            .tab-suffix {
-                display: inline-block;
-                margin-left: .4em;
-                font-weight: bold;
-            }
-        }
-        [aria-selected] {
-            font-weight: bold;
-            @media (min-width: 550px) {
-                border: 1px solid;
-            }
-            &::after {
-                //content: '\0020⬅';
-                @media (min-width: 550px) {
+  button {
+    background: none;
+    border: none;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: var(--FAU-H-Heading-4, 1.25rem);
+    /**
+    transition border-bottom and color
+     */
+    transition: border-bottom 0.1s ease-in-out, color 0.1s ease-in-out, background 0.1s ease-in-out;
+    color: var(--FAU-Col-FAU-Dunkelblau-62_5, #617188);
+    cursor: pointer;
 
-                }
-            }
-        }
-        @media (min-width: 550px) {
-            padding: 0;
-            position: relative;
-            top: 1px;
-            @supports (-webkit-hyphens:none) { // Safari hack
-                top: 1.5px;
-            }
-        }
-    }
-    [role="tabpanel"] {
-        padding: 1.5rem;
-        border-top: 0;
-        overflow: hidden;
-        & > * + * {
-            margin-top: 0.75rem;
-        }
-        @media print {
-            display: block;
-            margin-bottom: 10px;
-            h1 {
-                margin-top: 0 !important;
-            }
-        }
-    }
-    */
-
-    [role="tablist"] {
-        //min-width: 550px;
+    &:hover,
+    &:focus,
+    &:target {
+      background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
+      color: var(--FAU-Col-FAU-Schwarz-100, #222);
+      border: none;
+      border-radius: 0;
+      transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
     }
 
-    [role="tab"],
-    [role="tab"]:focus,
-    [role="tab"]:hover {
-        position: relative;
-        z-index: 2;
-        //margin: 0;
-        //margin-top: 4px;
-        padding: 2px 6px;
-        overflow: visible;
-        outline: none;
-        //font-weight: bold;
+    &[role=tab] span.focus{
+      padding: var(--Spacing-2x, 0.5rem) var(--Spacing-4x, 1rem);
+    }
+  }
+
+  .manual{
+    @media print {
+      display: none;
+    }
+  }
+
+  /* Button with aria-selected true */
+  button {
+    &[aria-selected="true"] {
+      color: var(--FAU-FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+      border-bottom: 2px solid var(--FAU-Blau-FAU_Col_FAU-Blau, #04316A);
+      transition: border-bottom 0.1s ease-in-out, color 0.1s ease-in-out;
+
+      &:hover,
+      &:focus,
+      &:target {
+        color: var(--FAU-Col-FAU-Schwarz-100, #222);
+      }
+    }
+  }
+
+  div.wp-block-rrze-elements-tab {
+    border-bottom: none;
+    padding-bottom: var(--FAU-Spacing-6x, 1.5rem);
+    padding-top: var(--FAU-Spacing-6x, 1.5rem);
+    background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
+
+    div.alert{
+      background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
+      color: var(--FAU-Col-FAU-Schwarz-100, #222);
     }
 
-    [role="tab"] {
-        margin: 0 5px 0 0;
-        &[aria-selected="true"] {
-            font-weight: bold;
-            /*padding: 2px 2px 4px;
-            margin-top: 0;
-            border-width: 2px;
-            border-top-width: 6px;
-            border-top-color: rgb(36 116 214);
-            border-bottom-color: hsl(220deg 43% 99%);
-            background: hsl(220deg 43% 99%);*/
-        }
+    @media print {
+      margin-bottom: 0.5rem;
+      background: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7) !important;
+      print-color-adjust: exact;
+    }
+  }
 
-        /*&[aria-selected="false"] {
-            border-bottom: 1px solid hsl(219deg 1% 72%);
-        }*/
+  margin-bottom: 1em;
+
+  [role="tab"],
+  [role="tab"]:focus,
+  [role="tab"]:hover {
+    position: relative;
+    z-index: 2;
+    //margin: 0;
+    //margin-top: 4px;
+    padding: 2px 6px;
+    overflow: visible;
+    outline: none;
+    //font-weight: bold;
+  }
+
+  [role="tab"] {
+    margin: 0 5px 0 0;
+
+    &[aria-selected="true"] {
+      font-weight: bold;
+      /*padding: 2px 2px 4px;
+      margin-top: 0;
+      border-width: 2px;
+      border-top-width: 6px;
+      border-top-color: rgb(36 116 214);
+      border-bottom-color: hsl(220deg 43% 99%);
+      background: hsl(220deg 43% 99%);*/
+    }
+
+    /*&[aria-selected="false"] {
+        border-bottom: 1px solid hsl(219deg 1% 72%);
+    }*/
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    @media (min-width: 550px) {
+      display: inline-block;
+      width: auto;
+      border-radius: 5px 5px 0 0;
+      //padding: 0.5rem 1em;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      top: 1px;
+    }
+
+    span.focus {
+      display: inline-block;
+      margin: 2px;
+      padding: 4px 6px;
+
+      & > svg.rrze-elements-icon {
+        padding: 0;
+        border-radius: 0 !important;
+        color: unset;
+        margin-right: .4em;
+        max-width: 2em;
+      }
+
+      .tab-suffix {
+        display: inline-block;
+        margin-left: .4em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  [role="tabpanel"] {
+    padding: 1rem;
+    min-height: 10em;
+    overflow: auto;
+    @media (min-width: 550px) {
+      //border-radius: 0 0 5px 5px;
+    }
+
+    &.is-hidden {
+      display: none;
+      @media print {
         display: block;
-        width: 100%;
-        border-radius: 0;
-        font-size: 1rem;
-        text-align: left;
-        cursor: pointer;
-        @media (min-width: 550px) {
-            display: inline-block;
-            width: auto;
-            border-radius: 5px 5px 0 0;
-            //padding: 0.5rem 1em;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            top: 1px;
-        }
-        span.focus {
-            display: inline-block;
-            margin: 2px;
-            padding: 4px 6px;
-            & > svg.rrze-elements-icon {
-                padding: 0;
-                border-radius: 0 !important;
-                color: unset;
-                margin-right: .4em;
-                max-width: 2em;
-            }
-            .tab-suffix {
-                display: inline-block;
-                margin-left: .4em;
-                font-weight: bold;
-            }
-        }
+      }
     }
 
-    [role="tabpanel"] {
-        padding: 1rem;
-        min-height: 10em;
-        overflow: auto;
-        @media (min-width: 550px) {
-            //border-radius: 0 0 5px 5px;
-        }
-        &.is-hidden {
-            display: none;
-        }
-
-        p {
-            //margin: 0;
-        }
-        figure:first-child {
-            margin-top: 0;
-        }
+    p {
+      //margin: 0;
     }
 
-}
-
-
-$colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
-@each $color in $colors {
-    .rrze-elements-tabs.#{$color} {
-        [role="tablist"] {
-            button {
-                border: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                background-color: var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                color: var(--color-#{$color}-ci-hell2-kontrast, map-get($colormaps, $color, "ci-hell2-kontrast"));
-                &:hover, &:focus, &:active {
-                    color: inherit;
-                    border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                }
-                @media (min-width: 550px) {
-                    border-top: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                    &:hover, &:active {
-                        color: inherit;
-                        border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    }
-                    &:focus {
-                        & > span.focus {
-                            padding: 2px 4px;
-                            border: 2px solid var(--color-#{$color}-dunkler, map-get($colormaps, $color, "dunkler"));
-                            border-radius: 3px;
-                        }
-                    }
-
-                }
-            }
-            [aria-selected="true"] {
-                background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
-                border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                @media (min-width: 550px) {
-                    border: 1px solid;
-                    background: #fff;
-                    border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    border-bottom-color: #fff;
-                    color: unset;
-                }
-                &:hover, &:focus, &:active {
-                    background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
-                    border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    @media (min-width: 550px) {
-                        background: #fff;
-                        border-bottom-color: #fff;
-                        color: unset;
-                    }
-                }
-            }
-        }
-        [role="tabpanel"] {
-            border: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-            border-top: 0;
-            @media (min-width: 550px) {
-                border-top: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-            }
-            @media print {
-                border-top: 1px solid var(--color-primary-ci-hell, map-get($colormaps, $color, "ci-hell"));
-            }
-        }
+    figure:first-child {
+      margin-top: 0;
     }
+  }
 
-    .print-only {
-        display: none;
-        @media print {
-            display: block;
-        }
+  .print-only {
+    display: none;
+    @media print {
+      display: block;
     }
-    .hide-in-print {
-        @media print {
-            display: none !important;
-        }
+  }
+  .hide-in-print {
+    @media print {
+      display: none !important;
     }
+  }
 }

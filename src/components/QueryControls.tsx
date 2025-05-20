@@ -1,5 +1,5 @@
-import {useSelect} from "@wordpress/data";
-import {QueryControls} from "@wordpress/components";
+import { useSelect } from "@wordpress/data";
+import { QueryControls } from "@wordpress/components";
 
 type CustomQueryControlsProps = {
   attributes: {
@@ -20,11 +20,11 @@ interface Category {
 }
 
 const CustomQueryControls = ({
-                               attributes,
-                               setAttributes,
-                             }: CustomQueryControlsProps) => {
-  const {categories} = useSelect((select) => {
-    const {getEntityRecords} = select("core") as {
+  attributes,
+  setAttributes,
+}: CustomQueryControlsProps) => {
+  const { categories } = useSelect((select) => {
+    const { getEntityRecords } = select("core") as {
       getEntityRecords: (
         entity?: string,
         type?: string,
@@ -32,7 +32,7 @@ const CustomQueryControls = ({
       ) => Category[];
     };
     return {
-      categories: getEntityRecords("taxonomy", "category", {per_page: -1}),
+      categories: getEntityRecords("taxonomy", "category"),
     };
   }, []);
 
@@ -40,20 +40,20 @@ const CustomQueryControls = ({
 
   const categorySuggestions = categories
     ? categories.reduce(
-      (acc, category) => {
-        acc[category.slug] = category;
-        return acc;
-      },
-      {} as Record<string, Category>
-    )
+        (acc, category) => {
+          acc[category.slug] = category;
+          return acc;
+        },
+        {} as Record<string, Category>
+      )
     : {};
 
   const selectedCategorySlugs = cat.split(",");
 
   const selectedCategories = categories
     ? categories
-      .filter((category) => selectedCategorySlugs.includes(category.slug))
-      .map(({id, name, parent}) => ({id, name, parent}))
+        .filter((category) => selectedCategorySlugs.includes(category.slug))
+        .map(({ id, name, parent }) => ({ id, name, parent }))
     : [];
 
   const onCategoryChange = (
@@ -82,7 +82,7 @@ const CustomQueryControls = ({
       }
     });
 
-    setAttributes({cat: currentCategorySlugs.join(",")});
+    setAttributes({ cat: currentCategorySlugs.join(",") });
   };
 
   return (
@@ -90,12 +90,12 @@ const CustomQueryControls = ({
       categorySuggestions={categorySuggestions}
       numberOfItems={attributes.num}
       onCategoryChange={onCategoryChange}
-      onNumberOfItemsChange={(value) => setAttributes({num: value})}
+      onNumberOfItemsChange={(value) => setAttributes({ num: value })}
       selectedCategories={selectedCategories}
-      minItems={1}
-      maxItems={15}
+      minItems = {1}
+      maxItems = {15}
     />
   );
 };
 
-export {CustomQueryControls};
+export { CustomQueryControls };

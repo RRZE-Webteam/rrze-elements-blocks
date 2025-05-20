@@ -214,7 +214,7 @@
         }
 
         @media screen and (min-width: 600px) {
-            grid-gap: 2em;
+            grid-gap: 1rem;
         }
 
         :first-child {
@@ -254,7 +254,7 @@
             }
             border-top: none;
             @media screen and (min-width: 300px) {
-                border-top: 3px solid var(--color-primary-basis, #04316A);
+                border-top: 2px solid var(--color-primary-basis, #04316A);
             }
 
             padding-top: 0.5em;

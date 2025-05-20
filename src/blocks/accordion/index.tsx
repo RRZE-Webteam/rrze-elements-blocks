@@ -1,7 +1,6 @@
 import {
   registerBlockType
 } from "@wordpress/blocks";
-import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
 import Edit from "./edit";

@@ -1,7 +1,6 @@
 import {
   registerBlockType,
 } from "@wordpress/blocks";
-import "./style.scss";
 import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
@@ -31,6 +30,10 @@ interface AttributesV1 {
 
 export interface AttributesV1_0_12 extends AttributesV1 {
   isCustomJumpname: boolean;
+}
+
+export interface AttributesV2 extends AttributesV1_0_12 {
+  materialSymbol: string;
 }
 
 //type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;

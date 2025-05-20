@@ -16,6 +16,8 @@ nbproject*
 node_modules/
 ### Composer ###
 composer.lock
+### WordPress ###
+*.pot
 ### Tmp ###
 _tmp/
 
