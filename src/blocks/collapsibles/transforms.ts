@@ -1,6 +1,7 @@
 import { createBlock, BlockInstance } from "@wordpress/blocks";
 import iconJson from "../../components/assets/fontawesome/fontawesomeIconNames.json";
 import { __ } from "@wordpress/i18n";
+import { sanitizeTitleToJumpName as sanitizeJumpName } from "../../utility/utils";
 
 interface CollapseBlockAttributes {
   title: string;
@@ -310,7 +311,7 @@ const transforms = {
               {
                 title: sanitizeTitle(collapseAttributes.title || "Enter a title"),
                 color: colorChoice(collapseAttributes.color),
-                jumpName: collapseAttributes.name || "",
+                jumpName: sanitizeJumpName(collapseAttributes.name || ""),
                 icon: validateIcon(collapseAttributes.icon) || "",
               },
               collapseInnerBlocks
