@@ -1,4 +1,5 @@
 import { registerBlockType } from "@wordpress/blocks";
+import { InnerBlocks } from "@wordpress/block-editor";
 
 import Edit from "./edit";
 import save from "./save";
@@ -40,7 +41,7 @@ registerBlockType(
     /**
      * @see ./save.js
      */
-    save,
+    save: () => <InnerBlocks.Content />,
     transforms: transforms,
   } as any,
 );

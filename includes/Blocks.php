@@ -5,6 +5,7 @@ namespace RRZE\ElementsBlocks;
 defined('ABSPATH') || exit;
 
 use RRZE\Elements\News\News;
+use RRZE\ElementsBlocks\BlockFrontend\Alert;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
@@ -21,6 +22,7 @@ class Blocks
     {
         if (ThemeSniffer::getThemeGroup('fauthemes')) {
             $this->rrze_register_blocks_and_translations();
+            $this->rrze_register_alert_block();
 
             // Additional logic for blocks with custom render callbacks.
             if (class_exists('RRZE\Elements\News\News')) {
@@ -41,7 +43,7 @@ class Blocks
     private function rrze_register_blocks_and_translations()
     {
         $blocks = [
-            'collapsibles', 'collapse', 'accordions', 'accordion', 'alert', 'notice', 'iconbox',
+            'collapsibles', 'collapse', 'accordions', 'accordion', 'notice', 'iconbox',
             'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'counter-row', 'timeline', 'timeline-item'
         ];
 
@@ -59,9 +61,25 @@ class Blocks
         wp_enqueue_style('rrze-elements-blocks');
     }
 
+    private function rrze_register_alert_block()
+    {
+      register_block_type(
+        plugin_dir_path(__DIR__) . 'build/blocks/alert',
+        [
+          'render_callback' => function ($attributes, $block, $content) {
+            $alert = new Alert();
+            return $alert->render($attributes, $block, $content);
+          },
+        ]
+      );
+      load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
+      $script_handle = generate_block_asset_handle('rrze-elements/alert', 'editorScript');
+      wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
+    }
+
     /**
      * Renders the news block.
-     * 
+     *
      * @param array $attributes Attributes for the news block.
      * @return string HTML content for the news block.
      */
