@@ -98,6 +98,16 @@ function validateIcon(iconStr: string) {
   return "";
 }
 
+function sanitizeTitle(title: string) {
+  // Removes all html tags
+  let sanitized = title.replace(/<\/?[^>]+(>|$)/g, "");
+
+  sanitized = sanitized.replace(/&nbsp;/g, " ");
+  sanitized = sanitized.replace(/&amp;/g, "&");
+
+  return sanitized;
+}
+
 const transforms = {
   from: [
     {
@@ -178,7 +188,6 @@ const transforms = {
           ...cleanData.matchAll(regexCollapse),
         ];
         let titleStore: { title: string; type: string; level: number; items?: any[] }[] = [];
-        console.log(data);
         const originalContent = data?.content || "";
 
         matchesCollapseContent.forEach((match, collapseIndex) => {
@@ -206,7 +215,6 @@ const transforms = {
           const splitContents = contentInsideCollapse.split(accordionRegex);
           splitContents.forEach((splitContent: string, index: number) => {
             if (index % 2 === 0) {
-              // This should be freeform content outside of the accordions
               if (splitContent.trim()) {
                 collapseInnerBlocks.push(
                   createBlock("core/freeform", {
@@ -215,7 +223,6 @@ const transforms = {
                 );
               }
             } else {
-              // This should be content inside an accordion
               const accordionItemsRegex =
                 /\[accordion-item(?=\s)((?:\s+\w+=(?:'[^']*'|"[^"]*"|“[^”]*”))*)\]([\s\S]*?)\[\/accordion-item\]/g;
               const accordionItemMatches = [
@@ -237,12 +244,12 @@ const transforms = {
                 accordionAttributeMatches?.forEach((attr) => {
                   const [key, fullValue] = attr.split("=");
                   const actualValue = fullValue.slice(1, -1);
-                  accordionAttributes[key] = actualValue; // <-- Populate the object correctly
+                  accordionAttributes[key] = actualValue;
                 });
 
                 accordionTitles.push(
                   {
-                    title: accordionAttributes.title || "No title detected",
+                    title: sanitizeTitle(accordionAttributes.title || "No title detected"),
                     type: "accordion",
                     level: 2
                   }
@@ -251,7 +258,7 @@ const transforms = {
                 innerAccordionBlocks.push(
                   createBlock(
                     "rrze-elements/accordion",
-                    { title: accordionAttributes.title || "Enter a title" },
+                    { title: sanitizeTitle(accordionAttributes.title || "Enter a title")},
                     [
                       createBlock("core/freeform", {
                         content: accordionContent,
@@ -291,7 +298,7 @@ const transforms = {
           };
 
           titleStore.push({
-            title: collapseAttributes.title || `Collapse #${collapseIndex + 1}`,
+            title: sanitizeTitle(collapseAttributes.title || `Collapse #${collapseIndex + 1}`),
             type: "collapse",
             level: 1,
             items: accordionTitles,
@@ -301,7 +308,7 @@ const transforms = {
             createBlock(
               "rrze-elements/collapse",
               {
-                title: collapseAttributes.title || "Enter a title",
+                title: sanitizeTitle(collapseAttributes.title || "Enter a title"),
                 color: colorChoice(collapseAttributes.color),
                 jumpName: collapseAttributes.name || "",
                 icon: validateIcon(collapseAttributes.icon) || "",
