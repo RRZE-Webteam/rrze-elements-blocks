@@ -6,7 +6,6 @@ use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
 
 class Alert extends AbstractBlockRender
 {
-
     /**
      * @inheritDoc
      */
