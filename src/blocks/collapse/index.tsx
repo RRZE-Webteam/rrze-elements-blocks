@@ -12,6 +12,7 @@ import Edit from "./edit";
 import save from "./save";
 import deprecated from "./deprecated";
 import metadata from "./block.json";
+import {InnerBlocks} from "@wordpress/block-editor";
 
 interface AttributesV1 {
   message: string;
@@ -47,8 +48,7 @@ interface LabelContext {
  */
 registerBlockType(metadata.name as any, {
   edit: Edit,
-  // @ts-ignore
-  save,
+  save: () => <InnerBlocks.Content />,
   deprecated,
   icon: {
     src: (

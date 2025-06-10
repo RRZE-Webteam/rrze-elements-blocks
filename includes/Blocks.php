@@ -84,7 +84,7 @@ class Blocks
         'class' => Accordions::class,
       ],
       [
-        'slug'  => 'Collapse',
+        'slug'  => 'collapse',
         'class' => Collapse::class,
       ],
     ];
