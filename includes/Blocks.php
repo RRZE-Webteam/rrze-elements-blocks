@@ -45,7 +45,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'collapsibles', 'collapse', 'accordions', 'notice', 'iconbox',
+            'collapsibles', 'collapse', 'notice', 'iconbox',
             'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'counter-row', 'timeline', 'timeline-item'
         ];
 
@@ -92,6 +92,19 @@ class Blocks
     );
     load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
     $script_handle = generate_block_asset_handle('rrze-elements/accordion', 'editorScript');
+    wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
+
+    register_block_type(
+      plugin_dir_path(__DIR__) . 'build/blocks/accordions',
+      [
+        'render_callback' => function ($attributes, $block, $content) {
+          $accordion = new Accordion();
+          return $accordion->render($attributes, $block, $content);
+        },
+      ]
+    );
+    load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
+    $script_handle = generate_block_asset_handle('rrze-elements/accordions', 'editorScript');
     wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
   }
 

@@ -19,7 +19,6 @@ class Accordion extends AbstractBlockRender
 
       $title     = isset( $attributes['title'] ) ? wp_kses_post( $attributes['title'] ) : '';
       $color     = isset( $attributes['color'] ) ? sanitize_html_class( $attributes['color'] ) : '';
-      $svg_class = isset( $attributes['svgString'] ) ? sanitize_html_class( $attributes['svgString'] ) : '';
 
       $hstart   = isset( $attributes['hstart'] ) ? (int) $attributes['hstart'] : 1;
       $jumpname = isset( $attributes['jumpName'] ) ? $attributes['jumpName'] : '';
@@ -44,7 +43,7 @@ class Accordion extends AbstractBlockRender
         esc_attr( $color )
       );
 
-      // Heading mit Button
+      // Heading with Button
       $markup .= sprintf(
         '<h%1$d class="accordion-heading">',         // 1 = $heading_level
         $heading_level

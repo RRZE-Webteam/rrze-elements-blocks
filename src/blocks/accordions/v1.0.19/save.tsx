@@ -1,16 +1,15 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { BlockSaveProps } from "@wordpress/blocks";
-import { AttributesV1 } from "./attributes";
+import {AttributesV1_0_19} from "./attributes";
 
-const Save: React.FC<BlockSaveProps<AttributesV1>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_19>) => {
   const blockProps = useBlockProps.save();
-  const { sameBlockCount } = attributes;
 
   return (
     <div {...blockProps}>
       {" "}
       <>
-        <div className="accordion" id={`accordion-${sameBlockCount}`}>
+        <div className="accordion">
           <InnerBlocks.Content />
         </div>
       </>
