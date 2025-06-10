@@ -6,7 +6,9 @@ defined('ABSPATH') || exit;
 
 use RRZE\Elements\News\News;
 use RRZE\ElementsBlocks\BlockFrontend\Accordion;
+use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
+use RRZE\ElementsBlocks\BlockFrontend\Collapse;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
@@ -23,8 +25,7 @@ class Blocks
     {
         if (ThemeSniffer::getThemeGroup('fauthemes')) {
             $this->rrze_register_blocks_and_translations();
-            $this->rrze_register_alert_block();
-            $this->rrze_register_accordion_block();
+            $this->rrze_register_dynamic_blocks();
 
             // Additional logic for blocks with custom render callbacks.
             if (class_exists('RRZE\Elements\News\News')) {
@@ -45,7 +46,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'collapsibles', 'collapse', 'notice', 'iconbox',
+            'collapsibles', 'notice', 'iconbox',
             'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'counter-row', 'timeline', 'timeline-item'
         ];
 
@@ -63,52 +64,52 @@ class Blocks
         wp_enqueue_style('rrze-elements-blocks');
     }
 
-    private function rrze_register_alert_block(): void
-    {
+  /**
+   * Registers dynamic blocks and their dynamic render functions.
+   * @return void
+   */
+  private function rrze_register_dynamic_blocks(): void
+  {
+    $dynamic_blocks = [
+      [
+        'slug'  => 'alert',
+        'class' => Alert::class,
+      ],
+      [
+        'slug'  => 'accordion',
+        'class' => Accordion::class,
+      ],
+      [
+        'slug'  => 'accordions',
+        'class' => Accordions::class,
+      ],
+      [
+        'slug'  => 'Collapse',
+        'class' => Collapse::class,
+      ],
+    ];
+
+    foreach ($dynamic_blocks as $block) {
       register_block_type(
-        plugin_dir_path(__DIR__) . 'build/blocks/alert',
+        plugin_dir_path(__DIR__) . 'build/blocks/' . $block['slug'],
         [
-          'render_callback' => function ($attributes, $block, $content) {
-            $alert = new Alert();
-            return $alert->render($attributes, $block, $content);
+          'render_callback' => function ($attributes, $block_info, $content) use ($block) {
+            $class = $block['class'];
+            $instance = new $class();
+            return $instance->render($attributes, $block_info, $content);
           },
         ]
       );
+
       load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
-      $script_handle = generate_block_asset_handle('rrze-elements/alert', 'editorScript');
+
+      $script_handle = generate_block_asset_handle('rrze-elements/' . $block['slug'], 'editorScript');
       wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
     }
-
-  private function rrze_register_accordion_block(): void
-  {
-    register_block_type(
-      plugin_dir_path(__DIR__) . 'build/blocks/accordion',
-      [
-        'render_callback' => function ($attributes, $block, $content) {
-          $accordion = new Accordion();
-          return $accordion->render($attributes, $block, $content);
-        },
-      ]
-    );
-    load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
-    $script_handle = generate_block_asset_handle('rrze-elements/accordion', 'editorScript');
-    wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
-
-    register_block_type(
-      plugin_dir_path(__DIR__) . 'build/blocks/accordions',
-      [
-        'render_callback' => function ($attributes, $block, $content) {
-          $accordion = new Accordion();
-          return $accordion->render($attributes, $block, $content);
-        },
-      ]
-    );
-    load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
-    $script_handle = generate_block_asset_handle('rrze-elements/accordions', 'editorScript');
-    wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
   }
 
-    /**
+
+  /**
      * Renders the news block.
      *
      * @param array $attributes Attributes for the news block.
