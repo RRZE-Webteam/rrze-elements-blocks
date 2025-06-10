@@ -12,12 +12,15 @@ class Alert extends AbstractBlockRender
      */
     public function render($attributes = [], $innerBlocks = ''): string {
       $style  = isset($attributes['style']) ? esc_attr($attributes['style']) : 'default';
-      $title  = !empty($attributes['title'])
-        ? '<strong class="alert-title">'.esc_html($attributes['title']).'</strong>'
-        : '';
+      $title  = isset($attributes['title']) ? esc_attr($attributes['title']) : '';
+
+      if(!empty($title)){
+        $style = 'example';
+        $title = str_replace('"', '&quot;', $title);
+      }
 
       return sprintf(
-        '<div class="alert clear alert-%s">%s%s</div>',
+        '<div class="alert clearfix clear alert-%s" title="%s">%s</div>',
         $style,
         $title,
         $innerBlocks
