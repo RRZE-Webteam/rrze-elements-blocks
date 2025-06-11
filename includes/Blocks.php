@@ -9,6 +9,7 @@ use RRZE\ElementsBlocks\BlockFrontend\Accordion;
 use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse;
+use RRZE\ElementsBlocks\BlockFrontend\Collapsibles;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
@@ -46,7 +47,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'collapsibles', 'notice', 'iconbox',
+            'notice', 'iconbox',
             'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'columns', 'counter', 'counter-row', 'timeline', 'timeline-item'
         ];
 
@@ -87,6 +88,10 @@ class Blocks
         'slug'  => 'collapse',
         'class' => Collapse::class,
       ],
+      [
+        'slug' => 'collapsibles',
+        'class' => Collapsibles::class,
+      ]
     ];
 
     foreach ($dynamic_blocks as $block) {

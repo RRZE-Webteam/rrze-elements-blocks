@@ -23,22 +23,12 @@ import { useEffect } from "@wordpress/element";
 type SaveProps = {
   attributes: {
     expandAllLink: boolean;
-    sameBlockCount: number;
-    previousBlockIds: string[];
     hstart: number;
-    childrenCount: number;
-    message: string;
-    previousBlockClients: string[];
     expandLabel: string;
   };
   setAttributes: (newAttributes: {
     expandAllLink?: boolean;
-    sameBlockCount?: number;
-    previousBlockIds?: string[];
     hstart?: number;
-    childrenCount?: number;
-    message?: string;
-    previousBlockClients?: string[];
     expandLabel?: string;
   }) => void;
   clientId?: string;

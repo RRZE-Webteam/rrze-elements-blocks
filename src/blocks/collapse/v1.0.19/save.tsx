@@ -3,21 +3,6 @@ import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
 import {AttributesV1_0_19} from "./attributes";
 
-interface Attributes {
-  message: string;
-  expandAllLink: boolean;
-  register: boolean;
-  isCustomJumpname: boolean;
-  sameBlockCount: number;
-  totalChildrenCount: number;
-  color: string;
-  title: string;
-  jumpName: string;
-  loadOpen: boolean;
-  hstart: number;
-  svgString?: string;
-}
-
 const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_19>) => {
   const blockProps = useBlockProps.save();
   const { color, title, jumpName, svgString, loadOpen, hstart } = attributes;
