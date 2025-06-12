@@ -4,6 +4,8 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import { InnerBlocks } from '@wordpress/block-editor';
+import deprecated from './deprecated';
 
 registerBlockType( metadata.name as any, {
 	icon: {
@@ -22,5 +24,6 @@ registerBlockType( metadata.name as any, {
 	edit: Edit,
 
 	// @see ./save.js
-	save,
+	save: () => <InnerBlocks.Content />,
+  deprecated
 } as any );
