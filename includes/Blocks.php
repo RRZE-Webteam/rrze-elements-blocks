@@ -11,6 +11,7 @@ use RRZE\ElementsBlocks\BlockFrontend\Alert;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse;
 use RRZE\ElementsBlocks\BlockFrontend\Collapsibles;
 use RRZE\ElementsBlocks\BlockFrontend\Columns;
+use RRZE\ElementsBlocks\BlockFrontend\ContentWidthLimiter;
 use RRZE\ElementsBlocks\BlockFrontend\Counter;
 use RRZE\ElementsBlocks\BlockFrontend\CounterRow;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
@@ -52,7 +53,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'timeline', 'timeline-item'
+            'tabs', 'tab', 'cta', 'insertion', 'timeline', 'timeline-item'
         ];
 
         foreach ($blocks as $block) {
@@ -115,6 +116,10 @@ class Blocks
       [
         'build_folder' => 'iconbox',
         'class' => IconBox::class,
+      ],
+      [
+        'build_folder' => 'contentwidthlimiter',
+        'class' => ContentWidthLimiter::class,
       ]
     ];
 
