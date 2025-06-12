@@ -20,6 +20,8 @@ use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
+use RRZE\ElementsBlocks\BlockFrontend\Timeline;
+use RRZE\ElementsBlocks\BlockFrontend\TimelineItem;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
@@ -56,19 +58,6 @@ class Blocks
      */
     private function rrze_register_blocks_and_translations(): void
     {
-        $blocks = [
-            'timeline', 'timeline-item'
-        ];
-
-        foreach ($blocks as $block) {
-            register_block_type(plugin_dir_path(__DIR__) . 'build/blocks/' . $block);
-
-            load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
-
-            $script_handle = generate_block_asset_handle('rrze-elements/' . $block, 'editorScript');
-            wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
-        }
-
         // Register global styles and scripts here.
         wp_enqueue_style('fontawesome');
         wp_enqueue_style('rrze-elements-blocks');
@@ -141,6 +130,14 @@ class Blocks
         'build_folder' => 'tab',
         'class' => Tab::class,
       ],
+      [
+        'build_folder' => 'timeline',
+        'class' => Timeline::class,
+      ],
+      [
+        'build_folder' => 'timeline-item',
+        'class' => TimelineItem::class,
+      ]
     ];
 
     foreach ($dynamic_blocks as $block) {
