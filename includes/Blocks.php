@@ -18,6 +18,8 @@ use RRZE\ElementsBlocks\BlockFrontend\CounterRow;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
+use RRZE\ElementsBlocks\BlockFrontend\Tab;
+use RRZE\ElementsBlocks\BlockFrontend\Tabs;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
@@ -55,7 +57,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'tabs', 'tab', 'timeline', 'timeline-item'
+            'timeline', 'timeline-item'
         ];
 
         foreach ($blocks as $block) {
@@ -130,7 +132,15 @@ class Blocks
       [
         'build_folder' => 'insertion',
         'class' => Insertion::class,
-      ]
+      ],
+      [
+        'build_folder' => 'tabs',
+        'class' => Tabs::class,
+      ],
+      [
+        'build_folder' => 'tab',
+        'class' => Tab::class,
+      ],
     ];
 
     foreach ($dynamic_blocks as $block) {

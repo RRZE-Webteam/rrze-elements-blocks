@@ -4,6 +4,8 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import { InnerBlocks } from '@wordpress/block-editor';
+import deprecated from './deprecated';
 
 registerBlockType( metadata.name as any, {
 	// Used to construct a preview for the block to be shown in the block inserter.
@@ -27,5 +29,6 @@ registerBlockType( metadata.name as any, {
 	// @see ./edit.js
 	edit: Edit,
 	// @see ./save.js
-	save,
+	save: () => <InnerBlocks.Content/>,
+  deprecated
 } as any );
