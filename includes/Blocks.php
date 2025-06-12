@@ -8,6 +8,7 @@ use RRZE\Elements\News\News;
 use RRZE\ElementsBlocks\BlockFrontend\Accordion;
 use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
+use RRZE\ElementsBlocks\BlockFrontend\CallToAction;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse;
 use RRZE\ElementsBlocks\BlockFrontend\Collapsibles;
 use RRZE\ElementsBlocks\BlockFrontend\Columns;
@@ -53,7 +54,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'tabs', 'tab', 'cta', 'insertion', 'timeline', 'timeline-item'
+            'tabs', 'tab', 'insertion', 'timeline', 'timeline-item'
         ];
 
         foreach ($blocks as $block) {
@@ -120,6 +121,10 @@ class Blocks
       [
         'build_folder' => 'contentwidthlimiter',
         'class' => ContentWidthLimiter::class,
+      ],
+      [
+        'build_folder' => 'cta',
+        'class' => CallToAction::class,
       ]
     ];
 
