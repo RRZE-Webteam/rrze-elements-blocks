@@ -11,6 +11,9 @@ use RRZE\ElementsBlocks\BlockFrontend\Alert;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse;
 use RRZE\ElementsBlocks\BlockFrontend\Collapsibles;
 use RRZE\ElementsBlocks\BlockFrontend\Columns;
+use RRZE\ElementsBlocks\BlockFrontend\Counter;
+use RRZE\ElementsBlocks\BlockFrontend\CounterRow;
+use RRZE\ElementsBlocks\BlockFrontend\IconBox;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
@@ -49,8 +52,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'iconbox',
-            'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'counter', 'counter-row', 'timeline', 'timeline-item'
+            'tabs', 'tab', 'cta', 'insertion', 'contentwidthlimiter', 'timeline', 'timeline-item'
         ];
 
         foreach ($blocks as $block) {
@@ -75,38 +77,50 @@ class Blocks
   {
     $dynamic_blocks = [
       [
-        'slug'  => 'alert',
+        'build_folder'  => 'alert',
         'class' => Alert::class,
       ],
       [
-        'slug'  => 'accordion',
+        'build_folder'  => 'accordion',
         'class' => Accordion::class,
       ],
       [
-        'slug'  => 'accordions',
+        'build_folder'  => 'accordions',
         'class' => Accordions::class,
       ],
       [
-        'slug'  => 'collapse',
+        'build_folder'  => 'collapse',
         'class' => Collapse::class,
       ],
       [
-        'slug' => 'collapsibles',
+        'build_folder' => 'collapsibles',
         'class' => Collapsibles::class,
       ],
       [
-        'slug' => 'notice',
+        'build_folder' => 'notice',
         'class' => Notice::class,
       ],
       [
-        'slug' => 'columns',
+        'build_folder' => 'columns',
         'class' => Columns::class,
+      ],
+      [
+        'build_folder' => 'counter-row',
+        'class' => CounterRow::class,
+      ],
+      [
+        'build_folder' => 'counter',
+        'class' => Counter::class,
+      ],
+      [
+        'build_folder' => 'iconbox',
+        'class' => IconBox::class,
       ]
     ];
 
     foreach ($dynamic_blocks as $block) {
       register_block_type(
-        plugin_dir_path(__DIR__) . 'build/blocks/' . $block['slug'],
+        plugin_dir_path(__DIR__) . 'build/blocks/' . $block['build_folder'],
         [
           'render_callback' => function ($attributes, $block_info, $content) use ($block) {
             $class = $block['class'];
@@ -118,7 +132,7 @@ class Blocks
 
       load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
 
-      $script_handle = generate_block_asset_handle('rrze-elements/' . $block['slug'], 'editorScript');
+      $script_handle = generate_block_asset_handle('rrze-elements/' . $block['build_folder'], 'editorScript');
       wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
     }
   }
