@@ -16,6 +16,7 @@ use RRZE\ElementsBlocks\BlockFrontend\ContentWidthLimiter;
 use RRZE\ElementsBlocks\BlockFrontend\Counter;
 use RRZE\ElementsBlocks\BlockFrontend\CounterRow;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
+use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
 use RRZE\ElementsBlocks\ThemeSniffer;
 
@@ -54,7 +55,7 @@ class Blocks
     private function rrze_register_blocks_and_translations(): void
     {
         $blocks = [
-            'tabs', 'tab', 'insertion', 'timeline', 'timeline-item'
+            'tabs', 'tab', 'timeline', 'timeline-item'
         ];
 
         foreach ($blocks as $block) {
@@ -125,6 +126,10 @@ class Blocks
       [
         'build_folder' => 'cta',
         'class' => CallToAction::class,
+      ],
+      [
+        'build_folder' => 'insertion',
+        'class' => Insertion::class,
       ]
     ];
 
