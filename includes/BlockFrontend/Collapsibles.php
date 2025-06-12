@@ -16,7 +16,7 @@ class Collapsibles extends AbstractBlockRender
 
     $wrapper_class = $attributes['className'] ?? '';
 
-    $markup  = '<div class="' . esc_attr( trim( $wrapper_class ) ) . '">';
+    $markup  = '<div class="wp-block-rrze-elements-collapsibles ' . esc_attr( trim( $wrapper_class ) ) . '">';
 
     $markup .= '<div class="accordion">';
 

@@ -33,7 +33,7 @@ class Collapse extends AbstractBlockRender
     $jump_attr = esc_attr($jump_name);
     $region_id = $jump_attr . '-section';
 
-    $markup = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
+    $markup = '<div class="wp-block-rrze-elements-collapse ' . esc_attr(trim($wrapper_class)) . '">';
     $markup .= sprintf(
       '<div class="accordion-group %s">',
       esc_attr($color)
