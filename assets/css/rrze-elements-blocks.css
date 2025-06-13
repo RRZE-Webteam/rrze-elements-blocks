@@ -15070,6 +15070,27 @@ table.filtertable .tablesorter-filter-row input {
 /*!
 Functions and Mixins
 */
+.wp-block-rrze-elements-cta.color-tf .cta-content {
+  background-color: var(--color-tf-ci-hell, #04316a);
+  color: var(--color-tf-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-phil .cta-content {
+  background-color: var(--color-phil-ci-hell, #04316a);
+  color: var(--color-phil-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-rw .cta-content {
+  background-color: var(--color-rw-ci-hell, #04316a);
+  color: var(--color-rw-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-med .cta-content {
+  background-color: var(--color-med-ci-hell, #04316a);
+  color: var(--color-med-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-nat .cta-content {
+  background-color: var(--color-nat-ci-hell, #04316a);
+  color: var(--color-nat-ci-hell-kontrast, #fff);
+}
+
 .rrze-elements-cta {
   position: relative;
   margin: 2em 0;
