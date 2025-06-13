@@ -45,13 +45,10 @@ function initCounterAnimations() {
           snap: {textContent: 1},
           invalidateOnRefresh: true,
           immediateRender: false,
-          onUpdate: function () {
-            this.targets().forEach((target) => {
-              target.innerHTML = numberWithDots(
-                Math.ceil(parseInt(target.textContent.replace(/\./g, ""), 10))
-              );
-            });
+          modifiers: {
+            textContent: v => numberWithDots(Math.round(v))
           },
+
           scrollTrigger: {
             trigger: container,
             start: "top bottom",
