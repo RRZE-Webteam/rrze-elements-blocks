@@ -4,8 +4,12 @@
 export function sanitizeTitleToJumpName(title: string): string {
   if (!title) return "";
 
+  const decoded = new DOMParser()
+    .parseFromString(title, "text/html")
+    .documentElement.textContent || "";
+
   // removal of html tags
-  let sanitized = title.replace(/<[^>]*>/g, '');
+  let sanitized = decoded.replace(/<[^>]+>/g, "");
 
   // removal of common entities
   const entityMap: { [key: string]: string } = {
@@ -25,14 +29,15 @@ export function sanitizeTitleToJumpName(title: string): string {
   sanitized = sanitized.toLowerCase();
 
   sanitized = sanitized
-    .replace(/ö/g, 'oe')
-    .replace(/ä/g, 'ae')
-    .replace(/ü/g, 'ue')
-    .replace(/ß/g, 'ss');
-
-  sanitized = sanitized
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
+    .toLowerCase()
+    .replace(/ö/g, "oe")
+    .replace(/ä/g, "ae")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 
   return sanitized;
 }
