@@ -13,7 +13,8 @@ try {
     if (prefersReducedMotion) {
       items.forEach(item => {
         item.style.opacity = 1;
-        item.querySelector(".tooltip").style.opacity = 1;
+        const tooltip = item.querySelector(".tooltip");
+        if (tooltip) tooltip.style.opacity = 1;
       });
       return;
     }
