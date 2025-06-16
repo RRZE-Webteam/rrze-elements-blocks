@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.19] - 2025-06-16
+
+Dynamic Rendering and Migration.
+
+### Added
+- #238 Advanced Sanitization for JumpName Links within the Migration Phase to minimize User Error.
+- #230 New Blocks within the Timeline Block available
+- #220 Legacy CTA-Colors available via Additional color classes per faculty
+
+### Fixed
+- #229 Animation preview inside counter and timeline blocks not working
+- #232 Category Selector within the Custom News Block is not working
+
+### Changed
+- #237 Dynamic Rendering for all blocks for an easier Maintenance in the future
+
 ## [1.0.18] - 2025-04-25
 
 Minor usability and design improvements.
