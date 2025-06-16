@@ -26,7 +26,7 @@ class Counter extends AbstractBlockRender
       $button_url  = $attributes['buttonUrl'] ?? '';
       $button_text = $attributes['buttonText'] ?? '';
 
-      $html  = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
+      $html  = '<div class="wp-block-rrze-elements-rrze-counter ' . esc_attr(trim($wrapper_class)) . '">';
       $html .= '<div class="rrze--counter-element-container">';
       $html .= '<dl class="rrze-elements-counter">';
       $html .= '<dt><span class="' . esc_attr($span_class) . '" data-duration="' . esc_attr($duration) . '" data-stagger="' . esc_attr($stagger) . '">' . esc_html($title) . '</span></dt>';
