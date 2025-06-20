@@ -98,7 +98,7 @@ export default function Edit({
           colorData={colorDataAlert}
           hex={true}
           useStyle={true}
-          customColor={false}
+          customColor={true}
           useTextColor={true}
         />
         <ContrastChecker
@@ -140,6 +140,12 @@ export default function Edit({
       <div
         className={`alert clearfix clear ${
           attributes.style ? `alert-${attributes.style}` : ""
+        } ${
+          attributes.textColor &&
+          (attributes.textColor.toLowerCase() === "#fff" ||
+            attributes.textColor.toLowerCase() === "#ffffff")
+            ? "font-light"
+            : ""
         }`}
         style={{
           ...(attributes.style

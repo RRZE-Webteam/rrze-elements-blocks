@@ -12450,16 +12450,34 @@ Functions and Mixins
   color: #fff;
   letter-spacing: 0.03em;
 }
-.alert.font-light * {
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > p,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > strong,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > h1,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > h2,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > h3,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > h4,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > h5,
+.alert.font-light .block-editor-inner-blocks > .block-editor-block-list__layout > h6 {
   color: #fff;
   letter-spacing: 0.03em;
 }
-.alert.font-light a {
+.alert.font-light > p, .alert.font-light > strong, .alert.font-light > h6, .alert.font-light > h5, .alert.font-light > h4, .alert.font-light > h3, .alert.font-light > h2, .alert.font-light > h1, .alert.font-light > a {
   color: #fff;
-  text-decoration-color: inherit;
+  letter-spacing: 0.03em;
 }
 .alert.font-light a:hover, .alert.font-light a:focus, .alert.font-light a:active {
   color: rgb(229.5, 229.5, 229.5);
+}
+.alert.font-light .faudir {
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #000;
+}
+.alert.font-light .faudir .format-compact-container {
+  margin-bottom: 0;
+}
+.alert.font-light .faudir a:hover, .alert.font-light .faudir a:focus, .alert.font-light .faudir a:active {
+  color: #04316a;
 }
 .alert a.standard-btn {
   margin-bottom: 0;
@@ -12493,6 +12511,23 @@ Functions and Mixins
   color: #78302f;
   background-color: #f2dede;
   border-color: #ebccd1;
+}
+
+.alert-success .faudir, .alert-warning .faudir, .alert-danger .faudir, .alert-info .faudir, .alert-default .faudir {
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #000;
+}
+.alert-success .faudir *:not(code, pre), .alert-warning .faudir *:not(code, pre), .alert-danger .faudir *:not(code, pre), .alert-info .faudir *:not(code, pre), .alert-default .faudir *:not(code, pre) {
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+}
+.alert-success .faudir .format-compact-container, .alert-warning .faudir .format-compact-container, .alert-danger .faudir .format-compact-container, .alert-info .faudir .format-compact-container, .alert-default .faudir .format-compact-container {
+  margin-bottom: 0;
+}
+.alert-success .faudir a:hover, .alert-success .faudir a:focus, .alert-success .faudir a:active, .alert-warning .faudir a:hover, .alert-warning .faudir a:focus, .alert-warning .faudir a:active, .alert-danger .faudir a:hover, .alert-danger .faudir a:focus, .alert-danger .faudir a:active, .alert-info .faudir a:hover, .alert-info .faudir a:focus, .alert-info .faudir a:active, .alert-default .faudir a:hover, .alert-default .faudir a:focus, .alert-default .faudir a:active {
+  color: #04316a;
 }
 
 .alert.alert-danger p {

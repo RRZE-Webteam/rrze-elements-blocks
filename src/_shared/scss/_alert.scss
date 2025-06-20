@@ -2,118 +2,180 @@
 @use "mixins" as m;
 
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    font-weight: normal;
-    background-color: #e9edf2;
-    overflow: hidden;
-    color: #000;
-    p, strong {
-        color: inherit;
-    }
-    &.font-light  {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  font-weight: normal;
+  background-color: #e9edf2;
+  overflow: hidden;
+  color: #000;
+
+  p, strong {
+    color: inherit;
+  }
+
+  &.font-light {
+    color: #fff;
+    letter-spacing: 0.03em;
+
+    .block-editor-inner-blocks > .block-editor-block-list__layout {
+      > p,
+      > strong,
+      > h1,
+      > h2,
+      > h3,
+      > h4,
+      > h5,
+      > h6 {
         color: #fff;
         letter-spacing: 0.03em;
-        * {
-            color: #fff;
-            letter-spacing: 0.03em;
-        }
-        a {
-            color: #fff;
-            text-decoration-color: inherit;
-            &:hover, &:focus, &:active{
-                color: darken(#fff, 10%);
+      }
+    }
 
-            }
-        }
+
+    & > p, & > strong, & > h6, & > h5, & > h4, & > h3, & > h2, & > h1, & > a {
+      color: #fff;
+      letter-spacing: 0.03em;
     }
-    a.standard-btn {
+
+    & a:hover, & a:focus, & a:active {
+      color: darken(#fff, 10%);
+    }
+
+    & .faudir{
+      padding: .5rem 1rem;
+      .format-compact-container{
         margin-bottom: 0;
+      }
+      background-color: #fff;
+      color: #000;
+
+      a:hover, a:focus, a:active {
+        color: #04316a;
+      }
     }
-    :last-child {
-        margin-bottom: 0;
-    }
-    p:last-child {
-        padding-bottom: 0; // für FAU-Themes
-    }
+  }
+
+  a.standard-btn {
+    margin-bottom: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  p:last-child {
+    padding-bottom: 0; // für FAU-Themes
+  }
 }
+
 .alert-success, .alert-success *:not(code, pre) {
-    color: #315f31;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+  color: #315f31;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
 }
+
 .alert-info, .alert-info *:not(code, pre) {
-    color: #245269  ;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
+  color: #245269;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
 }
+
 .alert-warning, .alert-warning *:not(code, pre) {
-    color: #66512c;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
+  color: #66512c;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
+
 .alert-danger, .alert-danger *:not(code, pre) {
-    color: #78302f;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  color: #78302f;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
+
+.alert-success, .alert-warning, .alert-danger, .alert-info, .alert-default{
+  & .faudir{
+    *:not(code, pre){
+      color: inherit;
+      background-color: inherit;
+      border-color: inherit;
+    }
+
+    padding: .5rem 1rem;
+    .format-compact-container{
+      margin-bottom: 0;
+    }
+    background-color: #fff;
+    color: #000;
+
+    a:hover, a:focus, a:active {
+      color: #04316a;
+    }
+  }
+}
+
 .alert.alert-danger p {
-    line-height: 1.5;
+  line-height: 1.5;
 }
 
 .alert-example,
 #content .alert-example {
-    margin: 30px 20px 40px;
-    padding: 30px 10px 5px;
-    position: relative;
+  margin: 30px 20px 40px;
+  padding: 30px 10px 5px;
+  position: relative;
+  background: #fff;
+  overflow: initial;
+  border: 1px dashed var(--color-TextLight, v.$medium-grey);
+  border-radius: var(--border-radius, 3px);
+
+  &:after {
     background: #fff;
-    overflow: initial;
     border: 1px dashed var(--color-TextLight, v.$medium-grey);
-    border-radius: var(--border-radius, 3px);
-    &:after {
-        background: #fff;
-        border: 1px dashed var(--color-TextLight, v.$medium-grey);
-        color: var(--color-Text);
-        content: "Beispiel";
-        font-family: sans-serif;
-        font-size: .8rem;
-        line-height: inherit;
-        font-weight: 700;
-        padding: 3px 10px;
-        position: absolute;
-        right: 20px;
-        text-transform: uppercase;
-        top: -1.2rem;
-        z-index: 1;
-        overflow: auto;
-        :lang(en) & {
-            content: 'Example';
-        }
-        .fau-events & {
-            width: auto;
-            height: auto;
-            visibility: initial;
-        }
+    color: var(--color-Text);
+    content: "Beispiel";
+    font-family: sans-serif;
+    font-size: .8rem;
+    line-height: inherit;
+    font-weight: 700;
+    padding: 3px 10px;
+    position: absolute;
+    right: 20px;
+    text-transform: uppercase;
+    top: -1.2rem;
+    z-index: 1;
+    overflow: auto;
+
+    :lang(en) & {
+      content: 'Example';
     }
-    &[title]:after {
-        content: attr(title);
+
+    .fau-events & {
+      width: auto;
+      height: auto;
+      visibility: initial;
     }
+  }
+
+  &[title]:after {
+    content: attr(title);
+  }
 }
 
 .fau-theme {
-    #content .alert {
-        h2 {
-            padding-top: 7px;
-        }
-        p {
-            padding: 5px 0;
-        }
-        margin-left: calc(var(--gutter-halfwidth, 15px) * -1);
-        margin-right: calc(var(--gutter-halfwidth, 15px) * -1);
-        @media (min-width: 768px) {
-            margin-left: 0;
-            margin-right: 0;
-        }
+  #content .alert {
+    h2 {
+      padding-top: 7px;
     }
+
+    p {
+      padding: 5px 0;
+    }
+
+    margin-left: calc(var(--gutter-halfwidth, 15px) * -1);
+    margin-right: calc(var(--gutter-halfwidth, 15px) * -1);
+    @media (min-width: 768px) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
 }
