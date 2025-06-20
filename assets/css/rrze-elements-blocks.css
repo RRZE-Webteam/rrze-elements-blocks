@@ -15105,27 +15105,6 @@ table.filtertable .tablesorter-filter-row input {
 /*!
 Functions and Mixins
 */
-.wp-block-rrze-elements-cta.color-tf .cta-content {
-  background-color: var(--color-tf-ci-hell, #04316a);
-  color: var(--color-tf-ci-hell-kontrast, #fff);
-}
-.wp-block-rrze-elements-cta.color-phil .cta-content {
-  background-color: var(--color-phil-ci-hell, #04316a);
-  color: var(--color-phil-ci-hell-kontrast, #fff);
-}
-.wp-block-rrze-elements-cta.color-rw .cta-content {
-  background-color: var(--color-rw-ci-hell, #04316a);
-  color: var(--color-rw-ci-hell-kontrast, #fff);
-}
-.wp-block-rrze-elements-cta.color-med .cta-content {
-  background-color: var(--color-med-ci-hell, #04316a);
-  color: var(--color-med-ci-hell-kontrast, #fff);
-}
-.wp-block-rrze-elements-cta.color-nat .cta-content {
-  background-color: var(--color-nat-ci-hell, #04316a);
-  color: var(--color-nat-ci-hell-kontrast, #fff);
-}
-
 .rrze-elements-cta {
   position: relative;
   margin: 2em 0;
@@ -15426,6 +15405,31 @@ Functions and Mixins
 .wp-block-rrze-elements-cta .rrze-elements-cta-icon {
   font-size: 1.25em;
   margin-left: 1em;
+}
+
+.wp-block-rrze-elements-cta.color-tf .cta-content {
+  background-color: var(--color-tf-dunkler, #04316a);
+  color: var(--color-tf-dunkler-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-tf .cta-button-container .cta-button:hover, .wp-block-rrze-elements-cta.color-tf .cta-button-container .cta-button:focus, .wp-block-rrze-elements-cta.color-tf .cta-button-container .cta-button:active {
+  color: var(--color-tf-dunkelste-kontrast, #004a9f);
+  background-color: var(--color-tf-dunkelste, #fff);
+}
+.wp-block-rrze-elements-cta.color-phil .rrze-elements-cta {
+  background-color: var(--color-phil-ci-hell, #04316a);
+  color: var(--color-phil-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-rw .rrze-elements-cta {
+  background-color: var(--color-rw-ci-hell, #04316a);
+  color: var(--color-rw-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-med .rrze-elements-cta {
+  background-color: var(--color-med-ci-hell, #04316a);
+  color: var(--color-med-ci-hell-kontrast, #fff);
+}
+.wp-block-rrze-elements-cta.color-nat .rrze-elements-cta {
+  background-color: var(--color-nat-ci-hell, #04316a);
+  color: var(--color-nat-ci-hell-kontrast, #fff);
 }
 
 .rrze--counter-element {

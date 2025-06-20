@@ -1,29 +1,6 @@
 @use "variables" as v;
 @use "mixins" as m;
 
-.wp-block-rrze-elements-cta {
-  &.color-tf .cta-content{
-    background-color: var(--color-tf-dunkler, #04316a);
-    color: var(--color-tf-dunkler-kontrast, #fff);
-  }
-  &.color-phil .cta-content{
-    background-color: var(--color-phil-ci-hell, #04316a);
-    color: var(--color-phil-ci-hell-kontrast, #fff);
-  }
-  &.color-rw .cta-content{
-    background-color: var(--color-rw-ci-hell, #04316a);
-    color: var(--color-rw-ci-hell-kontrast, #fff);
-  }
-  &.color-med .cta-content{
-    background-color: var(--color-med-ci-hell, #04316a);
-    color: var(--color-med-ci-hell-kontrast, #fff);
-  }
-  &.color-nat .cta-content{
-    background-color: var(--color-nat-ci-hell, #04316a);
-    color: var(--color-nat-ci-hell-kontrast, #fff);
-  }
-}
-
 .rrze-elements-cta {
   position: relative;
   margin: 2em 0;
@@ -353,4 +330,42 @@
     font-size: 1.25em;
     margin-left: 1em;
   }
+}
+
+.wp-block-rrze-elements-cta {
+  &.color-tf .cta-content {
+    background-color: var(--color-tf-dunkler, #04316a);
+    color: var(--color-tf-dunkler-kontrast, #fff);
+  }
+
+  &.color-tf .cta-button-container .cta-button {
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--color-tf-dunkelste-kontrast, #004a9f);
+      background-color: var(--color-tf-dunkelste, #fff);
+
+    }
+  }
+
+  &.color-phil .rrze-elements-cta {
+    background-color: var(--color-phil-ci-hell, #04316a);
+    color: var(--color-phil-ci-hell-kontrast, #fff);
+  }
+
+  &.color-rw .rrze-elements-cta {
+    background-color: var(--color-rw-ci-hell, #04316a);
+    color: var(--color-rw-ci-hell-kontrast, #fff);
+  }
+
+  &.color-med .rrze-elements-cta {
+    background-color: var(--color-med-ci-hell, #04316a);
+    color: var(--color-med-ci-hell-kontrast, #fff);
+  }
+
+  &.color-nat .rrze-elements-cta {
+    background-color: var(--color-nat-ci-hell, #04316a);
+    color: var(--color-nat-ci-hell-kontrast, #fff);
+  }
+
 }
