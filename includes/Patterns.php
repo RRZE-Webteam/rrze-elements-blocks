@@ -259,6 +259,6 @@ class Patterns
      */
     private function is_development_environment()
     {
-        return wp_get_environment_type() === 'local' || 'development';
+        return wp_get_environment_type() === 'local' || wp_get_environment_type() === 'development';
     }
 }
