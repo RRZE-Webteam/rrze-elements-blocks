@@ -2,9 +2,9 @@ import { registerBlockType } from '@wordpress/blocks';
 import './editor.scss';
 
 import Edit from './edit';
-import save from './save';
 import metadata from './block.json';
 import deprecated from "./deprecated";
+import {InnerBlocks} from "@wordpress/block-editor";
 
 registerBlockType( metadata.name as any, {
 	// Used to construct a preview for the block to be shown in the block inserter.
@@ -17,10 +17,7 @@ registerBlockType( metadata.name as any, {
 		src: "align-center",
 		background: "#00458c"
 	},
-	// @see ./edit.js
 	edit: Edit,
-
-	// @see ./save.js
-	save,
+  save: () => <InnerBlocks.Content />,
 	deprecated
 } );

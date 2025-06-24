@@ -56,7 +56,6 @@ const updateColorAttributes = (
 			setAttributes({ textColor: newFontColor });
 		}
 	} catch (error) {
-		//eslint-disable-next-line
 		console.error(
 			"Invalid color string provided to updateColorAttributes:",
 			error,
@@ -77,7 +76,7 @@ const updateColorAttributes = (
 const handleColorChange = (
 	colorData: { color: string; slug: string; name: string }[],
 	newColor: string,
-	setAttributes: (newAttributes: { color?: string; style?: string }) => void,
+	setAttributes: (newAttributes: { color?: string; style?: string; textColor?: string }) => void,
 	outputHex: boolean = false,
 	useStyle: boolean = false,
 	useTextColor: boolean = false,

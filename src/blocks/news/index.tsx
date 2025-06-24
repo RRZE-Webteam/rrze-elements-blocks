@@ -1,8 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 
 import Edit from './edit';
-//@ts-ignore
-import save from './save';
 import metadata from './block.json';
 import './editor.scss';
 
@@ -23,5 +21,5 @@ registerBlockType( metadata.name as any, {
 	edit: Edit,
 
 	// @see ./save.js
-	save,
+	save: (): any => null,
 } as any );

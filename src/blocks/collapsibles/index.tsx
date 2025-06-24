@@ -1,10 +1,10 @@
 import { registerBlockType } from "@wordpress/blocks";
 import "./editor.scss";
 import Edit from "./edit";
-import save from "./save";
 import metadata from "./block.json";
 import deprecated from "./deprecated";
 import transforms from "./transforms";
+import {InnerBlocks} from "@wordpress/block-editor";
 
 registerBlockType(
   metadata.name as any,
@@ -65,7 +65,7 @@ registerBlockType(
     /**
      * @see ./save.js
      */
-    save,
+    save: () => <InnerBlocks.Content />,
     deprecated,
     transforms,
   } as any,

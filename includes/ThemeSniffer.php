@@ -21,7 +21,8 @@ class ThemeSniffer {
                 'FAU-Natfak',
                 'FAU-RWFak',
                 'Fau-Blog',
-                'FAU Jobportal'
+                'FAU Jobportal',
+                'FAU-Elemental'
             ],
             'rrzethemes' => ['rrze-2019'],
             'eventthemes' => ['FAU-Events'],

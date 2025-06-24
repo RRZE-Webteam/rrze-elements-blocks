@@ -35,8 +35,8 @@ class Main
         add_action('rest_api_init', function () {
             register_rest_route('rrze-elements-blocks/v1', '/jump-names', [
                 'methods' => 'GET',
-                'callback' => [$this, 'getJumpNames'], // Use a method within the class
-                'permission_callback' => '__return_true', // Allow public access
+                'callback' => [$this, 'getJumpNames'],
+                'permission_callback' => '__return_true',
             ]);
         });
     }

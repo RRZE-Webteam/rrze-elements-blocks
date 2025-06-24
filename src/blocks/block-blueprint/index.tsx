@@ -1,9 +1,9 @@
 import { registerBlockType } from '@wordpress/blocks';
 
 import Edit from './edit';
-import save from './save';
 import metadata from './block.json';
 import './editor.scss';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 registerBlockType( metadata.name as any, {
 	icon: {
@@ -20,5 +20,5 @@ registerBlockType( metadata.name as any, {
 	edit: Edit,
 
 	// @see ./save.js
-	save,
+	save: () => <InnerBlocks.Content />,
 } as any );

@@ -5,9 +5,9 @@ import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
 import Edit from "./edit";
-import save from "./save";
 import metadata from "./block.json";
 import deprecated from "./deprecated";
+import {InnerBlocks} from "@wordpress/block-editor";
 
 interface AttributesV1 {
   totalChildrenCount?: number;
@@ -31,7 +31,7 @@ interface LabelContext {
 
 registerBlockType(metadata.name as any, {
   edit: Edit,
-  save,
+  save: () => <InnerBlocks.Content />,
   deprecated,
   icon: {
     src: (

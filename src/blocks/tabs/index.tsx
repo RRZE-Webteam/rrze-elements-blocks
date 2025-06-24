@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks';
 
 import Edit from './edit';
-import save from './save';
 import metadata from './block.json';
+import deprecated from './deprecated';
 import './editor.scss';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 registerBlockType( metadata.name as any, {
 	icon: {
@@ -12,5 +13,6 @@ registerBlockType( metadata.name as any, {
 	// @see ./edit.js
 	edit: Edit,
 	// @see ./save.js
-	save,
+	save: () => <InnerBlocks.Content />,
+  deprecated
 } as any );

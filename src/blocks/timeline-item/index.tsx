@@ -2,9 +2,10 @@ import { registerBlockType } from "@wordpress/blocks";
 import "./editor.scss";
 
 import Edit from "./edit";
-import save from "./save";
 import metadata from "./block.json";
 import { __, sprintf } from "@wordpress/i18n";
+import deprecated from "./deprecated";
+import { InnerBlocks } from "@wordpress/block-editor";
 
 interface AttributesV1 {
   title: string;
@@ -120,7 +121,8 @@ registerBlockType(
     edit: Edit,
 
     // @see ./save.js
-    save,
+    save: () => <InnerBlocks.Content />,
+    deprecated,
     __experimentalLabel: (
       attributes: BlockAttributes,
       { context }: LabelContext

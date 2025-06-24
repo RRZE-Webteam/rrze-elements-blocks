@@ -1,19 +1,20 @@
-/**
- * Utility function to create JumpName out of title attributes
- */
+var he = require('he');
+
 export function sanitizeTitleToJumpName(title: string): string {
-    if (!title) return "";
-    let sanitized = title.toLowerCase();
+  if (!title) return "";
 
-    sanitized = sanitized
-        .replace(/ö/g, 'oe')
-        .replace(/ä/g, 'ae')
-        .replace(/ü/g, 'ue')
-        .replace(/ß/g, 'ss');
+  let cleaned = he.decode(title);
 
-    sanitized = sanitized
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '');
+  cleaned = cleaned
+    .replace(/ö/gi, "oe")
+    .replace(/ä/gi, "ae")
+    .replace(/ü/gi, "ue")
+    .replace(/ß/gi, "ss");
 
-    return sanitized;
+  return cleaned
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
