@@ -10,7 +10,7 @@ abstract class AbstractBlockRender
    * @param array $attributes A clean associative array of block attributes.
    * @param string $innerBlocks All the inner block semantics.
    */
-  abstract public function render($attributes, $innerBlocks): string;
+  abstract public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string;
 }
 
 

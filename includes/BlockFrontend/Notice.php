@@ -25,8 +25,12 @@ class Notice extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks): string
+    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
+      if ( $block && ! empty( trim($block->inner_html )) ) {
+        return $innerBlocks;
+      }
+
       $variation   = isset( $attributes['style'] ) ? $attributes['style'] : '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
 

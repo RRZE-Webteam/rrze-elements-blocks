@@ -10,7 +10,7 @@ class Insertion extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks): string
+    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
       $alignment   = $attributes['alignment'] ?? '';
       $extra_class = $attributes['className'] ?? '';

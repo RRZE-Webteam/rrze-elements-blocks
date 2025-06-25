@@ -10,7 +10,7 @@ class Columns extends AbstractBlockRender
   /**
    * @inheritDoc
    */
-  public function render($attributes, $innerBlocks): string
+  public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
   {
     $wrapper_class = 'elements-textcolumns' . (!empty($attributes['className']) ? ' ' . $attributes['className'] : '');
 

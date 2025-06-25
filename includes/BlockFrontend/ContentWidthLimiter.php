@@ -10,7 +10,7 @@ class ContentWidthLimiter extends AbstractBlockRender
   /**
    * @inheritDoc
    */
-  public function render($attributes, $innerBlocks): string
+  public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
   {
     $width = isset($attributes['width']) ? (int)$attributes['width'] : 0;
     $character_width = round($width * 0.125);

@@ -9,7 +9,7 @@ class Alert extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes = [], $innerBlocks = ''): string
+    public function render($attributes = [], $innerBlocks = '', ?\WP_Block $block = null): string
     {
       $style = isset($attributes['style']) ? esc_attr($attributes['style']) : 'default';
       $title = isset($attributes['title']) ? esc_attr($attributes['title']) : '';

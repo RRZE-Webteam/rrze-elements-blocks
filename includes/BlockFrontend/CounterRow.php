@@ -27,7 +27,7 @@ class CounterRow extends AbstractBlockRender
   /**
    * @inheritDoc
    */
-  public function render($attributes, $innerBlocks): string
+  public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
   {
     $innerBlocks = $this->strip_legacy_wrapper( $innerBlocks );
 
