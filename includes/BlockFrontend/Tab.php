@@ -12,19 +12,23 @@ class Tab extends AbstractBlockRender
      */
     public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
-      $tabs_uid      = isset($attributes['tabsUid']) ? $attributes['tabsUid'] : '';
-      $block_id      = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-      $uid           = substr($block_id, 0, 10);
-      $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
-      $title         = isset($attributes['title']) ? $attributes['title'] : '';
+        if ($block && !empty(trim($block->inner_html))) {
+            return $innerBlocks;
+        }
 
-      $div_id = 'tab-' . $tabs_uid . '_tabpanel_tab-label-' . $uid;
+        $tabs_uid = isset($attributes['tabsUid']) ? $attributes['tabsUid'] : '';
+        $block_id = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $uid = substr($block_id, 0, 10);
+        $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
+        $title = isset($attributes['title']) ? $attributes['title'] : '';
 
-      $html  = '<div id="' . esc_attr($div_id) . '" role="tabpanel" aria-labelledby="' . esc_attr($uid) . '" class="' . esc_attr($wrapper_class) . '">';
-      $html .= '<h2 class="print-only">' . esc_html($title) . '</h2>';
-      $html .= $innerBlocks;
-      $html .= '</div>';
+        $div_id = 'tab-' . $tabs_uid . '_tabpanel_tab-label-' . $uid;
 
-      return $html;
+        $html = '<div id="' . esc_attr($div_id) . '" role="tabpanel" aria-labelledby="' . esc_attr($uid) . '" class="' . esc_attr($wrapper_class) . '">';
+        $html .= '<h2 class="print-only">' . esc_html($title) . '</h2>';
+        $html .= $innerBlocks;
+        $html .= '</div>';
+
+        return $html;
     }
 }

@@ -12,7 +12,7 @@ class Accordion extends AbstractBlockRender
      */
     public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
-        if ( $block && ! empty( trim($block->inner_html )) ) {
+        if ($block && !empty(trim($block->inner_html))) {
             return $innerBlocks;
         }
 

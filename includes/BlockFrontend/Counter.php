@@ -12,30 +12,34 @@ class Counter extends AbstractBlockRender
      */
     public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
-      $wrapper_class = $attributes['className'] ?? '';
+        if ($block && !empty(trim($block->inner_html))) {
+            return $innerBlocks;
+        }
 
-      $font_size  = !empty($attributes['fontSize']) ? sanitize_html_class($attributes['fontSize']) : 'large';
-      $span_class = 'fau-counter-data rrze-counter-' . $font_size;
+        $wrapper_class = $attributes['className'] ?? '';
 
-      $duration = $attributes['duration'] ?? '';
-      $stagger  = $attributes['stagger'] ?? '';
+        $font_size = !empty($attributes['fontSize']) ? sanitize_html_class($attributes['fontSize']) : 'large';
+        $span_class = 'fau-counter-data rrze-counter-' . $font_size;
 
-      $title       = $attributes['title'] ?? '';
-      $description = $attributes['description'] ?? '';
+        $duration = $attributes['duration'] ?? '';
+        $stagger = $attributes['stagger'] ?? '';
 
-      $button_url  = $attributes['buttonUrl'] ?? '';
-      $button_text = $attributes['buttonText'] ?? '';
+        $title = $attributes['title'] ?? '';
+        $description = $attributes['description'] ?? '';
 
-      $html  = '<div class="wp-block-rrze-elements-rrze-counter ' . esc_attr(trim($wrapper_class)) . '">';
-      $html .= '<div class="rrze--counter-element-container">';
-      $html .= '<dl class="rrze-elements-counter">';
-      $html .= '<dt><span class="' . esc_attr($span_class) . '" data-duration="' . esc_attr($duration) . '" data-stagger="' . esc_attr($stagger) . '">' . esc_html($title) . '</span></dt>';
-      $html .= '<dd>' . wp_kses_post($description) . '<br />';
-      if ($button_url) {
-        $html .= '<a class="standard-btn ghost-btn" href="' . esc_url($button_url) . '" data-wpel-link="internal">' . esc_html($button_text) . '</a>';
-      }
-      $html .= '</dd></dl></div></div>';
+        $button_url = $attributes['buttonUrl'] ?? '';
+        $button_text = $attributes['buttonText'] ?? '';
 
-      return $html;
+        $html = '<div class="wp-block-rrze-elements-rrze-counter ' . esc_attr(trim($wrapper_class)) . '">';
+        $html .= '<div class="rrze--counter-element-container">';
+        $html .= '<dl class="rrze-elements-counter">';
+        $html .= '<dt><span class="' . esc_attr($span_class) . '" data-duration="' . esc_attr($duration) . '" data-stagger="' . esc_attr($stagger) . '">' . esc_html($title) . '</span></dt>';
+        $html .= '<dd>' . wp_kses_post($description) . '<br />';
+        if ($button_url) {
+            $html .= '<a class="standard-btn ghost-btn" href="' . esc_url($button_url) . '" data-wpel-link="internal">' . esc_html($button_text) . '</a>';
+        }
+        $html .= '</dd></dl></div></div>';
+
+        return $html;
     }
 }
