@@ -140,21 +140,22 @@ class Blocks
       ]
     ];
 
-    foreach ($dynamic_blocks as $block) {
+    foreach ( $dynamic_blocks as $block_def ) {
       register_block_type(
-        plugin_dir_path(__DIR__) . 'build/blocks/' . $block['build_folder'],
+        plugin_dir_path( __DIR__ ) . 'build/blocks/' . $block_def['build_folder'],
         [
-          'render_callback' => function ($attributes, $block_info, $content) use ($block) {
-            $class = $block['class'];
+          'render_callback' => function ( $attributes, $content, $block ) use ( $block_def ) {
+            $class    = $block_def['class'];
             $instance = new $class();
-            return $instance->render($attributes, $block_info, $content);
+
+            return $instance->render( $attributes, $content, $block );
           },
         ]
       );
 
       load_plugin_textdomain('rrze-elements-blocks', false, dirname(plugin_basename(__DIR__)) . 'languages');
 
-      $script_handle = generate_block_asset_handle('rrze-elements/' . $block['build_folder'], 'editorScript');
+      $script_handle = generate_block_asset_handle('rrze-elements/' . $block_def['build_folder'], 'editorScript');
       wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
     }
   }

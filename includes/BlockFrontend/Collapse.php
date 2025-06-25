@@ -11,8 +11,12 @@ class Collapse extends AbstractBlockRender
   /**
    * @inheritDoc
    */
-  public function render($attributes, $innerBlocks): string
+  public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
   {
+      if ( $block && ! empty( trim($block->inner_html )) ) {
+          return $innerBlocks;
+      }
+
     $color = isset($attributes['color']) ? sanitize_html_class($attributes['color']) : '';
     $title = isset($attributes['title']) ? wp_kses_post($attributes['title']) : '';
     $jump_name = isset($attributes['jumpName']) ? $attributes['jumpName'] : '';
@@ -21,7 +25,6 @@ class Collapse extends AbstractBlockRender
     $svg_class = isset($attributes['svgString']) ? sanitize_html_class($attributes['svgString']) : '';
     $svg_class = preg_replace('/(fa-(solid|regular|brands))(fa-)/', '$1 $3', $svg_class);
 
-    Helper::debug($svg_class);
 
     $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
 

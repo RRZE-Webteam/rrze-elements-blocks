@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\Helper;
 
 class Collapsibles extends AbstractBlockRender
 {
@@ -10,7 +11,12 @@ class Collapsibles extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-  public function render( $attributes = [], $innerBlocks = '' ) : string {
+  public function render( $attributes = [], $innerBlocks = '', ?\WP_Block $block = null) : string {
+
+      if ( $block && ! empty( trim($block->inner_html )) ) {
+          return $innerBlocks;
+      }
+
     $expand_all_link = ! empty( $attributes['expandAllLink'] );
     $expand_label    = $attributes['expandLabel'] ?? '';
 

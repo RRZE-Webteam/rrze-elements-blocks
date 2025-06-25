@@ -10,7 +10,7 @@ class Tab extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks): string
+    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
       $tabs_uid      = isset($attributes['tabsUid']) ? $attributes['tabsUid'] : '';
       $block_id      = isset($attributes['blockId']) ? $attributes['blockId'] : '';

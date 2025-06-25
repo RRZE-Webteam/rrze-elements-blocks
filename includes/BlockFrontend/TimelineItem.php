@@ -10,7 +10,7 @@ class TimelineItem extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks): string
+    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
       $wrapper_class = $attributes['className'] ?? '';
 

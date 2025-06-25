@@ -10,8 +10,12 @@ class Accordion extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks): string
+    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
+        if ( $block && ! empty( trim($block->inner_html )) ) {
+            return $innerBlocks;
+        }
+
       // Attributes
       $same_block_count     = isset( $attributes['sameBlockCount'] )     ? (int) $attributes['sameBlockCount']     : 0;
       $total_children_count = isset( $attributes['totalChildrenCount'] ) ? (int) $attributes['totalChildrenCount'] : 0;
