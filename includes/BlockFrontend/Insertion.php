@@ -12,11 +12,15 @@ class Insertion extends AbstractBlockRender
      */
     public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
-      $alignment   = $attributes['alignment'] ?? '';
-      $extra_class = $attributes['className'] ?? '';
+        if ($block && !empty(trim($block->inner_html))) {
+            return $innerBlocks;
+        }
 
-      $classes = trim('pull-' . $alignment . ' ' . $extra_class);
+        $alignment = $attributes['alignment'] ?? '';
+        $extra_class = $attributes['className'] ?? '';
 
-      return '<aside class="' . esc_attr($classes) . '">' . $innerBlocks . '</aside>';
+        $classes = trim('pull-' . $alignment . ' ' . $extra_class);
+
+        return '<aside class="' . esc_attr($classes) . '">' . $innerBlocks . '</aside>';
     }
 }

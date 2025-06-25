@@ -31,6 +31,10 @@ class Notice extends AbstractBlockRender
         return $innerBlocks;
       }
 
+      if ( $block && ! empty( trim($block->inner_html )) ) {
+        return $innerBlocks;
+      }
+
       $variation   = isset( $attributes['style'] ) ? $attributes['style'] : '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
 
