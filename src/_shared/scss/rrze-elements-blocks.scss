@@ -1,8 +1,8 @@
 // Konstanten fuer das Design
-@import "variables";
+@import "base-styles/variables";
 
 // Mixins
-@import "mixins";
+@import "base-styles/mixins";
 
 // Fontawesome Webfonts
 @import "../fontawesome/scss/fontawesome";
@@ -11,77 +11,80 @@
 @import "../fontawesome/scss/brands";
 
 // FlexSlider
-@import "flexslider";
+@import "base-styles/flexslider";
 
 // Accordion
-@import "accordion";
+@import "base-styles/accordion";
 
 //Tabs
-@import "tabs";
+@import "base-styles/tabs";
 
 // Absatzklassen
-@import "notice";
+@import "base-styles/notice";
 
 // Alerts
-@import "alert";
+@import "base-styles/alert";
 
 // Button
-@import "button";
+@import "base-styles/button";
 
 // Columns
-@import "columns";
+@import "base-styles/columns";
 
 // ContentIndex
-@import "contentindex";
+@import "base-styles/contentindex";
 
 // Lightbox
-@import "lightbox";
+@import "base-styles/lightbox";
 
 // News
-@import "news";
+@import "base-styles/news";
 
 // PullDiv
-@import "pulldiv";
+@import "base-styles/pulldiv";
 
 // Timeline
-@import "timeline";
-@import "timelineblock";
+@import "base-styles/timeline";
+@import "base-styles/timelineblock";
 
 // Gallery (Teile davon sind auch in Flexslider)
-@import "gallery";
+@import "base-styles/gallery";
 
 // Legal Text
-@import "legal-text";
+@import "base-styles/legal-text";
 
 // Assistant
-@import "assistant";
+@import "base-styles/assistant";
 
 // Symbole
-@import "symbols";
+@import "base-styles/symbols";
 
 // LaTeX
-@import "latex";
+@import "base-styles/latex";
 
 //Font-Awesome-Icons
-@import "icons";
+@import "base-styles/icons";
 
 //Text-Columns (Fließtext in Spalten)
-@import "textcolumns";
+@import "base-styles/textcolumns";
 
 //Table Sort/Filter
-@import "tables";
+@import "base-styles/tables";
 
 // Limit-Width
-@import "limit-width";
+@import "base-styles/limit-width";
 
 //CTA
-@import "cta";
+@import "base-styles/cta";
 
 //Counter
-@import "counter";
+@import "base-styles/counter";
 
 //Iconbox
-@import "iconbox";
+@import "base-styles/iconbox";
 
 //Scroll Stories
-@import "scrollstories";
+@import "base-styles/scrollstories";
+
+//Compatibility Layer
+@import "fau-elemental-compatibility-layer/accordion";

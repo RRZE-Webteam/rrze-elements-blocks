@@ -1,6 +1,6 @@
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
-@import "../../_shared/scss/tabs";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
+@import "../../_shared/scss/base-styles/tabs";
 
 $colormaps : (
     zentral: ("basis": #04316A, "basis-kontrast": #fff,"heller": #8fb1ef, "hellste": #dde5f0, "dunkler": #004A9F, "dunkler-kontrast": #fff, "dunkelste": #041E42, "dunkelste-kontrast": #fff, "ci-hell": #04316A, "ci-hell-kontrast": #fff, "ci-hell2": #CED9E7, "ci-hell2-kontrast": #000),
@@ -14,7 +14,7 @@ $colormaps : (
 
 .rrze-elements-tabs {
     margin-bottom: 1em;
- 
+
     [role="tab"],
     [role="tab"]:focus,
     [role="tab"]:hover {
@@ -40,7 +40,7 @@ $colormaps : (
             flex-wrap: nowrap;
             justify-content: center;
             align-items: baseline;
-            
+
             &>svg {
                 padding: 0;
                 border-radius: 0 !important;
@@ -66,11 +66,11 @@ $colormaps : (
             top: 1px;
         }
         span.focus {
-            
+
             display: inline;
             margin: 2px;
             padding: 4px 6px;
-            
+
             &>svg {
                 padding: 0;
                 border-radius: 0 !important;
@@ -194,5 +194,5 @@ $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
             display: none !important;
         }
     }
-    
+
 }

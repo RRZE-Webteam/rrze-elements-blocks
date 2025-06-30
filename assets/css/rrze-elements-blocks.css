@@ -15656,4 +15656,8 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   color: #fff;
 }
 
+* {
+  background-color: red !important;
+}
+
 /*# sourceMappingURL=rrze-elements-blocks.css.map */

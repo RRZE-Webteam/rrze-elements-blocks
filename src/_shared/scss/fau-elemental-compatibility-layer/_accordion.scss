@@ -1,0 +1,80 @@
+.wp-theme-FAU-Elemental{
+  .wp-block-rrze-elements-collapsibles{
+    .accordion-toggle p{
+      margin: 0;
+      padding: 0;
+      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: var(--H-Heading-4, 1.25rem);
+      font-weight: 700;
+    }
+
+    .accordion-toggle svg{
+      width: 2.5ch;
+      height: 2.5ch;
+      margin-right: 1.5ch;
+    }
+
+    div.accordion-toggle{
+      padding: 1rem;
+      background-color: transparent;
+    }
+
+    //div.accordion-toggle:hover p{
+      //color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    //}
+
+    div.accordion-toggle:hover,
+    div.accordion-toggle:target{
+      background-color: transparent;
+    }
+
+    & .accordion-toggle{
+      position: relative;
+      padding-right: 3rem;
+    }
+
+
+    & .accordion-toggle::before{
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      transform: translateY(-50%);
+      background: #04316a;
+      border-radius: 0px;
+      z-index: 0;
+    }
+
+    & .accordion-toggle::after{
+      content: "";
+      position: absolute;
+      color: #fff;
+      top: 50%;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      transform-origin: center;
+      transform: translateY(-50%) rotate(0);   /* ▼ */
+      transition: transform .2s ease;
+      z-index: 1;
+
+      background: currentColor;
+      -webkit-mask:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E")
+        center/50% 50%
+        no-repeat;
+      mask:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E")
+        center/60% 60%
+        no-repeat;
+    }
+  }
+
+}
+
+
+
+
