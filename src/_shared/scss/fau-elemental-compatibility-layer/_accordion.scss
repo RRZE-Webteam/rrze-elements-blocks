@@ -5,6 +5,19 @@
       border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
     }
 
+    .wp-block-rrze-elements-collapse:last-child .accordion-group{
+      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+
+    .wp-block-rrze-elements-collapse .accordion{
+      margin-top: var(--Spacing-1x, 1rem);
+      border-left: 4px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+
+    .wp-block-rrze-elements-accordion:last-child .accordion-group{
+      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+
     .accordion-toggle p{
       margin: 0;
       padding: 0;
@@ -52,6 +65,27 @@
       background: #04316a;
       border-radius: 0px;
       z-index: 0;
+    }
+
+    & .accordion-toggle:hover::before{
+      top: 50%;
+      right: 1rem;
+      transform: translateY(2%);
+    }
+
+    & .accordion-toggle:hover::after{
+      top: 50%;
+      transform: translateY(0);
+    }
+
+    & .accordion-toggle.active:hover::after{
+      top: 50%;
+      transform: rotate(180deg);
+    }
+
+    & .accordion-toggle.active::after{
+      top: 1rem;
+      transform: rotate(180deg);
     }
 
     & .accordion-toggle::after{
