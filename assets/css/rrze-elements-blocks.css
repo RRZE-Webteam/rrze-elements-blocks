@@ -11470,7 +11470,6 @@ button.expand-all.standard-btn {
 #content main .accordion-body:target,
 .admin-bar #content main .accordion-body:target {
   padding-top: 0;
-  background-color: cornflowerblue;
 }
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {
@@ -15656,8 +15655,131 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   color: #fff;
 }
 
-* {
-  background-color: red !important;
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group {
+  border: none;
+  border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse:last-child .accordion-group {
+  border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse .accordion {
+  margin-top: var(--Spacing-8x, 2rem);
+  border-left: 4px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse button.accordion-toggle {
+  padding-top: var(--Spacing-6x, 1.5rem) !important;
+  padding-bottom: var(--Spacing-6x, 1.5rem) !important;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-accordion:last-child .accordion-group {
+  border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-inner .accordion > div:last-child {
+  border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle p,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle {
+  margin: 0;
+  padding: 0;
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: var(--H-Heading-4, 1.25rem);
+  font-weight: 700;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:hover, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:focus, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:target, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:active {
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body .accordion-inner,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group .accordion-body .accordion-inner {
+  background-color: transparent;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle svg {
+  width: 2.5ch;
+  height: 2.5ch;
+  margin-right: 1.5ch;
+  fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle svg use {
+  fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles div.accordion-toggle, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle {
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles div.accordion-toggle:hover,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles div.accordion-toggle:target,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:hover,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:target {
+  background-color: transparent;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle {
+  position: relative;
+  padding-right: 3rem;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  transform: translateY(-50%);
+  background: #04316a;
+  border-radius: 0px;
+  z-index: 0;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle:hover::before {
+  top: 50%;
+  right: 1rem;
+  transform: translateY(2%);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle:hover::after {
+  top: 50%;
+  transform: translateY(0);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.active:hover::after {
+  top: 50%;
+  transform: rotate(180deg);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.active::after {
+  top: 1rem;
+  transform: rotate(180deg);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle::after {
+  content: "";
+  position: absolute;
+  color: #fff;
+  top: 50%;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  transform-origin: center;
+  transform: translateY(-50%) rotate(0); /* ▼ */
+  transition: transform 0.2s ease;
+  z-index: 1;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/50% 50% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/60% 60% no-repeat;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body p,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body h2,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body h3,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body h4,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body h5,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body h6 {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body * {
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 /*# sourceMappingURL=rrze-elements-blocks.css.map */
