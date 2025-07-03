@@ -1,5 +1,10 @@
 .wp-theme-FAU-Elemental{
   .wp-block-rrze-elements-collapsibles{
+    .accordion-group{
+      border: none;
+      border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+
     .accordion-toggle p{
       margin: 0;
       padding: 0;
@@ -18,6 +23,7 @@
     div.accordion-toggle{
       padding: 1rem;
       background-color: transparent;
+      border: none;
     }
 
     //div.accordion-toggle:hover p{
@@ -71,6 +77,33 @@
         center/60% 60%
         no-repeat;
     }
+  }
+
+  .wp-block-rrze-elements-collapsibles .accordion-body{
+    & {
+      background: none;
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+
+    p,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+    {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    * {
+      font-family: "Source Sans Pro", sans-serif;
+    }
+
   }
 
 }
