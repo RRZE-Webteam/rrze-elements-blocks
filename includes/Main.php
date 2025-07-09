@@ -25,6 +25,8 @@ class Main
     public function __construct($pluginFile)
     {
         $this->pluginFile = $pluginFile;
+        SpriteGenerator::setAssetPath( plugin_dir_path(plugin_dir_path( __DIR__, 2 ) . 'src/_shared/icons/svgs' ) );
+
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
         add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
         add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
