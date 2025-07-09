@@ -15655,9 +15655,25 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   color: #fff;
 }
 
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .block-editor-block-list__layout:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-accordion .accordion-group {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+.wp-theme-FAU-Elemental .accordion .block-editor-inner-blocks {
+  border-bottom: none;
+}
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group {
   border: none;
   border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group button svg {
+  margin: auto 20px auto 0;
+  height: 20px;
+  width: 20px;
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse:last-child .accordion-group {
   border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
@@ -15665,15 +15681,13 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse .accordion {
   margin-top: var(--Spacing-8x, 2rem);
   border-left: 4px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+  border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-collapse button.accordion-toggle {
   padding-top: var(--Spacing-6x, 1.5rem) !important;
   padding-bottom: var(--Spacing-6x, 1.5rem) !important;
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .wp-block-rrze-elements-accordion:last-child .accordion-group {
-  border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
-}
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-inner .accordion > div:last-child {
   border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle p,
