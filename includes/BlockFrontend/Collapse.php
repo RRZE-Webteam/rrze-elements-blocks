@@ -18,8 +18,6 @@ class Collapse extends AbstractBlockRender
             return $innerBlocks;
         }
 
-        Helper::debug($attributes);
-
         $color = isset($attributes['color']) ? sanitize_html_class($attributes['color']) : '';
         $title = isset($attributes['title']) ? wp_kses_post($attributes['title']) : '';
         $jump_name = isset($attributes['jumpName']) ? $attributes['jumpName'] : '';
@@ -28,7 +26,7 @@ class Collapse extends AbstractBlockRender
 
         $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
 
-      $iconMarkup = '';
+        $iconMarkup = '';
         if (!empty($attributes['icon'])) {
           $iconMarkup = SpriteGenerator::svgUse(
             $attributes['icon'],          // z. B. "solid cow"

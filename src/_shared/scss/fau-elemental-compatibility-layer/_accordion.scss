@@ -1,3 +1,50 @@
+.wp-theme-FAU-Elemental .is-style-dark {
+  .wp-block-rrze-elements-collapsibles{
+    .accordion-group {
+      border-top: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    .wp-block-rrze-elements-collapse:last-child .accordion-group{
+      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    .wp-block-rrze-elements-collapse .accordion{
+      border-left: 4px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    .wp-block-rrze-elements-accordion:last-child .accordion-group{
+      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    .accordion-toggle p,
+    button.accordion-toggle {
+      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    button.accordion-toggle:hover, button.accordion-toggle:focus, button.accordion-toggle:target, button.accordion-toggle:active {
+      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    .accordion-toggle svg {
+      fill: var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    .accordion-toggle svg use {
+      fill: var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    & .accordion-toggle::before {
+      background: var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
+
+    & .accordion-toggle::after {
+      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+}
+
+
 .wp-theme-FAU-Elemental {
   .wp-block-rrze-elements-collapsibles .block-editor-block-list__layout:last-child{
     padding-bottom: 0;
@@ -138,7 +185,7 @@
     & .accordion-toggle::after {
       content: "";
       position: absolute;
-      color: #fff;
+      color: var(--FAU-Col-FAU-Weiss-100, #fff);
       top: 50%;
       right: 1rem;
       width: 2rem;

@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Accordion extends AbstractBlockRender
 {
@@ -26,6 +27,14 @@ class Accordion extends AbstractBlockRender
 
       $hstart   = isset( $attributes['hstart'] ) ? (int) $attributes['hstart'] : 1;
       $jumpname = isset( $attributes['jumpName'] ) ? $attributes['jumpName'] : '';
+
+      $iconMarkup = '';
+      if (!empty($attributes['icon'])) {
+        $iconMarkup = SpriteGenerator::svgUse(
+          $attributes['icon'],          // z. B. "solid cow"
+          'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+        );
+      }
 
       // Jumpname ID
       if ( '' === $jumpname ) {
@@ -59,6 +68,10 @@ class Accordion extends AbstractBlockRender
         '<button class="accordion-toggle" data-toggle="collapse" data-name="%1$s" data-href="#%1$s" type="button" aria-expanded="false" aria-controls="%1$s">',
         esc_attr( $output_id )
       );
+
+      if ($iconMarkup) {
+        $markup .= $iconMarkup;
+      }
 
       $markup .= esc_html( $title ?: '…' );
       $markup .= '</button>';
