@@ -1,0 +1,15 @@
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-tabs {
+  div.wp-block-rrze-elements-tab div[role=tabpanel]{
+    background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #dfe2e7);
+    padding: var(--Spacing-8x, 2rem);
+  }
+
+  .primary [role=tabpanel]
+  {
+    border: none !important;
+  }
+
+  div.wp-block-rrze-elements-tab .is-hidden{
+    display: none;
+  }
+}
