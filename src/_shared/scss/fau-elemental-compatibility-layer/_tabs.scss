@@ -4,11 +4,17 @@
     width: 1rem;
     margin-right: 1ch;
   }
+
+  button[role=tab] span.focus{
+    display: inline;
+  }
+
   div.wp-block-rrze-elements-tab div[role=tabpanel], div[role=tabpanel] {
     background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #dfe2e7);
     color: #000;
     border: none;
     padding: var(--Spacing-6x, 2.5rem);
+    margin-bottom: 0.125rem;
 
     & > p,
     & > h2,
