@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.22] - 2025-07-16
+
+Preparations for FAU-Elemental and UX-Fix inside the CTA
+
+### Added
+- CSS for FAU-Elemental for Accordion, CTA & partially Tabs
+
+### Fixed
+- CTA Button not working within the Editor
+
 ## [1.0.19] - 2025-06-16
 
 Dynamic Rendering and Migration.

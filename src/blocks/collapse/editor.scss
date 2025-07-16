@@ -1,5 +1,5 @@
-@use "../../_shared/scss/variables" as v;
-@use "../../_shared/scss/mixins" as m;
+@use "../../_shared/scss/base-styles/variables" as v;
+@use "../../_shared/scss/base-styles/mixins" as m;
 
 
 /**
@@ -159,7 +159,7 @@
 
 button.is-compact.elements-blocks-icon-Button, button.is-pressed.elements-blocks-icon-Button{
 	font-size: 1.5rem;
-	padding: 0.25rem;	
+	padding: 0.25rem;
 	height: 55px;
 	width: 55px;
 

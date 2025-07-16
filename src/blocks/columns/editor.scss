@@ -1,4 +1,4 @@
-@import "../../_shared/scss/textcolumns";
+@import "../../_shared/scss/base-styles/textcolumns";
 
 .wp-block-rrze-elements-columns {
     column-gap: 1.5em;
@@ -31,7 +31,7 @@
         margin-top: 0;
         display: inline-block;
     }
-    
+
     // &.font-light {
     //     * {
     //         color: #fff;
@@ -49,6 +49,6 @@
             padding-left: 0px;
             padding-right: 5px;
         }
-    
+
     }
 }

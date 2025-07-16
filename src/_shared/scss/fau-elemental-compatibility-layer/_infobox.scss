@@ -1,0 +1,23 @@
+.wp-theme-FAU-Elemental, .wp-theme-FAU-Elemental .wp-block-rrze-elements-rrze-iconbox {
+  div.rrze--iconbox-element-container svg{
+    height: 60px;
+    width: 60px;
+    padding: 0;
+    margin: 0;
+  }
+
+  div.rrze--iconbox-element-container svg use{
+    fill: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
+  }
+
+  div.rrze--iconbox-element-container{
+    display: block;
+    background: transparent;
+    border: none;
+    color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
+  }
+
+  div.rrze--iconbox-element-container .rrze-iconbox-content dt{
+    font-size: var(--H-Heading-3, 1.5rem);
+  }
+}

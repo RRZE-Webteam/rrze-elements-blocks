@@ -1,198 +1,207 @@
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
-@import "../../_shared/scss/tabs";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
+@import "../../_shared/scss/base-styles/tabs";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/tabs";
 
-$colormaps : (
-    zentral: ("basis": #04316A, "basis-kontrast": #fff,"heller": #8fb1ef, "hellste": #dde5f0, "dunkler": #004A9F, "dunkler-kontrast": #fff, "dunkelste": #041E42, "dunkelste-kontrast": #fff, "ci-hell": #04316A, "ci-hell-kontrast": #fff, "ci-hell2": #CED9E7, "ci-hell2-kontrast": #000),
-    primary: ("basis": #04316A, "basis-kontrast": #fff,"heller": #8fb1ef, "hellste": #dde5f0, "dunkler": #004A9F, "dunkler-kontrast": #fff, "dunkelste": #041E42, "dunkelste-kontrast": #fff, "ci-hell": #04316A, "ci-hell-kontrast": #fff, "ci-hell2": #CED9E7, "ci-hell2-kontrast": #000),
-    phil: ("basis": #963B2F, "basis-kontrast": #fff,"heller": #d9c689, "hellste": #f3eedf, "dunkler": #e87722, "dunkler-kontrast": #000, "dunkelste": #963B2F, "dunkelste-kontrast": #fff,  "ci-hell": #FDB735, "ci-hell-kontrast": #000, "ci-hell2": #F4E8CB, "ci-hell2-kontrast": #000),
-    med: ("basis": #005287,"basis-kontrast": #fff, "heller": #bfd6f5, "hellste": #eaf3fc, "dunkler": #005287, "dunkler-kontrast": #fff, "dunkelste": #003E61, "dunkelste-kontrast": #fff,  "ci-hell": #18B4F1, "ci-hell-kontrast": #000, "ci-hell2": #B9D9EC, "ci-hell2-kontrast": #000),
-    nat: ("basis": #266141, "basis-kontrast": #fff,"heller": #aacfbd, "hellste": #e5efea, "dunkler": #266141, "dunkler-kontrast": #fff, "dunkelste": #14462D, "dunkelste-kontrast": #fff,  "ci-hell": #7BB725, "ci-hell-kontrast": #000, "ci-hell2": #CFE0D8, "ci-hell2-kontrast": #000),
-    rw: ("basis": #971B2F, "basis-kontrast": #fff,"heller": #c5ac94, "hellste": #F2DED1, "dunkler": #971B2F, "dunkler-kontrast": #fff, "dunkelste": #662938, "dunkelste-kontrast": #fff,  "ci-hell": #C50F3C, "ci-hell-kontrast": #fff, "ci-hell2": #F2DED1, "ci-hell2-kontrast": #000),
-    tf: ("basis": #2F586E, "basis-kontrast": #fff,"heller": #d2d5d7, "hellste": #ebecee, "dunkler": #2F586E, "dunkler-kontrast": #fff, "dunkelste": #204251, "dunkelste-kontrast": #fff,  "ci-hell": #8C9FB1, "ci-hell-kontrast": #000, "ci-hell2": #D3DDE6, "ci-hell2-kontrast": #000),
-);
+body:not(.wp-theme-FAU-Elemental) {
+  $colormaps: (
+    zentral: ("basis": #04316A, "basis-kontrast": #fff, "heller": #8fb1ef, "hellste": #dde5f0, "dunkler": #004A9F, "dunkler-kontrast": #fff, "dunkelste": #041E42, "dunkelste-kontrast": #fff, "ci-hell": #04316A, "ci-hell-kontrast": #fff, "ci-hell2": #CED9E7, "ci-hell2-kontrast": #000),
+    primary: ("basis": #04316A, "basis-kontrast": #fff, "heller": #8fb1ef, "hellste": #dde5f0, "dunkler": #004A9F, "dunkler-kontrast": #fff, "dunkelste": #041E42, "dunkelste-kontrast": #fff, "ci-hell": #04316A, "ci-hell-kontrast": #fff, "ci-hell2": #CED9E7, "ci-hell2-kontrast": #000),
+    phil: ("basis": #963B2F, "basis-kontrast": #fff, "heller": #d9c689, "hellste": #f3eedf, "dunkler": #e87722, "dunkler-kontrast": #000, "dunkelste": #963B2F, "dunkelste-kontrast": #fff, "ci-hell": #FDB735, "ci-hell-kontrast": #000, "ci-hell2": #F4E8CB, "ci-hell2-kontrast": #000),
+    med: ("basis": #005287, "basis-kontrast": #fff, "heller": #bfd6f5, "hellste": #eaf3fc, "dunkler": #005287, "dunkler-kontrast": #fff, "dunkelste": #003E61, "dunkelste-kontrast": #fff, "ci-hell": #18B4F1, "ci-hell-kontrast": #000, "ci-hell2": #B9D9EC, "ci-hell2-kontrast": #000),
+    nat: ("basis": #266141, "basis-kontrast": #fff, "heller": #aacfbd, "hellste": #e5efea, "dunkler": #266141, "dunkler-kontrast": #fff, "dunkelste": #14462D, "dunkelste-kontrast": #fff, "ci-hell": #7BB725, "ci-hell-kontrast": #000, "ci-hell2": #CFE0D8, "ci-hell2-kontrast": #000),
+    rw: ("basis": #971B2F, "basis-kontrast": #fff, "heller": #c5ac94, "hellste": #F2DED1, "dunkler": #971B2F, "dunkler-kontrast": #fff, "dunkelste": #662938, "dunkelste-kontrast": #fff, "ci-hell": #C50F3C, "ci-hell-kontrast": #fff, "ci-hell2": #F2DED1, "ci-hell2-kontrast": #000),
+    tf: ("basis": #2F586E, "basis-kontrast": #fff, "heller": #d2d5d7, "hellste": #ebecee, "dunkler": #2F586E, "dunkler-kontrast": #fff, "dunkelste": #204251, "dunkelste-kontrast": #fff, "ci-hell": #8C9FB1, "ci-hell-kontrast": #000, "ci-hell2": #D3DDE6, "ci-hell2-kontrast": #000),
+  );
 
-.rrze-elements-tabs {
+  .rrze-elements-tabs {
     margin-bottom: 1em;
- 
+
     [role="tab"],
     [role="tab"]:focus,
     [role="tab"]:hover {
-        position: relative;
-        z-index: 2;
-        padding: 2px 6px;
-        overflow: visible;
-        outline: none;
+      position: relative;
+      z-index: 2;
+      padding: 2px 6px;
+      overflow: visible;
+      outline: none;
     }
 
     [role="tab"] {
-        margin: 0 5px 0 0;
-        &[aria-selected="true"] {
-            font-weight: bold;
-        }
+      margin: 0 5px 0 0;
 
-        span.focus {
-            display: inline;
-            margin: 2px;
-            padding: 4px 6px;
+      &[aria-selected="true"] {
+        font-weight: bold;
+      }
 
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: baseline;
-            
-            &>svg {
-                padding: 0;
-                border-radius: 0 !important;
-                color: unset;
-                margin-right: .4em;
-                max-width: 1.5ch;
-                display: inline;
-            }
-        }
+      span.focus {
+        display: inline;
+        margin: 2px;
+        padding: 4px 6px;
 
-        display: block;
-        width: 100%;
-        border-radius: 0;
-        font-size: 1rem;
-        text-align: left;
-        cursor: pointer;
-        @media (min-width: 550px) {
-            display: inline-block;
-            width: auto;
-            border-radius: 5px 5px 0 0;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            top: 1px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: baseline;
+
+        & > svg {
+          padding: 0;
+          border-radius: 0 !important;
+          color: unset;
+          margin-right: .4em;
+          max-width: 1.5ch;
+          display: inline;
         }
-        span.focus {
-            
-            display: inline;
-            margin: 2px;
-            padding: 4px 6px;
-            
-            &>svg {
-                padding: 0;
-                border-radius: 0 !important;
-                color: unset;
-                margin-right: .4em;
-                max-width: 1.5ch;
-                display: inline;
-            }
+      }
+
+      display: block;
+      width: 100%;
+      border-radius: 0;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      @media (min-width: 550px) {
+        display: inline-block;
+        width: auto;
+        border-radius: 5px 5px 0 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        top: 1px;
+      }
+
+      span.focus {
+
+        display: inline;
+        margin: 2px;
+        padding: 4px 6px;
+
+        & > svg {
+          padding: 0;
+          border-radius: 0 !important;
+          color: unset;
+          margin-right: .4em;
+          max-width: 1.5ch;
+          display: inline;
         }
+      }
     }
 
     [role="tabpanel"] {
-        padding: 1rem;
-        min-height: 10em;
-        overflow: auto;
-        &.is-hidden {
-            display: none;
-        }
+      padding: 1rem;
+      min-height: 10em;
+      overflow: auto;
 
-        figure:first-child {
-            margin-top: 0;
-        }
+      &.is-hidden {
+        display: none;
+      }
+
+      figure:first-child {
+        margin-top: 0;
+      }
     }
 
     .elements-tabs-label-icon-inside-editor {
-        max-height: 1.5ch;
-        max-width: 1.5ch;
-        padding-right: 1ch;
-        width: 1.5ch;
+      max-height: 1.5ch;
+      max-width: 1.5ch;
+      padding-right: 1ch;
+      width: 1.5ch;
     }
 
-}
+  }
 
-$colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
-@each $color in $colors {
+  $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
+  @each $color in $colors {
     .rrze-elements-tabs.#{$color} {
-        [role="tablist"] {
-            button {
-                border: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                background-color: var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                color: var(--color-#{$color}-ci-hell2-kontrast, map-get($colormaps, $color, "ci-hell2-kontrast"));
-                &:hover, &:focus, &:active {
-                    color: inherit;
-                    border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                }
-                @media (min-width: 550px) {
-                    border-top: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                    &:hover, &:active {
-                        color: inherit;
-                        border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    }
-                    &:focus {
-                        & > span.focus {
-                            padding: 2px 4px;
-                            border: 2px solid var(--color-#{$color}-dunkler, map-get($colormaps, $color, "dunkler"));
-                            border-radius: 3px;
-                        }
-                    }
-                }
-            }
+      [role="tablist"] {
+        button {
+          border: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
+          border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+          background-color: var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
+          color: var(--color-#{$color}-ci-hell2-kontrast, map-get($colormaps, $color, "ci-hell2-kontrast"));
 
-            button.add-tab-button {
-                background-color: #1e1e1e;
-                color: #fff;
-                padding: 6px 0.6rem;
-                border: none;
-            }
+          &:hover, &:focus, &:active {
+            color: inherit;
+            border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+          }
 
-            button.add-tab-button:hover {
-                background-color: rgb(9, 100, 132);
-                color: #fff;
-                padding: 6px 0.6rem;
-                border: none;
+          @media (min-width: 550px) {
+            border-top: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
+            &:hover, &:active {
+              color: inherit;
+              border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
             }
-
-            [aria-selected="true"] {
-                background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
-                border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                @media (min-width: 550px) {
-                    border: 1px solid;
-                    background: #fff;
-                    border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    border-bottom-color: #fff;
-                    color: unset;
-                }
-
-                &:hover, &:focus, &:active {
-                    background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
-                    border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    @media (min-width: 550px) {
-                        background: #fff;
-                        border-bottom-color: #fff;
-                        color: unset;
-                    }
-                }
+            &:focus {
+              & > span.focus {
+                padding: 2px 4px;
+                border: 2px solid var(--color-#{$color}-dunkler, map-get($colormaps, $color, "dunkler"));
+                border-radius: 3px;
+              }
             }
+          }
         }
-        [role="tabpanel"] {
-            border: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-            border-top: 0;
+
+        button.add-tab-button {
+          background-color: #1e1e1e;
+          color: #fff;
+          padding: 6px 0.6rem;
+          border: none;
+        }
+
+        button.add-tab-button:hover {
+          background-color: rgb(9, 100, 132);
+          color: #fff;
+          padding: 6px 0.6rem;
+          border: none;
+        }
+
+        [aria-selected="true"] {
+          background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+          color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
+          border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+          @media (min-width: 550px) {
+            border: 1px solid;
+            background: #fff;
+            border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+            border-bottom-color: #fff;
+            color: unset;
+          }
+
+          &:hover, &:focus, &:active {
+            background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+            color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
+            border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
             @media (min-width: 550px) {
-                border-top: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+              background: #fff;
+              border-bottom-color: #fff;
+              color: unset;
             }
-            @media print {
-                border-top: 1px solid var(--color-primary-ci-hell, map-get($colormaps, $color, "ci-hell"));
-            }
+          }
         }
+      }
+
+      [role="tabpanel"] {
+        border: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+        border-top: 0;
+        @media (min-width: 550px) {
+          border-top: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+        }
+        @media print {
+          border-top: 1px solid var(--color-primary-ci-hell, map-get($colormaps, $color, "ci-hell"));
+        }
+      }
     }
 
     .print-only {
-        display: none;
-        @media print {
-            display: block;
-        }
+      display: none;
+      @media print {
+        display: block;
+      }
     }
     .hide-in-print {
-        @media print {
-            display: none !important;
-        }
+      @media print {
+        display: none !important;
+      }
     }
-    
+
+  }
 }

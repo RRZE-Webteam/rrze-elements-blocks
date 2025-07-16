@@ -4,12 +4,12 @@ $medium-blue : #5bc0de;
 $green : #5cb85c;
 $dark-grey: #121212;
 
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
-@import "../../_shared/scss/notice";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
+@import "../../_shared/scss/base-styles/notice";
 
 .wp-block-rrze-elements-notice {
-    // display: block; 
+    // display: block;
     .notice {
         // border: none;
         // padding-left: 0;
@@ -38,7 +38,7 @@ $dark-grey: #121212;
                 // color: #fff;
                 // background-color: var(--color-zentral-basis, #04316A);
             }
-        
+
             // span.fa-triangle-exclamation:before {
             //     // background-color: #fad201;
             //     background-color: #ffff00;

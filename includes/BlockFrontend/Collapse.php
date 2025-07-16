@@ -1,9 +1,10 @@
 <?php
-
+declare(strict_types=1);
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
 use RRZE\ElementsBlocks\Helper;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Collapse extends AbstractBlockRender
 {
@@ -22,11 +23,16 @@ class Collapse extends AbstractBlockRender
         $jump_name = isset($attributes['jumpName']) ? $attributes['jumpName'] : '';
         $load_open = !empty($attributes['loadOpen']);
         $hstart = isset($attributes['hstart']) ? (int)$attributes['hstart'] : 1;
-        $svg_class = isset($attributes['svgString']) ? sanitize_html_class($attributes['svgString']) : '';
-        $svg_class = preg_replace('/(fa-(solid|regular|brands))(fa-)/', '$1 $3', $svg_class);
-
 
         $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
+
+        $iconMarkup = '';
+        if (!empty($attributes['icon'])) {
+          $iconMarkup = SpriteGenerator::svgUse(
+            $attributes['icon'],          // z. B. "solid cow"
+            'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+          );
+        }
 
         $heading_level = max(1, min(6, $hstart));
         $load_on_page_load = $load_open ? 'open' : '';
@@ -52,8 +58,8 @@ class Collapse extends AbstractBlockRender
             $load_open ? 'true' : 'false'
         );
 
-        if ($svg_class) {
-            $markup .= '<span class="' . esc_attr($svg_class) . '"></span>';
+        if ($iconMarkup) {
+            $markup .= $iconMarkup;
         }
 
         $markup .= esc_html($title ?: '…');
