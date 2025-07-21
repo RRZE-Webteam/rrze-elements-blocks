@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class IconBox extends AbstractBlockRender
 {
@@ -14,6 +15,14 @@ class IconBox extends AbstractBlockRender
     {
         if ($block && !empty(trim($block->inner_html))) {
             return $innerBlocks;
+        }
+
+        $iconMarkup = '';
+        if (!empty($attributes['icon'])) {
+          $iconMarkup = SpriteGenerator::svgUse(
+            $attributes['icon'],          // z. B. "solid cow"
+            'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+          );
         }
 
         $title = $attributes['title'] ?? '';
@@ -33,9 +42,12 @@ class IconBox extends AbstractBlockRender
         $button_url = $attributes['buttonUrl'] ?? '';
         $button_text = $attributes['buttonText'] ?? '';
 
+        $markup = '<div class="rrze-iconbox-icon"><span>' . $iconMarkup . '</span></div>';
+
+
         $html = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
         $html .= '<div class="rrze--iconbox-element-container">';
-        $html .= '<div class="rrze-iconbox-icon"><span class="' . esc_attr($svg_string) . '"></span></div>';
+        $html .= $markup;
         $html .= '<div class="rrze-iconbox-content"><dl class="rrze-elements-iconbox">';
         $html .= '<dt><span class="fau-iconbox-data rrze-iconbox-' . esc_attr($font_size) . '" data-duration="' . esc_attr($duration) . '" data-stagger="' . esc_attr($stagger) . '">' . esc_html($title) . '</span></dt>';
         $html .= '<dd>' . wp_kses_post($description) . '<br />';
