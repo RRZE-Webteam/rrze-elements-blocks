@@ -29,7 +29,6 @@
       margin-bottom: var(--Spacing-2x);
     }
     a {
-      width: fit-content;
       border: none;
       border-radius: 0;
       font-weight: 600;
@@ -39,7 +38,10 @@
       padding: 0;
       position: relative;
       text-align: left;
-      padding-right: 36px;
+      padding-right: 1rem;
+      display: block;
+      overflow: initial;
+      width: fit-content;
     }
     a::after{
       background-image: var(--icon-arrow-fau-blau);
@@ -72,9 +74,21 @@
     // padding: var(--Spacing-8x) var(--Spacing-4x) var(--Spacing-8x) var(--Spacing-8x);
     border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
   }
+
+  .rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
+    border: none;
+    background-color: transparent;
+    color: inherit;
+
+    &::after {
+      right: -29px;
+      transition: all .2s ease-in-out;
+    }
+  }
 }
 
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .rrze-elements-blocks-counter-row .block-editor-block-list__layout{
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .rrze-elements-blocks-counter-row .block-editor-block-list__layout,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row section.rrze--counter-element{
   gap: var(--Spacing-8x);
 }
 
