@@ -11476,6 +11476,15 @@ button.expand-all.standard-btn {
   padding-top: 8px;
 }
 
+button.accordion-toggle svg.icon, div.accordion-toggle > svg {
+  margin-right: 1ch;
+  height: 1rem;
+  width: 1rem;
+}
+button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
+  fill: var(--color-Text, #222);
+}
+
 .rrze-elements-tabs {
   margin-bottom: 1em;
   /*
@@ -16313,7 +16322,8 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   transition: all 0.2s ease-in-out;
 }
 
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section {
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .block-editor-block-list__layout {
   align-items: end;
 }
 

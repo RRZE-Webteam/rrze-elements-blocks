@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Notice extends AbstractBlockRender
 {
@@ -31,12 +32,17 @@ class Notice extends AbstractBlockRender
         return $innerBlocks;
       }
 
+      $iconMarkup = '';
       if ( $block && ! empty( trim($block->inner_html )) ) {
         return $innerBlocks;
       }
 
       $variation   = isset( $attributes['style'] ) ? $attributes['style'] : '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
+      $iconMarkup = SpriteGenerator::svgUse(
+        $icon_class,          // z. B. "solid cow"
+        'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+      );
 
       $wrapper_class = isset( $attributes['className'] ) ? $attributes['className'] : '';
 
@@ -44,7 +50,7 @@ class Notice extends AbstractBlockRender
       $markup .= '<div class="notice">';
 
       $markup .= '<div>';
-      $markup .= '<span class="' . esc_attr( trim( $icon_class . ' rrze-elements-icon' ) ) . '"></span>';
+      $markup .= '<span>' . $iconMarkup . '</span>';
       $markup .= '</div>';
 
       $markup .= '<div>';
