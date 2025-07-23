@@ -316,3 +316,12 @@ button.expand-all.standard-btn {
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target{
     padding-top: 8px;
 }
+
+button.accordion-toggle svg.icon, div.accordion-toggle > svg{
+  margin-right: 1ch;
+  height: 1rem;
+  width: 1rem;
+  use {
+    fill: var(--color-Text, #222);
+  }
+}
