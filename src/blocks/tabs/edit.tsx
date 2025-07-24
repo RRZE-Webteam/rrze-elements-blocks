@@ -286,7 +286,11 @@ export default function Edit({
               type="button"
               role="tab"
             >
-              <span className={"fa-solid fa-plus"}></span>
+              <IconMarkComponent
+                type="solid"
+                iconName="plus"
+                defaultClass="elements-tabs-label-icon-inside-editor"
+              />
               {/* {__(" Add new tab", "rrze-elements-blocks")} */}
             </Button>
           </div>

@@ -363,7 +363,20 @@
     background-color: var(--color-nat-ci-hell, #04316a);
     color: var(--color-nat-ci-hell-kontrast, #fff);
   }
+}
 
+div.cta-button-container a.cta-button{
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  align-items: center;
+}
+
+div.cta-button-container a.cta-button svg{
+  display: inline-block;
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-left: 1ch;
 }
 
 //.cta-button-container {

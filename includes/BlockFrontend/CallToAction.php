@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class CallToAction extends AbstractBlockRender
 {
@@ -27,6 +28,12 @@ class CallToAction extends AbstractBlockRender
         $button_url = $attributes['buttonUrl'] ?? '';
         $background = $attributes['background'] ?? '';
         $is_search = !empty($attributes['isSearch']);
+        $cta_icon = 'solid arrow-right';
+
+        $icon_markup = SpriteGenerator::svgUse(
+          $cta_icon,
+          'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+        );
 
         $url_class = $url ? 'has-image' : 'no-image';
 
@@ -52,7 +59,7 @@ class CallToAction extends AbstractBlockRender
             }
 
             $html .= '<div class="cta-button-container">';
-            $html .= '<a href="' . esc_url($href) . '" class="btn cta-button">' . esc_html($button_text) . '<span class="fa-solid fa-arrow-right rrze-elements-cta-icon"></span></a>';
+            $html .= '<a href="' . esc_url($href) . '" class="btn cta-button">' . esc_html($button_text) . $icon_markup .'</a>';
             $html .= '</div></div>';
         }
 

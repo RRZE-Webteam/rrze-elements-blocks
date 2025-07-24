@@ -11431,6 +11431,9 @@ button.expand-all.standard-btn {
 .fau-theme .accordion-toggle {
   border-radius: var(--border-radius, 4px);
   background-clip: padding-box;
+  padding: 8px 35px 8px 10px;
+  font-size: 1rem;
+  font-weight: 400;
 }
 .fau-theme .accordion-body .accordion-inner {
   background-color: #f5f7f9;
@@ -11474,6 +11477,15 @@ button.expand-all.standard-btn {
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {
   padding-top: 8px;
+}
+
+button.accordion-toggle svg.icon, div.accordion-toggle > svg {
+  margin-right: 1ch;
+  height: 1rem;
+  width: 1rem;
+}
+button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
+  fill: var(--color-Text, #222);
 }
 
 .rrze-elements-tabs {
@@ -11720,6 +11732,13 @@ button.expand-all.standard-btn {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.zentral [role=tablist] button {
   border: 1px solid var(--color-zentral-ci-hell2, #CED9E7);
   border-bottom-color: var(--color-zentral-ci-hell, #04316A);
@@ -11798,6 +11817,13 @@ button.expand-all.standard-btn {
   .hide-in-print {
     display: none !important;
   }
+}
+
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
 }
 
 .rrze-elements-tabs.phil [role=tablist] button {
@@ -11880,6 +11906,13 @@ button.expand-all.standard-btn {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.med [role=tablist] button {
   border: 1px solid var(--color-med-ci-hell2, #B9D9EC);
   border-bottom-color: var(--color-med-ci-hell, #18B4F1);
@@ -11958,6 +11991,13 @@ button.expand-all.standard-btn {
   .hide-in-print {
     display: none !important;
   }
+}
+
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
 }
 
 .rrze-elements-tabs.nat [role=tablist] button {
@@ -12040,6 +12080,13 @@ button.expand-all.standard-btn {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.rw [role=tablist] button {
   border: 1px solid var(--color-rw-ci-hell2, #F2DED1);
   border-bottom-color: var(--color-rw-ci-hell, #C50F3C);
@@ -12120,6 +12167,13 @@ button.expand-all.standard-btn {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.tf [role=tablist] button {
   border: 1px solid var(--color-tf-ci-hell2, #D3DDE6);
   border-bottom-color: var(--color-tf-ci-hell, #8C9FB1);
@@ -12198,6 +12252,13 @@ button.expand-all.standard-btn {
   .hide-in-print {
     display: none !important;
   }
+}
+
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
 }
 
 /*!
@@ -12371,8 +12432,18 @@ button.expand-all.standard-btn {
     grid-gap: 2em;
   }
 }
+.wp-block-rrze-elements-notice .notice svg.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.wp-block-rrze-elements-notice .notice > div:first-child {
+  color: var(--color-primary-basis-kontrast, #fff);
+  background-color: var(--color-primary-basis, #04316A);
+  padding: 1em 0.5em;
+}
 .wp-block-rrze-elements-notice .notice :first-child {
-  align-self: top;
+  align-self: center;
+  justify-self: center;
 }
 .wp-block-rrze-elements-notice .notice :first-child .fa-solid {
   font-size: 1.5em;
@@ -12407,6 +12478,34 @@ button.expand-all.standard-btn {
   .wp-block-rrze-elements-notice .notice div:nth-child(2) {
     border-top: 3px solid var(--color-primary-basis, #04316A);
   }
+}
+.wp-block-rrze-elements-notice .notice .icon-box > svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #fff;
+}
+.wp-block-rrze-elements-notice .notice .icon-box {
+  padding: 2rem;
+}
+.wp-block-rrze-elements-notice .notice > div:first-child.icon-box {
+  padding: 2rem;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-container {
+  background-color: #FDDF35;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-container svg {
+  fill: #000;
+}
+.wp-block-rrze-elements-notice .wp-block-rrze-elements-notice .notice :first-child.icon-box .fa-solid {
+  width: inherit;
+  height: inherit;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-box {
+  background-color: #FDDF35;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-box svg, .wp-block-rrze-elements-notice .notice.notice-attention div.icon-box use {
+  fill: #000;
+  color: #000;
 }
 
 /*
@@ -15431,6 +15530,12 @@ Functions and Mixins
   color: var(--color-nat-ci-hell-kontrast, #fff);
 }
 
+a.cta-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 1.25rem;
+}
+
 .rrze--counter-element {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -16313,7 +16418,8 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   transition: all 0.2s ease-in-out;
 }
 
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section {
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .block-editor-block-list__layout {
   align-items: end;
 }
 

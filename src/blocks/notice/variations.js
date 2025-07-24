@@ -6,7 +6,7 @@ import { Path, SVG } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { WPBlockVariation } from "@wordpress/blocks";
 
-/** 
+/**
 @typedef {import('@wordpress/blocks').WPBlockVariation} WPBlockVariation */
 
 /**
@@ -19,7 +19,7 @@ const variations = [
     name: "notice-attention",
     title: __("Warning", "rrze-elements-blocks"),
     description: __("Warning", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-triangle-exclamation",
+    iconClass: "solid triangle-exclamation",
     icon: (
       <SVG
         width="1em"
@@ -49,7 +49,7 @@ const variations = [
     name: "notice-hinweis",
     title: __("Hint", "rrze-elements-blocks"),
     description: __("Notice with hint-icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-info",
+    iconClass: "solid info",
     icon: (
       <SVG
         width="1em"
@@ -80,7 +80,7 @@ const variations = [
     name: "notice-baustelle",
     title: __("Maintenance", "rrze-elements-blocks"),
     description: __("Notice with wrench icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-screwdriver-wrench",
+    iconClass: "solid screwdriver-wrench",
     icon: (
       <SVG
         width="1em"
@@ -110,7 +110,7 @@ const variations = [
     name: "notice-question",
     title: __("Question", "rrze-elements-blocks"),
     description: __("Questionmark", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-question",
+    iconClass: "solid question",
     icon: (
       <SVG
         width="1em"
@@ -140,7 +140,7 @@ const variations = [
     name: "notice-minus",
     title: __("Negative", "rrze-elements-blocks"),
     description: __("Minus icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-minus",
+    iconClass: "solid minus",
     icon: (
       <SVG
         width="1em"
@@ -170,7 +170,7 @@ const variations = [
     name: "notice-plus",
     title: __("Positive", "rrze-elements-blocks"),
     description: __("Plus-icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-plus",
+    iconClass: "solid plus",
     icon: (
       <SVG
         width="1em"
@@ -200,7 +200,7 @@ const variations = [
     name: "notice-idea",
     title: __("Idea", "rrze-elements-blocks"),
     description: __("Lightbulb icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-lightbulb",
+    iconClass: "solid lightbulb",
     icon: (
       <SVG
         width="1em"
@@ -230,7 +230,7 @@ const variations = [
     name: "notice-download",
     title: __("Download", "rrze-elements-blocks"),
     description: __("Download-icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-download",
+    iconClass: "solid download",
     icon: (
       <SVG
         width="1em"
@@ -260,7 +260,7 @@ const variations = [
     name: "notice-faubox",
     title: __("FAUbox", "rrze-elements-blocks"),
     description: __("FAUbox-icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-cloud-arrow-down",
+    iconClass: "solid cloud-arrow-down",
     icon: (
       <SVG
         width="1em"
@@ -290,7 +290,7 @@ const variations = [
     name: "notice-audio",
     title: __("Audio", "rrze-elements-blocks"),
     description: __("Loudspeaker icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-headphones",
+    iconClass: "solid headphones",
     icon: (
       <SVG
         width="1em"
@@ -320,7 +320,7 @@ const variations = [
     name: "notice-video",
     title: __("Video", "rrze-elements-blocks"),
     description: __("Video-icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-video",
+    iconClass: "solid video",
     icon: (
       <SVG
         width="1em"
@@ -350,7 +350,7 @@ const variations = [
     name: "notice-thumbs-up",
     title: __("Thumbs up", "rrze-elements-blocks"),
     description: __("Thumps up icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-thumbs-up",
+    iconClass: "solid thumbs-up",
     icon: (
       <SVG
         width="1em"
@@ -380,7 +380,7 @@ const variations = [
     name: "notice-thumbs-down",
     title: __("Thumbs down", "rrze-elements-blocks"),
     description: __("Thumbs down icon", "rrze-elements-blocks"),
-    iconClass: "fa-solid fa-thumbs-down",
+    iconClass: "solid thumbs-down",
     icon: (
       <SVG
         width="1em"

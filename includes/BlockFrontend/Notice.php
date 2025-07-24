@@ -3,23 +3,25 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\Helper;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Notice extends AbstractBlockRender
 {
     private static array $icon_map = [
-      'notice-attention'  => 'fa-solid fa-triangle-exclamation',
-      'notice-hinweis'    => 'fa-solid fa-info',
-      'notice-baustelle'  => 'fa-solid fa-screwdriver-wrench',
-      'notice-question'   => 'fa-solid fa-question',
-      'notice-minus'      => 'fa-solid fa-minus',
-      'notice-plus'       => 'fa-solid fa-plus',
-      'notice-idea'       => 'fa-solid fa-lightbulb',
-      'notice-download'   => 'fa-solid fa-download',
-      'notice-faubox'     => 'fa-solid fa-cloud-arrow-down',
-      'notice-audio'      => 'fa-solid fa-headphones',
-      'notice-video'      => 'fa-solid fa-video',
-      'notice-thumbs-up'  => 'fa-solid fa-thumbs-up',
-      'notice-thumbs-down'=> 'fa-solid fa-thumbs-down',
+      'notice-attention'  => 'solid triangle-exclamation',
+      'notice-hinweis'    => 'solid info',
+      'notice-baustelle'  => 'solid screwdriver-wrench',
+      'notice-question'   => 'solid question',
+      'notice-minus'      => 'solid minus',
+      'notice-plus'       => 'solid plus',
+      'notice-idea'       => 'solid lightbulb',
+      'notice-download'   => 'solid download',
+      'notice-faubox'     => 'solid cloud-arrow-down',
+      'notice-audio'      => 'solid headphones',
+      'notice-video'      => 'solid video',
+      'notice-thumbs-up'  => 'solid thumbs-up',
+      'notice-thumbs-down'=> 'solid thumbs-down',
     ];
 
     /**
@@ -31,20 +33,22 @@ class Notice extends AbstractBlockRender
         return $innerBlocks;
       }
 
-      if ( $block && ! empty( trim($block->inner_html )) ) {
-        return $innerBlocks;
-      }
+      Helper::debug($attributes);
 
-      $variation   = isset( $attributes['style'] ) ? $attributes['style'] : '';
+      $variation   = $attributes['style'] ?? '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
+      $iconMarkup = SpriteGenerator::svgUse(
+        $icon_class,          // z. B. "solid cow"
+        'fa fa-' . str_replace(' ', ' fa-', $icon_class)
+      );
 
       $wrapper_class = isset( $attributes['className'] ) ? $attributes['className'] : '';
 
       $markup  = '<div class="wp-block-rrze-elements-notice ' . esc_attr( trim( $wrapper_class ) ) . '">';
-      $markup .= '<div class="notice">';
+      $markup .= '<div class="notice ' .  $attributes["style"] . '">';
 
-      $markup .= '<div>';
-      $markup .= '<span class="' . esc_attr( trim( $icon_class . ' rrze-elements-icon' ) ) . '"></span>';
+      $markup .= '<div class="icon-box">';
+      $markup .= $iconMarkup;
       $markup .= '</div>';
 
       $markup .= '<div>';
