@@ -11736,6 +11736,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.zentral [role=tablist] button {
   border: 1px solid var(--color-zentral-ci-hell2, #CED9E7);
   border-bottom-color: var(--color-zentral-ci-hell, #04316A);
@@ -11814,6 +11821,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   .hide-in-print {
     display: none !important;
   }
+}
+
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
 }
 
 .rrze-elements-tabs.phil [role=tablist] button {
@@ -11896,6 +11910,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.med [role=tablist] button {
   border: 1px solid var(--color-med-ci-hell2, #B9D9EC);
   border-bottom-color: var(--color-med-ci-hell, #18B4F1);
@@ -11974,6 +11995,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   .hide-in-print {
     display: none !important;
   }
+}
+
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
 }
 
 .rrze-elements-tabs.nat [role=tablist] button {
@@ -12056,6 +12084,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.rw [role=tablist] button {
   border: 1px solid var(--color-rw-ci-hell2, #F2DED1);
   border-bottom-color: var(--color-rw-ci-hell, #C50F3C);
@@ -12136,6 +12171,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   }
 }
 
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
+}
+
 .rrze-elements-tabs.tf [role=tablist] button {
   border: 1px solid var(--color-tf-ci-hell2, #D3DDE6);
   border-bottom-color: var(--color-tf-ci-hell, #8C9FB1);
@@ -12214,6 +12256,13 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   .hide-in-print {
     display: none !important;
   }
+}
+
+button span svg.icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 1ch;
 }
 
 /*!
