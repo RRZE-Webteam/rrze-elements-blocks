@@ -55,4 +55,29 @@ $dark-grey: #121212;
         }
     }
 
+  div >span.rrze-elements-icon > svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: #fff;
+    padding: 2rem;
+  }
+
+  .notice div {
+    padding: 0;
+  }
+
+  .notice > div:first-child{
+    padding: 0;
+  }
+
+  .notice.notice-attention div.icon-box{
+    background-color: #FDDF35;
+    svg {
+      fill: #000;
+      width: 1.25rem;
+      height: 1.25rem;
+      padding: 2rem;
+    }
+  }
+
 }

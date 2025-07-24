@@ -21,6 +21,7 @@ import {
 } from "@wordpress/components";
 
 import { symbol } from "@wordpress/icons";
+import {IconMarkComponent} from "../../components/IconPicker";
 
 interface EditProps {
 	attributes: {
@@ -57,6 +58,8 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 	const matchedVariation = variations.find(
 		(variation: any) => variation.name === attributes.style,
 	);
+
+  const [iconType, iconName] = matchedVariation?.iconClass.split(" ") || [];
 
 	const openModal = () => setOpen(true);
 	const closeModal = () => setOpen(false);
@@ -127,7 +130,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 			)}
 			<div
 				className={`notice no-title ${
-					attributes.style ? `alert-${attributes.style}` : ""
+					attributes.style ? `${attributes.style}` : ""
 				}`}
 				style={
 					attributes.style
@@ -139,14 +142,12 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 							}
 				}
 			>
-				<div>
-					<div>
+					<div className={"icon-container"}>
 						{/* Render the icon if a matching variation is found */}
 						<span
-							className={`${matchedVariation?.iconClass} rrze-elements-icon`}
-						></span>
+							className={`rrze-elements-icon`}
+						><IconMarkComponent type={iconType} iconName={iconName}/></span>
 					</div>
-				</div>
 				{attributes.style && (
 					<div>
 						<InnerBlocks

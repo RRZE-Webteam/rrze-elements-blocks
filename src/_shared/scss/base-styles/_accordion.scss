@@ -264,6 +264,10 @@ button.expand-all.standard-btn {
 .fau-theme {
     .accordion-toggle {
         @include border-radius(var(--border-radius, 4px));
+
+      padding-top: 1rem;
+      padding-right: 1rem;
+      padding: 1rem;
     }
     .accordion-body {
         .accordion-inner {
@@ -314,7 +318,7 @@ button.expand-all.standard-btn {
 }
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target{
-    padding-top: 8px;
+    padding-top: 1rem;
 }
 
 button.accordion-toggle svg.icon, div.accordion-toggle > svg{
@@ -324,4 +328,8 @@ button.accordion-toggle svg.icon, div.accordion-toggle > svg{
   use {
     fill: var(--color-Text, #222);
   }
+}
+
+.accordion button.expand-all.standard-btn.primary-btn.xsmall-btn{
+  padding: 0.5rem 1rem;
 }

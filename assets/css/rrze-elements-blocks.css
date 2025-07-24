@@ -11431,6 +11431,9 @@ button.expand-all.standard-btn {
 .fau-theme .accordion-toggle {
   border-radius: var(--border-radius, 4px);
   background-clip: padding-box;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding: 1rem;
 }
 .fau-theme .accordion-body .accordion-inner {
   background-color: #f5f7f9;
@@ -11473,7 +11476,7 @@ button.expand-all.standard-btn {
 }
 
 #content main .wp-block-rrze-elements-collapsibles .accordion-toggle:target {
-  padding-top: 8px;
+  padding-top: 1rem;
 }
 
 button.accordion-toggle svg.icon, div.accordion-toggle > svg {
@@ -11483,6 +11486,10 @@ button.accordion-toggle svg.icon, div.accordion-toggle > svg {
 }
 button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   fill: var(--color-Text, #222);
+}
+
+.accordion button.expand-all.standard-btn.primary-btn.xsmall-btn {
+  padding: 0.5rem 1rem;
 }
 
 .rrze-elements-tabs {
@@ -12380,8 +12387,18 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
     grid-gap: 2em;
   }
 }
+.wp-block-rrze-elements-notice .notice svg.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.wp-block-rrze-elements-notice .notice > div:first-child {
+  color: var(--color-primary-basis-kontrast, #fff);
+  background-color: var(--color-primary-basis, #04316A);
+  padding: 1em 0.5em;
+}
 .wp-block-rrze-elements-notice .notice :first-child {
-  align-self: top;
+  align-self: center;
+  justify-self: center;
 }
 .wp-block-rrze-elements-notice .notice :first-child .fa-solid {
   font-size: 1.5em;
@@ -12416,6 +12433,34 @@ button.accordion-toggle svg.icon use, div.accordion-toggle > svg use {
   .wp-block-rrze-elements-notice .notice div:nth-child(2) {
     border-top: 3px solid var(--color-primary-basis, #04316A);
   }
+}
+.wp-block-rrze-elements-notice .notice .icon-box > svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #fff;
+}
+.wp-block-rrze-elements-notice .notice .icon-box {
+  padding: 2rem;
+}
+.wp-block-rrze-elements-notice .notice > div:first-child.icon-box {
+  padding: 2rem;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-container {
+  background-color: #FDDF35;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-container svg {
+  fill: #000;
+}
+.wp-block-rrze-elements-notice .wp-block-rrze-elements-notice .notice :first-child.icon-box .fa-solid {
+  width: inherit;
+  height: inherit;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-box {
+  background-color: #FDDF35;
+}
+.wp-block-rrze-elements-notice .notice.notice-attention div.icon-box svg, .wp-block-rrze-elements-notice .notice.notice-attention div.icon-box use {
+  fill: #000;
+  color: #000;
 }
 
 /*
@@ -15438,6 +15483,12 @@ Functions and Mixins
 .wp-block-rrze-elements-cta.color-nat .rrze-elements-cta {
   background-color: var(--color-nat-ci-hell, #04316a);
   color: var(--color-nat-ci-hell-kontrast, #fff);
+}
+
+a.cta-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 1.25rem;
 }
 
 .rrze--counter-element {
