@@ -219,12 +219,10 @@ const IconPickerModalInset = memo(
       setAllIcons([...solidIcons, ...regularIcons, ...brandIcons]);
     }, [solidIcons, regularIcons, brandIcons]);
 
-    /* svgString synchron halten */
     useEffect(() => {
       updateSvgHref(type, iconName, attributes, setAttributes);
     }, [type, iconName, attributes, setAttributes]);
 
-    /* Suche */
     const runSearch = () => {
       const q = searchQuery.trim().toLowerCase();
       if (!q) {
@@ -273,7 +271,6 @@ const IconPickerModalInset = memo(
             {__('Search for Icons', 'rrze-elements-blocks')}
           </Button>
 
-          {/* Aktuell gewähltes Icon */}
           {attributes.icon && (
             <>
               <Spacer paddingBottom="1rem" paddingTop="1rem">
@@ -297,7 +294,6 @@ const IconPickerModalInset = memo(
           )}
         </Spacer>
 
-        {/* Suchergebnisse */}
         {showSearch && (
           <>
             <Divider />

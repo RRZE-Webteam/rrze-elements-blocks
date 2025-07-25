@@ -81,6 +81,7 @@
 		"gsap": "^3.13.0",
 		"he": "^1.2.0",
 		"lodash": "^4.17.21",
+		"material-symbols": "^0.33.0",
 		"react-error-boundary": "^6.0.0"
 	},
 	"engines": {

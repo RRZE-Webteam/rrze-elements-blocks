@@ -23,14 +23,15 @@ class Collapse extends AbstractBlockRender
         $jump_name = isset($attributes['jumpName']) ? $attributes['jumpName'] : '';
         $load_open = !empty($attributes['loadOpen']);
         $hstart = isset($attributes['hstart']) ? (int)$attributes['hstart'] : 1;
+        $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
 
         $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
 
+        Helper::debug($attributes);
         $iconMarkup = '';
-        if (!empty($attributes['icon'])) {
+        if (!empty($attributes['materialSymbol'])) {
           $iconMarkup = SpriteGenerator::svgUse(
-            $attributes['icon'],          // z. B. "solid cow"
-            'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+            $material_symbol
           );
         }
 
