@@ -7,6 +7,7 @@ $dark-grey: #121212;
 @import "../../_shared/scss/base-styles/variables";
 @import "../../_shared/scss/base-styles/mixins";
 @import "../../_shared/scss/base-styles/notice";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/notice";
 
 .wp-block-rrze-elements-notice {
     // display: block;
@@ -76,8 +77,15 @@ $dark-grey: #121212;
       fill: #000;
       width: 1.25rem;
       height: 1.25rem;
-      padding: 2rem;
     }
+  }
+
+  .notice > div.icon-container svg{
+    padding: initial;
+  }
+
+  .notice > div.icon-container{
+    padding: 2rem;
   }
 
 }
