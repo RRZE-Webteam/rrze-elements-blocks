@@ -17,7 +17,7 @@ import type {KeyboardEvent} from "react";
 
 interface MaterialSymbolPickerProps {
   attributes: {
-    materialSymbol: string;
+    materialSymbol?: string;
   };
   setAttributes: (attributes: { materialSymbol: string }) => void;
 }

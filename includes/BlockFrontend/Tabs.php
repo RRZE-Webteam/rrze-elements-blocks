@@ -36,12 +36,20 @@ class Tabs extends AbstractBlockRender
             $selected = ($client_id === $active || $active === '') ? 'true' : 'false';
             $title = $tab['title'] ?? '';
             $iconMarkup = '';
-            if (!empty($tab['icon'])) {
-              $iconMarkup = SpriteGenerator::svgUse(
-                $tab['icon'],          // z. B. "solid cow"
-                'fa fa-' . str_replace(' ', ' fa-', $tab['icon'])
-              );
-            }
+          $material_symbol = isset($tab['materialSymbol']) ? 'symbols ' . sanitize_html_class($tab['materialSymbol']) : '';
+          $iconMarkup = '';
+          if (empty($tab['materialSymbol']) && !empty($tab['icon'])) {
+            $iconMarkup = SpriteGenerator::svgUse(
+              $tab['icon'],          // z. B. "solid cow"
+              'fa fa-' . str_replace(' ', ' fa-', $tab['icon'])
+            );
+          }
+
+          if (!empty($tab['materialSymbol'])) {
+            $iconMarkup = SpriteGenerator::svgUse(
+              $material_symbol
+            );
+          }
 
             $html .= '<button id="' . esc_attr($inner_uid) . '" type="button" role="tab" aria-selected="' . $selected . '" aria-controls="tab-' . esc_attr($uid) . '_tabpanel_tab-label-' . esc_attr($inner_uid) . '">';
             $html .= '<span class="focus" tabindex="-1">' . $iconMarkup . esc_html($title) . '</span>';

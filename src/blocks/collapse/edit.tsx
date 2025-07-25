@@ -200,15 +200,6 @@ const Edit = ({
           />
           <ColorSwitcher {...{ attributes, setAttributes }} />
           <AdvancedSettings {...{ attributes, setAttributes }} />
-          <PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
-            <IconPicker
-              attributes={{
-                icon: attributes.icon,
-                svgString: attributes.svgString,
-              }}
-              setAttributes={setAttributes}
-            />
-          </PanelBody>
         </InspectorControls>
 
         <div className={`accordion-group ${color}`}>
@@ -223,7 +214,7 @@ const Edit = ({
                 isActive || loadOpen ? "active" : ""
               }`}
             >
-              {attributes.icon && (
+              {(attributes.icon || attributes.materialSymbol) && (
                 <IconMarkComponent
                   type={iconType}
                   iconName={iconName}
@@ -232,6 +223,7 @@ const Edit = ({
                     svgString: attributes.svgString,
                   }}
                   setAttributes={setAttributes}
+                  materialSymbol={attributes.materialSymbol}
                 />
               )}
               <RichText

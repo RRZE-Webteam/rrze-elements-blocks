@@ -26,6 +26,7 @@ import {
   IconMarkComponent,
   IconPickerModalInset,
 } from "../../components/IconPicker";
+import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 
 interface EditProps {
   blockProps: string[];
@@ -39,6 +40,7 @@ interface EditProps {
     svgString: string;
     buttonOpensInNewTab: boolean;
     target: string;
+    materialSymbol: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   isSelected: boolean;
@@ -144,13 +146,7 @@ export default function Edit({
               onRequestClose={closeModal}
               size="large"
             >
-              <IconPickerModalInset
-                attributes={{
-                  icon: attributes.icon,
-                  svgString: attributes.svgString,
-                }}
-                setAttributes={setAttributes}
-              />
+              <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
               <Button variant="primary" onClick={closeModal}>
                 {__("Close", "rrze-elements-blocks")}
               </Button>
@@ -185,13 +181,6 @@ export default function Edit({
             units={["px", "em", "rem"]}
             value={attributes.fontSize}
           />
-          <IconPicker
-            attributes={{
-              icon: attributes.icon,
-              svgString: attributes.svgString,
-            }}
-            setAttributes={setAttributes}
-          />
         </PanelBody>
       </InspectorControls>
       {isLinkTag && isSelected && (isEditingURL || isURLSet) && (
@@ -213,7 +202,7 @@ export default function Edit({
 
       <div className="rrze--iconbox-element-container">
         <div className="rrze-iconbox-icon">
-          {attributes.icon && (
+          {(attributes.icon || attributes.materialSymbol) && (
             <IconMarkComponent
               type={iconType}
               iconName={iconName}
@@ -221,8 +210,8 @@ export default function Edit({
                 icon: attributes.icon,
                 svgString: attributes.svgString,
               }}
-              defaultClass="rrze-iconbox-icon"
               setAttributes={setAttributes}
+              materialSymbol={attributes.materialSymbol}
               onClick={openModal}
             />
           )}

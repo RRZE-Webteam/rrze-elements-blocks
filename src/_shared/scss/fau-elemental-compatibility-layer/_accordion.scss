@@ -19,7 +19,7 @@
       border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
     }
 
-    .accordion-group button svg {
+    .accordion-group button.accordion-toggle svg {
       margin: auto 20px auto 0;
       height: 20px;
       width: 20px;
@@ -53,7 +53,6 @@
       margin: 0;
       padding: 0;
       color: var(--FAU-Col-FAU-Blau-100, #04316a);
-      font-family: "Source Sans Pro", "Source Sans 3", sans-serif;
       font-size: var(--H-Heading-4, 1.25rem);
       font-weight: 700;
     }
@@ -174,9 +173,6 @@
       padding-right: 0;
     }
 
-    * {
-      font-family: "Source Sans Pro", "Source Sans 3", sans-serif;
-    }
 
   }
 

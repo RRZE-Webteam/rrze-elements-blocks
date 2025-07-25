@@ -49,6 +49,10 @@
     "tabsUid": {
       "type": "string",
       "default": ""
+    },
+    "materialSymbol": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
