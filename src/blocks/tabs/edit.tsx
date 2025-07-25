@@ -43,6 +43,7 @@ interface EditProps {
       position: number;
       icon: string;
       svgString: string;
+      materialSymbol: string;
     }[];
     active?: string;
     xray?: boolean;
@@ -63,6 +64,7 @@ type WPBlock = {
     svgString: any;
     childrenCount?: number;
     title?: string;
+    materialSymbol: string;
   };
   clientId?: string;
 };
@@ -110,6 +112,7 @@ export default function Edit({
           position: counter++,
           icon: block.attributes?.icon,
           svgString: block.attributes?.svgString,
+          materialSymbol: block.attributes?.materialSymbol
         }));
 
         return {
@@ -273,6 +276,17 @@ export default function Edit({
                           svgString: innerClientId["svgString"],
                         }}
                         defaultClass="elements-tabs-label-icon-inside-editor"
+                      />
+                    )}
+                    {(innerClientId["icon"] || innerClientId["materialSymbol"]) && (
+                      <IconMarkComponent
+                        type={iconType}
+                        iconName={iconName}
+                        attributes={{
+                          icon: innerClientId["icon"],
+                          svgString: innerClientId["svgString"]
+                        }}
+                        materialSymbol={innerClientId["materialSymbol"]}
                       />
                     )}
                     {innerClientId["title"]}

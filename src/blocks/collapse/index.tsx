@@ -27,6 +27,7 @@ interface AttributesV1 {
   jumpName: string;
   icon: string;
   svgString: string;
+  materialSymbol: string;
 }
 
 export interface AttributesV1_0_12 extends AttributesV1 {

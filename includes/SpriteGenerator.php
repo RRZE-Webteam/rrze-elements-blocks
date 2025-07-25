@@ -122,8 +122,6 @@ class SpriteGenerator
   /** Assemble one sprite string from all registered icons. */
   private static function createSpriteSheet(): string
   {
-    Helper::debug(self::$icons);
-    Helper::debug(self::$assetPath);
     if (self::$icons === [] || self::$assetPath === '') {
       return '';
     }
@@ -136,13 +134,6 @@ class SpriteGenerator
     if ($symbols === []) {
       return '';
     }
-    Helper::debug("Da");
-
-    Helper::debug(
-      '<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">'
-      . implode('', $symbols)
-      . '</svg>'
-    );
 
     return '<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">'
       . implode('', $symbols)

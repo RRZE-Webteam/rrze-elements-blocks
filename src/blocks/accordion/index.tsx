@@ -20,6 +20,7 @@ interface AttributesV1 {
   jumpName?: string;
   svgString?: string;
   ancestorCount?: number;
+  materialSymbol?: string;
 }
 
 //type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;

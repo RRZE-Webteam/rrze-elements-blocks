@@ -28,11 +28,18 @@ class Accordion extends AbstractBlockRender
       $hstart   = isset( $attributes['hstart'] ) ? (int) $attributes['hstart'] : 1;
       $jumpname = isset( $attributes['jumpName'] ) ? $attributes['jumpName'] : '';
 
+      $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
       $iconMarkup = '';
-      if (!empty($attributes['icon'])) {
+      if (empty($attributes['materialSymbol']) && !empty($attributes['icon'])) {
         $iconMarkup = SpriteGenerator::svgUse(
           $attributes['icon'],          // z. B. "solid cow"
           'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+        );
+      }
+
+      if (!empty($attributes['materialSymbol'])) {
+        $iconMarkup = SpriteGenerator::svgUse(
+          $material_symbol
         );
       }
 

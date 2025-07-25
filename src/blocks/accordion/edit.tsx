@@ -22,7 +22,6 @@ import {
 } from "../../components/CustomColorSwitcher";
 import HeadingComponent from "../../components/HeadingComponent";
 import {
-  IconPicker,
   IconMarkComponent,
   IconPickerModalInset,
 } from "../../components/IconPicker";
@@ -34,6 +33,7 @@ import { sanitizeTitleToJumpName } from "../../utility/utils";
 import JumpLinkSelector from "../../components/JumpLinkSelector";
 import { useDispatch } from "@wordpress/data";
 import { store as blockEditorStore } from "@wordpress/block-editor";
+import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 
 interface EditProps {
   attributes: {
@@ -47,6 +47,7 @@ interface EditProps {
     jumpName?: string;
     svgString?: string;
     isCustomJumpname?: boolean;
+    materialSymbol?: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -187,13 +188,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
                     onRequestClose={closeModal}
                     size="large"
                   >
-                    <IconPickerModalInset
-                      attributes={{
-                        icon: attributes.icon,
-                        svgString: attributes.svgString,
-                      }}
-                      setAttributes={setAttributes}
-                    />
+                    <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
                     <Button variant="primary" onClick={closeModal}>
                       {__("Close", "rrze-elements-blocks")}
                     </Button>
@@ -217,15 +212,6 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
           attributes={attributes}
           setAttributes={setAttributes}
         />
-        <PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
-          <IconPicker
-            attributes={{
-              icon: attributes.icon,
-              svgString: attributes.svgString,
-            }}
-            setAttributes={setAttributes}
-          />
-        </PanelBody>
       </InspectorControls>
       <div className={`accordion-group ${finalColor} `}>
         <HeadingComponent
@@ -238,7 +224,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
               isActive || loadOpen ? "active" : ""
             }`}
           >
-            {attributes.icon && (
+            {(attributes.icon || attributes.materialSymbol) && (
               <IconMarkComponent
                 type={iconType}
                 iconName={iconName}
@@ -247,6 +233,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
                   svgString: attributes.svgString,
                 }}
                 setAttributes={setAttributes}
+                materialSymbol={attributes.materialSymbol}
               />
             )}
             <RichText

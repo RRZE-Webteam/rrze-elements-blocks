@@ -28,15 +28,6 @@ const CustomInspectorControls = ({ attributes, setAttributes }: EditProps) => {
 					attributes={{ title: attributes.title }}
 					setAttributes={setAttributes}
 				/>
-				<PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
-					<IconPicker
-						attributes={{
-							icon: attributes.icon,
-							svgString: attributes.svgString,
-						}}
-						setAttributes={setAttributes}
-					/>
-				</PanelBody>
 			</InspectorControls>
 		</>
 	);

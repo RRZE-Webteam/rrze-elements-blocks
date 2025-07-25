@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import {__} from '@wordpress/i18n';
 import {
   ComboboxControl,
   Button,
@@ -15,8 +15,8 @@ import {
   memo,
   Fragment,
 } from '@wordpress/element';
-import { speak } from '@wordpress/a11y';
-import type { KeyboardEvent } from 'react';
+import {speak} from '@wordpress/a11y';
+import type {KeyboardEvent} from 'react';
 
 import fontawesomeIconNames from './assets/fontawesome/fontawesomeIconNames.json';
 
@@ -37,15 +37,16 @@ const brandsSpriteUrl = new URL(
 
 
 const SPRITES: Record<string, string> = {
-  solid:   solidSpriteUrl,
+  solid: solidSpriteUrl,
   regular: regularSpriteUrl,
-  brands:  brandsSpriteUrl,
+  brands: brandsSpriteUrl,
 };
 
 interface BlockAttributes {
   icon: string;      // "solid address-book" usw.
   svgString: string; // `${spriteUrl}#${iconName}`
 }
+
 type SetAttributesFunction = (a: Partial<BlockAttributes>) => void;
 
 const updateSvgHref = (
@@ -58,7 +59,7 @@ const updateSvgHref = (
 
   const href = `${SPRITES[type]}#${iconName}`;
   if (href !== attributes.svgString) {
-    setAttributes({ svgString: href });
+    setAttributes({svgString: href});
   }
 };
 
@@ -78,16 +79,24 @@ const SpriteIcon = ({
   const href = hrefOverride ?? `${SPRITES[type]}#${iconName}`;
   if (!href) return null;
 
+  if (type === 'symbol') {
+    return (
+      <span className={`material-symbols-outlined ${iconName}`}>
+        {iconName}
+      </span>
+    )
+  }
+
   return (
     <svg
       role="img"
       aria-hidden="true"
       className={className}
       onClick={onClick}
-      style={{ pointerEvents: onClick ? 'auto' : 'none' }}
+      style={{pointerEvents: onClick ? 'auto' : 'none'}}
     >
       {/* @ts-ignore: href ist in SVG2 spezifiziert */}
-      <use href={href} />
+      <use href={href}/>
     </svg>
   );
 };
@@ -132,7 +141,7 @@ const IconPicker = memo(
           value={attributes.icon}
           options={options}
           allowReset={false}
-          onChange={(newIcon) => setAttributes({ icon: newIcon })}
+          onChange={(newIcon) => setAttributes({icon: newIcon})}
         />
 
         {attributes.icon && (
@@ -145,7 +154,7 @@ const IconPicker = memo(
             />
             <Button
               variant="secondary"
-              onClick={() => setAttributes({ icon: '', svgString: '' })}
+              onClick={() => setAttributes({icon: '', svgString: ''})}
             >
               {__('Remove Icon', 'rrze-elements-blocks')}
             </Button>
@@ -208,7 +217,7 @@ const IconPickerModalInset = memo(
     /* Optionen aufbauen */
     useEffect(() => {
       const toOpts = (icons: string[], label: string) =>
-        icons.map((i) => ({ value: `${label} ${i}`, label: `${i} (${label})` }));
+        icons.map((i) => ({value: `${label} ${i}`, label: `${i} (${label})`}));
 
       setSolidIcons(toOpts(fontawesomeIconNames.solid, 'solid'));
       setRegularIcons(toOpts(fontawesomeIconNames.regular, 'regular'));
@@ -219,12 +228,10 @@ const IconPickerModalInset = memo(
       setAllIcons([...solidIcons, ...regularIcons, ...brandIcons]);
     }, [solidIcons, regularIcons, brandIcons]);
 
-    /* svgString synchron halten */
     useEffect(() => {
       updateSvgHref(type, iconName, attributes, setAttributes);
     }, [type, iconName, attributes, setAttributes]);
 
-    /* Suche */
     const runSearch = () => {
       const q = searchQuery.trim().toLowerCase();
       if (!q) {
@@ -233,7 +240,7 @@ const IconPickerModalInset = memo(
         return;
       }
       setFilteredIcons(
-        allIcons.filter(({ value }) => {
+        allIcons.filter(({value}) => {
           const [t, n] = value.split(' ');
           return t.includes(q) || n.includes(q);
         }),
@@ -273,11 +280,10 @@ const IconPickerModalInset = memo(
             {__('Search for Icons', 'rrze-elements-blocks')}
           </Button>
 
-          {/* Aktuell gewähltes Icon */}
           {attributes.icon && (
             <>
               <Spacer paddingBottom="1rem" paddingTop="1rem">
-                <Divider />
+                <Divider/>
               </Spacer>
               <Fragment>
                 <SpriteIcon
@@ -288,7 +294,7 @@ const IconPickerModalInset = memo(
                 />
                 <Button
                   variant="secondary"
-                  onClick={() => setAttributes({ icon: '', svgString: '' })}
+                  onClick={() => setAttributes({icon: '', svgString: ''})}
                 >
                   {__('Remove Icon', 'rrze-elements-blocks')}
                 </Button>
@@ -297,17 +303,16 @@ const IconPickerModalInset = memo(
           )}
         </Spacer>
 
-        {/* Suchergebnisse */}
         {showSearch && (
           <>
-            <Divider />
+            <Divider/>
             <Spacer paddingTop="1rem" paddingBottom="1rem">
               <Heading>{__('Search Results', 'rrze-elements-blocks')}</Heading>
               {filteredIcons.length ? (
                 <Grid columns={12}>
                   {filteredIcons.map((opt) =>
                     renderIconButton(opt, attributes.icon, (v) =>
-                      setAttributes({ icon: v }),
+                      setAttributes({icon: v}),
                     ),
                   )}
                 </Grid>
@@ -324,46 +329,46 @@ const IconPickerModalInset = memo(
         )}
 
         {/* Solid */}
-        <Divider />
+        <Divider/>
         <Spacer paddingTop="1rem" paddingBottom="1rem">
           <Heading>{__('Solid Icons', 'rrze-elements-blocks')}</Heading>
           <Grid columns={12}>
             {solidIcons.map((opt) =>
               renderIconButton(opt, attributes.icon, (v) =>
-                setAttributes({ icon: v }),
+                setAttributes({icon: v}),
               ),
             )}
           </Grid>
         </Spacer>
 
         {/* Regular */}
-        <Divider />
+        <Divider/>
         <Spacer paddingTop="1rem" paddingBottom="1rem">
           <Heading>{__('Regular Icons', 'rrze-elements-blocks')}</Heading>
           <Grid columns={12}>
             {regularIcons.map((opt) =>
               renderIconButton(opt, attributes.icon, (v) =>
-                setAttributes({ icon: v }),
+                setAttributes({icon: v}),
               ),
             )}
           </Grid>
         </Spacer>
 
         {/* Brands */}
-        <Divider />
+        <Divider/>
         <Spacer paddingTop="1rem" paddingBottom="1rem">
           <Heading>{__('Brand Icons', 'rrze-elements-blocks')}</Heading>
           <Grid columns={12}>
             {brandIcons.map((opt) =>
               renderIconButton(opt, attributes.icon, (v) =>
-                setAttributes({ icon: v }),
+                setAttributes({icon: v}),
               ),
             )}
           </Grid>
         </Spacer>
 
         <Spacer paddingBottom="1rem">
-          <Divider />
+          <Divider/>
         </Spacer>
       </>
     );
@@ -381,6 +386,7 @@ interface LegacyIconProps {
   onClick?: () => void;
   hrefOverride?: string;
   iconValue?: string;
+  materialSymbol?: string;
 }
 
 const IconMarkComponent = ({
@@ -392,15 +398,22 @@ const IconMarkComponent = ({
                              onClick,
                              hrefOverride,
                              iconValue = '',
+                              materialSymbol = '',
                            }: LegacyIconProps) => {
   let t = type;
   let n = iconName;
+
   if (iconValue) {
     const [vType, vName] = iconValue.split(' ');
     if (vType && vName) {
       t = vType;
       n = vName;
     }
+  }
+
+  if (materialSymbol) {
+    t = 'symbol';
+    n = materialSymbol
   }
 
   const href =
@@ -419,4 +432,4 @@ const IconMarkComponent = ({
   );
 };
 
-export { IconPicker, IconPickerModalInset, IconMarkComponent };
+export {IconPicker, IconPickerModalInset, IconMarkComponent};

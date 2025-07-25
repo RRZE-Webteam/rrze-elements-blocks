@@ -24,6 +24,7 @@ import {
   TitleModal,
   TitlePlaceholder,
 } from "./InspectorControls/TitleSettings";
+import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 
 /**
  * Interface representing the properties for the Edit component.
@@ -40,6 +41,7 @@ interface EditProps {
     labelSettings?: boolean;
     blockId?: string;
     tabsUid?: string;
+    materialSymbol: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -71,10 +73,10 @@ export default function Edit({
   // Hide the block in the editor if it is not active or xray is enabled.
   let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
 
-  // isOpen state is used to control the opening and closing of the icon picker modal  
+  // isOpen state is used to control the opening and closing of the icon picker modal
   const [isOpen, setOpen] = useState(false);
 
-  // Sync the block's 'tabsUid' attribute with the parent block's context.  
+  // Sync the block's 'tabsUid' attribute with the parent block's context.
   useEffect(() => {
     if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
       __unstableMarkNextChangeAsNotPersistent();
@@ -157,13 +159,7 @@ export default function Edit({
                     onRequestClose={closeModal}
                     size="large"
                   >
-                    <IconPickerModalInset
-                      attributes={{
-                        icon: attributes.icon,
-                        svgString: attributes.svgString,
-                      }}
-                      setAttributes={setAttributes}
-                    />
+                    <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
                     <Button variant="primary" onClick={closeModal}>
                       {__("Close", "rrze-elements-blocks")}
                     </Button>

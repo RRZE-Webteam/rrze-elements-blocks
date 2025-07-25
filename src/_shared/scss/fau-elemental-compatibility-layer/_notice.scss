@@ -120,3 +120,16 @@
     display: flex;
   }
 }
+
+.wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice{
+  background-color: var(--FAU-Col-FAU-Weiss-100);
+}
+
+.wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-box,
+.wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-container{
+  background-color: var(--FAU-Col-FAU-Blau-100);
+  svg use{
+    color: var(--FAU-Col-FAU-Weiss-100);
+    fill: var(--FAU-Col-FAU-Weiss-100);
+  }
+}
