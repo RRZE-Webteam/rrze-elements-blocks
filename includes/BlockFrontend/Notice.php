@@ -9,19 +9,19 @@ use RRZE\ElementsBlocks\SpriteGenerator;
 class Notice extends AbstractBlockRender
 {
     private static array $icon_map = [
-      'notice-attention'  => 'solid triangle-exclamation',
-      'notice-hinweis'    => 'solid info',
-      'notice-baustelle'  => 'solid screwdriver-wrench',
-      'notice-question'   => 'solid question',
-      'notice-minus'      => 'solid minus',
-      'notice-plus'       => 'solid plus',
-      'notice-idea'       => 'solid lightbulb',
-      'notice-download'   => 'solid download',
-      'notice-faubox'     => 'solid cloud-arrow-down',
-      'notice-audio'      => 'solid headphones',
-      'notice-video'      => 'solid video',
-      'notice-thumbs-up'  => 'solid thumbs-up',
-      'notice-thumbs-down'=> 'solid thumbs-down',
+      'notice-attention'  => 'symbols warning',
+      'notice-hinweis'    => 'symbols notifications',
+      'notice-baustelle'  => 'symbols construction',
+      'notice-question'   => 'symbols question_mark',
+      'notice-minus'      => 'symbols block',
+      'notice-plus'       => 'symbols add',
+      'notice-idea'       => 'symbols lightbulb',
+      'notice-download'   => 'symbols cognition',
+      'notice-faubox'     => 'symbols download',
+      'notice-audio'      => 'symbols headphones',
+      'notice-video'      => 'symbols video_library',
+      'notice-thumbs-up'  => 'symbols thumb_up',
+      'notice-thumbs-down'=> 'symbols thumb_down',
     ];
 
     /**
@@ -33,8 +33,6 @@ class Notice extends AbstractBlockRender
         return $innerBlocks;
       }
 
-      Helper::debug($attributes);
-
       $variation   = $attributes['style'] ?? '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
       $material_symbol = !empty($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
@@ -45,8 +43,7 @@ class Notice extends AbstractBlockRender
         );
       } else {
         $iconMarkup = SpriteGenerator::svgUse(
-          $icon_class,          // z. B. "solid cow"
-          'fa fa-' . str_replace(' ', ' fa-', $icon_class)
+          $icon_class
         );
       }
 
