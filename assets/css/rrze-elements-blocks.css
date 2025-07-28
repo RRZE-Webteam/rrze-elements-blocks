@@ -16538,6 +16538,10 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   fill: var(--FAU-Col-FAU-Weiss-100);
 }
 
+div.icon-box {
+  text-align: center;
+}
+
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-timeline-item a {
   color: var(--FAU-Col-FAU-Weiss-100);
 }

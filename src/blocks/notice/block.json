@@ -9,6 +9,10 @@
   "attributes": {
     "style": {
       "type": "string"
+    },
+    "materialSymbol": {
+      "type": "string",
+      "default": ""
     }
   },
   "example": {
