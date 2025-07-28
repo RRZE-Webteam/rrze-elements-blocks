@@ -37,7 +37,7 @@ class Notice extends AbstractBlockRender
 
       $variation   = $attributes['style'] ?? '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
-      $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
+      $material_symbol = !empty($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
 
       if (!empty($material_symbol)) {
         $iconMarkup = SpriteGenerator::svgUse(
