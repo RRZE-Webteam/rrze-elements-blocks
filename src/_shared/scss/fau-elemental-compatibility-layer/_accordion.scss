@@ -4,6 +4,11 @@
     border-bottom: 0;
   }
 
+  .wp-block-rrze-elements-collapsibles{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   .wp-block-rrze-elements-accordion .accordion-group{
     margin-bottom: 0;
     border-bottom: none;
@@ -66,6 +71,10 @@
       background-color: transparent;
     }
 
+    .accordion-group{
+      padding-right: 60px;
+    }
+
     .accordion-toggle svg {
       width: 2.5ch;
       height: 2.5ch;
@@ -79,8 +88,22 @@
 
     div.accordion-toggle, button.accordion-toggle {
       padding: 1rem;
+      padding-left: 0;
       background-color: transparent;
       border: none;
+    }
+
+    .accordion .accordion-body .accordion-inner{
+      padding: 0;
+    }
+
+    .accordion .accordion .accordion-group .accordion-heading button.accordion-toggle,
+    .accordion .accordion .accordion-group .accordion-heading .accordion-toggle{
+      padding-left: 1rem;
+    }
+
+    .accordion .accordion .accordion-inner{
+      padding-left: 1rem;
     }
 
     //div.accordion-toggle:hover p{
@@ -103,34 +126,34 @@
     & .accordion-toggle::before {
       content: "";
       position: absolute;
-      top: 50%;
-      right: 1rem;
+      top: 45%;
+      right: -60px;
       width: 2rem;
       height: 2rem;
-      transform: translateY(-50%);
+      transform: translateY(-45%);
       background: #04316a;
       border-radius: 0px;
       z-index: 0;
     }
 
     & .accordion-toggle:hover::before {
-      top: 50%;
-      right: 1rem;
+      top: 45%;
+      right: -60px;
       transform: translateY(2%);
     }
 
     & .accordion-toggle:hover::after {
-      top: 50%;
+      top: 45%;
       transform: translateY(0);
     }
 
     & .accordion-toggle.active:hover::after {
-      top: 50%;
+      top: 45%;
       transform: rotate(180deg);
     }
 
     & .accordion-toggle.active::after {
-      top: 1rem;
+      top: 20px;
       transform: rotate(180deg);
     }
 
@@ -138,17 +161,17 @@
       content: "";
       position: absolute;
       color: var(--FAU-Col-FAU-Weiss-100, #fff);
-      top: 50%;
-      right: 1rem;
+      top: 45%;
+      right: -60px;
       width: 2rem;
       height: 2rem;
       transform-origin: center;
-      transform: translateY(-50%) rotate(0); /* ▼ */
+      transform: translateY(-33%) rotate(0); /* ▼ */
       transition: transform .2s ease;
       z-index: 1;
 
       background: currentColor;
-      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/50% 50% no-repeat;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/45% 45% no-repeat;
       mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/60% 60% no-repeat;
     }
   }
@@ -172,10 +195,40 @@
       padding-left: 0;
       padding-right: 0;
     }
-
-
   }
 
+  .accordion .accordion-toggle.active:focus::before {
+    position: absolute;
+    top: inherit;
+    right: -60px !important;
+  }
+
+  .accordion .accordion-group .accordion-heading button.accordion-toggle{
+    padding-left: 0;
+  }
+
+  .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
+  .accordion .accordion-group .accordion-heading button.accordion-toggle:target,
+  .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
+  .accordion .accordion-group .accordion-heading button.accordion-toggle.active{
+    background-color: initial;
+    color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  }
+
+  .accordion .nat .accordion-heading .accordion-toggle.active:hover,
+  .accordion .rw .accordion-heading .accordion-toggle.active:hover,
+  .accordion .phil .accordion-heading .accordion-toggle.active:hover,
+  .accordion .tf .accordion-heading .accordion-toggle.active:hover,
+  .accordion .fau .accordion-heading .accordion-toggle.active:hover,
+  .accordion .med .accordion-heading .accordion-toggle.active:hover,
+  .accordion .nat .accordion-heading .accordion-toggle:hover,
+  .accordion .rw .accordion-heading .accordion-toggle:hover,
+  .accordion .phil .accordion-heading .accordion-toggle:hover,
+  .accordion .tf .accordion-heading .accordion-toggle:hover,
+  .accordion .fau .accordion-heading .accordion-toggle:hover,
+  .accordion .med .accordion-heading .accordion-toggle:hover{
+    background-color: initial;
+  }
 }
 
 .wp-theme-FAU-Elemental .is-style-dark {

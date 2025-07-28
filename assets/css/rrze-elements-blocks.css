@@ -15770,6 +15770,10 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   padding-bottom: 0;
   border-bottom: 0;
 }
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-accordion .accordion-group {
   margin-bottom: 0;
   border-bottom: none;
@@ -15816,6 +15820,9 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group .accordion-body .accordion-inner {
   background-color: transparent;
 }
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group {
+  padding-right: 60px;
+}
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle svg {
   width: 2.5ch;
   height: 2.5ch;
@@ -15830,6 +15837,15 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   background-color: transparent;
   border: none;
 }
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion .accordion-body .accordion-inner {
+  padding: 0;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion .accordion .accordion-group .accordion-heading button.accordion-toggle {
+  padding-left: 1rem;
+}
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion .accordion .accordion-inner {
+  padding-left: 1rem;
+}
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles div.accordion-toggle:hover,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles div.accordion-toggle:target,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles button.accordion-toggle:hover,
@@ -15843,46 +15859,46 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle::before {
   content: "";
   position: absolute;
-  top: 50%;
-  right: 1rem;
+  top: 45%;
+  right: -60px;
   width: 2rem;
   height: 2rem;
-  transform: translateY(-50%);
+  transform: translateY(-45%);
   background: #04316a;
   border-radius: 0px;
   z-index: 0;
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle:hover::before {
-  top: 50%;
-  right: 1rem;
+  top: 45%;
+  right: -60px;
   transform: translateY(2%);
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle:hover::after {
-  top: 50%;
+  top: 45%;
   transform: translateY(0);
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.active:hover::after {
-  top: 50%;
+  top: 45%;
   transform: rotate(180deg);
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.active::after {
-  top: 1rem;
+  top: 20px;
   transform: rotate(180deg);
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle::after {
   content: "";
   position: absolute;
   color: var(--FAU-Col-FAU-Weiss-100, #fff);
-  top: 50%;
-  right: 1rem;
+  top: 45%;
+  right: -60px;
   width: 2rem;
   height: 2rem;
   transform-origin: center;
-  transform: translateY(-50%) rotate(0); /* ▼ */
+  transform: translateY(-33%) rotate(0); /* ▼ */
   transition: transform 0.2s ease;
   z-index: 1;
   background: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/50% 50% no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/45% 45% no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/60% 60% no-repeat;
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-body {
@@ -15901,6 +15917,35 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
+}
+.wp-theme-FAU-Elemental .accordion .accordion-toggle.active:focus::before {
+  position: absolute;
+  top: inherit;
+  right: -60px !important;
+}
+.wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle {
+  padding-left: 0;
+}
+.wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
+.wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle:target,
+.wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
+.wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle.active {
+  background-color: initial;
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+.wp-theme-FAU-Elemental .accordion .nat .accordion-heading .accordion-toggle.active:hover,
+.wp-theme-FAU-Elemental .accordion .rw .accordion-heading .accordion-toggle.active:hover,
+.wp-theme-FAU-Elemental .accordion .phil .accordion-heading .accordion-toggle.active:hover,
+.wp-theme-FAU-Elemental .accordion .tf .accordion-heading .accordion-toggle.active:hover,
+.wp-theme-FAU-Elemental .accordion .fau .accordion-heading .accordion-toggle.active:hover,
+.wp-theme-FAU-Elemental .accordion .med .accordion-heading .accordion-toggle.active:hover,
+.wp-theme-FAU-Elemental .accordion .nat .accordion-heading .accordion-toggle:hover,
+.wp-theme-FAU-Elemental .accordion .rw .accordion-heading .accordion-toggle:hover,
+.wp-theme-FAU-Elemental .accordion .phil .accordion-heading .accordion-toggle:hover,
+.wp-theme-FAU-Elemental .accordion .tf .accordion-heading .accordion-toggle:hover,
+.wp-theme-FAU-Elemental .accordion .fau .accordion-heading .accordion-toggle:hover,
+.wp-theme-FAU-Elemental .accordion .med .accordion-heading .accordion-toggle:hover {
+  background-color: initial;
 }
 
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-collapsibles .accordion-group {
@@ -16531,6 +16576,10 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-box,
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-container {
   background-color: var(--FAU-Col-FAU-Blau-100);
+}
+.wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-box span.material-symbols-outlined,
+.wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-container span.material-symbols-outlined {
+  color: var(--FAU-Col-FAU-Weiss-100);
 }
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-box svg use,
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice .notice > div:first-child.icon-container svg use {
