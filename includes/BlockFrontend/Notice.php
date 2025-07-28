@@ -37,10 +37,20 @@ class Notice extends AbstractBlockRender
 
       $variation   = $attributes['style'] ?? '';
       $icon_class  = self::$icon_map[ $variation ] ?? '';
-      $iconMarkup = SpriteGenerator::svgUse(
-        $icon_class,          // z. B. "solid cow"
-        'fa fa-' . str_replace(' ', ' fa-', $icon_class)
-      );
+      $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
+
+      if (!empty($material_symbol)) {
+        $iconMarkup = SpriteGenerator::svgUse(
+          $material_symbol
+        );
+      } else {
+        $iconMarkup = SpriteGenerator::svgUse(
+          $icon_class,          // z. B. "solid cow"
+          'fa fa-' . str_replace(' ', ' fa-', $icon_class)
+        );
+      }
+
+
 
       $wrapper_class = isset( $attributes['className'] ) ? $attributes['className'] : '';
 
