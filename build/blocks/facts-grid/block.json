@@ -12,11 +12,15 @@
   "attributes": {
     "title": {
       "type": "string",
-      "default": "Blueprint"
+      "default": ""
     },
     "materialSymbol": {
       "type": "string",
       "default": ""
+    },
+    "headingLevel": {
+      "type": "number",
+      "default": 3
     }
   },
   "textdomain": "rrze-elements-blocks",

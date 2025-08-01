@@ -1,10 +1,13 @@
 import {
   useBlockProps,
-  InnerBlocks, BlockControls,
+  InnerBlocks, BlockControls, RichText,
 } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
 import type { ComponentType } from "@wordpress/element";
 import { useRef } from "@wordpress/element";
+import {__} from "@wordpress/i18n";
+// @ts-ignore
+import {HeadingLevelDropdown} from "@wordpress/block-editor";
 
 type WPBlock = {
   clientId: string;
@@ -13,13 +16,16 @@ type WPBlock = {
 
 interface EditProps {
   clientId: string;
-  attributes: Record<string, unknown>;
+  attributes: {
+    title: string;
+    headingLevel: number;
+  };
   setAttributes: (a: Record<string, unknown>) => void;
 }
 
 const MAX_CHILDREN = 4;
 
-export default function Edit({ clientId }: EditProps) {
+export default function Edit({attributes, setAttributes, clientId }: EditProps) {
   const blockProps   = useBlockProps();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -40,6 +46,28 @@ export default function Edit({ clientId }: EditProps) {
 
   return (
     <div {...blockProps}>
+      <BlockControls>
+        <HeadingLevelDropdown
+          onChange={(headingLevel: number) => {setAttributes({ headingLevel })}}
+          options={[
+            2,
+            3,
+            4,
+            5,
+            6
+          ]}
+          value={attributes.headingLevel}
+        />
+      </BlockControls>
+      <div className={"wp-block-fau-elemental-fau-meta-headline"}>
+        <RichText
+          tagName="span"
+          value={attributes.title}
+          onChange={(title) => setAttributes({title})}
+          allowedFormats={[]}
+          placeholder={__("Section Heading", "rrze-elements-blocks")}
+        />
+      </div>
     <ul className={"facts"}>
       <InnerBlocks
         template={[

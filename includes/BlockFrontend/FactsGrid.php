@@ -22,13 +22,14 @@ class FactsGrid extends AbstractBlockRender
     $heading_id = !empty($attributes['anchor'])
       ? esc_attr($attributes['anchor'])
       : 'facts-heading';
+    $headingLevel = isset($attributes['headingLevel']) ? absint($attributes['headingLevel']) : 3;
 
     /* --------------------------------------------------------------
      * 3. Mark-up zurückgeben
      * ------------------------------------------------------------ */
     return sprintf(
       '<section aria-labelledby="%1$s" class="facts %2$s">
-            <h2 id="%1$s" class="visually-hidden">%3$s</h2>
+<h%5$s class="wp-block-fau-elemental-fau-meta-headline">%3$s</h%5$s>
             <ul class="facts__list" role="list">
                 %4$s
             </ul>
@@ -36,7 +37,8 @@ class FactsGrid extends AbstractBlockRender
       $heading_id,
       $wrapper_class,
       esc_html($heading),
-      $innerBlocks
+      $innerBlocks,
+      $headingLevel
     );
   }
 }
