@@ -1,23 +1,9 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
+import {AttributesV1_0_19} from "../v1.0.19/attributes";
 
-interface Attributes {
-  sameBlockCount: number;
-  totalChildrenCount: number;
-  color: string;
-  title: string;
-  jumpName: string;
-  loadOpen: boolean;
-  hstart: number;
-  svgString?: string;
-}
-
-interface SaveProps {
-  attributes: Attributes;
-}
-
-const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_19>) => {
   const blockProps = useBlockProps.save();
   const { sameBlockCount, totalChildrenCount, color, title, jumpName, svgString, loadOpen, hstart } = attributes;
 
@@ -25,7 +11,7 @@ const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
   let output = '';
   if (jumpName === ''){
       output = `panel_${sameBlockCount + totalChildrenCount}`;
-  } else { 
+  } else {
       output = `${jumpName}`;
   }
 
@@ -35,7 +21,7 @@ const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
   if ( loadOpen ) {
     loadOnPageLoad = 'open';
     activeOnPageLoad = 'active';
-  } 
+  }
 
   return (
     <div {...blockProps}>

@@ -3,10 +3,7 @@ import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
 import { AttributesV1 } from "../v1/attributes";
 
-interface SaveProps {
-  attributes: AttributesV1;
-}
-const Save: React.FC<BlockSaveProps<AttributesV1>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<AttributesV1>) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,

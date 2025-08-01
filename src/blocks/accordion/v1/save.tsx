@@ -14,7 +14,7 @@ interface Attributes {
   ancestorCount?: number;
 }
 
-const Save: React.FC<BlockSaveProps<Attributes>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<Attributes>) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,

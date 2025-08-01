@@ -81,7 +81,7 @@ const SpriteIcon = ({
 
   if (type === 'symbol') {
     return (
-      <span className={`material-symbols-outlined ${iconName}`}>
+      <span onClick={onClick} style={{pointerEvents: onClick ? 'auto' : 'none'}} className={`material-symbols-outlined ${iconName}`}>
         {iconName}
       </span>
     )

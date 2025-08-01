@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/fact",
+  "version": "1.0.19",
+  "title": "Fact",
+  "category": "rrze_elements",
+  "description": "Creates a Fact",
+  "parent": [ "rrze-elements/facts-grid" ],
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "materialSymbol": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.ts",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
