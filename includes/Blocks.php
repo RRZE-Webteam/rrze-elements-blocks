@@ -15,6 +15,8 @@ use RRZE\ElementsBlocks\BlockFrontend\Columns;
 use RRZE\ElementsBlocks\BlockFrontend\ContentWidthLimiter;
 use RRZE\ElementsBlocks\BlockFrontend\Counter;
 use RRZE\ElementsBlocks\BlockFrontend\CounterRow;
+use RRZE\ElementsBlocks\BlockFrontend\Fact;
+use RRZE\ElementsBlocks\BlockFrontend\FactsGrid;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
@@ -137,6 +139,14 @@ class Blocks
       [
         'build_folder' => 'timeline-item',
         'class' => TimelineItem::class,
+      ],
+      [
+        'build_folder' => 'facts-grid',
+        'class' => FactsGrid::class,
+      ],
+      [
+        'build_folder' => 'fact',
+        'class' => Fact::class,
       ]
     ];
 

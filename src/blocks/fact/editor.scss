@@ -1,0 +1,54 @@
+section.facts ul, section.facts li, section.facts p.facts__text{
+  list-style: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+section.facts ul li span.facts__icon svg,
+section.facts ul li span.facts__icon span.material-symbols-outlined{
+  height: 60px;
+  width: 60px;
+  font-size: 60px;
+  fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+section.facts ul {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: var(--spacing-8x, 2rem);
+}
+
+section.facts li {
+  grid-column: span 3;
+}
+
+section.facts {
+  max-width: var(--wide-max-width, 1320px) !important;
+
+  p.facts__text {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+.progress-low div{
+  --wp-components-progress-bar-color: green;
+  background-color: green;
+}
+
+.progress-medium div{
+  --wp-components-progress-bar-color: orange;
+  background-color: orange;
+}
+
+.progress-high div{
+  --wp-components-progress-bar-color: red;
+  background-color: red;
+}
+
+.progress-low, .progress-medium, .progress-high{
+  height: 5px !important;
+}
