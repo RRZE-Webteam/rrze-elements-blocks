@@ -70,6 +70,7 @@ export default function Edit({attributes, setAttributes, clientId }: EditProps) 
       </div>
     <ul className={"facts"}>
       <InnerBlocks
+        orientation="horizontal"
         template={[
           ["rrze-elements/fact"],
           ["rrze-elements/fact"],
