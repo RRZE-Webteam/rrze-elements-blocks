@@ -7,7 +7,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
 
 registerBlockType( metadata.name as any, {
 	icon: {
-		src: <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect x="60.05" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/><rect x="199.53" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/><rect x="339.01" y="115.69" width="112.94" height="280.62" rx="5.73" ry="5.73" fill="evenodd" strokeWidth="0"/></svg>
+		src: <svg id="a" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect x="68.16" y="64.1" width="171.82" height="188.56" rx="5.73" ry="5.73" transform="translate(312.45 4.32) rotate(90)" fill="evenodd"/><g opacity=".25"><rect x="68.16" y="251.45" width="171.82" height="188.56" rx="5.73" ry="5.73" transform="translate(499.8 191.67) rotate(90)" fill="evenodd"/></g><g opacity=".25"><rect x="274.84" y="64.1" width="171.82" height="188.56" rx="5.73" ry="5.73" transform="translate(519.13 -202.37) rotate(90)" fill="evenodd"/></g><g opacity=".25"><rect x="274.84" y="253.71" width="171.82" height="188.56" rx="5.73" ry="5.73" transform="translate(708.74 -12.76) rotate(90)" fill="evenodd"/></g></svg>
 	},
 	__experimentalLabel: (attributes: any, { context }: any) => {
 		const { description } = attributes;

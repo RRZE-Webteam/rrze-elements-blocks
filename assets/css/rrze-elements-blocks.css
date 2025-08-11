@@ -16616,8 +16616,13 @@ section.facts ul li span.facts__icon span.material-symbols-outlined {
 
 section.facts ul {
   display: grid;
+  padding-top: var(--spacing-10, 2.5rem);
   grid-template-columns: repeat(12, 1fr);
   grid-gap: var(--spacing-8x, 2rem);
+}
+
+div.wp-block-rrze-elements-facts-grid {
+  padding-bottom: var(--spacing-10, 2.5rem);
 }
 
 section.facts li {
@@ -16629,7 +16634,11 @@ section.facts {
 }
 section.facts p.facts__text {
   padding-top: 0;
-  margin-top: 0;
+  margin-top: 8px;
+}
+
+section.facts .wp-block-fau-elemental-fau-meta-headline {
+  padding-left: var(--Spacing-2x, 0.5rem) !important;
 }
 
 .progress-low div {
@@ -16649,6 +16658,37 @@ section.facts p.facts__text {
 
 .progress-low, .progress-medium, .progress-high {
   height: 5px !important;
+}
+
+/* Tablet breakpoint */
+@media screen and (width <= 1440px) {
+  section.facts ul {
+    grid-template-columns: repeat(8, 1fr);
+    padding-left: var(--Spacing-10x, 2.5rem);
+    padding-right: var(--Spacing-10x, 2.5rem);
+  }
+  section.facts li {
+    grid-column: span 2;
+  }
+  section.facts .wp-block-fau-elemental-fau-meta-headline {
+    margin-left: var(--Spacing-20x, 5rem) !important;
+    padding-left: var(--Spacing-2x, 0.5rem) !important;
+  }
+}
+/* Mobile breakpoint */
+@media screen and (width <= 768px) {
+  section.facts ul {
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: var(--Spacing-5x, 1.25rem);
+    padding-right: var(--Spacing-5x, 1.25rem);
+  }
+  section.facts li {
+    grid-column: span 2;
+  }
+  section.facts .wp-block-fau-elemental-fau-meta-headline {
+    margin-left: var(--Spacing-10x, 2.5rem) !important;
+    padding-left: var(--Spacing-1x, 0.25rem) !important;
+  }
 }
 
 /*# sourceMappingURL=rrze-elements-blocks.css.map */
