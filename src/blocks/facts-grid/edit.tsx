@@ -70,6 +70,7 @@ export default function Edit({attributes, setAttributes, clientId }: EditProps) 
       </div>
     <ul className={"facts"}>
       <InnerBlocks
+        renderAppender={ConditionalAppender}
         orientation="horizontal"
         template={[
           ["rrze-elements/fact"],
@@ -78,7 +79,6 @@ export default function Edit({attributes, setAttributes, clientId }: EditProps) 
           ["rrze-elements/fact"],
         ]}
         allowedBlocks={["rrze-elements/fact"]}
-        renderAppender={ConditionalAppender}
       />
     </ul>
     </div>

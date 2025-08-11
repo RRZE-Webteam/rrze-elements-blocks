@@ -38,6 +38,7 @@ class Fact extends AbstractBlockRender
       );
     }
 
+    if (!empty($description) && !empty($materialSymbol)) {
     return sprintf(
       '<li class="facts__item">
         <span class="facts__icon" aria-hidden="true">%1$s</span>
@@ -48,5 +49,8 @@ class Fact extends AbstractBlockRender
       nl2br($description),
       $buttonMarkup
     );
+    } else {
+      return("");
+    }
   }
 }
