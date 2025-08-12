@@ -134,34 +134,41 @@
       background: #04316a;
       border-radius: 0px;
       z-index: 0;
+      transition: all .2s ease;
     }
 
     & .accordion-toggle:hover::before {
       top: 45%;
       right: -60px;
       transform: translateY(2%);
+      transition: all .2s ease;
     }
 
     & .accordion-toggle:hover::after {
-      top: 45%;
+      top: 46%;
       transform: translateY(0);
+      transition: all .2s ease;
     }
 
-    & .accordion-toggle.active:hover::after {
-      top: 45%;
+    & .accordion-toggle.active:hover::after,
+    & .accordion-toggle.focus:hover::after{
+      top: 46%;
       transform: rotate(180deg);
+      //transition: all .2s ease;
     }
 
-    & .accordion-toggle.active::after {
-      top: 20px;
+    & .accordion-toggle.active::after,
+    & .accordion-toggle.focus::after{
+      top: 29%;
       transform: rotate(180deg);
+      transition: all .2s ease;
     }
 
     & .accordion-toggle::after {
       content: "";
       position: absolute;
       color: var(--FAU-Col-FAU-Weiss-100, #fff);
-      top: 45%;
+      top: 42%;
       right: -60px;
       width: 2rem;
       height: 2rem;
@@ -199,8 +206,9 @@
 
   .accordion .accordion-toggle.active:focus::before {
     position: absolute;
-    top: inherit;
+    //top: inherit;
     right: -60px !important;
+    transition: all .2s ease;
   }
 
   .accordion .accordion-group .accordion-heading button.accordion-toggle{
@@ -275,5 +283,15 @@
     & .accordion-toggle::after {
       color: var(--FAU-Col-FAU-Blau-100, #04316a);
     }
+
+    .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
+    .accordion .accordion-group .accordion-heading button.accordion-toggle:active,
+    .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
+    .accordion .accordion-group .accordion-heading button.accordion-toggle:target,
+    .accordion .accordion-group .accordion-heading button.accordion-toggle.active{
+      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    }
   }
+
+
 }
