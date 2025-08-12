@@ -227,22 +227,40 @@
       }
     }
 
-    .rrze-elements-cta.no-image {
-      grid-template-columns: 1fr 1fr 1fr 1.5fr;
-      grid-template-rows: 3rem auto auto auto auto auto 3rem;
-      padding: var(--Spacing-8x, 2rem);
+    //  .rrze-elements-cta.no-image {
+    //    //grid-template-columns: 1fr 1fr 1fr 1.5fr;
+    //    //grid-template-rows: 3rem auto auto auto auto auto 3rem;
+    //    padding: var(--Spacing-8x, 2rem);
+    //
+    //    div.cta-button-container {
+    //      grid-row: 1/8;
+    //    }
+    //
+    //    div.cta-content {
+    //      grid-row: 1/8;
+    //      padding-left: 0;
+    //    }
+    //
+    //    a.cta-button {
+    //      margin-left: 0;
+    //    }
+    //  }
 
-      div.cta-button-container {
-        grid-row: 1/8;
+    .rrze-elements-cta.no-image{
+      display: block;
+      padding-bottom: var(--Spacing-8x, 32px);
+
+      .cta-content{
+        padding-bottom: var(--Spacing-2x, 32px);
+        padding: 0 !important;
       }
 
-      div.cta-content {
-        grid-row: 1/8;
-        padding-left: 0;
-      }
-
-      a.cta-button {
-        margin-left: 0;
+      .cta-button-container {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        height: fit-content;
       }
     }
   }

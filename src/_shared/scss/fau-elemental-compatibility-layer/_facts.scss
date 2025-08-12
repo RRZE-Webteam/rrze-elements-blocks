@@ -98,3 +98,18 @@ section.facts .wp-block-fau-elemental-fau-meta-headline{
     padding-left: var(--Spacing-1x, 0.25rem) !important;
   }
 }
+
+.is-style-dark{
+  section.facts svg.icon {
+    color: var(--FAU-Col-FAU-Weiss-100, #fff);
+  }
+
+  section.facts {
+    padding-top: var(--spacing-10, 2.5rem);
+    padding-bottom: var(--spacing-10, 2.5rem);
+  }
+}
+
+section.facts svg.icon{
+  margin-left: -4px;
+}
