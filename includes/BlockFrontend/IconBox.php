@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\Helper;
 use RRZE\ElementsBlocks\SpriteGenerator;
 
 class IconBox extends AbstractBlockRender
@@ -17,6 +18,7 @@ class IconBox extends AbstractBlockRender
             return $innerBlocks;
         }
 
+        $wrapper_class = $attributes['className'] ?? '';
         $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
 
         $iconMarkup = '';
@@ -37,11 +39,9 @@ class IconBox extends AbstractBlockRender
         $description = $attributes['description'] ?? '';
         $svg_string = $attributes['svgString'] ?? '';
 
-        if ($title === '' || $description === '' || $svg_string === '') {
+        if ($title === '' || $description === '' || $iconMarkup === '') {
             return '';
         }
-
-        $wrapper_class = $attributes['className'] ?? '';
 
         $font_size = !empty($attributes['fontSize']) ? sanitize_html_class($attributes['fontSize']) : 'large';
         $duration = $attributes['duration'] ?? '';
