@@ -67,7 +67,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
   };
 
   const descriptionLength = description?.length || 0;
-  const progressValue =  Math.min((descriptionLength / 80) * 100, 100);
+  const progressValue =  Math.min((descriptionLength / 120) * 100, 100);
 
   let progressClass = "progress-low";
   if (progressValue > 85) {
@@ -168,7 +168,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
             value={progressValue}
             className={progressClass}
           />
-          <span>{descriptionLength} / 80 {__("Characters", "rrze-elements-blocks")}</span>
+          <span>{descriptionLength} / 120 {__("Characters", "rrze-elements-blocks")}</span>
             <br/>
           </>
         )}

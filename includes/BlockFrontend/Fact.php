@@ -16,7 +16,7 @@ class Fact extends AbstractBlockRender
     }
 
     $description = isset($attributes['description']) ? wp_kses_post($attributes['description']) : '';
-    $description = mb_substr($description, 0, 80);
+    $description = mb_substr($description, 0, 120);
     $materialSymbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
     $buttonText      = isset($attributes['buttonText'])      ? esc_html($attributes['buttonText'])      : __('Mehr', 'rrze-elements-blocks');
     $buttonUrl       = isset($attributes['buttonUrl'])       ? esc_url($attributes['buttonUrl'])        : '#';
@@ -38,7 +38,7 @@ class Fact extends AbstractBlockRender
       );
     }
 
-    if (!empty($description) && !empty($materialSymbol)) {
+    if (!empty($description) && !empty($attributes['materialSymbol'])) {
     return sprintf(
       '<li class="facts__item">
         <span class="facts__icon" aria-hidden="true">%1$s</span>
