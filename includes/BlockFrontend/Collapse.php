@@ -20,7 +20,7 @@ class Collapse extends AbstractBlockRender
     }
 
     $color = isset($attributes['color']) ? sanitize_html_class($attributes['color']) : '';
-    $title = isset($attributes['title']) ? wp_kses_post($attributes['title']) : '';
+    $title = isset($attributes['title']) ? sanitize_text_field($attributes['title']) : '';
     $jump_name = isset($attributes['jumpName']) ? $attributes['jumpName'] : '';
     $load_open = !empty($attributes['loadOpen']);
     $hstart = isset($attributes['hstart']) ? (int)$attributes['hstart'] : 1;

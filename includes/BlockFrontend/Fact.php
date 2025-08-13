@@ -15,10 +15,10 @@ class Fact extends AbstractBlockRender
       return $innerBlocks;
     }
 
-    $description = isset($attributes['description']) ? wp_kses_post($attributes['description']) : '';
+    $description = isset($attributes['description']) ? sanitize_text_field($attributes['description']) : '';
     $description = mb_substr($description, 0, 120);
     $materialSymbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
-    $buttonText      = isset($attributes['buttonText'])      ? esc_html($attributes['buttonText'])      : __('Mehr', 'rrze-elements-blocks');
+    $buttonText      = isset($attributes['buttonText'])      ? sanitize_text_field($attributes['buttonText'])      : __('More Information', 'rrze-elements-blocks');
     $buttonUrl       = isset($attributes['buttonUrl'])       ? esc_url($attributes['buttonUrl'])        : '#';
     $iconMarkup = '';
     if (!empty($attributes['materialSymbol'])) {
