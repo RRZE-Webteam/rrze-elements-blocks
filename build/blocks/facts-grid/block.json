@@ -21,6 +21,10 @@
     "headingLevel": {
       "type": "number",
       "default": 3
+    },
+    "hideHeading": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "rrze-elements-blocks",
