@@ -35,8 +35,8 @@ class IconBox extends AbstractBlockRender
           );
         }
 
-        $title = $attributes['title'] ?? '';
-        $description = $attributes['description'] ?? '';
+        $title = sanitize_text_field($attributes['title']) ?? '';
+        $description = sanitize_text_field($attributes['description']) ?? '';
         $svg_string = $attributes['svgString'] ?? '';
 
         if ($title === '' || $description === '' || $iconMarkup === '') {

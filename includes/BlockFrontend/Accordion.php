@@ -22,11 +22,11 @@ class Accordion extends AbstractBlockRender
       $total_children_count = isset( $attributes['totalChildrenCount'] ) ? (int) $attributes['totalChildrenCount'] : 0;
       $ancestor_count       = isset( $attributes['ancestorCount'] )      ? (int) $attributes['ancestorCount']      : 0;
 
-      $title     = isset( $attributes['title'] ) ? wp_kses_post( $attributes['title'] ) : '';
+      $title     = isset( $attributes['title'] ) ? sanitize_text_field( $attributes['title'] ) : '';
       $color     = isset( $attributes['color'] ) ? sanitize_html_class( $attributes['color'] ) : '';
 
       $hstart   = isset( $attributes['hstart'] ) ? (int) $attributes['hstart'] : 1;
-      $jumpname = isset( $attributes['jumpName'] ) ? $attributes['jumpName'] : '';
+      $jumpname = isset( $attributes['jumpName'] ) ? sanitize_text_field($attributes['jumpName']) : '';
 
       $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
       $iconMarkup = '';
