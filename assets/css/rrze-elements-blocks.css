@@ -16286,6 +16286,9 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   padding-bottom: 0;
   padding-top: var(--Spacing-6x, 32px);
 }
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-subtitle, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-subtitle {
+  padding-top: var(--Spacing-3x, 18px);
+}
 .wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-button-container, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-button-container {
   display: block;
   position: relative;
@@ -16295,6 +16298,10 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 }
 .wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-button-container a.cta-button, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-button-container a.cta-button {
   margin-top: var(--Spacing-1x, 1rem);
+}
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-button-container, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.wp-block-rrze-elements-cta .rrze-elements-cta.no-image .cta-button-container {
+  margin-top: var(--Spacing-3x, 18px);
+  padding-top: var(--Spacing-3x, 18px);
 }
 .wp-theme-FAU-Elemental .cta-image, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta .cta-image {
   width: 100%;
@@ -16319,17 +16326,20 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
     object-fit: cover;
   }
   .wp-theme-FAU-Elemental div.cta-content, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.cta-content {
-    grid-row: 2/2;
+    grid-row: 2/6;
   }
 }
 @media screen and (max-width: 992px) {
   .wp-theme-FAU-Elemental div.cta-image, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.cta-image {
     display: block;
   }
+  .wp-theme-FAU-Elemental div.cta-content, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.cta-content {
+    grid-row: 2/6;
+  }
 }
 @media screen and (max-width: 768px) {
   .wp-theme-FAU-Elemental div.cta-content, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.cta-content {
-    grid-row: 2/2;
+    grid-row: 2/6;
   }
 }
 
