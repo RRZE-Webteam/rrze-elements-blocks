@@ -57,11 +57,23 @@
 
 
 @media screen and (max-width: 870px) {
-  .wp-theme-FAU-Elemental aside.pull-right {
-    margin-left: auto;
-    margin-right: 0;
-    width: 45vw;
-    margin-left: var(--Spacing-3x);
+  .wp-theme-FAU-Elemental {
+
+    aside.pull-right {
+      margin-left: auto;
+      margin-right: 0;
+      width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
+      margin-right: var(--Spacing-10x);
+      padding-left: var(--Spacing-5x);
+    }
+
+    aside.pull-left {
+      margin-right: auto;
+      margin-left: 0;
+      width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
+      margin-left: var(--Spacing-10x);
+      padding-right: var(--Spacing-5x);
+    }
   }
 }
 
