@@ -16823,5 +16823,22 @@ div.rrze-elements-blocks-text-column {
     padding-bottom: 0 !important;
   }
 }
+.wp-theme-FAU-Elemental aside figure + ul.wp-block-list {
+  margin-top: 0;
+}
+.wp-theme-FAU-Elemental aside figure + ul.wp-block-list li {
+  margin-bottom: var(--Spacing-3x);
+}
+.wp-theme-FAU-Elemental aside figure + ul.wp-block-list li:last-child {
+  margin-bottom: var(--Spacing-6x);
+}
+.wp-theme-FAU-Elemental aside ul.wp-block-list {
+  text-align: left;
+}
+.wp-theme-FAU-Elemental aside > p,
+.wp-theme-FAU-Elemental aside .wp-block-heading {
+  text-align: left;
+  padding: 0;
+}
 
 /*# sourceMappingURL=rrze-elements-blocks.css.map */

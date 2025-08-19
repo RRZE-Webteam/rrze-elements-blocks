@@ -96,3 +96,27 @@
     }
   }
 }
+
+.wp-theme-FAU-Elemental aside {
+  figure + ul.wp-block-list{
+    margin-top: 0;
+
+    & li {
+      margin-bottom: var(--Spacing-3x);
+    }
+
+    & li:last-child {
+      margin-bottom: var(--Spacing-6x);
+    }
+  }
+
+  ul.wp-block-list{
+    text-align: left;
+  }
+
+  & > p,
+  .wp-block-heading{
+    text-align: left;
+    padding: 0;
+  }
+}
