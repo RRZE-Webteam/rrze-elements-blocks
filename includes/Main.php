@@ -2,7 +2,6 @@
 
 namespace RRZE\ElementsBlocks;
 
-use RRZE\ElementsBlocks\LegacyShortcodes\Accordion;
 use const RRZE\ElementsBlocks\RRZE_ELEMENTSB_VERSION;
 
 defined('ABSPATH') || exit;
@@ -34,7 +33,6 @@ class Main
 
         new Blocks();
         new Patterns();
-        new Accordion($pluginFile);
 
         add_action('rest_api_init', function () {
             register_rest_route('rrze-elements-blocks/v1', '/jump-names', [
