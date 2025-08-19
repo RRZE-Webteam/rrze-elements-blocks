@@ -16735,19 +16735,29 @@ div.rrze-elements-blocks-text-column {
   column-rule: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
 }
 
+.wp-theme-FAU-Elemental aside.pull-left::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.wp-theme-FAU-Elemental .wp-block-group.is-layout-constrained {
+  display: flow-root;
+}
+
 .wp-theme-FAU-Elemental aside {
   overflow: hidden;
 }
 
 .wp-theme-FAU-Elemental aside.pull-left,
 .wp-theme-FAU-Elemental aside.pull-right {
-  margin-left: calc(50vw - var(--small-max-width) / 2 - 10px);
-  width: calc(var(--small-max-width) / 8 * 3);
+  margin-left: calc(50vw - var(--small-max-width) / 2 - 10px) !important;
+  width: calc(var(--small-max-width) / 8 * 3) !important;
   border: none;
   padding-top: 1rem;
   padding-left: 0;
   padding-right: 0;
   float: left;
+  margin-right: var(--Spacing-4x, 1rem) !important;
 }
 .wp-theme-FAU-Elemental aside.pull-left figure,
 .wp-theme-FAU-Elemental aside.pull-right figure {
@@ -16778,10 +16788,9 @@ div.rrze-elements-blocks-text-column {
 }
 
 .wp-theme-FAU-Elemental aside.pull-right {
-  margin-left: auto;
-  margin-right: calc(50vw - var(--small-max-width) / 2 - 10px);
+  margin-right: calc(50vw - var(--small-max-width) / 2 - 10px) !important;
   float: right;
-  margin-left: var(--Spacing-4x, 1rem);
+  margin-left: var(--Spacing-4x, 1rem) !important;
 }
 .wp-theme-FAU-Elemental aside.pull-right div.image-wrapper::before {
   background: none;
@@ -16792,17 +16801,17 @@ div.rrze-elements-blocks-text-column {
 
 @media screen and (max-width: 870px) {
   .wp-theme-FAU-Elemental aside.pull-right {
-    margin-left: auto;
+    margin-left: auto !important;
     margin-right: 0;
     width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
-    margin-right: var(--Spacing-10x);
+    margin-right: var(--Spacing-10x) !important;
     padding-left: var(--Spacing-5x);
   }
   .wp-theme-FAU-Elemental aside.pull-left {
-    margin-right: auto;
+    margin-right: auto !important;
     margin-left: 0;
     width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
-    margin-left: var(--Spacing-10x);
+    margin-left: var(--Spacing-10x) !important;
     padding-right: var(--Spacing-5x);
   }
 }
