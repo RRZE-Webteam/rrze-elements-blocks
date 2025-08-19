@@ -16,7 +16,7 @@
     },
     "alignment": {
       "type": "string",
-      "default": "left"
+      "default": "right"
     }
   },
   "textdomain": "rrze-elements-blocks",

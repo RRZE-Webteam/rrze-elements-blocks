@@ -1,0 +1,122 @@
+.wp-theme-FAU-Elemental aside {
+  overflow: hidden;
+}
+
+.wp-theme-FAU-Elemental aside.pull-left,
+.wp-theme-FAU-Elemental aside.pull-right {
+  margin-left: calc(calc(50vw - (var(--small-max-width) / 2)) - 10px);
+  width: calc(var(--small-max-width) / 8 * 3);
+  border: none;
+  padding-top: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+  float: left;
+
+  figure {
+    padding: 0;
+    margin: 0;
+    height: auto !important;
+
+    button.image-fullscreen-btn {
+      right: 0;
+    }
+
+    figcaption {
+      padding: 0;
+      margin: 0;
+      position: initial;
+      width: 100%;
+      transform: none;
+      font-size: var(--P-Caption, 0.85rem);
+      letter-spacing: var(--letter-spacing-small);
+      margin-top: var(--Spacing-3x, 1rem);
+      padding-bottom: var(--Spacing-6x, 1rem);
+    }
+
+    div.image-wrapper img {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+}
+
+.wp-theme-FAU-Elemental aside.pull-right {
+  margin-left: auto;
+  margin-right: calc(calc(50vw - (var(--small-max-width) / 2)) - 10px);
+  float: right;
+  margin-left: var(--Spacing-4x, 1rem);
+
+  div.image-wrapper::before {
+    background: none;
+  }
+
+  figcaption {
+    text-align: left;
+  }
+}
+
+
+@media screen and (max-width: 870px) {
+  .wp-theme-FAU-Elemental {
+
+    aside.pull-right {
+      margin-left: auto;
+      margin-right: 0;
+      width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
+      margin-right: var(--Spacing-10x);
+      padding-left: var(--Spacing-5x);
+    }
+
+    aside.pull-left {
+      margin-right: auto;
+      margin-left: 0;
+      width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
+      margin-left: var(--Spacing-10x);
+      padding-right: var(--Spacing-5x);
+    }
+  }
+}
+
+@media screen and (max-width: 393px) {
+  .wp-theme-FAU-Elemental aside.pull-right,
+  .wp-theme-FAU-Elemental aside.pull-left {
+    display: block;
+    float: initial;
+    max-width: 100vw;
+    width: auto;
+    padding: 0 var(--Spacing-5x, 1.25rem);
+    margin: var(--Spacing-5x) 0;
+  }
+
+  figure{
+    margin: 0 !important;
+
+    figcaption{
+      padding-bottom: 0 !important;
+    }
+  }
+}
+
+.wp-theme-FAU-Elemental aside {
+  figure + ul.wp-block-list{
+    margin-top: 0;
+
+    & li {
+      margin-bottom: var(--Spacing-3x);
+    }
+
+    & li:last-child {
+      margin-bottom: var(--Spacing-6x);
+    }
+  }
+
+  ul.wp-block-list{
+    text-align: left;
+  }
+
+  & > p,
+  .wp-block-heading{
+    text-align: left;
+    padding: 0;
+  }
+}

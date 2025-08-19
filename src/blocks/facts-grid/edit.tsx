@@ -65,19 +65,6 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
   return (
     <div {...blockProps}>
       <BlockControls>
-        <HeadingLevelDropdown
-          onChange={(headingLevel: number) => {
-            setAttributes({headingLevel})
-          }}
-          options={[
-            2,
-            3,
-            4,
-            5,
-            6
-          ]}
-          value={attributes.headingLevel}
-        />
         <ToolbarGroup>
           <ToolbarItem>
             {() => (
@@ -105,7 +92,23 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
               />
             )}
           </ToolbarItem>
+          {!attributes.hideHeading && (
+            <HeadingLevelDropdown
+              onChange={(headingLevel: number) => {
+                setAttributes({headingLevel})
+              }}
+              options={[
+                2,
+                3,
+                4,
+                5,
+                6
+              ]}
+              value={attributes.headingLevel}
+            />
+          )}
         </ToolbarGroup>
+
       </BlockControls>
       {!attributes.hideHeading && (
         <div className={"wp-block-fau-elemental-fau-meta-headline"}>

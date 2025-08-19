@@ -16735,4 +16735,110 @@ div.rrze-elements-blocks-text-column {
   column-rule: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
 }
 
+.wp-theme-FAU-Elemental aside {
+  overflow: hidden;
+}
+
+.wp-theme-FAU-Elemental aside.pull-left,
+.wp-theme-FAU-Elemental aside.pull-right {
+  margin-left: calc(50vw - var(--small-max-width) / 2 - 10px);
+  width: calc(var(--small-max-width) / 8 * 3);
+  border: none;
+  padding-top: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+  float: left;
+}
+.wp-theme-FAU-Elemental aside.pull-left figure,
+.wp-theme-FAU-Elemental aside.pull-right figure {
+  padding: 0;
+  margin: 0;
+  height: auto !important;
+}
+.wp-theme-FAU-Elemental aside.pull-left figure button.image-fullscreen-btn,
+.wp-theme-FAU-Elemental aside.pull-right figure button.image-fullscreen-btn {
+  right: 0;
+}
+.wp-theme-FAU-Elemental aside.pull-left figure figcaption,
+.wp-theme-FAU-Elemental aside.pull-right figure figcaption {
+  padding: 0;
+  margin: 0;
+  position: initial;
+  width: 100%;
+  transform: none;
+  font-size: var(--P-Caption, 0.85rem);
+  letter-spacing: var(--letter-spacing-small);
+  margin-top: var(--Spacing-3x, 1rem);
+  padding-bottom: var(--Spacing-6x, 1rem);
+}
+.wp-theme-FAU-Elemental aside.pull-left figure div.image-wrapper img,
+.wp-theme-FAU-Elemental aside.pull-right figure div.image-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.wp-theme-FAU-Elemental aside.pull-right {
+  margin-left: auto;
+  margin-right: calc(50vw - var(--small-max-width) / 2 - 10px);
+  float: right;
+  margin-left: var(--Spacing-4x, 1rem);
+}
+.wp-theme-FAU-Elemental aside.pull-right div.image-wrapper::before {
+  background: none;
+}
+.wp-theme-FAU-Elemental aside.pull-right figcaption {
+  text-align: left;
+}
+
+@media screen and (max-width: 870px) {
+  .wp-theme-FAU-Elemental aside.pull-right {
+    margin-left: auto;
+    margin-right: 0;
+    width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
+    margin-right: var(--Spacing-10x);
+    padding-left: var(--Spacing-5x);
+  }
+  .wp-theme-FAU-Elemental aside.pull-left {
+    margin-right: auto;
+    margin-left: 0;
+    width: calc(50vw - (var(--Spacing-10x) + var(--Spacing-5x)));
+    margin-left: var(--Spacing-10x);
+    padding-right: var(--Spacing-5x);
+  }
+}
+@media screen and (max-width: 393px) {
+  .wp-theme-FAU-Elemental aside.pull-right,
+  .wp-theme-FAU-Elemental aside.pull-left {
+    display: block;
+    float: initial;
+    max-width: 100vw;
+    width: auto;
+    padding: 0 var(--Spacing-5x, 1.25rem);
+    margin: var(--Spacing-5x) 0;
+  }
+  figure {
+    margin: 0 !important;
+  }
+  figure figcaption {
+    padding-bottom: 0 !important;
+  }
+}
+.wp-theme-FAU-Elemental aside figure + ul.wp-block-list {
+  margin-top: 0;
+}
+.wp-theme-FAU-Elemental aside figure + ul.wp-block-list li {
+  margin-bottom: var(--Spacing-3x);
+}
+.wp-theme-FAU-Elemental aside figure + ul.wp-block-list li:last-child {
+  margin-bottom: var(--Spacing-6x);
+}
+.wp-theme-FAU-Elemental aside ul.wp-block-list {
+  text-align: left;
+}
+.wp-theme-FAU-Elemental aside > p,
+.wp-theme-FAU-Elemental aside .wp-block-heading {
+  text-align: left;
+  padding: 0;
+}
+
 /*# sourceMappingURL=rrze-elements-blocks.css.map */
