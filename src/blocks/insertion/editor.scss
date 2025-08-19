@@ -147,13 +147,23 @@
 
 .wp-theme-FAU-Elemental {
   aside.pull-right {
-    margin-right: 0;
+    margin-right: 0 !important;
     border: none;
   }
 
   aside.pull-left {
-    margin-left: 0;
+    margin-left: 0 !important;
     border: none;
+  }
+
+  div.is-style-default{
+    aside.pull-left {
+      margin-left: calc(50vw - var(--small-max-width) / 2 - 10px) !important;
+    }
+
+    aside.pull-right {
+      margin-right: calc(50vw - var(--small-max-width) / 2 - 10px) !important;
+    }
   }
 
   aside p.wp-block-paragraph,
@@ -174,4 +184,6 @@
   {
     margin-block-start: 3rem;
   }
+
+  .editor-styles-wrapper .wp-block-group:not(.is-layout-flex) { display: flow-root; }
 }
