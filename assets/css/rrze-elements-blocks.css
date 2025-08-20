@@ -16439,6 +16439,7 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
   border: none;
   border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+  margin-left: auto !important;
 }
 .wp-theme-FAU-Elemental dl.rrze-elements-counter dt, .wp-theme-FAU-Elemental .rrze--counter-element-container dl.rrze-elements-counter dt {
   font-size: var(--H-Heading-3, 1.5rem);
