@@ -1,4 +1,9 @@
-.wp-theme-FAU-Elemental{
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-rrze-counter .rrze--counter-element-container {
+  background: transparent;
+  color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
+  border: none;
+  border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+
   dl.rrze-elements-counter {
     dt {
       font-size: var(--H-Heading-3, 1.5rem);
@@ -61,8 +66,8 @@
 
 .wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row{
   margin-left: auto !important;
-  background: transparent;
-  color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
-  border: none;
-  border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+}
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row section div.wp-block-rrze-elements-rrze-counter:last-child div.rrze--counter-element-container {
+  border-right: none;
 }
