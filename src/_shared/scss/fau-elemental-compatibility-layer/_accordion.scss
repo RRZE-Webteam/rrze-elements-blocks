@@ -204,6 +204,11 @@
     }
   }
 
+  div.rrze-elements.accordion{
+    max-width: var(--small-max-width);
+    margin: 0 auto;
+  }
+
   .accordion .accordion-toggle.active:focus::before {
     position: absolute;
     //top: inherit;

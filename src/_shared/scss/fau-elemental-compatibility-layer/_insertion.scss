@@ -1,4 +1,8 @@
 .wp-theme-FAU-Elemental {
+  footer {
+    clear: both;
+  }
+
   aside.pull-left::after {
     content: "";
     display: table;

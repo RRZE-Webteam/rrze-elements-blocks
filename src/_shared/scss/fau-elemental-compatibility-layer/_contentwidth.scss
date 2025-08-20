@@ -1,0 +1,8 @@
+// This is a workaround. This file should be deleted in future versions,
+// once the Theme supports decent Content width Support
+.wp-theme-FAU-Elemental{
+  div.faudir{
+    max-width: var(--small-max-width);
+    margin: 0 auto;
+  }
+}
