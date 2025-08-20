@@ -15861,7 +15861,7 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle::before {
   content: "";
   position: absolute;
-  top: 45%;
+  top: 50%;
   right: -60px;
   width: 2rem;
   height: 2rem;
@@ -15871,23 +15871,12 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   z-index: 0;
   transition: all 0.2s ease;
 }
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle:hover::before {
-  top: 45%;
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:hover:before, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion .accordion-toggle.active:focus:before {
   right: -60px;
-  transform: translateY(2%);
-  transition: all 0.2s ease;
-}
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle:hover::after {
-  top: 46%;
-  transform: translateY(0);
-  transition: all 0.2s ease;
-}
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.active:hover::after, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.focus:hover::after {
-  top: 46%;
-  transform: rotate(180deg);
+  top: 50%;
 }
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.active::after, .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-toggle.focus::after {
-  top: 29%;
+  top: calc(50% - 13px);
   transform: rotate(180deg);
   transition: all 0.2s ease;
 }
@@ -15895,13 +15884,11 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   content: "";
   position: absolute;
   color: var(--FAU-Col-FAU-Weiss-100, #fff);
-  top: 42%;
+  top: calc(50% - 13px);
   right: -60px;
   width: 2rem;
   height: 2rem;
   transform-origin: center;
-  transform: translateY(-33%) rotate(0); /* ▼ */
-  transition: transform 0.2s ease;
   z-index: 1;
   background: currentColor;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/45% 45% no-repeat;
@@ -15935,6 +15922,7 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 }
 .wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle {
   padding-left: 0;
+  cursor: pointer;
 }
 .wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
 .wp-theme-FAU-Elemental .accordion .accordion-group .accordion-heading button.accordion-toggle:target,

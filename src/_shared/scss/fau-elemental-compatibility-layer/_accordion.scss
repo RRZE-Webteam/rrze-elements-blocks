@@ -126,7 +126,7 @@
     & .accordion-toggle::before {
       content: "";
       position: absolute;
-      top: 45%;
+      top: 50%;
       right: -60px;
       width: 2rem;
       height: 2rem;
@@ -137,29 +137,36 @@
       transition: all .2s ease;
     }
 
-    & .accordion-toggle:hover::before {
-      top: 45%;
+    //& .accordion-toggle:hover::before {
+    //  top: 45%;
+    //  right: -60px;
+    //  transform: translateY(2%);
+    //  transition: all .2s ease;
+    //}
+    //
+    //& .accordion-toggle:hover::after {
+    //  top: 46%;
+    //  transform: translateY(0);
+    //  transition: all .2s ease;
+    //}
+
+    //& .accordion-toggle.active:hover::after,
+    //& .accordion-toggle.focus:hover::after{
+    //  top: 46%;
+    //  transform: rotate(180deg);
+    //  //transition: all .2s ease;
+    //}
+
+    & .accordion .accordion-toggle.active:hover:before,
+    & .accordion .accordion-toggle.active:focus:before
+      {
       right: -60px;
-      transform: translateY(2%);
-      transition: all .2s ease;
-    }
-
-    & .accordion-toggle:hover::after {
-      top: 46%;
-      transform: translateY(0);
-      transition: all .2s ease;
-    }
-
-    & .accordion-toggle.active:hover::after,
-    & .accordion-toggle.focus:hover::after{
-      top: 46%;
-      transform: rotate(180deg);
-      //transition: all .2s ease;
+      top: 50%;
     }
 
     & .accordion-toggle.active::after,
     & .accordion-toggle.focus::after{
-      top: 29%;
+      top: calc(50% - 13px);
       transform: rotate(180deg);
       transition: all .2s ease;
     }
@@ -168,13 +175,11 @@
       content: "";
       position: absolute;
       color: var(--FAU-Col-FAU-Weiss-100, #fff);
-      top: 42%;
+      top: calc(50% - 13px);
       right: -60px;
       width: 2rem;
       height: 2rem;
       transform-origin: center;
-      transform: translateY(-33%) rotate(0); /* ▼ */
-      transition: transform .2s ease;
       z-index: 1;
 
       background: currentColor;
@@ -218,6 +223,7 @@
 
   .accordion .accordion-group .accordion-heading button.accordion-toggle{
     padding-left: 0;
+    cursor: pointer;
   }
 
   .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
