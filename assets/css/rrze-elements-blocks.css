@@ -15785,6 +15785,9 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
   border: none;
   border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
 }
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles ol.wp-block-list {
+  padding-left: 0;
+}
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-collapsibles .accordion-group button.accordion-toggle svg {
   margin: auto 20px auto 0;
   height: 20px;
