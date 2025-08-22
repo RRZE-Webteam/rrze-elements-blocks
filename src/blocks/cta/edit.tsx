@@ -122,6 +122,8 @@ export default function Edit({
     setAttributes({buttonText: newButtonText});
   };
 
+  props.className = props.className ? props.className + " " + imageClass : imageClass;
+
   return (
     <div {...props}>
       <BlockControls>

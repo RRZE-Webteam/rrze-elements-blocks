@@ -70,6 +70,7 @@
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "parent": [
-    "rrze-elements/counter-row"
+    "rrze-elements/counter-row",
+    "rrze-elements/iconbox-row"
   ]
 }
