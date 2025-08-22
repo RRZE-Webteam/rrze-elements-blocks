@@ -15951,6 +15951,9 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .accordion .med .accordion-heading .accordion-toggle:hover {
   background-color: initial;
 }
+.wp-theme-FAU-Elemental .accordion ol.wp-block-list {
+  padding-left: 2.5rem;
+}
 
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-collapsibles .accordion-group {
   border-top: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
