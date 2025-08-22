@@ -248,6 +248,10 @@
   .accordion .med .accordion-heading .accordion-toggle:hover{
     background-color: initial;
   }
+
+  .accordion ol.wp-block-list{
+    padding-left: 2.5rem;
+  }
 }
 
 .wp-theme-FAU-Elemental .is-style-dark {
@@ -303,6 +307,4 @@
       color: var(--FAU-Col-FAU-Weiss-100, #fff);
     }
   }
-
-
 }
