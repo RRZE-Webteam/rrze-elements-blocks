@@ -55,17 +55,6 @@
       "subtitle": "Your CTA subtitl"
     }
   },
-  "styles": [
-    {
-      "name": "no-background",
-      "label": "Normal",
-      "isDefault": true
-    },
-    {
-      "name": "small",
-      "label": "Small"
-    }
-  ],
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",

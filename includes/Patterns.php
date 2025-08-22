@@ -19,7 +19,7 @@ class Patterns
     private function register_hooks()
     {
         add_action('init', [$this, 'elementsBlocks_pattern_categories']);
-        add_filter('block_categories_all', [$this, 'my_custom_block_category'], 10, 2);
+        add_filter('block_categories_all', [$this, 'my_custom_block_category'], 100, 2);
         add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
         add_action('init', [$this, 'register_dev_patterns']);
     }
@@ -44,27 +44,91 @@ class Patterns
         ]);
     }
 
-    /**
-     * Adds custom block category for grouping RRZE elements in the block editor underneath RRZE Elements.
-     *
-     * @param array $categories Existing block categories.
-     * @param WP_Post $post Current post object.
-     * @return array Modified block categories.
-     */
-    public function my_custom_block_category($categories, $post)
-    {
-        $custom_category = [
-            'slug'  => 'rrze_elements',
-            'title' => __('RRZE Elements', 'rrze-elements-blocks'),
-            'icon'  => 'layout',
-        ];
+  /**
+   * Add custom RRZE category and sort categories so that any slug
+   * starting with "fau" or "rrze" appears right after "design".
+   * If "design" doesn't exist, those categories appear last.
+   *
+   * @param array   $categories
+   * @param WP_Post $post
+   * @return array
+   */
+  public function my_custom_block_category($categories, $post) {
+    $categories = array_values(is_array($categories) ? $categories : []);
 
-        array_unshift($categories, $custom_category);
-
-        return $categories;
+    $has_rrze = false;
+    foreach ($categories as $c) {
+      if (!empty($c['slug']) && strtolower($c['slug']) === 'rrze_elements') {
+        $has_rrze = true;
+        break;
+      }
+    }
+    if (!$has_rrze) {
+      $categories[] = [
+        'slug'  => 'rrze_elements',
+        'title' => __('RRZE Elements', 'rrze-elements-blocks'),
+        'icon'  => 'layout',
+      ];
     }
 
-    /**
+    // Helper: does slug start with fau/rrze?
+    $is_rrze_fau = static function($slug) {
+      $slug = is_string($slug) ? $slug : '';
+      return (bool) preg_match('/^(fau|rrze)/i', $slug);
+    };
+
+    // Find the first "design" category (if any)
+    $designIndex = null;
+    foreach ($categories as $i => $cat) {
+      $slug = strtolower($cat['slug'] ?? '');
+      if ($slug === 'design') {
+        $designIndex = $i;
+        break;
+      }
+    }
+
+    // Partition while preserving original order
+    $rrzeFau = [];
+    $before  = [];
+    $after   = [];
+    $designCat = null;
+
+    foreach ($categories as $i => $cat) {
+      $slug = $cat['slug'] ?? '';
+
+      if (!is_array($cat)) {
+        continue;
+      }
+
+      if ($is_rrze_fau($slug)) {
+        $rrzeFau[] = $cat;
+        continue;
+      }
+
+      $slugLower = strtolower($slug);
+      if ($slugLower === 'design') {
+        $designCat = $cat;
+        continue;
+      }
+
+      if ($designIndex !== null && $i < $designIndex) {
+        $before[] = $cat;
+      } else {
+        $after[] = $cat;
+      }
+    }
+
+    if ($designCat !== null) {
+      // before + design + rrze/fau + after
+      return array_values(array_merge($before, [$designCat], $rrzeFau, $after));
+    } else {
+      // No design category: put rrze/fau last
+      return array_values(array_merge($before, $after, $rrzeFau));
+    }
+  }
+
+
+  /**
      * Register development patterns.
      */
     public function register_dev_patterns()

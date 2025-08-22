@@ -60,14 +60,26 @@
 }
 
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section,
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .block-editor-block-list__layout{
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row > section
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .block-editor-block-list__layout,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row .block-editor-block-list__layout{
   align-items: end;
 }
 
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row{
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row{
   margin-left: auto !important;
 }
 
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row section div.wp-block-rrze-elements-rrze-counter:last-child div.rrze--counter-element-container {
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row section div.wp-block-rrze-elements-rrze-counter:last-child div.rrze--counter-element-container,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row section div.wp-block-rrze-elements-rrze-counter:last-child div.rrze--counter-element-container{
+  border-right: none;
+}
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row .material-symbols-outlined{
+  font-size: inherit;
+}
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row .rrze--counter-element > div:last-child > .rrze--iconbox-element-container:first-child{
   border-right: none;
 }

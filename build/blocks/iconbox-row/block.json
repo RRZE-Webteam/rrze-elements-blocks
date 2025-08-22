@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/iconbox-row",
+  "version": "1.0.19",
+  "title": "Iconbox Row",
+  "category": "rrze_elements",
+  "description": "Create a Row for Iconboxes",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "columns": {
+      "type": "number",
+      "default": 4
+    }
+  },
+  "example": {
+    "attributes": {
+      "stagger": 0,
+      "columns": 2,
+      "startValue": 0
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/rrze-iconbox",
+        "attributes": {
+          "title": "Term",
+          "description": "Description",
+          "materialSymbol": "rib_cage"
+        }
+      },
+      {
+        "name": "rrze-elements/rrze-iconbox",
+        "attributes": {
+          "title": "Term",
+          "description": "Description",
+          "materialSymbol": "rib_cage"
+        }
+      }
+    ]
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

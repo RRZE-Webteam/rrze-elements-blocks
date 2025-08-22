@@ -135,7 +135,8 @@ dt {
 // }
 
 @media (min-width: 992px) {
-    .wp-block-rrze-elements-counter-row {
+    .wp-block-rrze-elements-counter-row,
+    .wp-block-rrze-elements-iconbox-row{
         float: none !important;
         @for $i from 1 through 5 {
 
