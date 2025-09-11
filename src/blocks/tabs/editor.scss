@@ -2,6 +2,7 @@
 @import "../../_shared/scss/base-styles/mixins";
 @import "../../_shared/scss/base-styles/tabs";
 @import "../../_shared/scss/fau-elemental-compatibility-layer/tabs";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 body:not(.wp-theme-FAU-Elemental) {
   $colormaps: (
