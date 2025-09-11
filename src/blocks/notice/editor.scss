@@ -8,6 +8,7 @@ $dark-grey: #121212;
 @import "../../_shared/scss/base-styles/mixins";
 @import "../../_shared/scss/base-styles/notice";
 @import "../../_shared/scss/fau-elemental-compatibility-layer/notice";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 .wp-block-rrze-elements-notice {
     // display: block;

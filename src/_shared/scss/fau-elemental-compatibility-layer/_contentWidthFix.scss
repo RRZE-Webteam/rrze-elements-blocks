@@ -9,9 +9,10 @@ div.wp-block-rrze-elements-notice,
 div.rrze-elements-tabs,
 div.wp-block-rrze-elements-cta,
 div.elements-textcolumns,
-div.wp-block-rrze-elements-counter-row,
 div.wp-block-rrze-elements-timeline,
-section.rrze-elements-news
+section.rrze-elements-news,
+div.wp-block-rrze-elements-columns,
+div.wp-block-rrze-elements-block-contentwidthlimiter
 {
   margin-inline: auto;
   max-width: var(--small-max-width);
@@ -22,7 +23,9 @@ div.wp-block-rrze-elements-counter-row{
   max-width: var(--base-max-width);
 }
 
-div.elements-textcolumns{
+div.elements-textcolumns,
+div.wp-block-rrze-elements-counter-row,
+div.wp-block-rrze-elements-columns{
   max-width: var(--wide-max-width);
 }
 
