@@ -24,7 +24,7 @@ class TimelineItem extends AbstractBlockRender
         $html = '<li class="wp-block-rrze-elements-timeline-item ' . esc_attr(trim($wrapper_class)) . '">';
         $html .= '<div class="tooltip">';
         $html .= '<div class="tooltip-arrow"></div>';
-        $html .= '<h' . $hstart . ' class="timeline-label">' . esc_html($title) . '</h' . $hstart . '>';
+        $html .= '<h' . $hstart . ' class="timeline-label">' . sanitize_text_field($title) . '</h' . $hstart . '>';
         $html .= $innerBlocks;
         $html .= '</div></li>';
 
