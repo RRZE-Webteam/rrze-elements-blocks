@@ -2,16 +2,16 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: RRZE Elements Blocks 1.0.17\n"
+"Project-Id-Version: RRZE Elements Blocks 1.0.22\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-01T11:22:36+00:00\n"
+"POT-Creation-Date: 2025-09-11T11:46:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rrze-elements-blocks\n"
 
 #. Plugin Name of the plugin
@@ -39,6 +39,33 @@ msgstr ""
 msgid "https://blogs.fau.de/webworking/"
 msgstr ""
 
+#: includes/BlockFrontend/Fact.php:21
+msgid "More Information"
+msgstr ""
+
+#: includes/BlockFrontend/FactsGrid.php:21
+msgid "Facts About Our Research"
+msgstr ""
+
+#: includes/Blocks.php:85
+msgid "Light"
+msgstr ""
+
+#: includes/Blocks.php:89
+msgid "Dark"
+msgstr ""
+
+#: includes/Blocks.php:95
+#: build/blocks/counter/index.js:1
+msgid "Normal"
+msgstr ""
+
+#: includes/Blocks.php:100
+#: build/blocks/counter/index.js:1
+#: build/blocks/iconbox/index.js:1
+msgid "Small"
+msgstr ""
+
 #: includes/Patterns.php:33
 msgctxt "Block pattern category"
 msgid "Pages"
@@ -57,98 +84,100 @@ msgstr ""
 msgid "A collection of DEV layouts for automated testing."
 msgstr ""
 
-#: includes/Patterns.php:58
+#: includes/Patterns.php:69
 msgid "RRZE Elements"
 msgstr ""
 
-#: includes/Patterns.php:80
+#: includes/Patterns.php:144
 msgid "DEV: Counter and Iconbox"
 msgstr ""
 
-#: includes/Patterns.php:81
+#: includes/Patterns.php:145
 msgctxt "DEV Template"
 msgid "A testing template for Counter and Iconbox."
 msgstr ""
 
-#: includes/Patterns.php:92
+#: includes/Patterns.php:156
 msgid "DEV: Accordion"
 msgstr ""
 
-#: includes/Patterns.php:93
+#: includes/Patterns.php:157
 msgctxt "DEV Template"
 msgid "A testing template for Accordions."
 msgstr ""
 
-#: includes/Patterns.php:132
+#: includes/Patterns.php:196
 msgid "Example Pattern"
 msgstr ""
 
-#: includes/Patterns.php:133
+#: includes/Patterns.php:197
 msgctxt "Block pattern description"
 msgid "Description for Example Pattern"
 msgstr ""
 
-#: includes/Patterns.php:139
+#: includes/Patterns.php:203
 msgid "Image with Accordion"
 msgstr ""
 
-#: includes/Patterns.php:140
+#: includes/Patterns.php:204
 msgctxt "Block pattern description"
 msgid "Description for Image with Accordion"
 msgstr ""
 
-#: includes/Patterns.php:147
+#: includes/Patterns.php:211
 msgid "Custom News section 3-Column Layout"
 msgstr ""
 
-#: includes/Patterns.php:148
+#: includes/Patterns.php:212
 msgctxt "Block pattern description"
 msgid "A 3 Column Layout for custom News on Landing pages"
 msgstr ""
 
-#: includes/Patterns.php:154
+#: includes/Patterns.php:218
 msgid "Call to Action"
 msgstr ""
 
-#: includes/Patterns.php:155
+#: includes/Patterns.php:219
 msgctxt "Block pattern description"
 msgid "Call to Action section"
 msgstr ""
 
-#: includes/Patterns.php:161
+#: includes/Patterns.php:225
 msgid "Image with Text"
 msgstr ""
 
-#: includes/Patterns.php:162
+#: includes/Patterns.php:226
 msgctxt "Block pattern description"
 msgid "Two column layout: Image left, text right column."
 msgstr ""
 
-#: includes/Patterns.php:168
+#: includes/Patterns.php:232
 msgid "Imagefilm"
 msgstr ""
 
-#: includes/Patterns.php:169
+#: includes/Patterns.php:233
 msgctxt "Block pattern description"
 msgid "FAU Imagefilm."
 msgstr ""
 
-#: includes/Patterns.php:175
+#: includes/Patterns.php:239
 msgid "Landing page template 1"
 msgstr ""
 
-#: includes/Patterns.php:176
+#: includes/Patterns.php:240
 msgctxt "Block pattern description"
 msgid "A landingpage template for FAU."
 msgstr ""
 
 #. translators: 1: current PHP version, 2: required PHP version
 #: rrze-elements-blocks.php:75
+#, php-format
 msgid "The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s."
 msgstr ""
 
 #. translators: 1: current WordPress version, 2: required WordPress version
 #: rrze-elements-blocks.php:78
+#, php-format
 msgid "The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s."
 msgstr ""
 
@@ -225,7 +254,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Select an icon"
@@ -233,7 +265,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Remove Icon"
@@ -241,7 +276,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "The search results got updated."
@@ -249,7 +287,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Icons are provided by "
@@ -257,7 +298,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid ". You can search for an icon by typing its Font Awesome name in the search field below."
@@ -265,7 +309,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Search for an Icon"
@@ -273,7 +320,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Search for Icons"
@@ -281,7 +331,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Search Results"
@@ -289,7 +342,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "No icons found. Please try a different search term."
@@ -297,7 +353,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Solid Icons"
@@ -305,7 +364,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Regular Icons"
@@ -313,7 +375,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
 msgid "Brand Icons"
@@ -361,6 +426,61 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Loading icons…"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid ". You can search for an icon by typing its name or relevant keywords in the search field below."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Search for an icon in English."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Searching…"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Load more"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Material Symbols"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 #: build/blocks/tab/index.js:1
 msgid "Add an icon"
@@ -368,6 +488,7 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 #: build/blocks/tab/index.js:1
 msgid "Change the icon"
@@ -375,6 +496,7 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 #: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
@@ -383,15 +505,10 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 #: build/blocks/tab/index.js:1
 msgid "Close"
-msgstr ""
-
-#: build/blocks/accordion/index.js:1
-#: build/blocks/collapse/index.js:1
-#: build/blocks/tab/index.js:1
-msgid "Icon Settings"
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -413,6 +530,7 @@ msgstr ""
 #: build/blocks/accordion/index.js:2
 #: build/blocks/collapse/index.js:2
 #: build/blocks/timeline-item/index.js:2
+#, js-format
 msgid "Level %1$s. %2$s"
 msgstr ""
 
@@ -420,6 +538,7 @@ msgstr ""
 #: build/blocks/accordion/index.js:3
 #: build/blocks/collapse/index.js:3
 #: build/blocks/timeline-item/index.js:3
+#, js-format
 msgid "Level %s. Empty."
 msgstr ""
 
@@ -585,10 +704,12 @@ msgid "Stagger between Animations (seconds)"
 msgstr ""
 
 #: build/blocks/counter-row/index.js:1
+#: build/blocks/iconbox-row/index.js:1
 msgid "Grid Settings"
 msgstr ""
 
 #: build/blocks/counter-row/index.js:1
+#: build/blocks/iconbox-row/index.js:1
 msgid "Column number"
 msgstr ""
 
@@ -598,12 +719,14 @@ msgstr ""
 
 #: build/blocks/counter/index.js:1
 #: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Link"
 msgstr ""
 
 #: build/blocks/counter/index.js:1
 #: build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Unlink"
 msgstr ""
@@ -611,15 +734,6 @@ msgstr ""
 #: build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Font Size"
-msgstr ""
-
-#: build/blocks/counter/index.js:1
-#: build/blocks/iconbox/index.js:1
-msgid "Small"
-msgstr ""
-
-#: build/blocks/counter/index.js:1
-msgid "Normal"
 msgstr ""
 
 #: build/blocks/counter/index.js:1
@@ -631,6 +745,7 @@ msgid "Description"
 msgstr ""
 
 #: build/blocks/counter/index.js:1
+#: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Button Text"
 msgstr ""
@@ -659,6 +774,30 @@ msgstr ""
 msgid "CTA Button Text"
 msgstr ""
 
+#: build/blocks/fact/index.js:1
+msgid "Fact description"
+msgstr ""
+
+#: build/blocks/fact/index.js:1
+msgid "Characters"
+msgstr ""
+
+#: build/blocks/facts-grid/index.js:1
+msgid "Display options for the Title"
+msgstr ""
+
+#: build/blocks/facts-grid/index.js:1
+msgid "Add a Section Title for the Facts Grid."
+msgstr ""
+
+#: build/blocks/facts-grid/index.js:1
+msgid "Hide the Section Title for the Facts Grid."
+msgstr ""
+
+#: build/blocks/facts-grid/index.js:1
+msgid "Section Heading"
+msgstr ""
+
 #: build/blocks/iconbox/index.js:1
 msgid "Medium"
 msgstr ""
@@ -673,10 +812,6 @@ msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Definition"
-msgstr ""
-
-#: build/blocks/insertion/index.js:1
-msgid "Insertion"
 msgstr ""
 
 #: build/blocks/news/index.js:1
@@ -813,14 +948,6 @@ msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Download-icon"
-msgstr ""
-
-#: build/blocks/notice/index.js:1
-msgid "FAUbox"
-msgstr ""
-
-#: build/blocks/notice/index.js:1
-msgid "FAUbox-icon"
 msgstr ""
 
 #: build/blocks/notice/index.js:1
@@ -1079,14 +1206,34 @@ msgctxt "block description"
 msgid "Creates an Call to action box."
 msgstr ""
 
-#: build/blocks/cta/block.json
-msgctxt "block style label"
-msgid "Normal"
+#: build/blocks/fact/block.json
+msgctxt "block title"
+msgid "Fact"
 msgstr ""
 
-#: build/blocks/cta/block.json
-msgctxt "block style label"
-msgid "Small"
+#: build/blocks/fact/block.json
+msgctxt "block description"
+msgid "Creates a Fact"
+msgstr ""
+
+#: build/blocks/facts-grid/block.json
+msgctxt "block title"
+msgid "Facts Grid"
+msgstr ""
+
+#: build/blocks/facts-grid/block.json
+msgctxt "block description"
+msgid "Creates a Facts Grid Block"
+msgstr ""
+
+#: build/blocks/iconbox-row/block.json
+msgctxt "block title"
+msgid "Iconbox Row"
+msgstr ""
+
+#: build/blocks/iconbox-row/block.json
+msgctxt "block description"
+msgid "Create a Row for Iconboxes"
 msgstr ""
 
 #: build/blocks/iconbox/block.json
