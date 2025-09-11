@@ -16919,4 +16919,31 @@ div.rrze-elements-blocks-text-column {
   margin: 0 auto;
 }
 
+div.wp-block-rrze-elements-collapsibles,
+div.alert.alert-default,
+div.alert.alert-success,
+div.alert.alert-warning,
+div.alert.alert-danger,
+div.alert.alert-info,
+div.alert.alert-example,
+div.wp-block-rrze-elements-notice,
+div.rrze-elements-tabs,
+div.wp-block-rrze-elements-cta,
+div.elements-textcolumns,
+div.wp-block-rrze-elements-counter-row,
+div.wp-block-rrze-elements-timeline,
+section.rrze-elements-news {
+  margin-inline: auto;
+  max-width: var(--small-max-width);
+}
+
+div.wp-block-rrze-elements-cta,
+div.wp-block-rrze-elements-counter-row {
+  max-width: var(--base-max-width);
+}
+
+div.elements-textcolumns {
+  max-width: var(--wide-max-width);
+}
+
 /*# sourceMappingURL=rrze-elements-blocks.css.map */
