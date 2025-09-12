@@ -1,3 +1,4 @@
+//ToDo Remove Important statements after content width issue is completed
 section.facts ul, section.facts li, section.facts p.facts__text{
   list-style: none;
   margin-left: 0;
@@ -113,3 +114,50 @@ section.facts .wp-block-fau-elemental-fau-meta-headline{
 section.facts svg.icon{
   margin-left: -4px;
 }
+
+.wp-theme-FAU-Einrichtungen {
+
+  section.facts .wp-block-fau-elemental-fau-meta-headline {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    border-top: 1px solid #04316a;
+    margin-top: 1rem;
+    padding-bottom: 0;
+    font-size: 1rem;
+  }
+  ul.facts__list{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #04316a;
+    margin-bottom: 1rem;
+  }
+
+  ul.facts__list li.facts__item {
+    border-right: 1px solid #04316a;
+
+    &:last-of-type {
+      border-right: none;
+    }
+
+    .wp-block-button.is-style-tertiary a.wp-block-button__link {
+      text-align: left;
+      background: none;
+      padding-left: 0;
+      margin-left: 0;
+      padding-top: 0;
+      color: var(--color-primary-basis, #04316a);
+      text-decoration: underline;
+      font-size: .9rem;
+    }
+  }
+}
+  /* Mobile breakpoint */
+  @media screen and (width <= 768px) {
+    .wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item {
+      &:nth-child(even) {
+        border-right: none;
+      }
+    }
+  }
+
+
+

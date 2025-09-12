@@ -329,3 +329,15 @@ button.accordion-toggle svg.icon, div.accordion-toggle > svg{
     fill: var(--color-Text, #222);
   }
 }
+
+.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-collapsibles{
+  .accordion-heading svg{
+    height: 24px;
+    width: 24px;
+  }
+
+  .accordion-heading button{
+    display: flex;
+    align-items: center;
+  }
+}
