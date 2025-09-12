@@ -44,7 +44,7 @@
     padding: var(--Spacing-3x) 0;
   }
 
-  .notice > div:first-child, .notice > div:first-child::before{
+  .notice > div:first-child, .notice > div:first-child span::before{
     color: var(--FAU-Col-FAU-Dunkelblau-100);
     background-color: var(--FAU-Col-FAU-Weiss-100);
   }
