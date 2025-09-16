@@ -84,15 +84,11 @@ class SpriteGenerator
   /** Transform a raw SVG file into a <symbol> element. */
   private static function prepareSVGSymbol(string $iconPath): string
   {
-    Helper::debug("ready");
     if (self::$assetPath === '') {
       return '';
     }
 
-    Helper::debug($iconPath);
-
     $file = self::$assetPath . '/' . $iconPath . '.svg';
-    Helper::debug($file);
     if (!is_readable($file)) {
       return '';
     }
