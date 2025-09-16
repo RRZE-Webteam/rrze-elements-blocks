@@ -30,18 +30,21 @@ class CallToAction extends AbstractBlockRender
     $is_search = !empty($attributes['isSearch']);
     $cta_icon = 'solid arrow-right';
 
+    $icon_value  = (string) ($attributes['icon'] ?? '');
     $icon_markup = SpriteGenerator::svgUse(
       $cta_icon,
-      'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+      'fa fa-' . str_replace(' ', ' fa-', $icon_value)
     );
 
     $url_class = $url ? 'has-image' : 'no-image';
 
     $href = $button_url;
-    if (stripos($href, 'www.') === 0) {
-      $href = 'https://' . $href;
-    } elseif (stripos($href, 'http://') === 0) {
-      $href = preg_replace('/^http:\/\//i', 'https://', $href);
+    if ($href !== '') {
+      if (stripos($href, 'www.') === 0) {
+        $href = 'https://' . $href;
+      } elseif (stripos($href, 'http://') === 0) {
+        $href = preg_replace('/^http:\/\//i', 'https://', $href);
+      }
     }
 
     $html = '<div class="wp-block-rrze-elements-cta ' . esc_attr(trim($wrapper_class)) . '">';
