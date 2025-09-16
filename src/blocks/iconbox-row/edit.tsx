@@ -65,18 +65,10 @@ export default function Edit({
         </InspectorControls>
         <InnerBlocks
           template={[
-            ["rrze-elements/rrze-iconbox", { title: "Term",
-              description: "Description",
-              materialSymbol: "rib_cage"}],
-            ["rrze-elements/rrze-iconbox", { title: "Term",
-              description: "Description",
-              materialSymbol: "rib_cage"}],
-            ["rrze-elements/rrze-iconbox", { title: "Term",
-              description: "Description",
-              materialSymbol: "rib_cage"}],
-            ["rrze-elements/rrze-iconbox", { title: "Term",
-              description: "Description",
-              materialSymbol: "rib_cage"}],
+            ["rrze-elements/rrze-iconbox"],
+            ["rrze-elements/rrze-iconbox"],
+            ["rrze-elements/rrze-iconbox"],
+            ["rrze-elements/rrze-iconbox"],
           ]}
           allowedBlocks={[
             "rrze-elements/rrze-iconbox",
