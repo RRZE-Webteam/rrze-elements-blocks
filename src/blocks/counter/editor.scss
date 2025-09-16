@@ -1,4 +1,6 @@
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
-@import "../../_shared/scss/counter";
-@import "../../_shared/scss/button";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
+@import "../../_shared/scss/base-styles/counter";
+@import "../../_shared/scss/base-styles/button";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/counter";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";

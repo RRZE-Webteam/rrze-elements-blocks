@@ -28,7 +28,7 @@ class CounterRow extends AbstractBlockRender
     /**
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
+    public function render($attributes = [], $innerBlocks = '', ?\WP_Block $block = null): string
     {
         if ($block && !empty(trim($block->inner_html))) {
             return $innerBlocks;

@@ -50,8 +50,7 @@ export default function Edit({
             ]}
             template={[
               [
-                "core/paragraph",
-                { placeholder: __("Insertion", "rrze-elements-blocks") },
+                "core/image"
               ],
             ]}
           />

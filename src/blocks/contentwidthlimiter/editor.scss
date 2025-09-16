@@ -1,4 +1,5 @@
-@import "../../_shared/scss/limit-width";
+@import "../../_shared/scss/base-styles/limit-width";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 svg.elements-tabs-icon-modal{
     float: left;

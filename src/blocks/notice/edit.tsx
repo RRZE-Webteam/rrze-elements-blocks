@@ -21,6 +21,8 @@ import {
 } from "@wordpress/components";
 
 import { symbol } from "@wordpress/icons";
+import {IconMarkComponent} from "../../components/IconPicker";
+import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 
 interface EditProps {
 	attributes: {
@@ -30,6 +32,7 @@ interface EditProps {
 		borderColor?: string;
 		icon?: string;
 		svgString?: string;
+    materialSymbol?: string;
 	};
 	setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 	clientId: string;
@@ -57,6 +60,8 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 	const matchedVariation = variations.find(
 		(variation: any) => variation.name === attributes.style,
 	);
+
+  const [iconType, iconName] = matchedVariation?.iconClass.split(" ") || [];
 
 	const openModal = () => setOpen(true);
 	const closeModal = () => setOpen(false);
@@ -95,12 +100,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 										title={__("Select an Icon", "rrze-elements-blocks")}
 										onRequestClose={closeModal}
 									>
-										<BlockVariationPicker
-											variations={variations}
-											onSelect={(variation) => {
-												setAttributes({ style: variation?.name });
-											}}
-										/>
+                    <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
 										<Button variant="primary" onClick={closeModal}>
 											{__("Save changes", "rrze-elements-blocks")}
 										</Button>
@@ -127,7 +127,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 			)}
 			<div
 				className={`notice no-title ${
-					attributes.style ? `alert-${attributes.style}` : ""
+					attributes.style ? `${attributes.style}` : ""
 				}`}
 				style={
 					attributes.style
@@ -139,14 +139,12 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 							}
 				}
 			>
-				<div>
-					<div>
+					<div className={"icon-container"}>
 						{/* Render the icon if a matching variation is found */}
 						<span
-							className={`${matchedVariation?.iconClass} rrze-elements-icon`}
-						></span>
+							className={`rrze-elements-icon`}
+						><IconMarkComponent type={iconType} iconName={iconName} materialSymbol={attributes.materialSymbol}/></span>
 					</div>
-				</div>
 				{attributes.style && (
 					<div>
 						<InnerBlocks

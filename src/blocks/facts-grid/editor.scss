@@ -1,0 +1,126 @@
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
+
+ul.facts, ul.facts li, ul.facts p.facts__text{
+  list-style: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+ul.facts li span.facts__icon svg,
+ul.facts li span.facts__icon span.material-symbols-outlined{
+  height: 60px;
+  width: 60px;
+  font-size: 60px;
+  fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+ul.facts, ul.facts div div.block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: var(--spacing-8x, 2rem);
+}
+
+ul.facts li, .wp-block-rrze-elements-fact {
+  grid-column: span 3;
+}
+
+ul.facts, .wp-block-rrze-elements-facts-grid {
+  max-width: var(--wide-max-width, 1320px) !important;
+
+  p.facts__text {
+    padding-top: 0;
+    margin-top: 0;
+    margin-top: 8px;
+  }
+}
+
+.wp-block-rrze-elements-facts-grid ul.facts{
+  display: block;
+}
+
+.is-style-dark .wp-block-rrze-elements-facts-grid ul.facts span.facts__icon span{
+  color: #fff;
+}
+
+.is-style-dark .wp-block-rrze-elements-facts-grid, .wp-block-rrze-elements-facts-grid{
+  padding-bottom: var(--spacing-8x, 2rem);
+}
+
+
+/* Tablet breakpoint */
+@media (width <= 1440px) {
+  ul.facts, ul.facts div div.block-editor-block-list__layout {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  ul.facts li, .wp-block-rrze-elements-fact {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile breakpoint */
+@media (width <= 768px) {
+  ul.facts, ul.facts div div.block-editor-block-list__layout {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  ul.facts li, .wp-block-rrze-elements-fact {
+    grid-column: span 2;
+  }
+}
+
+li.facts__item a.is-style-tertiary{
+  color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+.is-style-dark li.facts__item a.is-style-tertiary{
+  color: var(--FAU-Col-FAU-Weiss-100, #fff);
+}
+//
+//body.wp-theme-FAU-Einrichtungen {
+//  div.wp-block-rrze-elements-facts-grid .wp-block-fau-elemental-fau-meta-headline span {
+//    padding-left: 0 !important;
+//    margin-left: 0 !important;
+//    border-top: 1px solid #04316a;
+//    margin-top: 1rem;
+//    padding-bottom: 0;
+//    font-size: 1rem;
+//  }
+//
+//  ul.facts {
+//    padding-bottom: 1rem;
+//    border-bottom: 1px solid #04316a;
+//    margin-bottom: 1rem;
+//  }
+//
+//  ul.facts .wp-block-rrze-elements-fact {
+//    border-right: 1px solid #04316a;
+//
+//    &:last-of-type {
+//      border-right: none;
+//    }
+//
+//    .wp-block-button.is-style-tertiary a.wp-block-button__link {
+//      text-align: left;
+//      background: none;
+//      padding-left: 0;
+//      margin-left: 0;
+//      padding-top: 0;
+//      color: var(--color-primary-basis, #04316a);
+//      text-decoration: underline;
+//      font-size: .9rem;
+//    }
+//  }
+//}
+//
+///* Mobile breakpoint */
+//@media screen and (width <= 768px) {
+//  .wp-theme-FAU-Einrichtungen ul.facts__list .wp-block-rrze-elements-fact {
+//    &:nth-child(even) {
+//      border-right: none;
+//    }
+//  }
+//}

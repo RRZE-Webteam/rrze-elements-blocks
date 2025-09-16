@@ -2,13 +2,17 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/notice",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "title": "Notice",
   "category": "rrze_elements",
   "description": "Creates an notice.",
   "attributes": {
     "style": {
       "type": "string"
+    },
+    "materialSymbol": {
+      "type": "string",
+      "default": ""
     }
   },
   "example": {

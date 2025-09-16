@@ -1,9 +1,11 @@
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
-@import "../../_shared/scss/iconbox";
-@import "../../_shared/scss/button";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
+@import "../../_shared/scss/base-styles/iconbox";
+@import "../../_shared/scss/base-styles/button";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/infobox";
 
-.wp-block-rrze-elements-counter-row {
+.wp-block-rrze-elements-counter-row,
+.wp-block-rrze-elements-iconbox-row{
     dt {
         .fau-iconbox-editor-data.rrze-iconbox-normal {
             font-size: var(--wp--preset--font-size--normal, 1rem);
@@ -20,4 +22,12 @@
             font-weight: bold;
         }
     }
+
+    .material-symbols-outlined{
+      font-size: 60px;
+    }
+}
+
+.is-style-dark .wp-block-rrze-elements-iconbox-row .rrze-iconbox-icon {
+  color: #fff;
 }

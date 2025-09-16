@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/rrze-iconbox",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "title": "Iconbox",
   "category": "rrze_elements",
   "description": "Creates a Iconbox block.",
@@ -47,11 +47,15 @@
     },
     "icon": {
       "type": "string",
-      "default": "solid icons"
+      "default": ""
     },
     "svgString": {
       "type": "string",
       "default": ""
+    },
+    "materialSymbol": {
+      "type": "string",
+      "default": "add_reaction"
     }
   },
   "example": {
@@ -66,6 +70,7 @@
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "parent": [
-    "rrze-elements/counter-row"
+    "rrze-elements/counter-row",
+    "rrze-elements/iconbox-row"
   ]
 }

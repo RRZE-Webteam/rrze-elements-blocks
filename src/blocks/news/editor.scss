@@ -1,12 +1,11 @@
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
-@import "../../_shared/scss/news";
-@import "../../_shared/scss/columns";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
+@import "../../_shared/scss/base-styles/news";
+@import "../../_shared/scss/base-styles/columns";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 .wp-block-rrze-elements-news {
     .rrze-elements-news {
-        font-family: 'Roboto', sans-serif;
-
         .entry-title {
             h2 {
                 font-size: 1.5rem;

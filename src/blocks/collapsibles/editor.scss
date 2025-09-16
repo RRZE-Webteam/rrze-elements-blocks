@@ -1,7 +1,9 @@
-@import "../../_shared/scss/variables";
-@import "../../_shared/scss/mixins";
+@import "../../_shared/scss/base-styles/variables";
+@import "../../_shared/scss/base-styles/mixins";
 
-@import "../../_shared/scss/accordion";
+@import "../../_shared/scss/base-styles/accordion";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/accordion";
+@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 .wp-block-rrze-elements-collapsibles {
 	padding-bottom: 2em;
@@ -74,13 +76,18 @@ button.expand-all {
 		display: flex;
   		align-items: center;
 		  justify-content: start;
-  
+
 		padding: 2px 35px 2px 10px;
 	}
 
 	.accordion .accordion-toggle > span[class*="fa-"] {
 		padding-right: 10px;
 	}
+
+  .accordion .accordion-toggle span.material-symbols-outlined{
+    color: var(--FAU-Col-FAU-Blau-100, #04316a);
+    margin-right: 1ch;
+  }
 
 
 }

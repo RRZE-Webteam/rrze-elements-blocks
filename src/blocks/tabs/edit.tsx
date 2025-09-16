@@ -43,6 +43,7 @@ interface EditProps {
       position: number;
       icon: string;
       svgString: string;
+      materialSymbol: string;
     }[];
     active?: string;
     xray?: boolean;
@@ -63,6 +64,7 @@ type WPBlock = {
     svgString: any;
     childrenCount?: number;
     title?: string;
+    materialSymbol: string;
   };
   clientId?: string;
 };
@@ -110,6 +112,7 @@ export default function Edit({
           position: counter++,
           icon: block.attributes?.icon,
           svgString: block.attributes?.svgString,
+          materialSymbol: block.attributes?.materialSymbol
         }));
 
         return {
@@ -275,6 +278,17 @@ export default function Edit({
                         defaultClass="elements-tabs-label-icon-inside-editor"
                       />
                     )}
+                    {(innerClientId["icon"] || innerClientId["materialSymbol"]) && (
+                      <IconMarkComponent
+                        type={iconType}
+                        iconName={iconName}
+                        attributes={{
+                          icon: innerClientId["icon"],
+                          svgString: innerClientId["svgString"]
+                        }}
+                        materialSymbol={innerClientId["materialSymbol"]}
+                      />
+                    )}
                     {innerClientId["title"]}
                   </span>
                 </Button>
@@ -286,7 +300,11 @@ export default function Edit({
               type="button"
               role="tab"
             >
-              <span className={"fa-solid fa-plus"}></span>
+              <IconMarkComponent
+                type="solid"
+                iconName="plus"
+                defaultClass="elements-tabs-label-icon-inside-editor"
+              />
               {/* {__(" Add new tab", "rrze-elements-blocks")} */}
             </Button>
           </div>

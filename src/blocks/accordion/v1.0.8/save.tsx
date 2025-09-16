@@ -19,7 +19,7 @@ interface Attributes {
 interface SaveProps {
   attributes: Attributes;
 }
-const Save: React.FC<BlockSaveProps<AttributesV1_0_8>> = ({ attributes }) => {
+const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_8>) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,
@@ -35,7 +35,7 @@ const Save: React.FC<BlockSaveProps<AttributesV1_0_8>> = ({ attributes }) => {
   let output = '';
   if (jumpName === ''){
       output = `#panel_${sameBlockCount + totalChildrenCount + ancestorCount}`;
-  } else { 
+  } else {
       output = `${jumpName}`;
   }
 

@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Accordion extends AbstractBlockRender
 {
@@ -21,11 +22,26 @@ class Accordion extends AbstractBlockRender
       $total_children_count = isset( $attributes['totalChildrenCount'] ) ? (int) $attributes['totalChildrenCount'] : 0;
       $ancestor_count       = isset( $attributes['ancestorCount'] )      ? (int) $attributes['ancestorCount']      : 0;
 
-      $title     = isset( $attributes['title'] ) ? wp_kses_post( $attributes['title'] ) : '';
+      $title     = isset( $attributes['title'] ) ? sanitize_text_field( $attributes['title'] ) : '';
       $color     = isset( $attributes['color'] ) ? sanitize_html_class( $attributes['color'] ) : '';
 
       $hstart   = isset( $attributes['hstart'] ) ? (int) $attributes['hstart'] : 1;
-      $jumpname = isset( $attributes['jumpName'] ) ? $attributes['jumpName'] : '';
+      $jumpname = isset( $attributes['jumpName'] ) ? sanitize_text_field($attributes['jumpName']) : '';
+
+      $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
+      $iconMarkup = '';
+      if (empty($attributes['materialSymbol']) && !empty($attributes['icon'])) {
+        $iconMarkup = SpriteGenerator::svgUse(
+          $attributes['icon'],          // z. B. "solid cow"
+          'fa fa-' . str_replace(' ', ' fa-', $attributes['icon'])
+        );
+      }
+
+      if (!empty($attributes['materialSymbol'])) {
+        $iconMarkup = SpriteGenerator::svgUse(
+          $material_symbol
+        );
+      }
 
       // Jumpname ID
       if ( '' === $jumpname ) {
@@ -59,6 +75,10 @@ class Accordion extends AbstractBlockRender
         '<button class="accordion-toggle" data-toggle="collapse" data-name="%1$s" data-href="#%1$s" type="button" aria-expanded="false" aria-controls="%1$s">',
         esc_attr( $output_id )
       );
+
+      if ($iconMarkup) {
+        $markup .= $iconMarkup;
+      }
 
       $markup .= esc_html( $title ?: '…' );
       $markup .= '</button>';

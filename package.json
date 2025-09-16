@@ -1,20 +1,20 @@
 {
-	"name": "rrze-elements",
-	"version": "1.0.21",
+	"name": "rrze-elements-blocks",
+	"version": "1.1.0",
 	"description": "RRZE Elements: Gestalterische Erweiterungen für den BlockEditor",
 	"main": "build/index.js",
 	"textdomain": "rrze-elements-blocks",
 	"license": "GPL-3.0-or-later",
 	"private": true,
 	"scripts": {
-		"build": "wp-scripts build",
+		"build": "wp-scripts build && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start",
-		"build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
+    "start": "wp-scripts start & sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w",
+    "build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
 		"update-version": "node update-version.js && npm run build"
 	},
 	"repository": {
@@ -81,6 +81,7 @@
 		"gsap": "^3.13.0",
 		"he": "^1.2.0",
 		"lodash": "^4.17.21",
+		"material-symbols": "^0.33.0",
 		"react-error-boundary": "^6.0.0"
 	},
 	"engines": {

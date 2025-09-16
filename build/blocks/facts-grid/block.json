@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/facts-grid",
+  "version": "1.1.0",
+  "title": "Facts Grid",
+  "category": "rrze_elements",
+  "description": "Creates a Facts Grid Block",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "materialSymbol": {
+      "type": "string",
+      "default": ""
+    },
+    "headingLevel": {
+      "type": "number",
+      "default": 3
+    },
+    "hideHeading": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "example": {
+    "name": "rrze-elements/facts-grid",
+    "attributes": {
+      "title": "Forschung im Überblick"
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/fact",
+        "attributes": {
+          "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
+          "materialSymbol": "biotech",
+          "buttonText": "Mehr erfahren",
+          "buttonUrl": "www.fau.de"
+        }
+      },
+      {
+        "name": "rrze-elements/fact",
+        "attributes": {
+          "description": "Hermatology – Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean",
+          "materialSymbol": "hematology",
+          "buttonText": "Mehr erfahren",
+          "buttonUrl": "www.fau.de"
+        }
+      },
+      {
+        "name": "rrze-elements/fact",
+        "attributes": {
+          "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
+          "materialSymbol": "rib_cage",
+          "buttonText": "Mehr erfahren",
+          "buttonUrl": "www.fau.de"
+        }
+      },
+      {
+        "name": "rrze-elements/fact",
+        "attributes": {
+          "description": "Virology - Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean com",
+          "materialSymbol": "coronavirus",
+          "buttonText": "Mehr erfahren",
+          "buttonUrl": "www.fau.de"
+        }
+      }
+    ]
+  }
+}

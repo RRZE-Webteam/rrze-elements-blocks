@@ -3,6 +3,7 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\Helper;
 
 class Counter extends AbstractBlockRender
 {

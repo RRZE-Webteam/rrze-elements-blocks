@@ -3,23 +3,25 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
+use RRZE\ElementsBlocks\Helper;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Notice extends AbstractBlockRender
 {
     private static array $icon_map = [
-      'notice-attention'  => 'fa-solid fa-triangle-exclamation',
-      'notice-hinweis'    => 'fa-solid fa-info',
-      'notice-baustelle'  => 'fa-solid fa-screwdriver-wrench',
-      'notice-question'   => 'fa-solid fa-question',
-      'notice-minus'      => 'fa-solid fa-minus',
-      'notice-plus'       => 'fa-solid fa-plus',
-      'notice-idea'       => 'fa-solid fa-lightbulb',
-      'notice-download'   => 'fa-solid fa-download',
-      'notice-faubox'     => 'fa-solid fa-cloud-arrow-down',
-      'notice-audio'      => 'fa-solid fa-headphones',
-      'notice-video'      => 'fa-solid fa-video',
-      'notice-thumbs-up'  => 'fa-solid fa-thumbs-up',
-      'notice-thumbs-down'=> 'fa-solid fa-thumbs-down',
+        'notice-attention'  => 'symbols warning',
+        'notice-hinweis'    => 'symbols notifications',
+        'notice-baustelle'  => 'symbols construction',
+        'notice-question'   => 'symbols question_mark',
+        'notice-minus'      => 'symbols block',
+        'notice-plus'       => 'symbols add',
+        'notice-idea'       => 'symbols lightbulb',
+        'notice-download'   => 'symbols cognition',
+        'notice-faubox'     => 'symbols download',
+        'notice-audio'      => 'symbols headphones',
+        'notice-video'      => 'symbols video_library',
+        'notice-thumbs-up'  => 'symbols thumb_up',
+        'notice-thumbs-down'=> 'symbols thumb_down',
     ];
 
     /**
@@ -27,32 +29,41 @@ class Notice extends AbstractBlockRender
      */
     public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
     {
-      if ( $block && ! empty( trim($block->inner_html )) ) {
-        return $innerBlocks;
-      }
+        // Avoid deprecation on trim(null)
+        if ($block && !empty(trim((string)$block->inner_html))) {
+            return (string)$innerBlocks;
+        }
 
-      if ( $block && ! empty( trim($block->inner_html )) ) {
-        return $innerBlocks;
-      }
+        // Style / variation may be absent → coalesce + sanitize
+        $variation = (string)($attributes['style'] ?? '');
+        $variation_class = $variation !== '' ? sanitize_html_class($variation) : '';
 
-      $variation   = isset( $attributes['style'] ) ? $attributes['style'] : '';
-      $icon_class  = self::$icon_map[ $variation ] ?? '';
+        $icon_class = self::$icon_map[$variation] ?? '';
 
-      $wrapper_class = isset( $attributes['className'] ) ? $attributes['className'] : '';
+        // Optional override via materialSymbol
+        $material_symbol = !empty($attributes['materialSymbol'])
+            ? 'symbols ' . sanitize_html_class((string)$attributes['materialSymbol'])
+            : '';
 
-      $markup  = '<div class="wp-block-rrze-elements-notice ' . esc_attr( trim( $wrapper_class ) ) . '">';
-      $markup .= '<div class="notice">';
+        $iconMarkup = SpriteGenerator::svgUse(
+            $material_symbol !== '' ? $material_symbol : $icon_class
+        );
 
-      $markup .= '<div>';
-      $markup .= '<span class="' . esc_attr( trim( $icon_class . ' rrze-elements-icon' ) ) . '"></span>';
-      $markup .= '</div>';
+        $wrapper_class = (string)($attributes['className'] ?? '');
 
-      $markup .= '<div>';
-      $markup .= $innerBlocks;
-      $markup .= '</div>';
+        $markup = '<div class="wp-block-rrze-elements-notice ' . esc_attr(trim($wrapper_class)) . '">';
+        $markup .= '<div class="notice ' . esc_attr($variation_class) . '">';
 
-      $markup .= '</div></div>';
+        $markup .= '<div class="icon-box">';
+        $markup .= $iconMarkup;
+        $markup .= '</div>';
 
-      return $markup;
+        $markup .= '<div>';
+        $markup .= (string)$innerBlocks;
+        $markup .= '</div>';
+
+        $markup .= '</div></div>';
+
+        return $markup;
     }
 }

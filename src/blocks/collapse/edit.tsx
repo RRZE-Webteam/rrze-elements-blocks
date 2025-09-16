@@ -19,6 +19,7 @@ import { seen, unseen, symbol } from "@wordpress/icons";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
+import 'material-symbols';
 
 // Imports of custom components and helper functions.
 import JumpLinkSelector from "../../components/JumpLinkSelector";
@@ -30,8 +31,10 @@ import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import {
   IconPicker,
   IconMarkComponent,
-  IconPickerModalInset,
 } from "../../components/IconPicker";
+import {
+  MaterialSymbolPicker
+} from "../../components/MaterialSymbolPicker";
 import { speak } from "@wordpress/a11y";
 
 import { useJumpNameStore } from "../../hooks/useJumpNameStore";
@@ -167,13 +170,14 @@ const Edit = ({
                       onRequestClose={closeModal}
                       size="large"
                     >
-                      <IconPickerModalInset
-                        attributes={{
-                          icon: attributes.icon,
-                          svgString: attributes.svgString,
-                        }}
-                        setAttributes={setAttributes}
-                      />
+                      {/*<IconPickerModalInset*/}
+                      {/*  attributes={{*/}
+                      {/*    icon: attributes.icon,*/}
+                      {/*    svgString: attributes.svgString,*/}
+                      {/*  }}*/}
+                      {/*  setAttributes={setAttributes}*/}
+                      {/*/>*/}
+                      <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
                       <Button variant="primary" onClick={closeModal}>
                         {__("Close", "rrze-elements-blocks")}
                       </Button>
@@ -196,15 +200,6 @@ const Edit = ({
           />
           <ColorSwitcher {...{ attributes, setAttributes }} />
           <AdvancedSettings {...{ attributes, setAttributes }} />
-          <PanelBody title={__("Icon Settings", "rrze-elements-blocks")}>
-            <IconPicker
-              attributes={{
-                icon: attributes.icon,
-                svgString: attributes.svgString,
-              }}
-              setAttributes={setAttributes}
-            />
-          </PanelBody>
         </InspectorControls>
 
         <div className={`accordion-group ${color}`}>
@@ -219,7 +214,7 @@ const Edit = ({
                 isActive || loadOpen ? "active" : ""
               }`}
             >
-              {attributes.icon && (
+              {(attributes.icon || attributes.materialSymbol) && (
                 <IconMarkComponent
                   type={iconType}
                   iconName={iconName}
@@ -228,6 +223,7 @@ const Edit = ({
                     svgString: attributes.svgString,
                   }}
                   setAttributes={setAttributes}
+                  materialSymbol={attributes.materialSymbol}
                 />
               )}
               <RichText
