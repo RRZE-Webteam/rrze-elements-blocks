@@ -2,11 +2,13 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/fact",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "title": "Fact",
   "category": "rrze_elements",
   "description": "Creates a Fact",
-  "parent": [ "rrze-elements/facts-grid" ],
+  "parent": [
+    "rrze-elements/facts-grid"
+  ],
   "supports": {
     "html": false
   },

@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/iconbox-row",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "title": "Iconbox Row",
   "category": "rrze_elements",
   "description": "Create a Row for Iconboxes",

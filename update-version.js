@@ -59,6 +59,9 @@ const filesToUpdate = [
   "./src/blocks/counter/block.json",
   "./src/blocks/counter-row/block.json",
   "./src/blocks/iconbox/block.json",
+  "./src/blocks/iconbox-row/block.json",
+  "./src/blocks/facts-grid/block.json",
+  "./src/blocks/fact/block.json",
 ];
 
 filesToUpdate.forEach((filePath) => updateVersion(filePath, version));

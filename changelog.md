@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2025-09-16
+This version introduces a new Iconset replacing the FontAwesome IconLibrary.
+Old Icons set via FontAwesome will be supported for now, but might be removed in later versions v2+.
+
+### Added
+- New Iconset Google Material Icons
+- New Block Facts Grid
+- Rudimentary CSS Support for the new FAU-Elemental Theme
+
+### Fixed
+- Blocks are now sorted below the Design Elements inside the BlockInserter
+- Translation files for DE Formal are now in Sync with DE to fix general naming conventions
+
 ## [1.0.22] - 2025-07-16
 
 Preparations for FAU-Elemental and UX-Fix inside the CTA
