@@ -12,7 +12,6 @@ class Alert extends AbstractBlockRender
    */
   public function render($attributes = [], $innerBlocks = '', ?\WP_Block $block = null): string
   {
-    Helper::debug($attributes);
     if ($block && !empty(trim($block->inner_html))) {
       return $innerBlocks;
     }
