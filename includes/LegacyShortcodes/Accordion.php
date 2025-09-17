@@ -62,15 +62,6 @@ class Accordion
   protected function addShortcodeForce(string $tag, $callback): void
   {
     if (shortcode_exists($tag)) {
-      // Keep a small trace in the debug log – very handy when hunting
-      // conflicts in large installations.
-      //            if (WP_DEBUG) {
-      //                $prev = $GLOBALS['shortcode_tags'][$tag];
-      //                $prevDesc = is_array($prev)
-      //                    ? (is_object($prev[0]) ? get_class($prev[0]) . '::' . $prev[1] : $prev[0] . '()')
-      //                    : (is_string($prev)    ? $prev . '()'                        : 'closure');
-      //                error_log(sprintf('RRZE ElementsBlocks: overriding existing shortcode "%s" previously registered by %s', $tag, $prevDesc));
-      //            }
       remove_shortcode($tag);
     }
     add_shortcode($tag, $callback);
