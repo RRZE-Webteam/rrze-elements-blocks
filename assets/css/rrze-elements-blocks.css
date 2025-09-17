@@ -12523,7 +12523,12 @@ button span svg.icon {
   width: 1.25rem;
 }
 
-.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-notice div.notice div.icon-box {
+.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-notice div.notice div.icon-box,
+.wp-theme-FAU-Techfak div.wp-block-rrze-elements-notice div.notice div.icon-box,
+.wp-theme-FAU-Natfak div.wp-block-rrze-elements-notice div.notice div.icon-box,
+.wp-theme-FAU-RWFak div.wp-block-rrze-elements-notice div.notice div.icon-box,
+.wp-theme-FAU-Philfak div.wp-block-rrze-elements-notice div.notice div.icon-box,
+.wp-theme-FAU-Medfak div.wp-block-rrze-elements-notice div.notice div.icon-box {
   padding: 0.5rem;
   display: flex;
   justify-content: center;
@@ -12531,9 +12536,22 @@ button span svg.icon {
   height: 90px;
   width: 90px;
 }
-.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon {
+.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon,
+.wp-theme-FAU-Techfak div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon,
+.wp-theme-FAU-Natfak div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon,
+.wp-theme-FAU-RWFak div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon,
+.wp-theme-FAU-Philfak div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon,
+.wp-theme-FAU-Medfak div.wp-block-rrze-elements-notice div.notice div.icon-box svg.icon {
   height: 2rem;
   width: 2rem;
+}
+.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-notice div.notice div.icon-box .wp-block-heading,
+.wp-theme-FAU-Techfak div.wp-block-rrze-elements-notice div.notice div.icon-box .wp-block-heading,
+.wp-theme-FAU-Natfak div.wp-block-rrze-elements-notice div.notice div.icon-box .wp-block-heading,
+.wp-theme-FAU-RWFak div.wp-block-rrze-elements-notice div.notice div.icon-box .wp-block-heading,
+.wp-theme-FAU-Philfak div.wp-block-rrze-elements-notice div.notice div.icon-box .wp-block-heading,
+.wp-theme-FAU-Medfak div.wp-block-rrze-elements-notice div.notice div.icon-box .wp-block-heading {
+  color: var(--color-primary-ci-hell-kontrast, #000);
 }
 
 /*
@@ -16817,7 +16835,12 @@ section.facts svg.icon {
   margin-left: -4px;
 }
 
-.wp-theme-FAU-Einrichtungen section.facts .wp-block-fau-elemental-fau-meta-headline {
+.wp-theme-FAU-Einrichtungen section.facts .wp-block-fau-elemental-fau-meta-headline,
+.wp-theme-FAU-Techfak section.facts .wp-block-fau-elemental-fau-meta-headline,
+.wp-theme-FAU-Natfak section.facts .wp-block-fau-elemental-fau-meta-headline,
+.wp-theme-FAU-RWFak section.facts .wp-block-fau-elemental-fau-meta-headline,
+.wp-theme-FAU-Philfak section.facts .wp-block-fau-elemental-fau-meta-headline,
+.wp-theme-FAU-Medfak section.facts .wp-block-fau-elemental-fau-meta-headline {
   padding-left: 0 !important;
   margin-left: 0 !important;
   border-top: 1px solid #04316a;
@@ -16825,31 +16848,56 @@ section.facts svg.icon {
   padding-bottom: 0;
   font-size: 1rem;
 }
-.wp-theme-FAU-Einrichtungen ul.facts__list {
+.wp-theme-FAU-Einrichtungen ul.facts__list,
+.wp-theme-FAU-Techfak ul.facts__list,
+.wp-theme-FAU-Natfak ul.facts__list,
+.wp-theme-FAU-RWFak ul.facts__list,
+.wp-theme-FAU-Philfak ul.facts__list,
+.wp-theme-FAU-Medfak ul.facts__list {
   padding-bottom: 1rem;
   border-bottom: 1px solid #04316a;
   margin-bottom: 1rem;
 }
-.wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item {
+.wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item,
+.wp-theme-FAU-Techfak ul.facts__list li.facts__item,
+.wp-theme-FAU-Natfak ul.facts__list li.facts__item,
+.wp-theme-FAU-RWFak ul.facts__list li.facts__item,
+.wp-theme-FAU-Philfak ul.facts__list li.facts__item,
+.wp-theme-FAU-Medfak ul.facts__list li.facts__item {
   border-right: 1px solid #04316a;
 }
-.wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item:last-of-type {
+.wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item:last-of-type,
+.wp-theme-FAU-Techfak ul.facts__list li.facts__item:last-of-type,
+.wp-theme-FAU-Natfak ul.facts__list li.facts__item:last-of-type,
+.wp-theme-FAU-RWFak ul.facts__list li.facts__item:last-of-type,
+.wp-theme-FAU-Philfak ul.facts__list li.facts__item:last-of-type,
+.wp-theme-FAU-Medfak ul.facts__list li.facts__item:last-of-type {
   border-right: none;
 }
-.wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link {
+.wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link,
+.wp-theme-FAU-Techfak ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link,
+.wp-theme-FAU-Natfak ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link,
+.wp-theme-FAU-RWFak ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link,
+.wp-theme-FAU-Philfak ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link,
+.wp-theme-FAU-Medfak ul.facts__list li.facts__item .wp-block-button.is-style-tertiary a.wp-block-button__link {
   text-align: left;
   background: none;
   padding-left: 0;
   margin-left: 0;
   padding-top: 0;
-  color: var(--color-primary-basis, #04316a);
+  color: var(--color-primary-basis-kontrast, #04316a);
   text-decoration: underline;
   font-size: 0.9rem;
 }
 
 /* Mobile breakpoint */
 @media screen and (width <= 768px) {
-  .wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item:nth-child(even) {
+  .wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item:nth-child(even),
+  .wp-theme-FAU-Techfak ul.facts__list li.facts__item:nth-child(even),
+  .wp-theme-FAU-Natfak ul.facts__list li.facts__item:nth-child(even),
+  .wp-theme-FAU-RWFak ul.facts__list li.facts__item:nth-child(even),
+  .wp-theme-FAU-Philfak ul.facts__list li.facts__item:nth-child(even),
+  .wp-theme-FAU-Medfak ul.facts__list li.facts__item:nth-child(even) {
     border-right: none;
   }
 }
