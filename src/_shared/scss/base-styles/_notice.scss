@@ -279,11 +279,11 @@
     fill: #fff;
   }
 
-  .notice .icon-box{
+  .notice .icon-box {
     padding: 2rem;
   }
 
-  .notice > div:first-child.icon-box{
+  .notice > div:first-child.icon-box {
     padding: 2rem;
   }
 
@@ -294,41 +294,57 @@
       fill: #000;
     }
   }
+
   .wp-block-rrze-elements-notice .notice :first-child.icon-box .fa-solid {
     width: inherit;
     height: inherit;
   }
 
-  .notice.notice-attention div.icon-box{
+  .notice.notice-attention div.icon-box {
     background-color: #FDDF35;
+
     svg, use {
       fill: #000;
       color: #000;
     }
   }
 
-  .notice div.icon-box{
+  .notice div.icon-box {
     padding: 2rem;
   }
 
-  .notice div.icon-box svg{
+  .notice div.icon-box svg {
     height: 1.25rem;
     width: 1.25rem;
   }
 
 }
 
-.wp-theme-FAU-Einrichtungen div.wp-block-rrze-elements-notice div.notice div.icon-box{
-  padding: .5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90px;
-  width: 90px;
+.wp-theme-FAU-Einrichtungen,
+.wp-theme-FAU-Techfak,
+.wp-theme-FAU-Natfak,
+.wp-theme-FAU-RWFak,
+.wp-theme-FAU-Philfak,
+.wp-theme-FAU-Medfak {
+  div.wp-block-rrze-elements-notice div.notice {
+    div.icon-box {
+      padding: .5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90px;
+      width: 90px;
 
-  svg.icon{
-    height: 2rem;
-    width: 2rem;
+      svg.icon {
+        height: 2rem;
+        width: 2rem;
+      }
+
+      .wp-block-heading {
+        color: var(--color-primary-ci-hell-kontrast, #000);
+      }
+    }
   }
 }
+
 

@@ -1,5 +1,5 @@
 //ToDo Remove Important statements after content width issue is completed
-section.facts ul, section.facts li, section.facts p.facts__text{
+section.facts ul, section.facts li, section.facts p.facts__text {
   list-style: none;
   margin-left: 0;
   margin-right: 0;
@@ -8,7 +8,7 @@ section.facts ul, section.facts li, section.facts p.facts__text{
 }
 
 section.facts ul li span.facts__icon svg,
-section.facts ul li span.facts__icon span.material-symbols-outlined{
+section.facts ul li span.facts__icon span.material-symbols-outlined {
   height: 60px;
   width: 60px;
   font-size: 60px;
@@ -40,26 +40,26 @@ section.facts {
   }
 }
 
-section.facts .wp-block-fau-elemental-fau-meta-headline{
-    padding-left: var(--Spacing-2x, 0.5rem) !important;
+section.facts .wp-block-fau-elemental-fau-meta-headline {
+  padding-left: var(--Spacing-2x, 0.5rem) !important;
 }
 
-.progress-low div{
+.progress-low div {
   --wp-components-progress-bar-color: green;
   background-color: green;
 }
 
-.progress-medium div{
+.progress-medium div {
   --wp-components-progress-bar-color: orange;
   background-color: orange;
 }
 
-.progress-high div{
+.progress-high div {
   --wp-components-progress-bar-color: red;
   background-color: red;
 }
 
-.progress-low, .progress-medium, .progress-high{
+.progress-low, .progress-medium, .progress-high {
   height: 5px !important;
 }
 
@@ -76,7 +76,7 @@ section.facts .wp-block-fau-elemental-fau-meta-headline{
     grid-column: span 2;
   }
 
-  section.facts .wp-block-fau-elemental-fau-meta-headline{
+  section.facts .wp-block-fau-elemental-fau-meta-headline {
     margin-left: var(--Spacing-20x, 5rem) !important;
     padding-left: var(--Spacing-2x, 0.5rem) !important;
   }
@@ -94,13 +94,13 @@ section.facts .wp-block-fau-elemental-fau-meta-headline{
     grid-column: span 2;
   }
 
-  section.facts .wp-block-fau-elemental-fau-meta-headline{
+  section.facts .wp-block-fau-elemental-fau-meta-headline {
     margin-left: var(--Spacing-10x, 2.5rem) !important;
     padding-left: var(--Spacing-1x, 0.25rem) !important;
   }
 }
 
-.is-style-dark{
+.is-style-dark {
   section.facts svg.icon {
     color: var(--FAU-Col-FAU-Weiss-100, #fff);
   }
@@ -111,12 +111,16 @@ section.facts .wp-block-fau-elemental-fau-meta-headline{
   }
 }
 
-section.facts svg.icon{
+section.facts svg.icon {
   margin-left: -4px;
 }
 
-.wp-theme-FAU-Einrichtungen {
-
+.wp-theme-FAU-Einrichtungen,
+.wp-theme-FAU-Techfak,
+.wp-theme-FAU-Natfak,
+.wp-theme-FAU-RWFak,
+.wp-theme-FAU-Philfak,
+.wp-theme-FAU-Medfak {
   section.facts .wp-block-fau-elemental-fau-meta-headline {
     padding-left: 0 !important;
     margin-left: 0 !important;
@@ -125,7 +129,8 @@ section.facts svg.icon{
     padding-bottom: 0;
     font-size: 1rem;
   }
-  ul.facts__list{
+
+  ul.facts__list {
     padding-bottom: 1rem;
     border-bottom: 1px solid #04316a;
     margin-bottom: 1rem;
@@ -144,20 +149,28 @@ section.facts svg.icon{
       padding-left: 0;
       margin-left: 0;
       padding-top: 0;
-      color: var(--color-primary-basis, #04316a);
+      color: var(--color-primary-basis-kontrast, #04316a);
       text-decoration: underline;
       font-size: .9rem;
     }
   }
 }
-  /* Mobile breakpoint */
-  @media screen and (width <= 768px) {
-    .wp-theme-FAU-Einrichtungen ul.facts__list li.facts__item {
+
+/* Mobile breakpoint */
+@media screen and (width <= 768px) {
+  .wp-theme-FAU-Einrichtungen,
+  .wp-theme-FAU-Techfak,
+  .wp-theme-FAU-Natfak,
+  .wp-theme-FAU-RWFak,
+  .wp-theme-FAU-Philfak,
+  .wp-theme-FAU-Medfak {
+    ul.facts__list li.facts__item {
       &:nth-child(even) {
         border-right: none;
       }
     }
   }
+}
 
 
 

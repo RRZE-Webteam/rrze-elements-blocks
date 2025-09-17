@@ -1,3 +1,4 @@
+
 var he = require('he');
 
 export function sanitizeTitleToJumpName(title: string): string {
