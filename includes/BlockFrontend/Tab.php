@@ -19,8 +19,8 @@ class Tab extends AbstractBlockRender
         $tabs_uid = isset($attributes['tabsUid']) ? $attributes['tabsUid'] : '';
         $block_id = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $uid = substr($block_id, 0, 10);
-        $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
-        $title = isset($attributes['title']) ? $attributes['title'] : '';
+        $wrapper_class = isset($attributes['className']) ? sanitize_text_field($attributes['className']) : '';
+        $title = isset($attributes['title']) ? sanitize_text_field($attributes['title']) : '';
 
         $div_id = 'tab-' . $tabs_uid . '_tabpanel_tab-label-' . $uid;
 

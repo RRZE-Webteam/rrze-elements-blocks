@@ -16,8 +16,8 @@ class Alert extends AbstractBlockRender
       return $innerBlocks;
     }
 
-    $style = isset($attributes['style']) ? esc_attr($attributes['style']) : 'default';
-    $title = isset($attributes['title']) ? esc_attr($attributes['title']) : '';
+    $style = isset($attributes['style']) ? sanitize_text_field($attributes['style']) : 'default';
+    $title = isset($attributes['title']) ? sanitize_text_field($attributes['title']) : '';
     $text_color = isset($attributes['textColor']) ? esc_attr($attributes['textColor']) : '';
     $custom_background_color = isset($attributes['color']) ? esc_attr($attributes['color']) : '';
     $font_light = false;
