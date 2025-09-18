@@ -8,7 +8,8 @@
   "description": "Creates an notice.",
   "attributes": {
     "style": {
-      "type": "string"
+      "type": "string",
+      "default": "notice-hinweis"
     },
     "materialSymbol": {
       "type": "string",
