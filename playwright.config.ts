@@ -32,6 +32,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     // trace: 'retain-on-failure',
     video: 'retain-on-failure',
+    ignoreHTTPSErrors: true,
   },
 
   /* Configure projects for major browsers */
@@ -40,7 +41,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: true,
+        headless: false,
       },
     },
 

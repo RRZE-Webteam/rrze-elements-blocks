@@ -1,0 +1,165 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Klassisches Accordion ohne Extras</h2>
+<!-- /wp:heading -->
+
+<!-- wp:rrze-elements/collapsibles -->
+<!-- wp:rrze-elements/collapse {"title":"Akkordeonreiter 1","jumpName":"panel_8280ae13","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Ein einfaches Akkordeon ohne viel Schnickschnack.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Akkordeonreiter mit Bild","jumpName":"panel_8b1c6ca7","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Ein einfacher Akkordeonreiter mit einem Bild und Text.<br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29,"className":"alignnone size-medium wp-image-29"} -->
+<figure class="wp-block-image alignnone size-medium wp-image-29"><img src="https://elements.multisite.localhost:8890/wp-content/uploads/sites/5/2025/09/FAU_Cluster_AiSolEn_Web_23-300x214.jpg" alt="" class="wp-image-29"/><figcaption class="wp-element-caption">AiSolEn</figcaption></figure>
+<!-- /wp:image -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einem Zitat","jumpName":"ein-akkordeonreiter-mit-einem-zitat","isCustomJumpname":false} -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Fische sind Freunde, kein Futter</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einem Zitat","jumpName":"panel_847a155a","isCustomJumpname":false} -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Fische sind Freunde, kein Futter</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einem Icon?","jumpName":"ein-akkordeonreiter-mit-einem-icon","icon":"solid cat","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Was soll hier schon stehen…</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit der Sprungmarke Kowabunga","jumpName":"kowabunga"} -->
+<!-- wp:paragraph -->
+<p>Kowabunga it is</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeon mit einem inneren Akkordeon","jumpName":"ein-akkordeon-mit-einem-inneren-akkordeon","isCustomJumpname":false} -->
+<!-- wp:rrze-elements/accordions -->
+<!-- wp:rrze-elements/accordion {"hstart":2,"title":"Ein inneres Akkordeon für die Verschachteln von Schachteln","jumpName":"ein-inneres-akkordeon-fuer-die-verschachteln-von-schachteln","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Irgendein Text</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/accordion -->
+
+<!-- wp:rrze-elements/accordion {"hstart":2,"title":"Wer hat es überhaupt erlaub zu verschachteln…","jumpName":"panel_88087eba","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Ein Bild<br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30,"className":"alignnone size-medium wp-image-30"} -->
+<figure class="wp-block-image alignnone size-medium wp-image-30"><img src="https://elements.multisite.localhost:8890/wp-content/uploads/sites/5/2025/09/FAU_Cluster_FunQC_Web_07-300x214.jpg" alt="" class="wp-image-30"/><figcaption class="wp-element-caption">FunQC</figcaption></figure>
+<!-- /wp:image -->
+<!-- /wp:rrze-elements/accordion -->
+<!-- /wp:rrze-elements/accordions -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einer Überschrift","jumpName":"ein-akkordeonreiter-mit-einer-ueberschrift","isCustomJumpname":false} -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Überschriften</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Inhalt</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Sollte es geben</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Weiterer Inhalt</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+<!-- /wp:rrze-elements/collapsibles -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Klassisches Accordion mit Farben</h2>
+<!-- /wp:heading -->
+
+<!-- wp:rrze-elements/collapsibles -->
+<!-- wp:rrze-elements/collapse {"title":"Akkordeonreiter 1","color":"nat","jumpName":"akkordeonreiter-1","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Ein einfaches Akkordeon ohne viel Schnickschnack.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Akkordeonreiter mit Bild","color":"phil","jumpName":"akkordeonreiter-mit-bild","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Ein einfacher Akkordeonreiter mit einem Bild und Text.<br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29,"className":"alignnone size-medium wp-image-29"} -->
+<figure class="wp-block-image alignnone size-medium wp-image-29"><img src="https://elements.multisite.localhost:8890/wp-content/uploads/sites/5/2025/09/FAU_Cluster_AiSolEn_Web_23-300x214.jpg" alt="" class="wp-image-29"/><figcaption class="wp-element-caption">AiSolEn</figcaption></figure>
+<!-- /wp:image -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einem Zitat","jumpName":"panel_1fbcf5fa","isCustomJumpname":false} -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Fische sind Freunde, kein Futter</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einem Zitat","jumpName":"panel_f1799e8b","isCustomJumpname":false} -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Fische sind Freunde, kein Futter</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einem Icon?","color":"phil","jumpName":"panel_d42a2eb5","icon":"solid cat","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Was soll hier schon stehen…</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit der Sprungmarke Kowabunga","color":"tf","jumpName":"kowabungas"} -->
+<!-- wp:paragraph -->
+<p>Kowabunga it is</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeon mit einem inneren Akkordeon","color":"med","jumpName":"panel_4385838f","isCustomJumpname":false} -->
+<!-- wp:rrze-elements/accordions -->
+<!-- wp:rrze-elements/accordion {"hstart":2,"title":"Ein inneres Akkordeon für die Verschachteln von Schachteln","jumpName":"panel_74796240","isCustomJumpname":false} -->
+<!-- wp:paragraph -->
+<p>Irgendein Text</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/accordion -->
+<!-- /wp:rrze-elements/accordions -->
+<!-- /wp:rrze-elements/collapse -->
+
+<!-- wp:rrze-elements/collapse {"title":"Ein Akkordeonreiter mit einer Überschrift","jumpName":"panel_253b6ad2","isCustomJumpname":false} -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Überschriften</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Inhalt</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Sollte es geben</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Weiterer Inhalt</p>
+<!-- /wp:paragraph -->
+<!-- /wp:rrze-elements/collapse -->
+<!-- /wp:rrze-elements/collapsibles -->
