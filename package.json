@@ -26,7 +26,8 @@
 	},
 	"browserslist": [
 		"last 3 years",
-		"ie 11"
+    "> 1%",
+    "not ie <= 11"
 	],
 	"supports": {
 		"email": "webmaster@fau.de",

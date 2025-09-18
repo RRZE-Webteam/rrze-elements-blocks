@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "variables";
+
 .rrze-elements-tabs {
     margin-bottom: 1em;
     /*
@@ -186,24 +189,24 @@ $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
     .rrze-elements-tabs.#{$color} {
         [role="tablist"] {
             button {
-                border: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                background-color: var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
-                color: var(--color-#{$color}-ci-hell2-kontrast, map-get($colormaps, $color, "ci-hell2-kontrast"));
+                border: 1px solid var(--color-#{$color}-ci-hell2, map.get(variables.$colormaps, $color, "ci-hell2"));
+                border-bottom-color: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
+                background-color: var(--color-#{$color}-ci-hell2, map.get(variables.$colormaps, $color, "ci-hell2"));
+                color: var(--color-#{$color}-ci-hell2-kontrast, map.get(variables.$colormaps, $color, "ci-hell2-kontrast"));
                 &:hover, &:focus, &:active {
                     color: inherit;
-                    border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                    border-color: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
                 }
                 @media (min-width: 550px) {
-                    border-top: 1px solid var(--color-#{$color}-ci-hell2, map-get($colormaps, $color, "ci-hell2"));
+                    border-top: 1px solid var(--color-#{$color}-ci-hell2, map.get(variables.$colormaps, $color, "ci-hell2"));
                     &:hover, &:active {
                         color: inherit;
-                        border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                        border-color: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
                     }
                     &:focus {
                         & > span.focus {
                             padding: 2px 4px;
-                            border: 2px solid var(--color-#{$color}-dunkler, map-get($colormaps, $color, "dunkler"));
+                            border: 2px solid var(--color-#{$color}-dunkler, map.get(variables.$colormaps, $color, "dunkler"));
                             border-radius: 3px;
                         }
                     }
@@ -211,20 +214,20 @@ $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
                 }
             }
             [aria-selected="true"] {
-                background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
-                border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                background: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
+                color: var(--color-#{$color}-ci-hell-kontrast, map.get(variables.$colormaps, $color, "ci-hell-kontrast"));
+                border-color: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
                 @media (min-width: 550px) {
                     border: 1px solid;
                     background: #fff;
-                    border-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                    border-color: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
                     border-bottom-color: #fff;
                     color: unset;
                 }
                 &:hover, &:focus, &:active {
-                    background: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
-                    color: var(--color-#{$color}-ci-hell-kontrast, map-get($colormaps, $color, "ci-hell-kontrast"));
-                    border-bottom-color: var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                    background: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
+                    color: var(--color-#{$color}-ci-hell-kontrast, map.get(variables.$colormaps, $color, "ci-hell-kontrast"));
+                    border-bottom-color: var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
                     @media (min-width: 550px) {
                         background: #fff;
                         border-bottom-color: #fff;
@@ -234,13 +237,13 @@ $colors: "primary", "zentral", "phil", "med", "nat", "rw", "tf";
             }
         }
         [role="tabpanel"] {
-            border: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+            border: 1px solid var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
             border-top: 0;
             @media (min-width: 550px) {
-                border-top: 1px solid var(--color-#{$color}-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                border-top: 1px solid var(--color-#{$color}-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
             }
             @media print {
-                border-top: 1px solid var(--color-primary-ci-hell, map-get($colormaps, $color, "ci-hell"));
+                border-top: 1px solid var(--color-primary-ci-hell, map.get(variables.$colormaps, $color, "ci-hell"));
             }
         }
     }

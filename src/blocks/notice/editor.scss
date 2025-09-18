@@ -4,48 +4,18 @@ $medium-blue : #5bc0de;
 $green : #5cb85c;
 $dark-grey: #121212;
 
-@import "../../_shared/scss/base-styles/variables";
-@import "../../_shared/scss/base-styles/mixins";
-@import "../../_shared/scss/base-styles/notice";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/notice";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
+@use "../../_shared/scss/base-styles/variables";
+@use "../../_shared/scss/base-styles/mixins";
+@use "../../_shared/scss/base-styles/notice";
+@use "../../_shared/scss/fau-elemental-compatibility-layer/notice" as notice2;
+@use "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 .wp-block-rrze-elements-notice {
-    // display: block;
     .notice {
-        // border: none;
-        // padding-left: 0;
-
-        // h2.wp-block-heading {
-        //     margin-top: 0;
-        // }
-
-        // display: grid;
-        // grid-template-columns: 6em auto;
-        // grid-gap: 2em;
-
         :first-child {
-            // align-self:center;
-
-            // .fa-solid {
-            //     font-size: 2em;
-            //     width: 3em;
-            //     text-align: center;
-            // }
-
             span:before {
                 aspect-ratio: inherit;
-                // display: block;
-                // padding: 0.5em;
-                // color: #fff;
-                // background-color: var(--color-zentral-basis, #04316A);
             }
-
-            // span.fa-triangle-exclamation:before {
-            //     // background-color: #fad201;
-            //     background-color: #ffff00;
-            //     color: #121212;
-            // }
         }
 
         :nth-child(2) {
@@ -88,5 +58,4 @@ $dark-grey: #121212;
   .notice > div.icon-container{
     padding: 2rem;
   }
-
 }

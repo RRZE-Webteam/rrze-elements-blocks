@@ -1,3 +1,5 @@
+@use "variables";
+
 /*!
  * Absatzklassen
  */
@@ -46,7 +48,7 @@
 .notice-alert,
 .notice-attention {
   svg.rrze-elements-icon {
-    fill: $red !important;
+    fill: variables.$red !important;
   }
 
   h1,
@@ -55,18 +57,18 @@
   h4,
   h5,
   h6 {
-    color: $red;
+    color: variables.$red;
   }
 
   &.no-title p {
-    color: $red;
+    color: variables.$red;
     font-weight: bold;
   }
 }
 
 .notice-hinweis {
   svg.rrze-elements-icon {
-    fill: $text-blue !important;
+    fill: variables.$text-blue !important;
   }
 
   h1,
@@ -75,18 +77,18 @@
   h4,
   h5,
   h6 {
-    color: $text-blue;
+    color: variables.$text-blue;
   }
 
   &.no-title p {
-    color: $text-blue;
+    color: variables.$text-blue;
     font-weight: bold;
   }
 }
 
 .notice-baustelle {
   svg.rrze-elements-icon {
-    fill: $dark-grey !important;
+    fill: variables.$dark-grey !important;
   }
 
   h1,
@@ -95,30 +97,30 @@
   h4,
   h5,
   h6 {
-    color: $dark-grey;
+    color: variables.$dark-grey;
   }
 
   &.no-title p {
-    color: $dark-grey;
+    color: variables.$dark-grey;
     font-weight: bold;
   }
 }
 
 .notice-question {
   svg.rrze-elements-icon {
-    fill: $medium-blue !important;
+    fill: variables.$medium-blue !important;
   }
 }
 
 .notice-minus {
   svg.rrze-elements-icon {
-    fill: $red !important;
+    fill: variables.$red !important;
   }
 }
 
 .notice-plus {
   svg.rrze-elements-icon {
-    fill: $green !important;
+    fill: variables.$green !important;
   }
 }
 
@@ -133,48 +135,48 @@
   h4,
   h5,
   h6 {
-    color: $dark-grey;
+    color: variables.$dark-grey;
   }
 
   &.no-title p {
-    color: $dark-grey;
+    color: variables.$dark-grey;
     font-weight: bold;
   }
 }
 
 .notice-download {
   svg.rrze-elements-icon {
-    fill: $medium-blue !important;
+    fill: variables.$medium-blue !important;
   }
 }
 
 .notice-faubox {
   svg.rrze-elements-icon {
-    fill: $medium-blue !important;
+    fill: variables.$medium-blue !important;
   }
 }
 
 .notice-audio {
   svg.rrze-elements-icon {
-    fill: $medium-blue !important;
+    fill: variables.$medium-blue !important;
   }
 }
 
 .notice-video {
   svg.rrze-elements-icon {
-    fill: $medium-blue !important;
+    fill: variables.$medium-blue !important;
   }
 }
 
 .notice-thumbs-up {
   svg.rrze-elements-icon {
-    fill: $green !important;
+    fill: variables.$green !important;
   }
 }
 
 .notice-thumbs-down {
   svg.rrze-elements-icon {
-    fill: $red !important;
+    fill: variables.$red !important;
   }
 }
 

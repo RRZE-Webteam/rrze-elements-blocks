@@ -37,12 +37,6 @@ Functions and Mixins
 .fa-classic,
 .fa-sharp,
 .fas,
-.accordion .accordion-toggle.active:hover:before,
-.accordion .accordion-toggle.active:focus:before,
-.accordion .accordion-toggle:hover:before,
-.accordion .accordion-toggle:focus:before,
-.accordion .accordion-toggle.active:before,
-.accordion .accordion-toggle:before,
 .fa-solid,
 .far,
 .fa-regular,
@@ -57,7 +51,7 @@ Functions and Mixins
   text-rendering: auto;
 }
 
-.fas, .accordion .accordion-toggle.active:hover:before, .accordion .accordion-toggle.active:focus:before, .accordion .accordion-toggle:hover:before, .accordion .accordion-toggle:focus:before, .accordion .accordion-toggle.active:before, .accordion .accordion-toggle:before,
+.fas,
 .fa-classic,
 .fa-solid,
 .far,
@@ -2740,7 +2734,7 @@ readers do not read off random characters that represent icons */
   content: "\f6c8";
 }
 
-.fa-caret-up::before, .accordion .accordion-toggle.active:hover::before, .accordion .accordion-toggle.active:focus::before, .accordion .accordion-toggle.active::before {
+.fa-caret-up::before {
   content: "\f0d8";
 }
 
@@ -5356,7 +5350,7 @@ readers do not read off random characters that represent icons */
   content: "\f11c";
 }
 
-.fa-caret-down::before, .accordion .accordion-toggle:hover::before, .accordion .accordion-toggle:focus::before, .accordion .accordion-toggle.active::before, .accordion .accordion-toggle::before {
+.fa-caret-down::before {
   content: "\f0d7";
 }
 
@@ -8306,7 +8300,7 @@ readers do not read off random characters that represent icons */
   font-display: block;
   src: url("../../webfonts/fa-solid-900.woff2") format("woff2"), url("../../webfonts/fa-solid-900.ttf") format("truetype");
 }
-.fas, .accordion .accordion-toggle.active:hover:before, .accordion .accordion-toggle.active:focus:before, .accordion .accordion-toggle:hover:before, .accordion .accordion-toggle:focus:before, .accordion .accordion-toggle.active:before, .accordion .accordion-toggle:before,
+.fas,
 .fa-solid {
   font-weight: 900;
 }
@@ -11123,7 +11117,7 @@ aside .gallery-slider-thumbs .flex-control-nav li {
 #content .sidebar-inline + .content-inline .content-slider.flexslider .slides:after {
   clear: left;
 }
-#content .sidebar-inline + .content-inline .content-slider.flexslider.clearfix:after, #content .sidebar-inline + .content-inline .accordion .accordion-body .content-slider.flexslider.accordion-inner:after, .accordion .accordion-body #content .sidebar-inline + .content-inline .content-slider.flexslider.accordion-inner:after {
+#content .sidebar-inline + .content-inline .content-slider.flexslider.clearfix:after {
   clear: left;
 }
 
@@ -12565,30 +12559,6 @@ button span svg.icon {
   color: var(--color-primary-ci-hell-kontrast, #000);
 }
 
-/*
-    --color-zentral-ci-hell: #04316a;
-    --color-zentral-ci-hell-kontrast: #fff;
-    --color-phil-ci-hell: #fdb735;
-    --color-phil-ci-hell-kontrast: #000;
-    --color-med-ci-hell: #18b4f1;
-    --color-med-ci-hell-kontrast: #000;
-    --color-nat-ci-hell: #7bb725;
-    --color-nat-ci-hell-kontrast: #000;
-    --color-rw-ci-hell: #c50f3c;
-    --color-rw-ci-hell-kontrast: #fff;
-    --color-tf-ci-hell: #8c9fb1;
-    --color-tf-ci-hell-kontrast: #000;
-
-    --color-primary-ci-hell
-    --color-primary-ci-hell-kontrast
-    --color-button-text
-    --color-button-bg
-    --color-button-hover-text
-    --color-button-hover-bg
-*/
-/*!
-Functions and Mixins
-*/
 .alert {
   padding: 15px;
   margin-bottom: 20px;
@@ -14277,7 +14247,7 @@ body.rrze-expo.fau-theme {
 main aside.pull-left,
 main aside.pull-right {
   margin-bottom: 15px;
-  color: black;
+  color: hsl(210, 10.8108108108%, -5.4901960784%);
   border-top: 2px solid rgb(78.4864864865, 88, 97.5135135135);
   border-bottom: 1px solid rgb(78.4864864865, 88, 97.5135135135);
   padding: 10px 5px;
@@ -15301,30 +15271,6 @@ table.filtertable .tablesorter-filter-row input {
   min-width: 260px;
 }
 
-/*
-    --color-zentral-ci-hell: #04316a;
-    --color-zentral-ci-hell-kontrast: #fff;
-    --color-phil-ci-hell: #fdb735;
-    --color-phil-ci-hell-kontrast: #000;
-    --color-med-ci-hell: #18b4f1;
-    --color-med-ci-hell-kontrast: #000;
-    --color-nat-ci-hell: #7bb725;
-    --color-nat-ci-hell-kontrast: #000;
-    --color-rw-ci-hell: #c50f3c;
-    --color-rw-ci-hell-kontrast: #fff;
-    --color-tf-ci-hell: #8c9fb1;
-    --color-tf-ci-hell-kontrast: #000;
-
-    --color-primary-ci-hell
-    --color-primary-ci-hell-kontrast
-    --color-button-text
-    --color-button-bg
-    --color-button-hover-text
-    --color-button-hover-bg
-*/
-/*!
-Functions and Mixins
-*/
 .rrze-elements-cta {
   position: relative;
   margin: 2em 0;

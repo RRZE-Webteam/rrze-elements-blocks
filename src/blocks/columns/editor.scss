@@ -1,5 +1,5 @@
-@import "../../_shared/scss/base-styles/textcolumns";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
+@use "../../_shared/scss/base-styles/textcolumns";
+@use "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 .wp-block-rrze-elements-columns {
     column-gap: 1.5em;

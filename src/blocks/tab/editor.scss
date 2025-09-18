@@ -1,6 +1,6 @@
-@import "../../_shared/scss/base-styles/variables";
-@import "../../_shared/scss/base-styles/mixins";
-@import "../../_shared/scss/base-styles/tabs";
+@use "../../_shared/scss/base-styles/variables";
+@use "../../_shared/scss/base-styles/mixins";
+@use "../../_shared/scss/base-styles/tabs";
 
 svg.elements-tabs-icon-modal{
     float: left;

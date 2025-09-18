@@ -1,5 +1,5 @@
-@import "../../_shared/scss/base-styles/alert";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/alert";
+@use "../../_shared/scss/base-styles/alert" as *;
+@use "../../_shared/scss/fau-elemental-compatibility-layer/alert" as *;
 
 .alert {
   line-height: 1.5;
