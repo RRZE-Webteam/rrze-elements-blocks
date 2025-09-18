@@ -7,7 +7,7 @@
 	"license": "GPL-3.0-or-later",
 	"private": true,
 	"scripts": {
-		"build": "wp-scripts build && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css",
+		"build": "wp-scripts build --no-stats && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
