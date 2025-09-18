@@ -127,6 +127,7 @@ const JumpLinkSelector = ({
 				<BaseControl
 					label={__("Jump Link Name", "rrze-elements-blocks")}
 					id="rrze-elements"
+          __nextHasNoMarginBottom
 				>
 					<input
 						className="rrze-element-input-field"
@@ -145,6 +146,7 @@ const JumpLinkSelector = ({
 			<Spacer />
 			<ToggleControl
 				checked={attributes.isCustomJumpname}
+        __nextHasNoMarginBottom
 				label={__("Lock Jump Link Name", "rrze-elements-blocks")}
 				help={__("If enabled, the jump link will not generated automatically any longer. ", "rrze-elements-blocks")}
 				onChange={(isCustomJumpname) =>

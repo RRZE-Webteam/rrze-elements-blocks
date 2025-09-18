@@ -106,6 +106,8 @@ const HeadingSelectorInspector = ({ attributes, setAttributes }: SaveProps) => {
         value={attributes.hstart}
         onChange={handleToggleHeadingGroup}
         isBlock
+        __next40pxDefaultSize
+        __nextHasNoMarginBottom
       >
         <ToggleGroupControlOption value={2} label="H2" />
         <ToggleGroupControlOption value={3} label="H3" />
