@@ -11151,14 +11151,9 @@ aside .gallery-slider-thumbs .flex-control-nav li {
 /*!
  * Accordion
  */
-h1.accordion-heading,
-h2.accordion-heading,
-h3.accordion-heading,
-h4.accordion-heading,
-h5.accordion-heading,
-h6.accordion-heading {
+.accordion .accordion-group .accordion-heading {
   width: auto;
-  padding: 0 !important;
+  padding: 0;
   margin: 0;
   border: none;
   text-align: left;

@@ -7,17 +7,16 @@
  */
 
 
-h1.accordion-heading,
-h2.accordion-heading,
-h3.accordion-heading,
-h4.accordion-heading,
-h5.accordion-heading,
-h6.accordion-heading {
-    width: auto;
-    padding: 0 !important;
-    margin: 0;
-    border: none;
-    text-align: left;
+.accordion {
+  .accordion-group {
+    .accordion-heading {
+      width: auto;
+      padding: 0;
+      margin: 0;
+      border: none;
+      text-align: left;
+    }
+  }
 }
 button.accordion-toggle {
     width: 100%;
