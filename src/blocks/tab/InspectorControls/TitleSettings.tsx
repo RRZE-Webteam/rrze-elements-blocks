@@ -125,6 +125,8 @@ const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
 							onChange={onChangeTitle}
 							placeholder={__("Enter your Tab Label", "rrze-elements-blocks")}
 							className="elements-blocks-input-following-icon"
+              __next40pxDefaultSize
+              __nextHasNoMarginBottom
 						/>
 
 						<Button variant="primary" onClick={closeModal}>
@@ -193,6 +195,7 @@ const TitlePlaceholder = ({
 					onChange={onChangeTitle}
 					placeholder={__("Enter your Tab Label", "rrze-elements-blocks")}
 					className="elements-tabs-icon-modal-input"
+          __next40pxDefaultSize
 				/>
 				<Button variant="primary" onClick={onChangeLabelHint}>
 					{__("Hide Label settings", "rrze-elements-blocks")}
@@ -236,6 +239,8 @@ const TitleInspectorControls = ({
 			<TextControl
 				value={attributes.title}
 				onChange={onChangeTitle}
+        __next40pxDefaultSize
+        __nextHasNoMarginBottom
 				placeholder={__("Enter your Tab Label", "rrze-elements-blocks")}
 				className="elements-blocks-input-following-icon"
 			/>

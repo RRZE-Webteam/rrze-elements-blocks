@@ -228,6 +228,7 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
           onChange={onChangeSearch}
           onKeyDown={handleKeyDown}
           ref={searchInputRef}
+          __nextHasNoMarginBottom
           help={__("Search for an icon in English.", "rrze-elements-blocks")}
         />
         <Button variant="secondary" onClick={handleSearch}>

@@ -5,21 +5,21 @@ import {
   BlockControls,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
-import { Button } from "@wordpress/components";
-import { __ } from "@wordpress/i18n";
-import { useEffect } from "@wordpress/element";
-import { useSelect, useDispatch } from "@wordpress/data";
-import { createBlock } from "@wordpress/blocks";
+import {Button} from "@wordpress/components";
+import {__} from "@wordpress/i18n";
+import {useEffect, useRef} from "@wordpress/element";
+import {useSelect, useDispatch} from "@wordpress/data";
+import {createBlock} from "@wordpress/blocks";
 import InputWarning from "../../components/InputWarning";
 
 // Other Imports
-import { isEqual } from "lodash";
+import {isEqual} from "lodash";
 
 // Custom Components
-import { XrayBar } from "../../components/Xray";
-import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
-import { StandardColorSwitcherToolbar as ColorSwitcherToolbar } from "../../components/CustomColorSwitcher";
-import { IconMarkComponent } from "../../components/IconPicker";
+import {XrayBar} from "../../components/Xray";
+import {CustomInspectorControls} from "./InspectorControls/CustomInspectorControls";
+import {StandardColorSwitcherToolbar as ColorSwitcherToolbar} from "../../components/CustomColorSwitcher";
+import {IconMarkComponent} from "../../components/IconPicker";
 
 // TypeScript interfaces for better type checking
 interface Tab {
@@ -28,6 +28,7 @@ interface Tab {
   active?: string;
   clientId?: string;
 }
+
 interface EditProps {
   attributes: {
     style?: string;
@@ -78,49 +79,50 @@ type WPBlock = {
  * @returns     - The JSX representation of the component.
  */
 export default function Edit({
-  attributes,
-  setAttributes,
-  clientId,
-}: EditProps) {
+                               attributes,
+                               setAttributes,
+                               clientId,
+                             }: EditProps) {
   // WordPress hooks and other logic here.
-  const { __unstableMarkNextChangeAsNotPersistent } =
-    useDispatch(blockEditorStore);
+  const {__unstableMarkNextChangeAsNotPersistent} = useDispatch(blockEditorStore);
   const props = useBlockProps();
   const blockId = props["data-block"];
+  const lastInnerClientIdsRef = useRef<Array<{
+    clientId: string;
+    title: string;
+    position: number;
+    icon: string;
+    svgString: string;
+    materialSymbol: string;
+  }>>([]);
 
-  const { insertBlock } = useDispatch("core/block-editor");
-  const { selectBlock } = useDispatch("core/block-editor");
+  const {insertBlock, selectBlock} = useDispatch("core/block-editor");
 
   // useEffects for syncing component state and attributes
-  const { innerClientIds } =
-    // retrieve the inner client ids of the current block
-    useSelect(
-      (select) => {
-        const { getBlocks } = select(
-          "core/block-editor"
-        ) as {
-          getBlock: Function;
-          getBlocks: Function;
-          getBlockIndex: Function;
-        };
-        const selectedBlockClientId = clientId;
-        const innerBlocks = getBlocks(selectedBlockClientId);
-        let counter = 0;
-        const innerClientIds = innerBlocks.map((block: WPBlock) => ({
-          clientId: block?.clientId,
-          title: block.attributes?.title,
-          position: counter++,
-          icon: block.attributes?.icon,
-          svgString: block.attributes?.svgString,
-          materialSymbol: block.attributes?.materialSymbol
-        }));
+  const innerClientIds = useSelect(
+    (select) => {
+      const {getBlocks} = select("core/block-editor") as {
+        getBlocks: (id: string) => WPBlock[];
+      };
+      const innerBlocks = getBlocks(clientId);
 
-        return {
-          innerClientIds,
-        };
-      },
-      [clientId]
-    );
+      const next = innerBlocks.map((block, idx) => ({
+        clientId: block?.clientId ?? "",
+        title: block?.attributes?.title ?? "",
+        position: idx,
+        icon: block?.attributes?.icon ?? "",
+        svgString: block?.attributes?.svgString ?? "",
+        materialSymbol: block?.attributes?.materialSymbol ?? "",
+      }));
+
+      if (isEqual(next, lastInnerClientIdsRef.current)) {
+        return lastInnerClientIdsRef.current; // stable ref
+      }
+      lastInnerClientIdsRef.current = next;
+      return next;
+    },
+    [clientId]
+  );
 
   /**
    * Update the blockId attribute whenever it changes
@@ -128,7 +130,7 @@ export default function Edit({
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ blockId: blockId.slice(0, 10) });
+      setAttributes({blockId: blockId.slice(0, 10)});
     }
   }, [attributes.blockId, blockId]);
 
@@ -136,40 +138,27 @@ export default function Edit({
    * Syncs the innerClientIds attribute with the component state
    */
   useEffect(() => {
-    if (innerClientIds.length === 0) {
-      return;
-    }
-
+    if (!innerClientIds.length) return;
     if (!isEqual(attributes.innerClientIds, innerClientIds)) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ innerClientIds });
+      setAttributes({innerClientIds});
     }
-  }, [innerClientIds, setAttributes]);
+  }, [innerClientIds, attributes.innerClientIds, setAttributes]);
 
   /**
    * Handles logic to set the active tab.
    */
   useEffect(() => {
-    if (
-      attributes.active === "" &&
-      innerClientIds &&
-      innerClientIds.length > 0
-    ) {
+    if (!innerClientIds.length) return;
+
+    const activeExists = innerClientIds.some(
+      (item) => item.clientId === attributes.active
+    );
+
+    // If no active tab is set, or the current active tab doesn't exist anymore
+    if (!attributes.active || !activeExists) {
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: innerClientIds[0].clientId });
-    }
-
-    if (
-      !innerClientIds ||
-      !innerClientIds.find(
-        (innerClientId: WPBlock) =>
-          innerClientId["clientId"] === attributes.active
-      )
-    ) {
-      if (innerClientIds && innerClientIds.length > 0) {
-        __unstableMarkNextChangeAsNotPersistent();
-        setAttributes({ active: innerClientIds[0].clientId });
-      }
     }
   }, [innerClientIds, attributes.active]);
 
@@ -181,7 +170,7 @@ export default function Edit({
     insertBlock(block, undefined, clientId);
     selectBlock(block.clientId);
     __unstableMarkNextChangeAsNotPersistent();
-    setAttributes({ active: block.clientId });
+    setAttributes({active: block.clientId});
   };
 
   /**
@@ -196,7 +185,7 @@ export default function Edit({
   ) => {
     if (innerClientIds[index]?.clientId !== undefined) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ active: innerClientIds[index].clientId });
+      setAttributes({active: innerClientIds[index].clientId});
       selectBlock(innerClientIds[index].clientId);
     }
   };
@@ -206,17 +195,10 @@ export default function Edit({
    * @param index  - The index of the tab.
    * @returns      - Whether the tab is selected.
    */
-  const ariaSelected: any = (index: number) => {
-    if (innerClientIds[index] === undefined) {
-      return true;
-    }
-    if (
-      innerClientIds[index].clientId === attributes.active ||
-      attributes.active === ""
-    ) {
-      return true;
-    }
-    return false;
+  const ariaSelected = (index: number): boolean => {
+    const item = innerClientIds[index];
+    if (!item) return false;
+    return item.clientId === attributes.active || attributes.active === "";
   };
 
   // Main return statement for the Edit function component.
@@ -229,22 +211,22 @@ export default function Edit({
         )}
         min={5}
         max={null}
-        count={attributes.innerClientIds?.length || 0}
+        count={innerClientIds.length}
         status="info"
         className="accordion-notice"
       />
       <div {...props}>
         <CustomInspectorControls
-          attributes={{ xray: attributes.xray, color: attributes.color }}
+          attributes={{xray: attributes.xray, color: attributes.color}}
           setAttributes={setAttributes}
         />
         <BlockControls>
           <XrayBar
-            attributes={{ xray: attributes.xray }}
+            attributes={{xray: attributes.xray}}
             setAttributes={setAttributes}
           />
           <ColorSwitcherToolbar
-            attributes={{ color: attributes.color }}
+            attributes={{color: attributes.color}}
             setAttributes={setAttributes}
           />
         </BlockControls>
@@ -253,44 +235,38 @@ export default function Edit({
           id="tabs-1"
         >
           <div role="tablist" className="manual">
-            {attributes.innerClientIds.map((innerClientId, index) => {
-              const [iconType, iconName] =
-                innerClientId["icon"]?.split(" ") || [];
+            {innerClientIds.map((innerClientId, index) => {
+              const [iconType, iconName] = innerClientId.icon?.split(" ") || [];
+              const showMaterial = !!innerClientId.materialSymbol && !innerClientId.icon;
+
               return (
                 <Button
-                  key={index}
+                  key={innerClientId.clientId || index}
                   onClick={() => onChangeActive(index, innerClientIds)}
-                  id={innerClientId["clientId"]}
+                  id={innerClientId.clientId}
                   type="button"
                   role="tab"
                   aria-selected={ariaSelected(index)}
-                  aria-controls={`${innerClientId["position"]}`}
+                  aria-controls={innerClientId.clientId}
                 >
-                  <span className="focus" tabIndex={-1}>
-                    {innerClientId["icon"] && (
-                      <IconMarkComponent
-                        type={iconType}
-                        iconName={iconName}
-                        attributes={{
-                          icon: innerClientId["icon"],
-                          svgString: innerClientId["svgString"],
-                        }}
-                        defaultClass="elements-tabs-label-icon-inside-editor"
-                      />
-                    )}
-                    {(innerClientId["icon"] || innerClientId["materialSymbol"]) && (
-                      <IconMarkComponent
-                        type={iconType}
-                        iconName={iconName}
-                        attributes={{
-                          icon: innerClientId["icon"],
-                          svgString: innerClientId["svgString"]
-                        }}
-                        materialSymbol={innerClientId["materialSymbol"]}
-                      />
-                    )}
-                    {innerClientId["title"]}
-                  </span>
+        <span className="focus" tabIndex={-1}>
+         {showMaterial ? (
+           <IconMarkComponent
+             type={iconType}
+             iconName={iconName}
+             attributes={{icon: innerClientId.icon, svgString: innerClientId.svgString}}
+             materialSymbol={innerClientId.materialSymbol}
+           />
+         ) : innerClientId.icon ? (
+           <IconMarkComponent
+             type={iconType}
+             iconName={iconName}
+             attributes={{icon: innerClientId.icon, svgString: innerClientId.svgString}}
+             defaultClass="elements-tabs-label-icon-inside-editor"
+           />
+         ) : null}
+          {innerClientId.title}
+        </span>
                 </Button>
               );
             })}
