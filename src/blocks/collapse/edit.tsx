@@ -287,6 +287,7 @@ const Edit = ({
                   "rrze/rrze-video",
                   "rrze-faudir/block",
                   "core/gallery",
+                  "rrze-calendar/calendar",
                 ]}
               />
             </div>
