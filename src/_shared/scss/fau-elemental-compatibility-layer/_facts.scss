@@ -149,9 +149,34 @@ section.facts svg.icon {
       padding-left: 0;
       margin-left: 0;
       padding-top: 0;
-      color: var(--color-primary-basis-kontrast, #04316a);
+      color: var(--color-content-links);
       text-decoration: underline;
-      font-size: .9rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .wp-block-button.is-style-tertiary a.wp-block-button__link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4em;
+    }
+
+    /* draw an icon box */
+    .wp-block-button.is-style-tertiary a.wp-block-button__link::after {
+      content: "";
+      inline-size: 1em;
+      block-size: 1em;
+      /* Use the SVG as a mask so we can color it with currentColor */
+      -webkit-mask: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" viewBox=\'0 -960 960 960\'>\
+<path d=\"m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z\"/>\
+</svg>') no-repeat center / contain;
+      mask: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" viewBox=\'0 -960 960 960\'>\
+<path d=\"m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z\"/>\
+</svg>') no-repeat center / contain;
+      background-color: currentColor;
+      flex: 0 0 1em;
     }
   }
 }
