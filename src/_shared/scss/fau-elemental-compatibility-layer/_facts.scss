@@ -32,7 +32,7 @@ section.facts li {
 }
 
 section.facts {
-  max-width: var(--wide-max-width, 1320px) !important;
+  //max-width: var(--wide-max-width, 1320px) !important;
 
   p.facts__text {
     padding-top: 0;
@@ -177,6 +177,35 @@ section.facts svg.icon {
 </svg>') no-repeat center / contain;
       background-color: currentColor;
       flex: 0 0 1em;
+    }
+  }
+}
+
+.wp-theme-FAU-Elemental {
+  li.facts__item {
+    display: flex;
+    flex-direction: column;
+    min-block-size: fit-content;
+
+    & > * {
+      margin-block: 1rem;
+    }
+
+    & > :first-child:not(p) {
+      margin-block-start: 0;
+    }
+
+    & > :last-child:not(p) {
+      margin-block-end: 0;
+    }
+
+    & > p {
+      margin-block: auto;
+    }
+
+    a {
+      text-align: left;
+      text-wrap: wrap;
     }
   }
 }
