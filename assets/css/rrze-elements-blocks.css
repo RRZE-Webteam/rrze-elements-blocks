@@ -16529,6 +16529,11 @@ div.wp-block-rrze-elements-cta.is-style-lightmode .cta-image::before {
   transition: all 0.2s ease-in-out;
 }
 
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row section.rrze--counter-element,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row section.rrze--counter-element {
+  align-items: start;
+}
+
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .rrze-elements-blocks-counter-row .block-editor-block-list__layout,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row section.rrze--counter-element,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row .rrze-elements-blocks-iconbox-row .block-editor-block-list__layout,
