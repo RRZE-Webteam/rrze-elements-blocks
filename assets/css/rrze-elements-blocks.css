@@ -16149,6 +16149,12 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 .wp-theme-FAU-Elemental .is-style-dark div.alert p, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert p {
   color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
 }
+.wp-theme-FAU-Elemental .is-style-dark div.alert ul li, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert ul li {
+  color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
+}
+.wp-theme-FAU-Elemental .is-style-dark div.alert ul li:before, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert ul li:before {
+  background-image: var(--icon-arrow-fau-blau);
+}
 .wp-theme-FAU-Elemental .is-style-dark div.alert h1, .wp-theme-FAU-Elemental .is-style-dark div.alert h2, .wp-theme-FAU-Elemental .is-style-dark div.alert h3, .wp-theme-FAU-Elemental .is-style-dark div.alert h4, .wp-theme-FAU-Elemental .is-style-dark div.alert h5, .wp-theme-FAU-Elemental .is-style-dark div.alert h6, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert h1, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert h2, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert h3, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert h4, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert h5, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert h6 {
   color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
 }
@@ -16158,6 +16164,10 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 }
 .wp-theme-FAU-Elemental .is-style-dark div.alert.alert-success *:not(code, pre), .wp-theme-FAU-Elemental .is-style-dark div.alert.alert-danger *:not(code, pre), .wp-theme-FAU-Elemental .is-style-dark div.alert.alert-warning *:not(code, pre), .wp-theme-FAU-Elemental .is-style-dark div.alert.alert-info *:not(code, pre), .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert.alert-success *:not(code, pre), .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert.alert-danger *:not(code, pre), .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert.alert-warning *:not(code, pre), .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert .is-style-dark div.alert.alert-info *:not(code, pre) {
   background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
+}
+
+.is-layout-flow div.alert * {
+  padding: 0;
 }
 
 .wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta, .wp-theme-FAU-Elemental .wp-block-rrze-elements-cta div.wp-block-rrze-elements-cta {
