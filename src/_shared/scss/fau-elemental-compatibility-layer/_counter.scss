@@ -83,3 +83,23 @@
 .wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row .rrze--counter-element > div:last-child > .rrze--iconbox-element-container:first-child{
   border-right: none;
 }
+
+@media screen and (max-width: 639px) {
+  div.wp-block-rrze-elements-counter-row .rrze--iconbox-element-container{
+    border-right: none;
+    border-bottom: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+  }
+
+  .is-style-dark {
+    div.wp-block-rrze-elements-counter-row .rrze--iconbox-element-container{
+      border-right: none;
+      border-bottom: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+    }
+
+    section.rrze--counter-element div:last-of-type .rrze--iconbox-element-container{
+     border-bottom: none;
+    }
+  }
+}
+
+//.rrze-elements-column-3

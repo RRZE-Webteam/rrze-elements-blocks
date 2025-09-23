@@ -28,5 +28,16 @@
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-columns {
     max-width: var(--wide-max-width);
+    padding-left: var(--Spacing-6x);
+    padding-right: var(--Spacing-6x);
+  }
+}
+
+@media screen and (max-width: 639px) {
+  div.elements-textcolumns,
+  div.wp-block-rrze-elements-counter-row,
+  div.wp-block-rrze-elements-columns {
+    padding-left: var(--Spacing-6x);
+    padding-right: var(--Spacing-6x);
   }
 }
