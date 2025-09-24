@@ -361,3 +361,9 @@ div.wp-block-rrze-elements-cta.is-style-lightmode{
     }
   }
 }
+
+
+.wp-theme-FAU-Elemental main div.cta-image:not([class*=hero] .wp-block-cover,.image-wrapper):has(>img):before{
+  height: initial;
+  width: initial;
+}

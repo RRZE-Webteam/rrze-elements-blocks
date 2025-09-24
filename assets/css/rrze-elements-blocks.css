@@ -16452,6 +16452,11 @@ div.wp-block-rrze-elements-cta.is-style-lightmode .cta-image::before {
   background: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
 }
 
+.wp-theme-FAU-Elemental main div.cta-image:not([class*=hero] .wp-block-cover, .image-wrapper):has(> img):before {
+  height: initial;
+  width: initial;
+}
+
 .wp-theme-FAU-Elemental div.rrze--iconbox-element-container svg, .wp-theme-FAU-Elemental .wp-block-rrze-elements-rrze-iconbox div.rrze--iconbox-element-container svg {
   height: 60px;
   width: 60px;
