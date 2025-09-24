@@ -16664,6 +16664,10 @@ div.wp-block-rrze-elements-cta.is-style-lightmode .cta-image::before {
     border-bottom: none;
   }
 }
+.wp-theme-FAU-Elemental .is-layout-flow dl.rrze-elements-counter {
+  padding-left: 0;
+}
+
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-notice {
   display: block;
   background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #dfe2e7);
