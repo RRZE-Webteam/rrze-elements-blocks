@@ -44,48 +44,6 @@
   }
 }
 
-
-.notice-alert,
-.notice-attention {
-  svg.rrze-elements-icon {
-    fill: variables.$red !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: variables.$red;
-  }
-
-  &.no-title p {
-    color: variables.$red;
-    font-weight: bold;
-  }
-}
-
-.notice-hinweis {
-  svg.rrze-elements-icon {
-    fill: variables.$text-blue !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: variables.$text-blue;
-  }
-
-  &.no-title p {
-    color: variables.$text-blue;
-    font-weight: bold;
-  }
-}
-
 .notice-baustelle {
   svg.rrze-elements-icon {
     fill: variables.$dark-grey !important;
@@ -143,58 +101,6 @@
     font-weight: bold;
   }
 }
-
-.notice-download {
-  svg.rrze-elements-icon {
-    fill: variables.$medium-blue !important;
-  }
-}
-
-.notice-faubox {
-  svg.rrze-elements-icon {
-    fill: variables.$medium-blue !important;
-  }
-}
-
-.notice-audio {
-  svg.rrze-elements-icon {
-    fill: variables.$medium-blue !important;
-  }
-}
-
-.notice-video {
-  svg.rrze-elements-icon {
-    fill: variables.$medium-blue !important;
-  }
-}
-
-.notice-thumbs-up {
-  svg.rrze-elements-icon {
-    fill: variables.$green !important;
-  }
-}
-
-.notice-thumbs-down {
-  svg.rrze-elements-icon {
-    fill: variables.$red !important;
-  }
-}
-
-// .wp-block-rrze-elements-notice{
-//     display:grid;
-//     grid-template-columns: 3em 1fr;
-//     grid-gap: 1em;
-
-//     :first-child {
-//         align-self: center;
-//         span:before {
-//             font-size: 1.5em;
-//             padding: 0.5em;
-//             background-color: red;
-//             color: white;
-//         }
-//     }
-// }
 
 .wp-block-rrze-elements-notice {
   display: block;
