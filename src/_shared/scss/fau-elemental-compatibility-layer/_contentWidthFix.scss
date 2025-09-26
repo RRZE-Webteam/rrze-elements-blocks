@@ -6,6 +6,7 @@
   div.alert.alert-danger,
   div.alert.alert-info,
   div.alert.alert-example,
+  div.alert,
   div.wp-block-rrze-elements-notice,
   div.rrze-elements-tabs,
   div.wp-block-rrze-elements-cta,
@@ -25,7 +26,21 @@
 
   div.elements-textcolumns,
   div.wp-block-rrze-elements-counter-row,
-  div.wp-block-rrze-elements-columns {
+  div.wp-block-rrze-elements-iconbox-row,
+  div.wp-block-rrze-elements-columns,
+  section.facts,
+  section.facts ul.facts__list{
     max-width: var(--wide-max-width);
+    padding-left: var(--Spacing-6x);
+    padding-right: var(--Spacing-6x);
+  }
+}
+
+@media screen and (max-width: 639px) {
+  div.elements-textcolumns,
+  div.wp-block-rrze-elements-counter-row,
+  div.wp-block-rrze-elements-columns {
+    padding-left: var(--Spacing-6x);
+    padding-right: var(--Spacing-6x);
   }
 }

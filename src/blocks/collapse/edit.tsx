@@ -285,7 +285,9 @@ const Edit = ({
                   "core/table",
                   "rrze-elements/alert",
                   "rrze/rrze-video",
-                  "rrze-faudir/block"
+                  "rrze-faudir/block",
+                  "core/gallery",
+                  "rrze-calendar/calendar",
                 ]}
               />
             </div>

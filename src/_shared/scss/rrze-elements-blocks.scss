@@ -1,102 +1,102 @@
 // Konstanten fuer das Design
-@import "base-styles/variables";
+@use "base-styles/variables";
 
 // Mixins
-@import "base-styles/mixins";
+@use "base-styles/mixins";
 
 // Fontawesome Webfonts
-@import "../fontawesome/scss/fontawesome";
-@import "../fontawesome/scss/regular";
-@import "../fontawesome/scss/solid";
-@import "../fontawesome/scss/brands";
+@use "../fontawesome/scss/fontawesome";
+@use "../fontawesome/scss/regular";
+@use "../fontawesome/scss/solid";
+@use "../fontawesome/scss/brands";
 
 // FlexSlider
-@import "base-styles/flexslider";
+@use "base-styles/flexslider";
 
 // Accordion
-@import "base-styles/accordion";
+@use "base-styles/accordion";
 
 //Tabs
-@import "base-styles/tabs";
+@use "base-styles/tabs";
 
 // Absatzklassen
-@import "base-styles/notice";
+@use "base-styles/notice";
 
 // Alerts
-@import "base-styles/alert";
+@use "base-styles/alert";
 
 // Button
-@import "base-styles/button";
+@use "base-styles/button";
 
 // Columns
-@import "base-styles/columns";
+@use "base-styles/columns";
 
 // ContentIndex
-@import "base-styles/contentindex";
+@use "base-styles/contentindex";
 
 // Lightbox
-@import "base-styles/lightbox";
+@use "base-styles/lightbox";
 
 // News
-@import "base-styles/news";
+@use "base-styles/news";
 
 // PullDiv
-@import "base-styles/pulldiv";
+@use "base-styles/pulldiv";
 
 // Timeline
-@import "base-styles/timeline";
-@import "base-styles/timelineblock";
+@use "base-styles/timeline";
+@use "base-styles/timelineblock";
 
 // Gallery (Teile davon sind auch in Flexslider)
-@import "base-styles/gallery";
+@use "base-styles/gallery";
 
 // Legal Text
-@import "base-styles/legal-text";
+@use "base-styles/legal-text";
 
 // Assistant
-@import "base-styles/assistant";
+@use "base-styles/assistant";
 
 // Symbole
-@import "base-styles/symbols";
+@use "base-styles/symbols";
 
 // LaTeX
-@import "base-styles/latex";
+@use "base-styles/latex";
 
 //Font-Awesome-Icons
-@import "base-styles/icons";
+@use "base-styles/icons";
 
 //Text-Columns (Fließtext in Spalten)
-@import "base-styles/textcolumns";
+@use "base-styles/textcolumns";
 
 //Table Sort/Filter
-@import "base-styles/tables";
+@use "base-styles/tables";
 
 // Limit-Width
-@import "base-styles/limit-width";
+@use "base-styles/limit-width";
 
 //CTA
-@import "base-styles/cta";
+@use "base-styles/cta";
 
 //Counter
-@import "base-styles/counter";
+@use "base-styles/counter";
 
 //Iconbox
-@import "base-styles/iconbox";
+@use "base-styles/iconbox";
 
 //Scroll Stories
-@import "base-styles/scrollstories";
+@use "base-styles/scrollstories";
 
 //Compatibility Layer
-@import "fau-elemental-compatibility-layer/accordion";
-@import "fau-elemental-compatibility-layer/tabs";
-@import "fau-elemental-compatibility-layer/alert";
-@import "fau-elemental-compatibility-layer/cta";
-@import "fau-elemental-compatibility-layer/infobox";
-@import "fau-elemental-compatibility-layer/counter";
-@import "fau-elemental-compatibility-layer/notice";
-@import "fau-elemental-compatibility-layer/timeline";
-@import "fau-elemental-compatibility-layer/facts";
-@import "fau-elemental-compatibility-layer/textcolumn";
-@import "fau-elemental-compatibility-layer/insertion";
-@import "fau-elemental-compatibility-layer/contentwidth";
-@import "fau-elemental-compatibility-layer/contentWidthFix";
+@use "fau-elemental-compatibility-layer/accordion" as accordion2;
+@use "fau-elemental-compatibility-layer/tabs" as tabs2;
+@use "fau-elemental-compatibility-layer/alert" as alert2;
+@use "fau-elemental-compatibility-layer/cta" as cta2;
+@use "fau-elemental-compatibility-layer/infobox";
+@use "fau-elemental-compatibility-layer/counter" as counter2;
+@use "fau-elemental-compatibility-layer/notice" as notice2;
+@use "fau-elemental-compatibility-layer/timeline" as timeline2;
+@use "fau-elemental-compatibility-layer/facts";
+@use "fau-elemental-compatibility-layer/textcolumn";
+@use "fau-elemental-compatibility-layer/insertion";
+@use "fau-elemental-compatibility-layer/contentwidth";
+@use "fau-elemental-compatibility-layer/contentWidthFix";

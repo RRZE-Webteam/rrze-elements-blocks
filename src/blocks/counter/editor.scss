@@ -1,6 +1,6 @@
-@import "../../_shared/scss/base-styles/variables";
-@import "../../_shared/scss/base-styles/mixins";
-@import "../../_shared/scss/base-styles/counter";
-@import "../../_shared/scss/base-styles/button";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/counter";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
+@use "../../_shared/scss/base-styles/variables";
+@use "../../_shared/scss/base-styles/mixins";
+@use "../../_shared/scss/base-styles/counter";
+@use "../../_shared/scss/base-styles/button";
+@use "../../_shared/scss/fau-elemental-compatibility-layer/counter" as counter2;
+@use "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";

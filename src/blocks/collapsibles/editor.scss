@@ -1,9 +1,9 @@
-@import "../../_shared/scss/base-styles/variables";
-@import "../../_shared/scss/base-styles/mixins";
+@use "../../_shared/scss/base-styles/variables";
+@use "../../_shared/scss/base-styles/mixins";
 
-@import "../../_shared/scss/base-styles/accordion";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/accordion";
-@import "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
+@use "../../_shared/scss/base-styles/accordion";
+@use "../../_shared/scss/fau-elemental-compatibility-layer/accordion" as accordion2;
+@use "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 
 .wp-block-rrze-elements-collapsibles {
 	padding-bottom: 2em;

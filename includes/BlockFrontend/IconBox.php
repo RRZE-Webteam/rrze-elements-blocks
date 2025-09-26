@@ -18,6 +18,10 @@ class IconBox extends AbstractBlockRender
             return $innerBlocks;
         }
 
+        $allowed_tags = [
+            'br' => [],
+        ];
+
         $wrapper_class = $attributes['className'] ?? '';
         $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
 
@@ -36,7 +40,9 @@ class IconBox extends AbstractBlockRender
         }
 
         $title = sanitize_text_field($attributes['title']) ?? '';
-        $description = sanitize_text_field($attributes['description']) ?? '';
+        $description = isset($attributes['description'])
+            ? wp_kses($attributes['description'], $allowed_tags)
+            : '';
         $svg_string = $attributes['svgString'] ?? '';
 
         if ($title === '' || $description === '' || $iconMarkup === '') {

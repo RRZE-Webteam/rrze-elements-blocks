@@ -29,6 +29,7 @@ const AdvancedSettings = ({ attributes, setAttributes }: AdvancedSettingsProps) 
         label={__("Open collapse on Page load", "rrze-elements-blocks")}
         checked={attributes.loadOpen}
         onChange={() => updateloadOpen()}
+        __nextHasNoMarginBottom
       />
     </PanelBody>
   );

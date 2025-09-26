@@ -25,6 +25,7 @@ const ExpandAllLinkSelector = ({ attributes, setAttributes }: SaveProps) => {
 			label={__("Show Expand-All-Link", "rrze-elements-blocks")}
 			checked={attributes.expandAllLink}
 			onChange={updateExpandAllLink}
+      __nextHasNoMarginBottom
 		/>
 	);
 };

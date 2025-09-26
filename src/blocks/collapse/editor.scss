@@ -10,10 +10,10 @@
 
 // @import "../../_shared/scss/variables";
 // @import "../../_shared/scss/mixins";
-@import "../../_shared/fontawesome/scss/fontawesome";
-@import "../../_shared/fontawesome/scss/regular";
-@import "../../_shared/fontawesome/scss/solid";
-@import "../../_shared/fontawesome/scss/brands";
+@use "../../_shared/fontawesome/scss/fontawesome";
+@use "../../_shared/fontawesome/scss/regular";
+@use "../../_shared/fontawesome/scss/solid";
+@use "../../_shared/fontawesome/scss/brands";
 // @import "../../_shared/scss/accordion";
 
 .wp-block-rrze-elements-collapsibles {

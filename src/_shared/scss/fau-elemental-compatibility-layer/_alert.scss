@@ -52,6 +52,14 @@
       color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
     }
 
+    & ul li {
+      color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
+
+      &:before {
+        background-image: var(--icon-arrow-fau-blau);
+      }
+    }
+
     & h1, & h2, & h3, & h4, & h5, & h6{
       color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
     }
@@ -73,4 +81,8 @@
       background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
     }
   }
+}
+
+.is-layout-flow div.alert *{
+  padding: 0;
 }

@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import type {KeyboardEvent} from "react";
 import {
   Fragment,
   memo,
@@ -9,7 +9,7 @@ import {
   useState,
   useTransition,
 } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import {__} from "@wordpress/i18n";
 import {
   __experimentalDivider as Divider,
   __experimentalGrid as Grid,
@@ -19,7 +19,21 @@ import {
   SearchControl,
   Spinner,
 } from "@wordpress/components";
-import { speak } from "@wordpress/a11y";
+import {speak} from "@wordpress/a11y";
+import FAUEngineeringSymbol from "../_shared/icons/sprites/fau-icons/fau_engineering.svg";
+import FAUDevelopingSymbol from "../_shared/icons/sprites/fau-icons/fau_developing.svg";
+import FAUUnderstandingSymbol from "../_shared/icons/sprites/fau-icons/fau_understanding.svg";
+import FAUTargetingSymbol from "../_shared/icons/sprites/fau-icons/fau_targeting.svg";
+import FAUExploringSymbol from "../_shared/icons/sprites/fau-icons/fau_exploring.svg";
+
+export const FAU_ICON_MAP: Record<string, JSX.Element> = {
+  fau_engineering: <FAUEngineeringSymbol />,
+  fau_developing: <FAUDevelopingSymbol />,
+  fau_understanding: <FAUUnderstandingSymbol />,
+  fau_targeting: <FAUTargetingSymbol />,
+  fau_exploring: <FAUExploringSymbol />,
+};
+
 
 interface MaterialSymbolPickerProps {
   attributes: {
@@ -65,8 +79,8 @@ const IconGrid = memo(function IconGrid({
   );
 });
 
-const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPickerProps) => {
-  const { materialSymbol } = attributes;
+const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerProps) => {
+  const {materialSymbol} = attributes;
 
   // Lazy-loaded data
   const [maps, setMaps] = useState<Maps | null>(null);
@@ -78,8 +92,17 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [page, setPage] = useState(1);
   const [isPending, startTransition] = useTransition();
+  const [isExclusive, setIsExclusive] = useState(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const EXCLUSIVE_ICONS = [
+    { name: "fau_engineering", svg: <FAUEngineeringSymbol style={{height:"3rem", width:"3rem"}} /> },
+    { name: "fau_developing", svg: <FAUDevelopingSymbol style={{height:"3rem", width:"3rem"}} /> },
+    { name: "fau_understanding", svg: <FAUUnderstandingSymbol style={{height:"3rem", width:"3rem"}} /> },
+    { name: "fau_targeting", svg: <FAUTargetingSymbol style={{height:"3rem", width:"3rem"}} /> },
+    { name: "fau_exploring", svg: <FAUExploringSymbol style={{height:"3rem", width:"3rem"}} /> },
+  ];
 
   const onChangeSearch = (value: string) => {
     if (value.trim()) {
@@ -127,7 +150,7 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
 
   const onClickIconButton = useCallback(
     (iconValue: string) => {
-      setAttributes({ materialSymbol: iconValue === materialSymbol ? "" : iconValue });
+      setAttributes({materialSymbol: iconValue === materialSymbol ? "" : iconValue});
     },
     [materialSymbol, setAttributes]
   );
@@ -197,8 +220,8 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
   // Initial load state (maps not yet available)
   if (loadingMaps) {
     return (
-      <div style={{ display: "grid", placeItems: "center", minHeight: 160 }}>
-        <Spinner />
+      <div style={{display: "grid", placeItems: "center", minHeight: 160}}>
+        <Spinner/>
         <p>{__("Loading icons…", "rrze-elements-blocks")}</p>
       </div>
     );
@@ -228,6 +251,7 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
           onChange={onChangeSearch}
           onKeyDown={handleKeyDown}
           ref={searchInputRef}
+          __nextHasNoMarginBottom
           help={__("Search for an icon in English.", "rrze-elements-blocks")}
         />
         <Button variant="secondary" onClick={handleSearch}>
@@ -235,8 +259,8 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
         </Button>
 
         {isPending && (
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12 }}>
-            <Spinner />
+          <div style={{display: "flex", alignItems: "center", gap: 8, marginTop: 12}}>
+            <Spinner/>
             <span>{__("Searching…", "rrze-elements-blocks")}</span>
           </div>
         )}
@@ -250,7 +274,7 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
               onClick={onClickIconButton}
             />
             {visibleSearchIcons.length < filteredIcons.length && (
-              <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}>
+              <div style={{display: "flex", justifyContent: "center", marginTop: 12}}>
                 <Button onClick={() => setPage((p) => p + 1)}>
                   {__("Load more", "rrze-elements-blocks")}
                 </Button>
@@ -260,7 +284,7 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
         ) : (
           <>
             <Spacer paddingBottom="1rem" paddingTop="1rem">
-              <Divider />
+              <Divider/>
             </Spacer>
 
             <Fragment>
@@ -269,7 +293,7 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
               >
                 {materialSymbol}
               </span>
-              <Button variant="secondary" onClick={() => setAttributes({ materialSymbol: "" })}>
+              <Button variant="secondary" onClick={() => setAttributes({materialSymbol: ""})}>
                 {__("Remove Icon", "rrze-elements-blocks")}
               </Button>
             </Fragment>
@@ -282,12 +306,43 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
                 onClick={onClickIconButton}
               />
               {maps && visiblePopularIcons.length < maps.popularity.length && (
-                <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}>
-                  <Button onClick={() => setPage((p) => p + 1)}>
+                <div style={{display: "flex", justifyContent: "center", marginTop: 12}}>
+                  <Button variant={"secondary"} onClick={() => setPage((p) => p + 1)}>
                     {__("Load more", "rrze-elements-blocks")}
                   </Button>
                 </div>
               )}
+                {!isExclusive ? (
+                  <Button variant={"tertiary"} onClick={() => setIsExclusive(true)}>
+                    {__("Show FAU-exclusive Icons", "rrze-elements-blocks")}
+                  </Button>
+                ) : (
+                  <>
+                    <Heading>{__("FAU-exklusive Icons", "rrze-elements-blocks")}</Heading>
+                    <br/>
+                    <Grid columns={5}>
+                      {EXCLUSIVE_ICONS.map(({name, svg}) => (
+                        <Button
+                          key={name}
+                          onClick={() => onClickIconButton(name)}
+                          size="compact"
+                          className="fau-exclusive-icon-button"
+                          label={name}
+                          showTooltip
+                        >
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+        {svg}
+          <span>{name}</span>
+      </span>
+                        </Button>
+                      ))}
+                    </Grid>
+                    <br/>
+                      <Button variant="tertiary" onClick={() => setIsExclusive(false)}>
+                        {__("Back to Material Symbols", "rrze-elements-blocks")}
+                      </Button>
+                  </>
+                )}
             </Spacer>
           </>
         )}
@@ -296,4 +351,4 @@ const MaterialSymbolPicker = ({ attributes, setAttributes }: MaterialSymbolPicke
   );
 };
 
-export { MaterialSymbolPicker };
+export {MaterialSymbolPicker};

@@ -70,9 +70,10 @@
     padding-left: 0;
   }
 
-  div.rrze--iconbox-element-container{
+  section.rrze--counter-element > div{
     // padding: var(--Spacing-8x) var(--Spacing-4x) var(--Spacing-8x) var(--Spacing-8x);
     border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+    height: 100%;
   }
 
   .rrze--iconbox-element-container a.standard-btn.ghost-btn:hover {
@@ -86,6 +87,12 @@
     }
   }
 }
+
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row section.rrze--counter-element,
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row section.rrze--counter-element{
+  align-items: start;
+}
+
 
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .rrze-elements-blocks-counter-row .block-editor-block-list__layout,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row section.rrze--counter-element,

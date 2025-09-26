@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.1] - 2025-09-26
+Bugfixes and minor improvements. Also updates the Dependencies to the latest versions.
+
+### Added
+- #246 Allows Callendar usage within Collapse Blocks
+
+### Fixed
+- Fixed all SASS deprecation warnings
+- Fixed the build process for cleaner outputs
+- #254 Escapes titles for html tag removal
+- #303 Fixes an issue where #undefined was present as default input for Notice blocks
+- #244 CSS hierarchy fix
+- #304, #302 Opts into the new default margins and paddings in FAU-Elemental
+- #253 Allows Gallery usage inside Collapse Blocks
+- #301 Resolves deprecation warnings within the tabs block
+- #325 Update the Facts Grid Design in FAU-Einrichtungen
+- #327 Fixes the Content Width in FAU-Elemental
+- #326 Fixes Alert Styles in FAU-Elemental
+- #328 Fixes content width in FAU-Elemental
+- #329 Adds FAU SVG files for usage inside the editor frontend
+- #330 Adjusts the facts grid design for FAU-Elemental
+- #331 Adjusts the Iconbox Design for FAU-Elemental
+- #332 Adjusts the border-right for iconboxes and counters
+- #334 Fixes the CTA inside FAU-Elemental
+- #335 Allows br tags in descriptions inside the Iconboxes
+- #336 Adds content width for IconboxRow inside the Editor in FAU-Elemental
+- #333 Fixes a padding issue in FAU-Elemental
+- #320 Removes redundant notice styles
+- #322 Improves notice block styling
+
+### Maintenance
+- Updated Dependencies
+
 ## [1.1.0] - 2025-09-16
 This version introduces a new Iconset replacing the FontAwesome IconLibrary.
 Old Icons set via FontAwesome will be supported for now, but might be removed in later versions v2+.

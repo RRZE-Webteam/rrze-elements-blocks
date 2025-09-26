@@ -1,9 +1,12 @@
+@use "mixins";
+@use "variables";
+
 table.sorttable,
 table.sorttable {
     th {
         cursor: pointer;
         &:after {
-            @include svg-content('sort', 'solid');
+            @include mixins.svg-content('sort', 'solid');
             margin-left: .5em;
             width: .5em;
         }
@@ -18,7 +21,7 @@ table.filtertable {
         display: none;
     }
     .tablesorter-filter-row {
-        background-color: var(--color-ContentRegions, $bg-grey);
+        background-color: var(--color-ContentRegions, variables.$bg-grey);
         td {
             padding: 5px;
         }

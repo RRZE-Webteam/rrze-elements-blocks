@@ -143,11 +143,14 @@ export default function Edit({
               onChange={onChangeRangeControl}
               step={1}
               value={numberOfColumns}
+              __next40pxDefaultSize
+              __nextHasNoMarginBottom
             />
             <ToggleControl
               checked={rule}
               label={__("Show Rule", "rrze-elements-blocks")}
               onChange={onChangeRuler}
+              __nextHasNoMarginBottom
             />
             <StandardColorSwitcher
               attributes={{ color: attributes.color }}

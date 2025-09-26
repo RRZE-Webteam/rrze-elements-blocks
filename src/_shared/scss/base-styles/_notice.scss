@@ -1,3 +1,5 @@
+@use "variables";
+
 /*!
  * Absatzklassen
  */
@@ -42,51 +44,9 @@
   }
 }
 
-
-.notice-alert,
-.notice-attention {
-  svg.rrze-elements-icon {
-    fill: $red !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: $red;
-  }
-
-  &.no-title p {
-    color: $red;
-    font-weight: bold;
-  }
-}
-
-.notice-hinweis {
-  svg.rrze-elements-icon {
-    fill: $text-blue !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: $text-blue;
-  }
-
-  &.no-title p {
-    color: $text-blue;
-    font-weight: bold;
-  }
-}
-
 .notice-baustelle {
   svg.rrze-elements-icon {
-    fill: $dark-grey !important;
+    fill: variables.$dark-grey !important;
   }
 
   h1,
@@ -95,30 +55,30 @@
   h4,
   h5,
   h6 {
-    color: $dark-grey;
+    color: variables.$dark-grey;
   }
 
   &.no-title p {
-    color: $dark-grey;
+    color: variables.$dark-grey;
     font-weight: bold;
   }
 }
 
 .notice-question {
   svg.rrze-elements-icon {
-    fill: $medium-blue !important;
+    fill: variables.$medium-blue !important;
   }
 }
 
 .notice-minus {
   svg.rrze-elements-icon {
-    fill: $red !important;
+    fill: variables.$red !important;
   }
 }
 
 .notice-plus {
   svg.rrze-elements-icon {
-    fill: $green !important;
+    fill: variables.$green !important;
   }
 }
 
@@ -133,66 +93,14 @@
   h4,
   h5,
   h6 {
-    color: $dark-grey;
+    color: variables.$dark-grey;
   }
 
   &.no-title p {
-    color: $dark-grey;
+    color: variables.$dark-grey;
     font-weight: bold;
   }
 }
-
-.notice-download {
-  svg.rrze-elements-icon {
-    fill: $medium-blue !important;
-  }
-}
-
-.notice-faubox {
-  svg.rrze-elements-icon {
-    fill: $medium-blue !important;
-  }
-}
-
-.notice-audio {
-  svg.rrze-elements-icon {
-    fill: $medium-blue !important;
-  }
-}
-
-.notice-video {
-  svg.rrze-elements-icon {
-    fill: $medium-blue !important;
-  }
-}
-
-.notice-thumbs-up {
-  svg.rrze-elements-icon {
-    fill: $green !important;
-  }
-}
-
-.notice-thumbs-down {
-  svg.rrze-elements-icon {
-    fill: $red !important;
-  }
-}
-
-// .wp-block-rrze-elements-notice{
-//     display:grid;
-//     grid-template-columns: 3em 1fr;
-//     grid-gap: 1em;
-
-//     :first-child {
-//         align-self: center;
-//         span:before {
-//             font-size: 1.5em;
-//             padding: 0.5em;
-//             background-color: red;
-//             color: white;
-//         }
-//     }
-// }
 
 .wp-block-rrze-elements-notice {
   display: block;

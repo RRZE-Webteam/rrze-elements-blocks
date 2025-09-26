@@ -1,8 +1,11 @@
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-rrze-counter section.rrze-counter-element div {
+  border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+}
+
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-rrze-counter .rrze--counter-element-container {
   background: transparent;
   color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
   border: none;
-  border-right: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
 
   dl.rrze-elements-counter {
     dt {
@@ -18,7 +21,7 @@
     }
   }
 
-  dd a, dd a.standard-btn{
+  dd a, dd a.standard-btn {
     border: none;
     border-radius: 0;
     font-weight: 600;
@@ -62,24 +65,48 @@
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row > section
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .block-editor-block-list__layout,
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row .block-editor-block-list__layout{
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row .block-editor-block-list__layout {
   align-items: end;
 }
 
 .wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row,
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row{
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row {
   margin-left: auto !important;
 }
 
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row section div.wp-block-rrze-elements-rrze-counter:last-child div.rrze--counter-element-container,
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row section div.wp-block-rrze-elements-rrze-counter:last-child div.rrze--counter-element-container{
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row section div.wp-block-rrze-elements-rrze-counter:last-child,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row section div.wp-block-rrze-elements-rrze-counter:last-child {
   border-right: none;
 }
 
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row .material-symbols-outlined{
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row .material-symbols-outlined {
   font-size: inherit;
 }
 
-.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row .rrze--counter-element > div:last-child > .rrze--iconbox-element-container:first-child{
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row .rrze--counter-element > div:last-child {
   border-right: none;
 }
+
+@media screen and (max-width: 639px) {
+  div.wp-block-rrze-elements-counter-row section.rrze--counter-element > div {
+    border-right: none;
+    border-bottom: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+  }
+
+  .is-style-dark {
+    div.wp-block-rrze-elements-counter-row section.rrze--counter-element > div {
+      border-right: none;
+      border-bottom: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
+    }
+
+    section.rrze--counter-element div:last-of-type {
+      border-bottom: none;
+    }
+  }
+}
+
+.wp-theme-FAU-Elemental .is-layout-flow dl.rrze-elements-counter{
+  padding-left: 0;
+}
+
+//.rrze-elements-column-3

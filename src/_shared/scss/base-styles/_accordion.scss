@@ -1,19 +1,22 @@
+@use "sass:color";
+@use "mixins";
+@use "variables";
+
 /*!
  * Accordion
  */
 
 
-h1.accordion-heading,
-h2.accordion-heading,
-h3.accordion-heading,
-h4.accordion-heading,
-h5.accordion-heading,
-h6.accordion-heading {
-    width: auto;
-    padding: 0 !important;
-    margin: 0;
-    border: none;
-    text-align: left;
+.accordion {
+  .accordion-group {
+    .accordion-heading {
+      width: auto;
+      padding: 0;
+      margin: 0;
+      border: none;
+      text-align: left;
+    }
+  }
 }
 button.accordion-toggle {
     width: 100%;
@@ -41,8 +44,8 @@ button.expand-all.standard-btn {
     .accordion-register {
         padding-left: 0;
         margin: 0 0 .5em;
-        border-top: 1px solid $border;
-        border-bottom: 1px solid $border;
+        border-top: 1px solid variables.$border;
+        border-bottom: 1px solid variables.$border;
         li {
             float: left;
             list-style-type: none;
@@ -58,7 +61,7 @@ button.expand-all.standard-btn {
     }
     .accordion-toggle {
         display: block;
-        border-left: 10px solid var(--color-primary-ci-hell, $colorDefault);
+        border-left: 10px solid var(--color-primary-ci-hell, variables.$colorDefault);
         background: var(--color-ContentBorders, #d2ddeb);
         color:  var(--color-Text, #444);
         font-size: 1rem;
@@ -76,7 +79,7 @@ button.expand-all.standard-btn {
         &:focus,
         &.active {
             text-decoration: none;
-            background-color: var(--color-primary-ci-hell, $colorDefault);
+            background-color: var(--color-primary-ci-hell, variables.$colorDefault);
             color: var(--color-primary-ci-hell-kontrast, #fff);
             &:before {
                 position: absolute;
@@ -103,8 +106,8 @@ button.expand-all.standard-btn {
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-primary-dunkler, $colorDefaultDunkler);
-            background-color: var(--color-primary-dunkler, $colorDefaultDunkler);
+            border-color: var(--color-primary-dunkler, variables.$colorDefaultDunkler);
+            background-color: var(--color-primary-dunkler, variables.$colorDefaultDunkler);
             color: var(--color-primary-dunkler-kontrast, #fff);
             &:before {
                 position: absolute;
@@ -136,108 +139,108 @@ button.expand-all.standard-btn {
     .phil .accordion-heading .accordion-toggle,
     .philfak .accordion-heading .accordion-toggle,
     .gold .accordion-heading .accordion-toggle {
-        border-color: var(--color-phil-ci-hell, $colorPhilFak);
+        border-color: var(--color-phil-ci-hell, variables.$colorPhilFak);
         &:hover,
         &:focus,
         &.active {
-            border-color: var(--color-phil-ci-hell, $colorPhilFak);
-            background-color: var(--color-phil-ci-hell, $colorPhilFak);
+            border-color: var(--color-phil-ci-hell, variables.$colorPhilFak);
+            background-color: var(--color-phil-ci-hell, variables.$colorPhilFak);
             color: var(--color-phil-ci-hell-kontrast, #000);
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-phil-dunkler, $colorPhilFakDunkler);
-            background-color: var(--color-phil-dunkler, $colorPhilFakDunkler);
+            border-color: var(--color-phil-dunkler, variables.$colorPhilFakDunkler);
+            background-color: var(--color-phil-dunkler, variables.$colorPhilFakDunkler);
             color: var(--color-phil-ci-hell-kontrast, #000);
         }
     }
     .rw .accordion-heading .accordion-toggle,
     .rwfak .accordion-heading .accordion-toggle,
     .red .accordion-heading .accordion-toggle {
-        border-color: var(--color-rw-ci-hell, $colorRwFak);
+        border-color: var(--color-rw-ci-hell, variables.$colorRwFak);
         &:hover,
         &:focus,
         &.active {
-            border-color: var(--color-rw-ci-hell, $colorRwFak);
-            background-color: var(--color-rw-ci-hell, $colorRwFak);
+            border-color: var(--color-rw-ci-hell, variables.$colorRwFak);
+            background-color: var(--color-rw-ci-hell, variables.$colorRwFak);
             color: var(--color-rw-ci-hell-kontrast, #fff);
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-rw-dunkler, $colorRwFakDunkler);
-            background-color: var(--color-rw-dunkler, $colorRwFakDunkler);
+            border-color: var(--color-rw-dunkler, variables.$colorRwFakDunkler);
+            background-color: var(--color-rw-dunkler, variables.$colorRwFakDunkler);
             color: var(--color-rw-ci-hell-kontrast, #fff);
         }
     }
     .med .accordion-heading .accordion-toggle,
     .medfak .accordion-heading .accordion-toggle,
     .blue .accordion-heading .accordion-toggle {
-        border-color: var(--color-med-ci-hell, $colorMedFak);
+        border-color: var(--color-med-ci-hell, variables.$colorMedFak);
         &:hover,
         &:focus,
         &.active {
-            border-color: var(--color-med-ci-hell, $colorMedFak);
-            background-color: var(--color-med-ci-hell, $colorMedFak);
+            border-color: var(--color-med-ci-hell, variables.$colorMedFak);
+            background-color: var(--color-med-ci-hell, variables.$colorMedFak);
             color: var(--color-med-ci-hell-kontrast, #000);
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-med-dunkler, $colorMedFakDunkler);
-            background-color: var(--color-med-dunkler, $colorMedFakDunkler);
+            border-color: var(--color-med-dunkler, variables.$colorMedFakDunkler);
+            background-color: var(--color-med-dunkler, variables.$colorMedFakDunkler);
             color: var(--color-med-ci-dunkel-kontrast, #fff);
         }
     }
     .nat .accordion-heading .accordion-toggle,
     .natfak .accordion-heading .accordion-toggle,
     .green .accordion-heading .accordion-toggle {
-        border-color: var(--color-nat-ci-hell, $colorNatFak);
+        border-color: var(--color-nat-ci-hell, variables.$colorNatFak);
         &:hover,
         &:focus,
         &.active,
         &.active:focus {
-            border-color: var(--color-nat-ci-hell, $colorNatFak);
-            background-color: var(--color-nat-ci-hell, $colorNatFak);
+            border-color: var(--color-nat-ci-hell, variables.$colorNatFak);
+            background-color: var(--color-nat-ci-hell, variables.$colorNatFak);
             color: var(--color-nat-ci-hell-kontrast, #000);
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-nat-dunkler, $colorNatFakDunkler);
-            background-color: var(--color-nat-dunkler, $colorNatFakDunkler);
+            border-color: var(--color-nat-dunkler, variables.$colorNatFakDunkler);
+            background-color: var(--color-nat-dunkler, variables.$colorNatFakDunkler);
             color: var(--color-nat-dunkler-kontrast, #fff);
         }
     }
     .tf .accordion-heading .accordion-toggle,
     .techfak .accordion-heading .accordion-toggle,
     .grey .accordion-heading .accordion-toggle {
-        border-color: var(--color-tf-ci-hell, $colorTechFak);
+        border-color: var(--color-tf-ci-hell, variables.$colorTechFak);
         &:hover,
         &:focus,
         &.active {
-            border-color: var(--color-tf-ci-hell, $colorTechFak);
-            background-color: var(--color-tf-ci-hell, $colorTechFak);
+            border-color: var(--color-tf-ci-hell, variables.$colorTechFak);
+            background-color: var(--color-tf-ci-hell, variables.$colorTechFak);
             color: var(--color-tf-ci-dunkel-kontrast, #000);
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-tf-dunkler, $colorTechFakDunkler);
-            background-color: var(--color-tf-dunkler, $colorTechFakDunkler);
+            border-color: var(--color-tf-dunkler, variables.$colorTechFakDunkler);
+            background-color: var(--color-tf-dunkler, variables.$colorTechFakDunkler);
             color: var(--color-tf-ci-dunkel-kontrast, #fff);
         }
     }
     .fau .accordion-heading .accordion-toggle,
     .default .accordion-heading .accordion-toggle {
-        border-color: var(--color-zentral-ci-hell, $colorDefault);
+        border-color: var(--color-zentral-ci-hell, variables.$colorDefault);
         &:hover,
         &:focus,
         &.active {
-            border-color: var(--color-zentral-ci-hell, $colorDefault);
-            background-color: var(--color-zentral-ci-hell, $colorDefault);
+            border-color: var(--color-zentral-ci-hell, variables.$colorDefault);
+            background-color: var(--color-zentral-ci-hell, variables.$colorDefault);
             color: var(--color-zentral-ci-hell-kontrast, #fff);
         }
         &.active:hover,
         &.active:focus {
-            border-color: var(--color-zentral-dunkler, $colorDefaultDunkler);
-            background-color: var(--color-zentral-dunkler, $colorDefaultDunkler);
+            border-color: var(--color-zentral-dunkler, variables.$colorDefaultDunkler);
+            background-color: var(--color-zentral-dunkler, variables.$colorDefaultDunkler);
             color: var(--color-zentral-ci-dunkler-kontrast, #fff);
         }
     }
@@ -263,7 +266,7 @@ button.expand-all.standard-btn {
 
 .fau-theme {
     .accordion-toggle {
-        @include border-radius(var(--border-radius, 4px));
+        @include mixins.border-radius(var(--border-radius, 4px));
 
       padding: 8px 35px 8px 10px;
       font-size: 1rem;
@@ -277,7 +280,7 @@ button.expand-all.standard-btn {
     }
     .accordion-group .accordion-body .accordion-inner {
         .accordion-inner {
-            background-color: darken(#f5f7f9, 4%);
+            background-color: color.adjust(#f5f7f9, $lightness: -4%);
         }
     }
 }
