@@ -1,59 +1,83 @@
-body.wp-theme-FAU-Elemental {
-  section.rrze-elements-news .entry-thumbnail.float-left{
-    float: none !important;
-  }
+$space-mobile: var(--Spacing-10x, 1rem);
+$space-vertical: var(--Spacing-4x, 1rem);
+$grid-12: repeat(12, 1fr);
 
-  section.rrze-elements-news {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: var(--Spacing-1x);
+@mixin layout-grid-12 {
+  display: grid;
+  grid-template-columns: $grid-12;
+  grid-template-rows: auto auto 1fr;
+}
 
-    article{
-      grid-column: 1/12;
-      margin-bottom: var(--Spacing-4x);
-    }
+@mixin layout-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-    article div.entry-thumbnail img{
-      grid-column: 1/12;
+body.wp-theme-FAU-Elemental section.rrze-elements-news {
+  padding: 0 $space-mobile;
+
+  article {
+    margin-bottom: calc(2 * #{$space-vertical});
+
+    div.entry-thumbnail img {
       width: 100%;
-      padding-right: 0;
-      margin-right: 0;
-    }
-
-    article div.entry-thumbnail {
-      padding-right: 0;
-    }
-
-    article div.entry-content{
-      font-size: var(--FAU-font-size)
-    }
-
-    article div.entry-content{
-      grid-column: 1/12;
-      font-size: var(--P-Body-Text);
+      height: auto;
     }
 
     header.entry-header {
-      h2, h3, h4, h5, h6, h6 {
-        padding-left: 0;
+      h2, h3, h4, h5, h6 {
+        padding-inline: 0;
+        margin-bottom: var(--Spacing-2x);
       }
 
       a {
         text-decoration: none;
+        word-break: normal;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
-    div.entry-meta{
-      display: flex;
-      flex-wrap: wrap;
-      padding-bottom: var(--Spacing-4x);
+
+    div.entry-thumbnail::before {
+      background: none;
+    }
+
+    div.entry-meta {
+      @include layout-flex;
+      padding-bottom: $space-vertical;
 
       div.entry-date,
       div.entry-attachment,
       div.entry-author,
       div.entry-comments,
       div.entry-cats,
-      div.entry-tags{
+      div.entry-tags {
         padding-right: var(--Spacing-4x);
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  body.wp-theme-FAU-Elemental section.rrze-elements-news {
+    div.entry-thumbnail.float-left,
+    div.entry-thumbnail.float-right {
+      float: none;
+    }
+
+    div.rrze-elements.elements-columns.cols-4,
+    div.rrze-elements.elements-columns.cols-3,
+    div.rrze-elements.elements-columns.cols-2 {
+      h2, h3, h4, h5, h6 {
+        font-size: var(--H-Heading-4);
+      }
+    }
+
+    header.entry-header {
+      h2, h3, h4, h5, h6 {
+        font-size: var(--H-Heading-3);
       }
     }
   }
