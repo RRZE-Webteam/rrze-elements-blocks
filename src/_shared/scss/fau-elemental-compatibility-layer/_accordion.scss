@@ -60,6 +60,7 @@
       color: var(--FAU-Col-FAU-Blau-100, #04316a);
       font-size: var(--H-Heading-4, 1.25rem);
       font-weight: 700;
+      font-family: var(--font-family-base), sans-serif;
     }
 
     button.accordion-toggle:hover, button.accordion-toggle:focus, button.accordion-toggle:target, button.accordion-toggle:active {
