@@ -72,6 +72,10 @@
     "grid": {
       "type": "boolean",
       "default": false
+    },
+    "legacyMode": {
+      "type": "boolean",
+      "default": false
     }
   },
   "example": {

@@ -49,10 +49,3 @@ class ThemeSniffer {
         return '';
     }
 }
-
-// Usage example:
-// To check if the current theme is in 'fauthemes':
-// var_dump(ThemeSniffer::getThemeGroup('fauthemes'));
-
-// To get the current theme group name:
-// echo ThemeSniffer::getThemeGroup();
