@@ -24,24 +24,29 @@ class ThemeSniffer {
                 'FAU Jobportal',
                 'FAU-Elemental'
             ],
+            'fauelemental' => [
+                'FAU-Elemental',
+            ],
             'rrzethemes' => ['rrze-2019'],
             'eventthemes' => ['FAU-Events'],
         ];
 
         // Get the current active theme
-        $active_theme = wp_get_theme();
-        $theme_name = $active_theme->get('Name');
+        $activeTheme = wp_get_theme();
+        $themeName = $activeTheme->get('Name');
 
-        // Check against predefined theme groups
-        foreach ($themes as $group => $themeList) {
-            if (in_array($theme_name, $themeList, true)) {
-                // Return boolean if a target group is specified, otherwise the group name
-                return $targetGroup ? $group === $targetGroup : $group;
+        if ($targetGroup !== '') {
+            return isset($themes[$targetGroup])
+                && in_array($themeName, $themes[$targetGroup], true);
+        }
+
+        foreach ($themes as $group => $list) {
+            if (in_array($themeName, $list, true)) {
+                return $group;
             }
         }
 
-        // Return false or an empty string depending on if a target group is specified
-        return $targetGroup ? false : '';
+        return '';
     }
 }
 

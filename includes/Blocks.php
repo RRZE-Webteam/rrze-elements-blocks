@@ -24,7 +24,6 @@ use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
 use RRZE\ElementsBlocks\BlockFrontend\Timeline;
 use RRZE\ElementsBlocks\BlockFrontend\TimelineItem;
-use RRZE\ElementsBlocks\ThemeSniffer;
 
 class Blocks
 {
@@ -36,7 +35,7 @@ class Blocks
   /**
    * Initializes the block registration and sets up localization.
    */
-  public function rrze_rrze_elements_block_init()
+  public function rrze_rrze_elements_block_init(): void
   {
     if (ThemeSniffer::getThemeGroup('fauthemes')) {
       $this->rrze_register_blocks_and_translations();
@@ -54,6 +53,23 @@ class Blocks
         wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
       }
     }
+    $this->rrze_register_custom_styles();
+  }
+
+    /**
+     * Registers custom Block Styles.
+     * @return void
+     */
+  private function rrze_register_custom_styles(): void
+  {
+      Helper::debug(ThemeSniffer::getThemeGroup('fauelemental'));
+      if (ThemeSniffer::getThemeGroup('fauelemental')) {
+          register_block_style('rrze-elements/notice', [
+              'name' => __('attention', 'rrze-elements-blocks'),
+              'label' => __('Attention', 'rrze-elements-blocks'),
+              'is_default' => false,
+          ]);
+      }
   }
 
   /**
