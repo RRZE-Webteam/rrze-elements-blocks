@@ -17172,6 +17172,10 @@ div.rrze-elements-blocks-text-column {
     padding-right: var(--Spacing-6x);
   }
 }
+body.wp-theme-FAU-Elemental .wp-block-rrze-elements-news .wp-block-fau-elemental-fau-teaser-grid {
+  pointer-events: none;
+}
+
 body.wp-theme-FAU-Elemental section.rrze-elements-news {
   padding: 0 var(--Spacing-10x, 1rem);
 }
@@ -17208,6 +17212,9 @@ body.wp-theme-FAU-Elemental section.rrze-elements-news article div.entry-meta di
 body.wp-theme-FAU-Elemental section.rrze-elements-news article div.entry-meta div.entry-cats,
 body.wp-theme-FAU-Elemental section.rrze-elements-news article div.entry-meta div.entry-tags {
   padding-right: var(--Spacing-4x);
+}
+body.wp-theme-FAU-Elemental section.rrze-elements-news .fau-teaser-grid {
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
