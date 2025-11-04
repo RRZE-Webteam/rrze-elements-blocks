@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.3] - 2025-11-04
+Bugfixes and Improvements for FAU-Elemental
+
+# Added
+- #339 New style for Notices
+- #324 & #323 Mirroring inside Custom News, Migration features to ease the process of switching
+
+# Fixed
+- #342 Editor view of CTA
+- #343 CTA Button Hover on Frontend
+- #340 Fixed an issue where the wrong font family was used inside Accordion Titles
+
 ## [1.1.1] - 2025-09-26
 Bugfixes and minor improvements. Also updates the Dependencies to the latest versions.
 
