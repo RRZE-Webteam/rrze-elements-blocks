@@ -1,5 +1,5 @@
-import { createBlock, BlockInstance } from "@wordpress/blocks";
-import { select } from "@wordpress/data";
+import {createBlock, BlockInstance} from "@wordpress/blocks";
+import {select} from "@wordpress/data";
 
 /**
  * @fileoverview
@@ -137,7 +137,7 @@ const getCategoryIdFromCat = (cat: unknown): number | undefined => {
 /**
  * Attributes used by the `rrze-elements/news` source block.
  */
-interface RrzeNewsAttrs {
+interface CustomNewsAttrs {
   title?: string;
   cat?: string;
   tag?: string;
@@ -187,6 +187,8 @@ type FauTeaserGridAttrs = {
   className?: string;
 };
 
+type CustomNewsShortcodeAttrs = Partial<CustomNewsAttrs>;
+
 /**
  * Maps a validated subset of `rrze-elements/news` attributes to compatible
  * attributes for `fau-elemental/fau-teaser-grid`.
@@ -208,7 +210,7 @@ type FauTeaserGridAttrs = {
  * @param src - Source attributes from `rrze-elements/news`.
  * @returns A partial attribute object suitable for `fau-elemental/fau-teaser-grid`.
  */
-const mapRrzeToFau = (src: RrzeNewsAttrs): FauTeaserGridAttrs => {
+const mapRrzeToFau = (src: CustomNewsAttrs): FauTeaserGridAttrs => {
   const dst: FauTeaserGridAttrs = {};
 
   // num -> postsPerPage
@@ -266,7 +268,7 @@ const transforms = {
     {
       type: "block" as const,
       blocks: ["fau-elemental/fau-teaser-grid"],
-      transform: (attributes: RrzeNewsAttrs, innerBlocks: BlockInstance[]) => {
+      transform: (attributes: CustomNewsAttrs, innerBlocks: BlockInstance[]) => {
         const mapped = mapRrzeToFau(attributes);
 
         return createBlock(
@@ -276,6 +278,60 @@ const transforms = {
         );
       },
     },
+  ],
+  from: [
+    {
+      type: "shortcode",
+      tag: "custom-news",
+      transform: ({named = {} as CustomNewsShortcodeAttrs}: { named?: CustomNewsShortcodeAttrs }) => {
+        const attrs: CustomNewsAttrs = {
+          title: named.title,
+          cat: named.cat,
+          tag: named.tag,
+          num: named.num,
+          hstart: named.hstart,
+          hidemeta: named.hidemeta,
+          type: named.type,
+          hideduplicates: named.hideduplicates,
+          has_thumbnail: named.has_thumbnail,
+          days: named.days,
+          id: named.id,
+          display: named.display,
+          hide: named.hide,
+          columns: named.columns,
+          sticky_only: named.sticky_only,
+          divclass: named.divclass,
+        };
+
+        return createBlock('rrze-elements/news', attrs)
+      }
+    },
+    {
+      type: "shortcode",
+      tag: "blogroll",
+      transform: ({ named = {} as CustomNewsShortcodeAttrs }: { named?: CustomNewsShortcodeAttrs }) => {
+        const attrs: CustomNewsAttrs = {
+          title: named.title,
+          cat: named.cat,
+          tag: named.tag,
+          num: named.num,
+          hstart: named.hstart,
+          hidemeta: named.hidemeta,
+          type: named.type,
+          hideduplicates: named.hideduplicates,
+          has_thumbnail: named.has_thumbnail,
+          days: named.days,
+          id: named.id,
+          display: named.display,
+          hide: named.hide,
+          columns: named.columns,
+          sticky_only: named.sticky_only,
+          divclass: named.divclass,
+        };
+
+        return createBlock('rrze-elements/news', attrs)
+      }
+    }
   ],
 } as const;
 
