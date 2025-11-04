@@ -49,3 +49,11 @@
         height: 100%;
     }
 }
+
+div.wp-block-rrze-elements-cta div.cta-image:has(>img):before{
+  background: none;
+  content: "";
+  height: 0;
+  position: relative;
+  width: 0;
+}
