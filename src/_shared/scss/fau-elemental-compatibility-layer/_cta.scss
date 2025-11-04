@@ -328,20 +328,33 @@
   }
 }
 
-.wp-theme-FAU-Elemental.wp-admin div.wp-block-rrze-elements-cta{
+.wp-theme-FAU-Elemental.wp-admin div.wp-block-rrze-elements-cta {
   a {
     display: flex;
+    width: fit-content;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    align-items: center;
+
+    svg {
+      padding: 1rem;
+      aspect-ratio: 1/1;
+      background: var(--FAU-Col-FAU-Blau-12_5);
+    }
+
     use {
-      fill: #fff;
+      fill: var(--FAU-Col-FAU-Blau-100);
     }
   }
 
   margin: 0 auto;
   max-width: var(--base-max-width);
 
-  &.no-image{
+  &.no-image {
     max-width: var(--small-max-width);
-    a{
+
+    a {
       max-width: fit-content;
     }
   }
@@ -349,21 +362,61 @@
 
 
 div.wp-block-rrze-elements-cta.is-style-lightmode div.rrze-elements-cta,
-div.wp-block-rrze-elements-cta.is-style-lightmode{
+div.wp-block-rrze-elements-cta.is-style-lightmode {
   background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
   color: var(--FAU-Col-FAU-Blau-100, #04316a);
 
-  .cta-image{
+  .cta-image {
     background: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
 
-    &::before{
+    &::before {
       background: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
     }
   }
 }
 
 
-.wp-theme-FAU-Elemental main div.cta-image:not([class*=hero] .wp-block-cover,.image-wrapper):has(>img):before{
+.wp-theme-FAU-Elemental main div.cta-image:not([class*=hero] .wp-block-cover,.image-wrapper):has(>img):before {
   height: initial;
   width: initial;
+}
+
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta {
+  a.cta-button {
+    display: flex;
+    width: fit-content;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: var(--Spacing-6x);
+    align-items: center;
+
+    svg {
+      padding: 1rem;
+      aspect-ratio: 1/1;
+      background: var(--FAU-Col-FAU-Blau-12_5);
+      margin-left: var(--Spacing-6x);
+    }
+
+    use {
+      color: var(--FAU-Col-FAU-Blau-100);
+    }
+  }
+
+  a.cta-button:hover,
+  a.cta-button:focus,
+  a.cta-button:target {
+    svg {
+      margin-left: var(--Spacing-8x);
+      background: var(--FAU-Col-FAU-Weiss-100);
+      transition: all .2s ease;
+
+      use {
+        color: var(--FAU-Col-FAU-Schwarz-100);
+        transition: all .2s ease;
+      }
+    }
+
+  }
 }

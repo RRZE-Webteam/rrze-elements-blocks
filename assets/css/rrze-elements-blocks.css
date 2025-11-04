@@ -16360,9 +16360,19 @@ dt span.fau-iconbox-data.rrze-counter-large, dt span.fau-iconbox-data.rrze-iconb
 
 .wp-theme-FAU-Elemental.wp-admin div.wp-block-rrze-elements-cta a {
   display: flex;
+  width: fit-content;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  align-items: center;
+}
+.wp-theme-FAU-Elemental.wp-admin div.wp-block-rrze-elements-cta a svg {
+  padding: 1rem;
+  aspect-ratio: 1/1;
+  background: var(--FAU-Col-FAU-Blau-12_5);
 }
 .wp-theme-FAU-Elemental.wp-admin div.wp-block-rrze-elements-cta a use {
-  fill: #fff;
+  fill: var(--FAU-Col-FAU-Blau-100);
 }
 .wp-theme-FAU-Elemental.wp-admin div.wp-block-rrze-elements-cta {
   margin: 0 auto;
@@ -16392,6 +16402,38 @@ div.wp-block-rrze-elements-cta.is-style-lightmode .cta-image::before {
 .wp-theme-FAU-Elemental main div.cta-image:not([class*=hero] .wp-block-cover, .image-wrapper):has(> img):before {
   height: initial;
   width: initial;
+}
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button {
+  display: flex;
+  width: fit-content;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  padding-left: var(--Spacing-6x);
+  align-items: center;
+}
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button svg {
+  padding: 1rem;
+  aspect-ratio: 1/1;
+  background: var(--FAU-Col-FAU-Blau-12_5);
+  margin-left: var(--Spacing-6x);
+}
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button use {
+  color: var(--FAU-Col-FAU-Blau-100);
+}
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button:hover svg,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button:focus svg,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button:target svg {
+  margin-left: var(--Spacing-8x);
+  background: var(--FAU-Col-FAU-Weiss-100);
+  transition: all 0.2s ease;
+}
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button:hover svg use,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button:focus svg use,
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta a.cta-button:target svg use {
+  color: var(--FAU-Col-FAU-Schwarz-100);
+  transition: all 0.2s ease;
 }
 
 .wp-theme-FAU-Elemental div.rrze--iconbox-element-container svg, .wp-theme-FAU-Elemental .wp-block-rrze-elements-rrze-iconbox div.rrze--iconbox-element-container svg {
