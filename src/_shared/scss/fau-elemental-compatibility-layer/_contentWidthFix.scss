@@ -19,21 +19,24 @@
     max-width: var(--small-max-width);
   }
 
-  div.wp-block-rrze-elements-cta,
-  div.wp-block-rrze-elements-counter-row {
-    max-width: var(--base-max-width);
-  }
-
   div.elements-textcolumns,
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-iconbox-row,
   div.wp-block-rrze-elements-columns,
-  section.facts,
+  div.wp-block-rrze-elements-cta,
+  div.wp-block-rrze-elements-counter-row,
+  section.facts
+  {
+    max-width: var(--wide-max-width);
+    margin-left: var(--faue_wide-max-width_bleed_minimal_inline-margin);
+    margin-right: var(--faue_wide-max-width_bleed_minimal_inline-margin);
+  }
+
   section.facts ul.facts__list{
     max-width: var(--wide-max-width);
-    padding-left: var(--Spacing-6x);
-    padding-right: var(--Spacing-6x);
   }
+
+
 }
 
 @media screen and (max-width: 639px) {
