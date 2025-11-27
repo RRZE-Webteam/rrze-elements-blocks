@@ -7,14 +7,14 @@
 	"license": "GPL-3.0-or-later",
 	"private": true,
 	"scripts": {
-		"build": "wp-scripts build --no-stats && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css",
+		"build": "wp-scripts build --no-stats && sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start & sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w",
-    "build-all": "node check-compatibility.js && sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
+    "start": "wp-scripts start & sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w",
+    "build-all": "node check-compatibility.js && sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
 		"update-version": "node update-version.js && npm run build",
     "test:e2e": "NODE_OPTIONS=--use-system-ca playwright test"
 	},
