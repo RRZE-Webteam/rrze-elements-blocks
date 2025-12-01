@@ -13,10 +13,10 @@
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start & sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w",
-    "build-all": "node check-compatibility.js && sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
+		"start": "wp-scripts start & sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w",
+		"build-all": "node check-compatibility.js && sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
 		"update-version": "node update-version.js && npm run build",
-    "test:e2e": "NODE_OPTIONS=--use-system-ca playwright test"
+		"test:e2e": "NODE_OPTIONS=--use-system-ca playwright test"
 	},
 	"repository": {
 		"type": "git",
@@ -26,8 +26,8 @@
 	},
 	"browserslist": [
 		"last 3 years",
-    "> 1%",
-    "not ie <= 11"
+		"> 1%",
+		"not ie <= 11"
 	],
 	"supports": {
 		"email": "webmaster@fau.de",
@@ -66,6 +66,7 @@
 		"@wordpress/server-side-render": "^6.7.0",
 		"autoprefixer": "^10.4.21",
 		"babel-loader": "^10.0.0",
+		"baseline-browser-mapping": "^2.8.32",
 		"dotenv": "^17.2.2",
 		"eslint": "^9.35.0",
 		"eslint-plugin-react": "^7.37.5",
