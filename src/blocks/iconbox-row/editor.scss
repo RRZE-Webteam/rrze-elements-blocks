@@ -24,6 +24,34 @@ svg.elements-tabs-icon-modal {
     flex-wrap: wrap;
 }
 
+.wp-theme-FAU-Elemental div.is-style-dark div.wp-block-rrze-elements-iconbox-row {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  div.block-editor-block-list__layout div.rrze--iconbox-element-container{
+    border-right: 1px solid var(--FAU-Col-FAU-Blau-62_5);
+    margin-left: var(--Spacing-4x);
+  }
+
+  div.block-editor-block-list__layout > div:last-child div.rrze--iconbox-element-container{
+    border-right: none;
+  }
+}
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-iconbox-row {
+
+  div.block-editor-block-list__layout div.rrze--iconbox-element-container{
+    border-right: 1px solid var(--FAU-Col-FAU-Blau-62_5);
+    margin-left: var(--Spacing-4x);
+  }
+
+  div.block-editor-block-list__layout > div:last-child div.rrze--iconbox-element-container{
+    border-right: none;
+  }
+}
+
+
 .wp-block-rrze-elements-iconbox-row {
     .rrze-elements-blocks-counter-row {
         display: initial;
