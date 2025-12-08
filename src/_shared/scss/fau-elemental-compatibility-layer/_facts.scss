@@ -182,10 +182,14 @@ section.facts svg.icon {
 }
 
 .wp-theme-FAU-Elemental {
-  li.facts__item {
+  ul.facts__list li.facts__item {
     display: flex;
     flex-direction: column;
     min-block-size: fit-content;
+
+    &::before{
+      content: none;
+    }
 
     & > * {
       margin-block: 1rem;
