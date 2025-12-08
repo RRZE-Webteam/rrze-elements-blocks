@@ -102,13 +102,13 @@
     width: auto;
     padding: 0 var(--Spacing-5x, 1.25rem);
     margin: var(--Spacing-5x) 0;
-  }
 
-  figure {
-    margin: 0 !important;
+    figure {
+      margin: 0 !important;
 
-    figcaption {
-      padding-bottom: 0 !important;
+      figcaption {
+        padding-bottom: 0 !important;
+      }
     }
   }
 }
