@@ -156,6 +156,12 @@ $dark-grey: #121212;
   }
 }
 
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-notice.is-style-attention {
+  .wp-block-heading {
+    margin-left: 0;
+  }
+}
+
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice.is-style-attention{
   .notice > div:first-child.icon-container{
     background-color: var(--FAU-Col-FAU-Dunkelblau-100);
