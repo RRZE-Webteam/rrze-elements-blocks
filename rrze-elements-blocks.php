@@ -26,7 +26,7 @@ use RRZE\ElementsBlocks\Main;
 // Define plugin version requirements.
 const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
-const RRZE_ELEMENTSB_VERSION = '1.1.3';
+const RRZE_ELEMENTSB_VERSION = '1.1.4';
 
 // Autoloads plugin classes.
 spl_autoload_register(function ($class) {

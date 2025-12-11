@@ -80,6 +80,10 @@ class Blocks
         // Register global styles and scripts here.
         wp_enqueue_style('fontawesome');
         wp_enqueue_style('rrze-elements-blocks');
+
+        if ( ThemeSniffer::getThemeGroup('fauelemental' )){
+            wp_enqueue_style('rrze-elements-blocks-fau-elemental-compatibility');
+        }
     }
 
     /**
