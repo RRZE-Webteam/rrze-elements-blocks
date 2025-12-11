@@ -35,7 +35,7 @@ class FactsGrid extends AbstractBlockRender
     }
 
     return sprintf(
-      '<section aria-labelledby="%1$s" class="facts %2$s">
+      '<section aria-labelledby="%1$s" class="facts alignfull %2$s">
         %3$s
         <ul class="facts__list" role="list">
             %4$s

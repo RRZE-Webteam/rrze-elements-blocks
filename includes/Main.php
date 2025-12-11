@@ -123,6 +123,14 @@ class Main
             [],
             RRZE_ELEMENTSB_VERSION
         );
+
+        wp_register_style(
+            'rrze-elements-blocks-fau-elemental-compatibility',
+            plugins_url('assets/css/rrze-elements-blocks-elemental-compatibility.css', plugin_basename($this->pluginFile)),
+            [],
+            RRZE_ELEMENTSB_VERSION
+        );
+
         wp_register_script(
             'rrze-accordions',
             plugins_url('assets/js/accordion/rrze-accordion-min.js', plugin_basename($this->pluginFile)),
