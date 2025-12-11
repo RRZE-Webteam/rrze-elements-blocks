@@ -81,9 +81,9 @@ class Blocks
         wp_enqueue_style('fontawesome');
         wp_enqueue_style('rrze-elements-blocks');
 
-        if ( ThemeSniffer::getThemeGroup('fauelemental' )){
+        //if ( ThemeSniffer::getThemeGroup('fauelemental' )){
             wp_enqueue_style('rrze-elements-blocks-fau-elemental-compatibility');
-        }
+        //}
     }
 
     /**
