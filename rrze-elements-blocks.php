@@ -4,7 +4,7 @@
 Plugin Name:     RRZE Elements Blocks
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-elements
 Description:     Advanced design elements for WordPress BlockEditor.
-Version:         1.1.4
+Version:         1.1.5
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
