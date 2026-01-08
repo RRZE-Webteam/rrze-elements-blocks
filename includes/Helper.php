@@ -49,12 +49,28 @@ class Helper
 
         $out = self::get_var_dump($input);
 
-        $out = preg_replace("/=>[\r\n\s]+/", ' => ', $out);
-        $out = preg_replace("/\s+bool\(true\)/", ' <span style="color:green">TRUE</span>,', $out);
-        $out = preg_replace("/\s+bool\(false\)/", ' <span style="color:red">FALSE</span>,', $out);
-        $out = preg_replace("/,([\r\n\s]+})/", "$1", $out);
-        $out = preg_replace("/\s+string\(\d+\)/", '', $out);
-        $out = preg_replace("/\[\"([a-z\-_0-9]+)\"\]/i", "[\"<span style=\"color:#dd8800\">$1</span>\"]", $out);
+        $patterns = [
+            "/=>[\r\n\s]+/" => ' => ',
+            "/\s+bool\(true\)/" => ' <span style="color:green">TRUE</span>,',
+            "/\s+bool\(false\)/" => ' <span style="color:red">FALSE</span>,',
+            "/,([\r\n\s]+})/" => "$1",
+            "/\s+string\(\d+\)/" => '',
+        ];
+        foreach ($patterns as $pattern => $replacement) {
+            $replaced = preg_replace($pattern, $replacement, $out);
+            if ($replaced !== null) {
+                $out = $replaced;
+            }
+        }
+
+        $replacedKeys = preg_replace(
+            "/\[\"([a-z\-_0-9]+)\"\]/i",
+            "[\"<span style=\"color:#dd8800\">$1</span>\"]",
+            $out
+        );
+        if ($replacedKeys !== null) {
+            $out = $replacedKeys;
+        }
 
         return '<pre>' . $out . '</pre>';
     }
@@ -63,7 +79,7 @@ class Helper
     {
         ob_start();
         var_dump($input);
-        return "\n" . ob_get_clean();
+        return "\n" . (string)ob_get_clean();
     }
 
     /**

@@ -344,7 +344,7 @@ class Patterns
             return $random_numbers[$pair_index];
         }, $content);
 
-        return $content;
+        return $content ?? '';
     }
 
     /**

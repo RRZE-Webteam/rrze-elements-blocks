@@ -92,6 +92,7 @@ class Accordion
    */
   public function shortcodeCollapsibles(array $atts = [], ?string $content = '', string $tag = ''): string
   {
+    $content = $content ?? '';
     /* --------------------------------------------------
      * 1. Parse legacy attributes
      * --------------------------------------------------*/
@@ -125,7 +126,7 @@ class Accordion
      * --------------------------------------------------*/
     // Strip leading autop that WordPress sometimes adds when the shortcode
     // is on its own line.
-    if (str_starts_with($content, '</p>')) {
+    if ($content !== '' && str_starts_with($content, '</p>')) {
       $content = substr($content, 4);
     }
 
@@ -192,6 +193,7 @@ class Accordion
    */
   public function shortcodeCollapse(array $atts = [], ?string $content = '', string $tag = ''): string
   {
+    $content = $content ?? '';
     /* Maintain legacy globals for unique IDs */
     if (!isset($GLOBALS['current_collapse'])) {
       $GLOBALS['current_collapse'] = 0;

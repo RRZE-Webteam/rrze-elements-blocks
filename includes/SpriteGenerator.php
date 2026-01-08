@@ -72,7 +72,11 @@ class SpriteGenerator
   public static function iconPathFromRaw(string $raw): string
   {
     $raw = trim(str_replace('\\', '/', $raw));
-    return str_contains($raw, '/') ? $raw : preg_replace('/\s+/', '/', $raw);
+    if (str_contains($raw, '/')) {
+      return $raw;
+    }
+    $converted = preg_replace('/\s+/', '/', $raw);
+    return $converted ?? '';
   }
 
   /** Convert "solid/cow" → "solid-cow" for use as symbol/id. */
@@ -102,6 +106,9 @@ class SpriteGenerator
       '',
       $svg
     );
+    if ($svg === null) {
+      return '';
+    }
 
     if (!preg_match('#<svg[^>]*viewBox="([^"]+)"[^>]*>(.*?)</svg>#s', $svg, $m)) {
       return '';
