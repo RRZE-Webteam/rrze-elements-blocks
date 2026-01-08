@@ -39,7 +39,7 @@ class IconBox extends AbstractBlockRender
           );
         }
 
-        $title = sanitize_text_field($attributes['title']) ?? '';
+        $title = sanitize_text_field($attributes['title'] ?? '');
         $description = isset($attributes['description'])
             ? wp_kses($attributes['description'], $allowed_tags)
             : '';

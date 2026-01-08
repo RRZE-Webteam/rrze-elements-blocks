@@ -73,6 +73,7 @@ class Helper
         }
         if (in_array(strtolower((string)WP_DEBUG_LOG), ['true', '1'], true)) {
             $logPath = WP_CONTENT_DIR . '/debug.log';
+        //@phpstan-ignore-next-line
         } elseif (is_string(WP_DEBUG_LOG)) {
             $logPath = WP_DEBUG_LOG;
         } else {

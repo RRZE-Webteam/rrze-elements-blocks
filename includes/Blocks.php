@@ -266,7 +266,7 @@ class Blocks
         if ($cat !== '') {
             $term = get_category_by_slug($cat);
 
-            if ($term instanceof WP_Term && !is_wp_error($term)) {
+            if ($term instanceof WP_Term) {
                 $selectedCategoryId = (int)$term->term_id;
             }
         }
