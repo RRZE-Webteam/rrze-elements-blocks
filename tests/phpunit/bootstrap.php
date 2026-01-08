@@ -396,3 +396,5 @@ function wp_parse_args($args, $defaults = []): array
 {
     return array_merge($defaults, (array)$args);
 }
+
+class WP_Block_Editor_Context {}

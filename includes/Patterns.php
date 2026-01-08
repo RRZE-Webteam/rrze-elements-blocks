@@ -50,10 +50,10 @@ class Patterns
    * If "design" doesn't exist, those categories appear last.
    *
    * @param array<int, array<string, mixed>> $categories
-   * @param \WP_Post $post
+   * @param \WP_Post|\WP_Block_Editor_Context|null $context
    * @return array<int, array<string, mixed>>
    */
-  public function my_custom_block_category(array $categories, \WP_Post $post): array {
+  public function my_custom_block_category(array $categories, $context = null): array {
     $categories = array_values($categories);
 
     $has_rrze = false;
