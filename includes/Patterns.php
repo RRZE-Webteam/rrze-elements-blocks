@@ -50,7 +50,7 @@ class Patterns
    * If "design" doesn't exist, those categories appear last.
    *
    * @param array   $categories
-   * @param WP_Post $post
+   * @param \WP_Post $post
    * @return array
    */
   public function my_custom_block_category($categories, $post) {
