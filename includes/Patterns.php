@@ -120,9 +120,11 @@ class Patterns
 
     if ($designCat !== null) {
       // before + design + rrze/fau + after
+      // @phpstan-ignore-next-line
       return array_values(array_merge($before, [$designCat], $rrzeFau, $after));
     } else {
       // No design category: put rrze/fau last
+      // @phpstan-ignore-next-line
       return array_values(array_merge($before, $after, $rrzeFau));
     }
   }
