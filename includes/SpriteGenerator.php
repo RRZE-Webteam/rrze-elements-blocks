@@ -94,6 +94,9 @@ class SpriteGenerator
     }
 
     $svg = file_get_contents($file);
+    if ($svg === false) {
+      return '';
+    }
     $svg = preg_replace(
       ['#<\?xml.*?\?>#s', '#<!DOCTYPE.*?>#s', '#<!--.*?-->#s'], // strip header & comments
       '',

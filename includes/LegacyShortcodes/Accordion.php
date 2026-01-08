@@ -57,10 +57,13 @@ class Accordion
    * *guaranteed* to win collisions with other plugins or previous versions.
    *
    * @param string $tag The shortcode tag (e.g. "collapse").
-   * @param callable|string $callback The handler callback.
+   * @param callable(array<string>, string|null, string): string $callback The handler callback.
    */
-  protected function addShortcodeForce(string $tag, $callback): void
+  protected function addShortcodeForce(string $tag, callable $callback): void
   {
+    if ($tag === '') {
+      return;
+    }
     if (shortcode_exists($tag)) {
       // Keep a small trace in the debug log – very handy when hunting
       // conflicts in large installations.
@@ -85,9 +88,9 @@ class Accordion
    * Maps legacy attributes to the Collapsibles block renderer so the new
    * front‑end is used while the legacy API stays intact.
    *
-   * @param array<string, string>|string $atts
+   * @param array<string, string> $atts
    */
-  public function shortcodeCollapsibles(array|string $atts, ?string $content = '', string $tag = ''): string
+  public function shortcodeCollapsibles(array $atts = [], ?string $content = '', string $tag = ''): string
   {
     /* --------------------------------------------------
      * 1. Parse legacy attributes
@@ -185,9 +188,9 @@ class Accordion
   /**
    * Handles a single collapsible panel.
    *
-   * @param array<string, string>|string $atts
+   * @param array<string, string> $atts
    */
-  public function shortcodeCollapse(array|string $atts, ?string $content = '', string $tag = ''): string
+  public function shortcodeCollapse(array $atts = [], ?string $content = '', string $tag = ''): string
   {
     /* Maintain legacy globals for unique IDs */
     if (!isset($GLOBALS['current_collapse'])) {
@@ -285,7 +288,12 @@ class Accordion
     if ($fallback !== '') {
       return $fallback;
     }
-    switch (get_post_meta(get_the_ID(), 'fauval_langcode', true)) {
+    $postId = get_the_ID();
+    if (!is_int($postId)) {
+      return esc_html__('Expand All', 'rrze-elements');
+    }
+
+    switch (get_post_meta($postId, 'fauval_langcode', true)) {
       case 'en':
         return 'Expand All';
       case 'de':

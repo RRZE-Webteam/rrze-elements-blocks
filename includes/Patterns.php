@@ -306,6 +306,9 @@ class Patterns
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
         $pattern_content = file_get_contents($pattern_path);
+        if ($pattern_content === false) {
+            return;
+        }
 
         $pattern_content = $this->replace_random_numbers($pattern_content);
 
