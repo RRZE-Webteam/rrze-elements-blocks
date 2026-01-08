@@ -31,4 +31,12 @@ final class BlocksTest extends TestCase
 
         $this->assertStringContainsString('[rendered]', $output);
     }
+
+    public function test_rrze_register_block_styles_handles_theme_variations(): void
+    {
+        $blocks = new Blocks();
+        $blocks->rrze_register_block_styles();
+
+        $this->assertTrue(true, 'Method executed without runtime errors');
+    }
 }

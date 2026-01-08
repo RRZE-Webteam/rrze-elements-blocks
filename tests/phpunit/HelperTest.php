@@ -48,4 +48,25 @@ final class HelperTest extends TestCase
         yield [0];
         yield [null];
     }
+
+    public function test_get_html_var_dump_wraps_strings_and_booleans(): void
+    {
+        $input = [
+            'name' => '<script>alert("x")</script>',
+            'options' => [
+                'enabled' => true,
+            ],
+        ];
+
+        $html = Helper::get_html_var_dump($input, true);
+
+        $this->assertStringContainsString('&lt;script&gt;', $html);
+        $this->assertStringContainsString('TRUE', $html);
+    }
+
+    public function test_get_var_dump_returns_string(): void
+    {
+        $output = Helper::get_var_dump(['key' => 'value']);
+        $this->assertStringContainsString('key', $output);
+    }
 }

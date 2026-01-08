@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
 use RRZE\ElementsBlocks\BlockFrontend\Accordion;
 use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
