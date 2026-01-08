@@ -48,7 +48,7 @@ class Plugin
     /**
      * loaded method
      */
-    public function loaded()
+    public function loaded(): void
     {
         $this->setBasename()
             ->setDirectory()
@@ -182,8 +182,10 @@ class Plugin
     /**
      * __call method
      * Method overloading.
+     *
+     * @param array<int, mixed> $arguments
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): void
     {
         if (!method_exists($this, $name)) {
             $message = sprintf('Call to undefined method %1$s::%2$s', __CLASS__, $name);

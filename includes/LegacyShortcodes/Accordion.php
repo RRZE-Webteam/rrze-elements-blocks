@@ -84,8 +84,10 @@ class Accordion
    * Handles the wrapper shortcode (multiple collapsible panels).
    * Maps legacy attributes to the Collapsibles block renderer so the new
    * front‑end is used while the legacy API stays intact.
+   *
+   * @param array<string, string>|string $atts
    */
-  public function shortcodeCollapsibles($atts, $content = '', $tag = ''): string
+  public function shortcodeCollapsibles(array|string $atts, ?string $content = '', string $tag = ''): string
   {
     /* --------------------------------------------------
      * 1. Parse legacy attributes
@@ -182,8 +184,10 @@ class Accordion
 
   /**
    * Handles a single collapsible panel.
+   *
+   * @param array<string, string>|string $atts
    */
-  public function shortcodeCollapse($atts, $content = '', $tag = ''): string
+  public function shortcodeCollapse(array|string $atts, ?string $content = '', string $tag = ''): string
   {
     /* Maintain legacy globals for unique IDs */
     if (!isset($GLOBALS['current_collapse'])) {

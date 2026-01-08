@@ -89,7 +89,7 @@ class Blocks
     /**
      * Custom Block Styles
      */
-    public function rrze_register_block_styles()
+    public function rrze_register_block_styles(): void
     {
         $theme = wp_get_theme();
         $stylesheet = $theme->get_stylesheet(); // Child-Theme-Slug
@@ -235,10 +235,10 @@ class Blocks
     /**
      * Renders the news block.
      *
-     * @param array $attributes Attributes for the news block.
+     * @param array<string, mixed> $attributes Attributes for the news block.
      * @return string HTML content for the news block.
      */
-    public function render_news_block($attributes): string
+    public function render_news_block(array $attributes): string
     {
         $legacyMode = $attributes['legacyMode'] ?? false;
         $listView = $attributes['display'] ?? '';
@@ -255,6 +255,9 @@ class Blocks
         }
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function channel_fau_teaser_grid(array $attributes): string
     {
         $num = isset($attributes['num']) ? absint($attributes['num']) : 6;

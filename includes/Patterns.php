@@ -49,9 +49,9 @@ class Patterns
    * starting with "fau" or "rrze" appears right after "design".
    * If "design" doesn't exist, those categories appear last.
    *
-   * @param array   $categories
+   * @param array<int, array<string, mixed>> $categories
    * @param \WP_Post $post
-   * @return array
+   * @return array<int, array<string, mixed>>
    */
   public function my_custom_block_category(array $categories, \WP_Post $post): array {
     $categories = array_values($categories);
@@ -95,10 +95,6 @@ class Patterns
 
     foreach ($categories as $i => $cat) {
       $slug = $cat['slug'] ?? '';
-
-      if (!is_array($cat)) {
-        continue;
-      }
 
       if ($is_rrze_fau($slug)) {
         $rrzeFau[] = $cat;
@@ -275,8 +271,25 @@ class Patterns
 
     /**
      * Register a block pattern.
+     *
+     * @param array<int, string> $categories
+     * @param array<int, string> $postTypes
+     * @param array<int, string> $keywords
+     * @param array<int, string> $blockTypes
      */
-    private function register_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = [], $blockTypes = [], $isPhp = false, $directory = 'patterns'): void
+    private function register_pattern(
+        string $file_name,
+        string $pattern_name,
+        string $title,
+        string $description,
+        array $categories,
+        array $postTypes = ['page', 'single'],
+        bool $inserter = true,
+        array $keywords = [],
+        array $blockTypes = [],
+        bool $isPhp = false,
+        string $directory = 'patterns'
+    ): void
     {
 
         if ($isPhp) {
@@ -313,7 +326,7 @@ class Patterns
     /**
      * Replace {random_number} placeholders with unique random numbers.
      */
-    private function replace_random_numbers($content): string
+    private function replace_random_numbers(string $content): string
     {
         $random_numbers = [];
         $content = preg_replace_callback('/{random_number}/', function () use (&$random_numbers) {

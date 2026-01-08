@@ -17,7 +17,7 @@ class Helper
      * @return bool True if the plugin file exists (network admin) or the plugin is active (site context),
      *              otherwise false.
      */
-    public static function isPluginAvailable($plugin)
+    public static function isPluginAvailable(string $plugin): bool
     {
         if (is_network_admin()) {
             return file_exists(WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin);
@@ -27,7 +27,10 @@ class Helper
         return is_plugin_active($plugin);
     }
 
-    public static function get_html_var_dump($input, $nohtml = true)
+    /**
+     * @param array<string, mixed> $input
+     */
+    public static function get_html_var_dump(array $input, bool $nohtml = true): string
     {
         if ($nohtml) {
             foreach ($input as $key => $value) {
@@ -56,7 +59,7 @@ class Helper
         return '<pre>' . $out . '</pre>';
     }
 
-    public static function get_var_dump($input)
+    public static function get_var_dump(mixed $input): string
     {
         ob_start();
         var_dump($input);
@@ -66,7 +69,7 @@ class Helper
     /**
      * Log errors by writing to the debug.log file.
      */
-    public static function debug($input, string $level = 'i')
+    public static function debug(mixed $input, string $level = 'i'): void
     {
         if (!defined('WP_DEBUG') || !WP_DEBUG) {
             return;
@@ -109,7 +112,7 @@ class Helper
         );
     }
 
-    public static function shortcode_boolean($value): bool
+    public static function shortcode_boolean(mixed $value): bool
     {
         $value = esc_attr($value);
         return in_array($value, [true, 'true', '1', 'yes', 'ja', 'on'], true);
