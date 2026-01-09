@@ -1,0 +1,107 @@
+  /* FAU Main Brand Colors */
+  $fau-color-fau-blue-100: #04316a;
+  $fau-color-fau-blue-62: #617da1;
+  $fau-color-fau-blue-37: #a0b1c6;
+  $fau-color-fau-blue-25: #c0cbda;
+  $fau-color-fau-blue-12: #d3dcf2;
+
+  $fau-color-fau-darkblue-100: #041e42;
+  $fau-color-fau-darkblue-62: #617188;
+  $fau-color-fau-darkblue-37: #a0a9b7;
+  $fau-color-fau-darkblue-25: #c0c7d0;
+  $fau-color-fau-darkblue-12: #dfe2e7;
+
+  $fau-color-fau-black-100: #000;
+  $fau-color-fau-black-90: #1a1a1a;
+  $fau-color-fau-black-62: #5e5e5e;
+  $fau-color-fau-black-37: #9e9e9e;
+  $fau-color-fau-black-25: #bfbfbf;
+  $fau-color-fau-black-12: #e0e0e0;
+  $fau-color-fau-black-5: #f2f2f2;
+
+  $fau-color-fau-white-100: #fff;
+
+  /* FAU Faculty Colors - RW (Law) */
+  $fau-color-rw-red-100: #c50f3c;
+  $fau-color-rw-red-62: #dd737c;
+  $fau-color-rw-red-37: #ebabae;
+  $fau-color-rw-red-25: #f1c8c9;
+  $fau-color-rw-red-12: #fcdce3;
+
+  $fau-color-rw-darkred-100: #971b2f;
+  $fau-color-rw-darkred-62: #be717d;
+  $fau-color-rw-darkred-37: #d8a9b1;
+  $fau-color-rw-darkred-25: #e6c6cb;
+  $fau-color-rw-darkred-12: #f2e2e5;
+
+  /* FAU Faculty Colors - Med (Medicine) */
+  $fau-color-med-blue-100: #18b4f1;
+  $fau-color-med-blue-62: #6dd0f6;
+  $fau-color-med-blue-37: #a7e2fa;
+  $fau-color-med-blue-25: #c5ecfb;
+  $fau-color-med-blue-12: #e3fafc;
+
+  $fau-color-med-darkblue-100: #005287;
+  $fau-color-med-darkblue-62: #5e92b3;
+  $fau-color-med-darkblue-37: #9ebdd1;
+  $fau-color-med-darkblue-25: #bfd4e1;
+  $fau-color-med-darkblue-12: #dee9ef;
+
+  /* FAU Faculty Colors - Nat (Sciences) */
+  $fau-color-nat-green-100: #7bb725;
+  $fau-color-nat-green-62: #acd275;
+  $fau-color-nat-green-37: #cde4ac;
+  $fau-color-nat-green-25: #deedc8;
+  $fau-color-nat-green-12: #e6fcdc;
+
+  $fau-color-nat-darkgreen-100: #266141;
+  $fau-color-nat-darkgreen-62: #769b87;
+  $fau-color-nat-darkgreen-37: #acc3b7;
+  $fau-color-nat-darkgreen-25: #c9d7cf;
+  $fau-color-nat-darkgreen-12: #e3ebe6;
+
+  /* FAU Faculty Colors - Phil (Humanities) */
+  $fau-color-phil-yellow-100: #fdb735;
+  $fau-color-phil-yellow-62: #fece76;
+  $fau-color-phil-yellow-37: #fee4b2;
+  $fau-color-phil-yellow-25: #feedcc;
+  $fau-color-phil-yellow-12: #fff5e0;
+
+  $fau-color-phil-orange-100: #e87722;
+  $fau-color-phil-orange-62: #efa369;
+  $fau-color-phil-orange-37: #f6cbab;
+  $fau-color-phil-orange-25: #f9ddc8;
+  $fau-color-phil-orange-12: #fcede2;
+
+  /* FAU Faculty Colors - TF (Engineering) */
+  $fau-color-tf-metallic-100: #8c9fb1;
+  $fau-color-tf-metallic-62: #b6c2ce;
+  $fau-color-tf-metallic-37: #d3dae1;
+  $fau-color-tf-metallic-25: #e2e7eb;
+  $fau-color-tf-metallic-12: #ebf5f7;
+
+  $fau-color-tf-darkmetallic-100: #2f586e;
+  $fau-color-tf-darkmetallic-62: #7c96a3;
+  $fau-color-tf-darkmetallic-37: #b0bfc8;
+  $fau-color-tf-darkmetallic-25: #cbd5db;
+  $fau-color-tf-darkmetallic-12: #e4e9ec;
+
+  /* Special UI Application Colors */
+  $fau-color-error-light: #dd0004;
+  $fau-color-error-dark: #ff4245;
+  $fau-color-error-darkred-100: $fau-color-error-dark;
+  $fau-color-error-red-100: $fau-color-error-light;
+  $fau-color-info-blue-100: #0d6efd;
+  $fau-color-success-green-100: #10c000;
+  $fau-color-warning-yellow-100: #fddf35;
+
+  /* Font Color Special Variables */
+
+  /* Typography - Text Colors */
+  $fau-color-text-primary: $fau-color-fau-black-100;
+  $fau-color-text-primary-contrast: $fau-color-fau-white-100;
+  $fau-color-heading-primary-contrast: $fau-color-fau-white-100;
+
+  /* Typography - Brand Text Colors */
+  $fau-color-text-brand: $fau-color-fau-blue-100;
+  $fau-color-text-brand-contrast: $fau-color-fau-white-100;
