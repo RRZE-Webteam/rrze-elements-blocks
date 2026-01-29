@@ -61,7 +61,7 @@ class IconBox extends AbstractBlockRender
         $markup = '<div class="rrze-iconbox-icon"><span>' . $iconMarkup . '</span></div>';
 
 
-        $html = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
+        $html = '<div class="rrze--iconbox-entry ' . esc_attr(trim($wrapper_class)) . '">';
         $html .= '<div class="rrze--iconbox-element-container">';
         $html .= $markup;
         $html .= '<div class="rrze-iconbox-content"><dl class="rrze-elements-iconbox">';
