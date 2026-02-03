@@ -16,7 +16,7 @@ class Patterns
     /**
      * Register all hooks.
      */
-    private function register_hooks()
+    private function register_hooks(): void
     {
         add_action('init', [$this, 'elementsBlocks_pattern_categories']);
         add_filter('block_categories_all', [$this, 'my_custom_block_category'], 100, 2);
@@ -27,7 +27,7 @@ class Patterns
     /**
      * Register pattern categories.
      */
-    public function elementsBlocks_pattern_categories()
+    public function elementsBlocks_pattern_categories(): void
     {
         register_block_pattern_category('page', [
             'label'       => _x('Pages', 'Block pattern category','rrze-elements-blocks'),
@@ -49,12 +49,12 @@ class Patterns
    * starting with "fau" or "rrze" appears right after "design".
    * If "design" doesn't exist, those categories appear last.
    *
-   * @param array   $categories
-   * @param WP_Post $post
-   * @return array
+   * @param array<int, array<string, mixed>> $categories
+   * @param \WP_Post|\WP_Block_Editor_Context|null $context
+   * @return array<int, array<string, mixed>>
    */
-  public function my_custom_block_category($categories, $post) {
-    $categories = array_values(is_array($categories) ? $categories : []);
+  public function my_custom_block_category(array $categories, $context = null): array {
+    $categories = array_values($categories);
 
     $has_rrze = false;
     foreach ($categories as $c) {
@@ -96,10 +96,6 @@ class Patterns
     foreach ($categories as $i => $cat) {
       $slug = $cat['slug'] ?? '';
 
-      if (!is_array($cat)) {
-        continue;
-      }
-
       if ($is_rrze_fau($slug)) {
         $rrzeFau[] = $cat;
         continue;
@@ -120,9 +116,11 @@ class Patterns
 
     if ($designCat !== null) {
       // before + design + rrze/fau + after
+      // @phpstan-ignore-next-line
       return array_values(array_merge($before, [$designCat], $rrzeFau, $after));
     } else {
       // No design category: put rrze/fau last
+      // @phpstan-ignore-next-line
       return array_values(array_merge($before, $after, $rrzeFau));
     }
   }
@@ -131,7 +129,7 @@ class Patterns
   /**
      * Register development patterns.
      */
-    public function register_dev_patterns()
+    public function register_dev_patterns(): void
     {
         if (!$this->is_development_environment() || !ThemeSniffer::getThemeGroup('fauthemes')) {
             return;
@@ -183,7 +181,7 @@ class Patterns
     /**
      * Register custom WP block patterns for FAU themes.
      */
-    public function register_fau_custom_wp_block_patterns()
+    public function register_fau_custom_wp_block_patterns(): void
     {
         if (!ThemeSniffer::getThemeGroup('fauthemes')) {
             return;
@@ -244,17 +242,28 @@ class Patterns
         ];
 
         foreach ($patterns as $pattern) {
+            $pattern = array_merge(
+                [
+                    'postTypes'  => ['page', 'single'],
+                    'inserter'   => true,
+                    'keywords'   => [],
+                    'blockTypes' => [],
+                    'isPhp'      => false,
+                ],
+                $pattern
+            );
+
             $this->register_pattern(
                 $pattern['file_name'],
                 $pattern['pattern_name'],
                 $pattern['title'],
                 $pattern['description'],
                 $pattern['categories'],
-                $pattern['postTypes'] ?? ['page', 'single'],
-                $pattern['inserter'] ?? true,
-                $pattern['keywords'] ?? [],
-                $pattern['blockTypes'] ?? [],
-                $pattern['isPhp'] ?? false,
+                $pattern['postTypes'],
+                $pattern['inserter'],
+                $pattern['keywords'],
+                $pattern['blockTypes'],
+                $pattern['isPhp'],
                 'patterns'
             );
         }
@@ -262,8 +271,25 @@ class Patterns
 
     /**
      * Register a block pattern.
+     *
+     * @param array<int, string> $categories
+     * @param array<int, string> $postTypes
+     * @param array<int, string> $keywords
+     * @param array<int, string> $blockTypes
      */
-    private function register_pattern($file_name, $pattern_name, $title, $description, $categories, $postTypes = ['page', 'single'], $inserter = true, $keywords = [], $blockTypes = [], $isPhp = false, $directory = 'patterns')
+    private function register_pattern(
+        string $file_name,
+        string $pattern_name,
+        string $title,
+        string $description,
+        array $categories,
+        array $postTypes = ['page', 'single'],
+        bool $inserter = true,
+        array $keywords = [],
+        array $blockTypes = [],
+        bool $isPhp = false,
+        string $directory = 'patterns'
+    ): void
     {
 
         if ($isPhp) {
@@ -280,6 +306,9 @@ class Patterns
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
         $pattern_content = file_get_contents($pattern_path);
+        if ($pattern_content === false) {
+            return;
+        }
 
         $pattern_content = $this->replace_random_numbers($pattern_content);
 
@@ -300,7 +329,7 @@ class Patterns
     /**
      * Replace {random_number} placeholders with unique random numbers.
      */
-    private function replace_random_numbers($content)
+    private function replace_random_numbers(string $content): string
     {
         $random_numbers = [];
         $content = preg_replace_callback('/{random_number}/', function () use (&$random_numbers) {
@@ -315,13 +344,13 @@ class Patterns
             return $random_numbers[$pair_index];
         }, $content);
 
-        return $content;
+        return $content ?? '';
     }
 
     /**
      * Check if the current environment is development.
      */
-    private function is_development_environment()
+    private function is_development_environment(): bool
     {
         return wp_get_environment_type() === 'local' || wp_get_environment_type() === 'development';
     }

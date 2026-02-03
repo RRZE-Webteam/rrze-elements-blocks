@@ -1,0 +1,21 @@
+/* Default Spacing */
+$fau-space-05x: 0.125rem;   /* 2px */
+$fau-space-1x: 0.25rem;     /* 4px */
+$fau-space-2x: 0.5rem;      /* 8px */
+$fau-space-3x: 0.75rem;     /* 12px */
+$fau-space-4x: 1rem;        /* 16px */
+$fau-space-5x: 1.25rem;     /* 20px */
+$fau-space-6x: 1.5rem;      /* 24px */
+$fau-space-8x: 2rem;        /* 32px */
+$fau-space-10x: 2.5rem;     /* 40px */
+$fau-space-12x: 3rem;       /* 48px */
+$fau-space-14x: 3.5rem;     /* 56px */
+$fau-space-16x: 4rem;       /* 64px */
+$fau-space-20x: 5rem;       /* 80px */
+$fau-space-24x: 6rem;       /* 96px */
+$fau-space-30x: 7.5rem;     /* 120px */
+
+/* Grid Spacing */
+$fau-space-grid-gap: var($fau-space-4x);
+$fau-space-margin: var($fau-space-4x);
+$fau-space-padding: var($fau-space-4x);

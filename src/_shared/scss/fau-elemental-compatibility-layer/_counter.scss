@@ -64,7 +64,7 @@
 }
 
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row > section,
-.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row > section
+.wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row > section,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-counter-row .block-editor-block-list__layout,
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-iconbox-row .block-editor-block-list__layout {
   align-items: end;
@@ -135,7 +135,7 @@ body.wp-theme-FAU-Elemental {
       & > div:nth-child(4),
       & > div:nth-child(8),
       & > div:nth-child(12),
-      & > div:nth-child(16){
+      & > div:nth-child(16) {
         border-right: none;
       }
     }
@@ -175,9 +175,12 @@ body.wp-theme-FAU-Elemental {
       }
     }
   }
+
 }
 
-//.rrze-elements-column-3
+/**
+* Block Editor Styles
+ */
 body.wp-theme-FAU-Elemental.block-editor-page {
   .wp-block-rrze-elements-rrze-counter .rrze--counter-element-container,
   .wp-block-rrze-elements-rrze-iconbox {

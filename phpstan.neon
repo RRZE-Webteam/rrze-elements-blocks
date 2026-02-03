@@ -1,0 +1,8 @@
+parameters:
+  level: 8
+
+  paths:
+    - includes
+
+  scanFiles:
+    - rrze-elements-blocks.php

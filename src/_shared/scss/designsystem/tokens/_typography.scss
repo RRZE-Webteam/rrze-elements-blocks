@@ -1,0 +1,37 @@
+/* Typography Font Families */
+$fau-font-family-heading: "Source Sans 3", "Roboto", arial, sans-serif;
+$fau-font-family-body-text: "Source Sans 3", "Roboto", arial, sans-serif;
+$fau-font-family-code: "Source Code Pro", monospace;
+
+/* Typography - Font Sizes */
+$fau-font-size-display-01: 4.5rem;
+$fau-font-size-display-02: 4rem;
+$fau-font-size-heading-big-teaser-01: 2.5rem;
+$fau-font-size-heading-01: 3rem;
+$fau-font-size-heading-02: 2rem;
+$fau-font-size-heading-03: 1.5rem;
+$fau-font-size-heading-04: 1.25rem;
+$fau-font-size-heading-05: 1.15rem;
+$fau-font-size-heading-06: 1rem;
+$fau-font-size-paragraph-intro-01: 1.25rem;
+$fau-font-size-paragraph-body-01: 1.125rem;
+$fau-font-size-paragraph-body-02: 1rem;
+$fau-font-size-paragraph-caption-01: 0.85rem;
+$fau-font-size-code-01: 1rem;
+
+/* Typography - Font Weights */
+$fau-font-weight-display-regular: 400;
+$fau-font-weight-display-medium: 500;
+$fau-font-weight-body-text-light: 400;
+$fau-font-weight-body-text-medium: 500;
+$fau-font-weight-heading-light: 600;
+$fau-font-weight-heading-medium: 700;
+$fau-font-weight-code-light: 400;
+
+/* Typography - Line Heights */
+$fau-line-height-heading-01: 1.2;
+$fau-line-height-display-01: 1.1; // TODO: check if this is correct
+$fau-line-height-body-text-01: 1.5;
+
+/* Letter Spacing */
+$fau-letter-spacing-big: 0.02rem;

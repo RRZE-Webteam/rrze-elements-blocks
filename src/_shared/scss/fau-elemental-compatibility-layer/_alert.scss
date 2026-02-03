@@ -10,7 +10,7 @@
       padding-top: 0;
     }
 
-    padding: var(--Spacing-6x, 1.5rem);
+    padding: var(--Spacing-6x, 1.5rem) !important;
 
     &.alert-success *:not(code, pre),
     &.alert-danger *:not(code, pre),

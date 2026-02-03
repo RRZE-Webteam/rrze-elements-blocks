@@ -1,4 +1,4 @@
-import { test, expect } from '../test-utils/index';
+import { test, expect } from '../../test-utils/index';
 import fs from 'fs';
 import path from 'path';
 
@@ -60,5 +60,4 @@ test.describe('Syntax in the BlockEditor', () => {
     expect(akkordeonreiter1).toBeTruthy();
   })
 });
-
 

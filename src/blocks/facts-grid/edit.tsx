@@ -104,6 +104,7 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
                 5,
                 6
               ]}
+              // @ts-ignore
               value={attributes.headingLevel}
             />
           )}

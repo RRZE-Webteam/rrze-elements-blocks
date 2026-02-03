@@ -10,9 +10,11 @@ class IconBox extends AbstractBlockRender
 {
 
     /**
+     * @param array<string, mixed> $attributes
+     * @param string $innerBlocks
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
+    public function render(array $attributes, string $innerBlocks, ?\WP_Block $block = null): string
     {
         if ($block && !empty(trim($block->inner_html))) {
             return $innerBlocks;
@@ -39,7 +41,7 @@ class IconBox extends AbstractBlockRender
           );
         }
 
-        $title = sanitize_text_field($attributes['title']) ?? '';
+        $title = sanitize_text_field($attributes['title'] ?? '');
         $description = isset($attributes['description'])
             ? wp_kses($attributes['description'], $allowed_tags)
             : '';
@@ -59,7 +61,7 @@ class IconBox extends AbstractBlockRender
         $markup = '<div class="rrze-iconbox-icon"><span>' . $iconMarkup . '</span></div>';
 
 
-        $html = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
+        $html = '<div class="rrze--iconbox-entry ' . esc_attr(trim($wrapper_class)) . '">';
         $html .= '<div class="rrze--iconbox-element-container">';
         $html .= $markup;
         $html .= '<div class="rrze-iconbox-content"><dl class="rrze-elements-iconbox">';

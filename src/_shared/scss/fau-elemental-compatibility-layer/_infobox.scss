@@ -15,6 +15,8 @@
     background: transparent;
     border: none;
     color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
+    padding-inline-start: var(--Spacing-6x);
+    padding-inline-end: var(--Spacing-4x);
   }
 
   div.rrze--iconbox-element-container .rrze-iconbox-content {
@@ -154,7 +156,7 @@
   }
 }
 
-@media screen and (max-width: 1004px) and (min-width: 596px) {
+@media screen and (max-width: 991px) and (min-width: 596px) {
   .wp-theme-FAU-Elemental div.wp-block-rrze-elements-counter-row {
     max-width: 100vw !important;
   }
@@ -177,47 +179,36 @@
     }
 
     &::after {
-      inline-size: calc(100% + var(--Spacing-4x));
+      inline-size: calc(100% + var(--gap));
       block-size: var(--line-thickness);
-      inset-inline-start: 0;
-      inset-block-start: calc(var(--line-offset) * -1);
+      inset-inline-start: calc(var(--line-offset) * -1);
+      inset-inline-end: calc(var(--line-offset) * -1);
+      inset-block-start: auto;
+      inset-block-end: calc(var(--line-offset) * -1);
     }
 
     &::before {
       inline-size: var(--line-thickness);
       block-size: 130%;
       inset-block-start: 0;
-      inset-inline-start: calc(var(--line-offset) * -1);
+      inset-inline-start: auto;
+      inset-inline-end: auto;
     }
 
-    &:first-child {
-      &::before,
-      &::after {
-        content: initial;
-      }
-    }
-
-    &:nth-child(2) {
-      &::after {
-        content: initial;
-      }
-    }
-
-    &:nth-child(3) {
+    &:nth-child(odd) {
       &::before {
         content: initial;
       }
     }
 
-    &:nth-child(4) {
-      &::after {
-        left: calc(-1 * var(--Spacing-4x));
-      }
-    }
-
-    .wp-theme-FAU-Elemental .is-style-dark div.wp-block-rrze-elements-counter-row section.rrze--counter-element div.rrze--iconbox-element-container {
+    .wp-theme-FAU-Elemental .is-style-dark div.wp-block-rrze-elements-counter-row section.rrze--counter-element div.rrze--iconbox-element-container, {
       padding-left: var(--Spacing-8x);
       padding-right: var(--Spacing-6x);
     }
+  }
+}
+@media (min-width: 596px) and (max-width: 1004px) {
+  div.wp-block-rrze-elements-counter-row section.rrze--counter-element {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

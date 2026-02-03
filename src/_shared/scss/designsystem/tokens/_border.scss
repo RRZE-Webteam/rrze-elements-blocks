@@ -1,0 +1,11 @@
+@use "./color" as color;
+$fau-border-width-01: 1px;
+$fau-border-width-02: 2px;
+$fau-border-width-03: 3px;
+
+/* Border Radius Tokens */
+$fau-border-radius-sharp: 0px;
+$fau-border-radius-default: 4px;
+
+/* Presets */
+$fau-border-preset-01: $fau-border-width-03 solid color.$fau-color-fau-blue-62;

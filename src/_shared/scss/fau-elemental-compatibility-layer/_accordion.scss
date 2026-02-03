@@ -1,3 +1,5 @@
+@use "../designsystem/tokens/color" as color;
+
 .wp-theme-FAU-Elemental {
   .wp-block-rrze-elements-collapsibles .block-editor-block-list__layout:last-child{
     padding-bottom: 0;
@@ -21,7 +23,7 @@
   .wp-block-rrze-elements-collapsibles {
     .accordion-group {
       border: none;
-      border-top: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+      border-top: 1px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .accordion-group button.accordion-toggle svg {
@@ -31,13 +33,13 @@
     }
 
     .wp-block-rrze-elements-collapse:last-child .accordion-group {
-      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .wp-block-rrze-elements-collapse .accordion {
       margin-top: var(--Spacing-8x, 2rem);
-      border-left: 4px solid var(--FAU-Col-FAU-Blau-100, #04316a);
-      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+      border-left: 4px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .wp-block-rrze-elements-collapse button.accordion-toggle{
@@ -46,25 +48,21 @@
     }
 
     .wp-block-rrze-elements-accordion:last-child .accordion-group {
-      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
-
-    //.accordion-inner .accordion > div:last-child{
-    //  border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
-    //}
 
     .accordion-toggle p,
     button.accordion-toggle {
       margin: 0;
       padding: 0;
-      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
       font-size: var(--H-Heading-4, 1.25rem);
       font-weight: 700;
       font-family: var(--font-family-base), sans-serif;
     }
 
     button.accordion-toggle:hover, button.accordion-toggle:focus, button.accordion-toggle:target, button.accordion-toggle:active {
-      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .accordion-body .accordion-inner,
@@ -80,11 +78,11 @@
       width: 2.5ch;
       height: 2.5ch;
       margin-right: 1.5ch;
-      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+      fill: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .accordion-toggle svg use {
-      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+      fill: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     div.accordion-toggle, button.accordion-toggle {
@@ -107,10 +105,6 @@
       padding-left: 1rem;
     }
 
-    //div.accordion-toggle:hover p{
-    //color: var(--FAU-Col-FAU-Weiss-100, #fff);
-    //}
-
     div.accordion-toggle:hover,
     div.accordion-toggle:target,
     button.accordion-toggle:hover,
@@ -123,7 +117,6 @@
       padding-right: 3rem;
     }
 
-
     & .accordion-toggle::before {
       content: "";
       position: absolute;
@@ -132,31 +125,11 @@
       width: 2rem;
       height: 2rem;
       transform: translateY(-45%);
-      background: #04316a;
+      background: color.$fau-color-fau-blue-100;
       border-radius: 0px;
       z-index: 0;
       transition: all .2s ease;
     }
-
-    //& .accordion-toggle:hover::before {
-    //  top: 45%;
-    //  right: -60px;
-    //  transform: translateY(2%);
-    //  transition: all .2s ease;
-    //}
-    //
-    //& .accordion-toggle:hover::after {
-    //  top: 46%;
-    //  transform: translateY(0);
-    //  transition: all .2s ease;
-    //}
-
-    //& .accordion-toggle.active:hover::after,
-    //& .accordion-toggle.focus:hover::after{
-    //  top: 46%;
-    //  transform: rotate(180deg);
-    //  //transition: all .2s ease;
-    //}
 
     & .accordion .accordion-toggle.active:hover:before,
     & .accordion .accordion-toggle.active:focus:before
@@ -175,7 +148,7 @@
     & .accordion-toggle::after {
       content: "";
       position: absolute;
-      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+      color: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
       top: calc(50% - 13px);
       right: -60px;
       width: 2rem;
@@ -186,6 +159,14 @@
       background: currentColor;
       -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/45% 45% no-repeat;
       mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/60% 60% no-repeat;
+    }
+
+    .wp-block-rrze-elements-collapse:last-child .accordion-inner .accordion .accordion-group{
+      border-bottom: none;
+    }
+
+    .wp-block-rrze-elements-collapse:last-child .accordion-inner {
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -217,7 +198,6 @@
 
   .accordion .accordion-toggle.active:focus::before {
     position: absolute;
-    //top: inherit;
     right: -60px !important;
     transition: all .2s ease;
   }
@@ -232,7 +212,7 @@
   .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
   .accordion .accordion-group .accordion-heading button.accordion-toggle.active{
     background-color: initial;
-    color: var(--FAU-Col-FAU-Blau-100, #04316a);
+    color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
   }
 
   .accordion .nat .accordion-heading .accordion-toggle.active:hover,
@@ -258,46 +238,46 @@
 .wp-theme-FAU-Elemental .is-style-dark {
   .wp-block-rrze-elements-collapsibles{
     .accordion-group {
-      border-top: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
-      background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+      border-top: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
+      background-color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .wp-block-rrze-elements-collapse:last-child .accordion-group{
-      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     .wp-block-rrze-elements-collapse .accordion{
-      border-left: 4px solid var(--FAU-Col-FAU-Weiss-100, #fff);
-      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+      border-left: 4px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     .wp-block-rrze-elements-accordion:last-child .accordion-group{
-      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, #fff);
+      border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     .accordion-toggle p,
     button.accordion-toggle {
-      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+      color: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     button.accordion-toggle:hover, button.accordion-toggle:focus, button.accordion-toggle:target, button.accordion-toggle:active {
-      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+      color: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     .accordion-toggle svg {
-      fill: var(--FAU-Col-FAU-Weiss-100, #fff);
+      fill: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     .accordion-toggle svg use {
-      fill: var(--FAU-Col-FAU-Weiss-100, #fff);
+      fill: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     & .accordion-toggle::before {
-      background: var(--FAU-Col-FAU-Weiss-100, #fff);
+      background: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
     & .accordion-toggle::after {
-      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
     .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
@@ -305,7 +285,15 @@
     .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
     .accordion .accordion-group .accordion-heading button.accordion-toggle:target,
     .accordion .accordion-group .accordion-heading button.accordion-toggle.active{
-      color: var(--FAU-Col-FAU-Weiss-100, #fff);
+      color: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
+    }
+
+    .wp-block-rrze-elements-collapse:last-child .accordion-inner .accordion .accordion-group{
+      border-bottom: none;
+    }
+
+    .wp-block-rrze-elements-collapse:last-child .accordion-inner {
+      margin-bottom: 1.5rem;
     }
   }
 }

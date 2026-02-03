@@ -43,7 +43,7 @@ You can use the E2E Testing framework following these guidelines:
 WP_BASE_URL=http://subdomain.your-testsite.local
 WP_USERNAME=EnterYourWordpressUserNameHere
 WP_PASSWORD=YourPasswordForWPLogin
-WP_AUTH_STORAGE=./tests/authStorage.json
+WP_AUTH_STORAGE=./tests/playwright/authStorage.json
 WP_PLAYWRIGHT_TESTPAGE=http://subdomain.your-testsite.local/wp-admin/post.php?post=2319&action=edit (The Edit-URL to your desired test page)
 2. What happens after running `npx playwright test`? WordPress E2E Testing framework is used to open your defined WordPress Development Site and Login via /wp-admin. It visits your Playwright-Testpage and follows the defined protocoll. You can extend on the playwrigt tests if needed.
 

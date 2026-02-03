@@ -8,6 +8,9 @@ use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Notice extends AbstractBlockRender
 {
+    /**
+     * @var array<string, string>
+     */
     private static array $icon_map = [
         'notice-attention'  => 'symbols warning',
         'notice-hinweis'    => 'symbols notifications',
@@ -25,9 +28,11 @@ class Notice extends AbstractBlockRender
     ];
 
     /**
+     * @param array<string, mixed> $attributes
+     * @param string $innerBlocks
      * @inheritDoc
      */
-    public function render($attributes, $innerBlocks, ?\WP_Block $block = null): string
+    public function render(array $attributes, string $innerBlocks, ?\WP_Block $block = null): string
     {
         // Avoid deprecation on trim(null)
         if ($block && !empty(trim((string)$block->inner_html))) {

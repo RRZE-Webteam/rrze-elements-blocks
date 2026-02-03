@@ -48,7 +48,7 @@ class Plugin
     /**
      * loaded method
      */
-    public function loaded()
+    public function loaded(): void
     {
         $this->setBasename()
             ->setDirectory()
@@ -79,9 +79,9 @@ class Plugin
     /**
      * setBasename method
      * Set the basename of the plugin.
-     * @return object This Plugin object.
+     * @return self This Plugin object.
      */
-    public function setBasename(): object
+    public function setBasename(): self
     {
         $this->basename = plugin_basename($this->pluginFile);
         return $this;
@@ -100,9 +100,9 @@ class Plugin
     /**
      * setDirectory method
      * Set the filesystem directory path (with trailing slash) for the plugin.
-     * @return object This Plugin object.
+     * @return self This Plugin object.
      */
-    public function setDirectory(): object
+    public function setDirectory(): self
     {
         $this->directory = rtrim(plugin_dir_path($this->pluginFile), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         return $this;
@@ -133,9 +133,9 @@ class Plugin
     /**
      * setUrl method
      * Set the URL directory path (with trailing slash) for the plugin.
-     * @return object This Plugin object.
+     * @return self This Plugin object.
      */
-    public function setUrl(): object
+    public function setUrl(): self
     {
         $this->url = rtrim(plugin_dir_url($this->pluginFile), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         return $this;
@@ -167,9 +167,9 @@ class Plugin
     /**
      * getVersion method
      * Set the version of the plugin.
-     * @return object This Plugin object.
+     * @return self This Plugin object.
      */
-    public function setVersion(): object
+    public function setVersion(): self
     {
         $headers = ['Version' => 'Version'];
         $fileData = get_file_data($this->pluginFile, $headers, 'plugin');
@@ -182,8 +182,10 @@ class Plugin
     /**
      * __call method
      * Method overloading.
+     *
+     * @param array<int, mixed> $arguments
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): void
     {
         if (!method_exists($this, $name)) {
             $message = sprintf('Call to undefined method %1$s::%2$s', __CLASS__, $name);

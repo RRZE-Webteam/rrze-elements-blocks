@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace RRZE\ElementsBlocks;
+defined('ABSPATH') || exit;
 
 /**
  * Generates one tiny inline SVG sprite per request that contains
@@ -72,7 +73,11 @@ class SpriteGenerator
   public static function iconPathFromRaw(string $raw): string
   {
     $raw = trim(str_replace('\\', '/', $raw));
-    return str_contains($raw, '/') ? $raw : preg_replace('/\s+/', '/', $raw);
+    if (str_contains($raw, '/')) {
+      return $raw;
+    }
+    $converted = preg_replace('/\s+/', '/', $raw);
+    return $converted ?? '';
   }
 
   /** Convert "solid/cow" → "solid-cow" for use as symbol/id. */
@@ -94,11 +99,17 @@ class SpriteGenerator
     }
 
     $svg = file_get_contents($file);
+    if ($svg === false) {
+      return '';
+    }
     $svg = preg_replace(
       ['#<\?xml.*?\?>#s', '#<!DOCTYPE.*?>#s', '#<!--.*?-->#s'], // strip header & comments
       '',
       $svg
     );
+    if ($svg === null) {
+      return '';
+    }
 
     if (!preg_match('#<svg[^>]*viewBox="([^"]+)"[^>]*>(.*?)</svg>#s', $svg, $m)) {
       return '';

@@ -4,7 +4,7 @@
 Plugin Name:     RRZE Elements Blocks
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-elements
 Description:     Advanced design elements for WordPress BlockEditor.
-Version:         1.1.5
+Version:         1.1.6
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -26,25 +26,30 @@ use RRZE\ElementsBlocks\Main;
 // Define plugin version requirements.
 const RRZE_PHP_VERSION = '8.0';
 const RRZE_WP_VERSION = '6.0';
-const RRZE_ELEMENTSB_VERSION = '1.1.4';
+const RRZE_ELEMENTSB_VERSION = '1.1.6';
 
-// Autoloads plugin classes.
-spl_autoload_register(function ($class) {
-    $prefix = __NAMESPACE__;
-    $base_dir = __DIR__ . '/includes/';
+// Autoload plugin classes either through Composer or a simple fallback loader.
+$composerAutoload = __DIR__ . '/vendor/autoload.php';
+if (file_exists($composerAutoload)) {
+    require_once $composerAutoload;
+} else {
+    spl_autoload_register(function ($class) {
+        $prefix = __NAMESPACE__;
+        $base_dir = __DIR__ . '/includes/';
 
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        return;
-    }
+        $len = strlen($prefix);
+        if (strncmp($prefix, $class, $len) !== 0) {
+            return;
+        }
 
-    $relative_class = substr($class, $len);
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+        $relative_class = substr($class, $len);
+        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
-    if (file_exists($file)) {
-        require $file;
-    }
-});
+        if (file_exists($file)) {
+            require $file;
+        }
+    });
+}
 
 // Register activation and deactivation hooks.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');

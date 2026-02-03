@@ -57,10 +57,13 @@ class Accordion
    * *guaranteed* to win collisions with other plugins or previous versions.
    *
    * @param string $tag The shortcode tag (e.g. "collapse").
-   * @param callable|string $callback The handler callback.
+   * @param callable(array<string>, string|null, string): string $callback The handler callback.
    */
-  protected function addShortcodeForce(string $tag, $callback): void
+  protected function addShortcodeForce(string $tag, callable $callback): void
   {
+    if ($tag === '') {
+      return;
+    }
     if (shortcode_exists($tag)) {
       // Keep a small trace in the debug log – very handy when hunting
       // conflicts in large installations.
@@ -84,9 +87,12 @@ class Accordion
    * Handles the wrapper shortcode (multiple collapsible panels).
    * Maps legacy attributes to the Collapsibles block renderer so the new
    * front‑end is used while the legacy API stays intact.
+   *
+   * @param array<string, string> $atts
    */
-  public function shortcodeCollapsibles($atts, $content = '', $tag = ''): string
+  public function shortcodeCollapsibles(array $atts = [], ?string $content = '', string $tag = ''): string
   {
+    $content = $content ?? '';
     /* --------------------------------------------------
      * 1. Parse legacy attributes
      * --------------------------------------------------*/
@@ -120,7 +126,7 @@ class Accordion
      * --------------------------------------------------*/
     // Strip leading autop that WordPress sometimes adds when the shortcode
     // is on its own line.
-    if (str_starts_with($content, '</p>')) {
+    if ($content !== '' && str_starts_with($content, '</p>')) {
       $content = substr($content, 4);
     }
 
@@ -182,9 +188,12 @@ class Accordion
 
   /**
    * Handles a single collapsible panel.
+   *
+   * @param array<string, string> $atts
    */
-  public function shortcodeCollapse($atts, $content = '', $tag = ''): string
+  public function shortcodeCollapse(array $atts = [], ?string $content = '', string $tag = ''): string
   {
+    $content = $content ?? '';
     /* Maintain legacy globals for unique IDs */
     if (!isset($GLOBALS['current_collapse'])) {
       $GLOBALS['current_collapse'] = 0;
@@ -281,13 +290,18 @@ class Accordion
     if ($fallback !== '') {
       return $fallback;
     }
-    switch (get_post_meta(get_the_ID(), 'fauval_langcode', true)) {
+    $postId = get_the_ID();
+    if (!is_int($postId)) {
+      return esc_html__('Expand All', 'rrze-elements-blocks');
+    }
+
+    switch (get_post_meta($postId, 'fauval_langcode', true)) {
       case 'en':
         return 'Expand All';
       case 'de':
         return 'Alle öffnen';
       default:
-        return esc_html__('Expand All', 'rrze-elements');
+        return esc_html__('Expand All', 'rrze-elements-blocks');
     }
   }
 }

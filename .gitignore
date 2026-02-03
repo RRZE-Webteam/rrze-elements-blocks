@@ -3,6 +3,7 @@ nbproject*
 .sass-cache
 .DS_Store
 /node_modules/
+phpunit.xml.dist
 
 ### vscode ###
 .vscode/
@@ -71,4 +72,5 @@ phpunit.xml.dist.bak
 /playwright/.cache/
 
 /tests/authStorage.json
+/tests/playwright/authStorage.json
 *.authStorage.json

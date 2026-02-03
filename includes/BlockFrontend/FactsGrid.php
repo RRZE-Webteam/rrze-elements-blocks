@@ -7,9 +7,11 @@ use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
 class FactsGrid extends AbstractBlockRender
 {
   /**
+   * @param array<string, mixed> $attributes
+   * @param string $innerBlocks
    * @inheritDoc
    */
-  public function render($attributes = [], $innerBlocks = '', ?\WP_Block $block = null): string
+  public function render(array $attributes = [], string $innerBlocks = '', ?\WP_Block $block = null): string
   {
     if ($block && !empty(trim($block->inner_html))) {
       return $innerBlocks;
