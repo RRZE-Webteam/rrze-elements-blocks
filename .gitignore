@@ -3,6 +3,7 @@ nbproject*
 .sass-cache
 .DS_Store
 /node_modules/
+phpunit.xml.dist
 
 ### vscode ###
 .vscode/

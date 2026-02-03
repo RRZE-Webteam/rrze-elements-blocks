@@ -292,7 +292,7 @@ class Accordion
     }
     $postId = get_the_ID();
     if (!is_int($postId)) {
-      return esc_html__('Expand All', 'rrze-elements');
+      return esc_html__('Expand All', 'rrze-elements-blocks');
     }
 
     switch (get_post_meta($postId, 'fauval_langcode', true)) {
@@ -301,7 +301,7 @@ class Accordion
       case 'de':
         return 'Alle öffnen';
       default:
-        return esc_html__('Expand All', 'rrze-elements');
+        return esc_html__('Expand All', 'rrze-elements-blocks');
     }
   }
 }

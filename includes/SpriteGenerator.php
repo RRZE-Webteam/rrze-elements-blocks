@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace RRZE\ElementsBlocks;
+defined('ABSPATH') || exit;
 
 /**
  * Generates one tiny inline SVG sprite per request that contains
