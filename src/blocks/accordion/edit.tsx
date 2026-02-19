@@ -4,7 +4,6 @@ import {
   ToolbarItem,
   Modal,
   Button,
-  PanelBody,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -23,7 +22,6 @@ import {
 import HeadingComponent from "../../components/HeadingComponent";
 import {
   IconMarkComponent,
-  IconPickerModalInset,
 } from "../../components/IconPicker";
 import { speak } from "@wordpress/a11y";
 

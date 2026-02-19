@@ -1,7 +1,6 @@
 import {
   registerBlockType
 } from "@wordpress/blocks";
-import "./editor.scss";
 import { __, sprintf } from "@wordpress/i18n";
 
 import Edit from "./edit";
@@ -97,12 +96,12 @@ registerBlockType(metadata.name as any, {
         ? sprintf(
             /* translators: accessibility text. %s: heading level. */
             __("Level %s. Empty.", "rrze-elements-blocks"),
-            hstart
+            hstart.toString()
           )
         : sprintf(
             /* translators: accessibility text. 1: heading level. 2: heading title. */
             __("Level %1$s. %2$s", "rrze-elements-blocks"),
-            hstart,
+            hstart.toString(),
             title
           );
     }
