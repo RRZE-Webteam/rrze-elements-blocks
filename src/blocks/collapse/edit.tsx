@@ -14,10 +14,10 @@ import {
   BlockControls,
   RichText,
 } from "@wordpress/block-editor";
-import { BlockEditProps } from "@wordpress/blocks";
-import { seen, unseen, symbol } from "@wordpress/icons";
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import {BlockEditProps} from "@wordpress/blocks";
+import {seen, unseen, symbol} from "@wordpress/icons";
+import {useState, useEffect} from "@wordpress/element";
+import {__} from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
 import 'material-symbols';
 
@@ -35,30 +35,30 @@ import {
 import {
   MaterialSymbolPicker
 } from "../../components/MaterialSymbolPicker";
-import { speak } from "@wordpress/a11y";
+import {speak} from "@wordpress/a11y";
 
-import { useJumpNameStore } from "../../hooks/useJumpNameStore";
-import { JumpNameEntry } from "../../stores/jumpNameStore";
-import { sanitizeTitleToJumpName } from "../../utility/utils";
-import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
+import {useJumpNameStore} from "../../hooks/useJumpNameStore";
+import {JumpNameEntry} from "../../stores/jumpNameStore";
+import {sanitizeTitleToJumpName} from "../../utility/utils";
+import {useDispatch, select} from "@wordpress/data";
+import {store as blockEditorStore} from "@wordpress/block-editor";
 
-import { AttributesV1_0_12 as BlockAttributes } from "./index";
+import {AttributesV1_0_12 as BlockAttributes} from "./index";
 
 const Edit = ({
-  attributes,
-  setAttributes,
-  clientId,
-  context,
-}: BlockEditProps<BlockAttributes>) => {
+                attributes,
+                setAttributes,
+                clientId,
+                context,
+              }: BlockEditProps<BlockAttributes>) => {
   const props = useBlockProps();
-  const { color, loadOpen, icon, jumpName, isCustomJumpname } = attributes;
+  const {color, loadOpen, icon, jumpName, isCustomJumpname} = attributes;
   const title = attributes.title;
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
-  const { __unstableMarkNextChangeAsNotPersistent } =
+  const {__unstableMarkNextChangeAsNotPersistent} =
     useDispatch(blockEditorStore);
 
   let computedDefaultJumpName = jumpName;
@@ -66,22 +66,28 @@ const Edit = ({
     if (!attributes.jumpName || attributes.jumpName === "") {
       const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ jumpName: computedDefaultJumpName });
+      setAttributes({jumpName: computedDefaultJumpName});
     }
     if (jumpName && jumpName.startsWith("panel_")) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ isCustomJumpname: false });
+      setAttributes({isCustomJumpname: false});
     }
   }, [attributes.jumpName, clientId, setAttributes]);
 
-  const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
+  const {jumpNames}: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
+    clientId,
+    jumpName: computedDefaultJumpName,
+    setAttributes: (attrs) => setAttributes(attrs),
+  });
+
+  useJumpNameStore({
     clientId,
     jumpName: computedDefaultJumpName,
     setAttributes: (attrs) => setAttributes(attrs),
   });
 
   const doesJumpNameExist = (name: string): boolean => {
-    return jumpNames.some((entry: JumpNameEntry) => entry.jumpName === name);
+    return select("rrze/elements-blocks").jumpNameExists(name);
   };
 
   let sameTypeSiblingsBefore = 0;
@@ -92,7 +98,7 @@ const Edit = ({
       context["rrze-elements/accordion-hstart"] !== attributes.hstart
     ) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ hstart: context["rrze-elements/accordion-hstart"] as number });
+      setAttributes({hstart: context["rrze-elements/accordion-hstart"] as number});
     }
   }, [context["rrze-elements/accordion-hstart"]]);
 
@@ -113,35 +119,69 @@ const Edit = ({
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ title: "" });
+      setAttributes({title: ""});
     } else {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ title: newText });
+      setAttributes({title: newText});
     }
   };
 
-  const onChangeTitleFocus = () => {
-    const newJumpName = sanitizeTitleToJumpName(title);
-    if (
-      newJumpName &&
-      newJumpName !== jumpName &&
-      !doesJumpNameExist(newJumpName) &&
-      !isCustomJumpname
-    ) {
-      setAttributes({ jumpName: newJumpName });
+  /**
+   * Sanitizes a given string to be used as a valid HTML ID / Jump Name.
+   * Handles European diacritics, expands specific ligatures/umlauts,
+   * and formats the string safely for HTML attributes.
+   * * @param title The raw string to sanitize
+   * @returns A safe, URL-friendly string
+   */
+  export const sanitizeTitleToJumpName = (title: string): string => {
+    if (!title) {
+      return "";
     }
+
+    let sanitized = title.toLowerCase();
+
+    // 1. Map characters that need to be expanded into multiple letters
+    const charMap: { [key: string]: string } = {
+      'ä': 'ae',
+      'ö': 'oe',
+      'ü': 'ue',
+      'ß': 'ss',
+      'æ': 'ae',
+      'œ': 'oe',
+    };
+
+    sanitized = sanitized.replace(/[äöüßæœ]/g, (match) => charMap[match] || match);
+
+    // 2. Normalize and strip remaining diacritics (accents)
+    // .normalize('NFD') splits 'é' into 'e' + '´' (combining acute accent)
+    // The regex /[\u0300-\u036f]/g targets those combining accent marks and deletes them.
+    sanitized = sanitized.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    // 3. Replace spaces, underscores, and common separators with hyphens
+    sanitized = sanitized.replace(/[\s_&/]+/g, '-');
+
+    // 4. Remove all characters that are not alphanumeric or hyphens
+    sanitized = sanitized.replace(/[^a-z0-9-]/g, '');
+
+    // 5. Remove multiple consecutive hyphens (e.g., "my---title" -> "my-title")
+    sanitized = sanitized.replace(/-+/g, '-');
+
+    // 6. Trim hyphens from the start and end of the string
+    sanitized = sanitized.replace(/^-+|-+$/g, '');
+
+    return sanitized;
   };
 
   // Function to handle the toggle of the loadOpen attribute.
   const loadOpenToggle = () => {
-    setAttributes({ loadOpen: !loadOpen });
+    setAttributes({loadOpen: !loadOpen});
   };
 
   return (
     <>
       <div {...props}>
         <BlockControls>
-          <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
+          <ColorSwitcherToolbar {...{attributes, setAttributes}} />
           <ToolbarGroup>
             <ToolbarItem>
               {() => (
@@ -177,7 +217,7 @@ const Edit = ({
                       {/*  }}*/}
                       {/*  setAttributes={setAttributes}*/}
                       {/*/>*/}
-                      <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
+                      <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes}/>
                       <Button variant="primary" onClick={closeModal}>
                         {__("Close", "rrze-elements-blocks")}
                       </Button>
@@ -198,8 +238,8 @@ const Edit = ({
             setAttributes={setAttributes}
             clientId={clientId}
           />
-          <ColorSwitcher {...{ attributes, setAttributes }} />
-          <AdvancedSettings {...{ attributes, setAttributes }} />
+          <ColorSwitcher {...{attributes, setAttributes}} />
+          <AdvancedSettings {...{attributes, setAttributes}} />
         </InspectorControls>
 
         <div className={`accordion-group ${color}`}>
