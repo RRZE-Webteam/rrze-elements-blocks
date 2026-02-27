@@ -5,7 +5,7 @@ import {
   ToolbarItem,
   Modal,
   Button,
-  PanelBody,
+  PanelBody, Notice,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -90,6 +90,10 @@ const Edit = ({
     return select("rrze/elements-blocks").jumpNameExists(name);
   };
 
+  const areDuplicateJumpNamesPresent = (name: string): boolean => {
+    return select("rrze/elements-blocks").jumpNameDuplicateIDs(name).length > 1;
+  };
+
   let sameTypeSiblingsBefore = 0;
 
   useEffect(() => {
@@ -133,7 +137,7 @@ const Edit = ({
    * * @param title The raw string to sanitize
    * @returns A safe, URL-friendly string
    */
-  export const sanitizeTitleToJumpName = (title: string): string => {
+  const sanitizeTitleToJumpName = (title: string): string => {
     if (!title) {
       return "";
     }
@@ -170,6 +174,18 @@ const Edit = ({
     sanitized = sanitized.replace(/^-+|-+$/g, '');
 
     return sanitized;
+  };
+
+  const onChangeTitleFocus = () => {
+    const newJumpName = sanitizeTitleToJumpName(title);
+    if (
+      newJumpName &&
+      newJumpName !== jumpName &&
+      !doesJumpNameExist(newJumpName) &&
+      !isCustomJumpname
+    ) {
+      setAttributes({jumpName: newJumpName});
+    }
   };
 
   // Function to handle the toggle of the loadOpen attribute.
@@ -230,6 +246,13 @@ const Edit = ({
         </BlockControls>
 
         <InspectorControls>
+          {doesJumpNameExist(attributes.jumpName) && areDuplicateJumpNamesPresent(attributes.jumpName) && (
+            <>
+              <Notice isDismissible={false} status={"warning"} politeness={"assertive"} spokenMessage={__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}>
+                {__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}
+              </Notice>
+            </>
+          )}
           <JumpLinkSelector
             attributes={{
               jumpName: attributes.jumpName,

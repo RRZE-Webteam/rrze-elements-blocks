@@ -59,6 +59,10 @@ const selectors = {
   jumpNameExists(state: State, jumpName: string): boolean {
     return state.jumpNames.some((entry: JumpNameEntry) => entry.jumpName === jumpName);
   },
+  jumpNameDuplicateIDs(state: State, jumpName: string): string[] {
+    const entry = state.jumpNames.find((entry: JumpNameEntry) => entry.jumpName === jumpName);
+    return entry ? entry.clientIds : [];
+  },
   getJumpNames(state: State) {
     return state.jumpNames;
   }

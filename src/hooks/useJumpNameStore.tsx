@@ -6,6 +6,7 @@ interface RrzeElementsBlocksSelectors {
   getJumpNames(): JumpNameEntry[];
 
   jumpNameExists(jumpName: string): boolean;
+  jumpNameDuplicateIDs(jumpName: string): string[];
 }
 
 interface UseJumpNameStoreParams {
@@ -38,6 +39,16 @@ export function useJumpNameStore({
     [jumpName],
   );
 
+  const jumpNameDuplicateIDs: string[] = useSelect(
+    (select) => {
+      const store = select(
+        "rrze/elements-blocks",
+        ) as RrzeElementsBlocksSelectors;
+      return jumpName ? store.jumpNameDuplicateIDs(jumpName) : [];
+      },
+    [jumpName],
+  )
+
   const lastJumpNameRef = useRef(jumpName);
 
   useEffect(() => {
@@ -66,5 +77,6 @@ export function useJumpNameStore({
   return {
     jumpNames,
     jumpNameExists,
+    jumpNameDuplicateIDs
   };
 }
