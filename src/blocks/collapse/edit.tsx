@@ -20,6 +20,7 @@ import {useState, useEffect} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
 import 'material-symbols';
+import {sanitizeTitleToJumpName} from "../../utility/utils";
 
 // Imports of custom components and helper functions.
 import JumpLinkSelector from "../../components/JumpLinkSelector";
@@ -29,7 +30,6 @@ import {
 } from "../../components/CustomColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import {
-  IconPicker,
   IconMarkComponent,
 } from "../../components/IconPicker";
 import {
@@ -38,12 +38,11 @@ import {
 import {speak} from "@wordpress/a11y";
 
 import {useJumpNameStore} from "../../hooks/useJumpNameStore";
-import {JumpNameEntry} from "../../stores/jumpNameStore";
-import {sanitizeTitleToJumpName} from "../../utility/utils";
 import {useDispatch, select} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 
 import {AttributesV1_0_12 as BlockAttributes} from "./index";
+import JumpNameResolverModal from "../../components/JumpNameResolverModal";
 
 const Edit = ({
                 attributes,
@@ -58,6 +57,7 @@ const Edit = ({
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {__unstableMarkNextChangeAsNotPersistent} =
     useDispatch(blockEditorStore);
 
@@ -73,12 +73,6 @@ const Edit = ({
       setAttributes({isCustomJumpname: false});
     }
   }, [attributes.jumpName, clientId, setAttributes]);
-
-  const {jumpNames}: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
-    clientId,
-    jumpName: computedDefaultJumpName,
-    setAttributes: (attrs) => setAttributes(attrs),
-  });
 
   useJumpNameStore({
     clientId,
@@ -130,58 +124,13 @@ const Edit = ({
     }
   };
 
-  /**
-   * Sanitizes a given string to be used as a valid HTML ID / Jump Name.
-   * Handles European diacritics, expands specific ligatures/umlauts,
-   * and formats the string safely for HTML attributes.
-   * * @param title The raw string to sanitize
-   * @returns A safe, URL-friendly string
-   */
-  const sanitizeTitleToJumpName = (title: string): string => {
-    if (!title) {
-      return "";
-    }
-
-    let sanitized = title.toLowerCase();
-
-    // 1. Map characters that need to be expanded into multiple letters
-    const charMap: { [key: string]: string } = {
-      'ä': 'ae',
-      'ö': 'oe',
-      'ü': 'ue',
-      'ß': 'ss',
-      'æ': 'ae',
-      'œ': 'oe',
-    };
-
-    sanitized = sanitized.replace(/[äöüßæœ]/g, (match) => charMap[match] || match);
-
-    // 2. Normalize and strip remaining diacritics (accents)
-    // .normalize('NFD') splits 'é' into 'e' + '´' (combining acute accent)
-    // The regex /[\u0300-\u036f]/g targets those combining accent marks and deletes them.
-    sanitized = sanitized.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-    // 3. Replace spaces, underscores, and common separators with hyphens
-    sanitized = sanitized.replace(/[\s_&/]+/g, '-');
-
-    // 4. Remove all characters that are not alphanumeric or hyphens
-    sanitized = sanitized.replace(/[^a-z0-9-]/g, '');
-
-    // 5. Remove multiple consecutive hyphens (e.g., "my---title" -> "my-title")
-    sanitized = sanitized.replace(/-+/g, '-');
-
-    // 6. Trim hyphens from the start and end of the string
-    sanitized = sanitized.replace(/^-+|-+$/g, '');
-
-    return sanitized;
-  };
-
   const onChangeTitleFocus = () => {
     const newJumpName = sanitizeTitleToJumpName(title);
     if (
       newJumpName &&
       newJumpName !== jumpName &&
       !doesJumpNameExist(newJumpName) &&
+      !areDuplicateJumpNamesPresent(newJumpName) &&
       !isCustomJumpname
     ) {
       setAttributes({jumpName: newJumpName});
@@ -226,13 +175,6 @@ const Edit = ({
                       onRequestClose={closeModal}
                       size="large"
                     >
-                      {/*<IconPickerModalInset*/}
-                      {/*  attributes={{*/}
-                      {/*    icon: attributes.icon,*/}
-                      {/*    svgString: attributes.svgString,*/}
-                      {/*  }}*/}
-                      {/*  setAttributes={setAttributes}*/}
-                      {/*/>*/}
                       <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes}/>
                       <Button variant="primary" onClick={closeModal}>
                         {__("Close", "rrze-elements-blocks")}
@@ -244,13 +186,17 @@ const Edit = ({
             </ToolbarItem>
           </ToolbarGroup>
         </BlockControls>
-
+        {isModalOpen && <JumpNameResolverModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />}
         <InspectorControls>
           {doesJumpNameExist(attributes.jumpName) && areDuplicateJumpNamesPresent(attributes.jumpName) && (
             <>
-              <Notice isDismissible={false} status={"warning"} politeness={"assertive"} spokenMessage={__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}>
+              <Notice isDismissible={false} status={"warning"} politeness={"assertive"}
+                      spokenMessage={__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}>
                 {__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}
               </Notice>
+              <PanelBody>
+                <Button variant="primary" onClick={() => setIsModalOpen(true)}>{__('Resolve conflict', 'rrze-elements-blocks')}</Button>
+              </PanelBody>
             </>
           )}
           <JumpLinkSelector
