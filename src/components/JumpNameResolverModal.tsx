@@ -135,6 +135,21 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         setSelectedEntry(null);
     };
 
+    const handleAutoResolve = () => {
+        if (!selectedEntry) return;
+
+        const [firstClientId, ...remainingClientIds] = selectedEntry.clientIds;
+        remainingClientIds.forEach(clientId => {
+            const newJumpName = `panel_${clientId.slice(-8)}`;
+            removeJumpNameByClientId(clientId);
+            updateBlockAttributes(clientId, {
+                jumpName: newJumpName,
+                isCustomJumpname: false,
+            });
+        });
+        setSelectedEntry(null);
+    };
+
     const jumpNameCounts = blockStates.reduce((acc, state) => {
         acc[state.jumpName] = (acc[state.jumpName] || 0) + 1;
         return acc;
@@ -215,18 +230,23 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                 </tbody>
             </table>
 
-            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <div>
                     <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{ marginRight: '10px' }}>
                         {__("Back", "rrze-elements-blocks")}
                     </Button>
-                    {remainingConflicts > 0 && (
-                        <span>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
-                    )}
                 </div>
-                <Button variant="primary" onClick={handleResolveConflict} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
-                    {__("Resolve Conflict", "rrze-elements-blocks")}
-                </Button>
+                <div>
+                  {remainingConflicts > 0 && (
+                    <span style={{paddingRight: "1rem"}}>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
+                  )}
+                    <Button variant="secondary" onClick={handleAutoResolve} style={{ marginRight: '10px' }}>
+                        {__("Resolve automatically", "rrze-elements-blocks")}
+                    </Button>
+                    <Button variant="primary" onClick={handleResolveConflict} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
+                        {__("Resolve Conflict", "rrze-elements-blocks")}
+                    </Button>
+                </div>
             </div>
         </>
     );
