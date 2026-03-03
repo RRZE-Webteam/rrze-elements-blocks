@@ -12,7 +12,7 @@ import { JumpNameEntry } from "../stores/jumpNameStore";
 import { store as blockEditorStore } from "@wordpress/block-editor";
 import type { Block } from '@wordpress/blocks';
 import { useState, useEffect, createPortal } from "@wordpress/element";
-import { replace } from "@wordpress/icons";
+import { replace, check } from "@wordpress/icons";
 
 interface JumpNameResolverModalProps {
     isOpen: boolean;
@@ -74,10 +74,10 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
 
     const handleJumpNameChange = (clientId: string, newJumpName: string) => {
         const sanitized = sanitizeTitleToJumpName(newJumpName);
-        const isDuplicate = doesJumpNameExist(sanitized) && sanitized !== selectedEntry?.jumpName;
+        const isDuplicateInStore = doesJumpNameExist(sanitized) && sanitized !== selectedEntry?.jumpName;
 
         setBlockStates(blockStates.map(state =>
-            state.clientId === clientId ? { ...state, jumpName: newJumpName, error: isDuplicate ? __("This jump name is already in use.", "rrze-elements-blocks") : undefined } : state
+            state.clientId === clientId ? { ...state, jumpName: newJumpName, error: isDuplicateInStore ? __("This jump name is already in use elsewhere.", "rrze-elements-blocks") : undefined } : state
         ));
     };
 
@@ -85,10 +85,10 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         const blockState = blockStates.find(state => state.clientId === clientId);
         if (blockState) {
             const sanitized = sanitizeTitleToJumpName(blockState.jumpName);
-            const isDuplicate = doesJumpNameExist(sanitized) && sanitized !== selectedEntry?.jumpName;
+            const isDuplicateInStore = doesJumpNameExist(sanitized) && sanitized !== selectedEntry?.jumpName;
             setBlockStates(blockStates.map(state =>
                 state.clientId === clientId
-                    ? { ...state, jumpName: sanitized, error: isDuplicate ? __("This jump name is already in use.", "rrze-elements-blocks") : undefined }
+                    ? { ...state, jumpName: sanitized, error: isDuplicateInStore ? __("This jump name is already in use elsewhere.", "rrze-elements-blocks") : undefined }
                     : state
             ));
         }
@@ -116,7 +116,7 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
 
     const handleResolveConflict = () => {
         const hasErrors = blockStates.some(state => state.error);
-        if (hasErrors) {
+        if (hasErrors || remainingConflicts > 0) {
             return;
         }
 
@@ -133,6 +133,18 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         setSelectedEntry(null);
     };
 
+    const jumpNameCounts = blockStates.reduce((acc, state) => {
+        acc[state.jumpName] = (acc[state.jumpName] || 0) + 1;
+        return acc;
+    }, {} as Record<string, number>);
+
+    const remainingConflicts = Object.values(jumpNameCounts).reduce((acc, count) => {
+        if (count > 1) {
+            return acc + (count - 1);
+        }
+        return acc;
+    }, 0);
+
     const renderSelectionView = () => (
         <>
             <p>{__("A conflict was detected for the jump name:", "rrze-elements-blocks")} <code>{selectedEntry?.jumpName}</code></p>
@@ -148,55 +160,73 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                     </tr>
                 </thead>
                 <tbody>
-                    {blockStates.map(({ clientId, jumpName, isCustomJumpname, error }) => (
-                        <tr key={clientId}>
-                            <td>
-                                <BlockInfo clientId={clientId} />
-                            </td>
-                            <td>
-                                <TextControl
-                                    value={jumpName}
-                                    onChange={(newJumpName) => handleJumpNameChange(clientId, newJumpName)}
-                                    onBlur={() => handleJumpNameBlur(clientId)}
-                                    help={error}
-                                />
-                            </td>
-                            <td>
-                                <ToggleControl
-                                    label={__("Lock Jump Name", "rrze-elements-blocks")}
-                                    checked={isCustomJumpname}
-                                    help={__("If enabled, the jump link will not be overwritten automatically any longer. ", "rrze-elements-blocks")}
-                                    onChange={(isChecked) => handleLockChange(clientId, isChecked)}
-                                />
-                            </td>
-                            <td>
-                                <Button
-                                    icon={<Icon icon={replace} />}
-                                    label={__("Generate new jump name", "rrze-elements-blocks")}
-                                    onClick={() => generateNewJumpName(clientId)}
-                                >
-                                  {__("Generate default jump name", "rrze-elements-blocks")}
-                                </Button>
-                                <Button
-                                    icon={<Icon icon={replace} />}
-                                    label={__("Generate jump name from title", "rrze-elements-blocks")}
-                                    onClick={() => generateJumpNameFromTitle(clientId)}
-                                >
-                                  {__("Generate jump name from title", "rrze-elements-blocks")}
-                                </Button>
-                            </td>
-                        </tr>
-                    ))}
+                    {blockStates.map(({ clientId, jumpName, isCustomJumpname, error }) => {
+                        const isDuplicateInView = jumpNameCounts[jumpName] > 1;
+                        const helpText = error || (isDuplicateInView ? __("This jump name is a duplicate.", "rrze-elements-blocks") : undefined);
+                        const hasError = !!error || isDuplicateInView;
+
+                        return (
+                            <tr key={clientId}>
+                                <td>
+                                    <BlockInfo clientId={clientId} />
+                                </td>
+                                <td>
+                                    <div style={{ position: 'relative' }}>
+                                        <TextControl
+                                            value={jumpName}
+                                            onChange={(newJumpName) => handleJumpNameChange(clientId, newJumpName)}
+                                            onBlur={() => handleJumpNameBlur(clientId)}
+                                            help={helpText}
+                                        />
+                                        {!hasError && jumpName !== selectedEntry?.jumpName && (
+                                            <Icon icon={check} style={{ position: 'absolute', top: '8px', right: '8px', color: 'green' }} />
+                                        )}
+                                    </div>
+                                </td>
+                                <td>
+                                    <ToggleControl
+                                        label={__("Lock Jump Name", "rrze-elements-blocks")}
+                                        checked={isCustomJumpname}
+                                        help={__("If enabled, the jump link will not be overwritten automatically any longer. ", "rrze-elements-blocks")}
+                                        onChange={(isChecked) => handleLockChange(clientId, isChecked)}
+                                    />
+                                </td>
+                                <td>
+                                    <Button
+                                        icon={<Icon icon={replace} />}
+                                        label={__("Generate new jump name", "rrze-elements-blocks")}
+                                        onClick={() => generateNewJumpName(clientId)}
+                                    >
+                                      {__("Generate default jump name", "rrze-elements-blocks")}
+                                    </Button>
+                                    <Button
+                                        icon={<Icon icon={replace} />}
+                                        label={__("Generate jump name from title", "rrze-elements-blocks")}
+                                        onClick={() => generateJumpNameFromTitle(clientId)}
+                                    >
+                                      {__("Generate jump name from title", "rrze-elements-blocks")}
+                                    </Button>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
 
-            <div style={{ marginTop: "20px", textAlign: "right" }}>
-                <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{ marginRight: '10px' }}>
-                    {__("Back", "rrze-elements-blocks")}
-                </Button>
-                <Button variant="primary" onClick={handleResolveConflict} disabled={blockStates.some(state => state.error)}>
+            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div>
+                    <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{ marginRight: '10px' }}>
+                        {__("Back", "rrze-elements-blocks")}
+                    </Button>
+                </div>
+              <div>
+                {remainingConflicts > 0 && (
+                  <span style={{paddingRight: "1rem"}}>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
+                )}
+                <Button variant="primary" onClick={handleResolveConflict} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
                     {__("Resolve Conflict", "rrze-elements-blocks")}
                 </Button>
+              </div>
             </div>
         </>
     );
