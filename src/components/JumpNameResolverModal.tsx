@@ -1,143 +1,262 @@
-import { __ } from "@wordpress/i18n";
+import {__} from "@wordpress/i18n";
 import {
-	Modal,
-	Button,
+  Modal,
+  Button,
+  TextControl,
+  ToggleControl,
+  Icon,
 } from "@wordpress/components";
-import { useDispatch, useSelect } from "@wordpress/data";
-import { useJumpNameStore } from "../hooks/useJumpNameStore";
-import { JumpNameEntry } from "../stores/jumpNameStore";
-import { store as blockEditorStore } from "@wordpress/block-editor";
-import type { Block } from '@wordpress/blocks';
+import {useSelect, useDispatch} from "@wordpress/data";
+import {useJumpNameStore} from "../hooks/useJumpNameStore";
+import {JumpNameEntry} from "../stores/jumpNameStore";
+import {store as blockEditorStore} from "@wordpress/block-editor";
+import type {Block} from '@wordpress/blocks';
+import {useState, useEffect, createPortal} from "@wordpress/element";
+import {replace} from "@wordpress/icons";
 
 interface JumpNameResolverModalProps {
-	isOpen: boolean;
-	onRequestClose: () => void;
+  isOpen: boolean;
+  onRequestClose: () => void;
 }
 
 interface BlockInfoProps {
-	clientId: string;
+  clientId: string;
 }
 
-const BlockInfo = ({ clientId }: BlockInfoProps) => {
-    const block = useSelect(
-        (select): Block | null => {
-            const editorSelect = select(blockEditorStore);
-            return editorSelect ? editorSelect.getBlock(clientId) : null;
-        },
-        [clientId]
-    );
+export const BlockInfo = ({clientId}: BlockInfoProps) => {
+  const block = useSelect(
+    (select): Block | null => {
+      const editorSelect = select(blockEditorStore);
+      return editorSelect ? editorSelect.getBlock(clientId) : null;
+    },
+    [clientId]
+  );
 
-    if (!block) {
-        return <small>{clientId}</small>;
-    }
+  if (!block) {
+    return <small>{clientId}</small>;
+  }
 
-    const title = (block.attributes as { title?: string }).title;
+  const title = (block.attributes as { title?: string }).title;
 
-    return (
-        <div style={{ marginBottom: '5px' }}>
-            <small>
-                <strong>{block.name}</strong> - {clientId}
-                {title && ` (Title: ${title})`}
-            </small>
-        </div>
-    );
+  return (
+    <div style={{marginBottom: '5px'}}>
+      <small>
+        <strong>{block.name}</strong> - {clientId}
+        {title && ` (Title: ${title})`}
+      </small>
+    </div>
+  );
 };
 
-const JumpNameResolverModal = ({
-	isOpen,
-	onRequestClose,
-}: JumpNameResolverModalProps) => {
-	const { jumpNames } = useJumpNameStore({
-		clientId: "", // Not specific to one block
-		jumpName: undefined,
-		setAttributes: () => {},
-	});
+const JumpNameResolverModal = ({isOpen, onRequestClose}: JumpNameResolverModalProps) => {
+  const {jumpNames} = useJumpNameStore({
+    clientId: "",
+    jumpName: undefined,
+    setAttributes: () => {
+    },
+  });
 
-	const { updateBlockAttributes } = useDispatch('core/block-editor');
+  const [selectedEntry, setSelectedEntry] = useState<JumpNameEntry | null>(null);
+  const [blockStates, setBlockStates] = useState<{
+    clientId: string;
+    jumpName: string;
+    isCustomJumpname: boolean
+  }[]>([]);
+  const {updateBlockAttributes} = useDispatch('core/block-editor');
+  const {removeJumpNameByClientId} = useDispatch('rrze/elements-blocks');
 
-	if (!isOpen) {
-		return null;
-	}
+  useEffect(() => {
+    if (selectedEntry) {
+      setBlockStates(
+        selectedEntry.clientIds.map(clientId => ({
+          clientId,
+          jumpName: selectedEntry.jumpName,
+          isCustomJumpname: false,
+        }))
+      );
+    }
+  }, [selectedEntry]);
 
-	const handleResolveConflict = (entry: JumpNameEntry) => {
-        entry.clientIds.forEach((clientId) => {
-            const newJumpName = `panel_${clientId.slice(-8)}`;
-            updateBlockAttributes(clientId, { jumpName: newJumpName, isCustomJumpname: false });
+  const handleJumpNameChange = (clientId: string, newJumpName: string) => {
+    setBlockStates(blockStates.map(state =>
+      state.clientId === clientId ? {...state, jumpName: newJumpName} : state
+    ));
+  };
+
+  const handleLockChange = (clientId: string, isLocked: boolean) => {
+    setBlockStates(blockStates.map(state =>
+      state.clientId === clientId ? {...state, isCustomJumpname: isLocked} : state
+    ));
+  };
+
+  const generateNewJumpName = (clientId: string) => {
+    const newJumpName = `panel_${clientId.slice(-8)}`;
+    handleJumpNameChange(clientId, newJumpName);
+  };
+
+  const handleResolveConflict = () => {
+    blockStates.forEach(state => {
+      if (selectedEntry && state.jumpName !== selectedEntry.jumpName) {
+        removeJumpNameByClientId(state.clientId);
+        updateBlockAttributes(state.clientId, {
+          jumpName: state.jumpName,
+          isCustomJumpname: state.isCustomJumpname,
         });
-        onRequestClose();
-    };
+      }
+    });
+    setSelectedEntry(null);
+  };
 
-	return (
-		<Modal
-			title={__("Jump Name Manager", "rrze-elements-blocks")}
-			onRequestClose={onRequestClose}
-			size="large"
-		>
-			<div className="jump-name-resolver-container">
-				<p>
-					{__(
-						"Manage and resolve conflicts for jump names used in the editor.",
-						"rrze-elements-blocks",
-					)}
-				</p>
-				<table className="wp-list-table widefat fixed striped">
-					<thead>
-						<tr>
-							<th>{__("Jump Name", "rrze-elements-blocks")}</th>
-							<th>{__("Used by", "rrze-elements-blocks")}</th>
-							<th>{__("Actions", "rrze-elements-blocks")}</th>
-						</tr>
-					</thead>
-					<tbody>
-						{jumpNames.map((entry) => (
-							<tr key={entry.jumpName}>
-								<td>
-									<code>{entry.jumpName}</code>
-								</td>
-								<td>
-									{entry.clientIds.map(id => <BlockInfo key={id} clientId={id} />)}
-									{entry.clientIds.length > 1 && (
-										<div style={{ color: "red", fontWeight: "bold" }}>
-											{__("Conflict detected!", "rrze-elements-blocks")}
-										</div>
-									)}
-								</td>
-								<td>
-									{entry.clientIds.length > 1 ? (
-										<Button
-											variant="primary"
-											onClick={() => handleResolveConflict(entry)}
-										>
-											{__("Resolve conflict", "rrze-elements-blocks")}
-										</Button>
-									) : (
-                                        <Button
-                                            variant="secondary"
-                                            disabled={true}
-                                        >
-                                            {__("No conflict", "rrze-elements-blocks")}
-                                        </Button>
-                                    )}
-								</td>
-							</tr>
-						))}
-						{jumpNames.length === 0 && (
-							<tr>
-								<td colSpan={3}>
-									{__("No jump names registered.", "rrze-elements-blocks")}
-								</td>
-							</tr>
-						)}
-					</tbody>
-				</table>
-			</div>
-			<div style={{ marginTop: "20px", textAlign: "right" }}>
-				<Button variant="primary" onClick={onRequestClose}>
-					{__("Close", "rrze-elements-blocks")}
-				</Button>
-			</div>
-		</Modal>
-	);
+  const renderSelectionView = () => (
+    <>
+      <p>{__("A conflict was detected for the jump name:", "rrze-elements-blocks")}
+        <code>{selectedEntry?.jumpName}</code></p>
+      <p>{__("Please resolve the conflict by assigning new jump names to the blocks below.", "rrze-elements-blocks")}</p>
+
+      <table className="wp-list-table widefat fixed striped">
+        <thead>
+        <tr>
+          <th>{__("Block", "rrze-elements-blocks")}</th>
+          <th>{__("Jump Name", "rrze-elements-blocks")}</th>
+          <th>{__("Lock Jumpname", "rrze-elements-blocks")}</th>
+          <th>{__("Generation options", "rrze-elements-blocks")}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {blockStates.map(({clientId, jumpName, isCustomJumpname}) => (
+          <tr key={clientId}>
+            <td>
+              <BlockInfo clientId={clientId}/>
+            </td>
+            <td>
+              <TextControl
+                value={jumpName}
+                onChange={(newJumpName) => handleJumpNameChange(clientId, newJumpName)}
+              />
+            </td>
+            <td>
+              <ToggleControl
+                label={__("Lock Jumpname", "rrze-elements-blocks")}
+                checked={isCustomJumpname}
+                help={__("If enabled, the jump link will not be overwritten automatically any longer. ", "rrze-elements-blocks")}
+                onChange={(isChecked) => handleLockChange(clientId, isChecked)}
+              />
+            </td>
+            <td>
+              <Button
+                icon={<Icon icon={replace}/>}
+                label={__("Generate default jump name", "rrze-elements-blocks")}
+                onClick={() => generateNewJumpName(clientId)}
+              >
+                {__("Generate default jump name", "rrze-elements-blocks")}
+              </Button>
+              <Button
+                icon={<Icon icon={replace}/>}
+                label={__("Generate jump name from Accordion Title", "rrze-elements-blocks")}
+                onClick={() => generateNewJumpName(clientId)}
+              >
+                {__("Generate jump name from Title", "rrze-elements-blocks")}
+              </Button>
+            </td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
+
+      <div style={{marginTop: "20px", textAlign: "right"}}>
+        <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{marginRight: '10px'}}>
+          {__("Back", "rrze-elements-blocks")}
+        </Button>
+        <Button variant="primary" onClick={handleResolveConflict}>
+          {__("Resolve Conflict", "rrze-elements-blocks")}
+        </Button>
+      </div>
+    </>
+  );
+
+  const renderListView = () => (
+    <>
+      <div className="jump-name-resolver-container">
+        <p>
+          {__(
+            "Manage and resolve conflicts for jump names used in the editor.",
+            "rrze-elements-blocks",
+          )}
+        </p>
+        <table className="wp-list-table widefat fixed striped">
+          <thead>
+          <tr>
+            <th>{__("Jump Name", "rrze-elements-blocks")}</th>
+            <th>{__("Used by", "rrze-elements-blocks")}</th>
+            <th>{__("Actions", "rrze-elements-blocks")}</th>
+          </tr>
+          </thead>
+          <tbody>
+          {jumpNames.map((entry) => (
+            <tr key={entry.jumpName}>
+              <td>
+                <code>{entry.jumpName}</code>
+              </td>
+              <td>
+                {entry.clientIds.map(id => <BlockInfo key={id} clientId={id}/>)}
+                {entry.clientIds.length > 1 && (
+                  <div style={{color: "red", fontWeight: "bold"}}>
+                    {__("Conflict detected!", "rrze-elements-blocks")}
+                  </div>
+                )}
+              </td>
+              <td>
+                {entry.clientIds.length > 1 ? (
+                  <Button
+                    variant="primary"
+                    onClick={() => setSelectedEntry(entry)}
+                  >
+                    {__("Resolve conflict", "rrze-elements-blocks")}
+                  </Button>
+                ) : (
+                  <Button
+                    variant="secondary"
+                    disabled={true}
+                  >
+                    {__("No conflict", "rrze-elements-blocks")}
+                  </Button>
+                )}
+              </td>
+            </tr>
+          ))}
+          {jumpNames.length === 0 && (
+            <tr>
+              <td colSpan={3}>
+                {__("No jump names registered.", "rrze-elements-blocks")}
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+      <div style={{marginTop: "20px", textAlign: "right"}}>
+        <Button variant="primary" onClick={onRequestClose}>
+          {__("Close", "rrze-elements-blocks")}
+        </Button>
+      </div>
+    </>
+  );
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return createPortal(
+    <Modal
+      title={selectedEntry ? __("Resolve Jump Name Conflict", "rrze-elements-blocks") : __("Jump Name Manager", "rrze-elements-blocks")}
+      onRequestClose={onRequestClose}
+      size="large"
+      isFullScreen={true}
+    >
+      {selectedEntry ? renderSelectionView() : renderListView()}
+    </Modal>,
+    document.body
+  );
 };
 
 export default JumpNameResolverModal;
