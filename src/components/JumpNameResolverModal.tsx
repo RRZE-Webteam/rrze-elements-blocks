@@ -116,7 +116,7 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         }
     }
 
-    const handleResolveConflict = () => {
+    const handleSaveChanges = () => {
         const hasErrors = blockStates.some(state => state.error);
         if (hasErrors || remainingConflicts > 0) {
             return;
@@ -174,10 +174,18 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         return acc;
     }, 0);
 
+    const isEditing = selectedEntry && selectedEntry.clientIds.length === 1;
+
     const renderSelectionView = () => (
         <>
-            <p>{__("A conflict was detected for the jump name:", "rrze-elements-blocks")} <code>{selectedEntry?.jumpName}</code></p>
-            <p>{__("Please resolve the conflict by assigning new jump names to the blocks below.", "rrze-elements-blocks")}</p>
+            {isEditing ? (
+                <p>{__("Edit the jump name for this block.", "rrze-elements-blocks")}</p>
+            ) : (
+                <>
+                    <p>{__("A conflict was detected for the jump name:", "rrze-elements-blocks")} <code>{selectedEntry?.jumpName}</code></p>
+                    <p>{__("Please resolve the conflict by assigning new jump names to the blocks below.", "rrze-elements-blocks")}</p>
+                </>
+            )}
 
             <table className="wp-list-table widefat fixed striped">
                 <thead>
@@ -242,21 +250,23 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                 </tbody>
             </table>
 
-            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{ marginRight: '10px' }}>
                         {__("Back", "rrze-elements-blocks")}
                     </Button>
+                    {!isEditing && remainingConflicts > 0 && (
+                        <span>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
+                    )}
                 </div>
                 <div>
-                  {remainingConflicts > 0 && (
-                    <span style={{ paddingRight: "1rem" }}>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
-                  )}
-                    <Button variant="secondary" onClick={handleAutoResolve} style={{ marginRight: '10px' }}>
-                        {__("Resolve automatically", "rrze-elements-blocks")}
-                    </Button>
-                    <Button variant="primary" onClick={handleResolveConflict} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
-                        {__("Resolve Conflict", "rrze-elements-blocks")}
+                    {!isEditing && (
+                        <Button variant="secondary" onClick={handleAutoResolve} style={{ marginRight: '10px' }}>
+                            {__("Resolve automatically", "rrze-elements-blocks")}
+                        </Button>
+                    )}
+                    <Button variant="primary" onClick={handleSaveChanges} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
+                        {isEditing ? __("Save Changes", "rrze-elements-blocks") : __("Resolve Conflict", "rrze-elements-blocks")}
                     </Button>
                 </div>
             </div>
@@ -314,9 +324,9 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                                     ) : (
                                         <Button
                                             variant="secondary"
-                                            disabled={true}
+                                            onClick={() => setSelectedEntry(entry)}
                                         >
-                                            {__("No conflict", "rrze-elements-blocks")}
+                                            {__("Edit", "rrze-elements-blocks")}
                                         </Button>
                                     )}
                                 </td>
@@ -346,7 +356,7 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
 
     return createPortal(
         <Modal
-            title={selectedEntry ? __("Resolve Jump Name Conflict", "rrze-elements-blocks") : __("Jump Name Manager", "rrze-elements-blocks")}
+            title={selectedEntry ? (selectedEntry.clientIds.length > 1 ? __("Resolve Jump Name Conflict", "rrze-elements-blocks") : __("Edit Jump Name", "rrze-elements-blocks")) : __("Jump Name Manager", "rrze-elements-blocks")}
             onRequestClose={onRequestClose}
             isFullScreen={true}
         >
