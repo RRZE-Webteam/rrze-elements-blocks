@@ -1,4 +1,5 @@
 
+//todo: remove old sanitization file. It is replaced with sanitize.ts in the future.
 var he = require('he');
 
 /**

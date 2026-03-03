@@ -81,6 +81,19 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         ));
     };
 
+    const handleJumpNameBlur = (clientId: string) => {
+        const blockState = blockStates.find(state => state.clientId === clientId);
+        if (blockState) {
+            const sanitized = sanitizeTitleToJumpName(blockState.jumpName);
+            const isDuplicate = doesJumpNameExist(sanitized) && sanitized !== selectedEntry?.jumpName;
+            setBlockStates(blockStates.map(state =>
+                state.clientId === clientId
+                    ? { ...state, jumpName: sanitized, error: isDuplicate ? __("This jump name is already in use.", "rrze-elements-blocks") : undefined }
+                    : state
+            ));
+        }
+    };
+
     const handleLockChange = (clientId: string, isLocked: boolean) => {
         setBlockStates(blockStates.map(state =>
             state.clientId === clientId ? { ...state, isCustomJumpname: isLocked } : state
@@ -131,7 +144,7 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                         <th>{__("Block", "rrze-elements-blocks")}</th>
                         <th>{__("Jump Name", "rrze-elements-blocks")}</th>
                         <th>{__("Lock Jump Name", "rrze-elements-blocks")}</th>
-                        <th>{__("Generate", "rrze-elements-blocks")}</th>
+                        <th>{__("Generation options", "rrze-elements-blocks")}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,6 +157,7 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                                 <TextControl
                                     value={jumpName}
                                     onChange={(newJumpName) => handleJumpNameChange(clientId, newJumpName)}
+                                    onBlur={() => handleJumpNameBlur(clientId)}
                                     help={error}
                                 />
                             </td>
