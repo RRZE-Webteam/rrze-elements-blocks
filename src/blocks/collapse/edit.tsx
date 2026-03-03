@@ -20,7 +20,6 @@ import {useState, useEffect} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
 import 'material-symbols';
-import {sanitizeTitleToJumpName} from "../../utility/utils";
 
 // Imports of custom components and helper functions.
 import JumpLinkSelector from "../../components/JumpLinkSelector";
@@ -38,7 +37,7 @@ import {
 import {speak} from "@wordpress/a11y";
 
 import {useJumpNameStore} from "../../hooks/useJumpNameStore";
-import {useDispatch, select} from "@wordpress/data";
+import {useDispatch} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 
 import {AttributesV1_0_12 as BlockAttributes} from "./index";
@@ -61,32 +60,11 @@ const Edit = ({
   const {__unstableMarkNextChangeAsNotPersistent} =
     useDispatch(blockEditorStore);
 
-  let computedDefaultJumpName = jumpName;
-  useEffect(() => {
-    if (!attributes.jumpName || attributes.jumpName === "") {
-      const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({jumpName: computedDefaultJumpName});
-    }
-    if (jumpName && jumpName.startsWith("panel_")) {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({isCustomJumpname: false});
-    }
-  }, [attributes.jumpName, clientId, setAttributes]);
-
-  useJumpNameStore({
+  const { doesJumpNameExist, areDuplicateJumpNamesPresent, sanitizeTitleToJumpName } = useJumpNameStore({
     clientId,
-    jumpName: computedDefaultJumpName,
+    jumpName: attributes.jumpName,
     setAttributes: (attrs) => setAttributes(attrs),
   });
-
-  const doesJumpNameExist = (name: string): boolean => {
-    return select("rrze/elements-blocks").jumpNameExists(name);
-  };
-
-  const areDuplicateJumpNamesPresent = (name: string): boolean => {
-    return select("rrze/elements-blocks").jumpNameDuplicateIDs(name).length > 1;
-  };
 
   let sameTypeSiblingsBefore = 0;
 

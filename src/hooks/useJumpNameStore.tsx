@@ -1,6 +1,7 @@
 import {useEffect, useRef} from "@wordpress/element";
-import {useSelect, useDispatch} from "@wordpress/data";
-import {JumpNameEntry} from "../stores/jumpNameStore"; // Assuming standard path structure
+import {useSelect, useDispatch, select} from "@wordpress/data";
+import {JumpNameEntry} from "../stores/jumpNameStore";
+import { sanitizeTitleToJumpName } from "../utility/sanitize";
 
 interface RrzeElementsBlocksSelectors {
   getJumpNames(): JumpNameEntry[];
@@ -29,25 +30,15 @@ export function useJumpNameStore({
     return store.getJumpNames();
   }, []);
 
-  const jumpNameExists = useSelect(
-    (select) => {
-      const store = select(
-        "rrze/elements-blocks",
-      ) as RrzeElementsBlocksSelectors;
-      return jumpName ? store.jumpNameExists(jumpName) : false;
-    },
-    [jumpName],
-  );
+  const doesJumpNameExist = (name: string): boolean => {
+    const store = select("rrze/elements-blocks") as RrzeElementsBlocksSelectors;
+    return store.jumpNameExists(name);
+  }
 
-  const jumpNameDuplicateIDs: string[] = useSelect(
-    (select) => {
-      const store = select(
-        "rrze/elements-blocks",
-        ) as RrzeElementsBlocksSelectors;
-      return jumpName ? store.jumpNameDuplicateIDs(jumpName) : [];
-      },
-    [jumpName],
-  )
+  const areDuplicateJumpNamesPresent = (name: string): boolean => {
+    const store = select("rrze/elements-blocks") as RrzeElementsBlocksSelectors;
+    return store.jumpNameDuplicateIDs(name).length > 1;
+  }
 
   const lastJumpNameRef = useRef(jumpName);
 
@@ -76,7 +67,8 @@ export function useJumpNameStore({
 
   return {
     jumpNames,
-    jumpNameExists,
-    jumpNameDuplicateIDs
+    doesJumpNameExist,
+    areDuplicateJumpNamesPresent,
+    sanitizeTitleToJumpName,
   };
 }
