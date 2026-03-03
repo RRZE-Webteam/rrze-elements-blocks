@@ -6,6 +6,10 @@
     border-bottom: 0;
   }
 
+  .accordion-heading .accordion-toggle.active {
+    background: none;
+  }
+
   .wp-block-rrze-elements-collapsibles{
     padding-top: 2rem;
     padding-bottom: 2rem;
