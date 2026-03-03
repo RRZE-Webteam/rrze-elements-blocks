@@ -250,16 +250,20 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                 </tbody>
             </table>
 
-            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                 <div>
                     <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{ marginRight: '10px' }}>
                         {__("Back", "rrze-elements-blocks")}
                     </Button>
-                    {!isEditing && remainingConflicts > 0 && (
-                        <span>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
-                    )}
                 </div>
                 <div>
+                    {!isEditing && remainingConflicts > 0 && (
+                        <span style={{ paddingRight: "1rem" }}>
+                            {remainingConflicts === 1
+                                ? `${remainingConflicts} ${__("Jump name duplication remaining", "rrze-elements-blocks")}`
+                                : `${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}
+                        </span>
+                    )}
                     {!isEditing && (
                         <Button variant="secondary" onClick={handleAutoResolve} style={{ marginRight: '10px' }}>
                             {__("Resolve automatically", "rrze-elements-blocks")}
