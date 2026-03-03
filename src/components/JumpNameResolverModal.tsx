@@ -62,13 +62,15 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
 
     useEffect(() => {
         if (selectedEntry) {
-            setBlockStates(
-                selectedEntry.clientIds.map(clientId => ({
+            const initialStates = selectedEntry.clientIds.map(clientId => {
+                const block = select(blockEditorStore).getBlock(clientId);
+                return {
                     clientId,
                     jumpName: selectedEntry.jumpName,
-                    isCustomJumpname: false,
-                }))
-            );
+                    isCustomJumpname: (block?.attributes as { isCustomJumpname?: boolean }).isCustomJumpname || false,
+                };
+            });
+            setBlockStates(initialStates);
         }
     }, [selectedEntry]);
 
@@ -213,20 +215,18 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                 </tbody>
             </table>
 
-            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <div style={{ marginTop: "20px", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <Button variant="secondary" onClick={() => setSelectedEntry(null)} style={{ marginRight: '10px' }}>
                         {__("Back", "rrze-elements-blocks")}
                     </Button>
+                    {remainingConflicts > 0 && (
+                        <span>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
+                    )}
                 </div>
-              <div>
-                {remainingConflicts > 0 && (
-                  <span style={{paddingRight: "1rem"}}>{`${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}</span>
-                )}
                 <Button variant="primary" onClick={handleResolveConflict} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
                     {__("Resolve Conflict", "rrze-elements-blocks")}
                 </Button>
-              </div>
             </div>
         </>
     );

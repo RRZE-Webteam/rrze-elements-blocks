@@ -8,6 +8,7 @@ declare global {
 }
 
 export interface JumpNameEntry {
+  isCustomJumpname: boolean;
   jumpName: string;
   clientIds: string[];
 }
