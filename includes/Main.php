@@ -33,6 +33,7 @@ class Main
 
         new Blocks();
         new Patterns();
+        Filters::register();
 
         add_action('rest_api_init', function () {
             register_rest_route('rrze-elements-blocks/v1', '/jump-names', [
