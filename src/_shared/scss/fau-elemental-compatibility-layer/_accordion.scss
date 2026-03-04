@@ -1,7 +1,7 @@
 @use "../designsystem/tokens/color" as color;
 
 .wp-theme-FAU-Elemental {
-  .wp-block-rrze-elements-collapsibles .block-editor-block-list__layout:last-child{
+  .wp-block-rrze-elements-collapsibles .block-editor-block-list__layout:last-child {
     padding-bottom: 0;
     border-bottom: 0;
   }
@@ -10,17 +10,17 @@
     background: none;
   }
 
-  .wp-block-rrze-elements-collapsibles{
+  .wp-block-rrze-elements-collapsibles {
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
 
-  .wp-block-rrze-elements-accordion .accordion-group{
+  .wp-block-rrze-elements-accordion .accordion-group {
     margin-bottom: 0;
     border-bottom: none;
   }
 
-  .accordion .block-editor-inner-blocks{
+  .accordion .block-editor-inner-blocks {
     border-bottom: none;
   }
 
@@ -46,7 +46,7 @@
       border-bottom: 1px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
-    .wp-block-rrze-elements-collapse button.accordion-toggle{
+    .wp-block-rrze-elements-collapse button.accordion-toggle {
       padding-top: var(--Spacing-6x, 1.5rem) !important;
       padding-bottom: var(--Spacing-6x, 1.5rem) !important;
     }
@@ -70,11 +70,11 @@
     }
 
     .accordion-body .accordion-inner,
-    .accordion-group .accordion-body .accordion-inner{
+    .accordion-group .accordion-body .accordion-inner {
       background-color: transparent;
     }
 
-    .accordion-group{
+    .accordion-group {
       padding-right: 60px;
     }
 
@@ -96,16 +96,16 @@
       border: none;
     }
 
-    .accordion .accordion-body .accordion-inner{
+    .accordion .accordion-body .accordion-inner {
       padding: 0;
     }
 
     .accordion .accordion .accordion-group .accordion-heading button.accordion-toggle,
-    .accordion .accordion .accordion-group .accordion-heading .accordion-toggle{
+    .accordion .accordion .accordion-group .accordion-heading .accordion-toggle {
       padding-left: 1rem;
     }
 
-    .accordion .accordion .accordion-inner{
+    .accordion .accordion .accordion-inner {
       padding-left: 1rem;
     }
 
@@ -136,14 +136,13 @@
     }
 
     & .accordion .accordion-toggle.active:hover:before,
-    & .accordion .accordion-toggle.active:focus:before
-      {
+    & .accordion .accordion-toggle.active:focus:before {
       right: -60px;
       top: 50%;
     }
 
     & .accordion-toggle.active::after,
-    & .accordion-toggle.focus::after{
+    & .accordion-toggle.focus::after {
       top: calc(50% - 13px);
       transform: rotate(180deg);
       transition: all .2s ease;
@@ -165,7 +164,7 @@
       mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center/60% 60% no-repeat;
     }
 
-    .wp-block-rrze-elements-collapse:last-child .accordion-inner .accordion .accordion-group{
+    .wp-block-rrze-elements-collapse:last-child .accordion-inner .accordion .accordion-group {
       border-bottom: none;
     }
 
@@ -195,7 +194,7 @@
     }
   }
 
-  div.rrze-elements.accordion{
+  div.rrze-elements.accordion {
     max-width: var(--small-max-width);
     margin: 0 auto;
   }
@@ -206,7 +205,7 @@
     transition: all .2s ease;
   }
 
-  .accordion .accordion-group .accordion-heading button.accordion-toggle{
+  .accordion .accordion-group .accordion-heading button.accordion-toggle {
     padding-left: 0;
     cursor: pointer;
   }
@@ -214,7 +213,7 @@
   .accordion .accordion-group .accordion-heading button.accordion-toggle:hover,
   .accordion .accordion-group .accordion-heading button.accordion-toggle:target,
   .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
-  .accordion .accordion-group .accordion-heading button.accordion-toggle.active{
+  .accordion .accordion-group .accordion-heading button.accordion-toggle.active {
     background-color: initial;
     color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
   }
@@ -230,32 +229,44 @@
   .accordion .phil .accordion-heading .accordion-toggle:hover,
   .accordion .tf .accordion-heading .accordion-toggle:hover,
   .accordion .fau .accordion-heading .accordion-toggle:hover,
-  .accordion .med .accordion-heading .accordion-toggle:hover{
+  .accordion .med .accordion-heading .accordion-toggle:hover
+  .accordion .nat .accordion-heading .accordion-toggle.active,
+  .accordion .rw .accordion-heading .accordion-toggle.active,
+  .accordion .phil .accordion-heading .accordion-toggle.active,
+  .accordion .tf .accordion-heading .accordion-toggle.active,
+  .accordion .fau .accordion-heading .accordion-toggle.active,
+  .accordion .med .accordion-heading .accordion-toggle.active,
+  .accordion .nat .accordion-heading .accordion-toggle,
+  .accordion .rw .accordion-heading .accordion-toggle,
+  .accordion .phil .accordion-heading .accordion-toggle,
+  .accordion .tf .accordion-heading .accordion-toggle,
+  .accordion .fau .accordion-heading .accordion-toggle,
+  .accordion .med .accordion-heading .accordion-toggle {
     background-color: initial;
   }
 
-  .accordion ol.wp-block-list{
+  .accordion ol.wp-block-list {
     padding-left: 2.5rem;
   }
 }
 
 .wp-theme-FAU-Elemental .is-style-dark {
-  .wp-block-rrze-elements-collapsibles{
+  .wp-block-rrze-elements-collapsibles {
     .accordion-group {
       border-top: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
       background-color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
     }
 
-    .wp-block-rrze-elements-collapse:last-child .accordion-group{
+    .wp-block-rrze-elements-collapse:last-child .accordion-group {
       border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
-    .wp-block-rrze-elements-collapse .accordion{
+    .wp-block-rrze-elements-collapse .accordion {
       border-left: 4px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
       border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
-    .wp-block-rrze-elements-accordion:last-child .accordion-group{
+    .wp-block-rrze-elements-accordion:last-child .accordion-group {
       border-bottom: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
@@ -288,11 +299,11 @@
     .accordion .accordion-group .accordion-heading button.accordion-toggle:active,
     .accordion .accordion-group .accordion-heading button.accordion-toggle:focus,
     .accordion .accordion-group .accordion-heading button.accordion-toggle:target,
-    .accordion .accordion-group .accordion-heading button.accordion-toggle.active{
+    .accordion .accordion-group .accordion-heading button.accordion-toggle.active {
       color: var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
     }
 
-    .wp-block-rrze-elements-collapse:last-child .accordion-inner .accordion .accordion-group{
+    .wp-block-rrze-elements-collapse:last-child .accordion-inner .accordion .accordion-group {
       border-bottom: none;
     }
 
