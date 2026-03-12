@@ -144,26 +144,34 @@ jQuery(document).ready(function ($) {
   /**
    * Checks if the URL contains a hash and opens the corresponding accordion if it exists.
    */
-  if (window.location.hash) {
-    const identifier = window.location.hash.split("_")[0];
-    const inpagenum = window.location.hash.split("_")[1];
-    let $target;
+  function handleHashChange() {
+    if (window.location.hash) {
+      const identifier = window.location.hash.split("_")[0];
+      const inpagenum = window.location.hash.split("_")[1];
+      let $target;
 
-    if (identifier === "#collapse" || identifier === "#panel") {
-      const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
-      if (inpagenum) {
-        const $findid = prefix + inpagenum;
-        $target = $("body").find("#" + sanitizeSelector($findid));
+      if (identifier === "#collapse" || identifier === "#panel") {
+        const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
+        if (inpagenum) {
+          const $findid = prefix + inpagenum;
+          $target = $("body").find("#" + sanitizeSelector($findid));
+        }
+      } else {
+        const $findname = window.location.hash.replace("#", "");
+        $target = $("body").find("div[name=" + sanitizeSelector($findname) + "]");
       }
-    } else {
-      const $findname = window.location.hash.replace("#", "");
-      $target = $("body").find("div[name=" + sanitizeSelector($findname) + "]");
-    }
 
-    if ($target && $target.length > 0) {
-      openAnchorAccordion($target);
+      if ($target && $target.length > 0) {
+        openAnchorAccordion($target);
+      }
     }
   }
+
+  // Initial check on page load
+  handleHashChange();
+
+  // Listen for hash changes
+  $(window).on('hashchange', handleHashChange);
 
   /**
    * Binds mousedown and keydown events to accordion toggles.
@@ -226,43 +234,9 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-   * Handles clicks on links and opens the corresponding accordion if it exists.
-   */
-  $("a:not(.prev, .next)").click(function (e) {
-    if (
-      $("[id^=accordion-]").length &&
-      !$(this).hasClass("accordion-toggle") &&
-      !$(this).hasClass("accordion-tabs-nav-toggle")
-    ) {
-      const $hash = $(this).prop("hash");
-      const identifier = $hash.split("_")[0];
-      const inpagenum = $hash.split("_")[1];
-      let $target;
-
-      if (identifier === "#collapse" || identifier === "#panel") {
-        const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
-        if (inpagenum) {
-          const $findid = prefix + inpagenum;
-          $target = $("body").find("#" + sanitizeSelector($findid));
-        }
-      } else {
-        const $findname = identifier.replace("#", "");
-        $target = $("body").find(
-          "div[name=" + sanitizeSelector($findname) + "]"
-        );
-      }
-
-      if ($target && $target.length > 0) {
-        openAnchorAccordion($target);
-      }
-    }
-  });
-
-  /**
    * Open all Accordions when Ctrl + F is pressed
    */
   document.addEventListener("keydown", function (event) {
-    console.log("fired");
     if ((event.ctrlKey || event.metaKey) && event.key === "f") {
       $(".accordion-body").slideDown();
       $(".accordion-toggle").addClass("active");
