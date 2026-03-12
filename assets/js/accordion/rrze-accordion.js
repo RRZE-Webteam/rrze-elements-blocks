@@ -106,19 +106,10 @@ jQuery(document).ready(function ($) {
     // Determine the starting point. If target is a toggle, find its body. If it's a body, use it.
     let $startBody;
     if ($target.hasClass('accordion-toggle')) {
-      // If the target is the button, we find the corresponding body using data-href or traversal
       const targetSelector = getAccordionTarget($target);
-      if (targetSelector) {
-        $startBody = $(targetSelector);
-      } else {
-        // Fallback: assume the body is in the same group
-        $startBody = $target.closest('.accordion-group').children('.accordion-body');
-      }
-    } else if ($target.hasClass('accordion-body')) {
-      $startBody = $target;
+      $startBody = targetSelector ? $(targetSelector) : $target.closest('.accordion-group').children('.accordion-body');
     } else {
-      // If it's neither (e.g. some internal element), find the closest accordion body
-      $startBody = $target.closest('.accordion-body');
+      $startBody = $target.closest('.accordion-body, .accordion-group').children('.accordion-body');
     }
 
     if (!$startBody || $startBody.length === 0) {
@@ -137,68 +128,63 @@ jQuery(document).ready(function ($) {
       }
     });
 
-    const offset = $target.offset();
+    const $heading = $startBody.closest('.accordion-group').find('.accordion-heading');
+    const offset = $heading.offset();
     if (offset) {
-      const $scrolloffset = offset.top - 300;
-      $("html,body").animate(
-        {
-          scrollTop: $scrolloffset,
-        },
-        "slow"
-      );
+        const elementTop = offset.top;
+        const elementHeight = $heading.outerHeight();
+        const windowHeight = $(window).height();
+        const scrollPosition = elementTop - (windowHeight / 2) + (elementHeight / 2);
+
+        $('html, body').animate({
+            scrollTop: scrollPosition
+        }, 'slow');
     }
+  }
+
+  function findTargetFromHash(hash) {
+    if (!hash) return $();
+    const cleanHash = sanitizeSelector(hash);
+    let $target = $(cleanHash);
+
+    if ($target.length === 0) {
+        const findname = cleanHash.replace('#', '');
+        $target = $("button.accordion-toggle[id='" + findname + "']");
+    }
+    if ($target.length === 0) {
+        const findname = cleanHash.replace('#', '');
+        $target = $("div[name='" + findname + "']");
+    }
+    return $target;
   }
 
   /**
    * Checks if the URL contains a hash and opens the corresponding accordion if it exists.
    */
   function handleHashChange() {
-    if (window.location.hash) {
-      const hash = window.location.hash;
-      const cleanHash = sanitizeSelector(hash);
-      const identifier = hash.split("_")[0];
-      const inpagenum = hash.split("_")[1];
-      let $target = $(); // Empty jQuery object by default
-
-      // Strategy 1: Direct ID match (Handles Accordion.php blocks where ID is on the body)
-      if ($(hash).length) {
-        $target = $(hash);
-      }
-
-      // Strategy 2: Look for button with this ID (Handles Collapse.php blocks)
-      if ($target.length === 0) {
-        const $buttonTarget = $("button.accordion-toggle[id='" + cleanHash.replace('#', '') + "']");
-        if ($buttonTarget.length) {
-          $target = $buttonTarget;
-        }
-      }
-
-      // Strategy 3: Special "panel_" / "collapse_" logic
-      if ($target.length === 0 && (identifier === "#collapse" || identifier === "#panel")) {
-        const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
-        if (inpagenum) {
-          const findid = prefix + inpagenum;
-          $target = $("body").find("#" + sanitizeSelector(findid));
-        }
-      }
-
-      // Strategy 4: "name" attribute fallback (Legacy)
-      if ($target.length === 0) {
-        const findname = hash.replace("#", "");
-        $target = $("body").find("div[name='" + sanitizeSelector(findname) + "']");
-      }
-
-      if ($target.length > 0) {
-        openAnchorAccordion($target);
-      }
+    const $target = findTargetFromHash(window.location.hash);
+    if ($target.length > 0) {
+      openAnchorAccordion($target);
     }
   }
 
   // Initial check on page load
   handleHashChange();
 
-  // Listen for hash changes
+  // Listen for hash changes for back/forward button
   $(window).on('hashchange', handleHashChange);
+
+  // Intercept clicks on in-page links to prevent default jump
+  $('a[href^="#"]').on('click', function(event) {
+      const hash = this.hash;
+      const $target = findTargetFromHash(hash);
+
+      if ($target.length > 0 && $target.closest('.accordion').length > 0) {
+          event.preventDefault();
+          history.pushState(null, null, hash);
+          openAnchorAccordion($target);
+      }
+  });
 
   /**
    * Binds mousedown and keydown events to accordion toggles.
