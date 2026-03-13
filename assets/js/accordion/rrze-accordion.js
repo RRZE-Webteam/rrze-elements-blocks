@@ -1,11 +1,13 @@
 /**
- * RRZE Elements Blocks - Accordion 1.0.4
+ * RRZE Elements Blocks - Accordion 1.0.5
  * Refactored and documented for efficiency and readability.
  * Uses jQuery for DOM manipulation and event handling.
+ * Features include Anchor/Hash detection, Easier Search via Ctrl + F, and more
  */
+// eslint-disable-next-line no-undef
+const {__} = wp.i18n;
 
-const {__, _x, _n, sprintf} = wp.i18n;
-
+// eslint-disable-next-line no-undef
 jQuery(document).ready(function ($) {
   /**
    * Initially hides all accordion bodies except those marked as open or should stay open,
@@ -117,7 +119,7 @@ jQuery(document).ready(function ($) {
     } else if ($target.hasClass('accordion-body')) {
       $startBody = $target;
     } else {
-      // If it's neither (e.g. some internal element), find the closest accordion body
+      // If it's neither (e.g., some internal element), find the closest accordion body
       $startBody = $target.closest('.accordion-body');
     }
 
