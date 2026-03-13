@@ -26,7 +26,7 @@ class ImageCopyrightHandler
         if (get_post_type($post_or_attachment_id) === 'attachment') {
             $attachment_id = $post_or_attachment_id;
         } elseif (has_post_thumbnail($post_or_attachment_id)) {
-            $attachment_id = get_post_thumbnail_id($post_or_attachment_id);
+            $attachment_id = (int) get_post_thumbnail_id($post_or_attachment_id);
         }
 
         if ($attachment_id === 0) {

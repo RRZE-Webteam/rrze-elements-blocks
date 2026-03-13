@@ -10,7 +10,10 @@ defined('ABSPATH') || exit;
  * @since 1.1.7
  */
 class Filters {
-    /** Gesammelte Copyright-Einträge (pro Request). */
+    /**
+     * Gesammelte Copyright-Einträge (pro Request).
+     * @var array<int, array{text: string, image_id: int}>
+     */
     private static array $copyrightEntries = [];
 
     /** Cache für den gewählten Filter-Tag. */
@@ -47,7 +50,7 @@ class Filters {
      *
      * @param mixed $entries Array (oder gemischt), das vom Theme übergeben wird
      * @param mixed $args    optionale Zusatzargumente
-     * @return array         Normalisiertes Array von ['text' => string, 'image_id' => int]
+     * @return array<int, array{text: string, image_id: int}> Normalisiertes Array von ['text' => string, 'image_id' => int]
      */
     public static function collectCopyrightInfo($entries, $args = []): array {
         $entriesArr = is_array($entries) ? $entries : [$entries];
