@@ -1,3 +1,5 @@
+@use "../designsystem/tokens/color" as c;
+
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-notice {
   display: block;
   background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #dfe2e7);
@@ -203,6 +205,10 @@ div.icon-box{
       color: #fff;
     }
   }
+}
+
+.wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice a{
+  color: var(--FAU-Col-FAU-Schwarz-100, c.$fau-color-fau-black-100);
 }
 
 .wp-theme-FAU-Elemental .is-style-dark .wp-block-rrze-elements-notice.is-style-attention{
