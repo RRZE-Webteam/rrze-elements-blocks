@@ -9,7 +9,8 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2015",
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "skipLibCheck": true
   },
   "include": [
     "./src/**/*",

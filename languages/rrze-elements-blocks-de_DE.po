@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-"
 "blocks\n"
-"POT-Creation-Date: 2025-09-11T11:46:02+00:00\n"
-"PO-Revision-Date: 2025-09-11 15:35+0200\n"
+"POT-Creation-Date: 2026-03-13T13:34:04+00:00\n"
+"PO-Revision-Date: 2026-03-13 15:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.9\n"
 "X-Domain: rrze-elements-blocks\n"
 "X-Loco-Version: 2.6.11; wp-6.7.1\n"
 
@@ -43,30 +43,44 @@ msgstr "RRZE Webteam"
 msgid "https://blogs.fau.de/webworking/"
 msgstr "https://blogs.fau.de/webworking/"
 
-#: includes/BlockFrontend/Fact.php:21
+#: includes/BlockFrontend/Fact.php:23
 msgid "More Information"
 msgstr "Weitere Informationen"
 
-#: includes/BlockFrontend/FactsGrid.php:21
+#: includes/BlockFrontend/FactsGrid.php:23
 msgid "Facts About Our Research"
 msgstr "Fakten über unsere Forschung"
 
-#: includes/Blocks.php:85
+#: includes/Blocks.php:68
+msgid "attention"
+msgstr "Achtung"
+
+#: includes/Blocks.php:69
+msgid "Attention"
+msgstr "Achtung"
+
+#: includes/Blocks.php:105
 msgid "Light"
 msgstr "Hell"
 
-#: includes/Blocks.php:89
+#: includes/Blocks.php:109
 msgid "Dark"
 msgstr "Dunkel"
 
-#: includes/Blocks.php:95 build/blocks/counter/index.js:1
+#: includes/Blocks.php:115 build/blocks/counter/index.js:1
 msgid "Normal"
 msgstr "Normal"
 
-#: includes/Blocks.php:100 build/blocks/counter/index.js:1
+#: includes/Blocks.php:120 build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Small"
 msgstr "Klein"
+
+#: includes/LegacyShortcodes/Accordion.php:295
+#: includes/LegacyShortcodes/Accordion.php:304
+#: build/blocks/collapsibles/index.js:1
+msgid "Expand All"
+msgstr "Alle öffnen"
 
 #: includes/Patterns.php:33
 msgctxt "Block pattern category"
@@ -75,7 +89,7 @@ msgstr "Seiten"
 
 #: includes/Patterns.php:34
 msgid "A collection of full page layouts."
-msgstr "Eine Sammlung von Fullsite-Templates"
+msgstr "Eine Sammlung von Fullsite-Templates."
 
 #: includes/Patterns.php:42
 msgctxt "Block pattern category"
@@ -90,89 +104,89 @@ msgstr "Eine Sammlung von DEV-Layouts für automatisierte Tests."
 msgid "RRZE Elements"
 msgstr "RRZE Elements"
 
-#: includes/Patterns.php:144
+#: includes/Patterns.php:142
 msgid "DEV: Counter and Iconbox"
 msgstr "DEV: Zähl- und Iconbox"
 
-#: includes/Patterns.php:145
+#: includes/Patterns.php:143
 msgctxt "DEV Template"
 msgid "A testing template for Counter and Iconbox."
 msgstr "Eine Testvorlage für Counter und Iconbox."
 
-#: includes/Patterns.php:156
+#: includes/Patterns.php:154
 msgid "DEV: Accordion"
 msgstr "DEV: Accordion"
 
-#: includes/Patterns.php:157
+#: includes/Patterns.php:155
 msgctxt "DEV Template"
 msgid "A testing template for Accordions."
 msgstr "Eine Testvorlage für Accordions."
 
-#: includes/Patterns.php:196
+#: includes/Patterns.php:194
 msgid "Example Pattern"
 msgstr "Beispiel-Pattern"
 
-#: includes/Patterns.php:197
+#: includes/Patterns.php:195
 msgctxt "Block pattern description"
 msgid "Description for Example Pattern"
 msgstr "Beschreibung für eine Beispiel-Vorlage"
 
-#: includes/Patterns.php:203
+#: includes/Patterns.php:201
 msgid "Image with Accordion"
 msgstr "Bild mit Accordion"
 
-#: includes/Patterns.php:204
+#: includes/Patterns.php:202
 msgctxt "Block pattern description"
 msgid "Description for Image with Accordion"
 msgstr "Vorlage für ein Bild mit Accordion"
 
-#: includes/Patterns.php:211
+#: includes/Patterns.php:209
 msgid "Custom News section 3-Column Layout"
 msgstr "Neuste Beiträge 3-spaltiges Layout"
 
-#: includes/Patterns.php:212
+#: includes/Patterns.php:210
 msgctxt "Block pattern description"
 msgid "A 3 Column Layout for custom News on Landing pages"
 msgstr "Ein 3-spaltiges Layout für Custom News für Landing pages"
 
-#: includes/Patterns.php:218
+#: includes/Patterns.php:216
 msgid "Call to Action"
 msgstr "Call to Action"
 
-#: includes/Patterns.php:219
+#: includes/Patterns.php:217
 msgctxt "Block pattern description"
 msgid "Call to Action section"
 msgstr "Call to Action Vorlage"
 
-#: includes/Patterns.php:225
+#: includes/Patterns.php:223
 msgid "Image with Text"
 msgstr "Bild mit Text"
 
-#: includes/Patterns.php:226
+#: includes/Patterns.php:224
 msgctxt "Block pattern description"
 msgid "Two column layout: Image left, text right column."
-msgstr "Ein zweispaltiges Layout: Linksbündiges Bild, Textspalte rechts"
+msgstr "Ein zweispaltiges Layout: Linksbündiges Bild, Textspalte rechts."
 
-#: includes/Patterns.php:232
+#: includes/Patterns.php:230
 msgid "Imagefilm"
 msgstr "Imagefilm"
 
-#: includes/Patterns.php:233
+#: includes/Patterns.php:231
 msgctxt "Block pattern description"
 msgid "FAU Imagefilm."
-msgstr "FAU Imagefilm"
+msgstr "FAU Imagefilm."
 
-#: includes/Patterns.php:239
+#: includes/Patterns.php:237
 msgid "Landing page template 1"
 msgstr "Landingpage Template 1"
 
-#: includes/Patterns.php:240
+#: includes/Patterns.php:238
 msgctxt "Block pattern description"
 msgid "A landingpage template for FAU."
-msgstr "Ein Landingpage Template für die FAU"
+msgstr "Ein Landingpage Template für die FAU."
 
 #. translators: 1: current PHP version, 2: required PHP version
-#: rrze-elements-blocks.php:75
+#: rrze-elements-blocks.php:80
 #, php-format
 msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
@@ -182,7 +196,7 @@ msgstr ""
 "Version %2$s."
 
 #. translators: 1: current WordPress version, 2: required WordPress version
-#: rrze-elements-blocks.php:78
+#: rrze-elements-blocks.php:83
 #, php-format
 msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
@@ -200,7 +214,7 @@ msgstr "Farbeinstellung"
 #: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
 #: build/blocks/collapse/index.js:1 build/blocks/tabs/index.js:1
 msgid "Select a Color"
-msgstr "Farbe auswählen…"
+msgstr "Farbe auswählen"
 
 #: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
 #: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
@@ -334,6 +348,138 @@ msgid "Brand Icons"
 msgstr "Firmen Icons (Brand)"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "This jump name is already in use elsewhere."
+msgstr "Diese Sprungmarke wird bereits an anderer Stelle verwendet."
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Resolve Jump Name Conflict"
+msgstr "Konflikt bei Sprungmarken beheben"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Edit Jump Name"
+msgstr "Sprungmarke bearbeiten"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Jump Name Manager"
+msgstr "Sprungmarken-Verwaltung"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Edit the jump name for this block."
+msgstr "Bearbeite die Sprungmarke für diesen Block."
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "A conflict was detected for the jump name:"
+msgstr "Es wurde ein Konflikt bei der Benennung der Sprungmarke festgestellt:"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid ""
+"Please resolve the conflict by assigning new jump names to the blocks below."
+msgstr ""
+"Bitte beheben Sie den Konflikt, indem Sie den folgenden Blöcken neue "
+"Sprungmarken zuweisen."
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Block"
+msgstr "Block"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Jump Name"
+msgstr "Sprungmarke"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Lock Jump Name"
+msgstr "Sprungmarke sperren"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Generation options"
+msgstr "Generierungsoptionen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "This jump name is a duplicate."
+msgstr "Dieser Sprungmarke ist ein Duplikat."
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid ""
+"If enabled, the jump link will not be overwritten automatically any longer. "
+msgstr ""
+"Wenn diese Option aktiviert ist, wird die Sprungmarke nicht mehr automatisch "
+"überschrieben. "
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Generate new jump name"
+msgstr "Neue Sprungmarke generieren"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Generate default jump name"
+msgstr "Standard-Sprungmarke generieren"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Generate jump name from title"
+msgstr "Sprungmarke aus dem Titel generieren"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Back"
+msgstr "Zurück"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Jump name duplication remaining"
+msgstr "Doppelte Sprungmarke verbleibend"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Jump name duplications remaining"
+msgstr "Doppelte Sprungmarken verbleibend"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Resolve automatically"
+msgstr "Konflikt automatisch lösen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Resolve Conflict"
+msgstr "Konflikt lösen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Manage and resolve conflicts for jump names used in the editor."
+msgstr "Konflikte verwendeter Sprungmarken einsehen und beheben."
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Used by"
+msgstr "Genutzt von"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Actions"
+msgstr "Aktionen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Conflict detected!"
+msgstr "Konflikt erkannt!"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Resolve conflict"
+msgstr "Konflikt lösen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Auto-resolve"
+msgstr "Automatisch auflösen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "No jump names registered."
+msgstr "Es sind keine Sprungmarken registriert."
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Close"
+msgstr "Schließen"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 msgid "Jump Link Settings"
 msgstr "Sprungmarke | Einstellungen"
 
@@ -367,28 +513,28 @@ msgstr "Name der Sprungmarke sperren"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 msgid "If enabled, the jump link will not generated automatically any longer. "
-msgstr "Falls aktiviert, wird die Sprungmarke nicht mehr automatisch generiert"
+msgstr ""
+"Falls aktiviert, wird die Sprungmarke nicht mehr automatisch generiert. "
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+msgid "Manage all Jump Names"
+msgstr "Alle Sprungmarken verwalten"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
 #: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
-#, fuzzy
 msgid "Loading icons…"
-msgstr "Icons laden.."
+msgstr "Symbole werden geladen…"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
 #: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
-#, fuzzy
-#| msgid ""
-#| ". You can search for an icon by typing its Font Awesome name in the "
-#| "search field below."
 msgid ""
 ". You can search for an icon by typing its name or relevant keywords in the "
 "search field below."
 msgstr ""
-". Sie können nach einem Symbol suchen, indem Sie den zugehörigen Font "
-"Awesome Namen in das untenstehende Suchfeld eingeben."
+". Sie können nach einem Symbol suchen, indem Sie dessen Namen oder relevante "
+"Stichwörter in Englischer Sprache in das Suchfeld unten eingeben."
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
@@ -400,7 +546,7 @@ msgstr "Suchen Sie nach einem Symbol auf Englisch."
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
 #: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
 msgid "Searching…"
-msgstr "Suche..."
+msgstr "Suche…"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
@@ -411,9 +557,26 @@ msgstr "Mehr laden"
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
 #: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
-#, fuzzy
 msgid "Material Symbols"
 msgstr "Material-Symbole"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
+msgid "FAU-exklusive Icons"
+msgstr "FAU-exklusive Symbole"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
+msgid "Back to Material Symbols"
+msgstr "Material-Symbole"
+
+#: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1 build/blocks/tab/index.js:1
+msgid "Show FAU-exclusive Icons"
+msgstr "FAU-exklusive Symbole anzeigen"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
@@ -434,10 +597,9 @@ msgid "Select an Icon"
 msgstr "Icon auswählen"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
-#: build/blocks/tab/index.js:1
-msgid "Close"
-msgstr "Schließen"
+msgid "This jump link name is already in use in another accordion element."
+msgstr ""
+"Diese Sprungmarke wird bereits in einem anderen Accordion-Block verwendet."
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 msgid "reduced. Button."
@@ -496,7 +658,7 @@ msgstr "Label | Einstellungen"
 msgid "Add a Label for your Alert. This changes the style to example"
 msgstr ""
 "Füge eine Beschriftung hinzu. Dies verändert den Style der Hinweisbox zu "
-"\"Example\"."
+"\"Example\""
 
 #: build/blocks/alert/index.js:1
 msgid "Add a Label"
@@ -546,10 +708,6 @@ msgstr "Steuert die Überschriftebene von Accordions"
 msgid "Untitled Collapse"
 msgstr "Akkordeonreiter ohne Titel"
 
-#: build/blocks/collapsibles/index.js:1
-msgid "Expand All"
-msgstr "Alle öffnen"
-
 #: build/blocks/collapsibles/index.js:1 build/blocks/timeline/index.js:1
 msgid "Heading Settings"
 msgstr "Überschrift | Einstellungen"
@@ -592,15 +750,15 @@ msgstr "Darstellungsoptionen für den Editor"
 
 #: build/blocks/contentwidthlimiter/index.js:1
 msgid " (Ideale Leselänge)"
-msgstr "(Ideale Leselänge)"
+msgstr " (Ideale Leselänge)"
 
 #: build/blocks/contentwidthlimiter/index.js:1
 msgid " (Außerhalb des sichtbaren Bereichs)"
-msgstr "(Außerhalb des sichtbaren Bereichs)"
+msgstr " (Außerhalb des sichtbaren Bereichs)"
 
 #: build/blocks/contentwidthlimiter/index.js:1
 msgid " Zeichen"
-msgstr "Characters"
+msgstr " Characters"
 
 #: build/blocks/counter-row/index.js:1
 msgid "Preview Animation"
@@ -667,7 +825,7 @@ msgstr "Bild entfernen"
 
 #: build/blocks/cta/index.js:1
 msgid "CTA Title"
-msgstr "CTA Titel "
+msgstr " CTA Titel "
 
 #: build/blocks/cta/index.js:1
 msgid "CTA Subtitle"
@@ -716,6 +874,40 @@ msgstr "Begriff"
 #: build/blocks/iconbox/index.js:1
 msgid "Definition"
 msgstr "Definition"
+
+#: build/blocks/news/index.js:1
+msgid "Mirror Settings in FAU Elemental"
+msgstr "Einstellungen aus FAU Elemental spiegeln"
+
+#: build/blocks/news/index.js:1
+msgid "Mirror the FAU-Teaser-Grid Block"
+msgstr "Aufhören, das FAU-Teaser-Raster zu spiegeln"
+
+#: build/blocks/news/index.js:1
+msgid "Disabled as long as you are using the List view"
+msgstr "Deaktiviert, solange Sie die Listenansicht verwenden"
+
+#: build/blocks/news/index.js:1
+msgid "Mirror the legacy Shortcode"
+msgstr "Den Legacy Shortcode spiegeln"
+
+#: build/blocks/news/index.js:1
+msgid "This Block is currently mirroring another block"
+msgstr "Dieser Block spiegelt derzeit einen anderen Block"
+
+#: build/blocks/news/index.js:1
+msgid ""
+"To ease the process of migrating onto the new theme, this block mirrors the "
+"Block fau-teaser-grid. You can deactivate this behavior via the following "
+"Checkbox."
+msgstr ""
+"Um die Umstellung auf das neue Theme zu vereinfachen, spiegelt dieser Block "
+"den Block „fau-teaser-grid“ wider. Du kannst diese Funktion über das "
+"folgende Kontrollkästchen deaktivieren."
+
+#: build/blocks/news/index.js:1
+msgid "Stop Mirroring the FAU-Teaser-Grid"
+msgstr "Aufhören, das FAU-Teaser-Raster zu spiegeln"
 
 #: build/blocks/news/index.js:1
 msgid "Filter"
@@ -954,7 +1146,7 @@ msgstr "Tab Label hinzufügen."
 msgid "Click here and press / to enter content inside your Tab"
 msgstr ""
 "Klicken Sie hier und drücken Sie / oder die Enter-Taste, um Inhalte "
-"hinzuzufügen."
+"hinzuzufügen"
 
 #: build/blocks/tabs/index.js:1
 msgid "Reveal all tabs inside the Editor (X-ray)"
@@ -990,7 +1182,7 @@ msgstr "Accordionelement"
 #: build/blocks/accordion/block.json
 msgctxt "block description"
 msgid "Creates an inner accordion item"
-msgstr "Legt ein inneres Accordionelement an."
+msgstr "Legt ein inneres Accordionelement an"
 
 #: build/blocks/accordion/block.json build/blocks/collapse/block.json
 msgctxt "block keyword"
@@ -1020,7 +1212,7 @@ msgstr "Inneres Accordion"
 #: build/blocks/accordions/block.json
 msgctxt "block description"
 msgid "Creates an inner accordion block"
-msgstr "Erstellt ein verschachteltes Accordion."
+msgstr "Erstellt ein verschachteltes Accordion"
 
 #: build/blocks/alert/block.json
 msgctxt "block title"
@@ -1040,7 +1232,7 @@ msgstr "Vorlage"
 #: build/blocks/block-blueprint/block.json
 msgctxt "block description"
 msgid "Creates a blueprint block."
-msgstr "Erzeugt einen Vorlagen-Block"
+msgstr "Erzeugt einen Vorlagen-Block."
 
 #: build/blocks/collapse/block.json
 msgctxt "block title"
@@ -1050,7 +1242,7 @@ msgstr "Accordionreiter"
 #: build/blocks/collapse/block.json build/blocks/collapsibles/block.json
 msgctxt "block description"
 msgid "Creates an accordion block"
-msgstr "Legt ein Accordion (Inhaltsfächer) an."
+msgstr "Legt ein Accordion (Inhaltsfächer) an"
 
 #: build/blocks/collapsibles/block.json
 msgctxt "block title"
@@ -1087,7 +1279,7 @@ msgstr "Zählerreihe"
 #: build/blocks/counter-row/block.json
 msgctxt "block description"
 msgid "Create a Row for Counters"
-msgstr "Erstellt eine Reihe für Zähler und Iconboxen."
+msgstr "Erstellt eine Reihe für Zähler und Iconboxen"
 
 #: build/blocks/counter-row/block.json
 msgctxt "block style label"
@@ -1109,7 +1301,7 @@ msgctxt "block description"
 msgid "Creates a Counter block."
 msgstr ""
 "Erstellt einen Zähler Block der bis zu einer bestimmten Zahl hoch oder "
-"herunter zählt"
+"herunter zählt."
 
 #: build/blocks/cta/block.json
 msgctxt "block title"
@@ -1129,7 +1321,7 @@ msgstr "Fakt"
 #: build/blocks/fact/block.json
 msgctxt "block description"
 msgid "Creates a Fact"
-msgstr "Erzeugt einen Fakten-Block."
+msgstr "Erzeugt einen Fakten-Block"
 
 #: build/blocks/facts-grid/block.json
 msgctxt "block title"
@@ -1139,7 +1331,7 @@ msgstr "Fakten Raster"
 #: build/blocks/facts-grid/block.json
 msgctxt "block description"
 msgid "Creates a Facts Grid Block"
-msgstr "Erzeugt eine Reihe für Fakten."
+msgstr "Erzeugt eine Reihe für Fakten"
 
 #: build/blocks/iconbox-row/block.json
 msgctxt "block title"
@@ -1149,7 +1341,7 @@ msgstr "Iconboxen"
 #: build/blocks/iconbox-row/block.json
 msgctxt "block description"
 msgid "Create a Row for Iconboxes"
-msgstr "Erstellt eine Reihe aus Iconboxen."
+msgstr "Erstellt eine Reihe aus Iconboxen"
 
 #: build/blocks/iconbox/block.json
 msgctxt "block title"
@@ -1160,7 +1352,7 @@ msgstr "Iconbox"
 msgctxt "block description"
 msgid "Creates a Iconbox block."
 msgstr ""
-"Erstellt eine Infobox mit Icon, Definition und Beschreibung zur Darstellung "
+" Erstellt eine Infobox mit Icon, Definition und Beschreibung zur Darstellung "
 "kurzer Informationen."
 
 #: build/blocks/insertion/block.json

@@ -1,11 +1,13 @@
 /**
- * RRZE Elements Blocks - Accordion 1.0.4
+ * RRZE Elements Blocks - Accordion 1.0.5
  * Refactored and documented for efficiency and readability.
  * Uses jQuery for DOM manipulation and event handling.
+ * Features include Anchor/Hash detection, Easier Search via Ctrl + F, and more
  */
+// eslint-disable-next-line no-undef
+const {__} = wp.i18n;
 
-const { __, _x, _n, sprintf } = wp.i18n;
-
+// eslint-disable-next-line no-undef
 jQuery(document).ready(function ($) {
   /**
    * Initially hides all accordion bodies except those marked as open or should stay open,
@@ -103,67 +105,104 @@ jQuery(document).ready(function ($) {
    * @param {jQuery} $target - The target accordion body element to be opened.
    */
   function openAnchorAccordion($target) {
-    if ($target.closest(".accordion").parent().closest(".accordion-group")) {
-      const $thisgroup = $($target).closest(".accordion-group");
-      const $othergroups = $($target)
-        .closest(".accordion")
-        .find(".accordion-group")
-        .not($thisgroup);
-      $($othergroups)
-        .find(".accordion-toggle")
-        .removeClass("active")
-        .attr("aria-expanded", "false");
-      $($othergroups)
-        .find(".accordion-body")
-        .not(".accordion-body.stayopen")
-        .slideUp();
-      $($thisgroup)
-        .find(".accordion-toggle:first")
-        .not(".active")
-        .addClass("active")
-        .attr("aria-expanded", "true");
-      $($thisgroup).find(".accordion-body:first").slideDown();
-      $($thisgroup)
-        .parents(".accordion-group")
-        .find(".accordion-toggle:first")
-        .not(".active")
-        .addClass("active")
-        .attr("aria-expanded", "true");
-      $($thisgroup).parents(".accordion-body").slideDown();
+    // Determine the starting point. If target is a toggle, find its body. If it's a body, use it.
+    let $startBody;
+    if ($target.hasClass('accordion-toggle')) {
+      // If the target is the button, we find the corresponding body using data-href or traversal
+      const targetSelector = getAccordionTarget($target);
+      if (targetSelector) {
+        $startBody = $(targetSelector);
+      } else {
+        // Fallback: assume the body is in the same group
+        $startBody = $target.closest('.accordion-group').children('.accordion-body');
+      }
+    } else if ($target.hasClass('accordion-body')) {
+      $startBody = $target;
+    } else {
+      // If it's neither (e.g., some internal element), find the closest accordion body
+      $startBody = $target.closest('.accordion-body');
     }
-    const offset = $target.offset();
-    const $scrolloffset = offset.top - 300;
-    $("html,body").animate(
-      {
-        scrollTop: $scrolloffset,
-      },
-      "slow"
-    );
+
+    if (!$startBody || $startBody.length === 0) {
+      return;
+    }
+
+    // Traverse up from the starting body to open all parent accordions
+    $startBody.parents('.accordion-group').add($startBody.closest('.accordion-group')).each(function () {
+      var $section = $(this);
+      var $body = $section.children('.accordion-body');
+      var $toggle = $section.children('.accordion-heading').children('.accordion-toggle');
+
+      if (!$body.is(':visible')) {
+        $toggle.addClass('active').attr('aria-expanded', 'true');
+        $body.slideDown();
+      }
+    });
+
+    const $heading = $startBody.closest('.accordion-group').find('.accordion-heading');
+    const offset = $heading.offset();
+    if (offset) {
+      const elementTop = offset.top;
+      const elementHeight = $heading.outerHeight();
+      const windowHeight = $(window).height();
+      const scrollPosition = elementTop - (windowHeight / 2) + (elementHeight / 2);
+
+      $('html, body').animate({
+        scrollTop: scrollPosition
+      }, 'slow');
+    }
   }
 
   /**
    * Checks if the URL contains a hash and opens the corresponding accordion if it exists.
    */
-  if (window.location.hash) {
-    const identifier = window.location.hash.split("_")[0];
-    const inpagenum = window.location.hash.split("_")[1];
-    let $target;
+  function handleHashChange() {
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const cleanHash = sanitizeSelector(hash);
+      const identifier = hash.split("_")[0];
+      const inpagenum = hash.split("_")[1];
+      let $target = $(); // Empty jQuery object by default
 
-    if (identifier === "#collapse" || identifier === "#panel") {
-      const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
-      if (inpagenum) {
-        const $findid = prefix + inpagenum;
-        $target = $("body").find("#" + sanitizeSelector($findid));
+      // Strategy 1: Direct ID match (Handles Accordion.php blocks where ID is on the body)
+      if ($(hash).length) {
+        $target = $(hash);
       }
-    } else {
-      const $findname = window.location.hash.replace("#", "");
-      $target = $("body").find("div[name=" + sanitizeSelector($findname) + "]");
-    }
 
-    if ($target && $target.length > 0) {
-      openAnchorAccordion($target);
+      // Strategy 2: Look for button with this ID (Handles Collapse.php blocks)
+      if ($target.length === 0) {
+        const $buttonTarget = $("button.accordion-toggle[id='" + cleanHash.replace('#', '') + "']");
+        if ($buttonTarget.length) {
+          $target = $buttonTarget;
+        }
+      }
+
+      // Strategy 3: Special "panel_" / "collapse_" logic
+      if ($target.length === 0 && (identifier === "#collapse" || identifier === "#panel")) {
+        const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
+        if (inpagenum) {
+          const findid = prefix + inpagenum;
+          $target = $("body").find("#" + sanitizeSelector(findid));
+        }
+      }
+
+      // Strategy 4: "name" attribute fallback (Legacy)
+      if ($target.length === 0) {
+        const findname = hash.replace("#", "");
+        $target = $("body").find("div[name='" + sanitizeSelector(findname) + "']");
+      }
+
+      if ($target.length > 0) {
+        openAnchorAccordion($target);
+      }
     }
   }
+
+  // Initial check on page load
+  handleHashChange();
+
+  // Listen for hash changes
+  $(window).on('hashchange', handleHashChange);
 
   /**
    * Binds mousedown and keydown events to accordion toggles.
@@ -226,43 +265,9 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-   * Handles clicks on links and opens the corresponding accordion if it exists.
-   */
-  $("a:not(.prev, .next)").click(function (e) {
-    if (
-      $("[id^=accordion-]").length &&
-      !$(this).hasClass("accordion-toggle") &&
-      !$(this).hasClass("accordion-tabs-nav-toggle")
-    ) {
-      const $hash = $(this).prop("hash");
-      const identifier = $hash.split("_")[0];
-      const inpagenum = $hash.split("_")[1];
-      let $target;
-
-      if (identifier === "#collapse" || identifier === "#panel") {
-        const prefix = identifier === "#collapse" ? "collapse_" : "panel_";
-        if (inpagenum) {
-          const $findid = prefix + inpagenum;
-          $target = $("body").find("#" + sanitizeSelector($findid));
-        }
-      } else {
-        const $findname = identifier.replace("#", "");
-        $target = $("body").find(
-          "div[name=" + sanitizeSelector($findname) + "]"
-        );
-      }
-
-      if ($target && $target.length > 0) {
-        openAnchorAccordion($target);
-      }
-    }
-  });
-
-  /**
    * Open all Accordions when Ctrl + F is pressed
    */
   document.addEventListener("keydown", function (event) {
-    console.log("fired");
     if ((event.ctrlKey || event.metaKey) && event.key === "f") {
       $(".accordion-body").slideDown();
       $(".accordion-toggle").addClass("active");

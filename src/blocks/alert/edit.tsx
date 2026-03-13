@@ -77,6 +77,7 @@ export default function Edit({
     borderStyle = { border: `1px dashed var(--color-TextLight, #707070)` };
   }
 
+  // @ts-ignore
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
   const onChangeTitle = (newText: string) => {

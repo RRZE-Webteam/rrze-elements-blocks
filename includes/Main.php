@@ -27,12 +27,13 @@ class Main
         $this->pluginFile = $pluginFile;
         SpriteGenerator::setAssetPath( plugin_dir_path(plugin_dir_path( __DIR__ ) . 'src/_shared/icons/svgs' ) );
 
-        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts'], 5);
         add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
         add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
 
         new Blocks();
         new Patterns();
+        Filters::register();
 
         add_action('rest_api_init', function () {
             register_rest_route('rrze-elements-blocks/v1', '/jump-names', [

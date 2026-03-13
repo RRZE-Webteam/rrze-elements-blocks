@@ -15,6 +15,7 @@ import { FormEvent, ChangeEvent } from "react";
 import { useSelect, useDispatch } from "@wordpress/data";
 
 import { sanitizeTitleToJumpName as sanitizeInput } from "../utility/utils";
+import JumpNameResolverModal from "./JumpNameResolverModal";
 
 interface JumpNameEntry {
 	jumpName: string;
@@ -51,6 +52,7 @@ const JumpLinkSelector = ({
 	const [inputURL, setInputURL] = useState(attributes.jumpName);
 	const [disabled, setDisabled] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	// Dispatch
 	const { addJumpName, removeJumpName } = useDispatch(
@@ -109,51 +111,58 @@ const JumpLinkSelector = ({
 	};
 
 	return (
-		<PanelBody
-			title={__("Jump Link Settings", "rrze-elements-blocks")}
-			initialOpen={false}
-			icon={<Icon icon={link} />}
-		>
-			<Spacer>
-				<Text>
-					{__(
-						"Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL.",
-						"rrze-elements-blocks",
-					)}
-				</Text>
-			</Spacer>
+		<>
+			{isModalOpen && <JumpNameResolverModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />}
+			<PanelBody
+				title={__("Jump Link Settings", "rrze-elements-blocks")}
+				initialOpen={false}
+				icon={<Icon icon={link} />}
+			>
+				<Spacer>
+					<Text>
+						{__(
+							"Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL.",
+							"rrze-elements-blocks",
+						)}
+					</Text>
+				</Spacer>
 
-			<form onSubmit={handleToggleSubmit}>
-				<BaseControl
-					label={__("Jump Link Name", "rrze-elements-blocks")}
-					id="rrze-elements"
-          __nextHasNoMarginBottom
-				>
-					<input
-						className="rrze-element-input-field"
-						type="text"
-						value={inputURL}
-						onChange={onChangeURL}
-						placeholder={__("Update the Jump Link", "rrze-elements-blocks")}
-						style={{ width: "100%" }}
-					/>
-				</BaseControl>
-				{error && <p style={{ color: "red" }}>{error}</p>}
-				<Button variant="primary" type="submit" disabled={disabled}>
-					{__("Set Jump Link", "rrze-elements-blocks")}
+				<form onSubmit={handleToggleSubmit}>
+					<BaseControl
+						label={__("Jump Link Name", "rrze-elements-blocks")}
+						id="rrze-elements"
+						__nextHasNoMarginBottom
+					>
+						<input
+							className="rrze-element-input-field"
+							type="text"
+							value={inputURL}
+							onChange={onChangeURL}
+							placeholder={__("Update the Jump Link", "rrze-elements-blocks")}
+							style={{ width: "100%" }}
+						/>
+					</BaseControl>
+					{error && <p style={{ color: "red" }}>{error}</p>}
+					<Button variant="primary" type="submit" disabled={disabled}>
+						{__("Set Jump Link", "rrze-elements-blocks")}
+					</Button>
+				</form>
+				<Spacer />
+				<ToggleControl
+					checked={attributes.isCustomJumpname}
+					__nextHasNoMarginBottom
+					label={__("Lock Jump Link Name", "rrze-elements-blocks")}
+					help={__("If enabled, the jump link will not generated automatically any longer. ", "rrze-elements-blocks")}
+					onChange={(isCustomJumpname) =>
+						setAttributes({ isCustomJumpname })
+					}
+				/>
+				<Spacer />
+				<Button variant="secondary" onClick={() => setIsModalOpen(true)}>
+					{__("Manage all Jump Names", "rrze-elements-blocks")}
 				</Button>
-			</form>
-			<Spacer />
-			<ToggleControl
-				checked={attributes.isCustomJumpname}
-        __nextHasNoMarginBottom
-				label={__("Lock Jump Link Name", "rrze-elements-blocks")}
-				help={__("If enabled, the jump link will not generated automatically any longer. ", "rrze-elements-blocks")}
-				onChange={(isCustomJumpname) =>
-					setAttributes({ isCustomJumpname })
-				}
-			/>
-		</PanelBody>
+			</PanelBody>
+		</>
 	);
 };
 

@@ -71,7 +71,8 @@ const TitleToolbar = ({ attributes, setAttributes }: TitleSettingsProps) => {
  */
 
 const TitleModal = ({ attributes, setAttributes }: TitleSettingsProps) => {
-	const { __unstableMarkNextChangeAsNotPersistent } =
+	// @ts-ignore
+  const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch(blockEditorStore);
 
 	const [isOpen, setOpen] = useState(false);
@@ -149,7 +150,8 @@ const TitlePlaceholder = ({
 	attributes,
 	setAttributes,
 }: TitleSettingsProps) => {
-	const { __unstableMarkNextChangeAsNotPersistent } =
+	// @ts-ignore
+  const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch(blockEditorStore);
 	const [iconType, iconName] = attributes.icon?.split(" ") || [];
 
@@ -215,7 +217,8 @@ const TitleInspectorControls = ({
 	attributes,
 	setAttributes,
 }: TitleSettingsProps) => {
-	const { __unstableMarkNextChangeAsNotPersistent } =
+	// @ts-ignore
+  const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch(blockEditorStore);
 	const onChangeTitle = (newText: string) => {
 		if (newText === "") {

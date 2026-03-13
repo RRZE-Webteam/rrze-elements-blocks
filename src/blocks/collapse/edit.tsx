@@ -5,7 +5,7 @@ import {
   ToolbarItem,
   Modal,
   Button,
-  PanelBody,
+  PanelBody, Notice,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -14,10 +14,10 @@ import {
   BlockControls,
   RichText,
 } from "@wordpress/block-editor";
-import { BlockEditProps } from "@wordpress/blocks";
-import { seen, unseen, symbol } from "@wordpress/icons";
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import {BlockEditProps} from "@wordpress/blocks";
+import {seen, unseen, symbol} from "@wordpress/icons";
+import {useState, useEffect} from "@wordpress/element";
+import {__} from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
 import 'material-symbols';
 
@@ -29,60 +29,43 @@ import {
 } from "../../components/CustomColorSwitcher";
 import AdvancedSettings from "./InspectorControls/AdvancedSettings";
 import {
-  IconPicker,
   IconMarkComponent,
 } from "../../components/IconPicker";
 import {
   MaterialSymbolPicker
 } from "../../components/MaterialSymbolPicker";
-import { speak } from "@wordpress/a11y";
+import {speak} from "@wordpress/a11y";
 
-import { useJumpNameStore } from "../../hooks/useJumpNameStore";
-import { JumpNameEntry } from "../../stores/jumpNameStore";
-import { sanitizeTitleToJumpName } from "../../utility/utils";
-import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
+import {useJumpNameStore} from "../../hooks/useJumpNameStore";
+import {useDispatch} from "@wordpress/data";
+import {store as blockEditorStore} from "@wordpress/block-editor";
 
-import { AttributesV1_0_12 as BlockAttributes } from "./index";
+import {AttributesV1_0_12 as BlockAttributes} from "./index";
+import JumpNameResolverModal from "../../components/JumpNameResolverModal";
 
 const Edit = ({
-  attributes,
-  setAttributes,
-  clientId,
-  context,
-}: BlockEditProps<BlockAttributes>) => {
+                attributes,
+                setAttributes,
+                clientId,
+                context,
+              }: BlockEditProps<BlockAttributes>) => {
   const props = useBlockProps();
-  const { color, loadOpen, icon, jumpName, isCustomJumpname } = attributes;
+  const {color, loadOpen, icon, jumpName, isCustomJumpname} = attributes;
   const title = attributes.title;
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
-  const { __unstableMarkNextChangeAsNotPersistent } =
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // @ts-ignore
+  const {__unstableMarkNextChangeAsNotPersistent} =
     useDispatch(blockEditorStore);
 
-  let computedDefaultJumpName = jumpName;
-  useEffect(() => {
-    if (!attributes.jumpName || attributes.jumpName === "") {
-      const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ jumpName: computedDefaultJumpName });
-    }
-    if (jumpName && jumpName.startsWith("panel_")) {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ isCustomJumpname: false });
-    }
-  }, [attributes.jumpName, clientId, setAttributes]);
-
-  const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
+  const { doesJumpNameExist, areDuplicateJumpNamesPresent, sanitizeTitleToJumpName } = useJumpNameStore({
     clientId,
-    jumpName: computedDefaultJumpName,
+    jumpName: attributes.jumpName,
     setAttributes: (attrs) => setAttributes(attrs),
   });
-
-  const doesJumpNameExist = (name: string): boolean => {
-    return jumpNames.some((entry: JumpNameEntry) => entry.jumpName === name);
-  };
 
   let sameTypeSiblingsBefore = 0;
 
@@ -92,7 +75,7 @@ const Edit = ({
       context["rrze-elements/accordion-hstart"] !== attributes.hstart
     ) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ hstart: context["rrze-elements/accordion-hstart"] as number });
+      setAttributes({hstart: context["rrze-elements/accordion-hstart"] as number});
     }
   }, [context["rrze-elements/accordion-hstart"]]);
 
@@ -113,10 +96,10 @@ const Edit = ({
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ title: "" });
+      setAttributes({title: ""});
     } else {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ title: newText });
+      setAttributes({title: newText});
     }
   };
 
@@ -126,22 +109,23 @@ const Edit = ({
       newJumpName &&
       newJumpName !== jumpName &&
       !doesJumpNameExist(newJumpName) &&
+      !areDuplicateJumpNamesPresent(newJumpName) &&
       !isCustomJumpname
     ) {
-      setAttributes({ jumpName: newJumpName });
+      setAttributes({jumpName: newJumpName});
     }
   };
 
   // Function to handle the toggle of the loadOpen attribute.
   const loadOpenToggle = () => {
-    setAttributes({ loadOpen: !loadOpen });
+    setAttributes({loadOpen: !loadOpen});
   };
 
   return (
     <>
       <div {...props}>
         <BlockControls>
-          <ColorSwitcherToolbar {...{ attributes, setAttributes }} />
+          <ColorSwitcherToolbar {...{attributes, setAttributes}} />
           <ToolbarGroup>
             <ToolbarItem>
               {() => (
@@ -170,14 +154,7 @@ const Edit = ({
                       onRequestClose={closeModal}
                       size="large"
                     >
-                      {/*<IconPickerModalInset*/}
-                      {/*  attributes={{*/}
-                      {/*    icon: attributes.icon,*/}
-                      {/*    svgString: attributes.svgString,*/}
-                      {/*  }}*/}
-                      {/*  setAttributes={setAttributes}*/}
-                      {/*/>*/}
-                      <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes} />
+                      <MaterialSymbolPicker attributes={attributes} setAttributes={setAttributes}/>
                       <Button variant="primary" onClick={closeModal}>
                         {__("Close", "rrze-elements-blocks")}
                       </Button>
@@ -188,8 +165,19 @@ const Edit = ({
             </ToolbarItem>
           </ToolbarGroup>
         </BlockControls>
-
+        {isModalOpen && <JumpNameResolverModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />}
         <InspectorControls>
+          {doesJumpNameExist(attributes.jumpName) && areDuplicateJumpNamesPresent(attributes.jumpName) && (
+            <>
+              <Notice isDismissible={false} status={"warning"} politeness={"assertive"}
+                      spokenMessage={__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}>
+                {__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}
+              </Notice>
+              <PanelBody>
+                <Button variant="primary" onClick={() => setIsModalOpen(true)}>{__('Resolve conflict', 'rrze-elements-blocks')}</Button>
+              </PanelBody>
+            </>
+          )}
           <JumpLinkSelector
             attributes={{
               jumpName: attributes.jumpName,
@@ -198,8 +186,8 @@ const Edit = ({
             setAttributes={setAttributes}
             clientId={clientId}
           />
-          <ColorSwitcher {...{ attributes, setAttributes }} />
-          <AdvancedSettings {...{ attributes, setAttributes }} />
+          <ColorSwitcher {...{attributes, setAttributes}} />
+          <AdvancedSettings {...{attributes, setAttributes}} />
         </InspectorControls>
 
         <div className={`accordion-group ${color}`}>

@@ -5,6 +5,7 @@ import {
   Modal,
   Button,
   PanelBody,
+  Notice,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -23,17 +24,15 @@ import {
 import HeadingComponent from "../../components/HeadingComponent";
 import {
   IconMarkComponent,
-  IconPickerModalInset,
 } from "../../components/IconPicker";
 import { speak } from "@wordpress/a11y";
 
 import { useJumpNameStore } from "../../hooks/useJumpNameStore";
-import { JumpNameEntry } from "../../stores/jumpNameStore";
-import { sanitizeTitleToJumpName } from "../../utility/utils";
 import JumpLinkSelector from "../../components/JumpLinkSelector";
 import { useDispatch } from "@wordpress/data";
 import { store as blockEditorStore } from "@wordpress/block-editor";
 import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
+import JumpNameResolverModal from "../../components/JumpNameResolverModal";
 
 interface EditProps {
   attributes: {
@@ -62,30 +61,14 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // @ts-ignore
   const { __unstableMarkNextChangeAsNotPersistent } =
     useDispatch(blockEditorStore);
 
-  /// Helper ///
-  const doesJumpNameExist = (name: string): boolean => {
-    return jumpNames.some((entry: JumpNameEntry) => entry.jumpName === name);
-  };
-
-  let computedDefaultJumpName = jumpName;
-  useEffect(() => {
-    if (!attributes.jumpName || attributes.jumpName === "") {
-      const computedDefaultJumpName = `panel_${clientId?.slice(-8)}`;
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ jumpName: computedDefaultJumpName });
-    }
-    if (jumpName && jumpName.startsWith("panel_")) {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ isCustomJumpname: false });
-    }
-  }, [attributes.jumpName, clientId, setAttributes]);
-
-  const { jumpNames }: { jumpNames: JumpNameEntry[] } = useJumpNameStore({
+  const { doesJumpNameExist, areDuplicateJumpNamesPresent, sanitizeTitleToJumpName } = useJumpNameStore({
     clientId,
-    jumpName: computedDefaultJumpName,
+    jumpName: attributes.jumpName,
     setAttributes: (attrs) => setAttributes(attrs),
   });
 
@@ -148,6 +131,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
       newJumpName &&
       newJumpName !== jumpName &&
       !doesJumpNameExist(newJumpName) &&
+      !areDuplicateJumpNamesPresent(newJumpName) &&
       !isCustomJumpname
     ) {
       setAttributes({ jumpName: newJumpName });
@@ -199,7 +183,19 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
           </ToolbarItem>
         </ToolbarGroup>
       </BlockControls>
+      {isModalOpen && <JumpNameResolverModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />}
       <InspectorControls>
+        {doesJumpNameExist(attributes.jumpName) && areDuplicateJumpNamesPresent(attributes.jumpName) && (
+            <>
+              <Notice isDismissible={false} status={"warning"} politeness={"assertive"}
+                      spokenMessage={__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}>
+                {__("This jump link name is already in use in another accordion element.", "rrze-elements-blocks")}
+              </Notice>
+              <PanelBody>
+                <Button variant="primary" onClick={() => setIsModalOpen(true)}>{__('Resolve conflict', 'rrze-elements-blocks')}</Button>
+              </PanelBody>
+            </>
+        )}
         <JumpLinkSelector
           attributes={{
             jumpName: attributes.jumpName,
