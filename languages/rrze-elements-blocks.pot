@@ -1,15 +1,15 @@
-# Copyright (C) 2025 RRZE Webteam
+# Copyright (C) 2026 RRZE Webteam
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: RRZE Elements Blocks 1.0.22\n"
+"Project-Id-Version: RRZE Elements Blocks 1.1.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-11T11:46:02+00:00\n"
+"POT-Creation-Date: 2026-03-13T13:34:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rrze-elements-blocks\n"
@@ -39,31 +39,45 @@ msgstr ""
 msgid "https://blogs.fau.de/webworking/"
 msgstr ""
 
-#: includes/BlockFrontend/Fact.php:21
+#: includes/BlockFrontend/Fact.php:23
 msgid "More Information"
 msgstr ""
 
-#: includes/BlockFrontend/FactsGrid.php:21
+#: includes/BlockFrontend/FactsGrid.php:23
 msgid "Facts About Our Research"
 msgstr ""
 
-#: includes/Blocks.php:85
+#: includes/Blocks.php:68
+msgid "attention"
+msgstr ""
+
+#: includes/Blocks.php:69
+msgid "Attention"
+msgstr ""
+
+#: includes/Blocks.php:105
 msgid "Light"
 msgstr ""
 
-#: includes/Blocks.php:89
+#: includes/Blocks.php:109
 msgid "Dark"
 msgstr ""
 
-#: includes/Blocks.php:95
+#: includes/Blocks.php:115
 #: build/blocks/counter/index.js:1
 msgid "Normal"
 msgstr ""
 
-#: includes/Blocks.php:100
+#: includes/Blocks.php:120
 #: build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Small"
+msgstr ""
+
+#: includes/LegacyShortcodes/Accordion.php:295
+#: includes/LegacyShortcodes/Accordion.php:304
+#: build/blocks/collapsibles/index.js:1
+msgid "Expand All"
 msgstr ""
 
 #: includes/Patterns.php:33
@@ -88,95 +102,95 @@ msgstr ""
 msgid "RRZE Elements"
 msgstr ""
 
-#: includes/Patterns.php:144
+#: includes/Patterns.php:142
 msgid "DEV: Counter and Iconbox"
 msgstr ""
 
-#: includes/Patterns.php:145
+#: includes/Patterns.php:143
 msgctxt "DEV Template"
 msgid "A testing template for Counter and Iconbox."
 msgstr ""
 
-#: includes/Patterns.php:156
+#: includes/Patterns.php:154
 msgid "DEV: Accordion"
 msgstr ""
 
-#: includes/Patterns.php:157
+#: includes/Patterns.php:155
 msgctxt "DEV Template"
 msgid "A testing template for Accordions."
 msgstr ""
 
-#: includes/Patterns.php:196
+#: includes/Patterns.php:194
 msgid "Example Pattern"
 msgstr ""
 
-#: includes/Patterns.php:197
+#: includes/Patterns.php:195
 msgctxt "Block pattern description"
 msgid "Description for Example Pattern"
 msgstr ""
 
-#: includes/Patterns.php:203
+#: includes/Patterns.php:201
 msgid "Image with Accordion"
 msgstr ""
 
-#: includes/Patterns.php:204
+#: includes/Patterns.php:202
 msgctxt "Block pattern description"
 msgid "Description for Image with Accordion"
 msgstr ""
 
-#: includes/Patterns.php:211
+#: includes/Patterns.php:209
 msgid "Custom News section 3-Column Layout"
 msgstr ""
 
-#: includes/Patterns.php:212
+#: includes/Patterns.php:210
 msgctxt "Block pattern description"
 msgid "A 3 Column Layout for custom News on Landing pages"
 msgstr ""
 
-#: includes/Patterns.php:218
+#: includes/Patterns.php:216
 msgid "Call to Action"
 msgstr ""
 
-#: includes/Patterns.php:219
+#: includes/Patterns.php:217
 msgctxt "Block pattern description"
 msgid "Call to Action section"
 msgstr ""
 
-#: includes/Patterns.php:225
+#: includes/Patterns.php:223
 msgid "Image with Text"
 msgstr ""
 
-#: includes/Patterns.php:226
+#: includes/Patterns.php:224
 msgctxt "Block pattern description"
 msgid "Two column layout: Image left, text right column."
 msgstr ""
 
-#: includes/Patterns.php:232
+#: includes/Patterns.php:230
 msgid "Imagefilm"
 msgstr ""
 
-#: includes/Patterns.php:233
+#: includes/Patterns.php:231
 msgctxt "Block pattern description"
 msgid "FAU Imagefilm."
 msgstr ""
 
-#: includes/Patterns.php:239
+#: includes/Patterns.php:237
 msgid "Landing page template 1"
 msgstr ""
 
-#: includes/Patterns.php:240
+#: includes/Patterns.php:238
 msgctxt "Block pattern description"
 msgid "A landingpage template for FAU."
 msgstr ""
 
 #. translators: 1: current PHP version, 2: required PHP version
-#: rrze-elements-blocks.php:75
+#: rrze-elements-blocks.php:80
 #, php-format
 msgid "The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s."
 msgstr ""
 
 #. translators: 1: current WordPress version, 2: required WordPress version
-#: rrze-elements-blocks.php:78
+#: rrze-elements-blocks.php:83
 #, php-format
 msgid "The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s."
 msgstr ""
@@ -386,6 +400,164 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
+msgid "This jump name is already in use elsewhere."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Resolve Jump Name Conflict"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Edit Jump Name"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Jump Name Manager"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Edit the jump name for this block."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "A conflict was detected for the jump name:"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Please resolve the conflict by assigning new jump names to the blocks below."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Block"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Jump Name"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Lock Jump Name"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Generation options"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "This jump name is a duplicate."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "If enabled, the jump link will not be overwritten automatically any longer. "
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Generate new jump name"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Generate default jump name"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Generate jump name from title"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Back"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Jump name duplication remaining"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Jump name duplications remaining"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Resolve automatically"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Save Changes"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Resolve Conflict"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Manage and resolve conflicts for jump names used in the editor."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Used by"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Actions"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Conflict detected!"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Resolve conflict"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Auto-resolve"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Edit"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "No jump names registered."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Close"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
 msgid "Jump Link Settings"
 msgstr ""
 
@@ -422,6 +594,11 @@ msgstr ""
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
 msgid "If enabled, the jump link will not generated automatically any longer. "
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+msgid "Manage all Jump Names"
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -482,6 +659,33 @@ msgstr ""
 #: build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "FAU-exklusive Icons"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Back to Material Symbols"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
+#: build/blocks/notice/index.js:1
+#: build/blocks/tab/index.js:1
+msgid "Show FAU-exclusive Icons"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+#: build/blocks/collapse/index.js:1
+#: build/blocks/fact/index.js:1
+#: build/blocks/iconbox/index.js:1
 #: build/blocks/tab/index.js:1
 msgid "Add an icon"
 msgstr ""
@@ -505,10 +709,7 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
-#: build/blocks/fact/index.js:1
-#: build/blocks/iconbox/index.js:1
-#: build/blocks/tab/index.js:1
-msgid "Close"
+msgid "This jump link name is already in use in another accordion element."
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -631,10 +832,6 @@ msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 msgid "Untitled Collapse"
-msgstr ""
-
-#: build/blocks/collapsibles/index.js:1
-msgid "Expand All"
 msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
@@ -812,6 +1009,34 @@ msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Definition"
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "Mirror Settings in FAU Elemental"
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "Mirror the FAU-Teaser-Grid Block"
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "Disabled as long as you are using the List view"
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "Mirror the legacy Shortcode"
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "This Block is currently mirroring another block"
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "To ease the process of migrating onto the new theme, this block mirrors the Block fau-teaser-grid. You can deactivate this behavior via the following Checkbox."
+msgstr ""
+
+#: build/blocks/news/index.js:1
+msgid "Stop Mirroring the FAU-Teaser-Grid"
 msgstr ""
 
 #: build/blocks/news/index.js:1
