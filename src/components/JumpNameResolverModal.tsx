@@ -264,11 +264,6 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                                 : `${remainingConflicts} ${__("Jump name duplications remaining", "rrze-elements-blocks")}`}
                         </span>
                     )}
-                    {!isEditing && (
-                        <Button variant="secondary" onClick={handleAutoResolve} style={{ marginRight: '10px' }}>
-                            {__("Resolve automatically", "rrze-elements-blocks")}
-                        </Button>
-                    )}
                     <Button variant="primary" onClick={handleSaveChanges} disabled={remainingConflicts > 0 || blockStates.some(state => state.error)}>
                         {isEditing ? __("Save Changes", "rrze-elements-blocks") : __("Resolve Conflict", "rrze-elements-blocks")}
                     </Button>
