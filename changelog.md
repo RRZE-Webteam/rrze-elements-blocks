@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.7] - 2026-03-13
+New Jump name manager and many Design fixes
+
+# Added
+- #350 Copyright Hook for CTA
+- #391 New Jump name Manager for easier Management of Jump names
+
+# Fixed
+- #388 SVG fixed stroke-linejoin
+- #391 jump names on the same page did not open the right accordion
+- #374 Alerts couldn't be used in dark mode with links as content
+- #384 Preparations for WP 7.0
+- #392 Resolved several Vulnerabilities in the Dependency Stack
+
+
 ## [1.1.3] - 2025-11-04
 Bugfixes and Improvements for FAU-Elemental
 
