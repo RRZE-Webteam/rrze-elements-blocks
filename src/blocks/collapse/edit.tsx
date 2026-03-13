@@ -57,6 +57,7 @@ const Edit = ({
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // @ts-ignore
   const {__unstableMarkNextChangeAsNotPersistent} =
     useDispatch(blockEditorStore);
 

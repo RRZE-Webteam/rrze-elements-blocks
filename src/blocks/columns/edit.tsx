@@ -43,6 +43,7 @@ export default function Edit({
   setAttributes,
 }: EditProps) {
   const props = useBlockProps();
+  // @ts-ignore
   const { __unstableMarkNextChangeAsNotPersistent } =
   useDispatch(blockEditorStore);
 

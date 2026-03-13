@@ -84,6 +84,7 @@ export default function Edit({
                                clientId,
                              }: EditProps) {
   // WordPress hooks and other logic here.
+  // @ts-ignore
   const {__unstableMarkNextChangeAsNotPersistent} = useDispatch(blockEditorStore);
   const props = useBlockProps();
   const blockId = props["data-block"];

@@ -27,7 +27,8 @@ export const BlockInfo = ({ clientId }: BlockInfoProps) => {
     const block = useSelect(
         (select): Block | null => {
             const editorSelect = select(blockEditorStore);
-            return editorSelect ? editorSelect.getBlock(clientId) : null;
+            // @ts-ignore
+          return editorSelect ? editorSelect.getBlock(clientId) : null;
         },
         [clientId]
     );
