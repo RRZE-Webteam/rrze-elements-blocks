@@ -131,7 +131,6 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
       newJumpName &&
       newJumpName !== jumpName &&
       !doesJumpNameExist(newJumpName) &&
-      !areDuplicateJumpNamesPresent(newJumpName) &&
       !isCustomJumpname
     ) {
       setAttributes({ jumpName: newJumpName });
