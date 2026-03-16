@@ -109,7 +109,7 @@ const Edit = ({
       newJumpName &&
       newJumpName !== jumpName &&
       !doesJumpNameExist(newJumpName) &&
-      !areDuplicateJumpNamesPresent(newJumpName) &&
+      /* !areDuplicateJumpNamesPresent(newJumpName) && */
       !isCustomJumpname
     ) {
       setAttributes({jumpName: newJumpName});
