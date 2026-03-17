@@ -208,7 +208,15 @@ class Blocks
             [
                 'build_folder' => 'fact',
                 'class' => Fact::class,
-            ]
+            ],
+            [
+                'build_folder' => 'carousel',
+                'class' => Fact::class,
+            ],
+            [
+                'build_folder' => 'info-card',
+                'class' => Fact::class,
+            ],
         ];
 
         foreach ($dynamic_blocks as $block_def) {
