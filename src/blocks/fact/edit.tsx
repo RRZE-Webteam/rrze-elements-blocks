@@ -148,7 +148,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
       )}
       <li className="facts__item">
             <span className="facts__icon" aria-hidden="true">
-              <IconMarkComponent type={"symbol"} iconName={"add_reaction"} materialSymbol={iconName}
+              <IconMarkComponent className={"no-selection"} type={"symbol"} iconName={"add_reaction"} materialSymbol={iconName}
                                  onClick={openModal}/>
               {(progressValue >= 100 && isSelected) && (
                 <IconMarkComponent type={"symbol"} iconName={"keyboard_lock"} materialSymbol={"keyboard_lock"} />
