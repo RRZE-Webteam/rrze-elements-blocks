@@ -20,7 +20,7 @@ export default function Edit() {
           <div className={"rrze-elements-blocks__carousel-content"}>
             <ul aria-labelledby={"uniqueIDforTheSection-header"} role={"list"} className={"rrze-elements-blocks__carousel-content-list"}>
               <li className={"rrze-elements-blocks__carousel-content-list-item"} role={"listitem"} tabIndex={-1}>
-                <div className={"rrze-elements-blocks__carousel_feature-card-bg"}>
+                <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
                   <div className={"rrze-elements-blocks__carousel_feature_card-content"}>
                     <h3 className={"rrze-elements-blocks__carousel_feature_card_subtitle"}>
                       Forschung & Lehre
