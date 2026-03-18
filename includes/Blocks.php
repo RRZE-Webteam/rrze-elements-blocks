@@ -65,7 +65,7 @@ class Blocks
     {
         if (ThemeSniffer::getThemeGroup('fauelemental')) {
             register_block_style('rrze-elements/notice', [
-                'name' => __('attention', 'rrze-elements-blocks'),
+                'name' => 'attention',
                 'label' => __('Attention', 'rrze-elements-blocks'),
                 'is_default' => false,
             ]);

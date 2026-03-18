@@ -36,10 +36,6 @@ $dark-grey: #121212;
     padding: 2rem;
   }
 
-  .notice div {
-    padding: 0;
-  }
-
   .notice > div:first-child {
     padding: 0;
   }
@@ -98,7 +94,7 @@ $dark-grey: #121212;
 }
 
 .wp-theme-FAU-Elemental .wp-block-rrze-elements-notice.is-style-attention {
-  .notice div {
+  .notice > div {
     padding: initial;
   }
 
@@ -114,10 +110,7 @@ $dark-grey: #121212;
     }
 
     .block-editor-inner-blocks .block-editor-block-list__layout {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-content: flex-start;
+      display: block;
     }
 
     .block-editor-inner-blocks .block-editor-block-list__layout > * {
