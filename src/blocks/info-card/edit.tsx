@@ -14,6 +14,7 @@ import {
 import { useState } from "@wordpress/element";
 import { page, desktop, tablet, mobile } from "@wordpress/icons";
 import { __ } from "@wordpress/i18n";
+import { getImageBrightness } from "../../utility/color";
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
@@ -27,6 +28,7 @@ interface EditProps {
     tabletImageUrl: string;
     mobileImageId: number;
     mobileImageUrl: string;
+    textColor: string;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -47,6 +49,19 @@ export default function Edit({attributes, setAttributes}: EditProps) {
     desktop: desktop,
     tablet: tablet,
     mobile: mobile,
+  };
+
+  const onImageSelect = (image: { id: number; url: string }, device: DeviceType) => {
+    const newAttributes = {
+      [`${device}ImageId`]: image.id,
+      [`${device}ImageUrl`]: image.url,
+    };
+    setAttributes(newAttributes);
+
+    getImageBrightness(image.url).then(brightness => {
+      const newTextColor = brightness < 128 ? '#FFFFFF' : '#000000';
+      setAttributes({ textColor: newTextColor });
+    });
   };
 
   return (
@@ -87,7 +102,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     mediaURL={attributes.desktopImageUrl}
                     allowedTypes={['image']}
                     accept="image/*"
-                    onSelect={(media) => setAttributes({ desktopImageId: media.id, desktopImageUrl: media.url })}
+                    onSelect={(media) => onImageSelect(media, 'desktop')}
                     onError={(error: string) => console.error(error)}
                     name={__('Desktop Image', 'rrze-elements-blocks')}
                 />
@@ -98,7 +113,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     mediaURL={attributes.tabletImageUrl}
                     allowedTypes={['image']}
                     accept="image/*"
-                    onSelect={(media) => setAttributes({ tabletImageId: media.id, tabletImageUrl: media.url })}
+                    onSelect={(media) => onImageSelect(media, 'tablet')}
                     onError={(error: string) => console.error(error)}
                     name={__('Tablet Image', 'rrze-elements-blocks')}
                 />
@@ -109,7 +124,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     mediaURL={attributes.mobileImageUrl}
                     allowedTypes={['image']}
                     accept="image/*"
-                    onSelect={(media) => setAttributes({ mobileImageId: media.id, mobileImageUrl: media.url })}
+                    onSelect={(media) => onImageSelect(media, 'mobile')}
                     onError={(error: string) => console.error(error)}
                     name={__('Mobile Image', 'rrze-elements-blocks')}
                 />
@@ -138,10 +153,10 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                style={{position: 'relative', height: '680px', width: '320px'}}>
             <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
                       allowedFormats={[]} placeholder={__("Dein Thema", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle}/>
+                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle} style={{ color: attributes.textColor }}/>
             <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
                       placeholder={__("Hier steht dein Titel", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title}/>
+                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} style={{ color: attributes.textColor }}/>
             <div className={"rrze-elements-blocks__carousel_feature_card_bg"}>
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
                 <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>

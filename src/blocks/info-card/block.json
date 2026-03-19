@@ -42,6 +42,10 @@
     "mobileImageUrl": {
       "type": "string",
       "default": ""
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#000000"
     }
   },
   "textdomain": "rrze-elements-blocks",
