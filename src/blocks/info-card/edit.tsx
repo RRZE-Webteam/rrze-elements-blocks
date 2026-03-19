@@ -13,10 +13,11 @@ import {
   ToolbarButton,
   DropdownMenu,
   PanelBody,
-  ToggleControl,
   FocalPointPicker,
   TextControl,
   Popover,
+  __experimentalToggleGroupControl as ToggleGroupControl,
+  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { page, desktop, tablet, mobile, link } from "@wordpress/icons";
@@ -157,7 +158,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'desktop')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Desktop Image', 'rrze-elements-blocks')}
+                    name={__('Edit Desktop Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'tablet' && (
@@ -168,7 +169,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'tablet')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Tablet Image', 'rrze-elements-blocks')}
+                    name={__('Edit Tablet Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'mobile' && (
@@ -179,7 +180,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'mobile')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Mobile Image', 'rrze-elements-blocks')}
+                    name={__('Edit Mobile Image', 'rrze-elements-blocks')}
                 />
             )}
         </ToolbarGroup>
@@ -187,11 +188,26 @@ export default function Edit({attributes, setAttributes}: EditProps) {
 
       <InspectorControls>
         <PanelBody title={__("Image Settings", "rrze-elements-blocks")}>
-            <ToggleControl
-                label={__("Desktop", "rrze-elements-blocks")}
-                checked={deviceType === 'desktop'}
-                onChange={() => handleDeviceTypeChange('desktop')}
+          <ToggleGroupControl
+            __next40pxDefaultSize
+            isBlock
+            label="Choose Viewport"
+            value={deviceType}
+            onChange={(device: DeviceType) => {handleDeviceTypeChange(device)}}
+          >
+            <ToggleGroupControlOption
+              label={__("Desktop", "rrze-elements-blocks")}
+              value="desktop"
             />
+            <ToggleGroupControlOption
+              label={__("Tablet", "rrze-elements-blocks")}
+              value="tablet"
+            />
+            <ToggleGroupControlOption
+              label={__("Mobile", "rrze-elements-blocks")}
+              value="mobile"
+            />
+          </ToggleGroupControl>
             {deviceType === 'desktop' && (
                 <MediaReplaceFlow
                     mediaId={attributes.desktopImageId}
@@ -200,14 +216,9 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'desktop')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Desktop Image', 'rrze-elements-blocks')}
+                    name={__('Edit Desktop Image', 'rrze-elements-blocks')}
                 />
             )}
-            <ToggleControl
-                label={__("Tablet", "rrze-elements-blocks")}
-                checked={deviceType === 'tablet'}
-                onChange={() => handleDeviceTypeChange('tablet')}
-            />
             {deviceType === 'tablet' && (
                 <MediaReplaceFlow
                     mediaId={attributes.tabletImageId}
@@ -216,14 +227,9 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'tablet')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Tablet Image', 'rrze-elements-blocks')}
+                    name={__('Edit Tablet Image', 'rrze-elements-blocks')}
                 />
             )}
-            <ToggleControl
-                label={__("Mobile", "rrze-elements-blocks")}
-                checked={deviceType === 'mobile'}
-                onChange={() => handleDeviceTypeChange('mobile')}
-            />
             {deviceType === 'mobile' && (
                 <MediaReplaceFlow
                     mediaId={attributes.mobileImageId}
@@ -232,7 +238,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'mobile')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Mobile Image', 'rrze-elements-blocks')}
+                    name={__('Edit Mobile Image', 'rrze-elements-blocks')}
                 />
             )}
             <TextControl
@@ -242,21 +248,21 @@ export default function Edit({attributes, setAttributes}: EditProps) {
             />
         </PanelBody>
         <PanelBody title={__("Focus Point", "rrze-elements-blocks")}>
-            {deviceType === 'desktop' && (
+            {(deviceType === 'desktop' && !!attributes.desktopImageId) && (
                 <FocalPointPicker
                     url={attributes.desktopImageUrl}
                     value={attributes.desktopFocusPoint}
                     onChange={(newFocusPoint) => setAttributes({ desktopFocusPoint: newFocusPoint })}
                 />
             )}
-            {deviceType === 'tablet' && (
+            {(deviceType === 'tablet' && !!attributes.tabletImageId) && (
                 <FocalPointPicker
                     url={attributes.tabletImageUrl}
                     value={attributes.tabletFocusPoint}
                     onChange={(newFocusPoint) => setAttributes({ tabletFocusPoint: newFocusPoint })}
                 />
             )}
-            {deviceType === 'mobile' && (
+            {(deviceType === 'mobile' && !!attributes.mobileImageId) && (
                 <FocalPointPicker
                     url={attributes.mobileImageUrl}
                     value={attributes.mobileFocusPoint}
