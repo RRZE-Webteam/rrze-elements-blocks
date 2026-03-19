@@ -25,6 +25,8 @@ svg.elements-tabs-icon-modal{
 div.rrze-elements-blocks-info-card-editor{
   border: 3px solid #04316a;
   position: relative;
+  width: min(80vw, 95ch);
+  min-height: 680px;
 }
 div.rrze-elements-blocks-info-card-editor::before{
   content:"Card Popover Editor";
