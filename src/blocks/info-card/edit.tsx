@@ -3,7 +3,7 @@ import {
   RichText,
   useBlockProps,
   BlockControls,
-  useInnerBlocksProps,
+  useInnerBlocksProps, InnerBlocks,
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
@@ -52,15 +52,18 @@ export default function Edit({attributes, setAttributes}: EditProps){
       </BlockControls>
 
       {isModalOpen && (
-        <Modal
-          title={__("Edit Card Content", "rrze-elements-blocks")}
-          onRequestClose={() => setIsModalOpen(false)}
-          size="large"
-        >
-          <div style={{ padding: '16px' }}>
-            <div {...innerBlocksProps} />
+          <div className={"rrze-elements-blocks-info-card-editor"} style={{ padding: '16px' }}>
+            <InnerBlocks
+              template={[
+                [
+                  "core/paragraph",
+                  { placeholder: __("Add a description…", "rrze-elements-blocks") },
+                ],
+              ]}
+              allowedBlocks={["core/paragraph", "core/heading", "core/list", "core/buttons", "core/button", "rrze-faudir/block"]}
+              templateLock={false}
+            />
           </div>
-        </Modal>
       )}
 
       <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
