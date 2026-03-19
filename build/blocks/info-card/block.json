@@ -20,6 +20,30 @@
     "subtitle": {
       "type": "string",
       "default": ""
+    },
+    "desktopImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "desktopImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "tabletImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "tabletImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "mobileImageUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "rrze-elements-blocks",

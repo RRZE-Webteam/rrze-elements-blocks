@@ -3,20 +3,30 @@ import {
   RichText,
   useBlockProps,
   BlockControls,
-  useInnerBlocksProps, InnerBlocks,
+  InnerBlocks,
+  MediaReplaceFlow,
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
   ToolbarButton,
+  DropdownMenu,
 } from "@wordpress/components";
-import {useState} from "@wordpress/element";
-import {page} from "@wordpress/icons";
-import {__} from "@wordpress/i18n";
+import { useState } from "@wordpress/element";
+import { page, desktop, tablet, mobile } from "@wordpress/icons";
+import { __ } from "@wordpress/i18n";
+
+type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
 interface EditProps {
   attributes: {
     title: string;
     subtitle: string;
+    desktopImageId: number;
+    desktopImageUrl: string;
+    tabletImageId: number;
+    tabletImageUrl: string;
+    mobileImageId: number;
+    mobileImageUrl: string;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -27,6 +37,17 @@ export default function Edit({attributes, setAttributes}: EditProps) {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
+
+  const desktopImageUrl = attributes.desktopImageUrl;
+  const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
+  const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
+
+  const deviceIcons = {
+    desktop: desktop,
+    tablet: tablet,
+    mobile: mobile,
+  };
 
   return (
     <li {...blockProps}>
@@ -37,6 +58,62 @@ export default function Edit({attributes, setAttributes}: EditProps) {
             label={__("Add / Edit Content", "rrze-elements-blocks")}
             onClick={() => setIsModalOpen(!isModalOpen)}
           />
+        </ToolbarGroup>
+        <ToolbarGroup>
+            <DropdownMenu
+                icon={deviceIcons[deviceType]}
+                label={__("Select device type", "rrze-elements-blocks")}
+                controls={[
+                    {
+                        title: __('Desktop', 'rrze-elements-blocks'),
+                        icon: desktop,
+                        onClick: () => setDeviceType('desktop'),
+                    },
+                    {
+                        title: __('Tablet', 'rrze-elements-blocks'),
+                        icon: tablet,
+                        onClick: () => setDeviceType('tablet'),
+                    },
+                    {
+                        title: __('Mobile', 'rrze-elements-blocks'),
+                        icon: mobile,
+                        onClick: () => setDeviceType('mobile'),
+                    },
+                ]}
+            />
+            {deviceType === 'desktop' && (
+                <MediaReplaceFlow
+                    mediaId={attributes.desktopImageId}
+                    mediaURL={attributes.desktopImageUrl}
+                    allowedTypes={['image']}
+                    accept="image/*"
+                    onSelect={(media) => setAttributes({ desktopImageId: media.id, desktopImageUrl: media.url })}
+                    onError={(error: string) => console.error(error)}
+                    name={__('Desktop Image', 'rrze-elements-blocks')}
+                />
+            )}
+            {deviceType === 'tablet' && (
+                <MediaReplaceFlow
+                    mediaId={attributes.tabletImageId}
+                    mediaURL={attributes.tabletImageUrl}
+                    allowedTypes={['image']}
+                    accept="image/*"
+                    onSelect={(media) => setAttributes({ tabletImageId: media.id, tabletImageUrl: media.url })}
+                    onError={(error: string) => console.error(error)}
+                    name={__('Tablet Image', 'rrze-elements-blocks')}
+                />
+            )}
+            {deviceType === 'mobile' && (
+                <MediaReplaceFlow
+                    mediaId={attributes.mobileImageId}
+                    mediaURL={attributes.mobileImageUrl}
+                    allowedTypes={['image']}
+                    accept="image/*"
+                    onSelect={(media) => setAttributes({ mobileImageId: media.id, mobileImageUrl: media.url })}
+                    onError={(error: string) => console.error(error)}
+                    name={__('Mobile Image', 'rrze-elements-blocks')}
+                />
+            )}
         </ToolbarGroup>
       </BlockControls>
 
@@ -69,12 +146,12 @@ export default function Edit({attributes, setAttributes}: EditProps) {
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
                 <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>
                   <source
-                    srcSet={"https://plus.unsplash.com/premium_photo-1755883199872-2d31c8b8b012?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-                    width={"1920"} height={"1080"} media={"(max-width: 734px)"}/>
+                    srcSet={mobileImageUrl}
+                    media={"(max-width: 734px)"}/>
                   <source
-                    srcSet={"https://plus.unsplash.com/premium_photo-1757682619735-ba211caa04f2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-                    width={"1920"} height={"1080"}/>
-                  <img alt={"Alternativtext hier"}/>
+                    srcSet={tabletImageUrl}
+                    media={"(max-width: 1024px)"}/>
+                  <img src={desktopImageUrl} alt={"Alternativtext hier"}/>
                 </picture>
               </figure>
             </div>
