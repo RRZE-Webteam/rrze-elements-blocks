@@ -77,6 +77,14 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    "alt": {
+      "type": "string",
+      "default": ""
+    },
+    "url": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "rrze-elements-blocks",

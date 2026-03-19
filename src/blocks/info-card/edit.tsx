@@ -6,6 +6,7 @@ import {
   InnerBlocks,
   MediaReplaceFlow,
   InspectorControls,
+  LinkControl,
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
@@ -14,9 +15,11 @@ import {
   PanelBody,
   ToggleControl,
   FocalPointPicker,
+  TextControl,
+  Popover,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
-import { page, desktop, tablet, mobile } from "@wordpress/icons";
+import { page, desktop, tablet, mobile, link } from "@wordpress/icons";
 import { __ } from "@wordpress/i18n";
 import { getImageBrightness } from "../../utility/color";
 import { useDispatch } from "@wordpress/data";
@@ -39,6 +42,8 @@ interface EditProps {
     desktopFocusPoint: { x: number; y: number };
     tabletFocusPoint: { x: number; y: number };
     mobileFocusPoint: { x: number; y: number };
+    alt: string;
+    url: string;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -49,6 +54,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLinkPickerVisible, setIsLinkPickerVisible] = useState(false);
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
   const { __experimentalSetPreviewDeviceType: setPreviewDeviceType } = useDispatch('core/edit-post');
@@ -100,6 +106,24 @@ export default function Edit({attributes, setAttributes}: EditProps) {
             label={__("Add / Edit Content", "rrze-elements-blocks")}
             onClick={() => setIsModalOpen(!isModalOpen)}
           />
+        </ToolbarGroup>
+        <ToolbarGroup>
+            <ToolbarButton
+                icon={link}
+                label={__("Link", "rrze-elements-blocks")}
+                onClick={() => setIsLinkPickerVisible(true)}
+            />
+            {isLinkPickerVisible && (
+                <Popover
+                    onClose={() => setIsLinkPickerVisible(false)}
+                    headerTitle={__("Add Link", "rrze-elements-blocks")}
+                >
+                    <LinkControl
+                        value={{url: attributes.url}}
+                        onChange={(newLink) => setAttributes({ url: newLink.url })}
+                    />
+                </Popover>
+            )}
         </ToolbarGroup>
         <ToolbarGroup>
             <DropdownMenu
@@ -166,15 +190,53 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                 checked={deviceType === 'desktop'}
                 onChange={() => handleDeviceTypeChange('desktop')}
             />
+            {deviceType === 'desktop' && (
+                <MediaReplaceFlow
+                    mediaId={attributes.desktopImageId}
+                    mediaURL={attributes.desktopImageUrl}
+                    allowedTypes={['image']}
+                    accept="image/*"
+                    onSelect={(media) => onImageSelect(media, 'desktop')}
+                    onError={(error: string) => console.error(error)}
+                    name={__('Desktop Image', 'rrze-elements-blocks')}
+                />
+            )}
             <ToggleControl
                 label={__("Tablet", "rrze-elements-blocks")}
                 checked={deviceType === 'tablet'}
                 onChange={() => handleDeviceTypeChange('tablet')}
             />
+            {deviceType === 'tablet' && (
+                <MediaReplaceFlow
+                    mediaId={attributes.tabletImageId}
+                    mediaURL={attributes.tabletImageUrl}
+                    allowedTypes={['image']}
+                    accept="image/*"
+                    onSelect={(media) => onImageSelect(media, 'tablet')}
+                    onError={(error: string) => console.error(error)}
+                    name={__('Tablet Image', 'rrze-elements-blocks')}
+                />
+            )}
             <ToggleControl
                 label={__("Mobile", "rrze-elements-blocks")}
                 checked={deviceType === 'mobile'}
                 onChange={() => handleDeviceTypeChange('mobile')}
+            />
+            {deviceType === 'mobile' && (
+                <MediaReplaceFlow
+                    mediaId={attributes.mobileImageId}
+                    mediaURL={attributes.mobileImageUrl}
+                    allowedTypes={['image']}
+                    accept="image/*"
+                    onSelect={(media) => onImageSelect(media, 'mobile')}
+                    onError={(error: string) => console.error(error)}
+                    name={__('Mobile Image', 'rrze-elements-blocks')}
+                />
+            )}
+            <TextControl
+                label={__("Alt Text", "rrze-elements-blocks")}
+                value={attributes.alt}
+                onChange={(alt) => setAttributes({ alt })}
             />
         </PanelBody>
         <PanelBody title={__("Focus Point", "rrze-elements-blocks")}>
@@ -236,7 +298,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                   <source
                     srcSet={tabletImageUrl}
                     media={"(max-width: 1024px)"}/>
-                  <img src={desktopImageUrl} alt={"Alternativtext hier"}/>
+                  <img src={desktopImageUrl} alt={attributes.alt}/>
                 </picture>
               </figure>
             </div>
