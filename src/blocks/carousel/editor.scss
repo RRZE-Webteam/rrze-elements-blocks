@@ -79,6 +79,8 @@ div.rrze-elements-blocks__carousel_feature_card-content h3{
   font-weight: 500;
   font-size: 18px;
   color: #000;
+  position: relative;
+  z-index: 2;
 }
 
 div.rrze-elements-blocks__carousel_feature_card-content p{
@@ -88,6 +90,8 @@ div.rrze-elements-blocks__carousel_feature_card-content p{
   color: #000;
   padding: 0;
   margin: 0;
+  position: relative;
+  z-index: 2;
 }
 
 div.rrze-elements-blocks__carousel_feature_card-content .rrze-elements-blocks__carousel_feature_card_link_control_icon-container{
@@ -136,7 +140,7 @@ figure.rrze-elements-blocks__carousel_feature_card_bg_figure picture::before{
 }
 */
 
-a.rrze-elements-blocks__carousel_feature_card_link {
+.rrze-elements-blocks__carousel_feature_card_link {
   position: absolute;
   top: 0;
   left: 0;
