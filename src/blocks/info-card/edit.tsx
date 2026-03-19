@@ -19,6 +19,7 @@ import { useState } from "@wordpress/element";
 import { page, desktop, tablet, mobile } from "@wordpress/icons";
 import { __ } from "@wordpress/i18n";
 import { getImageBrightness } from "../../utility/color";
+import { useDispatch } from "@wordpress/data";
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
@@ -50,6 +51,8 @@ export default function Edit({attributes, setAttributes}: EditProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
+  const { __experimentalSetPreviewDeviceType: setPreviewDeviceType } = useDispatch('core/edit-post');
+
   const desktopImageUrl = attributes.desktopImageUrl;
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
@@ -71,6 +74,12 @@ export default function Edit({attributes, setAttributes}: EditProps) {
       const newTextColor = brightness < 128 ? '#FFFFFF' : '#000000';
       setAttributes({ [`${device}TextColor`]: newTextColor });
     });
+  };
+
+  const handleDeviceTypeChange = (newDeviceType: DeviceType) => {
+    setDeviceType(newDeviceType);
+    const deviceName = newDeviceType.charAt(0).toUpperCase() + newDeviceType.slice(1);
+    setPreviewDeviceType(deviceName);
   };
 
   const style = {
@@ -100,17 +109,17 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     {
                         title: __('Desktop', 'rrze-elements-blocks'),
                         icon: desktop,
-                        onClick: () => setDeviceType('desktop'),
+                        onClick: () => handleDeviceTypeChange('desktop'),
                     },
                     {
                         title: __('Tablet', 'rrze-elements-blocks'),
                         icon: tablet,
-                        onClick: () => setDeviceType('tablet'),
+                        onClick: () => handleDeviceTypeChange('tablet'),
                     },
                     {
                         title: __('Mobile', 'rrze-elements-blocks'),
                         icon: mobile,
-                        onClick: () => setDeviceType('mobile'),
+                        onClick: () => handleDeviceTypeChange('mobile'),
                     },
                 ]}
             />
@@ -155,17 +164,17 @@ export default function Edit({attributes, setAttributes}: EditProps) {
             <ToggleControl
                 label={__("Desktop", "rrze-elements-blocks")}
                 checked={deviceType === 'desktop'}
-                onChange={() => setDeviceType('desktop')}
+                onChange={() => handleDeviceTypeChange('desktop')}
             />
             <ToggleControl
                 label={__("Tablet", "rrze-elements-blocks")}
                 checked={deviceType === 'tablet'}
-                onChange={() => setDeviceType('tablet')}
+                onChange={() => handleDeviceTypeChange('tablet')}
             />
             <ToggleControl
                 label={__("Mobile", "rrze-elements-blocks")}
                 checked={deviceType === 'mobile'}
-                onChange={() => setDeviceType('mobile')}
+                onChange={() => handleDeviceTypeChange('mobile')}
             />
         </PanelBody>
         <PanelBody title={__("Focus Point", "rrze-elements-blocks")}>
