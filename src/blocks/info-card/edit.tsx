@@ -2,11 +2,19 @@
 import {
   RichText,
   useBlockProps,
+  BlockControls,
+  useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import {__} from "@wordpress/i18n";
+import {
+  ToolbarGroup,
+  ToolbarButton,
+  Modal,
+} from "@wordpress/components";
+import { useState } from "@wordpress/element";
+import { postContent } from "@wordpress/icons";
+import { __ } from "@wordpress/i18n";
 
 interface EditProps {
-  blockProps: string[];
   attributes: {
     title: string;
     subtitle: string;
@@ -19,8 +27,42 @@ export default function Edit({attributes, setAttributes}: EditProps){
     className: "rrze-elements-blocks__carousel-content-list-item"
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const innerBlocksProps = useInnerBlocksProps(
+    { className: 'rrze-elements-blocks__info-card-inner-content' },
+    {
+      allowedBlocks: ['core/paragraph', 'core/heading', 'core/list', 'core/button'],
+      template: [
+        ['core/paragraph', { placeholder: 'Add your content here...' }],
+      ],
+    }
+  );
+
   return (
     <li {...blockProps}>
+      <BlockControls>
+        <ToolbarGroup>
+          <ToolbarButton
+            icon={postContent}
+            label={__("Add / Edit Content", "rrze-elements-blocks")}
+            onClick={() => setIsModalOpen(true)}
+          />
+        </ToolbarGroup>
+      </BlockControls>
+
+      {isModalOpen && (
+        <Modal
+          title={__("Edit Card Content", "rrze-elements-blocks")}
+          onRequestClose={() => setIsModalOpen(false)}
+          size="large"
+        >
+          <div style={{ padding: '16px' }}>
+            <div {...innerBlocksProps} />
+          </div>
+        </Modal>
+      )}
+
       <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
         <div className={"rrze-elements-blocks__carousel_feature_card-content"}
              style={{position: 'relative', height: '680px', width: '320px'}}>
@@ -39,8 +81,6 @@ export default function Edit({attributes, setAttributes}: EditProps){
               </picture>
             </figure>
           </div>
-          {/*<a className={"rrze-elements-blocks__carousel_feature_card_link"}
-               aria-label={"Weitere Informationen zum Thema XYZ"} role={"button"}> */}
           <div className={"rrze-elements-blocks__carousel_feature_card_link"}
                aria-label={"Weitere Informationen zum Thema XYZ"} role={"button"}>
           <div className={"rrze-elements-blocks__carousel_feature_card_link_control_container"}>
@@ -52,7 +92,6 @@ export default function Edit({attributes, setAttributes}: EditProps){
                 d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
             </span>
           </div>
-          {/* </a> */}
           </div>
         </div>
       </div>
