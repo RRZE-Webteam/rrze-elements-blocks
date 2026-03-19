@@ -5,11 +5,15 @@ import {
   BlockControls,
   InnerBlocks,
   MediaReplaceFlow,
+  InspectorControls,
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
   ToolbarButton,
   DropdownMenu,
+  PanelBody,
+  ToggleControl,
+  FocalPointPicker,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { page, desktop, tablet, mobile } from "@wordpress/icons";
@@ -28,7 +32,12 @@ interface EditProps {
     tabletImageUrl: string;
     mobileImageId: number;
     mobileImageUrl: string;
-    textColor: string;
+    desktopTextColor: string;
+    tabletTextColor: string;
+    mobileTextColor: string;
+    desktopFocusPoint: { x: number; y: number };
+    tabletFocusPoint: { x: number; y: number };
+    mobileFocusPoint: { x: number; y: number };
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -60,12 +69,21 @@ export default function Edit({attributes, setAttributes}: EditProps) {
 
     getImageBrightness(image.url).then(brightness => {
       const newTextColor = brightness < 128 ? '#FFFFFF' : '#000000';
-      setAttributes({ textColor: newTextColor });
+      setAttributes({ [`${device}TextColor`]: newTextColor });
     });
   };
 
+  const style = {
+    '--desktop-text-color': attributes.desktopTextColor,
+    '--tablet-text-color': attributes.tabletTextColor || attributes.desktopTextColor,
+    '--mobile-text-color': attributes.mobileTextColor || attributes.tabletTextColor || attributes.desktopTextColor,
+    '--desktop-object-position': `${attributes.desktopFocusPoint.x * 100}% ${attributes.desktopFocusPoint.y * 100}%`,
+    '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
+    '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
+  } as React.CSSProperties;
+
   return (
-    <li {...blockProps}>
+    <li {...blockProps} style={style}>
       <BlockControls>
         <ToolbarGroup>
           <ToolbarButton
@@ -132,6 +150,49 @@ export default function Edit({attributes, setAttributes}: EditProps) {
         </ToolbarGroup>
       </BlockControls>
 
+      <InspectorControls>
+        <PanelBody title={__("Image Settings", "rrze-elements-blocks")}>
+            <ToggleControl
+                label={__("Desktop", "rrze-elements-blocks")}
+                checked={deviceType === 'desktop'}
+                onChange={() => setDeviceType('desktop')}
+            />
+            <ToggleControl
+                label={__("Tablet", "rrze-elements-blocks")}
+                checked={deviceType === 'tablet'}
+                onChange={() => setDeviceType('tablet')}
+            />
+            <ToggleControl
+                label={__("Mobile", "rrze-elements-blocks")}
+                checked={deviceType === 'mobile'}
+                onChange={() => setDeviceType('mobile')}
+            />
+        </PanelBody>
+        <PanelBody title={__("Focus Point", "rrze-elements-blocks")}>
+            {deviceType === 'desktop' && (
+                <FocalPointPicker
+                    url={attributes.desktopImageUrl}
+                    value={attributes.desktopFocusPoint}
+                    onChange={(newFocusPoint) => setAttributes({ desktopFocusPoint: newFocusPoint })}
+                />
+            )}
+            {deviceType === 'tablet' && (
+                <FocalPointPicker
+                    url={attributes.tabletImageUrl}
+                    value={attributes.tabletFocusPoint}
+                    onChange={(newFocusPoint) => setAttributes({ tabletFocusPoint: newFocusPoint })}
+                />
+            )}
+            {deviceType === 'mobile' && (
+                <FocalPointPicker
+                    url={attributes.mobileImageUrl}
+                    value={attributes.mobileFocusPoint}
+                    onChange={(newFocusPoint) => setAttributes({ mobileFocusPoint: newFocusPoint })}
+                />
+            )}
+        </PanelBody>
+      </InspectorControls>
+
       {isModalOpen && (
         <div className={"rrze-elements-blocks-info-card-editor"} style={{padding: '16px'}}>
           <InnerBlocks
@@ -153,10 +214,10 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                style={{position: 'relative', height: '680px', width: '320px'}}>
             <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
                       allowedFormats={[]} placeholder={__("Dein Thema", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle} style={{ color: attributes.textColor }}/>
+                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle} />
             <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
                       placeholder={__("Hier steht dein Titel", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} style={{ color: attributes.textColor }}/>
+                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} />
             <div className={"rrze-elements-blocks__carousel_feature_card_bg"}>
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
                 <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>

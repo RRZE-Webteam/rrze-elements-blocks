@@ -43,9 +43,29 @@
       "type": "string",
       "default": ""
     },
-    "textColor": {
+    "desktopTextColor": {
       "type": "string",
       "default": "#000000"
+    },
+    "tabletTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "desktopFocusPoint": {
+      "type": "object",
+      "default": { "x": 0.5, "y": 0.5 }
+    },
+    "tabletFocusPoint": {
+      "type": "object",
+      "default": { "x": 0.5, "y": 0.5 }
+    },
+    "mobileFocusPoint": {
+      "type": "object",
+      "default": { "x": 0.5, "y": 0.5 }
     }
   },
   "textdomain": "rrze-elements-blocks",
