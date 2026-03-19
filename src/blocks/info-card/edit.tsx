@@ -63,6 +63,8 @@ export default function Edit({attributes, setAttributes}: EditProps) {
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
 
+  const isLinkCard = !!attributes.url;
+
   const deviceIcons = {
     desktop: desktop,
     tablet: tablet,
@@ -307,10 +309,14 @@ export default function Edit({attributes, setAttributes}: EditProps) {
               <div className={"rrze-elements-blocks__carousel_feature_card_link_control_container"}>
             <span className={"rrze-elements-blocks__carousel_feature_card_link_control_icon-container"}
                   style={{position: 'absolute'}}>
+              { !isLinkCard ? (
               <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
                    xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                    fill="#5f6368"><path
                 d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+                ) : (
+              <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+                )}
             </span>
               </div>
             </div>
