@@ -17,6 +17,7 @@ import {
   TextControl,
   Popover,
   RangeControl,
+  ColorPalette,
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
@@ -42,6 +43,9 @@ interface EditProps {
     desktopTextColor: string;
     tabletTextColor: string;
     mobileTextColor: string;
+    desktopCustomTextColor: string;
+    tabletCustomTextColor: string;
+    mobileCustomTextColor: string;
     desktopFocusPoint: { x: number; y: number };
     tabletFocusPoint: { x: number; y: number };
     mobileFocusPoint: { x: number; y: number };
@@ -98,6 +102,11 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     mobile: mobile,
   };
 
+  const colorPaletteColors = [
+      { name: __('Black', 'rrze-elements-blocks'), color: '#000000' },
+      { name: __('White', 'rrze-elements-blocks'), color: '#FFFFFF' },
+  ];
+
   useEffect(() => {
     if (isSelected && ref.current) {
       // Use a slight delay to allow the editor's UI to settle before scrolling
@@ -130,14 +139,18 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     setPreviewDeviceType(deviceName);
   };
 
+  const desktopFinalColor = attributes.desktopCustomTextColor || attributes.desktopTextColor;
+  const tabletFinalColor = attributes.tabletCustomTextColor || attributes.tabletTextColor || desktopFinalColor;
+  const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
+
   const style = {
-    '--desktop-text-color': attributes.desktopTextColor,
-    '--tablet-text-color': attributes.tabletTextColor || attributes.desktopTextColor,
-    '--mobile-text-color': attributes.mobileTextColor || attributes.tabletTextColor || attributes.desktopTextColor,
+    '--desktop-text-color': desktopFinalColor,
+    '--tablet-text-color': tabletFinalColor,
+    '--mobile-text-color': mobileFinalColor,
     '--desktop-object-position': `${attributes.desktopFocusPoint.x * 100}% ${attributes.desktopFocusPoint.y * 100}%`,
     '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
     '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
-  } as React.CSSProperties;
+  } as any;
 
   return (
     <li {...blockProps} style={style}>
@@ -296,6 +309,32 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                 value={attributes.alt}
                 onChange={(alt) => setAttributes({ alt })}
             />
+        </PanelBody>
+        <PanelBody title={__("Text Color", "rrze-elements-blocks")}>
+            {deviceType === 'desktop' && (
+                <ColorPalette
+                    colors={colorPaletteColors}
+                    value={attributes.desktopCustomTextColor}
+                    onChange={(color) => setAttributes({ desktopCustomTextColor: color })}
+                    clearable={true}
+                />
+            )}
+            {deviceType === 'tablet' && (
+                <ColorPalette
+                    colors={colorPaletteColors}
+                    value={attributes.tabletCustomTextColor}
+                    onChange={(color) => setAttributes({ tabletCustomTextColor: color })}
+                    clearable={true}
+                />
+            )}
+            {deviceType === 'mobile' && (
+                <ColorPalette
+                    colors={colorPaletteColors}
+                    value={attributes.mobileCustomTextColor}
+                    onChange={(color) => setAttributes({ mobileCustomTextColor: color })}
+                    clearable={true}
+                />
+            )}
         </PanelBody>
         <PanelBody title={__("Focus Point", "rrze-elements-blocks")}>
             {(deviceType === 'desktop' && !!attributes.desktopImageId) && (

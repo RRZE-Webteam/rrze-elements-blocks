@@ -55,6 +55,18 @@
       "type": "string",
       "default": ""
     },
+    "desktopCustomTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "tabletCustomTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileCustomTextColor": {
+      "type": "string",
+      "default": ""
+    },
     "desktopFocusPoint": {
       "type": "object",
       "default": { "x": 0.5, "y": 0.5 }
