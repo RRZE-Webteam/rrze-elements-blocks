@@ -1,9 +1,9 @@
 // Imports from WordPress libraries
 import {
-  InnerBlocks,
   useBlockProps,
   useInnerBlocksProps
 } from "@wordpress/block-editor";
+import { useRef } from "@wordpress/element";
 
 // interface EditProps {
 //   blockProps: string[];
@@ -11,6 +11,8 @@ import {
 
 export default function Edit() {
   const props = useBlockProps();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const innerBlocksProps = useInnerBlocksProps(
     {
       className: "rrze-elements-blocks__carousel-content-list",
@@ -26,6 +28,20 @@ export default function Edit() {
     }
   );
 
+  const scroll = (direction: 'prev' | 'next') => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const firstItem = container.querySelector('li');
+      const itemWidth = firstItem ? firstItem.offsetWidth + 20 : 392;
+      const targetScroll = container.scrollLeft + (direction === 'next' ? itemWidth : -itemWidth);
+
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section {...props}>
       <div className={"rrze-elements-blocks__carousel"}>
@@ -33,26 +49,29 @@ export default function Edit() {
           <h2 className={"rrze-elements-blocks__carousel-section-header-headline"} id={"uniqueIDforTheSection-header"}>Lerne die FAU kennen.</h2>
         </div>
         <div id={"anotherUniqueIDForThisContentSection"} className={"rrze-elements-blocks__carousel-container"}>
-          <div className={"rrze-elements-blocks__carousel-content"}>
+          <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
             <ul aria-labelledby={"uniqueIDforTheSection-header"} role={"list"} className={"rrze-elements-blocks__carousel-content-list"} {...innerBlocksProps} >
-              {/*<ul aria-labelledby={"uniqueIDforTheSection-header"} role={"list"} className={"rrze-elements-blocks__carousel-content-list"}><InnerBlocks
-                allowedBlocks={["rrze-elements/info-card"]}
-                template={[
-                  ["rrze-elements/info-card", {}],
-                  ["rrze-elements/info-card", {}],
-                ]}
-              />*/}
             </ul>
           </div>
           <div className={"rrze-elements-blocks__carousel-navigation"}>
             <ul className={"rrze-elements-blocks__carousel-navigation-container"}>
               <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
-                <button className={"rrze-elements-blocks_carousel_navigation_button"} aria-label={"Zurück im H3-Überschrift Karusell"} type={"button"}>
+                <button
+                  className={"rrze-elements-blocks_carousel_navigation_button"}
+                  aria-label={"Zurück im H3-Überschrift Karusell"}
+                  type={"button"}
+                  onClick={() => scroll('prev')}
+                >
                   <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
                 </button>
               </li>
               <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
-                <button className={"rrze-elements-blocks_carousel_navigation_button"} aria-label={"Weiter im H3-Überschrift Karusell"} type={"button"}>
+                <button
+                  className={"rrze-elements-blocks_carousel_navigation_button"}
+                  aria-label={"Weiter im H3-Überschrift Karusell"}
+                  type={"button"}
+                  onClick={() => scroll('next')}
+                >
                   <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
                 </button>
               </li>
@@ -60,7 +79,6 @@ export default function Edit() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }
