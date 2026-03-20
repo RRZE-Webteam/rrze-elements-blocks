@@ -60,8 +60,13 @@ interface EditProps {
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
   const ref = useRef<HTMLLIElement>(null);
 
+  let imageStatus = 'image';
+  if(attributes.desktopImageId === 0){
+    imageStatus = 'no-image';
+  }
+
   const blockProps = useBlockProps({
-    className: "rrze-elements-blocks__carousel-content-list-item",
+    className: `rrze-elements-blocks__carousel-content-list-item ${imageStatus}`,
     ref: ref
   });
 
@@ -210,7 +215,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'desktop')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Desktop Image', 'rrze-elements-blocks')}
+                    name={__('Add Desktop Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'tablet' && (
@@ -304,6 +309,27 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                     name={__('Mobile Image', 'rrze-elements-blocks')}
                 />
             )}
+          {(deviceType === 'desktop' && !!attributes.desktopImageId) && (
+            <FocalPointPicker
+              url={attributes.desktopImageUrl}
+              value={attributes.desktopFocusPoint}
+              onChange={(newFocusPoint) => setAttributes({ desktopFocusPoint: newFocusPoint })}
+            />
+          )}
+          {(deviceType === 'tablet' && !!attributes.tabletImageId) && (
+            <FocalPointPicker
+              url={attributes.tabletImageUrl}
+              value={attributes.tabletFocusPoint}
+              onChange={(newFocusPoint) => setAttributes({ tabletFocusPoint: newFocusPoint })}
+            />
+          )}
+          {(deviceType === 'mobile' && !!attributes.mobileImageId) && (
+            <FocalPointPicker
+              url={attributes.mobileImageUrl}
+              value={attributes.mobileFocusPoint}
+              onChange={(newFocusPoint) => setAttributes({ mobileFocusPoint: newFocusPoint })}
+            />
+          )}
             <TextControl
                 label={__("Alt Text", "rrze-elements-blocks")}
                 value={attributes.alt}
@@ -333,29 +359,6 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                     value={attributes.mobileCustomTextColor}
                     onChange={(color) => setAttributes({ mobileCustomTextColor: color })}
                     clearable={true}
-                />
-            )}
-        </PanelBody>
-        <PanelBody title={__("Focus Point", "rrze-elements-blocks")}>
-            {(deviceType === 'desktop' && !!attributes.desktopImageId) && (
-                <FocalPointPicker
-                    url={attributes.desktopImageUrl}
-                    value={attributes.desktopFocusPoint}
-                    onChange={(newFocusPoint) => setAttributes({ desktopFocusPoint: newFocusPoint })}
-                />
-            )}
-            {(deviceType === 'tablet' && !!attributes.tabletImageId) && (
-                <FocalPointPicker
-                    url={attributes.tabletImageUrl}
-                    value={attributes.tabletFocusPoint}
-                    onChange={(newFocusPoint) => setAttributes({ tabletFocusPoint: newFocusPoint })}
-                />
-            )}
-            {(deviceType === 'mobile' && !!attributes.mobileImageId) && (
-                <FocalPointPicker
-                    url={attributes.mobileImageUrl}
-                    value={attributes.mobileFocusPoint}
-                    onChange={(newFocusPoint) => setAttributes({ mobileFocusPoint: newFocusPoint })}
                 />
             )}
         </PanelBody>

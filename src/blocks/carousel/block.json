@@ -16,7 +16,7 @@
     },
     "cardHeight": {
       "type": "number",
-      "default": 680
+      "default": 520
     }
   },
   "textdomain": "rrze-elements-blocks",

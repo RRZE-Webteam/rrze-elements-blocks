@@ -45,7 +45,7 @@
     },
     "desktopTextColor": {
       "type": "string",
-      "default": "#000000"
+      "default": "#fff"
     },
     "tabletTextColor": {
       "type": "string",

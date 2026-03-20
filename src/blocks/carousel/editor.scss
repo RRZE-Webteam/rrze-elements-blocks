@@ -21,6 +21,14 @@ ul.rrze-elements-blocks__carousel-content-list{
     margin: 0;
     padding: 0;
   }
+
+  div.block-list-appender {
+    position: relative;
+
+    button.block-list-appender__toggle {
+      height: 95%;
+    }
+  }
 }
 
 div.rrze-elements-blocks__carousel_feature_card-content
@@ -29,7 +37,7 @@ div.rrze-elements-blocks__carousel_feature_card-content
   padding: 32px;
   width: 372px;
   z-index: 1;
-  background-color: #189de5;
+  background-color: #04316a;
   will-change: transform;
 }
 
