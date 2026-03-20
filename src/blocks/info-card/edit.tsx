@@ -19,7 +19,7 @@ import {
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
-import { useState } from "@wordpress/element";
+import { useState, useRef, useEffect } from "@wordpress/element";
 import { page, desktop, tablet, mobile, link } from "@wordpress/icons";
 import { __ } from "@wordpress/i18n";
 import { getImageBrightness } from "../../utility/color";
@@ -47,11 +47,16 @@ interface EditProps {
     url: string;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
+  clientId: string;
+  isSelected: boolean;
 }
 
-export default function Edit({attributes, setAttributes}: EditProps) {
+export default function Edit({attributes, setAttributes, isSelected}: EditProps) {
+  const ref = useRef<HTMLLIElement>(null);
+
   const blockProps = useBlockProps({
-    className: "rrze-elements-blocks__carousel-content-list-item"
+    className: "rrze-elements-blocks__carousel-content-list-item",
+    ref: ref
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,6 +76,19 @@ export default function Edit({attributes, setAttributes}: EditProps) {
     tablet: tablet,
     mobile: mobile,
   };
+
+  useEffect(() => {
+    if (isSelected && ref.current) {
+      // Use a slight delay to allow the editor's UI to settle before scrolling
+      setTimeout(() => {
+        ref.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }, 50);
+    }
+  }, [isSelected]);
 
   const onImageSelect = (image: { id: number; url: string }, device: DeviceType) => {
     const newAttributes = {
@@ -158,7 +176,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'desktop')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Edit Desktop Image', 'rrze-elements-blocks')}
+                    name={__('Desktop Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'tablet' && (
@@ -169,7 +187,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'tablet')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Edit Tablet Image', 'rrze-elements-blocks')}
+                    name={__('Tablet Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'mobile' && (
@@ -180,7 +198,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'mobile')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Edit Mobile Image', 'rrze-elements-blocks')}
+                    name={__('Mobile Image', 'rrze-elements-blocks')}
                 />
             )}
         </ToolbarGroup>
@@ -216,7 +234,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'desktop')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Edit Desktop Image', 'rrze-elements-blocks')}
+                    name={__('Desktop Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'tablet' && (
@@ -227,7 +245,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'tablet')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Edit Tablet Image', 'rrze-elements-blocks')}
+                    name={__('Tablet Image', 'rrze-elements-blocks')}
                 />
             )}
             {deviceType === 'mobile' && (
@@ -238,7 +256,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                     accept="image/*"
                     onSelect={(media) => onImageSelect(media, 'mobile')}
                     onError={(error: string) => console.error(error)}
-                    name={__('Edit Mobile Image', 'rrze-elements-blocks')}
+                    name={__('Mobile Image', 'rrze-elements-blocks')}
                 />
             )}
             <TextControl
