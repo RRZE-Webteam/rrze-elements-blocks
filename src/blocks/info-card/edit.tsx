@@ -16,6 +16,7 @@ import {
   FocalPointPicker,
   TextControl,
   Popover,
+  RangeControl,
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
@@ -23,7 +24,8 @@ import { useState, useRef, useEffect } from "@wordpress/element";
 import { page, desktop, tablet, mobile, link } from "@wordpress/icons";
 import { __ } from "@wordpress/i18n";
 import { getImageBrightness } from "../../utility/color";
-import { useDispatch } from "@wordpress/data";
+import { useDispatch, useSelect } from "@wordpress/data";
+import { store as blockEditorStore } from "@wordpress/block-editor";
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
@@ -51,7 +53,7 @@ interface EditProps {
   isSelected: boolean;
 }
 
-export default function Edit({attributes, setAttributes, isSelected}: EditProps) {
+export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
   const ref = useRef<HTMLLIElement>(null);
 
   const blockProps = useBlockProps({
@@ -64,6 +66,25 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
   const { __experimentalSetPreviewDeviceType: setPreviewDeviceType } = useDispatch('core/edit-post');
+  const { updateBlockAttributes } = useDispatch(blockEditorStore);
+
+  const { parentId, parentAttributes } = useSelect((select) => {
+    const { getBlockParents, getBlockAttributes } = select(blockEditorStore);
+    const parents = getBlockParents(clientId);
+    const parentId = parents.length > 0 ? parents[parents.length - 1] : null;
+    return {
+      parentId,
+      parentAttributes: parentId ? getBlockAttributes(parentId) : null,
+    };
+  }, [clientId]);
+
+  const cardHeight = parentAttributes?.cardHeight !== undefined ? parentAttributes.cardHeight : 680;
+
+  const setCardHeight = (val: number) => {
+    if (parentId) {
+      updateBlockAttributes(parentId, { cardHeight: val });
+    }
+  };
 
   const desktopImageUrl = attributes.desktopImageUrl;
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
@@ -205,6 +226,17 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
       </BlockControls>
 
       <InspectorControls>
+        {parentId && (
+            <PanelBody title={__("Carousel Settings", "rrze-elements-blocks")}>
+                <RangeControl
+                    label={__("Card Height (px)", "rrze-elements-blocks")}
+                    value={cardHeight}
+                    onChange={setCardHeight}
+                    min={350}
+                    max={680}
+                />
+            </PanelBody>
+        )}
         <PanelBody title={__("Image Settings", "rrze-elements-blocks")}>
           <ToggleGroupControl
             __next40pxDefaultSize
@@ -308,7 +340,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
       {!isModalOpen && (
         <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
           <div className={"rrze-elements-blocks__carousel_feature_card-content"}
-               style={{position: 'relative', height: '680px', width: '320px'}}>
+               style={{position: 'relative', height: `${cardHeight}px`, width: '320px'}}>
             <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
                       allowedFormats={[]} placeholder={__("Dein Thema", "rrze-elements-blocks")}
                       onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle} />

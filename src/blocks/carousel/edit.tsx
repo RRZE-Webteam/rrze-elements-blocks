@@ -1,15 +1,22 @@
 // Imports from WordPress libraries
 import {
+  InspectorControls,
   useBlockProps,
   useInnerBlocksProps
 } from "@wordpress/block-editor";
+import { PanelBody, RangeControl } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 import { useRef } from "@wordpress/element";
 
-// interface EditProps {
-//   blockProps: string[];
-// }
+interface EditProps {
+  attributes: {
+    title: string;
+    cardHeight: number;
+  }
+  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
+}
 
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }: EditProps) {
   const props = useBlockProps();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -42,43 +49,61 @@ export default function Edit() {
     }
   };
 
+  const style = {
+    '--rrze-carousel-height': `${attributes.cardHeight}px`,
+  } as any;
+
   return (
-    <section {...props}>
-      <div className={"rrze-elements-blocks__carousel"}>
-        <div className={"rrze-elements-blocks__carousel-section-header"}>
-          <h2 className={"rrze-elements-blocks__carousel-section-header-headline"} id={"uniqueIDforTheSection-header"}>Lerne die FAU kennen.</h2>
-        </div>
-        <div id={"anotherUniqueIDForThisContentSection"} className={"rrze-elements-blocks__carousel-container"}>
-          <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
-            <ul aria-labelledby={"uniqueIDforTheSection-header"} role={"list"} className={"rrze-elements-blocks__carousel-content-list"} {...innerBlocksProps} >
-            </ul>
+    <>
+      <InspectorControls>
+        <PanelBody title={__("Carousel Settings", "rrze-elements-blocks")}>
+          <RangeControl
+            label={__("Card Height (px)", "rrze-elements-blocks")}
+            value={attributes.cardHeight}
+            onChange={(val) => setAttributes({ cardHeight: val })}
+            min={350}
+            max={680}
+          />
+        </PanelBody>
+      </InspectorControls>
+
+      <section {...props} style={style}>
+        <div className={"rrze-elements-blocks__carousel"}>
+          <div className={"rrze-elements-blocks__carousel-section-header"}>
+            <h2 className={"rrze-elements-blocks__carousel-section-header-headline"} id={"uniqueIDforTheSection-header"}>Lerne die FAU kennen.</h2>
           </div>
-          <div className={"rrze-elements-blocks__carousel-navigation"}>
-            <ul className={"rrze-elements-blocks__carousel-navigation-container"}>
-              <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
-                <button
-                  className={"rrze-elements-blocks_carousel_navigation_button"}
-                  aria-label={"Zurück im H3-Überschrift Karusell"}
-                  type={"button"}
-                  onClick={() => scroll('prev')}
-                >
-                  <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
-                </button>
-              </li>
-              <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
-                <button
-                  className={"rrze-elements-blocks_carousel_navigation_button"}
-                  aria-label={"Weiter im H3-Überschrift Karusell"}
-                  type={"button"}
-                  onClick={() => scroll('next')}
-                >
-                  <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
-                </button>
-              </li>
-            </ul>
+          <div id={"anotherUniqueIDForThisContentSection"} className={"rrze-elements-blocks__carousel-container"}>
+            <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
+              <ul aria-labelledby={"uniqueIDforTheSection-header"} role={"list"} className={"rrze-elements-blocks__carousel-content-list"} {...innerBlocksProps} >
+              </ul>
+            </div>
+            <div className={"rrze-elements-blocks__carousel-navigation"}>
+              <ul className={"rrze-elements-blocks__carousel-navigation-container"}>
+                <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
+                  <button
+                    className={"rrze-elements-blocks_carousel_navigation_button"}
+                    aria-label={"Zurück im H3-Überschrift Karusell"}
+                    type={"button"}
+                    onClick={() => scroll('prev')}
+                  >
+                    <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+                  </button>
+                </li>
+                <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
+                  <button
+                    className={"rrze-elements-blocks_carousel_navigation_button"}
+                    aria-label={"Weiter im H3-Überschrift Karusell"}
+                    type={"button"}
+                    onClick={() => scroll('next')}
+                  >
+                    <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
