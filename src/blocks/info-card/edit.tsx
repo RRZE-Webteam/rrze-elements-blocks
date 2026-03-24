@@ -12,6 +12,7 @@ import {
   ToolbarGroup,
   ToolbarButton,
   DropdownMenu,
+  Button,
   PanelBody,
   FocalPointPicker,
   TextControl,
@@ -21,13 +22,14 @@ import {
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
-import { useState, useRef, useEffect } from "@wordpress/element";
-import { page, desktop, tablet, mobile, link } from "@wordpress/icons";
-import { __ } from "@wordpress/i18n";
-import { getImageBrightness } from "../../utility/color";
-import { useDispatch, useSelect } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
+import {useState, useRef, useEffect} from "@wordpress/element";
+import {page, desktop, tablet, mobile, link} from "@wordpress/icons";
+import {__} from "@wordpress/i18n";
+import {getImageBrightness} from "../../utility/color";
+import {useDispatch, useSelect} from "@wordpress/data";
+import {store as blockEditorStore} from "@wordpress/block-editor";
 import {CharacterCountProgressBar} from "../../components/ProgressBar";
+import {CSSProperties} from "react";
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
@@ -58,11 +60,20 @@ interface EditProps {
   isSelected: boolean;
 }
 
+interface CustomStyles extends CSSProperties {
+  '--desktop-text-color'?: string;
+  '--tablet-text-color'?: string;
+  '--mobile-text-color'?: string;
+  '--desktop-object-position'?: string;
+  '--tablet-object-position'?: string;
+  '--mobile-object-position'?: string;
+}
+
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
   const ref = useRef<HTMLLIElement>(null);
 
   let imageStatus = 'image';
-  if(attributes.desktopImageId === 0){
+  if (attributes.desktopImageId === 0) {
     imageStatus = 'no-image';
   }
 
@@ -75,11 +86,11 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const [isLinkPickerVisible, setIsLinkPickerVisible] = useState(false);
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
-  const { __experimentalSetPreviewDeviceType: setPreviewDeviceType } = useDispatch('core/edit-post');
-  const { updateBlockAttributes } = useDispatch(blockEditorStore);
+  const {__experimentalSetPreviewDeviceType: setPreviewDeviceType} = useDispatch('core/edit-post');
+  const {updateBlockAttributes} = useDispatch(blockEditorStore);
 
-  const { parentId, parentAttributes } = useSelect((select) => {
-    const { getBlockParents, getBlockAttributes } = select(blockEditorStore);
+  const {parentId, parentAttributes} = useSelect((select) => {
+    const {getBlockParents, getBlockAttributes} = select(blockEditorStore);
     const parents = getBlockParents(clientId);
     const parentId = parents.length > 0 ? parents[parents.length - 1] : null;
     return {
@@ -92,7 +103,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
 
   const setCardHeight = (val: number) => {
     if (parentId) {
-      updateBlockAttributes(parentId, { cardHeight: val });
+      updateBlockAttributes(parentId, {cardHeight: val});
     }
   };
 
@@ -101,6 +112,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
 
   const isLinkCard = !!attributes.url;
+  // does it have inner Content
+  const isInfoCard = blockProps;
 
   const deviceIcons = {
     desktop: desktop,
@@ -109,8 +122,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   };
 
   const colorPaletteColors = [
-      { name: __('Black', 'rrze-elements-blocks'), color: '#000000' },
-      { name: __('White', 'rrze-elements-blocks'), color: '#FFFFFF' },
+    {name: __('Black', 'rrze-elements-blocks'), color: '#000000'},
+    {name: __('White', 'rrze-elements-blocks'), color: '#FFFFFF'},
   ];
 
   useEffect(() => {
@@ -135,7 +148,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
 
     getImageBrightness(image.url).then(brightness => {
       const newTextColor = brightness < 128 ? '#FFFFFF' : '#000000';
-      setAttributes({ [`${device}TextColor`]: newTextColor });
+      setAttributes({[`${device}TextColor`]: newTextColor});
     });
   };
 
@@ -149,14 +162,14 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const tabletFinalColor = attributes.tabletCustomTextColor || attributes.tabletTextColor || desktopFinalColor;
   const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
 
-  const style = {
+  const style: CustomStyles = {
     '--desktop-text-color': desktopFinalColor,
     '--tablet-text-color': tabletFinalColor,
     '--mobile-text-color': mobileFinalColor,
     '--desktop-object-position': `${attributes.desktopFocusPoint.x * 100}% ${attributes.desktopFocusPoint.y * 100}%`,
     '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
     '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
-  } as any;
+  };
 
   return (
     <li {...blockProps} style={style}>
@@ -169,92 +182,92 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           />
         </ToolbarGroup>
         <ToolbarGroup>
-            <ToolbarButton
-                icon={link}
-                label={__("Link", "rrze-elements-blocks")}
-                onClick={() => setIsLinkPickerVisible(true)}
-            />
-            {isLinkPickerVisible && (
-                <Popover
-                    onClose={() => setIsLinkPickerVisible(false)}
-                    headerTitle={__("Add Link", "rrze-elements-blocks")}
-                >
-                    <LinkControl
-                        value={{url: attributes.url}}
-                        onChange={(newLink) => setAttributes({ url: newLink.url })}
-                    />
-                </Popover>
-            )}
+          <ToolbarButton
+            icon={link}
+            label={__("Link", "rrze-elements-blocks")}
+            onClick={() => setIsLinkPickerVisible(true)}
+          />
+          {isLinkPickerVisible && (
+            <Popover
+              onClose={() => setIsLinkPickerVisible(false)}
+              headerTitle={__("Add Link", "rrze-elements-blocks")}
+            >
+              <LinkControl
+                value={{url: attributes.url}}
+                onChange={(newLink) => setAttributes({url: newLink.url})}
+              />
+            </Popover>
+          )}
         </ToolbarGroup>
         <ToolbarGroup>
-            <DropdownMenu
-                icon={deviceIcons[deviceType]}
-                label={__("Select device type", "rrze-elements-blocks")}
-                controls={[
-                    {
-                        title: __('Desktop', 'rrze-elements-blocks'),
-                        icon: desktop,
-                        onClick: () => handleDeviceTypeChange('desktop'),
-                    },
-                    {
-                        title: __('Tablet', 'rrze-elements-blocks'),
-                        icon: tablet,
-                        onClick: () => handleDeviceTypeChange('tablet'),
-                    },
-                    {
-                        title: __('Mobile', 'rrze-elements-blocks'),
-                        icon: mobile,
-                        onClick: () => handleDeviceTypeChange('mobile'),
-                    },
-                ]}
+          <DropdownMenu
+            icon={deviceIcons[deviceType]}
+            label={__("Select device type", "rrze-elements-blocks")}
+            controls={[
+              {
+                title: __('Desktop', 'rrze-elements-blocks'),
+                icon: desktop,
+                onClick: () => handleDeviceTypeChange('desktop'),
+              },
+              {
+                title: __('Tablet', 'rrze-elements-blocks'),
+                icon: tablet,
+                onClick: () => handleDeviceTypeChange('tablet'),
+              },
+              {
+                title: __('Mobile', 'rrze-elements-blocks'),
+                icon: mobile,
+                onClick: () => handleDeviceTypeChange('mobile'),
+              },
+            ]}
+          />
+          {deviceType === 'desktop' && (
+            <MediaReplaceFlow
+              mediaId={attributes.desktopImageId}
+              mediaURL={attributes.desktopImageUrl}
+              allowedTypes={['image']}
+              accept="image/*"
+              onSelect={(media) => onImageSelect(media, 'desktop')}
+              onError={(error: string) => console.error(error)}
+              name={__('Add Desktop Image', 'rrze-elements-blocks')}
             />
-            {deviceType === 'desktop' && (
-                <MediaReplaceFlow
-                    mediaId={attributes.desktopImageId}
-                    mediaURL={attributes.desktopImageUrl}
-                    allowedTypes={['image']}
-                    accept="image/*"
-                    onSelect={(media) => onImageSelect(media, 'desktop')}
-                    onError={(error: string) => console.error(error)}
-                    name={__('Add Desktop Image', 'rrze-elements-blocks')}
-                />
-            )}
-            {deviceType === 'tablet' && (
-                <MediaReplaceFlow
-                    mediaId={attributes.tabletImageId}
-                    mediaURL={attributes.tabletImageUrl}
-                    allowedTypes={['image']}
-                    accept="image/*"
-                    onSelect={(media) => onImageSelect(media, 'tablet')}
-                    onError={(error: string) => console.error(error)}
-                    name={__('Tablet Image', 'rrze-elements-blocks')}
-                />
-            )}
-            {deviceType === 'mobile' && (
-                <MediaReplaceFlow
-                    mediaId={attributes.mobileImageId}
-                    mediaURL={attributes.mobileImageUrl}
-                    allowedTypes={['image']}
-                    accept="image/*"
-                    onSelect={(media) => onImageSelect(media, 'mobile')}
-                    onError={(error: string) => console.error(error)}
-                    name={__('Mobile Image', 'rrze-elements-blocks')}
-                />
-            )}
+          )}
+          {deviceType === 'tablet' && (
+            <MediaReplaceFlow
+              mediaId={attributes.tabletImageId}
+              mediaURL={attributes.tabletImageUrl}
+              allowedTypes={['image']}
+              accept="image/*"
+              onSelect={(media) => onImageSelect(media, 'tablet')}
+              onError={(error: string) => console.error(error)}
+              name={__('Tablet Image', 'rrze-elements-blocks')}
+            />
+          )}
+          {deviceType === 'mobile' && (
+            <MediaReplaceFlow
+              mediaId={attributes.mobileImageId}
+              mediaURL={attributes.mobileImageUrl}
+              allowedTypes={['image']}
+              accept="image/*"
+              onSelect={(media) => onImageSelect(media, 'mobile')}
+              onError={(error: string) => console.error(error)}
+              name={__('Mobile Image', 'rrze-elements-blocks')}
+            />
+          )}
         </ToolbarGroup>
       </BlockControls>
 
       <InspectorControls>
         {parentId && (
-            <PanelBody title={__("Carousel Settings", "rrze-elements-blocks")}>
-                <RangeControl
-                    label={__("Card Height (px)", "rrze-elements-blocks")}
-                    value={cardHeight}
-                    onChange={setCardHeight}
-                    min={350}
-                    max={680}
-                />
-            </PanelBody>
+          <PanelBody title={__("Carousel Settings", "rrze-elements-blocks")}>
+            <RangeControl
+              label={__("Card Height (px)", "rrze-elements-blocks")}
+              value={cardHeight}
+              onChange={setCardHeight}
+              min={350}
+              max={680}
+            />
+          </PanelBody>
         )}
         <PanelBody title={__("Image Settings", "rrze-elements-blocks")}>
           <ToggleGroupControl
@@ -262,7 +275,9 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
             isBlock
             label="Choose Viewport"
             value={deviceType}
-            onChange={(device: DeviceType) => {handleDeviceTypeChange(device)}}
+            onChange={(device: DeviceType) => {
+              handleDeviceTypeChange(device)
+            }}
           >
             <ToggleGroupControlOption
               label={__("Desktop", "rrze-elements-blocks")}
@@ -277,91 +292,93 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               value="mobile"
             />
           </ToggleGroupControl>
-            {deviceType === 'desktop' && (
-                <MediaReplaceFlow
-                    mediaId={attributes.desktopImageId}
-                    mediaURL={attributes.desktopImageUrl}
-                    allowedTypes={['image']}
-                    accept="image/*"
-                    onSelect={(media) => onImageSelect(media, 'desktop')}
-                    onError={(error: string) => console.error(error)}
-                    name={__('Desktop Image', 'rrze-elements-blocks')}
-                />
-            )}
-            {deviceType === 'tablet' && (
-                <MediaReplaceFlow
-                    mediaId={attributes.tabletImageId}
-                    mediaURL={attributes.tabletImageUrl}
-                    allowedTypes={['image']}
-                    accept="image/*"
-                    onSelect={(media) => onImageSelect(media, 'tablet')}
-                    onError={(error: string) => console.error(error)}
-                    name={__('Tablet Image', 'rrze-elements-blocks')}
-                />
-            )}
-            {deviceType === 'mobile' && (
-                <MediaReplaceFlow
-                    mediaId={attributes.mobileImageId}
-                    mediaURL={attributes.mobileImageUrl}
-                    allowedTypes={['image']}
-                    accept="image/*"
-                    onSelect={(media) => onImageSelect(media, 'mobile')}
-                    onError={(error: string) => console.error(error)}
-                    name={__('Mobile Image', 'rrze-elements-blocks')}
-                />
-            )}
+          {deviceType === 'desktop' && (
+            <MediaReplaceFlow
+              mediaId={attributes.desktopImageId}
+              mediaURL={attributes.desktopImageUrl}
+              allowedTypes={['image']}
+              accept="image/*"
+              onSelect={(media) => onImageSelect(media, 'desktop')}
+              onError={(error: string) => console.error(error)}
+              name={__('Add Desktop Image', 'rrze-elements-blocks')}
+            />
+          )}
+          {deviceType === 'tablet' && (
+            <MediaReplaceFlow
+              mediaId={attributes.tabletImageId}
+              mediaURL={attributes.tabletImageUrl}
+              allowedTypes={['image']}
+              accept="image/*"
+              onSelect={(media) => onImageSelect(media, 'tablet')}
+              onError={(error: string) => console.error(error)}
+              name={__('Add Tablet Image', 'rrze-elements-blocks')}
+            />
+          )}
+          {deviceType === 'mobile' && (
+            <MediaReplaceFlow
+              mediaId={attributes.mobileImageId}
+              mediaURL={attributes.mobileImageUrl}
+              allowedTypes={['image']}
+              accept="image/*"
+              onSelect={(media) => onImageSelect(media, 'mobile')}
+              onError={(error: string) => console.error(error)}
+              name={__('Add Mobile Image', 'rrze-elements-blocks')}
+            />
+          )}
           {(deviceType === 'desktop' && !!attributes.desktopImageId) && (
             <FocalPointPicker
               url={attributes.desktopImageUrl}
               value={attributes.desktopFocusPoint}
-              onChange={(newFocusPoint) => setAttributes({ desktopFocusPoint: newFocusPoint })}
+              onChange={(newFocusPoint) => setAttributes({desktopFocusPoint: newFocusPoint})}
             />
           )}
           {(deviceType === 'tablet' && !!attributes.tabletImageId) && (
             <FocalPointPicker
               url={attributes.tabletImageUrl}
               value={attributes.tabletFocusPoint}
-              onChange={(newFocusPoint) => setAttributes({ tabletFocusPoint: newFocusPoint })}
+              onChange={(newFocusPoint) => setAttributes({tabletFocusPoint: newFocusPoint})}
             />
           )}
           {(deviceType === 'mobile' && !!attributes.mobileImageId) && (
             <FocalPointPicker
               url={attributes.mobileImageUrl}
               value={attributes.mobileFocusPoint}
-              onChange={(newFocusPoint) => setAttributes({ mobileFocusPoint: newFocusPoint })}
+              onChange={(newFocusPoint) => setAttributes({mobileFocusPoint: newFocusPoint})}
             />
           )}
+          {(!!attributes.mobileImageId || !!attributes.tabletImageId || !!attributes.desktopImageId) && (
             <TextControl
-                label={__("Alt Text", "rrze-elements-blocks")}
-                value={attributes.alt}
-                onChange={(alt) => setAttributes({ alt })}
+              label={__("Alt Text", "rrze-elements-blocks")}
+              value={attributes.alt}
+              onChange={(alt) => setAttributes({alt})}
             />
+          )}
         </PanelBody>
         <PanelBody title={__("Text Color", "rrze-elements-blocks")}>
-            {deviceType === 'desktop' && (
-                <ColorPalette
-                    colors={colorPaletteColors}
-                    value={attributes.desktopCustomTextColor}
-                    onChange={(color) => setAttributes({ desktopCustomTextColor: color })}
-                    clearable={true}
-                />
-            )}
-            {deviceType === 'tablet' && (
-                <ColorPalette
-                    colors={colorPaletteColors}
-                    value={attributes.tabletCustomTextColor}
-                    onChange={(color) => setAttributes({ tabletCustomTextColor: color })}
-                    clearable={true}
-                />
-            )}
-            {deviceType === 'mobile' && (
-                <ColorPalette
-                    colors={colorPaletteColors}
-                    value={attributes.mobileCustomTextColor}
-                    onChange={(color) => setAttributes({ mobileCustomTextColor: color })}
-                    clearable={true}
-                />
-            )}
+          {deviceType === 'desktop' && (
+            <ColorPalette
+              colors={colorPaletteColors}
+              value={attributes.desktopCustomTextColor}
+              onChange={(color) => setAttributes({desktopCustomTextColor: color})}
+              clearable={true}
+            />
+          )}
+          {deviceType === 'tablet' && (
+            <ColorPalette
+              colors={colorPaletteColors}
+              value={attributes.tabletCustomTextColor}
+              onChange={(color) => setAttributes({tabletCustomTextColor: color})}
+              clearable={true}
+            />
+          )}
+          {deviceType === 'mobile' && (
+            <ColorPalette
+              colors={colorPaletteColors}
+              value={attributes.mobileCustomTextColor}
+              onChange={(color) => setAttributes({mobileCustomTextColor: color})}
+              clearable={true}
+            />
+          )}
         </PanelBody>
       </InspectorControls>
 
@@ -385,16 +402,16 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           <div className={"rrze-elements-blocks__carousel_feature_card-content"}
                style={{position: 'relative', height: `${cardHeight}px`, width: '320px'}}>
             <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
-                      allowedFormats={[]} placeholder={__("Dein Thema", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle} />
+                      allowedFormats={[]} placeholder={__("Your Topic", "rrze-elements-blocks")}
+                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle}/>
             {isSelected && (
-              <CharacterCountProgressBar value={attributes.subtitle?.length || 0} maxValue={40} />
+              <CharacterCountProgressBar value={attributes.subtitle?.length || 0} maxValue={40}/>
             )}
             <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
-                      placeholder={__("Hier steht dein Titel", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} />
+                      placeholder={__("Your Headline", "rrze-elements-blocks")}
+                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title}/>
             {isSelected && (
-              <CharacterCountProgressBar value={attributes.title?.length || 0} maxValue={60} />
+              <CharacterCountProgressBar value={attributes.title?.length || 0} maxValue={60}/>
             )}
             <div className={"rrze-elements-blocks__carousel_feature_card_bg"}>
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
@@ -409,19 +426,26 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                 </picture>
               </figure>
             </div>
+            {/*Todo: hier */}
             <div className={"rrze-elements-blocks__carousel_feature_card_link"}
                  aria-label={"Weitere Informationen zum Thema XYZ"} role={"button"}>
               <div className={"rrze-elements-blocks__carousel_feature_card_link_control_container"}>
             <span className={"rrze-elements-blocks__carousel_feature_card_link_control_icon-container"}
                   style={{position: 'absolute'}}>
-              { !isLinkCard ? (
-              <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
-                   xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                   fill="#5f6368"><path
-                d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
-                ) : (
-              <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
-                )}
+              {!isLinkCard ? (
+                <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
+                     xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#5f6368">
+                  <path
+                    d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/>
+                </svg>
+              ) : (
+                <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
+                     xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#5f6368">
+                  <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
+                </svg>
+              )}
             </span>
               </div>
             </div>

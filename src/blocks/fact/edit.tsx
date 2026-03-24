@@ -12,7 +12,7 @@ import {__} from "@wordpress/i18n";
 import {displayShortcut} from "@wordpress/keycodes";
 import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 import {useState} from "@wordpress/element";
-import { CharacterCountProgressBar } from "../../components/ProgressBar";
+import {CharacterCountProgressBar} from "../../components/ProgressBar";
 
 interface EditProps {
   blockProps: string[];
@@ -62,17 +62,16 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
   };
 
 
-
   const onChangeFact = (title: string) => {
     setAttributes({description: title});
   };
 
   const descriptionLength = description?.length || 0;
-  const progressValue =  Math.min((descriptionLength / 120) * 100, 100);
+  const progressValue = Math.min((descriptionLength / 120) * 100, 100);
 
   let iconName = materialSymbol
 
-  if(progressValue >= 100 && isSelected){
+  if (progressValue >= 100 && isSelected) {
     iconName = "sentiment_stressed";
   }
 
@@ -141,13 +140,14 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
         </Popover>
       )}
       <li className="facts__item">
-            <span className="facts__icon" aria-hidden="true">
-              <IconMarkComponent className={"no-selection"} type={"symbol"} iconName={"add_reaction"} materialSymbol={iconName}
-                                 onClick={openModal}/>
-              {(progressValue >= 100 && isSelected) && (
-                <IconMarkComponent type={"symbol"} iconName={"keyboard_lock"} materialSymbol={"keyboard_lock"} />
-              )}
-            </span>
+        <span className="facts__icon" aria-hidden="true">
+          <IconMarkComponent className={"no-selection"} type={"symbol"} iconName={"add_reaction"}
+                             materialSymbol={iconName}
+                             onClick={openModal}/>
+          {(progressValue >= 100 && isSelected) && (
+            <IconMarkComponent type={"symbol"} iconName={"keyboard_lock"} materialSymbol={"keyboard_lock"}/>
+          )}
+        </span>
         <RichText
           tagName="p"
           value={description}
@@ -157,7 +157,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
           className={`facts__text`}
         />
         {isSelected && (
-          <CharacterCountProgressBar value={descriptionLength} maxValue={120} />
+          <CharacterCountProgressBar value={descriptionLength} maxValue={120}/>
         )}
         {isURLSet && isLinkTag && (
           <a className="is-style-tertiary">

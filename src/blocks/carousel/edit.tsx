@@ -28,6 +28,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
     },
     {
       allowedBlocks: ["rrze-elements/info-card"],
+      orientation: "horizontal",
       template: [
         ["rrze-elements/info-card", {}],
         ["rrze-elements/info-card", {}],

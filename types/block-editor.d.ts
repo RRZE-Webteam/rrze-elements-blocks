@@ -1,5 +1,6 @@
 import '@wordpress/block-editor';
 import { ComponentType } from 'react';
+import type { ReactNode } from 'react';
 
 declare module '@wordpress/block-editor' {
     export interface MediaReplaceFlowProps {
@@ -12,6 +13,8 @@ declare module '@wordpress/block-editor' {
         onToggleFeaturedImage?: (value: boolean) => void;
         useFeaturedImage?: boolean;
         name: string;
+        variant?: string;
+        renderToggle?: (props: { onToggle: () => void; isOpen: boolean }) => ReactNode;
     }
 
     export interface LinkControlProps {
