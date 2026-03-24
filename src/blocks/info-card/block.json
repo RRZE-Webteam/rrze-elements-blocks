@@ -11,6 +11,10 @@
     "html": false
   },
   "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "#04316a"
+    },
     "title": {
       "type": "string",
       "default": ""

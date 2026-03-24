@@ -7,12 +7,12 @@ import {
   MediaReplaceFlow,
   InspectorControls,
   LinkControl,
+  ContrastChecker
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
   ToolbarButton,
   DropdownMenu,
-  Button,
   PanelBody,
   FocalPointPicker,
   TextControl,
@@ -49,6 +49,7 @@ interface EditProps {
     desktopCustomTextColor: string;
     tabletCustomTextColor: string;
     mobileCustomTextColor: string;
+    backgroundColor: string;
     desktopFocusPoint: { x: number; y: number };
     tabletFocusPoint: { x: number; y: number };
     mobileFocusPoint: { x: number; y: number };
@@ -67,6 +68,7 @@ interface CustomStyles extends CSSProperties {
   '--desktop-object-position'?: string;
   '--tablet-object-position'?: string;
   '--mobile-object-position'?: string;
+  '--background-color'?: string;
 }
 
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
@@ -126,6 +128,23 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     {name: __('White', 'rrze-elements-blocks'), color: '#FFFFFF'},
   ];
 
+  const backgroundColorPaletteColors = [
+    {name: __('FAU Blue', 'rrze-elements-blocks'), color: '#04316a'},
+    {name: __('FAU Deep Blue', 'rrze-elements-blocks'), color: '#041e42'},
+    {name: __('RW Light', 'rrze-elements-blocks'), color: '#c50f3c'},
+    {name: __('RW Dark', 'rrze-elements-blocks'), color: '#971b2f'},
+    {name: __('Med Light', 'rrze-elements-blocks'), color: '#18b4f1'},
+    {name: __('Med Dark', 'rrze-elements-blocks'), color: '#005287'},
+    {name: __('Nat Light', 'rrze-elements-blocks'), color: '#7bb725'},
+    {name: __('Nat Dark', 'rrze-elements-blocks'), color: '#266141'},
+    {name: __('Phil Light', 'rrze-elements-blocks'), color: '#fdb735'},
+    {name: __('Phil Dark', 'rrze-elements-blocks'), color: '#e87722'},
+    {name: __('TF Light', 'rrze-elements-blocks'), color: '#8c9fb1'},
+    {name: __('TF Dark', 'rrze-elements-blocks'), color: '#2f586e'},
+    {name: __('White', 'rrze-elements-blocks'), color: '#fff'},
+    {name: __('Black', 'rrze-elements-blocks'), color: '#000'},
+  ];
+
   useEffect(() => {
     if (isSelected && ref.current) {
       // Use a slight delay to allow the editor's UI to settle before scrolling
@@ -161,11 +180,13 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const desktopFinalColor = attributes.desktopCustomTextColor || attributes.desktopTextColor;
   const tabletFinalColor = attributes.tabletCustomTextColor || attributes.tabletTextColor || desktopFinalColor;
   const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
+  const backgroundColor = attributes.backgroundColor;
 
   const style: CustomStyles = {
     '--desktop-text-color': desktopFinalColor,
     '--tablet-text-color': tabletFinalColor,
     '--mobile-text-color': mobileFinalColor,
+    '--background-color': backgroundColor,
     '--desktop-object-position': `${attributes.desktopFocusPoint.x * 100}% ${attributes.desktopFocusPoint.y * 100}%`,
     '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
     '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
@@ -356,29 +377,51 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
         </PanelBody>
         <PanelBody title={__("Text Color", "rrze-elements-blocks")}>
           {deviceType === 'desktop' && (
-            <ColorPalette
-              colors={colorPaletteColors}
-              value={attributes.desktopCustomTextColor}
-              onChange={(color) => setAttributes({desktopCustomTextColor: color})}
-              clearable={true}
-            />
+            <>
+              <ContrastChecker backgroundColor={attributes.backgroundColor}
+                               textColor={attributes.desktopCustomTextColor}/>
+              <ColorPalette
+                colors={colorPaletteColors}
+                value={attributes.desktopCustomTextColor}
+                onChange={(color) => setAttributes({desktopCustomTextColor: color})}
+                clearable={true}
+              />
+            </>
           )}
           {deviceType === 'tablet' && (
-            <ColorPalette
-              colors={colorPaletteColors}
-              value={attributes.tabletCustomTextColor}
-              onChange={(color) => setAttributes({tabletCustomTextColor: color})}
-              clearable={true}
-            />
+            <>
+              <ContrastChecker backgroundColor={attributes.backgroundColor}
+                               textColor={attributes.tabletCustomTextColor}/>
+              <ColorPalette
+                colors={colorPaletteColors}
+                value={attributes.tabletCustomTextColor}
+                onChange={(color) => setAttributes({tabletCustomTextColor: color})}
+                clearable={true}
+              />
+            </>
           )}
           {deviceType === 'mobile' && (
-            <ColorPalette
-              colors={colorPaletteColors}
-              value={attributes.mobileCustomTextColor}
-              onChange={(color) => setAttributes({mobileCustomTextColor: color})}
-              clearable={true}
-            />
+            <>
+              <ContrastChecker backgroundColor={attributes.backgroundColor}
+                               textColor={attributes.mobileCustomTextColor}/>
+              <ColorPalette
+                colors={colorPaletteColors}
+                value={attributes.mobileCustomTextColor}
+                onChange={(color) => setAttributes({mobileCustomTextColor: color})}
+                clearable={true}
+              />
+            </>
           )}
+        </PanelBody>
+        <PanelBody title={__("Background Color", "rrze-elements-blocks")}>
+          <ContrastChecker backgroundColor={attributes.backgroundColor} textColor={attributes.desktopCustomTextColor}/>
+          <ColorPalette
+            colors={backgroundColorPaletteColors}
+            value={attributes.backgroundColor}
+            onChange={(color) => setAttributes({backgroundColor: color})}
+            clearable={false}
+            disableCustomColors={true}
+          />
         </PanelBody>
       </InspectorControls>
 
