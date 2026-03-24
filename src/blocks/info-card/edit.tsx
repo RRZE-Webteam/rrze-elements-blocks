@@ -27,6 +27,7 @@ import { __ } from "@wordpress/i18n";
 import { getImageBrightness } from "../../utility/color";
 import { useDispatch, useSelect } from "@wordpress/data";
 import { store as blockEditorStore } from "@wordpress/block-editor";
+import {CharacterCountProgressBar} from "../../components/ProgressBar";
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
@@ -386,9 +387,15 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
             <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
                       allowedFormats={[]} placeholder={__("Dein Thema", "rrze-elements-blocks")}
                       onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle} />
+            {isSelected && (
+              <CharacterCountProgressBar value={attributes.subtitle?.length || 0} maxValue={40} />
+            )}
             <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
                       placeholder={__("Hier steht dein Titel", "rrze-elements-blocks")}
                       onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} />
+            {isSelected && (
+              <CharacterCountProgressBar value={attributes.title?.length || 0} maxValue={60} />
+            )}
             <div className={"rrze-elements-blocks__carousel_feature_card_bg"}>
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
                 <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>

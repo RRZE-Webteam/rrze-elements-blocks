@@ -6,12 +6,13 @@ import {
 } from "@wordpress/block-editor";
 import {IconMarkComponent} from "../../components/IconPicker";
 // @ts-ignore
-import {Button, Modal, Popover, ToolbarButton, ToolbarGroup, ProgressBar} from "@wordpress/components";
+import {Button, Modal, Popover, ToolbarButton, ToolbarGroup} from "@wordpress/components";
 import {link, linkOff, symbol} from "@wordpress/icons";
 import {__} from "@wordpress/i18n";
 import {displayShortcut} from "@wordpress/keycodes";
 import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 import {useState} from "@wordpress/element";
+import { CharacterCountProgressBar } from "../../components/ProgressBar";
 
 interface EditProps {
   blockProps: string[];
@@ -68,13 +69,6 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
 
   const descriptionLength = description?.length || 0;
   const progressValue =  Math.min((descriptionLength / 120) * 100, 100);
-
-  let progressClass = "progress-low";
-  if (progressValue > 85) {
-    progressClass = "progress-high";
-  } else if (progressValue > 75) {
-    progressClass = "progress-medium";
-  }
 
   let iconName = materialSymbol
 
@@ -163,14 +157,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
           className={`facts__text`}
         />
         {isSelected && (
-          <>
-          <ProgressBar
-            value={progressValue}
-            className={progressClass}
-          />
-          <span>{descriptionLength} / 120 {__("Characters", "rrze-elements-blocks")}</span>
-            <br/>
-          </>
+          <CharacterCountProgressBar value={descriptionLength} maxValue={120} />
         )}
         {isURLSet && isLinkTag && (
           <a className="is-style-tertiary">
