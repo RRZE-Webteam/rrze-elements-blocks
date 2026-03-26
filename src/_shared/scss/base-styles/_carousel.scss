@@ -225,3 +225,9 @@ div.rrze-elements-blocks__carousel_feature_card-content
     }
   }
 }
+
+div.rrze-elements-blocks__carousel_feature-card-bg,
+div.rrze-elements-blocks__carousel_feature_card-content,
+li.rrze-elements-blocks__carousel-content-list-item{
+  min-height: var(--card-height);
+}
