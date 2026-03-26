@@ -15,6 +15,12 @@ class InfoCard
             'mobileImageUrl' => '',
             'alt' => '',
             'url' => '',
+            'desktopTextColor' => '#fff',
+            'tabletTextColor' => '',
+            'mobileTextColor' => '',
+            'desktopCustomTextColor' => '',
+            'tabletCustomTextColor' => '',
+            'mobileCustomTextColor' => '',
         ];
 
         $attributes = wp_parse_args($attributes, $defaults);
@@ -27,12 +33,36 @@ class InfoCard
         $alt = $attributes['alt'];
         $url = $attributes['url'];
         $backgroundColor = $attributes['backgroundColor'];
+        $desktopTextColor = $attributes['desktopTextColor'];
+        $tabletTextColor = $attributes['tabletTextColor'];
+        $mobileTextColor = $attributes['mobileTextColor'];
+        $desktopCustomTextColor = $attributes['desktopCustomTextColor'];
+        $tabletCustomTextColor = $attributes['tabletCustomTextColor'];
+        $mobileCustomTextColor = $attributes['mobileCustomTextColor'];
         $modalId = uniqid('rrze-elements-modal-');
+
+        $style = "--background-color: {$backgroundColor};";
+        $style .= "--desktop-text-color: {$desktopTextColor};";
+        if ($tabletTextColor) {
+            $style .= "--tablet-text-color: {$tabletTextColor};";
+        }
+        if ($mobileTextColor) {
+            $style .= "--mobile-text-color: {$mobileTextColor};";
+        }
+        if ($desktopCustomTextColor) {
+            $style .= "--desktop-custom-text-color: {$desktopCustomTextColor};";
+        }
+        if ($tabletCustomTextColor) {
+            $style .= "--tablet-custom-text-color: {$tabletCustomTextColor};";
+        }
+        if ($mobileCustomTextColor) {
+            $style .= "--mobile-custom-text-color: {$mobileCustomTextColor};";
+        }
 
         ob_start();
         ?>
-        <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1">
-            <div class="rrze-elements-blocks__carousel_feature-card-bg" style="background-color: <?php echo esc_attr($backgroundColor); ?>">
+        <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>">
+            <div class="rrze-elements-blocks__carousel_feature-card-bg">
                 <div class="rrze-elements-blocks__carousel_feature_card-content">
                     <h3 class="rrze-elements-blocks__carousel_feature_card_subtitle">
                         <?php echo esc_html($subtitle); ?>
