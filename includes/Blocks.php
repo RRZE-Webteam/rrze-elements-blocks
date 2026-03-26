@@ -9,6 +9,7 @@ use RRZE\ElementsBlocks\BlockFrontend\Accordion;
 use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
 use RRZE\ElementsBlocks\BlockFrontend\CallToAction;
+use RRZE\ElementsBlocks\BlockFrontend\Carousel;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse;
 use RRZE\ElementsBlocks\BlockFrontend\Collapsibles;
 use RRZE\ElementsBlocks\BlockFrontend\Columns;
@@ -18,6 +19,7 @@ use RRZE\ElementsBlocks\BlockFrontend\CounterRow;
 use RRZE\ElementsBlocks\BlockFrontend\Fact;
 use RRZE\ElementsBlocks\BlockFrontend\FactsGrid;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
+use RRZE\ElementsBlocks\BlockFrontend\InfoCard;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
@@ -211,11 +213,11 @@ class Blocks
             ],
             [
                 'build_folder' => 'carousel',
-                'class' => Fact::class,
+                'class' => Carousel::class,
             ],
             [
                 'build_folder' => 'info-card',
-                'class' => Fact::class,
+                'class' => InfoCard::class,
             ],
         ];
 
@@ -269,7 +271,7 @@ class Blocks
     public function channel_fau_teaser_grid(array $attributes): string
     {
         $num = isset($attributes['num']) ? absint($attributes['num']) : 6;
-        $hstart = isset($attributes['hstart']) ? max(1, min(6, absint($attributes['hstart']))) : 2;
+        $hstart = isset($attributes['hstart']) ? max(1, min(6, absint($hstart))) : 2;
         $tag = isset($attributes['tag']) ? sanitize_text_field($attributes['tag']) : '';
         $cat = isset($attributes['cat']) ? sanitize_title($attributes['cat']) : '';
 

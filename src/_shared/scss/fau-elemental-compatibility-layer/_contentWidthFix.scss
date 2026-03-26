@@ -31,9 +31,16 @@
   div.wp-block-rrze-elements-iconbox-row,
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-counter-row,
+  section.rrze-elements-blocks__carousel,
   section.facts{
     margin-left: var(--faue_base-max-width_bleed_inline-margin);
     margin-right: var(--faue_base-max-width_bleed_inline-margin);
+  }
+
+  section.rrze-elements-blocks__carousel
+  {
+    margin-left: var(--faue_fullbleed_inline-margin);
+    margin-right: var(--faue_fullbleed_inline-margin);
   }
 
   div.wp-block-rrze-elements-iconbox-row,

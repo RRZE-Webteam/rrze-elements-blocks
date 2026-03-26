@@ -186,5 +186,12 @@ class Main
             RRZE_ELEMENTSB_VERSION,
             true
         );
+        wp_register_script(
+            'rrze-carousel',
+            plugins_url('assets/js/carousel/rrze-carousel.js', plugin_basename($this->pluginFile)),
+            [],
+            RRZE_ELEMENTSB_VERSION,
+            true
+        );
     }
 }
