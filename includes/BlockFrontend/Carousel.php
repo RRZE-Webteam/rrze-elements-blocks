@@ -29,12 +29,12 @@ class Carousel
                     <ul class="rrze-elements-blocks__carousel-navigation-container">
                         <li class="rrze-elements-blocks__carousel_navigation-button-container">
                             <button class="rrze-elements-blocks_carousel_navigation_button" aria-label="Zurück im <?php echo esc_attr($title); ?> Karusell" type="button">
-                                <svg class="rrze-elements-blocks__carousel_navigation_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M400-80-320-480l320-400 71 71-329 329 329 329-71 71Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
                             </button>
                         </li>
                         <li class="rrze-elements-blocks__carousel_navigation-button-container">
                             <button class="rrze-elements-blocks_carousel_navigation_button" aria-label="Weiter im <?php echo esc_attr($title); ?> Karusell" type="button">
-                                <svg class="rrze-elements-blocks__carousel_navigation_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
                             </button>
                         </li>
                     </ul>
