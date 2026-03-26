@@ -166,6 +166,13 @@ class Main
             true
         );
         wp_register_script(
+            'rrze-gsap-scrolltoplugin',
+            plugins_url('assets/js/gsap/ScrollToPlugin.min.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap'],
+            RRZE_ELEMENTSB_VERSION,
+            true
+        );
+        wp_register_script(
             'rrze-counter',
             plugins_url('assets/js/counter/rrze-counter-min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
@@ -189,7 +196,7 @@ class Main
         wp_register_script(
             'rrze-carousel',
             plugins_url('assets/js/carousel/rrze-carousel.js', plugin_basename($this->pluginFile)),
-            [],
+            ['rrze-gsap-scrolltrigger', 'rrze-gsap-scrolltoplugin'],
             RRZE_ELEMENTSB_VERSION,
             true
         );

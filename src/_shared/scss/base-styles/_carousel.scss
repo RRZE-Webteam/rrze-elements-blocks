@@ -270,5 +270,10 @@ div.rrze-elements-blocks__carousel-navigation{
       color: #fff;
       border: none;
     }
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
