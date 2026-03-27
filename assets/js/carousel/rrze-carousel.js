@@ -83,13 +83,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.rrze-elements-blocks__carousel-content-list-item');
 
     cards.forEach(card => {
+        const cardContent = card.querySelector('.rrze-elements-blocks__carousel_feature_card-content');
+        const cardBackground = card.querySelector('.rrze-elements-blocks__carousel_feature_card_bg');
+
+        let hoverTimeline = null;
+
+        if (cardContent) {
+            hoverTimeline = gsap.timeline({
+                paused: true,
+                defaults: {
+                    duration: 0.35,
+                    ease: 'power3.out'
+                }
+            })
+                .to(cardContent, {
+                    scale: 1.02
+                }, 0);
+
+            if (cardBackground) {
+                hoverTimeline.to(cardBackground, {
+                    '--rrze-card-overlay-opacity': 0.5
+                }, 0);
+            }
+        }
+
+        const activateCard = () => {
+            if (hoverTimeline) {
+                hoverTimeline.play();
+            }
+        };
+
+        const deactivateCard = () => {
+            if (hoverTimeline) {
+                hoverTimeline.reverse();
+            }
+        };
+
+        if (hoverTimeline) {
+            card.addEventListener('mouseenter', activateCard);
+            card.addEventListener('mouseleave', deactivateCard);
+        }
+
         const triggerBox = card.querySelector('.rrze-elements-blocks__carousel_feature_card_link');
         const modal = card.querySelector('.rrze-elements-blocks-fullscreen-modal');
         const overlay = modal ? modal.querySelector('[data-modal-overlay]') : null;
         const modalPanel = modal ? modal.querySelector('.rrze-elements-blocks-modal-content') : null;
-        const closeBtn = card.querySelector('.rrze-elements-blocks-close-modal');
+        const closeButtons = card.querySelectorAll('.rrze-elements-blocks-close-modal');
 
-        if (!triggerBox || !modal || !closeBtn || !overlay || !modalPanel) return;
+        if (!triggerBox || !modal || closeButtons.length === 0 || !overlay || !modalPanel) {
+            return;
+        }
+
+        if (hoverTimeline) {
+            triggerBox.addEventListener('focus', activateCard);
+            triggerBox.addEventListener('blur', deactivateCard);
+        }
 
         const closeModalAnimated = () => {
             if (!modal.open) {
@@ -112,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         triggerBox.addEventListener('click', (e) => {
             e.preventDefault();
 
+            deactivateCard();
             modal.showModal();
             overlay.scrollTop = 0;
             modalPanel.scrollTop = 0;
@@ -123,8 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         });
 
-        closeBtn.addEventListener('click', () => {
-            closeModalAnimated();
+        closeButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                closeModalAnimated();
+            });
         });
 
         overlay.addEventListener('click', (event) => {

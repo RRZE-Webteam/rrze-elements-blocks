@@ -33,6 +33,17 @@ div.rrze-elements-blocks__carousel_feature_card_bg
   height: 100%;
   overflow: hidden;
   z-index: -1;
+  pointer-events: none;
+  --rrze-card-overlay-opacity: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%);
+    opacity: var(--rrze-card-overlay-opacity, 0);
+    transition: none;
+  }
 }
 
 figure.rrze-elements-blocks__carousel_feature_card_bg_figure
@@ -182,6 +193,13 @@ div.rrze-elements-blocks__carousel_feature_card-content
   z-index: 1;
   background-color: var(--background-color);
   will-change: transform;
+  transition: box-shadow .2s ease, outline .2s ease;
+}
+
+li.rrze-elements-blocks__carousel-content-list-item:focus-within {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 10px;
+  border-radius: 32px;
 }
 
 li.rrze-elements-blocks__carousel-content-list-item {
@@ -252,7 +270,6 @@ div.rrze-elements-blocks__carousel-navigation{
     width: 48px;
     display: flex;
     align-items: center;
-    outline: none;
     margin: 0;
     padding: 0;
     justify-content: center;
@@ -264,11 +281,17 @@ div.rrze-elements-blocks__carousel-navigation{
     background: none;
     background: #04316a;
     border: none;
+    outline: 2px solid transparent;
+    outline-offset: 3px;
 
     svg {
       fill: #fff;
       color: #fff;
       border: none;
+    }
+
+    &:focus-visible {
+      outline-color: #fff;
     }
 
     &[disabled] {
@@ -291,29 +314,35 @@ div.rrze-elements-blocks__carousel-navigation{
 .rrze-elements-blocks-modal-overlay {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
   padding: clamp(1.5rem, 6vw, 3.5rem);
   display: grid;
   place-items: center;
   overflow-y: auto;
   overscroll-behavior: contain;
   z-index: 9999;
+  box-sizing: border-box;
 }
 
 .rrze-elements-blocks-modal-content{
   width: min(92vw, 64rem);
+  max-width: 100%;
   max-height: min(85dvh, 900px);
   border-radius: 28px;
   background: #fff;
   box-shadow: 0 30px 80px rgba(3, 15, 35, 0.5);
-  padding: clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 3rem) clamp(2.5rem, 4vw, 4rem);
+  margin-inline: auto;
   overflow-y: auto;
   overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   outline: none;
+  box-sizing: border-box;
 
   p {
     margin: 0;
@@ -355,4 +384,27 @@ div.rrze-elements-blocks__carousel-navigation{
 
 body:has(.rrze-elements-blocks-fullscreen-modal[open]) {
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .rrze-elements-blocks-modal-content {
+    width: min(94vw, 48rem);
+    padding: clamp(1rem, 3vw, 1.75rem) clamp(1.25rem, 5vw, 2.5rem) clamp(2rem, 5vw, 3rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .rrze-elements-blocks-modal-overlay {
+    padding: clamp(0.75rem, 6vw, 1.25rem);
+  }
+
+  .rrze-elements-blocks-modal-content {
+    width: 100%;
+    border-radius: 20px;
+    padding: clamp(1.25rem, 6vw, 1.75rem);
+  }
+
+  .rrze-elements-blocks-close-modal--icon {
+    right: 0.25rem;
+  }
 }
