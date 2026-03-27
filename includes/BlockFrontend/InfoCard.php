@@ -92,15 +92,12 @@ class InfoCard
                     </a>
                 </div>
             </div>
-            <div id="<?php echo esc_attr($modalId); ?>" class="rrze-elements-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
-                <div class="rrze-elements-modal__backdrop"></div>
-                <div class="rrze-elements-modal__content">
-                    <button class="rrze-elements-modal__close" aria-label="Close modal">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                    </button>
+            <dialog closedby="any" class="rrze-elements-blocks-fullscreen-modal">
+                <div class="rrze-elements-blocks-modal-content">
                     <?php echo $content; ?>
+                    <button class="rrze-elements-blocks-close-modal"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg> Schließen</button>
                 </div>
-            </div>
+            </dialog>
         </li>
         <?php
         return ob_get_clean();

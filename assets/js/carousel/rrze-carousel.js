@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.disabled = currentScroll >= maxScroll - 1;
       };
 
-      // 3. Die Scroll-Logik
       const scrollCarousel = (direction) => {
         updateMetrics();
 
@@ -71,11 +70,67 @@ document.addEventListener('DOMContentLoaded', () => {
           updateButtons();
         }, 200);
       });
-      
+
       updateMetrics();
       updateButtons();
     });
   } else {
     console.error('GSAP or ScrollToPlugin is not loaded for the carousel.');
   }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.rrze-elements-blocks__carousel-content-list-item');
+
+  cards.forEach(card => {
+    // Look FORWARD only inside the current card
+    const triggerBox = card.querySelector('.rrze-elements-blocks__carousel_feature_card_link');
+    const modal = card.querySelector('.rrze-elements-blocks-fullscreen-modal');
+    const closeBtn = card.querySelector('.rrze-elements-blocks-close-modal');
+
+    if (!triggerBox || !modal || !closeBtn) return;
+
+    const closeModalAnimated = () => {
+      gsap.to(modal, {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          modal.close(); // Natively close after animation
+          gsap.set(modal, { clearProps: "all" }); // Clean up GSAP styles
+        }
+      });
+    };
+
+    // Open Modal
+    triggerBox.addEventListener('click', (e) => {
+      e.preventDefault(); // IMPORTANT: Prevents the page from jumping to the top due to href="#"
+
+      modal.showModal();
+
+      gsap.fromTo(modal,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+      );
+    });
+
+    // Close Modal (via Button)
+    closeBtn.addEventListener('click', () => {
+      closeModalAnimated();
+    });
+
+    // Close Modal (via click on the Backdrop)
+    modal.addEventListener('click', (e) => {
+      const dialogDimensions = modal.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        closeModalAnimated();
+      }
+    });
+  });
 });

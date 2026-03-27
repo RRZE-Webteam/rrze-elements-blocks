@@ -277,3 +277,43 @@ div.rrze-elements-blocks__carousel-navigation{
     }
   }
 }
+
+/* Modal */
+.rrze-elements-blocks-fullscreen-modal {
+  position: fixed;
+  z-index: 9999;
+  height: 100dvh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  //height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #fff; /* Deine Hintergrundfarbe */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.rrze-elements-blocks-modal-content{
+  padding-inline: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  p {
+    margin: 0;
+  }
+}
+
+.rrze-elements-blocks-fullscreen-modal::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px); /* Optional: cooler Blur-Effekt */
+}
+
+body:has(.rrze-elements-blocks-fullscreen-modal[open]) {
+  overflow: hidden;
+}
