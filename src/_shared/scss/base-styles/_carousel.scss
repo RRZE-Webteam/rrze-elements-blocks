@@ -279,39 +279,78 @@ div.rrze-elements-blocks__carousel-navigation{
 }
 
 /* Modal */
+
 .rrze-elements-blocks-fullscreen-modal {
-  position: fixed;
-  z-index: 9999;
-  height: 100dvh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  //height: 100vh;
-  max-width: 100%;
-  max-height: 100%;
-  margin: 0;
-  padding: 0;
   border: none;
-  background-color: #fff; /* Deine Hintergrundfarbe */
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  overflow: visible;
+}
+
+.rrze-elements-blocks-modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: clamp(1.5rem, 6vw, 3.5rem);
+  display: grid;
+  place-items: center;
   overflow-y: auto;
-  overflow-x: hidden;
+  overscroll-behavior: contain;
+  z-index: 9999;
 }
 
 .rrze-elements-blocks-modal-content{
-  padding-inline: 1rem;
-  max-width: 1100px;
-  margin: 0 auto;
+  width: min(92vw, 64rem);
+  max-height: min(85dvh, 900px);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(3, 15, 35, 0.5);
+  padding: clamp(1.5rem, 3vw, 3rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  outline: none;
 
   p {
     margin: 0;
   }
 }
 
+.rrze-elements-blocks-close-modal {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.rrze-elements-blocks-close-modal--icon {
+  position: sticky;
+  top: 0;
+  right: 0;
+  margin-left: auto;
+  padding: 0.5rem;
+  border-radius: 999px;
+  background: transparent;
+}
+
 .rrze-elements-blocks-fullscreen-modal::backdrop {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px); /* Optional: cooler Blur-Effekt */
+  background: rgba(4, 18, 40, 0.7);
+  backdrop-filter: blur(8px);
 }
 
 body:has(.rrze-elements-blocks-fullscreen-modal[open]) {
