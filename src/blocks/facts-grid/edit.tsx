@@ -3,8 +3,8 @@ import {
   InnerBlocks, BlockControls, RichText,
 } from "@wordpress/block-editor";
 import {useSelect} from "@wordpress/data";
-import type {ComponentType} from "@wordpress/element";
 import {useRef} from "@wordpress/element";
+import type {ComponentProps} from "react";
 import {__} from "@wordpress/i18n";
 import {SVG, Path, ToolbarItem, ToolbarDropdownMenu, ToolbarGroup} from "@wordpress/components";
 
@@ -15,6 +15,8 @@ type WPBlock = {
   clientId: string;
   innerBlocks: WPBlock[];
 };
+
+type ButtonBlockAppenderProps = ComponentProps<typeof InnerBlocks.ButtonBlockAppender>;
 
 interface EditProps {
   clientId: string;
@@ -57,11 +59,12 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
   const inactiveHeadingIcon = createXrayIcon("#D3D3D3");
   const ActiveHeadingIcon = createXrayIcon("#000");
 
-  const ConditionalAppender: ComponentType = (props) =>
+  const ConditionalAppender = (props: ButtonBlockAppenderProps) =>
     childCount < MAX_CHILDREN ? (
       <InnerBlocks.ButtonBlockAppender {...props} />
     ) : null;
 
+  // @ts-ignore
   return (
     <div {...blockProps}>
       <BlockControls>
