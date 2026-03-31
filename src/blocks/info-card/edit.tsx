@@ -130,6 +130,29 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     mobile: mobile,
   };
 
+  const DeviceViewportToggle = ({label}: {label: string}) => (
+    <ToggleGroupControl
+      __next40pxDefaultSize
+      isBlock
+      label={label}
+      value={deviceType}
+      onChange={(device: DeviceType) => handleDeviceTypeChange(device)}
+    >
+      <ToggleGroupControlOption
+        label={__("Desktop", "rrze-elements-blocks")}
+        value="desktop"
+      />
+      <ToggleGroupControlOption
+        label={__("Tablet", "rrze-elements-blocks")}
+        value="tablet"
+      />
+      <ToggleGroupControlOption
+        label={__("Mobile", "rrze-elements-blocks")}
+        value="mobile"
+      />
+    </ToggleGroupControl>
+  );
+
   const colorPaletteColors = [
     {name: __('Black', 'rrze-elements-blocks'), color: '#000000'},
     {name: __('White', 'rrze-elements-blocks'), color: '#FFFFFF'},
@@ -188,6 +211,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const tabletFinalColor = attributes.tabletCustomTextColor || attributes.tabletTextColor || desktopFinalColor;
   const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
   const backgroundColor = attributes.backgroundColor;
+  const isCoverFit = (attributes.imageObjectFit || 'cover') === 'cover';
   const cardTextShadow = hasBackgroundImage ? '1px 1px 2px #222' : 'none';
 
   const clampFocusValue = (value: number) => Math.min(1, Math.max(0, value));
@@ -309,28 +333,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           </PanelBody>
         )}
         <PanelBody title={__("Image Settings", "rrze-elements-blocks")}>
-          <ToggleGroupControl
-            __next40pxDefaultSize
-            isBlock
-            label="Choose Viewport"
-            value={deviceType}
-            onChange={(device: DeviceType) => {
-              handleDeviceTypeChange(device)
-            }}
-          >
-            <ToggleGroupControlOption
-              label={__("Desktop", "rrze-elements-blocks")}
-              value="desktop"
-            />
-            <ToggleGroupControlOption
-              label={__("Tablet", "rrze-elements-blocks")}
-              value="tablet"
-            />
-            <ToggleGroupControlOption
-              label={__("Mobile", "rrze-elements-blocks")}
-              value="mobile"
-            />
-          </ToggleGroupControl>
+          <DeviceViewportToggle label={__("Choose Viewport", "rrze-elements-blocks")} />
           {deviceType === 'desktop' && (
             <MediaReplaceFlow
               mediaId={attributes.desktopImageId}
@@ -364,21 +367,21 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               name={__('Add Mobile Image', 'rrze-elements-blocks')}
             />
           )}
-          {(deviceType === 'desktop' && hasDesktopImage) && (
+          {(deviceType === 'desktop' && hasDesktopImage && isCoverFit) && (
             <FocalPointPicker
               url={desktopImageUrl}
               value={attributes.desktopFocusPoint}
               onChange={(newFocusPoint) => setAttributes({desktopFocusPoint: newFocusPoint})}
             />
           )}
-          {(deviceType === 'tablet' && hasTabletImage) && (
+          {(deviceType === 'tablet' && hasTabletImage && isCoverFit) && (
             <FocalPointPicker
               url={tabletImageUrl}
               value={attributes.tabletFocusPoint}
               onChange={(newFocusPoint) => setAttributes({tabletFocusPoint: newFocusPoint})}
             />
           )}
-          {(deviceType === 'mobile' && hasMobileImage) && (
+          {(deviceType === 'mobile' && hasMobileImage && isCoverFit) && (
             <FocalPointPicker
               url={mobileImageUrl}
               value={attributes.mobileFocusPoint}
@@ -411,6 +414,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           </ToggleGroupControl>
         </PanelBody>
         <PanelBody title={__("Text Color", "rrze-elements-blocks")}>
+          <DeviceViewportToggle label={__("Text Color Viewport", "rrze-elements-blocks")} />
           {deviceType === 'desktop' && (
             <>
               <ContrastChecker backgroundColor={attributes.backgroundColor}
