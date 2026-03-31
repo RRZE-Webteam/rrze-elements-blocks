@@ -1,0 +1,115 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/info-card",
+  "version": "1.1.7",
+  "title": "Info card",
+  "category": "rrze_elements",
+  "ancestor": [
+    "rrze-elements/carousel"
+  ],
+  "description": "Creates an info card for use in Carousels or on its own.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "#04316a"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "desktopImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "desktopImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "tabletImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "tabletImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "mobileImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "desktopTextColor": {
+      "type": "string",
+      "default": "#fff"
+    },
+    "tabletTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "desktopCustomTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "tabletCustomTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileCustomTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "desktopFocusPoint": {
+      "type": "object",
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "tabletFocusPoint": {
+      "type": "object",
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "mobileFocusPoint": {
+      "type": "object",
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "alt": {
+      "type": "string",
+      "default": ""
+    },
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "scientificText": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "rrze-carousel"
+}

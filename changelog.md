@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.8] - 2026-03-31
+Many minor Bugfixes and Improvements
+
+# Fixed
+- #361 - Behavior within Group blocks
+- #395 - Insertion UX Fix inside the Editor
+- #396 - Dependency Updates
+- #397 - Automatic JumpName Generation Fix
+- #399 - Insertion fix for long content
+- #402 - Better UX for Blocks with required fields
+- #403 - Notice Style Attention – Available again
+
 ## [1.1.7] - 2026-03-13
 New Jump name manager and many Design fixes
 

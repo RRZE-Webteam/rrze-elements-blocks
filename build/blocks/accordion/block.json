@@ -64,7 +64,7 @@
     },
     "isCustomJumpname": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "materialSymbol": {
       "type": "string",

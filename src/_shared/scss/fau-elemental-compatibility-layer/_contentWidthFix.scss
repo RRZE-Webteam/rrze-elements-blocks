@@ -19,6 +19,11 @@
     max-width: var(--small-max-width);
   }
 
+  div.rrze-elements-blocks__carousel-section-header {
+    padding-left: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
+    padding-right: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
+  }
+
   div.elements-textcolumns,
   div.wp-block-rrze-elements-columns,
   div.wp-block-rrze-elements-cta,
@@ -31,9 +36,16 @@
   div.wp-block-rrze-elements-iconbox-row,
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-counter-row,
+  section.rrze-elements-blocks__carousel,
   section.facts{
     margin-left: var(--faue_base-max-width_bleed_inline-margin);
     margin-right: var(--faue_base-max-width_bleed_inline-margin);
+  }
+
+  section.rrze-elements-blocks__carousel
+  {
+    margin-left: var(--faue_fullbleed_inline-margin);
+    margin-right: var(--faue_fullbleed_inline-margin);
   }
 
   div.wp-block-rrze-elements-iconbox-row,

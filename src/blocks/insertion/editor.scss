@@ -187,4 +187,8 @@
   }
 
   .editor-styles-wrapper .wp-block-group:not(.is-layout-flex) { display: flow-root; }
+
+  .wp-block-rrze-elements-insertion .wp-block-image-wrapper figure::before {
+    display: none;
+  }
 }

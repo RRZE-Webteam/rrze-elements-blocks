@@ -26,17 +26,17 @@ export function useJumpNameStore({
   );
 
   const jumpNames = useSelect((select) => {
-    const store = select("rrze/elements-blocks") as RrzeElementsBlocksSelectors;
+    const store = select("rrze/elements-blocks") as unknown as RrzeElementsBlocksSelectors;
     return store.getJumpNames();
   }, []);
 
   const doesJumpNameExist = (name: string): boolean => {
-    const store = select("rrze/elements-blocks") as RrzeElementsBlocksSelectors;
+    const store = select("rrze/elements-blocks") as unknown as RrzeElementsBlocksSelectors;
     return store.jumpNameExists(name);
   }
 
   const areDuplicateJumpNamesPresent = (name: string): boolean => {
-    const store = select("rrze/elements-blocks") as RrzeElementsBlocksSelectors;
+    const store = select("rrze/elements-blocks") as unknown as RrzeElementsBlocksSelectors;
     return store.jumpNameDuplicateIDs(name).length > 1;
   }
 
