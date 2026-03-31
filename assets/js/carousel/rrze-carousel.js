@@ -17,44 +17,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const gap = 20;
-            let itemWidth = 0;
-            let scrollStep = 0;
+            let firstItemOffset = 0;
+            let itemPositions = [];
+            let maxScroll = 0;
+            let targetIndex = 0;
 
             const updateMetrics = () => {
-                itemWidth = items[0].offsetWidth;
-                scrollStep = itemWidth + gap;
+                maxScroll = Math.max(0, contentScroller.scrollWidth - contentScroller.clientWidth);
+                firstItemOffset = items[0].offsetLeft;
+                itemPositions = items.map((item, index) => {
+                    const raw = Math.round(item.offsetLeft - firstItemOffset);
+                    if (index === items.length - 1) {
+                        return maxScroll;
+                    }
+                    return Math.max(0, Math.min(raw, maxScroll));
+                });
+            };
+
+            const clampIndex = (index) => Math.max(0, Math.min(index, items.length - 1));
+
+            const getNearestIndex = () => {
+                const currentScroll = contentScroller.scrollLeft;
+                let closestIndex = 0;
+                let minDiff = Infinity;
+                itemPositions.forEach((position, index) => {
+                    const diff = Math.abs(position - currentScroll);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closestIndex = index;
+                    }
+                });
+                return closestIndex;
             };
 
             const updateButtons = () => {
                 const currentScroll = Math.round(contentScroller.scrollLeft);
                 const maxScroll = Math.round(contentScroller.scrollWidth - contentScroller.clientWidth);
-
-                prevButton.disabled = currentScroll <= 0;
-                nextButton.disabled = currentScroll >= maxScroll - 1;
+                const atStart = currentScroll <= 1;
+                const atEnd = currentScroll >= maxScroll - 1;
+                prevButton.disabled = atStart;
+                nextButton.disabled = atEnd;
             };
 
             const scrollCarousel = (direction) => {
                 updateMetrics();
 
-                const currentScroll = contentScroller.scrollLeft;
-                const maxScroll = contentScroller.scrollWidth - contentScroller.clientWidth;
+                const currentIndex = getNearestIndex();
+                targetIndex = clampIndex(direction === 'next' ? currentIndex + 1 : currentIndex - 1);
+                const rawTarget = itemPositions[targetIndex];
+                const targetScroll = Math.max(0, Math.min(rawTarget, maxScroll));
 
-                let targetScroll;
-
-                if (direction === 'next') {
-                    targetScroll = currentScroll + scrollStep;
-                } else {
-                    targetScroll = currentScroll - scrollStep;
-                }
-
-                targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+                contentScroller.classList.add('is-programmatic-scroll');
+                let snapTimeout;
 
                 gsap.to(contentScroller, {
                     duration: 0.5,
-                    scrollTo: { x: targetScroll, autoKill: true },
+                    scrollTo: { x: targetScroll, autoKill: false },
                     ease: 'power2.inOut',
-                    onUpdate: updateButtons
+                    onUpdate: updateButtons,
+                    onComplete: () => {
+                        contentScroller.scrollLeft = targetScroll;
+                        clearTimeout(snapTimeout);
+                        snapTimeout = setTimeout(() => {
+                            contentScroller.classList.remove('is-programmatic-scroll');
+                            updateButtons();
+                        }, 150);
+                    }
                 });
             };
 

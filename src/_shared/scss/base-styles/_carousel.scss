@@ -144,6 +144,10 @@ div.rrze-elements-blocks__carousel-content {
   scroll-padding: calc((100vw - min(87.5vw, 1260px) - 14px)/2);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+
+  &.is-programmatic-scroll {
+    scroll-snap-type: none;
+  }
 }
 
 section.wp-block-rrze-elements-carousel {
