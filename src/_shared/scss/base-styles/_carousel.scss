@@ -195,7 +195,7 @@ div.rrze-elements-blocks__carousel_feature_card_scientific-text{
 
 .rrze-elements-blocks__carousel_feature_card_subtitle,
 .rrze-elements-blocks__carousel_feature_card_text {
-  text-shadow: 1px 1px 2px #222;
+  text-shadow: var(--card-text-shadow, 1px 1px 2px #222);
 }
 
 .is-style-scientific{

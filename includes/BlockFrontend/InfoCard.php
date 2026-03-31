@@ -61,6 +61,9 @@ class InfoCard
         }
         $style .= "--image-object-fit: {$imageObjectFit};";
 
+        $hasBackgroundImage = !empty($desktopImageUrl) || !empty($tabletImageUrl) || !empty($mobileImageUrl);
+        $style .= "--card-text-shadow: " . ($hasBackgroundImage ? '1px 1px 2px #222' : 'none') . ";";
+
         ob_start();
         ?>
         <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>">

@@ -72,6 +72,7 @@ interface CustomStyles extends CSSProperties {
   '--mobile-object-position'?: string;
   '--background-color'?: string;
   '--image-object-fit'?: string;
+  '--card-text-shadow'?: string;
 }
 
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
@@ -116,6 +117,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const desktopImageUrl = attributes.desktopImageUrl;
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
+  const hasBackgroundImage = Boolean(attributes.desktopImageUrl || attributes.tabletImageUrl || attributes.mobileImageUrl);
 
   const isLinkCard = !!attributes.url;
   // does it have inner Content
@@ -185,6 +187,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const tabletFinalColor = attributes.tabletCustomTextColor || attributes.tabletTextColor || desktopFinalColor;
   const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
   const backgroundColor = attributes.backgroundColor;
+  const cardTextShadow = hasBackgroundImage ? '1px 1px 2px #222' : 'none';
 
   const style: CustomStyles = {
     '--desktop-text-color': desktopFinalColor,
@@ -195,6 +198,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
     '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
     '--image-object-fit': attributes.imageObjectFit || 'cover',
+    '--card-text-shadow': cardTextShadow,
   };
 
   return (
