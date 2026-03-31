@@ -20,6 +20,7 @@ import {
   RangeControl,
   ColorPalette,
   ColorIndicator,
+  ToggleControl,
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
@@ -44,6 +45,7 @@ interface EditProps {
     tabletImageUrl: string;
     mobileImageId: number;
     mobileImageUrl: string;
+    textShadowEnabled?: boolean;
     imageObjectFit?: 'cover' | 'contain';
     desktopTextColor: string;
     tabletTextColor: string;
@@ -126,6 +128,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const isLinkCard = !!attributes.url;
   const showLinkIcon = isLinkCard;
   const shouldShowActionIcon = showLinkIcon || hasInnerBlocks;
+  const textShadowEnabled = attributes.textShadowEnabled !== false;
 
   const deviceIcons = {
     desktop: desktop,
@@ -247,9 +250,11 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     return ['#fff', '#ffffff', 'fff', 'ffffff', 'rgb(255,255,255)', 'rgba(255,255,255,1)', 'white'].includes(normalized);
   };
   const needsLightShadow = [desktopFinalColor, tabletFinalColor, mobileFinalColor].some((color) => isWhite(color));
-  const cardTextShadow = hasBackgroundImage
-    ? `1px 1px 2px ${needsLightShadow ? '#ddd' : '#222'}`
-    : 'none';
+  const cardTextShadow = !textShadowEnabled
+    ? 'none'
+    : hasBackgroundImage
+      ? `1px 1px 2px ${needsLightShadow ? '#ddd' : '#222'}`
+      : 'none';
 
   const clampFocusValue = (value: number) => Math.min(1, Math.max(0, value));
   const formatFocusPercentage = (value: number) => `${parseFloat((clampFocusValue(value) * 100).toFixed(2))}%`;
@@ -514,6 +519,13 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
             onChange={(color) => setAttributes({backgroundColor: color})}
             clearable={false}
             disableCustomColors={true}
+          />
+        </PanelBody>
+        <PanelBody title={__("Effects", "rrze-elements-blocks")}>
+          <ToggleControl
+            label={__("Enable text shadow", "rrze-elements-blocks")}
+            checked={textShadowEnabled}
+            onChange={(value: boolean) => setAttributes({textShadowEnabled: value})}
           />
         </PanelBody>
       </InspectorControls>

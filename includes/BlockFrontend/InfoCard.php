@@ -14,6 +14,7 @@ class InfoCard
             'tabletImageUrl' => '',
             'mobileImageUrl' => '',
             'imageObjectFit' => 'cover',
+            'textShadowEnabled' => true,
             'alt' => '',
             'url' => '',
             'desktopTextColor' => '#fff',
@@ -45,6 +46,7 @@ class InfoCard
         $tabletCustomTextColor = $attributes['tabletCustomTextColor'];
         $mobileCustomTextColor = $attributes['mobileCustomTextColor'];
         $imageObjectFit = $attributes['imageObjectFit'] === 'contain' ? 'contain' : 'cover';
+        $textShadowEnabled = isset($attributes['textShadowEnabled']) ? (bool) $attributes['textShadowEnabled'] : true;
         $scientificText = $attributes['scientificText'];
         $hasScientificText = '' !== trim(wp_strip_all_tags($scientificText));
         $modalId = uniqid('rrze-elements-modal-');
@@ -69,7 +71,9 @@ class InfoCard
         $mobileFinalColor = ($mobileCustomTextColor ?: $mobileTextColor) ?: $tabletFinalColor;
 
         $hasBackgroundImage = !empty($desktopImageUrl) || !empty($tabletImageUrl) || !empty($mobileImageUrl);
-        if ($hasBackgroundImage) {
+        if (!$textShadowEnabled) {
+            $style .= "--card-text-shadow: none;";
+        } elseif ($hasBackgroundImage) {
             $shadowColor = $this->shouldUseLightShadow([$desktopFinalColor, $tabletFinalColor, $mobileFinalColor]) ? '#ddd' : '#222';
             $style .= "--card-text-shadow: 1px 1px 2px {$shadowColor};";
         } else {

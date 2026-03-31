@@ -47,6 +47,10 @@
       "type": "string",
       "default": ""
     },
+    "textShadowEnabled": {
+      "type": "boolean",
+      "default": true
+    },
     "imageObjectFit": {
       "type": "string",
       "enum": ["cover", "contain"],
