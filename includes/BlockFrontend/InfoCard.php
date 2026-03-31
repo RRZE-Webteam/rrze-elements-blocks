@@ -23,6 +23,9 @@ class InfoCard
             'tabletCustomTextColor' => '',
             'mobileCustomTextColor' => '',
             'scientificText' => '',
+            'desktopFocusPoint' => ['x' => 0.5, 'y' => 0.5],
+            'tabletFocusPoint' => ['x' => 0.5, 'y' => 0.5],
+            'mobileFocusPoint' => ['x' => 0.5, 'y' => 0.5],
         ];
 
         $attributes = wp_parse_args($attributes, $defaults);
@@ -63,6 +66,9 @@ class InfoCard
 
         $hasBackgroundImage = !empty($desktopImageUrl) || !empty($tabletImageUrl) || !empty($mobileImageUrl);
         $style .= "--card-text-shadow: " . ($hasBackgroundImage ? '1px 1px 2px #222' : 'none') . ";";
+        $style .= "--desktop-object-position: " . $this->focusPointToObjectPosition($attributes['desktopFocusPoint']) . ";";
+        $style .= "--tablet-object-position: " . $this->focusPointToObjectPosition($attributes['tabletFocusPoint']) . ";";
+        $style .= "--mobile-object-position: " . $this->focusPointToObjectPosition($attributes['mobileFocusPoint']) . ";";
 
         ob_start();
         ?>
@@ -116,5 +122,34 @@ class InfoCard
         </li>
         <?php
         return ob_get_clean();
+    }
+
+    private function focusPointToObjectPosition($focusPoint)
+    {
+        $x = 0.5;
+        $y = 0.5;
+
+        if (is_array($focusPoint)) {
+            if (isset($focusPoint['x'])) {
+                $x = (float) $focusPoint['x'];
+            }
+            if (isset($focusPoint['y'])) {
+                $y = (float) $focusPoint['y'];
+            }
+        }
+
+        $x = $this->formatPercentage($x);
+        $y = $this->formatPercentage($y);
+
+        return sprintf('%s %s', $x, $y);
+    }
+
+    private function formatPercentage($value)
+    {
+        $value = max(0, min(1, (float) $value));
+        $percentage = round($value * 100, 2);
+        $percentage = rtrim(rtrim(sprintf('%.2f', $percentage), '0'), '.');
+
+        return $percentage . '%';
     }
 }

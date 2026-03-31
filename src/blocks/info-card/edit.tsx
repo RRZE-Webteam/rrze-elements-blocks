@@ -78,16 +78,6 @@ interface CustomStyles extends CSSProperties {
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
   const ref = useRef<HTMLLIElement>(null);
 
-  let imageStatus = 'image';
-  if (attributes.desktopImageId === 0) {
-    imageStatus = 'no-image';
-  }
-
-  const blockProps = useBlockProps({
-    className: `rrze-elements-blocks__carousel-content-list-item ${imageStatus}`,
-    ref: ref
-  });
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLinkPickerVisible, setIsLinkPickerVisible] = useState(false);
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
@@ -117,7 +107,18 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const desktopImageUrl = attributes.desktopImageUrl;
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
-  const hasBackgroundImage = Boolean(attributes.desktopImageUrl || attributes.tabletImageUrl || attributes.mobileImageUrl);
+
+  const hasDesktopImage = Boolean(desktopImageUrl);
+  const hasTabletImage = Boolean(tabletImageUrl);
+  const hasMobileImage = Boolean(mobileImageUrl);
+  const hasBackgroundImage = hasDesktopImage || hasTabletImage || hasMobileImage;
+
+  const imageStatus = hasBackgroundImage ? 'image' : 'no-image';
+
+  const blockProps = useBlockProps({
+    className: `rrze-elements-blocks__carousel-content-list-item ${imageStatus}`,
+    ref: ref
+  });
 
   const isLinkCard = !!attributes.url;
   // does it have inner Content
@@ -189,14 +190,22 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const backgroundColor = attributes.backgroundColor;
   const cardTextShadow = hasBackgroundImage ? '1px 1px 2px #222' : 'none';
 
+  const clampFocusValue = (value: number) => Math.min(1, Math.max(0, value));
+  const formatFocusPercentage = (value: number) => `${parseFloat((clampFocusValue(value) * 100).toFixed(2))}%`;
+  const getObjectPosition = (point?: EditProps['attributes']['desktopFocusPoint']) => {
+    const x = point?.x ?? 0.5;
+    const y = point?.y ?? 0.5;
+    return `${formatFocusPercentage(x)} ${formatFocusPercentage(y)}`;
+  };
+
   const style: CustomStyles = {
     '--desktop-text-color': desktopFinalColor,
     '--tablet-text-color': tabletFinalColor,
     '--mobile-text-color': mobileFinalColor,
     '--background-color': backgroundColor,
-    '--desktop-object-position': `${attributes.desktopFocusPoint.x * 100}% ${attributes.desktopFocusPoint.y * 100}%`,
-    '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
-    '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
+    '--desktop-object-position': getObjectPosition(attributes.desktopFocusPoint),
+    '--tablet-object-position': getObjectPosition(attributes.tabletFocusPoint),
+    '--mobile-object-position': getObjectPosition(attributes.mobileFocusPoint),
     '--image-object-fit': attributes.imageObjectFit || 'cover',
     '--card-text-shadow': cardTextShadow,
   };
@@ -355,28 +364,28 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               name={__('Add Mobile Image', 'rrze-elements-blocks')}
             />
           )}
-          {(deviceType === 'desktop' && !!attributes.desktopImageId) && (
+          {(deviceType === 'desktop' && hasDesktopImage) && (
             <FocalPointPicker
-              url={attributes.desktopImageUrl}
+              url={desktopImageUrl}
               value={attributes.desktopFocusPoint}
               onChange={(newFocusPoint) => setAttributes({desktopFocusPoint: newFocusPoint})}
             />
           )}
-          {(deviceType === 'tablet' && !!attributes.tabletImageId) && (
+          {(deviceType === 'tablet' && hasTabletImage) && (
             <FocalPointPicker
-              url={attributes.tabletImageUrl}
+              url={tabletImageUrl}
               value={attributes.tabletFocusPoint}
               onChange={(newFocusPoint) => setAttributes({tabletFocusPoint: newFocusPoint})}
             />
           )}
-          {(deviceType === 'mobile' && !!attributes.mobileImageId) && (
+          {(deviceType === 'mobile' && hasMobileImage) && (
             <FocalPointPicker
-              url={attributes.mobileImageUrl}
+              url={mobileImageUrl}
               value={attributes.mobileFocusPoint}
               onChange={(newFocusPoint) => setAttributes({mobileFocusPoint: newFocusPoint})}
             />
           )}
-          {(!!attributes.mobileImageId || !!attributes.tabletImageId || !!attributes.desktopImageId) && (
+          {hasBackgroundImage && (
             <TextControl
               label={__("Alt Text", "rrze-elements-blocks")}
               value={attributes.alt}
