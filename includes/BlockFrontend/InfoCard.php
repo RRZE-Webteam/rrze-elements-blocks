@@ -13,6 +13,7 @@ class InfoCard
             'desktopImageUrl' => '',
             'tabletImageUrl' => '',
             'mobileImageUrl' => '',
+            'imageObjectFit' => 'cover',
             'alt' => '',
             'url' => '',
             'desktopTextColor' => '#fff',
@@ -40,6 +41,7 @@ class InfoCard
         $desktopCustomTextColor = $attributes['desktopCustomTextColor'];
         $tabletCustomTextColor = $attributes['tabletCustomTextColor'];
         $mobileCustomTextColor = $attributes['mobileCustomTextColor'];
+        $imageObjectFit = $attributes['imageObjectFit'] === 'contain' ? 'contain' : 'cover';
         $scientificText = $attributes['scientificText'];
         $hasScientificText = '' !== trim(wp_strip_all_tags($scientificText));
         $modalId = uniqid('rrze-elements-modal-');
@@ -57,6 +59,7 @@ class InfoCard
         if ($mobileCustomTextColor) {
             $style .= "--mobile-custom-text-color: {$mobileCustomTextColor};";
         }
+        $style .= "--image-object-fit: {$imageObjectFit};";
 
         ob_start();
         ?>

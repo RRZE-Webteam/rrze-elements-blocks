@@ -60,7 +60,7 @@ figure.rrze-elements-blocks__carousel_feature_card_bg_figure
       width: 100%;
       height: 100%;
       object-position: center bottom;
-      object-fit: cover;
+      object-fit: var(--image-object-fit, cover);
     }
   }
 }

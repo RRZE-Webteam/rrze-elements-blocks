@@ -43,6 +43,7 @@ interface EditProps {
     tabletImageUrl: string;
     mobileImageId: number;
     mobileImageUrl: string;
+    imageObjectFit?: 'cover' | 'contain';
     desktopTextColor: string;
     tabletTextColor: string;
     mobileTextColor: string;
@@ -70,6 +71,7 @@ interface CustomStyles extends CSSProperties {
   '--tablet-object-position'?: string;
   '--mobile-object-position'?: string;
   '--background-color'?: string;
+  '--image-object-fit'?: string;
 }
 
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
@@ -192,6 +194,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     '--desktop-object-position': `${attributes.desktopFocusPoint.x * 100}% ${attributes.desktopFocusPoint.y * 100}%`,
     '--tablet-object-position': `${attributes.tabletFocusPoint.x * 100}% ${attributes.tabletFocusPoint.y * 100}%`,
     '--mobile-object-position': `${attributes.mobileFocusPoint.x * 100}% ${attributes.mobileFocusPoint.y * 100}%`,
+    '--image-object-fit': attributes.imageObjectFit || 'cover',
   };
 
   return (
@@ -376,6 +379,23 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               onChange={(alt) => setAttributes({alt})}
             />
           )}
+          <ToggleGroupControl
+            isBlock
+            label={__("Image Fit", "rrze-elements-blocks")}
+            value={attributes.imageObjectFit || 'cover'}
+            onChange={(value: 'cover' | 'contain' | undefined) => {
+              setAttributes({imageObjectFit: value || 'cover'});
+            }}
+          >
+            <ToggleGroupControlOption
+              label={__("Fill (cover)", "rrze-elements-blocks")}
+              value="cover"
+            />
+            <ToggleGroupControlOption
+              label={__("Fit (contain)", "rrze-elements-blocks")}
+              value="contain"
+            />
+          </ToggleGroupControl>
         </PanelBody>
         <PanelBody title={__("Text Color", "rrze-elements-blocks")}>
           {deviceType === 'desktop' && (

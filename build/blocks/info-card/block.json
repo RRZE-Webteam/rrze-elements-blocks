@@ -49,6 +49,14 @@
       "type": "string",
       "default": ""
     },
+    "imageObjectFit": {
+      "type": "string",
+      "enum": [
+        "cover",
+        "contain"
+      ],
+      "default": "cover"
+    },
     "desktopTextColor": {
       "type": "string",
       "default": "#fff"

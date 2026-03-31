@@ -33,6 +33,7 @@ div.rrze-elements-blocks__carousel_feature_card-content
 
     .rrze-elements-blocks__carousel_feature_card_bg_figure_picture img {
         object-position: var(--desktop-object-position);
+        object-fit: var(--image-object-fit, cover);
     }
 
     @media (max-width: 1024px) {
