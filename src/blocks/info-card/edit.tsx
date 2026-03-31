@@ -86,13 +86,15 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const {__experimentalSetPreviewDeviceType: setPreviewDeviceType} = useDispatch('core/edit-post');
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
 
-  const {parentId, parentAttributes} = useSelect((select) => {
-    const {getBlockParents, getBlockAttributes} = select(blockEditorStore);
+  const {parentId, parentAttributes, hasInnerBlocks} = useSelect((select) => {
+    const {getBlockParents, getBlockAttributes, getBlock} = select(blockEditorStore);
     const parents = getBlockParents(clientId);
     const parentId = parents.length > 0 ? parents[parents.length - 1] : null;
+    const block = getBlock(clientId);
     return {
       parentId,
       parentAttributes: parentId ? getBlockAttributes(parentId) : null,
+      hasInnerBlocks: !!block?.innerBlocks?.length,
     };
   }, [clientId]);
 
@@ -122,8 +124,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   });
 
   const isLinkCard = !!attributes.url;
-  // does it have inner Content
-  const isInfoCard = blockProps;
+  const showLinkIcon = isLinkCard;
+  const shouldShowActionIcon = showLinkIcon || hasInnerBlocks;
 
   const deviceIcons = {
     desktop: desktop,
@@ -170,6 +172,12 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       </div>
     );
   };
+
+  useEffect(() => {
+    if (isLinkCard && isModalOpen) {
+      setIsModalOpen(false);
+    }
+  }, [isLinkCard, isModalOpen]);
 
   const colorPaletteColors = [
     {name: __('Black', 'rrze-elements-blocks'), color: '#000000'},
@@ -260,6 +268,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
             icon={page}
             label={__("Add / Edit Content", "rrze-elements-blocks")}
             onClick={() => setIsModalOpen(!isModalOpen)}
+            disabled={isLinkCard}
           />
         </ToolbarGroup>
         <ToolbarGroup>
@@ -275,7 +284,11 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
             >
               <LinkControl
                 value={{url: attributes.url}}
-                onChange={(newLink) => setAttributes({url: newLink.url})}
+                onChange={(newLink) => setAttributes({url: newLink?.url || ''})}
+                onRemove={() => {
+                  setAttributes({url: ''});
+                  setIsLinkPickerVisible(false);
+                }}
               />
             </Popover>
           )}
@@ -543,28 +556,31 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               </figure>
             </div>
             {/*Todo: hier */}
-            <div className={"rrze-elements-blocks__carousel_feature_card_link"}
-                 aria-label={"Weitere Informationen zum Thema XYZ"} role={"button"}>
-              <div className={"rrze-elements-blocks__carousel_feature_card_link_control_container"}>
-            <span className={"rrze-elements-blocks__carousel_feature_card_link_control_icon-container"}
-                  style={{position: 'absolute'}}>
-              {!isLinkCard ? (
-                <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
-                     xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                     fill="#5f6368">
-                  <path
-                    d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/>
-                </svg>
-              ) : (
-                <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
-                     xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                     fill="#5f6368">
-                  <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
-                </svg>
-              )}
-            </span>
+            {shouldShowActionIcon && (
+              <div className={"rrze-elements-blocks__carousel_feature_card_link"}
+                   aria-label={showLinkIcon ? __("Open card link", "rrze-elements-blocks") : __("Show more information", "rrze-elements-blocks")}
+                   role={"button"}>
+                <div className={"rrze-elements-blocks__carousel_feature_card_link_control_container"}>
+              <span className={"rrze-elements-blocks__carousel_feature_card_link_control_icon-container"}
+                    style={{position: 'absolute'}}>
+                {!showLinkIcon ? (
+                  <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
+                       xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                       fill="#5f6368">
+                    <path
+                      d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/>
+                  </svg>
+                ) : (
+                  <svg className={"rrze-elements-blocks__carousel_feature_card_link_control_icon"}
+                       xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                       fill="#5f6368">
+                    <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
+                  </svg>
+                )}
+              </span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           {isScientificStyle && (
             <div className={"rrze-elements-blocks__carousel_feature_card_scientific-text"}>

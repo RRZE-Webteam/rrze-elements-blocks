@@ -70,6 +70,11 @@ class InfoCard
         $style .= "--tablet-object-position: " . $this->focusPointToObjectPosition($attributes['tabletFocusPoint']) . ";";
         $style .= "--mobile-object-position: " . $this->focusPointToObjectPosition($attributes['mobileFocusPoint']) . ";";
 
+        $hasInnerBlocks = trim($content) !== '';
+        $isLinkCard = !empty($url);
+        $showLinkIcon = $isLinkCard;
+        $shouldShowActionIcon = $showLinkIcon || $hasInnerBlocks;
+
         ob_start();
         ?>
         <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>">
@@ -94,13 +99,25 @@ class InfoCard
                             </picture>
                         </figure>
                     </div>
-                    <a href="#" class="rrze-elements-blocks__carousel_feature_card_link" role="button" aria-haspopup="dialog" aria-controls="<?php echo esc_attr($modalId); ?>" data-modal-id="<?php echo esc_attr($modalId); ?>">
-                        <div class="rrze-elements-blocks__carousel_feature_card_link_control_container">
-                            <span class="rrze-elements-blocks__carousel_feature_card_link_control_icon-container">
-                                <svg class="rrze-elements-blocks__carousel_feature_card_link_control_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
-                            </span>
-                        </div>
-                    </a>
+                    <?php if ($shouldShowActionIcon) : ?>
+                        <?php if ($showLinkIcon) : ?>
+                            <a href="<?php echo esc_url($url); ?>" class="rrze-elements-blocks__carousel_feature_card_link" aria-label="<?php esc_attr_e('Open card link', 'rrze-elements-blocks'); ?>">
+                                <div class="rrze-elements-blocks__carousel_feature_card_link_control_container">
+                                    <span class="rrze-elements-blocks__carousel_feature_card_link_control_icon-container">
+                                        <svg class="rrze-elements-blocks__carousel_feature_card_link_control_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        <?php else : ?>
+                            <a href="#" class="rrze-elements-blocks__carousel_feature_card_link" role="button" aria-haspopup="dialog" aria-controls="<?php echo esc_attr($modalId); ?>" data-modal-id="<?php echo esc_attr($modalId); ?>" aria-label="<?php esc_attr_e('Show more information', 'rrze-elements-blocks'); ?>">
+                                <div class="rrze-elements-blocks__carousel_feature_card_link_control_container">
+                                    <span class="rrze-elements-blocks__carousel_feature_card_link_control_icon-container">
+                                        <svg class="rrze-elements-blocks__carousel_feature_card_link_control_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+                                    </span>
+                                </div>
+                            </a>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <?php if ($hasScientificText) : ?>
@@ -108,17 +125,19 @@ class InfoCard
                     <?php echo wp_kses_post($scientificText); ?>
                 </div>
             <?php endif; ?>
-            <dialog id="<?php echo esc_attr($modalId); ?>" class="rrze-elements-blocks-fullscreen-modal">
-                <div class="rrze-elements-blocks-modal-overlay" data-modal-overlay>
-                    <div class="rrze-elements-blocks-modal-content" tabindex="-1">
-                        <button class="rrze-elements-blocks-close-modal rrze-elements-blocks-close-modal--icon" aria-label="<?php esc_attr_e('Schließen', 'rrze-elements-blocks'); ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                        </button>
-                        <?php echo $content; ?>
-                        <button class="rrze-elements-blocks-close-modal"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg> Schließen</button>
+            <?php if (!$showLinkIcon && $hasInnerBlocks) : ?>
+                <dialog id="<?php echo esc_attr($modalId); ?>" class="rrze-elements-blocks-fullscreen-modal">
+                    <div class="rrze-elements-blocks-modal-overlay" data-modal-overlay>
+                        <div class="rrze-elements-blocks-modal-content" tabindex="-1">
+                            <button class="rrze-elements-blocks-close-modal rrze-elements-blocks-close-modal--icon" aria-label="<?php esc_attr_e('Schließen', 'rrze-elements-blocks'); ?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                            </button>
+                            <?php echo $content; ?>
+                            <button class="rrze-elements-blocks-close-modal"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg> Schließen</button>
+                        </div>
                     </div>
-                </div>
-            </dialog>
+                </dialog>
+            <?php endif; ?>
         </li>
         <?php
         return ob_get_clean();
