@@ -238,7 +238,18 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
   const backgroundColor = attributes.backgroundColor;
   const isCoverFit = (attributes.imageObjectFit || 'cover') === 'cover';
-  const cardTextShadow = hasBackgroundImage ? '1px 1px 2px #222' : 'none';
+  const normalizeColor = (color?: string) => {
+    if (!color) return '';
+    return color.trim().toLowerCase().replace(/\s+/g, '');
+  };
+  const isWhite = (color?: string) => {
+    const normalized = normalizeColor(color);
+    return ['#fff', '#ffffff', 'fff', 'ffffff', 'rgb(255,255,255)', 'rgba(255,255,255,1)', 'white'].includes(normalized);
+  };
+  const needsLightShadow = [desktopFinalColor, tabletFinalColor, mobileFinalColor].some((color) => isWhite(color));
+  const cardTextShadow = hasBackgroundImage
+    ? `1px 1px 2px ${needsLightShadow ? '#ddd' : '#222'}`
+    : 'none';
 
   const clampFocusValue = (value: number) => Math.min(1, Math.max(0, value));
   const formatFocusPercentage = (value: number) => `${parseFloat((clampFocusValue(value) * 100).toFixed(2))}%`;

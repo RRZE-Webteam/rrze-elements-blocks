@@ -64,8 +64,17 @@ class InfoCard
         }
         $style .= "--image-object-fit: {$imageObjectFit};";
 
+        $desktopFinalColor = $desktopCustomTextColor ?: $desktopTextColor;
+        $tabletFinalColor = ($tabletCustomTextColor ?: $tabletTextColor) ?: $desktopFinalColor;
+        $mobileFinalColor = ($mobileCustomTextColor ?: $mobileTextColor) ?: $tabletFinalColor;
+
         $hasBackgroundImage = !empty($desktopImageUrl) || !empty($tabletImageUrl) || !empty($mobileImageUrl);
-        $style .= "--card-text-shadow: " . ($hasBackgroundImage ? '1px 1px 2px #222' : 'none') . ";";
+        if ($hasBackgroundImage) {
+            $shadowColor = $this->shouldUseLightShadow([$desktopFinalColor, $tabletFinalColor, $mobileFinalColor]) ? '#ddd' : '#222';
+            $style .= "--card-text-shadow: 1px 1px 2px {$shadowColor};";
+        } else {
+            $style .= "--card-text-shadow: none;";
+        }
         $style .= "--desktop-object-position: " . $this->focusPointToObjectPosition($attributes['desktopFocusPoint']) . ";";
         $style .= "--tablet-object-position: " . $this->focusPointToObjectPosition($attributes['tabletFocusPoint']) . ";";
         $style .= "--mobile-object-position: " . $this->focusPointToObjectPosition($attributes['mobileFocusPoint']) . ";";
@@ -161,6 +170,28 @@ class InfoCard
         $y = $this->formatPercentage($y);
 
         return sprintf('%s %s', $x, $y);
+    }
+
+    private function shouldUseLightShadow(array $colors)
+    {
+        foreach ($colors as $color) {
+            if ($this->isColorWhite($color)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function isColorWhite($color)
+    {
+        if (empty($color)) {
+            return false;
+        }
+
+        $normalized = preg_replace('/\s+/', '', strtolower(trim($color)));
+        $whiteValues = ['#fff', '#ffffff', 'fff', 'ffffff', 'rgb(255,255,255)', 'rgba(255,255,255,1)', 'white'];
+
+        return in_array($normalized, $whiteValues, true);
     }
 
     private function formatPercentage($value)
