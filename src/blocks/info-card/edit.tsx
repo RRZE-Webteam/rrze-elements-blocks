@@ -55,6 +55,7 @@ interface EditProps {
     mobileFocusPoint: { x: number; y: number };
     alt: string;
     url: string;
+    scientificText: string;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -102,6 +103,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   }, [clientId]);
 
   const cardHeight = parentAttributes?.cardHeight !== undefined ? parentAttributes.cardHeight : 680;
+  const isScientificStyle = typeof parentAttributes?.className === 'string' && parentAttributes.className.includes('is-style-scientific');
 
   const setCardHeight = (val: number) => {
     if (parentId) {
@@ -444,17 +446,21 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
         <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
           <div className={"rrze-elements-blocks__carousel_feature_card-content"}
                style={{position: 'relative', height: `${cardHeight}px`, width: '320px'}}>
-            <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
-                      allowedFormats={[]} placeholder={__("Your Topic", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle}/>
-            {isSelected && (
-              <CharacterCountProgressBar value={attributes.subtitle?.length || 0} maxValue={40}/>
-            )}
-            <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
-                      placeholder={__("Your Headline", "rrze-elements-blocks")}
-                      onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title}/>
-            {isSelected && (
-              <CharacterCountProgressBar value={attributes.title?.length || 0} maxValue={60}/>
+            {!isScientificStyle && (
+              <>
+                <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
+                          allowedFormats={[]} placeholder={__("Your Topic", "rrze-elements-blocks")}
+                          onChange={(newTitle) => setAttributes({subtitle: newTitle})} value={attributes.subtitle}/>
+                {isSelected && (
+                  <CharacterCountProgressBar value={attributes.subtitle?.length || 0} maxValue={40}/>
+                )}
+                <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
+                          placeholder={__("Your Headline", "rrze-elements-blocks")}
+                          onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title}/>
+                {isSelected && (
+                  <CharacterCountProgressBar value={attributes.title?.length || 0} maxValue={60}/>
+                )}
+              </>
             )}
             <div className={"rrze-elements-blocks__carousel_feature_card_bg"}>
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
@@ -493,6 +499,23 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               </div>
             </div>
           </div>
+          {isScientificStyle && (
+            <div className={"rrze-elements-blocks__carousel_feature_card_scientific-text"}>
+              <RichText
+                tagName={"p"}
+                className={"rrze-elements-blocks__carousel_feature_card_scientific-text-content"}
+                allowedFormats={[
+                  'core/bold',
+                  'core/italic',
+                  'core/subscript',
+                  'core/superscript',
+                ]}
+                placeholder={__("Add scientific text…", "rrze-elements-blocks")}
+                onChange={(newScientificText) => setAttributes({scientificText: newScientificText})}
+                value={attributes.scientificText}
+              />
+            </div>
+          )}
         </div>
       )}
     </li>

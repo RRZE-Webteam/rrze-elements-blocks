@@ -19,6 +19,17 @@
       "default": 520
     }
   },
+  "styles": [
+    {
+      "name": "marketing",
+      "label": "Marketing",
+      "isDefault": true
+    },
+    {
+      "name": "scientific",
+      "label": "Scientific"
+    }
+  ],
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",

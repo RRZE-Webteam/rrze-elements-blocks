@@ -211,14 +211,14 @@ class Blocks
                 'build_folder' => 'fact',
                 'class' => Fact::class,
             ],
-            [
-                'build_folder' => 'carousel',
-                'class' => Carousel::class,
-            ],
-            [
-                'build_folder' => 'info-card',
-                'class' => InfoCard::class,
-            ],
+//            [
+//                'build_folder' => 'carousel',
+//                'class' => Carousel::class,
+//            ],
+//            [
+//                'build_folder' => 'info-card',
+//                'class' => InfoCard::class,
+//            ],
         ];
 
         foreach ($dynamic_blocks as $block_def) {

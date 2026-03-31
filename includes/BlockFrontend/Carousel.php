@@ -13,7 +13,13 @@ class Carousel
 
         ob_start();
         ?>
-        <section class="rrze-elements-blocks__carousel" style="--card-height: <?php echo esc_attr($cardHeight); ?>px;">
+        <?php
+        $wrapper_attributes = get_block_wrapper_attributes([
+            'class' => 'rrze-elements-blocks__carousel',
+            'style' => sprintf('--card-height: %dpx;', (int) $cardHeight),
+        ]);
+        ?>
+        <section <?php echo $wrapper_attributes; ?>>
             <div class="rrze-elements-blocks__carousel-section-header">
                 <h2 class="rrze-elements-blocks__carousel-section-header-headline" id="<?php echo esc_attr($uniqueIDForSectionHeader); ?>">
                     <?php echo esc_html($title); ?>

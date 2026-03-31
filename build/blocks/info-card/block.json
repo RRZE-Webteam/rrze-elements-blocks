@@ -101,6 +101,10 @@
     "url": {
       "type": "string",
       "default": ""
+    },
+    "scientificText": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "rrze-elements-blocks",

@@ -21,12 +21,13 @@ class InfoCard
             'desktopCustomTextColor' => '',
             'tabletCustomTextColor' => '',
             'mobileCustomTextColor' => '',
+            'scientificText' => '',
         ];
 
         $attributes = wp_parse_args($attributes, $defaults);
 
-        $title = $attributes['title'];
-        $subtitle = $attributes['subtitle'];
+        $title = isset($attributes['title']) ? wp_strip_all_tags($attributes['title']) : '';
+        $subtitle = isset($attributes['subtitle']) ? wp_strip_all_tags($attributes['subtitle']) : '';
         $desktopImageUrl = $attributes['desktopImageUrl'];
         $tabletImageUrl = $attributes['tabletImageUrl'];
         $mobileImageUrl = $attributes['mobileImageUrl'];
@@ -39,6 +40,8 @@ class InfoCard
         $desktopCustomTextColor = $attributes['desktopCustomTextColor'];
         $tabletCustomTextColor = $attributes['tabletCustomTextColor'];
         $mobileCustomTextColor = $attributes['mobileCustomTextColor'];
+        $scientificText = $attributes['scientificText'];
+        $hasScientificText = '' !== trim(wp_strip_all_tags($scientificText));
         $modalId = uniqid('rrze-elements-modal-');
 
         $style = "--background-color: {$backgroundColor};";
@@ -88,6 +91,11 @@ class InfoCard
                     </a>
                 </div>
             </div>
+            <?php if ($hasScientificText) : ?>
+                <div class="rrze-elements-blocks__carousel_feature_card_scientific-text">
+                    <?php echo wp_kses_post($scientificText); ?>
+                </div>
+            <?php endif; ?>
             <dialog id="<?php echo esc_attr($modalId); ?>" class="rrze-elements-blocks-fullscreen-modal">
                 <div class="rrze-elements-blocks-modal-overlay" data-modal-overlay>
                     <div class="rrze-elements-blocks-modal-content" tabindex="-1">
