@@ -19,6 +19,7 @@ import {
   Popover,
   RangeControl,
   ColorPalette,
+  ColorIndicator,
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
@@ -152,6 +153,23 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       />
     </ToggleGroupControl>
   );
+
+  const AutoColorHint = ({color, label}: {color?: string; label: string}) => {
+    if (!color) {
+      return null;
+    }
+    return (
+      <div
+        className="rrze-elements-blocks__auto-color-hint"
+        style={{display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px'}}
+      >
+        <ColorIndicator colorValue={color}/>
+        <span style={{fontSize: '12px'}}>
+          {label}: {color}
+        </span>
+      </div>
+    );
+  };
 
   const colorPaletteColors = [
     {name: __('Black', 'rrze-elements-blocks'), color: '#000000'},
@@ -417,6 +435,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           <DeviceViewportToggle label={__("Text Color Viewport", "rrze-elements-blocks")} />
           {deviceType === 'desktop' && (
             <>
+              <AutoColorHint
+                color={attributes.desktopTextColor}
+                label={__("Auto text color (calculated)", "rrze-elements-blocks")}
+              />
               <ContrastChecker backgroundColor={attributes.backgroundColor}
                                textColor={attributes.desktopCustomTextColor}/>
               <ColorPalette
@@ -429,6 +451,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           )}
           {deviceType === 'tablet' && (
             <>
+              <AutoColorHint
+                color={attributes.tabletTextColor}
+                label={__("Auto text color (calculated)", "rrze-elements-blocks")}
+              />
               <ContrastChecker backgroundColor={attributes.backgroundColor}
                                textColor={attributes.tabletCustomTextColor}/>
               <ColorPalette
@@ -441,6 +467,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           )}
           {deviceType === 'mobile' && (
             <>
+              <AutoColorHint
+                color={attributes.mobileTextColor}
+                label={__("Auto text color (calculated)", "rrze-elements-blocks")}
+              />
               <ContrastChecker backgroundColor={attributes.backgroundColor}
                                textColor={attributes.mobileCustomTextColor}/>
               <ColorPalette
