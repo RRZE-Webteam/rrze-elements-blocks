@@ -43,18 +43,26 @@ export function useJumpNameStore({
   const lastJumpNameRef = useRef(jumpName);
 
   useEffect(() => {
-    lastJumpNameRef.current = jumpName;
+    if (!clientId) {
+      return;
+    }
+
+    const previousJumpName = lastJumpNameRef.current;
+    if (previousJumpName && previousJumpName !== jumpName) {
+      removeJumpNameByClientId(clientId);
+    }
 
     if (!jumpName || jumpName === "") {
       const defaultName = `panel_${clientId?.slice(-8)}`;
       setAttributes({jumpName: defaultName});
-      if (clientId) {
-        addJumpName(defaultName, clientId);
-      }
-    } else if (jumpName && clientId) {
-      addJumpName(jumpName, clientId);
+      addJumpName(defaultName, clientId);
+      lastJumpNameRef.current = defaultName;
+      return;
     }
-  }, [clientId, jumpName, addJumpName, setAttributes]);
+
+    addJumpName(jumpName, clientId);
+    lastJumpNameRef.current = jumpName;
+  }, [clientId, jumpName, addJumpName, removeJumpNameByClientId, setAttributes]);
 
   useEffect(() => {
     return () => {
