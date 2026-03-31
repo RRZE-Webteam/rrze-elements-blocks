@@ -114,9 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardContent = card.querySelector('.rrze-elements-blocks__carousel_feature_card-content');
         const cardBackground = card.querySelector('.rrze-elements-blocks__carousel_feature_card_bg');
 
+        const hasAction = card.dataset.cardHasAction === 'true';
+
         let hoverTimeline = null;
 
-        if (cardContent) {
+        if (cardContent && hasAction) {
             hoverTimeline = gsap.timeline({
                 paused: true,
                 defaults: {

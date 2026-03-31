@@ -87,10 +87,11 @@ class InfoCard
         $isLinkCard = !empty($url);
         $showLinkIcon = $isLinkCard;
         $shouldShowActionIcon = $showLinkIcon || $hasInnerBlocks;
+        $cardHasAction = $shouldShowActionIcon ? 'true' : 'false';
 
         ob_start();
         ?>
-        <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>">
+        <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>" data-card-has-action="<?php echo esc_attr($cardHasAction); ?>">
             <div class="rrze-elements-blocks__carousel_feature-card-bg">
                 <div class="rrze-elements-blocks__carousel_feature_card-content">
                     <h3 class="rrze-elements-blocks__carousel_feature_card_subtitle">
