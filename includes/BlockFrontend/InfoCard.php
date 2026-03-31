@@ -43,12 +43,8 @@ class InfoCard
 
         $style = "--background-color: {$backgroundColor};";
         $style .= "--desktop-text-color: {$desktopTextColor};";
-        if ($tabletTextColor) {
-            $style .= "--tablet-text-color: {$tabletTextColor};";
-        }
-        if ($mobileTextColor) {
-            $style .= "--mobile-text-color: {$mobileTextColor};";
-        }
+        $style .= "--tablet-text-color: " . ($tabletTextColor ?: $desktopTextColor) . ";";
+        $style .= "--mobile-text-color: " . ($mobileTextColor ?: $tabletTextColor ?: $desktopTextColor) . ";";
         if ($desktopCustomTextColor) {
             $style .= "--desktop-custom-text-color: {$desktopCustomTextColor};";
         }

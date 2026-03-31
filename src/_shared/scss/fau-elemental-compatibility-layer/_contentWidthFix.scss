@@ -19,9 +19,14 @@
     max-width: var(--small-max-width);
   }
 
+  div.rrze-elements-blocks__carousel-section-header {
+    padding-left: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
+    padding-right: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
+  }
+
   div.elements-textcolumns,
   div.wp-block-rrze-elements-columns,
-  div.wp-block-rrze-elements-cta
+  div.wp-block-rrze-elements-cta,
   {
     max-width: var(--wide-max-width);
     margin-left: var(--faue_base-max-width_bleed_inline-margin);

@@ -3,7 +3,6 @@ import {
   InnerBlocks, BlockControls, RichText,
 } from "@wordpress/block-editor";
 import {useSelect} from "@wordpress/data";
-import {useRef} from "@wordpress/element";
 import type {ComponentProps} from "react";
 import {__} from "@wordpress/i18n";
 import {SVG, Path, ToolbarItem, ToolbarDropdownMenu, ToolbarGroup} from "@wordpress/components";
@@ -32,7 +31,6 @@ const MAX_CHILDREN = 4;
 
 export default function Edit({attributes, setAttributes, clientId}: EditProps) {
   const blockProps = useBlockProps();
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const childCount = useSelect(
     (select) => {

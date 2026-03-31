@@ -164,3 +164,63 @@ section.wp-block-rrze-elements-carousel {
 div.rrze-elements-blocks__carousel-container {
   margin-inline: 0;
 }
+
+div.rrze-elements-blocks__carousel-navigation{
+  margin-right: 2rem;
+  //max-width: var(--wide-max-width);
+  max-width: calc(100vw - var(--Spacing-10x));
+  padding: var(--Spacing-10x);
+  padding-top: .125rem;
+
+  ul {
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+
+  li {
+    margin: 0;
+    max-width: fit-content;
+  }
+
+  li::before{
+    display: none;
+  }
+
+  button {
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .1s linear,color .1s linear,opacity .1s linear;
+    background: var(--icon-bg-color,transparent);
+    color: var(--icon-color);
+    will-change: opacity;
+    background: none;
+    background: #04316a;
+    border: none;
+    outline: 2px solid transparent;
+    outline-offset: 3px;
+
+    svg {
+      fill: #fff;
+      color: #fff;
+      border: none;
+    }
+
+    &:focus-visible {
+      outline-color: #fff;
+    }
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

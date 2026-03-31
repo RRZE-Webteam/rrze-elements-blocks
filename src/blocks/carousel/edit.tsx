@@ -87,7 +87,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
                     type={"button"}
                     onClick={() => scroll('prev')}
                   >
-                    <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+                    <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
                   </button>
                 </li>
                 <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
@@ -97,7 +97,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
                     type={"button"}
                     onClick={() => scroll('next')}
                   >
-                    <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+                    <svg className={"rrze-elements-blocks__carousel_navigation_icon"} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
                   </button>
                 </li>
               </ul>
