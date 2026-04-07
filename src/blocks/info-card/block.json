@@ -51,6 +51,14 @@
       "type": "boolean",
       "default": true
     },
+    "backgroundOverlayEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "backgroundOverlayGradient": {
+      "type": "string",
+      "default": "linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)"
+    },
     "imageObjectFit": {
       "type": "string",
       "enum": ["cover", "contain"],

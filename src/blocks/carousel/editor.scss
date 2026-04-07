@@ -41,6 +41,21 @@ div.rrze-elements-blocks__carousel_feature_card_bg
   height: 100%;
   overflow: hidden;
   z-index: -1;
+  pointer-events: none;
+  --rrze-card-overlay-opacity: 0;
+
+  .rrze-elements-blocks__carousel_feature_card_bg_overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--rrze-card-overlay-gradient, linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%));
+    opacity: var(--rrze-card-overlay-opacity, 0);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &[data-background-overlay="true"] {
+    --rrze-card-overlay-opacity: 1;
+  }
 }
 
 figure.rrze-elements-blocks__carousel_feature_card_bg_figure
@@ -48,6 +63,8 @@ figure.rrze-elements-blocks__carousel_feature_card_bg_figure
   margin: 0;
   padding: 0;
   display: block;
+  position: relative;
+  z-index: 0;
 
   picture {
     position: relative;
@@ -55,12 +72,15 @@ figure.rrze-elements-blocks__carousel_feature_card_bg_figure
     width: 100%;
     height: 100%;
     text-align: match-parent;
+    z-index: 0;
 
     img {
       width: 100%;
       height: 100%;
       object-position: center bottom;
       object-fit: var(--image-object-fit, cover);
+      position: relative;
+      z-index: 0;
     }
   }
 }

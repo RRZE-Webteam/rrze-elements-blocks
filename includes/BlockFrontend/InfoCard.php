@@ -6,6 +6,8 @@ class InfoCard
 {
     public function render($attributes, $content)
     {
+        $defaultOverlayGradient = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
+
         $defaults = [
             'backgroundColor' => '#04316a',
             'title' => '',
@@ -15,6 +17,8 @@ class InfoCard
             'mobileImageUrl' => '',
             'imageObjectFit' => 'cover',
             'textShadowEnabled' => true,
+            'backgroundOverlayEnabled' => false,
+            'backgroundOverlayGradient' => $defaultOverlayGradient,
             'alt' => '',
             'url' => '',
             'desktopTextColor' => '#fff',
@@ -47,9 +51,15 @@ class InfoCard
         $mobileCustomTextColor = $attributes['mobileCustomTextColor'];
         $imageObjectFit = $attributes['imageObjectFit'] === 'contain' ? 'contain' : 'cover';
         $textShadowEnabled = isset($attributes['textShadowEnabled']) ? (bool) $attributes['textShadowEnabled'] : true;
+        $backgroundOverlayEnabled = isset($attributes['backgroundOverlayEnabled']) ? (bool) $attributes['backgroundOverlayEnabled'] : false;
+        $backgroundOverlayGradient = isset($attributes['backgroundOverlayGradient']) ? sanitize_text_field($attributes['backgroundOverlayGradient']) : '';
         $scientificText = $attributes['scientificText'];
         $hasScientificText = '' !== trim(wp_strip_all_tags($scientificText));
         $modalId = uniqid('rrze-elements-modal-');
+
+        if (empty($backgroundOverlayGradient)) {
+            $backgroundOverlayGradient = $defaultOverlayGradient;
+        }
 
         $style = "--background-color: {$backgroundColor};";
         $style .= "--desktop-text-color: {$desktopTextColor};";
@@ -65,6 +75,14 @@ class InfoCard
             $style .= "--mobile-custom-text-color: {$mobileCustomTextColor};";
         }
         $style .= "--image-object-fit: {$imageObjectFit};";
+        $style .= "--rrze-card-overlay-gradient: {$backgroundOverlayGradient};";
+
+        $backgroundOverlayAttributes = [];
+        if ($backgroundOverlayEnabled) {
+            $backgroundOverlayAttributes[] = 'data-background-overlay="true"';
+        }
+        $backgroundOverlayAttributes[] = sprintf('style="--rrze-card-overlay-gradient: %s;"', esc_attr($backgroundOverlayGradient));
+        $backgroundOverlayAttributeString = $backgroundOverlayAttributes ? ' ' . implode(' ', $backgroundOverlayAttributes) : '';
 
         $desktopFinalColor = $desktopCustomTextColor ?: $desktopTextColor;
         $tabletFinalColor = ($tabletCustomTextColor ?: $tabletTextColor) ?: $desktopFinalColor;
@@ -98,7 +116,7 @@ class InfoCard
                         <?php echo esc_html($subtitle); ?>
                     </h3>
                     <p class="rrze-elements-blocks__carousel_feature_card_text"><?php echo esc_html($title); ?></p>
-                    <div class="rrze-elements-blocks__carousel_feature_card_bg">
+                    <div class="rrze-elements-blocks__carousel_feature_card_bg"<?php echo $backgroundOverlayAttributeString; ?>>
                         <figure class="rrze-elements-blocks__carousel_feature_card_bg_figure">
                             <picture class="rrze-elements-blocks__carousel_feature_card_bg_figure_picture">
                                 <?php if ($mobileImageUrl) : ?>
@@ -112,6 +130,7 @@ class InfoCard
                                 <?php endif; ?>
                             </picture>
                         </figure>
+                        <span class="rrze-elements-blocks__carousel_feature_card_bg_overlay" aria-hidden="true"></span>
                     </div>
                     <?php if ($shouldShowActionIcon) : ?>
                         <?php if ($showLinkIcon) : ?>

@@ -20,6 +20,8 @@ import {
   RangeControl,
   ColorPalette,
   ColorIndicator,
+  BaseControl,
+  GradientPicker,
   ToggleControl,
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
@@ -46,6 +48,8 @@ interface EditProps {
     mobileImageId: number;
     mobileImageUrl: string;
     textShadowEnabled?: boolean;
+    backgroundOverlayEnabled?: boolean;
+    backgroundOverlayGradient?: string;
     imageObjectFit?: 'cover' | 'contain';
     desktopTextColor: string;
     tabletTextColor: string;
@@ -76,7 +80,10 @@ interface CustomStyles extends CSSProperties {
   '--background-color'?: string;
   '--image-object-fit'?: string;
   '--card-text-shadow'?: string;
+  '--rrze-card-overlay-gradient'?: string;
 }
+
+const DEFAULT_OVERLAY_GRADIENT = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
 
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
   const ref = useRef<HTMLLIElement>(null);
@@ -129,6 +136,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const showLinkIcon = isLinkCard;
   const shouldShowActionIcon = showLinkIcon || hasInnerBlocks;
   const textShadowEnabled = attributes.textShadowEnabled !== false;
+  const backgroundOverlayEnabled = attributes.backgroundOverlayEnabled ?? false;
 
   const deviceIcons = {
     desktop: desktop,
@@ -204,6 +212,25 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     {name: __('Black', 'rrze-elements-blocks'), color: '#000'},
   ];
 
+  const overlayGradientOptions = [
+    {name: __('Soft dark', 'rrze-elements-blocks'), gradient: DEFAULT_OVERLAY_GRADIENT, slug: 'rrze-soft-dark'},
+    {
+      name: __('Fade bottom', 'rrze-elements-blocks'),
+      gradient: 'linear-gradient(180deg, rgba(3, 18, 34, 0) 0%, rgba(4, 49, 106, 0.7) 85%)',
+      slug: 'rrze-fade-bottom'
+    },
+    {
+      name: __('Warm glow', 'rrze-elements-blocks'),
+      gradient: 'linear-gradient(150deg, rgba(0, 0, 0, 0.58) 0%, rgba(83, 36, 0, 0.35) 60%)',
+      slug: 'rrze-warm-glow'
+    },
+    {
+      name: __('Cool tint', 'rrze-elements-blocks'),
+      gradient: 'linear-gradient(150deg, rgba(5, 34, 55, 0.6) 0%, rgba(7, 94, 108, 0.35) 70%)',
+      slug: 'rrze-cool-tint'
+    }
+  ];
+
   useEffect(() => {
     if (isSelected && ref.current) {
       // Use a slight delay to allow the editor's UI to settle before scrolling
@@ -240,6 +267,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const tabletFinalColor = attributes.tabletCustomTextColor || attributes.tabletTextColor || desktopFinalColor;
   const mobileFinalColor = attributes.mobileCustomTextColor || attributes.mobileTextColor || tabletFinalColor;
   const backgroundColor = attributes.backgroundColor;
+  const overlayGradient = attributes.backgroundOverlayGradient || DEFAULT_OVERLAY_GRADIENT;
   const isCoverFit = (attributes.imageObjectFit || 'cover') === 'cover';
   const normalizeColor = (color?: string) => {
     if (!color) return '';
@@ -274,7 +302,14 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     '--mobile-object-position': getObjectPosition(attributes.mobileFocusPoint),
     '--image-object-fit': attributes.imageObjectFit || 'cover',
     '--card-text-shadow': cardTextShadow,
+    '--rrze-card-overlay-gradient': overlayGradient,
   };
+
+  const backgroundOverlayStyle: CustomStyles = {
+    '--rrze-card-overlay-gradient': overlayGradient,
+  };
+
+  const backgroundOverlayDataAttr = backgroundOverlayEnabled ? 'true' : undefined;
 
   return (
     <li {...blockProps} style={style}>
@@ -523,6 +558,21 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
         </PanelBody>
         <PanelBody title={__("Effects", "rrze-elements-blocks")}>
           <ToggleControl
+            label={__("Show background overlay", "rrze-elements-blocks")}
+            help={__("Adds a gradient overlay on top of the background media to improve text contrast.", "rrze-elements-blocks")}
+            checked={backgroundOverlayEnabled}
+            onChange={(value: boolean) => setAttributes({backgroundOverlayEnabled: value})}
+          />
+          {backgroundOverlayEnabled && (
+            <BaseControl label={__("Overlay gradient", "rrze-elements-blocks")}>
+              <GradientPicker
+                value={attributes.backgroundOverlayGradient || overlayGradient}
+                onChange={(gradientValue?: string) => setAttributes({backgroundOverlayGradient: gradientValue || ''})}
+                gradients={overlayGradientOptions}
+              />
+            </BaseControl>
+          )}
+          <ToggleControl
             label={__("Enable text shadow", "rrze-elements-blocks")}
             checked={textShadowEnabled}
             onChange={(value: boolean) => setAttributes({textShadowEnabled: value})}
@@ -565,7 +615,11 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                 )}
               </>
             )}
-            <div className={"rrze-elements-blocks__carousel_feature_card_bg"}>
+            <div
+              className={"rrze-elements-blocks__carousel_feature_card_bg"}
+              data-background-overlay={backgroundOverlayDataAttr}
+              style={backgroundOverlayStyle}
+            >
               <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
                 <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>
                   <source
@@ -577,6 +631,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                   <img src={desktopImageUrl} alt={attributes.alt}/>
                 </picture>
               </figure>
+              <span className={"rrze-elements-blocks__carousel_feature_card_bg_overlay"} aria-hidden="true" />
             </div>
             {/*Todo: hier */}
             {shouldShowActionIcon && (

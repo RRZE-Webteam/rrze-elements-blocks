@@ -8,6 +8,7 @@ class Carousel
     {
         $title = $attributes['title'] ?? 'Lerne die FAU kennen.';
         $cardHeight = $attributes['cardHeight'] ?? 520;
+        $overlayHoverTarget = 0.5;
         $uniqueIDForSectionHeader = uniqid('carousel-header-');
         $anotherUniqueIDForContentSection = uniqid('carousel-content-');
 
@@ -19,7 +20,7 @@ class Carousel
             'style' => sprintf('--card-height: %dpx;', (int) $cardHeight),
         ]);
         ?>
-        <section <?php echo $wrapper_attributes; ?>>
+        <section <?php echo $wrapper_attributes; ?> data-hover-overlay-target="<?php echo esc_attr($overlayHoverTarget); ?>">
             <div class="rrze-elements-blocks__carousel-section-header">
                 <h2 class="rrze-elements-blocks__carousel-section-header-headline" id="<?php echo esc_attr($uniqueIDForSectionHeader); ?>">
                     <?php echo esc_html($title); ?>

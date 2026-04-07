@@ -113,6 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(card => {
         const cardContent = card.querySelector('.rrze-elements-blocks__carousel_feature_card-content');
         const cardBackground = card.querySelector('.rrze-elements-blocks__carousel_feature_card_bg');
+        const overlayTargetHost = card.closest('[data-hover-overlay-target]');
+        const hoverOverlayDefault = (() => {
+            if (!overlayTargetHost) {
+                return 0.5;
+            }
+            const value = parseFloat(overlayTargetHost.getAttribute('data-hover-overlay-target') || '');
+            return Number.isFinite(value) ? value : 0.5;
+        })();
 
         const hasAction = card.dataset.cardHasAction === 'true';
 
@@ -131,8 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 0);
 
             if (cardBackground) {
+                const computedStyles = window.getComputedStyle(cardBackground);
+                const baseOverlayOpacity = parseFloat(computedStyles.getPropertyValue('--rrze-card-overlay-opacity')) || 0;
+                const overlayTarget = baseOverlayOpacity > 0 ? Math.min(baseOverlayOpacity + 0.35, 1) : hoverOverlayDefault;
                 hoverTimeline.to(cardBackground, {
-                    '--rrze-card-overlay-opacity': 0.5
+                    '--rrze-card-overlay-opacity': overlayTarget
                 }, 0);
             }
         }
