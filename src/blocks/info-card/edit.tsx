@@ -620,7 +620,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       {!isModalOpen && (
         <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
           <div className={"rrze-elements-blocks__carousel_feature_card-content"}
-               style={{position: 'relative', height: `${cardHeight}px`, width: 'var(--desktop-card-width, 320px)'}}>
+               style={{position: 'relative', height: `${cardHeight}px`}}>
             {!isScientificStyle && (
               <>
                 <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}
