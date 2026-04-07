@@ -190,7 +190,7 @@ div.rrze-elements-blocks__carousel_feature_card_scientific-text{
   display: none;
   padding: 0 32px 32px 0;
   margin-top: 1rem;
-  width: 312px;
+  width: var(--desktop-card-width, 320px);
   border-top: 1px solid rgba(255, 255, 255, 0.25);
   line-height: 1.5;
   font-size: 1rem;
@@ -228,11 +228,18 @@ div.rrze-elements-blocks__carousel_feature_card-content
 {
   position: relative;
   padding: 32px;
-  width: 312px;
+  width: var(--desktop-card-width, 320px);
   z-index: 1;
   background-color: var(--background-color);
   will-change: transform;
   transition: box-shadow .2s ease, outline .2s ease;
+}
+
+@media (max-width: 1024px) {
+  div.rrze-elements-blocks__carousel_feature_card-content,
+  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+    width: 312px;
+  }
 }
 
 li.rrze-elements-blocks__carousel-content-list-item:focus-within {

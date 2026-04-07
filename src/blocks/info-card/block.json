@@ -111,6 +111,10 @@
     "scientificText": {
       "type": "string",
       "default": ""
+    },
+    "desktopContentWidth": {
+      "type": "number",
+      "default": 320
     }
   },
   "textdomain": "rrze-elements-blocks",

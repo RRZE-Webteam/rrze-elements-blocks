@@ -18,10 +18,16 @@ div.rrze-elements-blocks__carousel_feature_card-content
 {
   position: relative;
   padding: 32px;
-  width: 372px;
+  width: var(--desktop-card-width, 320px);
   z-index: 1;
   background-color: var(--background-color);
   will-change: transform;
+}
+
+@media (max-width: 1024px) {
+  div.rrze-elements-blocks__carousel_feature_card-content {
+    width: 312px;
+  }
 }
 
 .rrze-elements-blocks__carousel_feature_card_bg {

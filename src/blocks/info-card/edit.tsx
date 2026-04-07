@@ -64,6 +64,7 @@ interface EditProps {
     alt: string;
     url: string;
     scientificText: string;
+    desktopContentWidth?: number;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
@@ -81,6 +82,7 @@ interface CustomStyles extends CSSProperties {
   '--image-object-fit'?: string;
   '--card-text-shadow'?: string;
   '--rrze-card-overlay-gradient'?: string;
+  '--desktop-card-width'?: string;
 }
 
 const DEFAULT_OVERLAY_GRADIENT = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
@@ -119,6 +121,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const desktopImageUrl = attributes.desktopImageUrl;
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
+  const desktopContentWidth = Math.min(Math.max(attributes.desktopContentWidth || 320, 320), 520);
 
   const hasDesktopImage = Boolean(desktopImageUrl);
   const hasTabletImage = Boolean(tabletImageUrl);
@@ -303,6 +306,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     '--image-object-fit': attributes.imageObjectFit || 'cover',
     '--card-text-shadow': cardTextShadow,
     '--rrze-card-overlay-gradient': overlayGradient,
+    '--desktop-card-width': `${desktopContentWidth}px`,
   };
 
   const backgroundOverlayStyle: CustomStyles = {
@@ -556,6 +560,24 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
             disableCustomColors={true}
           />
         </PanelBody>
+        <PanelBody title={__("Layout", "rrze-elements-blocks")} initialOpen={false}>
+          <RangeControl
+            label={__("Desktop card width (px)", "rrze-elements-blocks")}
+            value={desktopContentWidth}
+            onChange={(value?: number) => {
+              if (!value) {
+                setAttributes({desktopContentWidth: 320});
+                return;
+              }
+              const clampedValue = Math.min(Math.max(value, 320), 520);
+              setAttributes({desktopContentWidth: clampedValue});
+            }}
+            min={320}
+            max={520}
+            step={2}
+            help={__("Desktop cards can only be wider than the default. Tablet and mobile widths stay fixed.", "rrze-elements-blocks")}
+          />
+        </PanelBody>
         <PanelBody title={__("Effects", "rrze-elements-blocks")}>
           <ToggleControl
             label={__("Show background overlay", "rrze-elements-blocks")}
@@ -598,7 +620,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       {!isModalOpen && (
         <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
           <div className={"rrze-elements-blocks__carousel_feature_card-content"}
-               style={{position: 'relative', height: `${cardHeight}px`, width: '320px'}}>
+               style={{position: 'relative', height: `${cardHeight}px`, width: 'var(--desktop-card-width, 320px)'}}>
             {!isScientificStyle && (
               <>
                 <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}

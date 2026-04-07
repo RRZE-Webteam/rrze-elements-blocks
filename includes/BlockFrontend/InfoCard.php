@@ -19,6 +19,7 @@ class InfoCard
             'textShadowEnabled' => true,
             'backgroundOverlayEnabled' => false,
             'backgroundOverlayGradient' => $defaultOverlayGradient,
+            'desktopContentWidth' => 320,
             'alt' => '',
             'url' => '',
             'desktopTextColor' => '#fff',
@@ -53,6 +54,7 @@ class InfoCard
         $textShadowEnabled = isset($attributes['textShadowEnabled']) ? (bool) $attributes['textShadowEnabled'] : true;
         $backgroundOverlayEnabled = isset($attributes['backgroundOverlayEnabled']) ? (bool) $attributes['backgroundOverlayEnabled'] : false;
         $backgroundOverlayGradient = isset($attributes['backgroundOverlayGradient']) ? sanitize_text_field($attributes['backgroundOverlayGradient']) : '';
+        $desktopContentWidth = isset($attributes['desktopContentWidth']) ? max(320, min((int) $attributes['desktopContentWidth'], 520)) : 320;
         $scientificText = $attributes['scientificText'];
         $hasScientificText = '' !== trim(wp_strip_all_tags($scientificText));
         $modalId = uniqid('rrze-elements-modal-');
@@ -76,6 +78,7 @@ class InfoCard
         }
         $style .= "--image-object-fit: {$imageObjectFit};";
         $style .= "--rrze-card-overlay-gradient: {$backgroundOverlayGradient};";
+        $style .= "--desktop-card-width: {$desktopContentWidth}px;";
 
         $backgroundOverlayAttributes = [];
         if ($backgroundOverlayEnabled) {
