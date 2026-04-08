@@ -21,13 +21,13 @@
   },
   "styles": [
     {
-      "name": "marketing",
-      "label": "Marketing",
+      "name": "scientific",
+      "label": "Scientific",
       "isDefault": true
     },
     {
-      "name": "scientific",
-      "label": "Scientific"
+      "name": "marketing",
+      "label": "Marketing"
     }
   ],
   "textdomain": "rrze-elements-blocks",

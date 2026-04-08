@@ -1,30 +1,17 @@
-// Imports from WordPress libraries
 import {
   RichText,
   useBlockProps,
   BlockControls,
   InnerBlocks,
   MediaReplaceFlow,
-  InspectorControls,
   LinkControl,
-  ContrastChecker
+  InspectorControls
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
   ToolbarButton,
   DropdownMenu,
-  PanelBody,
-  FocalPointPicker,
-  TextControl,
   Popover,
-  RangeControl,
-  ColorPalette,
-  ColorIndicator,
-  BaseControl,
-  GradientPicker,
-  ToggleControl,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
 import {useState, useRef, useEffect} from "@wordpress/element";
 import {page, desktop, tablet, mobile, link} from "@wordpress/icons";
@@ -33,56 +20,19 @@ import {getImageBrightness} from "../../utility/color";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 import {CharacterCountProgressBar} from "../../components/ProgressBar";
-import {CSSProperties} from "react";
-
-type DeviceType = 'desktop' | 'tablet' | 'mobile';
+import { DeviceType, InfoCardAttributes, InfoCardCustomStyles } from "./types";
+import CarouselSettingsPanel from "./inspectorControls/CarouselSettingsPanel";
+import ImageSettingsPanel from "./inspectorControls/ImageSettingsPanel";
+import TextColorPanel from "./inspectorControls/TextColorPanel";
+import BackgroundColorPanel from "./inspectorControls/BackgroundColorPanel";
+import LayoutPanel from "./inspectorControls/LayoutPanel";
+import EffectsPanel from "./inspectorControls/EffectsPanel";
 
 interface EditProps {
-  attributes: {
-    title: string;
-    subtitle: string;
-    desktopImageId: number;
-    desktopImageUrl: string;
-    tabletImageId: number;
-    tabletImageUrl: string;
-    mobileImageId: number;
-    mobileImageUrl: string;
-    textShadowEnabled?: boolean;
-    backgroundOverlayEnabled?: boolean;
-    backgroundOverlayGradient?: string;
-    imageObjectFit?: 'cover' | 'contain';
-    desktopTextColor: string;
-    tabletTextColor: string;
-    mobileTextColor: string;
-    desktopCustomTextColor: string;
-    tabletCustomTextColor: string;
-    mobileCustomTextColor: string;
-    backgroundColor: string;
-    desktopFocusPoint: { x: number; y: number };
-    tabletFocusPoint: { x: number; y: number };
-    mobileFocusPoint: { x: number; y: number };
-    alt: string;
-    url: string;
-    scientificText: string;
-    desktopContentWidth?: number;
-  }
-  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
+  attributes: InfoCardAttributes;
+  setAttributes: (attributes: Partial<InfoCardAttributes>) => void;
   clientId: string;
   isSelected: boolean;
-}
-
-interface CustomStyles extends CSSProperties {
-  '--desktop-text-color'?: string;
-  '--tablet-text-color'?: string;
-  '--mobile-text-color'?: string;
-  '--desktop-object-position'?: string;
-  '--tablet-object-position'?: string;
-  '--mobile-object-position'?: string;
-  '--background-color'?: string;
-  '--image-object-fit'?: string;
-  '--card-text-shadow'?: string;
-  '--rrze-card-overlay-gradient'?: string;
-  '--desktop-card-width'?: string;
 }
 
 const DEFAULT_OVERLAY_GRADIENT = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
@@ -122,6 +72,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const tabletImageUrl = attributes.tabletImageUrl || desktopImageUrl;
   const mobileImageUrl = attributes.mobileImageUrl || tabletImageUrl;
   const desktopContentWidth = Math.min(Math.max(attributes.desktopContentWidth || 320, 320), 520);
+  const handleDesktopWidthChange = (value: number) => {
+    const clampedValue = Math.min(Math.max(value, 320), 520);
+    setAttributes({desktopContentWidth: clampedValue});
+  };
 
   const hasDesktopImage = Boolean(desktopImageUrl);
   const hasTabletImage = Boolean(tabletImageUrl);
@@ -145,46 +99,6 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     desktop: desktop,
     tablet: tablet,
     mobile: mobile,
-  };
-
-  const DeviceViewportToggle = ({label}: {label: string}) => (
-    <ToggleGroupControl
-      __next40pxDefaultSize
-      isBlock
-      label={label}
-      value={deviceType}
-      onChange={(device: DeviceType) => handleDeviceTypeChange(device)}
-    >
-      <ToggleGroupControlOption
-        label={__("Desktop", "rrze-elements-blocks")}
-        value="desktop"
-      />
-      <ToggleGroupControlOption
-        label={__("Tablet", "rrze-elements-blocks")}
-        value="tablet"
-      />
-      <ToggleGroupControlOption
-        label={__("Mobile", "rrze-elements-blocks")}
-        value="mobile"
-      />
-    </ToggleGroupControl>
-  );
-
-  const AutoColorHint = ({color, label}: {color?: string; label: string}) => {
-    if (!color) {
-      return null;
-    }
-    return (
-      <div
-        className="rrze-elements-blocks__auto-color-hint"
-        style={{display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px'}}
-      >
-        <ColorIndicator colorValue={color}/>
-        <span style={{fontSize: '12px'}}>
-          {label}: {color}
-        </span>
-      </div>
-    );
   };
 
   useEffect(() => {
@@ -295,7 +209,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     return `${formatFocusPercentage(x)} ${formatFocusPercentage(y)}`;
   };
 
-  const style: CustomStyles = {
+  const style: InfoCardCustomStyles = {
     '--desktop-text-color': desktopFinalColor,
     '--tablet-text-color': tabletFinalColor,
     '--mobile-text-color': mobileFinalColor,
@@ -309,7 +223,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     '--desktop-card-width': `${desktopContentWidth}px`,
   };
 
-  const backgroundOverlayStyle: CustomStyles = {
+  const backgroundOverlayStyle: InfoCardCustomStyles = {
     '--rrze-card-overlay-gradient': overlayGradient,
   };
 
@@ -407,199 +321,51 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       </BlockControls>
 
       <InspectorControls>
-        {parentId && (
-          <PanelBody title={__("Carousel Settings", "rrze-elements-blocks")}>
-            <RangeControl
-              label={__("Card Height (px)", "rrze-elements-blocks")}
-              value={cardHeight}
-              onChange={setCardHeight}
-              min={350}
-              max={680}
-            />
-          </PanelBody>
-        )}
-        <PanelBody title={__("Image Settings", "rrze-elements-blocks")}>
-          <DeviceViewportToggle label={__("Choose Viewport", "rrze-elements-blocks")} />
-          {deviceType === 'desktop' && (
-            <MediaReplaceFlow
-              mediaId={attributes.desktopImageId}
-              mediaURL={attributes.desktopImageUrl}
-              allowedTypes={['image']}
-              accept="image/*"
-              onSelect={(media) => onImageSelect(media, 'desktop')}
-              onError={(error: string) => console.error(error)}
-              name={__('Add Desktop Image', 'rrze-elements-blocks')}
-            />
-          )}
-          {deviceType === 'tablet' && (
-            <MediaReplaceFlow
-              mediaId={attributes.tabletImageId}
-              mediaURL={attributes.tabletImageUrl}
-              allowedTypes={['image']}
-              accept="image/*"
-              onSelect={(media) => onImageSelect(media, 'tablet')}
-              onError={(error: string) => console.error(error)}
-              name={__('Add Tablet Image', 'rrze-elements-blocks')}
-            />
-          )}
-          {deviceType === 'mobile' && (
-            <MediaReplaceFlow
-              mediaId={attributes.mobileImageId}
-              mediaURL={attributes.mobileImageUrl}
-              allowedTypes={['image']}
-              accept="image/*"
-              onSelect={(media) => onImageSelect(media, 'mobile')}
-              onError={(error: string) => console.error(error)}
-              name={__('Add Mobile Image', 'rrze-elements-blocks')}
-            />
-          )}
-          {(deviceType === 'desktop' && hasDesktopImage && isCoverFit) && (
-            <FocalPointPicker
-              url={desktopImageUrl}
-              value={attributes.desktopFocusPoint}
-              onChange={(newFocusPoint) => setAttributes({desktopFocusPoint: newFocusPoint})}
-            />
-          )}
-          {(deviceType === 'tablet' && hasTabletImage && isCoverFit) && (
-            <FocalPointPicker
-              url={tabletImageUrl}
-              value={attributes.tabletFocusPoint}
-              onChange={(newFocusPoint) => setAttributes({tabletFocusPoint: newFocusPoint})}
-            />
-          )}
-          {(deviceType === 'mobile' && hasMobileImage && isCoverFit) && (
-            <FocalPointPicker
-              url={mobileImageUrl}
-              value={attributes.mobileFocusPoint}
-              onChange={(newFocusPoint) => setAttributes({mobileFocusPoint: newFocusPoint})}
-            />
-          )}
-          {hasBackgroundImage && (
-            <TextControl
-              label={__("Alt Text", "rrze-elements-blocks")}
-              value={attributes.alt}
-              onChange={(alt) => setAttributes({alt})}
-            />
-          )}
-          <ToggleGroupControl
-            isBlock
-            label={__("Image Fit", "rrze-elements-blocks")}
-            value={attributes.imageObjectFit || 'cover'}
-            onChange={(value: 'cover' | 'contain' | undefined) => {
-              setAttributes({imageObjectFit: value || 'cover'});
-            }}
-          >
-            <ToggleGroupControlOption
-              label={__("Fill (cover)", "rrze-elements-blocks")}
-              value="cover"
-            />
-            <ToggleGroupControlOption
-              label={__("Fit (contain)", "rrze-elements-blocks")}
-              value="contain"
-            />
-          </ToggleGroupControl>
-        </PanelBody>
-        <PanelBody title={__("Text Color", "rrze-elements-blocks")}>
-          <DeviceViewportToggle label={__("Text Color Viewport", "rrze-elements-blocks")} />
-          {deviceType === 'desktop' && (
-            <>
-              <AutoColorHint
-                color={attributes.desktopTextColor}
-                label={__("Auto text color (calculated)", "rrze-elements-blocks")}
-              />
-              <ContrastChecker backgroundColor={attributes.backgroundColor}
-                               textColor={attributes.desktopCustomTextColor}/>
-              <ColorPalette
-                colors={colorPaletteColors}
-                value={attributes.desktopCustomTextColor}
-                onChange={(color) => setAttributes({desktopCustomTextColor: color})}
-                clearable={true}
-              />
-            </>
-          )}
-          {deviceType === 'tablet' && (
-            <>
-              <AutoColorHint
-                color={attributes.tabletTextColor}
-                label={__("Auto text color (calculated)", "rrze-elements-blocks")}
-              />
-              <ContrastChecker backgroundColor={attributes.backgroundColor}
-                               textColor={attributes.tabletCustomTextColor}/>
-              <ColorPalette
-                colors={colorPaletteColors}
-                value={attributes.tabletCustomTextColor}
-                onChange={(color) => setAttributes({tabletCustomTextColor: color})}
-                clearable={true}
-              />
-            </>
-          )}
-          {deviceType === 'mobile' && (
-            <>
-              <AutoColorHint
-                color={attributes.mobileTextColor}
-                label={__("Auto text color (calculated)", "rrze-elements-blocks")}
-              />
-              <ContrastChecker backgroundColor={attributes.backgroundColor}
-                               textColor={attributes.mobileCustomTextColor}/>
-              <ColorPalette
-                colors={colorPaletteColors}
-                value={attributes.mobileCustomTextColor}
-                onChange={(color) => setAttributes({mobileCustomTextColor: color})}
-                clearable={true}
-              />
-            </>
-          )}
-        </PanelBody>
-        <PanelBody title={__("Background Color", "rrze-elements-blocks")}>
-          <ContrastChecker backgroundColor={attributes.backgroundColor} textColor={attributes.desktopCustomTextColor}/>
-          <ColorPalette
-            colors={backgroundColorPaletteColors}
-            value={attributes.backgroundColor}
-            onChange={(color) => setAttributes({backgroundColor: color})}
-            clearable={false}
-            disableCustomColors={true}
-          />
-        </PanelBody>
-        <PanelBody title={__("Layout", "rrze-elements-blocks")} initialOpen={false}>
-          <RangeControl
-            label={__("Desktop card width (px)", "rrze-elements-blocks")}
-            value={desktopContentWidth}
-            onChange={(value?: number) => {
-              if (!value) {
-                setAttributes({desktopContentWidth: 320});
-                return;
-              }
-              const clampedValue = Math.min(Math.max(value, 320), 520);
-              setAttributes({desktopContentWidth: clampedValue});
-            }}
-            min={320}
-            max={520}
-            step={2}
-            help={__("Desktop cards can only be wider than the default. Tablet and mobile widths stay fixed.", "rrze-elements-blocks")}
-          />
-        </PanelBody>
-        <PanelBody title={__("Effects", "rrze-elements-blocks")}>
-          <ToggleControl
-            label={__("Show background overlay", "rrze-elements-blocks")}
-            help={__("Adds a gradient overlay on top of the background media to improve text contrast.", "rrze-elements-blocks")}
-            checked={backgroundOverlayEnabled}
-            onChange={(value: boolean) => setAttributes({backgroundOverlayEnabled: value})}
-          />
-          {backgroundOverlayEnabled && (
-            <BaseControl label={__("Overlay gradient", "rrze-elements-blocks")}>
-              <GradientPicker
-                value={attributes.backgroundOverlayGradient || overlayGradient}
-                onChange={(gradientValue?: string) => setAttributes({backgroundOverlayGradient: gradientValue || ''})}
-                gradients={overlayGradientOptions}
-              />
-            </BaseControl>
-          )}
-          <ToggleControl
-            label={__("Enable text shadow", "rrze-elements-blocks")}
-            checked={textShadowEnabled}
-            onChange={(value: boolean) => setAttributes({textShadowEnabled: value})}
-          />
-        </PanelBody>
+        <CarouselSettingsPanel
+          isVisible={Boolean(parentId)}
+          cardHeight={cardHeight}
+          onChange={setCardHeight}
+        />
+        <ImageSettingsPanel
+          deviceType={deviceType}
+          onDeviceTypeChange={handleDeviceTypeChange}
+          hasBackgroundImage={hasBackgroundImage}
+          hasDesktopImage={hasDesktopImage}
+          hasTabletImage={hasTabletImage}
+          hasMobileImage={hasMobileImage}
+          isCoverFit={isCoverFit}
+          desktopImageUrl={desktopImageUrl}
+          tabletImageUrl={tabletImageUrl}
+          mobileImageUrl={mobileImageUrl}
+          attributes={attributes}
+          setAttributes={setAttributes}
+          onImageSelect={onImageSelect}
+        />
+        <TextColorPanel
+          deviceType={deviceType}
+          onDeviceTypeChange={handleDeviceTypeChange}
+          attributes={attributes}
+          setAttributes={setAttributes}
+          colorPaletteColors={colorPaletteColors}
+        />
+        <BackgroundColorPanel
+          backgroundColor={attributes.backgroundColor}
+          desktopCustomTextColor={attributes.desktopCustomTextColor}
+          palette={backgroundColorPaletteColors}
+          setAttributes={setAttributes}
+        />
+        <LayoutPanel
+          desktopContentWidth={desktopContentWidth}
+          onChange={handleDesktopWidthChange}
+        />
+        <EffectsPanel
+          backgroundOverlayEnabled={backgroundOverlayEnabled}
+          backgroundOverlayGradient={attributes.backgroundOverlayGradient}
+          overlayGradient={overlayGradient}
+          overlayGradientOptions={overlayGradientOptions}
+          textShadowEnabled={textShadowEnabled}
+          setAttributes={setAttributes}
+        />
       </InspectorControls>
 
       {isModalOpen && (
@@ -655,7 +421,6 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               </figure>
               <span className={"rrze-elements-blocks__carousel_feature_card_bg_overlay"} aria-hidden="true" />
             </div>
-            {/*Todo: hier */}
             {shouldShowActionIcon && (
               <div className={"rrze-elements-blocks__carousel_feature_card_link"}
                    aria-label={showLinkIcon ? __("Open card link", "rrze-elements-blocks") : __("Show more information", "rrze-elements-blocks")}

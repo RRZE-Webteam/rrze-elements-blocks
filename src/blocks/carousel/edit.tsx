@@ -1,11 +1,11 @@
 // Imports from WordPress libraries
 import {
-  InspectorControls,
+  InspectorControls, RichText,
   useBlockProps,
   useInnerBlocksProps
 } from "@wordpress/block-editor";
 import { PanelBody, RangeControl } from "@wordpress/components";
-import { __ } from "@wordpress/i18n";
+import { __, sprintf } from "@wordpress/i18n";
 import { useRef } from "@wordpress/element";
 
 interface EditProps {
@@ -71,7 +71,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
       <section {...props} style={style}>
         <div className={"rrze-elements-blocks__carousel"}>
           <div className={"rrze-elements-blocks__carousel-section-header"}>
-            <h2 className={"rrze-elements-blocks__carousel-section-header-headline"} id={"uniqueIDforTheSection-header"}>Lerne die FAU kennen.</h2>
+            <RichText className={"rrze-elements-blocks__carousel-section-header-headline"} id={"uniqueIDforTheSection-header"} onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} tagName={"h2"} />
           </div>
           <div id={"anotherUniqueIDForThisContentSection"} className={"rrze-elements-blocks__carousel-container"}>
             <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
@@ -83,7 +83,11 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
                 <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
                   <button
                     className={"rrze-elements-blocks_carousel_navigation_button"}
-                    aria-label={"Zurück im H3-Überschrift Karusell"}
+                    aria-label={sprintf(
+                      /* translators: %s: carousel title */
+                      __('Back in %s Carousel', 'rrze-elements-blocks'),
+                      attributes.title
+                    )}
                     type={"button"}
                     onClick={() => scroll('prev')}
                   >
@@ -93,7 +97,11 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
                 <li className={"rrze-elements-blocks__carousel_navigation-button-container"}>
                   <button
                     className={"rrze-elements-blocks_carousel_navigation_button"}
-                    aria-label={"Weiter im H3-Überschrift Karusell"}
+                    aria-label={sprintf(
+                      /* translators: %s: carousel title */
+                      __('Proceed in %s Carousel', 'rrze-elements-blocks'),
+                      attributes.title
+                    )}
                     type={"button"}
                     onClick={() => scroll('next')}
                   >
