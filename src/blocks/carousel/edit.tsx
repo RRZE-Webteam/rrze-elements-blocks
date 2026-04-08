@@ -6,7 +6,7 @@ import {
 } from "@wordpress/block-editor";
 import {PanelBody, RangeControl, Notice} from "@wordpress/components";
 import {__, sprintf} from "@wordpress/i18n";
-import {useMemo, useRef} from "@wordpress/element";
+import {useMemo, useRef, useEffect} from "@wordpress/element";
 import {useSelect} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 
@@ -14,21 +14,43 @@ interface EditProps {
   attributes: {
     title: string;
     cardHeight: number;
+    isNestedWarning?: boolean;
   }
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
   clientId: string;
 }
 
 export default function Edit({attributes, setAttributes, clientId}: EditProps) {
-  const props = useBlockProps();
   const scrollRef = useRef<HTMLDivElement>(null);
   const headingId = useMemo(() => `${clientId}-heading`, [clientId]);
   const listId = useMemo(() => `${clientId}-content`, [clientId]);
-  const parentId = useSelect(
-    (select) => select(blockEditorStore).getBlockRootClientId(clientId),
+  const {parentId, parentBlock} = useSelect(
+    (select) => {
+      const rootId = select(blockEditorStore).getBlockRootClientId(clientId);
+      return {
+        parentId: rootId,
+        parentBlock: rootId ? select(blockEditorStore).getBlock(rootId) : null,
+      };
+    },
     [clientId]
   );
-  const isTopLevel = !parentId;
+  const parentIsDarkGroup = parentBlock?.name === 'core/group'
+    && typeof parentBlock?.attributes?.className === 'string'
+    && parentBlock.attributes.className.includes('is-style-dark');
+  const isTopLevel = !parentId || parentIsDarkGroup;
+  const style = {
+    '--rrze-carousel-height': `${attributes.cardHeight}px`,
+  } as any;
+  useEffect(() => {
+    const warningActive = !isTopLevel;
+    if (attributes.isNestedWarning !== warningActive) {
+      setAttributes({isNestedWarning: warningActive});
+    }
+  }, [isTopLevel, attributes.isNestedWarning, setAttributes]);
+  const sectionProps = useBlockProps({
+    style,
+    className: !isTopLevel ? 'rrze-elements-blocks__carousel-prison' : undefined,
+  });
 
   const innerBlocksProps = useInnerBlocksProps(
     {
@@ -60,10 +82,6 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
     }
   };
 
-  const style = {
-    '--rrze-carousel-height': `${attributes.cardHeight}px`,
-  } as any;
-
   return (
     <>
       <InspectorControls>
@@ -78,21 +96,16 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
         </PanelBody>
       </InspectorControls>
 
-      <section {...props} style={style}>
+      <section {...sectionProps}>
         {!isTopLevel && (
-          <Notice status="info" isDismissible={false}
+          <Notice status="warning" isDismissible={false}
                   className={"rrze-elements-blocks__carousel-container-violation"}>
             <>
               <div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Zm60-364 20-12q2 24 19 40t41 16q25 0 42.5-17.5T680-540q0-15-7-28.5T654-590l26-15-20-35-140 80 20 36Zm-120 0 20-36-140-80-20 35 26 15q-12 8-19 21.5t-7 28.5q0 25 17.5 42.5T340-480q24 0 41-16t19-40l20 12Zm60 84q-71 0-125 45.5T279-280h402q-22-69-76-114.5T480-440Zm0-40Z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                     fill="#000">
-                  <path
-                    d="m840-234-80-80v-446q0-17 11.5-28.5T800-800q17 0 28.5 11.5T840-760v526ZM360-714l-80-80v-6q0-17 11.5-28.5T320-840q17 0 28.5 11.5T360-800v86Zm160 160-80-80v-246q0-17 11.5-28.5T480-920q17 0 28.5 11.5T520-880v326Zm160 81h-80v-367q0-17 11.5-28.5T640-880q17 0 28.5 11.5T680-840v367Zm37 343L360-487v224L212-367l157 229q5 8 14 13t19 5h278q10 0 19.5-2.5T717-130ZM402-40q-30 0-56-13.5T303-92L48-465l24-23q19-19 45-22t47 12l116 81v-150L27-820l57-57L876-85l-57 57-44-44q-20 15-44 23.5T680-40H402Zm137-268Zm61-165Z"/>
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M320-160q-117 0-198.5-81.5T40-440q0-107 70.5-186.5T287-718l-63-66 56-56 160 160-160 160-56-57 59-59q-71 14-117 69t-46 127q0 83 58.5 141.5T320-240h120v80H320Zm200-360v-280h360v280H520Zm0 360v-280h360v280H520Zm80-80h200v-120H600v120Z"/></svg>
               </div>
               <p className={"rrze-elements-blocks__carousel-container-violation-text"}>{__(
-                'The Carousel block should be placed at the top level for full functionality. Nested usage may break styles and accessibility. The developer does not approve this Block Move.',
+                'The Carousel block has to live at the top level of the page layout (not inside other blocks). Please move it out of its current container so styling and accessibility keep working.',
                 'rrze-elements-blocks'
               )}</p>
             </>

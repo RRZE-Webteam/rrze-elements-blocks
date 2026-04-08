@@ -11,10 +11,15 @@ class Carousel
         $overlayHoverTarget = 0.5;
         $uniqueIDForSectionHeader = sprintf('carousel-header-%s', uniqid());
         $anotherUniqueIDForContentSection = sprintf('carousel-content-%s', uniqid());
+        $isNestedWarning = !empty($attributes['isNestedWarning']);
 
         ob_start();
         ?>
         <?php
+        if ($isNestedWarning) {
+            return '';
+        }
+
         $wrapper_attributes = get_block_wrapper_attributes([
             'class' => 'rrze-elements-blocks__carousel',
             'style' => sprintf('--card-height: %dpx;', (int) $cardHeight),

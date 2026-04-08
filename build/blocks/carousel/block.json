@@ -17,6 +17,10 @@
     "cardHeight": {
       "type": "number",
       "default": 350
+    },
+    "isNestedWarning": {
+      "type": "boolean",
+      "default": false
     }
   },
   "styles": [
