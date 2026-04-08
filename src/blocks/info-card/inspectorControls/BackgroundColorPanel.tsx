@@ -17,8 +17,7 @@ const BackgroundColorPanel = ({ backgroundColor, desktopCustomTextColor, palette
       colors={palette}
       value={backgroundColor}
       onChange={(color) => setAttributes({backgroundColor: color || '#04316a'})}
-      clearable={false}
-      disableCustomColors={true}
+      clearable={true}
     />
   </PanelBody>
 );
