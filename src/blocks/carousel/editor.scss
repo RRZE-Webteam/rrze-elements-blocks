@@ -302,3 +302,12 @@ body.wp-theme-FAU-Elemental div.is-style-dark {
     color: var(--FAU-Col-FAU-Schwarz-100, #000);
   }
 }
+
+body.wp-theme-FAU-Einrichtungen ul.rrze-elements-blocks__carousel-navigation-container{
+  padding-top: 2rem;
+  list-style: none;
+}
+
+body.wp-theme-FAU-Einrichtungen a.rrze-elements-blocks__carousel_feature_card_link {
+  background: transparent;
+}
