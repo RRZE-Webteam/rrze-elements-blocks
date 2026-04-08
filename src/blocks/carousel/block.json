@@ -12,11 +12,11 @@
   "attributes": {
     "title": {
       "type": "string",
-      "default": "Blueprint"
+      "default": ""
     },
     "cardHeight": {
       "type": "number",
-      "default": 520
+      "default": 350
     }
   },
   "styles": [

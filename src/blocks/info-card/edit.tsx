@@ -47,20 +47,25 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const {__experimentalSetPreviewDeviceType: setPreviewDeviceType} = useDispatch('core/edit-post');
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
 
-  const {parentId, parentAttributes, hasInnerBlocks} = useSelect((select) => {
+  const {parentId, parentAttributes, parentBlockName, hasInnerBlocks} = useSelect((select) => {
     const {getBlockParents, getBlockAttributes, getBlock} = select(blockEditorStore);
     const parents = getBlockParents(clientId);
     const parentId = parents.length > 0 ? parents[parents.length - 1] : null;
+    const parentBlock = parentId ? getBlock(parentId) : null;
     const block = getBlock(clientId);
     return {
       parentId,
       parentAttributes: parentId ? getBlockAttributes(parentId) : null,
+      parentBlockName: parentBlock?.name ?? null,
       hasInnerBlocks: !!block?.innerBlocks?.length,
     };
   }, [clientId]);
 
   const cardHeight = parentAttributes?.cardHeight !== undefined ? parentAttributes.cardHeight : 680;
-  const isScientificStyle = typeof parentAttributes?.className === 'string' && parentAttributes.className.includes('is-style-scientific');
+  const parentClassName = typeof parentAttributes?.className === 'string' ? parentAttributes.className : '';
+  const isScientificStyle = parentBlockName === 'rrze-elements/carousel'
+    ? !parentClassName.includes('is-style-marketing')
+    : parentClassName.includes('is-style-scientific');
 
   const setCardHeight = (val: number) => {
     if (parentId) {

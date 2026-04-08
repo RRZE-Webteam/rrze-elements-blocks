@@ -73,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId }: EditProps 
       <section {...props} style={style}>
         <div className={"rrze-elements-blocks__carousel"}>
           <div className={"rrze-elements-blocks__carousel-section-header"}>
-            <RichText className={"rrze-elements-blocks__carousel-section-header-headline"} id={headingId} onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} tagName={"h2"} />
+            <RichText placeholder={__('Add your Carousel Headline', 'rrze-elements-blocks')} className={"rrze-elements-blocks__carousel-section-header-headline"} id={headingId} onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} tagName={"h2"} />
           </div>
           <div id={listId} className={"rrze-elements-blocks__carousel-container"}>
             <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
