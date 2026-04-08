@@ -106,7 +106,7 @@ div.rrze-elements-blocks__carousel_feature_card-content p{
 div.rrze-elements-blocks__carousel_feature_card-content .rrze-elements-blocks__carousel_feature_card_link_control_icon-container{
   background: #04316a;
   padding: 5px;
-  border-radius: 0px;
+  border-radius: 0;
   display: grid;
   justify-items: center;
   align-items: center;
@@ -169,23 +169,6 @@ div.rrze-elements-blocks__carousel-container {
   margin-inline: 0;
 }
 
-
-div.rrze-elements-blocks-info-card-editor{
-  border: 3px solid var(--background-color);
-  position: relative;
-  width: min(80vw, 95ch);
-  min-height: 680px;
-}
-div.rrze-elements-blocks-info-card-editor::before{
-  content:"Card Popover Editor";
-  background: var(--background-color);
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: var(--desktop-custom-text-color, var(--desktop-text-color));
-  padding: .125rem .5rem .25rem;
-}
-
 div.rrze-elements-blocks__carousel_feature_card_scientific-text{
   display: none;
   padding: 0 32px 32px 0;
@@ -245,7 +228,7 @@ div.rrze-elements-blocks__carousel_feature_card-content
 li.rrze-elements-blocks__carousel-content-list-item:focus-within {
   outline: 3px solid rgba(255, 255, 255, 0.7);
   outline-offset: 10px;
-  border-radius: 32px;
+  border-radius: 0;
 }
 
 li.rrze-elements-blocks__carousel-content-list-item {
@@ -450,7 +433,7 @@ body:has(.rrze-elements-blocks-fullscreen-modal[open]) {
 
   .rrze-elements-blocks-modal-content {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 0;
     padding: clamp(1.25rem, 6vw, 1.75rem);
   }
 
@@ -458,3 +441,41 @@ body:has(.rrze-elements-blocks-fullscreen-modal[open]) {
     right: 0.25rem;
   }
 }
+
+body.wp-theme-FAU-Elemental div.wp-block-group section.wp-block-rrze-elements-carousel{
+  margin: 0 auto;
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+body.wp-theme-FAU-Elemental div.is-style-dark {
+  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+    color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    border: none;
+  }
+  span.rrze-elements-blocks__carousel_feature_card_link_control_icon-container {
+    background: var(--FAU-Col-FAU-Weiss-100, #fff);
+
+    svg {
+      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+
+  button.rrze-elements-blocks_carousel_navigation_button {
+    background: var(--FAU-Col-FAU-Weiss-100, #fff);
+
+    svg{
+      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+
+  div.rrze-elements-blocks-modal-content *{
+    color: var(--FAU-Col-FAU-Schwarz-100, #000);
+  }
+
+  div.rrze-elements-blocks-modal-content ul li:before{
+    background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  }
+}
+

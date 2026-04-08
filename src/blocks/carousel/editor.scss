@@ -245,9 +245,60 @@ div.rrze-elements-blocks__carousel-navigation{
   }
 }
 
+
+div.rrze-elements-blocks-info-card-editor{
+  border: 3px solid var(--background-color);
+  position: relative;
+  width: min(80vw, 95ch);
+  min-height: 680px;
+}
+div.rrze-elements-blocks-info-card-editor::before{
+  content:"Card Popover Editor";
+  background: var(--background-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--desktop-custom-text-color, var(--desktop-text-color));
+  padding: .125rem .5rem .25rem;
+}
+
 body.wp-theme-FAU-Elemental div.wp-block-group section.wp-block-rrze-elements-carousel{
   margin: 0 auto;
   max-width: 100%;
   padding-right: 0;
   padding-left: 0;
+}
+
+body.wp-theme-FAU-Elemental div.is-style-dark {
+  div.rrze-elements-blocks-info-card-editor{
+    border: 3px solid var(--FAU-Col-Weiss-100, #fff);
+  }
+  div.rrze-elements-blocks-info-card-editor::before{
+    background: var(--FAU-Col-Weiss-100, #fff);
+    color: var(--FAU-Col-Schwarz-100, #000);
+  }
+  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+    color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    border: none;
+  }
+  span.rrze-elements-blocks__carousel_feature_card_link_control_icon-container {
+    background: var(--FAU-Col-FAU-Weiss-100, #fff);
+
+    svg {
+      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+
+  button.rrze-elements-blocks_carousel_navigation_button {
+    background: var(--FAU-Col-FAU-Weiss-100, #fff);
+
+    svg{
+      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+
+  div.rrze-elements-blocks-modal-content *{
+    color: var(--FAU-Col-FAU-Schwarz-100, #000);
+  }
 }
