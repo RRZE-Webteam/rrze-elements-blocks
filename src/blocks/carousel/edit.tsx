@@ -2,7 +2,9 @@
 import {
   InspectorControls, RichText,
   useBlockProps,
-  useInnerBlocksProps
+  useInnerBlocksProps,
+  BlockControls,
+  HeadingLevelDropdown
 } from "@wordpress/block-editor";
 import {PanelBody, RangeControl, Notice} from "@wordpress/components";
 import {__, sprintf} from "@wordpress/i18n";
@@ -10,13 +12,18 @@ import {useMemo, useRef, useEffect} from "@wordpress/element";
 import {useSelect} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 
+type HeadingLevel = 2 | 3 | 4 | 5 | 6;
+
+interface CarouselAttributes {
+  title: string;
+  cardHeight: number;
+  isNestedWarning?: boolean;
+  headingLevel?: HeadingLevel;
+}
+
 interface EditProps {
-  attributes: {
-    title: string;
-    cardHeight: number;
-    isNestedWarning?: boolean;
-  }
-  setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
+  attributes: CarouselAttributes;
+  setAttributes: (attributes: Partial<CarouselAttributes>) => void;
   clientId: string;
 }
 
@@ -24,6 +31,7 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const headingId = useMemo(() => `${clientId}-heading`, [clientId]);
   const listId = useMemo(() => `${clientId}-content`, [clientId]);
+  const headingLevel: HeadingLevel = attributes.headingLevel || 2;
   const {parentId, parentBlock} = useSelect(
     (select) => {
       const rootId = select(blockEditorStore).getBlockRootClientId(clientId);
@@ -95,6 +103,13 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
           />
         </PanelBody>
       </InspectorControls>
+      <BlockControls group="block">
+          <HeadingLevelDropdown
+            value={headingLevel}
+            onChange={(newLevel: HeadingLevel) => setAttributes({headingLevel: newLevel})}
+            options={[2, 3, 4, 5, 6]}
+          />
+      </BlockControls>
 
       <section {...sectionProps}>
         {!isTopLevel && (
@@ -116,7 +131,9 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
             <RichText placeholder={__('Add your Carousel Headline', 'rrze-elements-blocks')}
                       className={"rrze-elements-blocks__carousel-section-header-headline"} id={headingId}
                       onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title}
-                      tagName={"h2"}/>
+                      tagName={`h${headingLevel}`}
+                      allowedFormats={[]}
+            />
           </div>
           <div id={listId} className={"rrze-elements-blocks__carousel-container"}>
             <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>

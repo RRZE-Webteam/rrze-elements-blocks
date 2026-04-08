@@ -21,6 +21,17 @@
     "isNestedWarning": {
       "type": "boolean",
       "default": false
+    },
+    "headingLevel": {
+      "type": "number",
+      "enum": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "default": 2
     }
   },
   "styles": [

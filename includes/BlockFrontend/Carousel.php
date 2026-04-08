@@ -11,6 +11,11 @@ class Carousel
         $overlayHoverTarget = 0.5;
         $uniqueIDForSectionHeader = sprintf('carousel-header-%s', uniqid());
         $anotherUniqueIDForContentSection = sprintf('carousel-content-%s', uniqid());
+        $headingLevelValue = isset($attributes['headingLevel']) ? (int) $attributes['headingLevel'] : 2;
+        if ($headingLevelValue < 2 || $headingLevelValue > 6) {
+            $headingLevelValue = 2;
+        }
+        $headingLevel = 'h' . $headingLevelValue;
         $isNestedWarning = !empty($attributes['isNestedWarning']);
 
         ob_start();
@@ -27,9 +32,9 @@ class Carousel
         ?>
         <section <?php echo $wrapper_attributes; ?> data-hover-overlay-target="<?php echo esc_attr($overlayHoverTarget); ?>">
             <div class="rrze-elements-blocks__carousel-section-header">
-                <h2 class="rrze-elements-blocks__carousel-section-header-headline" id="<?php echo esc_attr($uniqueIDForSectionHeader); ?>">
+                <<?php echo esc_attr($headingLevel); ?> class="rrze-elements-blocks__carousel-section-header-headline" id="<?php echo esc_attr($uniqueIDForSectionHeader); ?>">
                     <?php echo esc_html($title); ?>
-                </h2>
+                </<?php echo esc_attr($headingLevel); ?>>
             </div>
             <div id="<?php echo esc_attr($anotherUniqueIDForContentSection); ?>" class="rrze-elements-blocks__carousel-container">
                 <div class="rrze-elements-blocks__carousel-content">
