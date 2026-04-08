@@ -6,7 +6,7 @@ import {
 } from "@wordpress/block-editor";
 import { PanelBody, RangeControl } from "@wordpress/components";
 import { __, sprintf } from "@wordpress/i18n";
-import { useRef } from "@wordpress/element";
+import { useMemo, useRef } from "@wordpress/element";
 
 interface EditProps {
   attributes: {
@@ -16,14 +16,16 @@ interface EditProps {
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
 
-export default function Edit({ attributes, setAttributes }: EditProps) {
+export default function Edit({ attributes, setAttributes, clientId }: EditProps & { clientId: string }) {
   const props = useBlockProps();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const headingId = useMemo(() => `${clientId}-heading`, [clientId]);
+  const listId = useMemo(() => `${clientId}-content`, [clientId]);
 
   const innerBlocksProps = useInnerBlocksProps(
     {
       className: "rrze-elements-blocks__carousel-content-list",
-      "aria-labelledby": "uniqueIDforTheSection-header",
+      "aria-labelledby": headingId,
       role: "list"
     },
     {
@@ -71,11 +73,11 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
       <section {...props} style={style}>
         <div className={"rrze-elements-blocks__carousel"}>
           <div className={"rrze-elements-blocks__carousel-section-header"}>
-            <RichText className={"rrze-elements-blocks__carousel-section-header-headline"} id={"uniqueIDforTheSection-header"} onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} tagName={"h2"} />
+            <RichText className={"rrze-elements-blocks__carousel-section-header-headline"} id={headingId} onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title} tagName={"h2"} />
           </div>
-          <div id={"anotherUniqueIDForThisContentSection"} className={"rrze-elements-blocks__carousel-container"}>
+          <div id={listId} className={"rrze-elements-blocks__carousel-container"}>
             <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
-              <ul aria-labelledby={"uniqueIDforTheSection-header"} role={"list"} className={"rrze-elements-blocks__carousel-content-list"} {...innerBlocksProps} >
+              <ul aria-labelledby={headingId} role={"list"} className={"rrze-elements-blocks__carousel-content-list"} {...innerBlocksProps} >
               </ul>
             </div>
             <div className={"rrze-elements-blocks__carousel-navigation"}>

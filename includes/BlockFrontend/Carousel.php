@@ -9,8 +9,8 @@ class Carousel
         $title = $attributes['title'] ?? 'Lerne die FAU kennen.';
         $cardHeight = $attributes['cardHeight'] ?? 520;
         $overlayHoverTarget = 0.5;
-        $uniqueIDForSectionHeader = uniqid('carousel-header-');
-        $anotherUniqueIDForContentSection = uniqid('carousel-content-');
+        $uniqueIDForSectionHeader = sprintf('carousel-header-%s', uniqid());
+        $anotherUniqueIDForContentSection = sprintf('carousel-content-%s', uniqid());
 
         ob_start();
         ?>
