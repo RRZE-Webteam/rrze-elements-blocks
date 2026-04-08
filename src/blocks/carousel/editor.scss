@@ -311,3 +311,29 @@ body.wp-theme-FAU-Einrichtungen ul.rrze-elements-blocks__carousel-navigation-con
 body.wp-theme-FAU-Einrichtungen a.rrze-elements-blocks__carousel_feature_card_link {
   background: transparent;
 }
+
+.rrze-elements-blocks__carousel-container-violation div.components-notice__content{
+  margin: 0 auto;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 105px auto;
+  justify-items: center;
+  align-items: center;
+}
+.rrze-elements-blocks__carousel-container-violation div.components-notice__content > div {
+  grid-column: 1/2;
+}
+.rrze-elements-blocks__carousel-container-violation div.components-notice__content svg{
+  width: 50px;
+  height: 50px;
+}
+
+p.rrze-elements-blocks__carousel-container-violation-text, div.is-style-dark p.rrze-elements-blocks__carousel-container-violation-text{
+  color: #000;
+  font-size: initial;
+  font-weight: initial;
+  max-width: 65ch;
+  grid-column: 2/3;
+  justify-self: start;
+  padding-left: 1rem;
+}
