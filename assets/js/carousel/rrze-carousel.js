@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if (document.body) {
+        document.body.classList.add('rrze-carousel-js-enabled');
+    }
     // GSAP Carousel functionality
     if (typeof gsap !== 'undefined' && typeof ScrollToPlugin !== 'undefined') {
         gsap.registerPlugin(ScrollToPlugin);
