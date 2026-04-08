@@ -112,6 +112,10 @@
       "type": "string",
       "default": ""
     },
+    "cardTextAlignment": {
+      "type": "string",
+      "default": "top left"
+    },
     "desktopContentWidth": {
       "type": "number",
       "default": 320

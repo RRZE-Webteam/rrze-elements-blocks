@@ -29,6 +29,7 @@ export interface InfoCardAttributes {
   url: string;
   scientificText: string;
   desktopContentWidth?: number;
+  cardTextAlignment?: string;
 }
 
 export interface InfoCardCustomStyles extends CSSProperties {

@@ -69,6 +69,7 @@ div.rrze-elements-blocks__carousel_feature_card-content
         z-index: 0;
     }
 
+
     @media (max-width: 1024px) {
         .rrze-elements-blocks__carousel_feature_card_subtitle,
         .rrze-elements-blocks__carousel_feature_card_text,
@@ -90,4 +91,19 @@ div.rrze-elements-blocks__carousel_feature_card-content
             object-position: var(--mobile-object-position);
         }
     }
+}
+
+.is-style-marketing {
+  .rrze-elements-blocks__carousel_feature_card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: var(--marketing-content-justify, flex-start);
+    align-items: var(--marketing-content-align, flex-start);
+    text-align: var(--marketing-content-text-align, left);
+  }
+
+  .rrze-elements-blocks__carousel_feature_card_subtitle,
+  .rrze-elements-blocks__carousel_feature_card_text {
+    width: 100%;
+  }
 }

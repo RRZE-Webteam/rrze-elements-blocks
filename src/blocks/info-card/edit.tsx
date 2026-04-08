@@ -12,8 +12,10 @@ import {
   ToolbarButton,
   DropdownMenu,
   Popover,
+  AlignmentMatrixControl,
 } from "@wordpress/components";
 import {useState, useRef, useEffect} from "@wordpress/element";
+import type { CSSProperties } from "react";
 import {page, desktop, tablet, mobile, link} from "@wordpress/icons";
 import {__} from "@wordpress/i18n";
 import {getImageBrightness} from "../../utility/color";
@@ -36,6 +38,7 @@ interface EditProps {
 }
 
 const DEFAULT_OVERLAY_GRADIENT = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
+const DEFAULT_CARD_ALIGNMENT = 'top left';
 
 export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
   const ref = useRef<HTMLLIElement>(null);
@@ -66,6 +69,42 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const isScientificStyle = parentBlockName === 'rrze-elements/carousel'
     ? !parentClassName.includes('is-style-marketing')
     : parentClassName.includes('is-style-scientific');
+  const isMarketingStyle = !isScientificStyle;
+  const getMarketingAlignmentVars = (value: string): CSSProperties => {
+    const safeValue = value || DEFAULT_CARD_ALIGNMENT;
+    const parts = safeValue.split(' ');
+    const vertical = parts[0] || 'center';
+    const horizontal = parts[1] || parts[0] || 'center';
+    const verticalMap: Record<string, string> = {
+      top: 'flex-start',
+      center: 'center',
+      bottom: 'flex-end',
+    };
+    const horizontalMap: Record<string, string> = {
+      left: 'flex-start',
+      center: 'center',
+      right: 'flex-end',
+    };
+    const textAlignMap: Record<string, string> = {
+      left: 'left',
+      center: 'center',
+      right: 'right',
+    };
+
+    return {
+      '--marketing-content-justify': verticalMap[vertical] || 'center',
+      '--marketing-content-align': horizontalMap[horizontal] || 'flex-start',
+      '--marketing-content-text-align': textAlignMap[horizontal] || 'left',
+    } as CSSProperties;
+  };
+  const cardTextAlignment = attributes.cardTextAlignment || DEFAULT_CARD_ALIGNMENT;
+  const marketingAlignmentStyles = isMarketingStyle ? getMarketingAlignmentVars(cardTextAlignment) : {};
+  const cardContentInlineStyles: CSSProperties = {
+    position: 'relative',
+    height: `${cardHeight}px`,
+    width: 'var(--desktop-card-width, 320px)',
+    ...(isMarketingStyle ? marketingAlignmentStyles : {}),
+  };
 
   const setCardHeight = (val: number) => {
     if (parentId) {
@@ -362,6 +401,9 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
         <LayoutPanel
           desktopContentWidth={desktopContentWidth}
           onChange={handleDesktopWidthChange}
+          showAlignmentControl={isMarketingStyle}
+          alignmentValue={cardTextAlignment}
+          onAlignmentChange={(value) => setAttributes({cardTextAlignment: value})}
         />
         <EffectsPanel
           backgroundOverlayEnabled={backgroundOverlayEnabled}
@@ -391,7 +433,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       {!isModalOpen && (
         <div className={"rrze-elements-blocks__carousel_feature-card-box"}>
           <div className={"rrze-elements-blocks__carousel_feature_card-content"}
-               style={{position: 'relative', height: `${cardHeight}px`}}>
+               style={cardContentInlineStyles}>
             {!isScientificStyle && (
               <>
                 <RichText className={"rrze-elements-blocks__carousel_feature_card_subtitle"} tagName={"h3"}

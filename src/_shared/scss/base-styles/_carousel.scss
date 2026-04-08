@@ -207,6 +207,21 @@ div.rrze-elements-blocks__carousel_feature_card_scientific-text{
   }
 }
 
+.is-style-marketing{
+  .rrze-elements-blocks__carousel_feature_card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: var(--marketing-content-justify, flex-start);
+    align-items: var(--marketing-content-align, flex-start);
+    text-align: var(--marketing-content-text-align, left);
+  }
+
+  .rrze-elements-blocks__carousel_feature_card_subtitle,
+  .rrze-elements-blocks__carousel_feature_card_text{
+    width: 100%;
+  }
+}
+
 div.rrze-elements-blocks__carousel_feature_card-content
 {
   position: relative;

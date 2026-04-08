@@ -20,6 +20,7 @@ class InfoCard
             'backgroundOverlayEnabled' => false,
             'backgroundOverlayGradient' => $defaultOverlayGradient,
             'desktopContentWidth' => 320,
+            'cardTextAlignment' => 'center left',
             'alt' => '',
             'url' => '',
             'desktopTextColor' => '#fff',
@@ -55,6 +56,7 @@ class InfoCard
         $backgroundOverlayEnabled = isset($attributes['backgroundOverlayEnabled']) ? (bool) $attributes['backgroundOverlayEnabled'] : false;
         $backgroundOverlayGradient = isset($attributes['backgroundOverlayGradient']) ? sanitize_text_field($attributes['backgroundOverlayGradient']) : '';
         $desktopContentWidth = isset($attributes['desktopContentWidth']) ? max(320, min((int) $attributes['desktopContentWidth'], 520)) : 320;
+        $cardTextAlignment = isset($attributes['cardTextAlignment']) ? sanitize_text_field($attributes['cardTextAlignment']) : 'center left';
         $scientificText = $attributes['scientificText'];
         $hasScientificText = '' !== trim(wp_strip_all_tags($scientificText));
         $modalId = uniqid('rrze-elements-modal-');
@@ -79,6 +81,11 @@ class InfoCard
         $style .= "--image-object-fit: {$imageObjectFit};";
         $style .= "--rrze-card-overlay-gradient: {$backgroundOverlayGradient};";
         $style .= "--desktop-card-width: {$desktopContentWidth}px;";
+        $alignmentVars = $this->getMarketingAlignmentStyles($cardTextAlignment);
+        $contentStyle = '';
+        if ($alignmentVars) {
+            $contentStyle = sprintf('--marketing-content-justify: %s; --marketing-content-align: %s; --marketing-content-text-align: %s;', $alignmentVars['justify'], $alignmentVars['align'], $alignmentVars['textAlign']);
+        }
 
         $backgroundOverlayAttributes = [];
         if ($backgroundOverlayEnabled) {
@@ -114,7 +121,7 @@ class InfoCard
         ?>
         <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>" data-card-has-action="<?php echo esc_attr($cardHasAction); ?>">
             <div class="rrze-elements-blocks__carousel_feature-card-bg">
-                <div class="rrze-elements-blocks__carousel_feature_card-content">
+                <div class="rrze-elements-blocks__carousel_feature_card-content"<?php echo $contentStyle ? ' style="' . esc_attr($contentStyle) . '"' : ''; ?>>
                     <h3 class="rrze-elements-blocks__carousel_feature_card_subtitle">
                         <?php echo esc_html($subtitle); ?>
                     </h3>
@@ -177,6 +184,41 @@ class InfoCard
         </li>
         <?php
         return ob_get_clean();
+    }
+
+    private function getMarketingAlignmentStyles($value)
+    {
+        $default = 'center left';
+        $value = trim(strtolower($value ?? $default));
+        if ($value === '') {
+            $value = $default;
+        }
+
+        $parts = preg_split('/\s+/', $value);
+        $vertical = $parts[0] ?? 'center';
+        $horizontal = $parts[1] ?? ($parts[0] ?? 'left');
+
+        $verticalMap = [
+            'top' => 'flex-start',
+            'center' => 'center',
+            'bottom' => 'flex-end',
+        ];
+        $horizontalMap = [
+            'left' => 'flex-start',
+            'center' => 'center',
+            'right' => 'flex-end',
+        ];
+        $textAlignMap = [
+            'left' => 'left',
+            'center' => 'center',
+            'right' => 'right',
+        ];
+
+        return [
+            'justify' => $verticalMap[$vertical] ?? 'center',
+            'align' => $horizontalMap[$horizontal] ?? 'flex-start',
+            'textAlign' => $textAlignMap[$horizontal] ?? 'left',
+        ];
     }
 
     private function focusPointToObjectPosition($focusPoint)
