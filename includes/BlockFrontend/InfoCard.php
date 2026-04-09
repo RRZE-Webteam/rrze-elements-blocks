@@ -4,7 +4,14 @@ namespace RRZE\ElementsBlocks\BlockFrontend;
 
 class InfoCard
 {
-    public function render($attributes, $content)
+    /**
+     * Renders the info card markup.
+     *
+     * @param array<string, mixed> $attributes Block attributes coming from Gutenberg.
+     * @param string $content Inner block content.
+     * @return string Rendered HTML for the info card block.
+     */
+    public function render(array $attributes = [], string $content = ''): string
     {
         $defaultOverlayGradient = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
 
@@ -82,17 +89,14 @@ class InfoCard
         $style .= "--rrze-card-overlay-gradient: {$backgroundOverlayGradient};";
         $style .= "--desktop-card-width: {$desktopContentWidth}px;";
         $alignmentVars = $this->getMarketingAlignmentStyles($cardTextAlignment);
-        $contentStyle = '';
-        if ($alignmentVars) {
-            $contentStyle = sprintf('--marketing-content-justify: %s; --marketing-content-align: %s; --marketing-content-text-align: %s;', $alignmentVars['justify'], $alignmentVars['align'], $alignmentVars['textAlign']);
-        }
+        $contentStyle = sprintf('--marketing-content-justify: %s; --marketing-content-align: %s; --marketing-content-text-align: %s;', $alignmentVars['justify'], $alignmentVars['align'], $alignmentVars['textAlign']);
 
         $backgroundOverlayAttributes = [];
         if ($backgroundOverlayEnabled) {
             $backgroundOverlayAttributes[] = 'data-background-overlay="true"';
         }
         $backgroundOverlayAttributes[] = sprintf('style="--rrze-card-overlay-gradient: %s;"', esc_attr($backgroundOverlayGradient));
-        $backgroundOverlayAttributeString = $backgroundOverlayAttributes ? ' ' . implode(' ', $backgroundOverlayAttributes) : '';
+        $backgroundOverlayAttributeString = ' ' . implode(' ', $backgroundOverlayAttributes);
 
         $desktopFinalColor = $desktopCustomTextColor ?: $desktopTextColor;
         $tabletFinalColor = ($tabletCustomTextColor ?: $tabletTextColor) ?: $desktopFinalColor;
@@ -121,7 +125,7 @@ class InfoCard
         ?>
         <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>" data-card-has-action="<?php echo esc_attr($cardHasAction); ?>">
             <div class="rrze-elements-blocks__carousel_feature-card-bg">
-                <div class="rrze-elements-blocks__carousel_feature_card-content"<?php echo $contentStyle ? ' style="' . esc_attr($contentStyle) . '"' : ''; ?>>
+                <div class="rrze-elements-blocks__carousel_feature_card-content" style="<?php echo esc_attr($contentStyle); ?>">
                     <h3 class="rrze-elements-blocks__carousel_feature_card_subtitle">
                         <?php echo esc_html($subtitle); ?>
                     </h3>
@@ -183,10 +187,15 @@ class InfoCard
             <?php endif; ?>
         </li>
         <?php
-        return ob_get_clean();
+        return (string) ob_get_clean();
     }
 
-    private function getMarketingAlignmentStyles($value)
+    /**
+     * Maps textual alignment options to CSS values.
+     *
+     * @return array{justify: string, align: string, textAlign: string}
+     */
+    private function getMarketingAlignmentStyles(?string $value): array
     {
         $default = 'center left';
         $value = trim(strtolower($value ?? $default));
@@ -221,7 +230,12 @@ class InfoCard
         ];
     }
 
-    private function focusPointToObjectPosition($focusPoint)
+    /**
+     * Converts a focus point into an object-position CSS value.
+     *
+     * @param array{x?: float|int|string, y?: float|int|string}|null $focusPoint
+     */
+    private function focusPointToObjectPosition(?array $focusPoint): string
     {
         $x = 0.5;
         $y = 0.5;
@@ -241,7 +255,10 @@ class InfoCard
         return sprintf('%s %s', $x, $y);
     }
 
-    private function shouldUseLightShadow(array $colors)
+    /**
+     * @param string[] $colors
+     */
+    private function shouldUseLightShadow(array $colors): bool
     {
         foreach ($colors as $color) {
             if ($this->isColorWhite($color)) {
@@ -251,7 +268,7 @@ class InfoCard
         return false;
     }
 
-    private function isColorWhite($color)
+    private function isColorWhite(string $color): bool
     {
         if (empty($color)) {
             return false;
@@ -263,9 +280,9 @@ class InfoCard
         return in_array($normalized, $whiteValues, true);
     }
 
-    private function formatPercentage($value)
+    private function formatPercentage(float $value): string
     {
-        $value = max(0, min(1, (float) $value));
+        $value = max(0, min(1, $value));
         $percentage = round($value * 100, 2);
         $percentage = rtrim(rtrim(sprintf('%.2f', $percentage), '0'), '.');
 

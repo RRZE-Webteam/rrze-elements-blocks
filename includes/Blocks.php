@@ -271,7 +271,7 @@ class Blocks
     public function channel_fau_teaser_grid(array $attributes): string
     {
         $num = isset($attributes['num']) ? absint($attributes['num']) : 6;
-        $hstart = isset($attributes['hstart']) ? max(1, min(6, absint($hstart))) : 2;
+        $hstart = isset($attributes['hstart']) ? max(1, min(6, absint($attributes['hstart']))) : 2;
         $tag = isset($attributes['tag']) ? sanitize_text_field($attributes['tag']) : '';
         $cat = isset($attributes['cat']) ? sanitize_title($attributes['cat']) : '';
 
