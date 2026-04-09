@@ -6,7 +6,7 @@
   "title": "Info card",
   "category": "rrze_elements",
   "ancestor": ["rrze-elements/carousel"],
-  "description": "Creates an info card for use in Carousels or on its own.",
+  "description": "Creates an info card for use in Carousels.",
   "supports": {
     "html": false
   },

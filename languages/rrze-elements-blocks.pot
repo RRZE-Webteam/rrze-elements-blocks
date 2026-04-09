@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: RRZE Elements Blocks 1.1.6\n"
+"Project-Id-Version: RRZE Elements Blocks 1.1.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-13T13:34:04+00:00\n"
+"POT-Creation-Date: 2026-04-09T07:24:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rrze-elements-blocks\n"
@@ -47,28 +47,38 @@ msgstr ""
 msgid "Facts About Our Research"
 msgstr ""
 
-#: includes/Blocks.php:68
-msgid "attention"
+#: includes/BlockFrontend/InfoCard.php:147
+#: build/blocks/info-card/index.js:1
+msgid "Open card link"
 msgstr ""
 
-#: includes/Blocks.php:69
+#: includes/BlockFrontend/InfoCard.php:155
+#: build/blocks/info-card/index.js:1
+msgid "Show more information"
+msgstr ""
+
+#: includes/BlockFrontend/InfoCard.php:175
+msgid "Schließen"
+msgstr ""
+
+#: includes/Blocks.php:71
 msgid "Attention"
 msgstr ""
 
-#: includes/Blocks.php:105
+#: includes/Blocks.php:107
 msgid "Light"
 msgstr ""
 
-#: includes/Blocks.php:109
+#: includes/Blocks.php:111
 msgid "Dark"
 msgstr ""
 
-#: includes/Blocks.php:115
+#: includes/Blocks.php:117
 #: build/blocks/counter/index.js:1
 msgid "Normal"
 msgstr ""
 
-#: includes/Blocks.php:120
+#: includes/Blocks.php:122
 #: build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Small"
@@ -495,11 +505,6 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
-msgid "Resolve automatically"
-msgstr ""
-
-#: build/blocks/accordion/index.js:1
-#: build/blocks/collapse/index.js:1
 msgid "Save Changes"
 msgstr ""
 
@@ -787,9 +792,40 @@ msgid "Add a Label"
 msgstr ""
 
 #: build/blocks/alert/index.js:1
+#: build/blocks/info-card/index.js:1
 #: build/blocks/notice/index.js:1
 #: build/blocks/timeline-item/index.js:1
 msgid "Add a description…"
+msgstr ""
+
+#: build/blocks/carousel/index.js:1
+#: build/blocks/info-card/index.js:1
+msgid "Carousel Settings"
+msgstr ""
+
+#: build/blocks/carousel/index.js:1
+#: build/blocks/info-card/index.js:1
+msgid "Card Height (px)"
+msgstr ""
+
+#: build/blocks/carousel/index.js:1
+msgid "The Carousel block has to live at the top level of the page layout (not inside other blocks). Please move it out of its current container to make it visible inside the Frontend."
+msgstr ""
+
+#: build/blocks/carousel/index.js:1
+msgid "Add your Carousel Headline"
+msgstr ""
+
+#. translators: %s: carousel title
+#: build/blocks/carousel/index.js:2
+#, js-format
+msgid "Back in %s Carousel"
+msgstr ""
+
+#. translators: %s: carousel title
+#: build/blocks/carousel/index.js:3
+#, js-format
+msgid "Proceed in %s Carousel"
 msgstr ""
 
 #: build/blocks/collapse/index.js:1
@@ -918,6 +954,7 @@ msgstr ""
 #: build/blocks/cta/index.js:1
 #: build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1
+#: build/blocks/info-card/index.js:1
 msgid "Link"
 msgstr ""
 
@@ -972,11 +1009,12 @@ msgid "CTA Button Text"
 msgstr ""
 
 #: build/blocks/fact/index.js:1
-msgid "Fact description"
+#: build/blocks/info-card/index.js:1
+msgid "Characters"
 msgstr ""
 
 #: build/blocks/fact/index.js:1
-msgid "Characters"
+msgid "Fact description"
 msgstr ""
 
 #: build/blocks/facts-grid/index.js:1
@@ -1009,6 +1047,211 @@ msgstr ""
 
 #: build/blocks/iconbox/index.js:1
 msgid "Definition"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Desktop"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Tablet"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Mobile"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Image Settings"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Choose Viewport"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Add Desktop Image"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Add Tablet Image"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Add Mobile Image"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Alt Text"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Image Fit"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Fill (cover)"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Fit (contain)"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Text Color"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Text Color Viewport"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Auto text color (calculated)"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Background Color"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+#: build/blocks/news/index.js:1
+msgid "Layout"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Desktop card width (px)"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Desktop cards can only be wider than the default. Tablet and mobile widths stay fixed."
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Card text alignment"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Effects"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Show background overlay"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Adds a gradient overlay on top of the background media to improve text contrast."
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Overlay gradient"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Enable text shadow"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Black"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "White"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "FAU Blue"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "FAU Deep Blue"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "RW Light"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "RW Dark"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Med Light"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Med Dark"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Nat Light"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Nat Dark"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Phil Light"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Phil Dark"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "TF Light"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "TF Dark"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Soft dark"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Fade bottom"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Warm glow"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Cool tint"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Add / Edit Content"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Add Link"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Select device type"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Tablet Image"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Mobile Image"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Your Topic"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Your Headline"
+msgstr ""
+
+#: build/blocks/info-card/index.js:1
+msgid "Add scientific text…"
 msgstr ""
 
 #: build/blocks/news/index.js:1
@@ -1065,10 +1308,6 @@ msgstr ""
 
 #: build/blocks/news/index.js:1
 msgid "Only show sticky posts"
-msgstr ""
-
-#: build/blocks/news/index.js:1
-msgid "Layout"
 msgstr ""
 
 #: build/blocks/news/index.js:1
@@ -1355,6 +1594,26 @@ msgctxt "block description"
 msgid "Creates a blueprint block."
 msgstr ""
 
+#: build/blocks/carousel/block.json
+msgctxt "block title"
+msgid "Carousel"
+msgstr ""
+
+#: build/blocks/carousel/block.json
+msgctxt "block description"
+msgid "Creates a Carousel of Feature Reveal Cards with Popover Functionality."
+msgstr ""
+
+#: build/blocks/carousel/block.json
+msgctxt "block style label"
+msgid "Scientific"
+msgstr ""
+
+#: build/blocks/carousel/block.json
+msgctxt "block style label"
+msgid "Marketing"
+msgstr ""
+
 #: build/blocks/collapse/block.json
 msgctxt "block title"
 msgid "Accordion-item"
@@ -1469,6 +1728,16 @@ msgstr ""
 #: build/blocks/iconbox/block.json
 msgctxt "block description"
 msgid "Creates a Iconbox block."
+msgstr ""
+
+#: build/blocks/info-card/block.json
+msgctxt "block title"
+msgid "Info card"
+msgstr ""
+
+#: build/blocks/info-card/block.json
+msgctxt "block description"
+msgid "Creates an info card for use in Carousels or on its own."
 msgstr ""
 
 #: build/blocks/insertion/block.json

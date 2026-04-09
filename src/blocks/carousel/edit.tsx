@@ -1,4 +1,3 @@
-// Imports from WordPress libraries
 import {
   InspectorControls, RichText,
   useBlockProps,

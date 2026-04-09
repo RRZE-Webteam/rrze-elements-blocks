@@ -5,7 +5,7 @@
   "version": "1.1.7",
   "title": "Carousel",
   "category": "rrze_elements",
-  "description": "Creates a Carousel of Feature Reveal Cards with Popover Functionality.",
+  "description": "Creates a Carousel of Info-Cards with Popover, Link or Image Functionality.",
   "supports": {
     "html": false
   },
