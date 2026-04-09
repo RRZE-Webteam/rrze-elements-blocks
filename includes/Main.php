@@ -195,7 +195,7 @@ class Main
         );
         wp_register_script(
             'rrze-carousel',
-            plugins_url('assets/js/carousel/rrze-carousel.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/carousel/rrze-carousel-min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger', 'rrze-gsap-scrolltoplugin'],
             RRZE_ELEMENTSB_VERSION,
             true
