@@ -18,8 +18,13 @@
 		"build-all": "node check-compatibility.js && sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
 		"update-version": "node update-version.js && npm run build",
 		"test:e2e": "NODE_OPTIONS=--use-system-ca playwright test",
-    "minify:js": "npx google-closure-compiler --js=assets/js/carousel/rrze-carousel.js --js_output_file=assets/js/carousel/rrze-carousel-min.js --compilation_level=SIMPLE --language_out=ECMASCRIPT_2015\n"
-	},
+    "minify:carousel:js": "npx google-closure-compiler --js=assets/js/carousel/rrze-carousel.js --js_output_file=assets/js/carousel/rrze-carousel.min.js --compilation_level=SIMPLE --language_out=ECMASCRIPT_2015\n",
+    "minify:accordion:js": "npx google-closure-compiler --js=assets/js/accordion/rrze-accordion.js --js_output_file=assets/js/accordion/rrze-accordion.min.js --compilation_level=SIMPLE --language_out=ECMASCRIPT_2015\n",
+    "minify:tabs:js": "npx google-closure-compiler --js=assets/js/tabs/rrze-tabs.js --js_output_file=assets/js/tabs/rrze-tabs.min.js --compilation_level=SIMPLE --language_out=ECMASCRIPT_2015\n",
+    "minify:counter:js": "npx google-closure-compiler --js=assets/js/counter/rrze-counter.js --js_output_file=assets/js/counter/rrze-counter.min.js --compilation_level=SIMPLE --language_out=ECMASCRIPT_2015\n",
+    "minify:timeline:js": "npx google-closure-compiler --js=assets/js/timeline/rrze-timeline.js --js_output_file=assets/js/timeline/rrze-timeline.min.js --compilation_level=SIMPLE --language_out=ECMASCRIPT_2015\n",
+    "minify:js": "npm run minify:accordion:js && npm run minify:carousel:js && npm run minify:counter:js && npm run minify:tabs:js && npm run minify:timeline:js"
+  },
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/RRZE-Webteam/rrze-elements",

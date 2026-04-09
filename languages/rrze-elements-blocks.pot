@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-09T07:24:09+00:00\n"
+"POT-Creation-Date: 2026-04-09T12:33:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rrze-elements-blocks\n"
@@ -86,6 +86,7 @@ msgstr ""
 
 #: includes/LegacyShortcodes/Accordion.php:295
 #: includes/LegacyShortcodes/Accordion.php:304
+#: assets/js/accordion/rrze-accordion.js:237
 #: build/blocks/collapsibles/index.js:1
 msgid "Expand All"
 msgstr ""
@@ -203,6 +204,11 @@ msgstr ""
 #: rrze-elements-blocks.php:83
 #, php-format
 msgid "The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s."
+msgstr ""
+
+#: assets/js/accordion/rrze-accordion.js:37
+#: assets/js/accordion/rrze-accordion.js:244
+msgid "Collapse All"
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -1601,7 +1607,7 @@ msgstr ""
 
 #: build/blocks/carousel/block.json
 msgctxt "block description"
-msgid "Creates a Carousel of Feature Reveal Cards with Popover Functionality."
+msgid "Creates a Carousel of Info-Cards with Popover, Link or Image Functionality."
 msgstr ""
 
 #: build/blocks/carousel/block.json
@@ -1737,7 +1743,7 @@ msgstr ""
 
 #: build/blocks/info-card/block.json
 msgctxt "block description"
-msgid "Creates an info card for use in Carousels or on its own."
+msgid "Creates an info card for use in Carousels."
 msgstr ""
 
 #: build/blocks/insertion/block.json

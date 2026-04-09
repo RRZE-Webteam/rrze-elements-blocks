@@ -25,7 +25,7 @@ If you want to extend blocks in the src folder, follow these simple steps:
 ### Translation
 1. Update the pot file `wp i18n make-pot . languages/rrze-elements-blocks.pot --slug=rrze-elements-blocks --domain=rrze-elements-blocks --exclude=node_modules,src` via WPcli. If you run into memory exhaustion, up your PHP memory limit or use the following command `php -d memory_limit=512M $(which wp) i18n make-pot . languages/rrze-elements-blocks.pot --slug=rrze-elements-blocks --domain=rrze-elements-blocks --exclude=node_modules,src`
 2. Transalte the missing strings for example via LocoTranslate or poEdit
-3. Bundle the translation strings and map them to the json files: `wp i18n make-json languages/ --no-purge`
+3. Bundle the translation strings and map them to the json files: `wp i18n make-json languages/ --no-purge --use-map=i18n-map.json`
 4. Push your Changes to the GitHub Repository as feature branch and Start a PullRequest into the dev branch
 5. Sometimes needed if you run into Memory Limits on Device: ` php -d memory_limit=512M -d max_execution_time=300 -d error_reporting=22527 $(which wp) \
     i18n make-pot . languages/rrze-elements-blocks.pot \

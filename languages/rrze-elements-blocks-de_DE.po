@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-"
 "blocks\n"
-"POT-Creation-Date: 2026-04-09T07:24:09+00:00\n"
-"PO-Revision-Date: 2026-04-09 09:32+0200\n"
+"POT-Creation-Date: 2026-04-09T12:33:01+00:00\n"
+"PO-Revision-Date: 2026-04-09 14:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -86,6 +86,7 @@ msgstr "Klein"
 
 #: includes/LegacyShortcodes/Accordion.php:295
 #: includes/LegacyShortcodes/Accordion.php:304
+#: assets/js/accordion/rrze-accordion.js:237
 #: build/blocks/collapsibles/index.js:1
 msgid "Expand All"
 msgstr "Alle öffnen"
@@ -212,6 +213,11 @@ msgid ""
 msgstr ""
 "Auf dem Server läuft WordPress Version  %1$s. Das Plugin benötigt mindestens "
 "WordPress Version %2$s."
+
+#: assets/js/accordion/rrze-accordion.js:37
+#: assets/js/accordion/rrze-accordion.js:244
+msgid "Collapse All"
+msgstr "Alle schließen"
 
 #: build/blocks/accordion/index.js:1 build/blocks/alert/index.js:1
 #: build/blocks/collapse/index.js:1 build/blocks/columns/index.js:1
@@ -1486,10 +1492,11 @@ msgstr "Karussell"
 
 #: build/blocks/carousel/block.json
 msgctxt "block description"
-msgid "Creates a Carousel of Feature Reveal Cards with Popover Functionality."
+msgid ""
+"Creates a Carousel of Info-Cards with Popover, Link or Image Functionality."
 msgstr ""
-"Erstellt ein Karussell aus Infokarten zur Vorstellung von Funktionen oder "
-"Wissenschaftsinhalten mit Popover-Funktion, Verlinkung oder Bild."
+"Erstellt ein Karussell aus Infokarten mit Popover-, Link- oder "
+"Bildfunktionen."
 
 #: build/blocks/carousel/block.json
 msgctxt "block style label"
@@ -1629,10 +1636,8 @@ msgstr "Infokarte"
 
 #: build/blocks/info-card/block.json
 msgctxt "block description"
-msgid "Creates an info card for use in Carousels or on its own."
-msgstr ""
-"Erstellt eine Infokarte, die in Karussells oder einzeln verwendet werden "
-"kann."
+msgid "Creates an info card for use in Carousels."
+msgstr "Erstellt eine Infokarte zur Verwendung in Karussells."
 
 #: build/blocks/insertion/block.json
 msgctxt "block title"
