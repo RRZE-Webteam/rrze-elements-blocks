@@ -30,6 +30,16 @@ div.rrze-elements-blocks__carousel_feature_card-content
   }
 }
 
+body.is-device-tablet,
+body.is-device-mobile,
+.is-tablet-preview,
+.is-mobile-preview {
+  div.rrze-elements-blocks__carousel_feature_card-content,
+  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+    width: 312px !important;
+  }
+}
+
 .rrze-elements-blocks__carousel_feature_card_bg {
   position: absolute;
   inset: 0;
