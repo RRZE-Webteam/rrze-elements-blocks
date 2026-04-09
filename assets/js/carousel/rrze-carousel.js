@@ -53,13 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return closestIndex;
             };
 
+            let isAnimating = false;
+            let scrollTween = null;
+
             const updateButtons = () => {
                 const currentScroll = Math.round(contentScroller.scrollLeft);
                 const maxScroll = Math.round(contentScroller.scrollWidth - contentScroller.clientWidth);
                 const atStart = currentScroll <= 1;
                 const atEnd = currentScroll >= maxScroll - 1;
-                prevButton.disabled = atStart;
-                nextButton.disabled = atEnd;
+                prevButton.disabled = isAnimating || atStart;
+                nextButton.disabled = isAnimating || atEnd;
             };
 
             const scrollCarousel = (direction) => {
@@ -70,21 +73,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rawTarget = itemPositions[targetIndex];
                 const targetScroll = Math.max(0, Math.min(rawTarget, maxScroll));
 
-                contentScroller.classList.add('is-programmatic-scroll');
-                let snapTimeout;
+                if (scrollTween) {
+                    scrollTween.kill();
+                }
 
-                gsap.to(contentScroller, {
+                isAnimating = true;
+                contentScroller.classList.add('is-programmatic-scroll');
+                updateButtons();
+
+                scrollTween = gsap.to(contentScroller, {
                     duration: 0.5,
                     scrollTo: { x: targetScroll, autoKill: false },
                     ease: 'power2.inOut',
                     onUpdate: updateButtons,
                     onComplete: () => {
                         contentScroller.scrollLeft = targetScroll;
-                        clearTimeout(snapTimeout);
-                        snapTimeout = setTimeout(() => {
-                            contentScroller.classList.remove('is-programmatic-scroll');
-                            updateButtons();
-                        }, 150);
+                        contentScroller.classList.remove('is-programmatic-scroll');
+                        isAnimating = false;
+                        scrollTween = null;
+                        updateButtons();
                     }
                 });
             };
