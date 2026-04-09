@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if (document.body) {
+        document.body.classList.add('rrze-carousel-js-enabled');
+    }
     // GSAP Carousel functionality
     if (typeof gsap !== 'undefined' && typeof ScrollToPlugin !== 'undefined') {
         gsap.registerPlugin(ScrollToPlugin);
@@ -17,44 +20,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const gap = 20;
-            let itemWidth = 0;
-            let scrollStep = 0;
+            let firstItemOffset = 0;
+            let itemPositions = [];
+            let maxScroll = 0;
+            let targetIndex = 0;
 
             const updateMetrics = () => {
-                itemWidth = items[0].offsetWidth;
-                scrollStep = itemWidth + gap;
+                maxScroll = Math.max(0, contentScroller.scrollWidth - contentScroller.clientWidth);
+                firstItemOffset = items[0].offsetLeft;
+                itemPositions = items.map((item, index) => {
+                    const raw = Math.round(item.offsetLeft - firstItemOffset);
+                    if (index === items.length - 1) {
+                        return maxScroll;
+                    }
+                    return Math.max(0, Math.min(raw, maxScroll));
+                });
             };
+
+            const clampIndex = (index) => Math.max(0, Math.min(index, items.length - 1));
+
+            const getNearestIndex = () => {
+                const currentScroll = contentScroller.scrollLeft;
+                let closestIndex = 0;
+                let minDiff = Infinity;
+                itemPositions.forEach((position, index) => {
+                    const diff = Math.abs(position - currentScroll);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closestIndex = index;
+                    }
+                });
+                return closestIndex;
+            };
+
+            let isAnimating = false;
+            let scrollTween = null;
 
             const updateButtons = () => {
                 const currentScroll = Math.round(contentScroller.scrollLeft);
                 const maxScroll = Math.round(contentScroller.scrollWidth - contentScroller.clientWidth);
-
-                prevButton.disabled = currentScroll <= 0;
-                nextButton.disabled = currentScroll >= maxScroll - 1;
+                const atStart = currentScroll <= 1;
+                const atEnd = currentScroll >= maxScroll - 1;
+                prevButton.disabled = isAnimating || atStart;
+                nextButton.disabled = isAnimating || atEnd;
             };
 
             const scrollCarousel = (direction) => {
                 updateMetrics();
 
-                const currentScroll = contentScroller.scrollLeft;
-                const maxScroll = contentScroller.scrollWidth - contentScroller.clientWidth;
+                const currentIndex = getNearestIndex();
+                targetIndex = clampIndex(direction === 'next' ? currentIndex + 1 : currentIndex - 1);
+                const rawTarget = itemPositions[targetIndex];
+                const targetScroll = Math.max(0, Math.min(rawTarget, maxScroll));
 
-                let targetScroll;
-
-                if (direction === 'next') {
-                    targetScroll = currentScroll + scrollStep;
-                } else {
-                    targetScroll = currentScroll - scrollStep;
+                if (scrollTween) {
+                    scrollTween.kill();
                 }
 
-                targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+                isAnimating = true;
+                contentScroller.classList.add('is-programmatic-scroll');
+                updateButtons();
 
-                gsap.to(contentScroller, {
+                scrollTween = gsap.to(contentScroller, {
                     duration: 0.5,
-                    scrollTo: { x: targetScroll, autoKill: true },
+                    scrollTo: { x: targetScroll, autoKill: false },
                     ease: 'power2.inOut',
-                    onUpdate: updateButtons
+                    onUpdate: updateButtons,
+                    onComplete: () => {
+                        contentScroller.scrollLeft = targetScroll;
+                        contentScroller.classList.remove('is-programmatic-scroll');
+                        isAnimating = false;
+                        scrollTween = null;
+                        updateButtons();
+                    }
                 });
             };
 
@@ -85,10 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(card => {
         const cardContent = card.querySelector('.rrze-elements-blocks__carousel_feature_card-content');
         const cardBackground = card.querySelector('.rrze-elements-blocks__carousel_feature_card_bg');
+        const overlayTargetHost = card.closest('[data-hover-overlay-target]');
+        const hoverOverlayDefault = (() => {
+            if (!overlayTargetHost) {
+                return 0.5;
+            }
+            const value = parseFloat(overlayTargetHost.getAttribute('data-hover-overlay-target') || '');
+            return Number.isFinite(value) ? value : 0.5;
+        })();
+
+        const hasAction = card.dataset.cardHasAction === 'true';
 
         let hoverTimeline = null;
 
-        if (cardContent) {
+        if (cardContent && hasAction) {
             hoverTimeline = gsap.timeline({
                 paused: true,
                 defaults: {
@@ -101,8 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 0);
 
             if (cardBackground) {
+                const computedStyles = window.getComputedStyle(cardBackground);
+                const baseOverlayOpacity = parseFloat(computedStyles.getPropertyValue('--rrze-card-overlay-opacity')) || 0;
+                const overlayTarget = baseOverlayOpacity > 0 ? Math.min(baseOverlayOpacity + 0.35, 1) : hoverOverlayDefault;
                 hoverTimeline.to(cardBackground, {
-                    '--rrze-card-overlay-opacity': 0.5
+                    '--rrze-card-overlay-opacity': overlayTarget
                 }, 0);
             }
         }

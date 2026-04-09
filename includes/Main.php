@@ -139,14 +139,14 @@ class Main
 
         wp_register_script(
             'rrze-accordions',
-            plugins_url('assets/js/accordion/rrze-accordion-min.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/accordion/rrze-accordion.min.js', plugin_basename($this->pluginFile)),
             ['jquery', 'wp-i18n'],
             RRZE_ELEMENTSB_VERSION,
             true
         );
         wp_register_script(
             'rrze-tabs',
-            plugins_url('assets/js/tabs/rrze-tabs-min.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/tabs/rrze-tabs.min.js', plugin_basename($this->pluginFile)),
             ['jquery'],
             RRZE_ELEMENTSB_VERSION,
             true
@@ -174,14 +174,14 @@ class Main
         );
         wp_register_script(
             'rrze-counter',
-            plugins_url('assets/js/counter/rrze-counter-min.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/counter/rrze-counter.min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
             RRZE_ELEMENTSB_VERSION,
             true
         );
         wp_register_script(
             'rrze-timeline',
-            plugins_url('assets/js/timeline/rrze-timeline-min.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/timeline/rrze-timeline.min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger'],
             RRZE_ELEMENTSB_VERSION,
             true
@@ -195,10 +195,15 @@ class Main
         );
         wp_register_script(
             'rrze-carousel',
-            plugins_url('assets/js/carousel/rrze-carousel.js', plugin_basename($this->pluginFile)),
+            plugins_url('assets/js/carousel/rrze-carousel.min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltrigger', 'rrze-gsap-scrolltoplugin'],
             RRZE_ELEMENTSB_VERSION,
             true
+        );
+        wp_set_script_translations(
+            'rrze-accordions',
+            'rrze-elements-blocks',
+            plugin_dir_path($this->pluginFile) . 'languages'
         );
     }
 }

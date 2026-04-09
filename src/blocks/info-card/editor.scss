@@ -18,10 +18,50 @@ div.rrze-elements-blocks__carousel_feature_card-content
 {
   position: relative;
   padding: 32px;
-  width: 372px;
+  width: var(--desktop-card-width, 320px);
   z-index: 1;
   background-color: var(--background-color);
   will-change: transform;
+}
+
+@media (max-width: 1024px) {
+  div.rrze-elements-blocks__carousel_feature_card-content {
+    width: 312px;
+  }
+}
+
+body.is-device-tablet,
+body.is-device-mobile,
+.is-tablet-preview,
+.is-mobile-preview {
+  div.rrze-elements-blocks__carousel_feature_card-content,
+  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+    width: 312px !important;
+  }
+}
+
+.rrze-elements-blocks__carousel_feature_card_bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+  --rrze-card-overlay-opacity: 0;
+
+  .rrze-elements-blocks__carousel_feature_card_bg_overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--rrze-card-overlay-gradient, linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%));
+    opacity: var(--rrze-card-overlay-opacity, 0);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &[data-background-overlay="true"] {
+    --rrze-card-overlay-opacity: 1;
+  }
 }
 
 .wp-block-rrze-elements-info-card {
@@ -29,11 +69,16 @@ div.rrze-elements-blocks__carousel_feature_card-content
     .rrze-elements-blocks__carousel_feature_card_text,
     .rrze-elements-blocks__carousel_feature_card-content span.progress-limit-desc{
         color: var(--desktop-text-color);
+        text-shadow: var(--card-text-shadow, 1px 1px 2px #222);
     }
 
     .rrze-elements-blocks__carousel_feature_card_bg_figure_picture img {
         object-position: var(--desktop-object-position);
+        object-fit: var(--image-object-fit, cover);
+        position: relative;
+        z-index: 0;
     }
+
 
     @media (max-width: 1024px) {
         .rrze-elements-blocks__carousel_feature_card_subtitle,
@@ -56,4 +101,19 @@ div.rrze-elements-blocks__carousel_feature_card-content
             object-position: var(--mobile-object-position);
         }
     }
+}
+
+.is-style-marketing {
+  .rrze-elements-blocks__carousel_feature_card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: var(--marketing-content-justify, flex-start);
+    align-items: var(--marketing-content-align, flex-start);
+    text-align: var(--marketing-content-text-align, left);
+  }
+
+  .rrze-elements-blocks__carousel_feature_card_subtitle,
+  .rrze-elements-blocks__carousel_feature_card_text {
+    width: 100%;
+  }
 }

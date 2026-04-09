@@ -2,11 +2,13 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/info-card",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "title": "Info card",
   "category": "rrze_elements",
-  "ancestor": ["rrze-elements/carousel"],
-  "description": "Creates an info card for use in Carousels or on its own.",
+  "ancestor": [
+    "rrze-elements/carousel"
+  ],
+  "description": "Creates an info card for use in Carousels.",
   "supports": {
     "html": false
   },
@@ -47,6 +49,26 @@
       "type": "string",
       "default": ""
     },
+    "textShadowEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "backgroundOverlayEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "backgroundOverlayGradient": {
+      "type": "string",
+      "default": "linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)"
+    },
+    "imageObjectFit": {
+      "type": "string",
+      "enum": [
+        "cover",
+        "contain"
+      ],
+      "default": "cover"
+    },
     "desktopTextColor": {
       "type": "string",
       "default": "#fff"
@@ -73,15 +95,24 @@
     },
     "desktopFocusPoint": {
       "type": "object",
-      "default": { "x": 0.5, "y": 0.5 }
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
     },
     "tabletFocusPoint": {
       "type": "object",
-      "default": { "x": 0.5, "y": 0.5 }
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
     },
     "mobileFocusPoint": {
       "type": "object",
-      "default": { "x": 0.5, "y": 0.5 }
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
     },
     "alt": {
       "type": "string",
@@ -94,6 +125,14 @@
     "scientificText": {
       "type": "string",
       "default": ""
+    },
+    "cardTextAlignment": {
+      "type": "string",
+      "default": "top left"
+    },
+    "desktopContentWidth": {
+      "type": "number",
+      "default": 320
     }
   },
   "textdomain": "rrze-elements-blocks",

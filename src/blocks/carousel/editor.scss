@@ -41,6 +41,21 @@ div.rrze-elements-blocks__carousel_feature_card_bg
   height: 100%;
   overflow: hidden;
   z-index: -1;
+  pointer-events: none;
+  --rrze-card-overlay-opacity: 0;
+
+  .rrze-elements-blocks__carousel_feature_card_bg_overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--rrze-card-overlay-gradient, linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%));
+    opacity: var(--rrze-card-overlay-opacity, 0);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &[data-background-overlay="true"] {
+    --rrze-card-overlay-opacity: 1;
+  }
 }
 
 figure.rrze-elements-blocks__carousel_feature_card_bg_figure
@@ -48,6 +63,8 @@ figure.rrze-elements-blocks__carousel_feature_card_bg_figure
   margin: 0;
   padding: 0;
   display: block;
+  position: relative;
+  z-index: 0;
 
   picture {
     position: relative;
@@ -55,12 +72,15 @@ figure.rrze-elements-blocks__carousel_feature_card_bg_figure
     width: 100%;
     height: 100%;
     text-align: match-parent;
+    z-index: 0;
 
     img {
       width: 100%;
       height: 100%;
       object-position: center bottom;
-      object-fit: cover;
+      object-fit: var(--image-object-fit, cover);
+      position: relative;
+      z-index: 0;
     }
   }
 }
@@ -223,4 +243,148 @@ div.rrze-elements-blocks__carousel-navigation{
       cursor: not-allowed;
     }
   }
+}
+
+
+div.rrze-elements-blocks-info-card-editor{
+  border: 3px solid var(--background-color);
+  position: relative;
+  width: min(80vw, 95ch);
+  min-height: 680px;
+}
+div.rrze-elements-blocks-info-card-editor::before{
+  content:"Card Popover Editor";
+  background: var(--background-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--desktop-custom-text-color, var(--desktop-text-color));
+  padding: .125rem .5rem .25rem;
+}
+
+body.wp-theme-FAU-Elemental div.wp-block-group section.wp-block-rrze-elements-carousel{
+  margin: 0 auto;
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+body.wp-theme-FAU-Elemental div.is-style-dark {
+  div.rrze-elements-blocks-info-card-editor{
+    border: 3px solid var(--FAU-Col-Weiss-100, #fff);
+  }
+  div.rrze-elements-blocks-info-card-editor::before{
+    background: var(--FAU-Col-Weiss-100, #fff);
+    color: var(--FAU-Col-Schwarz-100, #000);
+  }
+  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+    color: var(--FAU-Col-FAU-Weiss-100, #fff);
+    border: none;
+  }
+  span.rrze-elements-blocks__carousel_feature_card_link_control_icon-container {
+    background: var(--FAU-Col-FAU-Weiss-100, #fff);
+
+    svg {
+      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+
+  button.rrze-elements-blocks_carousel_navigation_button {
+    background: var(--FAU-Col-FAU-Weiss-100, #fff);
+
+    svg{
+      fill: var(--FAU-Col-FAU-Blau-100, #04316a);
+      color: var(--FAU-Col-FAU-Blau-100, #04316a);
+    }
+  }
+
+  div.rrze-elements-blocks-modal-content *{
+    color: var(--FAU-Col-FAU-Schwarz-100, #000);
+  }
+}
+
+body.wp-theme-FAU-Einrichtungen ul.rrze-elements-blocks__carousel-navigation-container{
+  padding-top: 2rem;
+  list-style: none;
+}
+
+body.wp-theme-FAU-Einrichtungen a.rrze-elements-blocks__carousel_feature_card_link {
+  background: transparent;
+}
+
+.rrze-elements-blocks__carousel-container-violation div.components-notice__content{
+  margin: 0 auto;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 105px auto;
+  justify-items: center;
+  align-items: center;
+}
+.rrze-elements-blocks__carousel-container-violation div.components-notice__content > div {
+  grid-column: 1/2;
+}
+.rrze-elements-blocks__carousel-container-violation div.components-notice__content svg{
+  width: 50px;
+  height: 50px;
+}
+
+p.rrze-elements-blocks__carousel-container-violation-text, div.is-style-dark p.rrze-elements-blocks__carousel-container-violation-text{
+  color: #000;
+  font-size: initial;
+  font-weight: initial;
+  max-width: 65ch;
+  grid-column: 2/3;
+  justify-self: start;
+  padding-left: 1rem;
+}
+
+
+section.rrze-elements-blocks__carousel-prison {
+  position: relative;
+}
+
+section.rrze-elements-blocks__carousel-prison div.rrze-elements-blocks__carousel {
+  position: relative;
+  //padding-top: 2rem;
+}
+
+/* Dark overlay */
+section.rrze-elements-blocks__carousel-prison div.rrze-elements-blocks__carousel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(176, 0, 32, 0.85);
+  pointer-events: none;
+}
+
+/* Icon + text */
+section.rrze-elements-blocks__carousel-prison div.rrze-elements-blocks__carousel::after {
+  content: "Block hidden in Frontend";
+  position: absolute;
+  inset: 0;
+  z-index: 1001;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+
+  pointer-events: none;
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='white'><path d='M403.5-423.5Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM480-200q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q141 0 257.5 76T912-520h-91q-52-93-143-146.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q20 0 40-2t40-6v81q-20 3-40 5t-40 2Zm0-120q22 0 42.5-5t38.5-14q5-50 31.5-90t67.5-64v-7q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm-5-180Zm205 380q-17 0-28.5-11.5T640-160v-120q0-17 11.5-28.5T680-320v-40q0-33 23.5-56.5T760-440q33 0 56.5 23.5T840-360v40q17 0 28.5 11.5T880-280v120q0 17-11.5 28.5T840-120H680Zm40-200h80v-40q0-17-11.5-28.5T760-400q-17 0-28.5 11.5T720-360v40Z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center calc(50% - 1.25rem);
+  background-size: 96px 96px;
+
+  padding-top: 6rem;
+}
+
+.rrze-elements-blocks__carousel-section-header{
+  padding-top: 2rem;
 }

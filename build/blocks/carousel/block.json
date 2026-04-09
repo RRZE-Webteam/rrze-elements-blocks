@@ -2,32 +2,47 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/carousel",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "title": "Carousel",
   "category": "rrze_elements",
-  "description": "Creates a Carousel of Feature Reveal Cards with Popover Functionality.",
+  "description": "Creates a Carousel of Info-Cards with Popover, Link or Image Functionality.",
   "supports": {
     "html": false
   },
   "attributes": {
     "title": {
       "type": "string",
-      "default": "Blueprint"
+      "default": ""
     },
     "cardHeight": {
       "type": "number",
-      "default": 520
+      "default": 350
+    },
+    "isNestedWarning": {
+      "type": "boolean",
+      "default": false
+    },
+    "headingLevel": {
+      "type": "number",
+      "enum": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "default": 2
     }
   },
   "styles": [
     {
-      "name": "marketing",
-      "label": "Marketing",
+      "name": "scientific",
+      "label": "Scientific",
       "isDefault": true
     },
     {
-      "name": "scientific",
-      "label": "Scientific"
+      "name": "marketing",
+      "label": "Marketing"
     }
   ],
   "textdomain": "rrze-elements-blocks",

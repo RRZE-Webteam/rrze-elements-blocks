@@ -4,26 +4,45 @@ namespace RRZE\ElementsBlocks\BlockFrontend;
 
 class Carousel
 {
-    public function render($attributes, $content)
+    /**
+     * Prints the carousel markup.
+     *
+     * @param array<string, mixed> $attributes Block attributes coming from Gutenberg.
+     * @param string $content Inner block content.
+     * @return string Rendered HTML for the carousel block.
+     */
+    public function render(array $attributes = [], string $content = ''): string
     {
         $title = $attributes['title'] ?? 'Lerne die FAU kennen.';
         $cardHeight = $attributes['cardHeight'] ?? 520;
-        $uniqueIDForSectionHeader = uniqid('carousel-header-');
-        $anotherUniqueIDForContentSection = uniqid('carousel-content-');
+        $overlayHoverTarget = 0.5;
+        $uniqueIDForSectionHeader = sprintf('carousel-header-%s', uniqid());
+        $anotherUniqueIDForContentSection = sprintf('carousel-content-%s', uniqid());
+        $headingLevelValue = isset($attributes['headingLevel']) ? (int) $attributes['headingLevel'] : 2;
+        if ($headingLevelValue < 2 || $headingLevelValue > 6) {
+            $headingLevelValue = 2;
+        }
+        $headingLevel = 'h' . $headingLevelValue;
+        $isNestedWarning = !empty($attributes['isNestedWarning']);
+
+        if ($isNestedWarning) {
+            return '';
+        }
 
         ob_start();
         ?>
         <?php
+
         $wrapper_attributes = get_block_wrapper_attributes([
             'class' => 'rrze-elements-blocks__carousel',
             'style' => sprintf('--card-height: %dpx;', (int) $cardHeight),
         ]);
         ?>
-        <section <?php echo $wrapper_attributes; ?>>
+        <section <?php echo $wrapper_attributes; ?> data-hover-overlay-target="<?php echo esc_attr((string) $overlayHoverTarget); ?>">
             <div class="rrze-elements-blocks__carousel-section-header">
-                <h2 class="rrze-elements-blocks__carousel-section-header-headline" id="<?php echo esc_attr($uniqueIDForSectionHeader); ?>">
+                <<?php echo esc_attr($headingLevel); ?> class="rrze-elements-blocks__carousel-section-header-headline" id="<?php echo esc_attr($uniqueIDForSectionHeader); ?>">
                     <?php echo esc_html($title); ?>
-                </h2>
+                </<?php echo esc_attr($headingLevel); ?>>
             </div>
             <div id="<?php echo esc_attr($anotherUniqueIDForContentSection); ?>" class="rrze-elements-blocks__carousel-container">
                 <div class="rrze-elements-blocks__carousel-content">
@@ -48,6 +67,6 @@ class Carousel
             </div>
         </section>
         <?php
-        return ob_get_clean();
+        return (string) ob_get_clean();
     }
 }

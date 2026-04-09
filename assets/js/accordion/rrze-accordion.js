@@ -34,7 +34,7 @@ jQuery(document).ready(function ($) {
         .find("button.expand-all")
         .attr("data-status", "open")
         .data("status", "open")
-        .html(__("Collapse All", "rrze-elements"));
+        .html(__("Collapse All", "rrze-elements-blocks"));
     }
   });
 
@@ -234,14 +234,14 @@ jQuery(document).ready(function ($) {
       $this
         .attr("data-status", "closed")
         .data("status", "closed")
-        .html(__("Expand All", "rrze-elements"));
+        .html(__("Expand All", "rrze-elements-blocks"));
     } else {
       $bodies.slideDown();
       $toggles.addClass("active");
       $this
         .attr("data-status", "open")
         .data("status", "open")
-        .html(__("Collapse All", "rrze-elements"));
+        .html(__("Collapse All", "rrze-elements-blocks"));
     }
   });
 
