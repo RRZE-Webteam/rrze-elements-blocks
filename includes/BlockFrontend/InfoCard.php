@@ -118,7 +118,9 @@ class InfoCard
         $hasInnerBlocks = trim($content) !== '';
         $isLinkCard = !empty($url);
         $showLinkIcon = $isLinkCard;
-        $shouldShowActionIcon = $showLinkIcon || $hasInnerBlocks;
+        $normalizedContent = preg_replace('/\s+/', ' ', trim($content));
+        $isEmptyContent = $normalizedContent === '<p class="wp-block-paragraph"></p>';
+        $shouldShowActionIcon = $showLinkIcon || ($hasInnerBlocks && !$isEmptyContent);
         $cardHasAction = $shouldShowActionIcon ? 'true' : 'false';
 
         ob_start();
@@ -172,7 +174,7 @@ class InfoCard
                     <?php echo wp_kses_post($scientificText); ?>
                 </div>
             <?php endif; ?>
-            <?php if (!$showLinkIcon && $hasInnerBlocks) : ?>
+            <?php if (!$showLinkIcon && $hasInnerBlocks && !$isEmptyContent) : ?>
                 <dialog id="<?php echo esc_attr($modalId); ?>" class="rrze-elements-blocks-fullscreen-modal">
                     <div class="rrze-elements-blocks-modal-overlay" data-modal-overlay>
                         <div class="rrze-elements-blocks-modal-content" tabindex="-1">
