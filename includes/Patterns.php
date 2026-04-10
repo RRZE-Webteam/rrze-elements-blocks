@@ -20,7 +20,7 @@ class Patterns
     {
         add_action('init', [$this, 'elementsBlocks_pattern_categories']);
         add_filter('block_categories_all', [$this, 'my_custom_block_category'], 100, 2);
-        add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
+        //add_action('init', [$this, 'register_fau_custom_wp_block_patterns']);
         add_action('init', [$this, 'register_dev_patterns']);
     }
 
@@ -195,50 +195,6 @@ class Patterns
                 'description' => _x('Description for Example Pattern', 'Block pattern description', 'rrze-elements-blocks'),
                 'categories'  => ['portfolio', 'about'],
             ],
-            [
-                'file_name'   => 'image-with-accordion-h2',
-                'pattern_name' => 'rrze-elements-blocks/image-w-accordion-h2',
-                'title'       => __('Image with Accordion', 'rrze-elements-blocks'),
-                'description' => _x('Description for Image with Accordion', 'Block pattern description', 'rrze-elements-blocks'),
-                'categories'  => ['portfolio', 'about'],
-
-            ],
-            [
-                'file_name'   => 'custom-news-h2',
-                'pattern_name' => 'rrze-elements-blocks/custom-news-h2',
-                'title'       => __('Custom News section 3-Column Layout', 'rrze-elements-blocks'),
-                'description' => _x('A 3 Column Layout for custom News on Landing pages', 'Block pattern description', 'rrze-elements-blocks'),
-                'categories'  => ['posts'],
-            ],
-            [
-                'file_name'   => 'cta-1',
-                'pattern_name' => 'rrze-elements-blocks/cta',
-                'title'       => __('Call to Action', 'rrze-elements-blocks'),
-                'description' => _x('Call to Action section', 'Block pattern description', 'rrze-elements-blocks'),
-                'categories'  => ['call-to-action'],
-            ],
-            [
-                'file_name'   => 'image-with-text',
-                'pattern_name' => 'rrze-elements-blocks/image-w-text',
-                'title'       => __('Image with Text', 'rrze-elements-blocks'),
-                'description' => _x('Two column layout: Image left, text right column.', 'Block pattern description', 'rrze-elements-blocks'),
-                'categories'  => ['portfolio', 'about'],
-            ],
-            [
-                'file_name'   => 'imagefilm',
-                'pattern_name' => 'rrze-elements-blocks/imagefilm',
-                'title'       => __('Imagefilm', 'rrze-elements-blocks'),
-                'description' => _x('FAU Imagefilm.', 'Block pattern description', 'rrze-elements-blocks'),
-                'categories'  => ['portfolio', 'about'],
-            ],
-            [
-                'file_name'   => 'page-home-fau',
-                'pattern_name' => 'rrze-elements-blocks/page-home-fau',
-                'title'       => __('Landing page template 1', 'rrze-elements-blocks'),
-                'description' => _x('A landingpage template for FAU.', 'Block pattern description', 'rrze-elements-blocks'),
-                'categories'  => ['page'],
-                'postTypes'   => ['page'],
-            ]
         ];
 
         foreach ($patterns as $pattern) {
