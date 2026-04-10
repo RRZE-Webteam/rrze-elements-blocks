@@ -5,7 +5,6 @@ import {
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
   FocalPointPicker,
 } from "@wordpress/components";
-import { MediaReplaceFlow } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import DeviceViewportToggle from "./DeviceViewportToggle";
 import { DeviceType, InfoCardAttributes } from "../types";
@@ -47,39 +46,6 @@ const ImageSettingsPanel = ({
       deviceType={deviceType}
       onChange={onDeviceTypeChange}
     />
-    {deviceType === 'desktop' && (
-      <MediaReplaceFlow
-        mediaId={attributes.desktopImageId}
-        mediaURL={attributes.desktopImageUrl}
-        allowedTypes={['image']}
-        accept="image/*"
-        onSelect={(media) => onImageSelect(media, 'desktop')}
-        onError={(error: string) => console.error(error)}
-        name={__('Add Desktop Image', 'rrze-elements-blocks')}
-      />
-    )}
-    {deviceType === 'tablet' && (
-      <MediaReplaceFlow
-        mediaId={attributes.tabletImageId}
-        mediaURL={attributes.tabletImageUrl}
-        allowedTypes={['image']}
-        accept="image/*"
-        onSelect={(media) => onImageSelect(media, 'tablet')}
-        onError={(error: string) => console.error(error)}
-        name={__('Add Tablet Image', 'rrze-elements-blocks')}
-      />
-    )}
-    {deviceType === 'mobile' && (
-      <MediaReplaceFlow
-        mediaId={attributes.mobileImageId}
-        mediaURL={attributes.mobileImageUrl}
-        allowedTypes={['image']}
-        accept="image/*"
-        onSelect={(media) => onImageSelect(media, 'mobile')}
-        onError={(error: string) => console.error(error)}
-        name={__('Add Mobile Image', 'rrze-elements-blocks')}
-      />
-    )}
     {(deviceType === 'desktop' && hasDesktopImage && isCoverFit) && (
       <FocalPointPicker
         url={desktopImageUrl}

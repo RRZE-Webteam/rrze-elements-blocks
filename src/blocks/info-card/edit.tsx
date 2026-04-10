@@ -12,17 +12,16 @@ import {
   ToolbarButton,
   DropdownMenu,
   Popover,
-  AlignmentMatrixControl,
 } from "@wordpress/components";
 import {useState, useRef, useEffect} from "@wordpress/element";
-import type { CSSProperties } from "react";
+import type {CSSProperties} from "react";
 import {page, desktop, tablet, mobile, link} from "@wordpress/icons";
 import {__} from "@wordpress/i18n";
 import {getImageBrightness} from "../../utility/color";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 import {CharacterCountProgressBar} from "../../components/ProgressBar";
-import { DeviceType, InfoCardAttributes, InfoCardCustomStyles } from "./types";
+import {DeviceType, InfoCardAttributes, InfoCardCustomStyles} from "./types";
 import CarouselSettingsPanel from "./inspectorControls/CarouselSettingsPanel";
 import ImageSettingsPanel from "./inspectorControls/ImageSettingsPanel";
 import TextColorPanel from "./inspectorControls/TextColorPanel";
@@ -205,16 +204,28 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     }
   }, [isSelected]);
 
-  const onImageSelect = (image: { id: number; url: string }, device: DeviceType) => {
-    const newAttributes = {
+  const onImageSelect = (
+    image: { id?: number; url: string } | undefined,
+    device: DeviceType
+  ) => {
+    if (!image) {
+      setAttributes({
+        [`${device}ImageId`]: undefined,
+        [`${device}ImageUrl`]: '',
+      });
+      return;
+    }
+
+    setAttributes({
       [`${device}ImageId`]: image.id,
       [`${device}ImageUrl`]: image.url,
-    };
-    setAttributes(newAttributes);
+    });
 
-    getImageBrightness(image.url).then(brightness => {
+    getImageBrightness(image.url).then((brightness) => {
       const newTextColor = brightness < 128 ? '#FFFFFF' : '#000000';
-      setAttributes({[`${device}TextColor`]: newTextColor});
+      setAttributes({
+        [`${device}TextColor`]: newTextColor,
+      });
     });
   };
 
@@ -336,7 +347,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               accept="image/*"
               onSelect={(media) => onImageSelect(media, 'desktop')}
               onError={(error: string) => console.error(error)}
-              name={__('Add Desktop Image', 'rrze-elements-blocks')}
+              onReset={() => onImageSelect(undefined, 'desktop')}
+              name={!hasDesktopImage ? __('Add Image', 'rrze-elements-blocks') : __('Replace Image', 'rrze-elements-blocks')}
             />
           )}
           {deviceType === 'tablet' && (
@@ -347,7 +359,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               accept="image/*"
               onSelect={(media) => onImageSelect(media, 'tablet')}
               onError={(error: string) => console.error(error)}
-              name={__('Tablet Image', 'rrze-elements-blocks')}
+              onReset={() => onImageSelect(undefined, 'tablet')}
+              name={!attributes.tabletImageUrl ? __('Add Image', 'rrze-elements-blocks') : __('Replace Image', 'rrze-elements-blocks')}
             />
           )}
           {deviceType === 'mobile' && (
@@ -358,7 +371,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               accept="image/*"
               onSelect={(media) => onImageSelect(media, 'mobile')}
               onError={(error: string) => console.error(error)}
-              name={__('Mobile Image', 'rrze-elements-blocks')}
+              onReset={() => onImageSelect(undefined, 'mobile')}
+              name={!attributes.mobileImageUrl ? __('Add Image', 'rrze-elements-blocks') : __('Replace Image', 'rrze-elements-blocks')}
             />
           )}
         </ToolbarGroup>
@@ -442,7 +456,8 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                 {isSelected && (
                   <CharacterCountProgressBar value={attributes.subtitle?.length || 0} maxValue={40}/>
                 )}
-                <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"} allowedFormats={[]}
+                <RichText className={"rrze-elements-blocks__carousel_feature_card_text"} tagName={"p"}
+                          allowedFormats={[]}
                           placeholder={__("Your Headline", "rrze-elements-blocks")}
                           onChange={(newTitle) => setAttributes({title: newTitle})} value={attributes.title}/>
                 {isSelected && (
@@ -466,7 +481,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                   <img src={desktopImageUrl} alt={attributes.alt}/>
                 </picture>
               </figure>
-              <span className={"rrze-elements-blocks__carousel_feature_card_bg_overlay"} aria-hidden="true" />
+              <span className={"rrze-elements-blocks__carousel_feature_card_bg_overlay"} aria-hidden="true"/>
             </div>
             {shouldShowActionIcon && (
               <div className={"rrze-elements-blocks__carousel_feature_card_link"}
