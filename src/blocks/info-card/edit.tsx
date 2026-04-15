@@ -28,6 +28,7 @@ import TextColorPanel from "./inspectorControls/TextColorPanel";
 import BackgroundColorPanel from "./inspectorControls/BackgroundColorPanel";
 import LayoutPanel from "./inspectorControls/LayoutPanel";
 import EffectsPanel from "./inspectorControls/EffectsPanel";
+import {EditControl} from "../../components/EditControl";
 
 interface EditProps {
   attributes: InfoCardAttributes;
@@ -287,14 +288,9 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   return (
     <li {...blockProps} style={style}>
       <BlockControls>
-        <ToolbarGroup>
-          <ToolbarButton
-            icon={page}
-            label={__("Add / Edit Content", "rrze-elements-blocks")}
-            onClick={() => setIsModalOpen(!isModalOpen)}
-            disabled={isLinkCard}
-          />
-        </ToolbarGroup>
+        <EditControl
+          attributes={{isEditView: isModalOpen}}
+          setAttributes={({isEditView}) => setIsModalOpen(isEditView)}/>
         <ToolbarGroup>
           <ToolbarButton
             icon={link}
