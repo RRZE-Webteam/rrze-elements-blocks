@@ -248,6 +248,59 @@
   .accordion ol.wp-block-list {
     padding-left: 2.5rem;
   }
+
+  .wp-block-rrze-elements-collapsibles {
+    .accordion-group.nat {
+      .accordion-toggle::before {
+        background: color.$fau-color-nat-green-100;
+      }
+
+      .accordion-toggle::after {
+        color: color.$fau-color-fau-black-100;
+      }
+    }
+
+    .accordion-group.phil {
+      .accordion-toggle::before {
+        background: color.$fau-color-phil-yellow-100;
+      }
+
+      .accordion-toggle::after {
+        color: color.$fau-color-fau-black-100;
+      }
+    }
+
+    .accordion-group.rw {
+      .accordion-toggle::before {
+        background: color.$fau-color-rw-red-100;
+      }
+
+      .accordion-toggle::after {
+        color: color.$fau-color-fau-white-100;
+      }
+    }
+
+    .accordion-group.tf {
+      .accordion-toggle::before {
+        background: color.$fau-color-tf-metallic-100;
+      }
+
+      .accordion-toggle::after {
+        color: color.$fau-color-fau-black-100;
+      }
+    }
+
+    .accordion-group.med {
+      .accordion-toggle::before {
+        background: color.$fau-color-med-blue-100;
+      }
+
+      .accordion-toggle::after {
+        color: color.$fau-color-fau-black-100;
+      }
+    }
+
+  }
 }
 
 .wp-theme-FAU-Elemental .is-style-dark {
