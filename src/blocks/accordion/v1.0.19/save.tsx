@@ -3,7 +3,7 @@ import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
 import { AttributesV1_0_19 } from "./attributes";
 
-interface Attributes {
+interface Attributes extends Record<string, unknown> {
   totalChildrenCount?: number;
   sameBlockCount?: number;
   title: string;

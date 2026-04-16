@@ -8,7 +8,7 @@ import metadata from "./block.json";
 import deprecated from "./deprecated";
 import {InnerBlocks} from "@wordpress/block-editor";
 
-interface AttributesV1 {
+interface AttributesV1 extends Record<string, unknown> {
   totalChildrenCount?: number;
   sameBlockCount?: number;
   title: string;
@@ -23,16 +23,16 @@ interface AttributesV1 {
 }
 
 //type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;
-type BlockAttributes = AttributesV1;
+type BlockAttributes = AttributesV1 & Record<string, unknown>;
 
 interface LabelContext {
   context: string;
 }
 
 registerBlockType(metadata.name as any, {
-  edit: Edit,
+  edit: Edit as any,
   save: () => <InnerBlocks.Content />,
-  deprecated,
+  deprecated: deprecated as any,
   icon: {
     src: (
       <svg

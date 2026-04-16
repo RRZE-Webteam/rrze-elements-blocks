@@ -13,7 +13,7 @@ import deprecated from "./deprecated";
 import metadata from "./block.json";
 import {InnerBlocks} from "@wordpress/block-editor";
 
-interface AttributesV1 {
+interface AttributesV1 extends Record<string, unknown> {
   message: string;
   loadOpen: boolean;
   expandAllLink: boolean;
@@ -35,7 +35,7 @@ export interface AttributesV1_0_12 extends AttributesV1 {
 }
 
 //type BlockAttributes = AttributesV1 | AttributesV2 | AttributesV3;
-type BlockAttributes = AttributesV1_0_12;
+type BlockAttributes = AttributesV1_0_12 & Record<string, unknown>;
 
 interface LabelContext {
   context: string;

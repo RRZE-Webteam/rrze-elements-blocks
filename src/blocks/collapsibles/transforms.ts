@@ -129,7 +129,7 @@ const transforms = {
           if (block.name === 'core/heading') {
             if (currentCollapseBlocks.length) {
               collapses.push(
-                createBlock<CollapseBlockAttributes>(
+                createBlock(
                   'rrze-elements/collapse',
                   { title: currentTitle },
                   currentCollapseBlocks
@@ -151,7 +151,7 @@ const transforms = {
 
         if (currentCollapseBlocks.length) {
           collapses.push(
-            createBlock<CollapseBlockAttributes>(
+            createBlock(
               'rrze-elements/collapse',
               { title: currentTitle },
               currentCollapseBlocks
@@ -159,7 +159,7 @@ const transforms = {
           );
         }
 
-        return createBlock<CollapsiblesBlockAttributes>(
+        return createBlock(
           'rrze-elements/collapsibles',
           {},
           collapses

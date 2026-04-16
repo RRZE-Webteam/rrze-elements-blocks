@@ -57,7 +57,7 @@ export const attributes: BlockAttributes = {
   },
 };
 
-export interface AttributesV1 {
+export interface AttributesV1 extends Record<string, unknown> {
   message: string;
   loadOpen: boolean;
   expandAllLink: boolean;

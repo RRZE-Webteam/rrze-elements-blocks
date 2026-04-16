@@ -28,6 +28,10 @@
     "buttonUrl": {
       "type": "string",
       "default": ""
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "rrze-elements-blocks",

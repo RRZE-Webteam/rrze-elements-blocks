@@ -10,7 +10,7 @@ registerBlockType( metadata.name as any, {
 		attributes: {
 			message: 'Accordion',
 		},
-	},
+	} as any,
 	icon: {
 		src: "align-center",
 		background: "#00458c"

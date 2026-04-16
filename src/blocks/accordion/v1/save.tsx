@@ -2,7 +2,7 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
 
-interface Attributes {
+interface Attributes extends Record<string, unknown> {
   sameBlockCount: number;
   totalChildrenCount: number;
   color: string;

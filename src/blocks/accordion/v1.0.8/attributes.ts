@@ -47,7 +47,7 @@ export const attributes: BlockAttributes = {
   }
 };
 
-export interface AttributesV1_0_8 {
+export interface AttributesV1_0_8 extends Record<string, unknown> {
   totalChildrenCount?: number;
   sameBlockCount?: number;
   title: string;

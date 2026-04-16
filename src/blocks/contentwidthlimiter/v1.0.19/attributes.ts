@@ -15,7 +15,7 @@ export const attributes: BlockAttributes = {
   }
 };
 
-export interface AttributesV1_0_19 {
+export interface AttributesV1_0_19 extends Record<string, unknown> {
   title: string;
   width: number;
   alignment: string;

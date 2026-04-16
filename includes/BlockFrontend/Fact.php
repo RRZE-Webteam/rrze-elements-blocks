@@ -22,6 +22,8 @@ class Fact extends AbstractBlockRender
     $materialSymbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
     $buttonText      = isset($attributes['buttonText'])      ? sanitize_text_field($attributes['buttonText'])      : __('More Information', 'rrze-elements-blocks');
     $buttonUrl       = isset($attributes['buttonUrl'])       ? esc_url($attributes['buttonUrl'])        : '#';
+    $ariaLabel       = isset($attributes['ariaLabel'])       ? sanitize_text_field($attributes['ariaLabel'])       : '';
+    $ariaLabelAttr   = $ariaLabel !== '' ? ' aria-label="' . esc_attr($ariaLabel) . '"' : '';
     $iconMarkup = '';
     if (!empty($attributes['materialSymbol'])) {
       $iconMarkup = SpriteGenerator::svgUse(
@@ -33,9 +35,10 @@ class Fact extends AbstractBlockRender
     if (!empty($buttonText) && !empty($buttonUrl)) {
       $buttonMarkup = sprintf(
         '<div class="wp-block-button is-style-tertiary">
-            <a class="wp-block-button__link wp-element-button" href="%s">%s</a>
+            <a class="wp-block-button__link wp-element-button" href="%s"%s>%s</a>
         </div>',
         $buttonUrl,
+        $ariaLabelAttr,
         $buttonText
       );
     }
