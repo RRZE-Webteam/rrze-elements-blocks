@@ -140,7 +140,7 @@ const transforms = {
           );
         });
 
-        return createBlock<any>(
+        return createBlock(
           'rrze-elements/notice',
           {},
           columns

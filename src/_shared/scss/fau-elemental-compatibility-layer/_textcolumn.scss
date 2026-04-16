@@ -6,3 +6,7 @@ div.rrze-elements-blocks-text-column p{
 div.rrze-elements-blocks-text-column {
   column-rule: 1px solid var(--FAU-Col-FAU-Dunkelblau-62_5);
 }
+
+div.rrze-elements-blocks-text-column.no-border {
+  column-rule: none;
+}

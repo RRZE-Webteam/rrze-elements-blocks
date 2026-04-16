@@ -40,7 +40,7 @@ interface JumpLinkSelectorProps {
 		jumpName: string;
 		isCustomJumpname?: boolean;
 	};
-	setAttributes: <Partial>(attributes: Partial) => void;
+	setAttributes: (attributes: Partial<JumpLinkSelectorProps["attributes"]>) => void;
 	clientId: string;
 }
 

@@ -42,7 +42,7 @@ const SPRITES: Record<string, string> = {
   brands: brandsSpriteUrl,
 };
 
-interface BlockAttributes {
+interface BlockAttributes extends Record<string, unknown> {
   icon: string;      // "solid address-book" usw.
   svgString: string; // `${spriteUrl}#${iconName}`
 }

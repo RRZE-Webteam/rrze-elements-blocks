@@ -7,12 +7,12 @@ import { __, sprintf } from "@wordpress/i18n";
 import deprecated from "./deprecated";
 import { InnerBlocks } from "@wordpress/block-editor";
 
-interface AttributesV1 {
+interface AttributesV1 extends Record<string, unknown> {
   title: string;
   hstart: number;
 }
 
-type BlockAttributes = AttributesV1;
+type BlockAttributes = AttributesV1 & Record<string, unknown>;
 
 interface LabelContext {
   context: string;

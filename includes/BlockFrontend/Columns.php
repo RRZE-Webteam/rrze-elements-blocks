@@ -19,6 +19,7 @@ class Columns extends AbstractBlockRender
         }
 
         $wrapper_class = 'elements-textcolumns' . (!empty($attributes['className']) ? ' ' . $attributes['className'] : '');
+        $has_border = !empty($attributes['border']);
 
         $styles = [];
         if (!empty($attributes['numberOfColumns'])) {
@@ -31,12 +32,14 @@ class Columns extends AbstractBlockRender
         if (!empty($attributes['rule']) && !empty($attributes['borderColor'])) {
             $styles[] = 'column-rule:1px solid ' . $attributes['borderColor'];
         }
-        if (!empty($attributes['border']) && !empty($attributes['borderColor'])) {
+        if ($has_border && !empty($attributes['borderColor'])) {
             $styles[] = 'border:1px solid ' . $attributes['borderColor'];
         }
         $style_attr = $styles ? ' style="' . esc_attr(implode(';', $styles)) . '"' : '';
 
-        $inner_class = 'rrze-elements-blocks-text-column' . (!empty($attributes['colorSlug']) ? ' bg-' . sanitize_html_class($attributes['colorSlug']) : '');
+        $inner_class = 'rrze-elements-blocks-text-column'
+            . (!$has_border ? ' no-border' : '')
+            . (!empty($attributes['colorSlug']) ? ' bg-' . sanitize_html_class($attributes['colorSlug']) : '');
 
         $html = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
         $html .= '<div class="' . esc_attr($inner_class) . '"' . $style_attr . '>';

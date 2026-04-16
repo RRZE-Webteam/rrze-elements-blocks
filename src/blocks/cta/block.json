@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/cta",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "title": "Call to action",
   "category": "rrze_elements",
   "description": "Creates an Call to action box.",
@@ -15,6 +15,10 @@
     },
     "buttonUrl": {
       "type": "string"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": ""
     },
     "buttonOpensInNewTab": {
       "type": "boolean",

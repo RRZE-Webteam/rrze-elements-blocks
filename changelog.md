@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.10] - 2026-04-16
+Minor Bugfixes and Improvements
+
+# Feature
+- #398 - Aria Labels for Buttons in Facts Grid, Iconboxes, Counters and CTAs
+- #416 - Added Color Support for Accordions according to the new CD in FAU-Elemental
+
+# Fixed
+- #422 - Corrected Content Widt of Facts-Grid in Editor if placed without a core/group
+- #412 - Improved UX for Carousel when Popover was used without content
+- #381 - Fixed an Issue where the Ruler was shown even if disabled in Text-Columns Block
+- #420 - Fixed the Icon for Switching into Card-Editor
+
+# Removed
+- #415 - Disabled old Legacy Patterns delivered via the Plugin
+
 
 ## [1.1.9] - 2026-04-09
 New Carousel Block and Minor fixes

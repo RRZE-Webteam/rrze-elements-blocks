@@ -51,8 +51,8 @@
   div.wp-block-rrze-elements-iconbox-row,
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-counter-row,
+  div.wp-block-rrze-elements-facts-grid,
   section.facts,
-  ul.facts,
   .is-style-dark div.wp-block-rrze-elements-iconbox-row,
   .is-style-dark div.wp-block-rrze-elements-counter-row,
   .is-style-dark div.wp-block-rrze-elements-counter-row,
@@ -70,6 +70,9 @@
     margin: 0 auto;
   }
 
+  div.wp-block-group div.wp-block-rrze-elements-facts-grid {
+    margin-inline: auto;
+  }
 
 
   section.facts ul.facts__list{

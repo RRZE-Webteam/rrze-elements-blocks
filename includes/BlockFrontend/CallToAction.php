@@ -28,6 +28,8 @@ class CallToAction extends AbstractBlockRender
         $subtitle = isset($attributes['subtitle']) ? sanitize_text_field($attributes['subtitle']) : '';
         $button_text = isset($attributes['buttonText']) ? sanitize_text_field($attributes['buttonText']) : '';
         $button_url = $attributes['buttonUrl'] ?? '';
+        $aria_label = isset($attributes['ariaLabel']) ? sanitize_text_field($attributes['ariaLabel']) : '';
+        $aria_label_attr = $aria_label !== '' ? ' aria-label="' . esc_attr($aria_label) . '"' : '';
         $background = $attributes['background'] ?? '';
         $is_search = !empty($attributes['isSearch']);
         $cta_icon = 'solid arrow-right';
@@ -68,7 +70,7 @@ class CallToAction extends AbstractBlockRender
             }
 
             $html .= '<div class="cta-button-container">';
-            $html .= '<a href="' . esc_url($href) . '" class="btn cta-button">' . esc_html($button_text) . $icon_markup . '</a>';
+            $html .= '<a href="' . esc_url($href) . '" class="btn cta-button"' . $aria_label_attr . '>' . esc_html($button_text) . $icon_markup . '</a>';
             $html .= '</div></div>';
         }
 

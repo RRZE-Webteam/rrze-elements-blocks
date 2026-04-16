@@ -137,7 +137,7 @@ const getCategoryIdFromCat = (cat: unknown): number | undefined => {
 /**
  * Attributes used by the `rrze-elements/news` source block.
  */
-interface CustomNewsAttrs {
+interface CustomNewsAttrs extends Record<string, unknown> {
   title?: string;
   cat?: string;
   tag?: string;

@@ -27,7 +27,7 @@ export const attributes: BlockAttributes = {
   }
 };
 
-export interface AttributesV1_0_13_2 {
+export interface AttributesV1_0_13_2 extends Record<string, unknown> {
   expandAllLink: boolean;
   sameBlockCount: number;
   previousBlockIds: string[];

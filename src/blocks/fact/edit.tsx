@@ -2,11 +2,12 @@
 import {
   BlockControls, RichText,
   useBlockProps,
+  InspectorControls,
   __experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 import {IconMarkComponent} from "../../components/IconPicker";
 // @ts-ignore
-import {Button, Modal, Popover, ToolbarButton, ToolbarGroup} from "@wordpress/components";
+import {Button, Modal, Popover, ToolbarButton, ToolbarGroup, PanelBody, TextControl} from "@wordpress/components";
 import {link, linkOff, symbol} from "@wordpress/icons";
 import {__} from "@wordpress/i18n";
 import {displayShortcut} from "@wordpress/keycodes";
@@ -21,6 +22,7 @@ interface EditProps {
     buttonText: string;
     fontSize: string;
     buttonUrl: string;
+    ariaLabel: string;
     materialSymbol: string;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
@@ -35,7 +37,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
 
   const TagName = "a";
   const isLinkTag = "a" === TagName;
-  const {buttonUrl, materialSymbol, description} = attributes;
+  const {buttonUrl, materialSymbol, description, ariaLabel} = attributes;
   const isURLSet = !!buttonUrl;
 
   const startEditing = () => {
@@ -122,6 +124,17 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
           )}
         </ToolbarGroup>
       </BlockControls>
+      <InspectorControls>
+        <PanelBody title={__("Accessibility", "rrze-elements-blocks")} initialOpen={true}>
+          <TextControl
+            label={__("Aria-Label", "rrze-elements-blocks")}
+            value={ariaLabel || ""}
+            onChange={(value) => setAttributes({ariaLabel: value})}
+            disabled={!isURLSet}
+            help={!isURLSet ? __("Add a link to enable this field.", "rrze-elements-blocks") : undefined}
+          />
+        </PanelBody>
+      </InspectorControls>
       {isLinkTag && isSelected && (isEditingURL || isURLSet) && (
         <Popover
           placement="bottom"
