@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-"
 "blocks\n"
-"POT-Creation-Date: 2026-04-09T12:33:01+00:00\n"
-"PO-Revision-Date: 2026-04-09 14:33+0200\n"
+"POT-Creation-Date: 2026-04-16T12:06:32+00:00\n"
+"PO-Revision-Date: 2026-04-16 14:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -51,15 +51,15 @@ msgstr "Weitere Informationen"
 msgid "Facts About Our Research"
 msgstr "Fakten über unsere Forschung"
 
-#: includes/BlockFrontend/InfoCard.php:147 build/blocks/info-card/index.js:1
+#: includes/BlockFrontend/InfoCard.php:153 build/blocks/info-card/index.js:1
 msgid "Open card link"
 msgstr "Link zur Infokarte öffnen"
 
-#: includes/BlockFrontend/InfoCard.php:155 build/blocks/info-card/index.js:1
+#: includes/BlockFrontend/InfoCard.php:161 build/blocks/info-card/index.js:1
 msgid "Show more information"
 msgstr "Weitere Informationen anzeigen"
 
-#: includes/BlockFrontend/InfoCard.php:175
+#: includes/BlockFrontend/InfoCard.php:181
 msgid "Schließen"
 msgstr "Schließen"
 
@@ -139,60 +139,6 @@ msgstr "Beispiel-Pattern"
 msgctxt "Block pattern description"
 msgid "Description for Example Pattern"
 msgstr "Beschreibung für eine Beispiel-Vorlage"
-
-#: includes/Patterns.php:201
-msgid "Image with Accordion"
-msgstr "Bild mit Accordion"
-
-#: includes/Patterns.php:202
-msgctxt "Block pattern description"
-msgid "Description for Image with Accordion"
-msgstr "Vorlage für ein Bild mit Accordion"
-
-#: includes/Patterns.php:209
-msgid "Custom News section 3-Column Layout"
-msgstr "Neuste Beiträge 3-spaltiges Layout"
-
-#: includes/Patterns.php:210
-msgctxt "Block pattern description"
-msgid "A 3 Column Layout for custom News on Landing pages"
-msgstr "Ein 3-spaltiges Layout für Custom News für Landing pages"
-
-#: includes/Patterns.php:216
-msgid "Call to Action"
-msgstr "Call to Action"
-
-#: includes/Patterns.php:217
-msgctxt "Block pattern description"
-msgid "Call to Action section"
-msgstr "Call to Action Vorlage"
-
-#: includes/Patterns.php:223
-msgid "Image with Text"
-msgstr "Bild mit Text"
-
-#: includes/Patterns.php:224
-msgctxt "Block pattern description"
-msgid "Two column layout: Image left, text right column."
-msgstr "Ein zweispaltiges Layout: Linksbündiges Bild, Textspalte rechts."
-
-#: includes/Patterns.php:230
-msgid "Imagefilm"
-msgstr "Imagefilm"
-
-#: includes/Patterns.php:231
-msgctxt "Block pattern description"
-msgid "FAU Imagefilm."
-msgstr "FAU Imagefilm."
-
-#: includes/Patterns.php:237
-msgid "Landing page template 1"
-msgstr "Landingpage Template 1"
-
-#: includes/Patterns.php:238
-msgctxt "Block pattern description"
-msgid "A landingpage template for FAU."
-msgstr "Ein Landingpage Template für die FAU."
 
 #. translators: 1: current PHP version, 2: required PHP version
 #: rrze-elements-blocks.php:80
@@ -845,6 +791,21 @@ msgstr "Schriftgröße"
 msgid "Big"
 msgstr "Groß"
 
+#: build/blocks/counter/index.js:1 build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+msgid "Accessibility"
+msgstr "Barrierefreiheit"
+
+#: build/blocks/counter/index.js:1 build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+msgid "Aria-Label"
+msgstr "Aria-Label"
+
+#: build/blocks/counter/index.js:1 build/blocks/cta/index.js:1
+#: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
+msgid "Add a link to enable this field."
+msgstr "Fügen Sie einen Link hinzu, um dieses Feld zu aktivieren."
+
 #: build/blocks/counter/index.js:1
 msgid "Description"
 msgstr "Beschreibung"
@@ -854,11 +815,11 @@ msgstr "Beschreibung"
 msgid "Button Text"
 msgstr "Buttontext"
 
-#: build/blocks/cta/index.js:1
+#: build/blocks/cta/index.js:1 build/blocks/info-card/index.js:1
 msgid "Replace Image"
 msgstr "Bild ersetzen"
 
-#: build/blocks/cta/index.js:1
+#: build/blocks/cta/index.js:1 build/blocks/info-card/index.js:1
 msgid "Add Image"
 msgstr "Bild auswählen"
 
@@ -939,18 +900,6 @@ msgid "Choose Viewport"
 msgstr "Vorschaugröße wählen"
 
 #: build/blocks/info-card/index.js:1
-msgid "Add Desktop Image"
-msgstr "Desktop-Hintergrundbild hinzufügen"
-
-#: build/blocks/info-card/index.js:1
-msgid "Add Tablet Image"
-msgstr "Tablet-Hintergrundbild hinzufügen"
-
-#: build/blocks/info-card/index.js:1
-msgid "Add Mobile Image"
-msgstr "Handy-Hintergrundbild hinzufügen"
-
-#: build/blocks/info-card/index.js:1
 msgid "Alt Text"
 msgstr "Alternativtext"
 
@@ -1027,6 +976,18 @@ msgid "Enable text shadow"
 msgstr "Textschatten aktivieren"
 
 #: build/blocks/info-card/index.js:1
+msgid "Popover options"
+msgstr "Popover-Optionen"
+
+#: build/blocks/info-card/index.js:1
+msgid "Card Editing mode"
+msgstr "Kartenbearbeitungsmodus"
+
+#: build/blocks/info-card/index.js:1
+msgid "Popover Editing Mode"
+msgstr "Popover-Bearbeitungsmodus"
+
+#: build/blocks/info-card/index.js:1
 msgid "Black"
 msgstr "Schwarz"
 
@@ -1099,24 +1060,12 @@ msgid "Cool tint"
 msgstr "Kühle Farbtönung"
 
 #: build/blocks/info-card/index.js:1
-msgid "Add / Edit Content"
-msgstr "Inhalt hinzufügen / bearbeiten"
-
-#: build/blocks/info-card/index.js:1
 msgid "Add Link"
 msgstr "Link hinzufügen"
 
 #: build/blocks/info-card/index.js:1
 msgid "Select device type"
 msgstr "Gerätetyp auswählen"
-
-#: build/blocks/info-card/index.js:1
-msgid "Tablet Image"
-msgstr "Tablet-Hintergrundbild"
-
-#: build/blocks/info-card/index.js:1
-msgid "Mobile Image"
-msgstr "Handy-Hintergrundbild"
 
 #: build/blocks/info-card/index.js:1
 msgid "Your Topic"
@@ -1694,6 +1643,66 @@ msgstr "Zeitstrahl"
 msgctxt "block description"
 msgid "Creates a Timeline block"
 msgstr "Erzeugt einen Zeitstrahl"
+
+#~ msgid "Image with Accordion"
+#~ msgstr "Bild mit Accordion"
+
+#~ msgctxt "Block pattern description"
+#~ msgid "Description for Image with Accordion"
+#~ msgstr "Vorlage für ein Bild mit Accordion"
+
+#~ msgid "Custom News section 3-Column Layout"
+#~ msgstr "Neuste Beiträge 3-spaltiges Layout"
+
+#~ msgctxt "Block pattern description"
+#~ msgid "A 3 Column Layout for custom News on Landing pages"
+#~ msgstr "Ein 3-spaltiges Layout für Custom News für Landing pages"
+
+#~ msgid "Call to Action"
+#~ msgstr "Call to Action"
+
+#~ msgctxt "Block pattern description"
+#~ msgid "Call to Action section"
+#~ msgstr "Call to Action Vorlage"
+
+#~ msgid "Image with Text"
+#~ msgstr "Bild mit Text"
+
+#~ msgctxt "Block pattern description"
+#~ msgid "Two column layout: Image left, text right column."
+#~ msgstr "Ein zweispaltiges Layout: Linksbündiges Bild, Textspalte rechts."
+
+#~ msgid "Imagefilm"
+#~ msgstr "Imagefilm"
+
+#~ msgctxt "Block pattern description"
+#~ msgid "FAU Imagefilm."
+#~ msgstr "FAU Imagefilm."
+
+#~ msgid "Landing page template 1"
+#~ msgstr "Landingpage Template 1"
+
+#~ msgctxt "Block pattern description"
+#~ msgid "A landingpage template for FAU."
+#~ msgstr "Ein Landingpage Template für die FAU."
+
+#~ msgid "Add Desktop Image"
+#~ msgstr "Desktop-Hintergrundbild hinzufügen"
+
+#~ msgid "Add Tablet Image"
+#~ msgstr "Tablet-Hintergrundbild hinzufügen"
+
+#~ msgid "Add Mobile Image"
+#~ msgstr "Handy-Hintergrundbild hinzufügen"
+
+#~ msgid "Add / Edit Content"
+#~ msgstr "Inhalt hinzufügen / bearbeiten"
+
+#~ msgid "Tablet Image"
+#~ msgstr "Tablet-Hintergrundbild"
+
+#~ msgid "Mobile Image"
+#~ msgstr "Handy-Hintergrundbild"
 
 #~ msgid "attention"
 #~ msgstr "Achtung"
