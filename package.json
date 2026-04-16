@@ -14,7 +14,7 @@
 		"test": "composer phpstan",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "concurrently \"wp-scripts start\" \"sass src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w\" \"sass src/_shared/scss/rrze-elements-blocks-elemental-compatibility.scss assets/css/rrze-elements-blocks-elemental-compatibility.css -w\"",
+		"start": "concurrently \"wp-scripts start\" \"sass --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css -w\" \"sass --no-source-map src/_shared/scss/rrze-elements-blocks-elemental-compatibility.scss assets/css/rrze-elements-blocks-elemental-compatibility.css -w\"",
 		"build-all": "node check-compatibility.js && sass --style=compressed --no-source-map src/_shared/scss/rrze-elements-blocks.scss assets/css/rrze-elements-blocks.css && npm run build && npx playwright test",
 		"update-version": "node update-version.js && npm run build",
 		"test:e2e": "NODE_OPTIONS=--use-system-ca playwright test",
