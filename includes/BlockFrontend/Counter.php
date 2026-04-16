@@ -32,6 +32,8 @@ class Counter extends AbstractBlockRender
 
         $button_url = $attributes['buttonUrl'] ?? '';
         $button_text = $attributes['buttonText'] ?? '';
+        $aria_label = isset($attributes['ariaLabel']) ? sanitize_text_field($attributes['ariaLabel']) : '';
+        $aria_label_attr = $aria_label !== '' ? ' aria-label="' . esc_attr($aria_label) . '"' : '';
 
         $html = '<div class="wp-block-rrze-elements-rrze-counter ' . esc_attr(trim($wrapper_class)) . '">';
         $html .= '<div class="rrze--counter-element-container">';
@@ -39,7 +41,7 @@ class Counter extends AbstractBlockRender
         $html .= '<dt><span class="' . esc_attr($span_class) . '" data-duration="' . esc_attr($duration) . '" data-stagger="' . esc_attr($stagger) . '">' . esc_html($title) . '</span></dt>';
         $html .= '<dd>' . wp_kses_post($description) . '<br />';
         if ($button_url) {
-            $html .= '<a class="standard-btn ghost-btn" href="' . esc_url($button_url) . '" data-wpel-link="internal">' . esc_html($button_text) . '</a>';
+            $html .= '<a class="standard-btn ghost-btn" href="' . esc_url($button_url) . '" data-wpel-link="internal"' . $aria_label_attr . '>' . esc_html($button_text) . '</a>';
         }
         $html .= '</dd></dl></div></div>';
 

@@ -33,6 +33,10 @@
     "buttonUrl": {
       "type": "string"
     },
+    "ariaLabel": {
+      "type": "string",
+      "default": ""
+    },
     "buttonOpensInNewTab": {
       "type": "boolean",
       "default": false

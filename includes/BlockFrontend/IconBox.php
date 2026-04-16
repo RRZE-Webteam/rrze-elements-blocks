@@ -57,6 +57,8 @@ class IconBox extends AbstractBlockRender
 
         $button_url = $attributes['buttonUrl'] ?? '';
         $button_text = $attributes['buttonText'] ?? '';
+        $aria_label = isset($attributes['ariaLabel']) ? sanitize_text_field($attributes['ariaLabel']) : '';
+        $aria_label_attr = $aria_label !== '' ? ' aria-label="' . esc_attr($aria_label) . '"' : '';
 
         $markup = '<div class="rrze-iconbox-icon"><span>' . $iconMarkup . '</span></div>';
 
@@ -68,7 +70,7 @@ class IconBox extends AbstractBlockRender
         $html .= '<dt><span class="fau-iconbox-data rrze-iconbox-' . esc_attr($font_size) . '" data-duration="' . esc_attr($duration) . '" data-stagger="' . esc_attr($stagger) . '">' . esc_html($title) . '</span></dt>';
         $html .= '<dd>' . wp_kses_post($description) . '<br />';
         if ($button_url && $button_text && $description) {
-            $html .= '<a class="standard-btn ghost-btn" href="' . esc_url($button_url) . '" data-wpel-link="internal">' . esc_html($button_text) . '</a>';
+            $html .= '<a class="standard-btn ghost-btn" href="' . esc_url($button_url) . '" data-wpel-link="internal"' . $aria_label_attr . '>' . esc_html($button_text) . '</a>';
         }
         $html .= '</dd></dl></div></div></div>';
 

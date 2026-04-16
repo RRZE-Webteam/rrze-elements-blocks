@@ -15,6 +15,7 @@ import {
   ToolbarGroup,
   ToolbarButton,
   Button,
+  TextControl,
 } from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
 import { displayShortcut } from "@wordpress/keycodes";
@@ -36,6 +37,7 @@ interface EditProps {
     buttonText: string;
     fontSize: string;
     buttonUrl: string;
+    ariaLabel: string;
     icon: string;
     svgString: string;
     buttonOpensInNewTab: boolean;
@@ -60,7 +62,7 @@ export default function Edit({
 }: EditProps) {
   const props = useBlockProps();
 
-  const { buttonUrl, icon } = attributes;
+  const { buttonUrl, icon, ariaLabel } = attributes;
 
   const [iconType, iconName] = icon?.split(" ") || [];
 
@@ -180,6 +182,15 @@ export default function Edit({
             }
             units={["px", "em", "rem"]}
             value={attributes.fontSize}
+          />
+        </PanelBody>
+        <PanelBody title={__("Accessibility", "rrze-elements-blocks")} initialOpen={true}>
+          <TextControl
+            label={__("Aria-Label", "rrze-elements-blocks")}
+            value={ariaLabel || ""}
+            onChange={(value) => setAttributes({ ariaLabel: value })}
+            disabled={!isURLSet}
+            help={!isURLSet ? __("Add a link to enable this field.", "rrze-elements-blocks") : undefined}
           />
         </PanelBody>
       </InspectorControls>

@@ -3,10 +3,13 @@ import {
   Popover,
   ToolbarGroup,
   ToolbarButton,
+  PanelBody,
+  TextControl,
 } from "@wordpress/components";
 import {
   useBlockProps,
   BlockControls,
+  InspectorControls,
   RichText,
   __experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
@@ -28,6 +31,7 @@ interface EditProps {
     title: string;
     subtitle: string;
     buttonText: string;
+    ariaLabel: string;
     target: string;
     background: string;
     isSearch: boolean;
@@ -54,6 +58,7 @@ export default function Edit({
     subtitle,
     buttonText,
     buttonUrl,
+    ariaLabel,
     background,
     isSearch,
   } = attributes;
@@ -158,6 +163,17 @@ export default function Edit({
           )}
         </ToolbarGroup>
       </BlockControls>
+      <InspectorControls>
+        <PanelBody title={__("Accessibility", "rrze-elements-blocks")} initialOpen={true}>
+          <TextControl
+            label={__("Aria-Label", "rrze-elements-blocks")}
+            value={ariaLabel || ""}
+            onChange={(value) => setAttributes({ariaLabel: value})}
+            disabled={!isURLSet}
+            help={!isURLSet ? __("Add a link to enable this field.", "rrze-elements-blocks") : undefined}
+          />
+        </PanelBody>
+      </InspectorControls>
       {isLinkTag && isSelected && (isEditingURL || isURLSet) && (
         <Popover
           placement="bottom"

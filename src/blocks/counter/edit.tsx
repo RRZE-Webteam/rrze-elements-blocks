@@ -13,6 +13,7 @@ import {
 	Popover,
 	ToolbarGroup,
 	ToolbarButton,
+	TextControl,
 } from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
 import { displayShortcut } from "@wordpress/keycodes";
@@ -21,15 +22,16 @@ import { useState, useEffect } from "@wordpress/element";
 
 interface EditProps {
 	blockProps: string[];
-	attributes: {
-		title: number;
-		description: string;
-		buttonText: string;
-		fontSize: string;
-		buttonUrl: string;
-		buttonOpensInNewTab: boolean;
-		target: string;
-	};
+		attributes: {
+			title: number;
+			description: string;
+			buttonText: string;
+			fontSize: string;
+			buttonUrl: string;
+			ariaLabel: string;
+			buttonOpensInNewTab: boolean;
+			target: string;
+		};
 	setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 	isSelected: boolean;
 }
@@ -48,7 +50,7 @@ export default function Edit({
 }: EditProps) {
 	const props = useBlockProps();
 
-	const { buttonUrl } = attributes;
+	const { buttonUrl, ariaLabel } = attributes;
 
 	const onChangeTitle = (title: string) => {
 		if (isNaN(parseInt(title))) {
@@ -144,6 +146,15 @@ export default function Edit({
 						}
 						units={["px", "em", "rem"]}
 						value={16}
+					/>
+				</PanelBody>
+				<PanelBody title={__("Accessibility", "rrze-elements-blocks")} initialOpen={true}>
+					<TextControl
+						label={__("Aria-Label", "rrze-elements-blocks")}
+						value={ariaLabel || ""}
+						onChange={(value) => setAttributes({ ariaLabel: value })}
+						disabled={!isURLSet}
+						help={!isURLSet ? __("Add a link to enable this field.", "rrze-elements-blocks") : undefined}
 					/>
 				</PanelBody>
 			</InspectorControls>
