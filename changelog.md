@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.0] - 2026-05-12
+Minor CSS Update for compatibility with FAU-Elemental Version 1.0.15.
+Please Update FAU-Elemental to >=1.0.15 when using this Plugin Version.
+
+Allows the rrze/appointment Block inside Accordions. Allows the new rrze-research block within Accordions.
+
 ## [1.1.10] - 2026-04-16
 Minor Bugfixes and Improvements
 

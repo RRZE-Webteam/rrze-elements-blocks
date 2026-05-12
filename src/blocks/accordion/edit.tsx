@@ -266,10 +266,11 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
                 "core/shortcode",
                 "core/calendar",
                 "core/rss",
+                "rrze/research-data",
                 "rrze-elements/alert",
                 "rrze-elements/notice",
                 "core/buttons",
-                "core/button"
+                "core/button",
               ]}
             />
           </div>

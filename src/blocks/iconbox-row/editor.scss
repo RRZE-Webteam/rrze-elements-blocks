@@ -1,5 +1,6 @@
 @use "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
 @use "../../_shared/scss/fau-elemental-compatibility-layer/counter";
+@use "../../_shared/scss/fau-elemental-compatibility-layer/bleed-variables" as bleed;
 
 svg.elements-tabs-icon-modal {
     float: left;
@@ -26,7 +27,7 @@ svg.elements-tabs-icon-modal {
 }
 
 .wp-theme-FAU-Elemental div.is-style-dark div.wp-block-rrze-elements-iconbox-row {
-  max-width: 100%;
+  max-width: bleed.$fau-wide-layout-width;
   margin-left: auto;
   margin-right: auto;
 
@@ -107,9 +108,4 @@ svg.elements-tabs-icon-modal {
     .rrze--counter-element-container {
         padding: 0;
     }
-}
-
-.wp-theme-FAU-Elemental .wp-block-post-content > .wp-block-group:has(div.wp-block-rrze-elements-iconbox-row) {
-  margin-left: 0;
-  margin-right: 0;
 }

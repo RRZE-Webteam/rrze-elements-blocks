@@ -1,3 +1,5 @@
+@use 'bleed-variables' as bleed;
+
 .wp-theme-FAU-Elemental {
   div.wp-block-rrze-elements-collapsibles,
   div.alert.alert-default,
@@ -29,18 +31,17 @@
   div.wp-block-rrze-elements-cta,
   {
     max-width: var(--wide-max-width);
-    margin-left: var(--faue_base-max-width_bleed_inline-margin);
-    margin-right: var(--faue_base-max-width_bleed_inline-margin);
+    margin-left: bleed.$fau-margin-to-wide-width;
+    margin-right: bleed.$fau-margin-to-wide-width;
   }
 
-  div.wp-block-rrze-elements-iconbox-row,
-  div.wp-block-rrze-elements-counter-row,
-  div.wp-block-rrze-elements-counter-row,
-  section.rrze-elements-blocks__carousel,
-  section.facts{
-    margin-left: var(--faue_base-max-width_bleed_inline-margin);
-    margin-right: var(--faue_base-max-width_bleed_inline-margin);
-  }
+    div.wp-block-rrze-elements-iconbox-row,
+    div.wp-block-rrze-elements-counter-row,
+    div.wp-block-rrze-elements-counter-row {
+        margin-inline: var(--faue_fullbleed_inline-margin);
+        padding-inline-start: var(--Spacing-6x);
+        padding-inline-end: var(--Spacing-4x);
+    }
 
   section.rrze-elements-blocks__carousel
   {
@@ -61,8 +62,8 @@
   div.wp-block-group-is-layout-constrained div.wp-block-group-is-layout-constrained.is-style-dark section.facts,
   {
     max-width: var(--wide-max-width);
-    margin-left: var(--faue_wide-max-width_bleed_minimal_inline-margin);
-    margin-right: var(--faue_wide-max-width_bleed_minimal_inline-margin);
+    margin-left: bleed.$fau-margin-to-wide-width-with-gutter;
+    margin-right: bleed.$fau-margin-to-wide-width-with-gutter;
   }
 
   div.wp-block-group-is-layout-constrained section.facts,
@@ -87,7 +88,7 @@
   div.wp-block-rrze-elements-counter-row {
     padding-left: 0;
     padding-right: 0;
-    margin-left: var(--faue_fullbleed_inline-margin) !important;
-    margin-right: var(--faue_fullbleed_inline-margin) !important;
+    margin-left: bleed.$fau-margin-to-wide-width-with-gutter !important;
+    margin-right: bleed.$fau-margin-to-wide-width-with-gutter !important;
   }
 }

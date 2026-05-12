@@ -1,0 +1,9 @@
+$fau-content-width: var(--small-max-width) !default;
+$fau-default-layout-width: var(--base-max-width) !default;
+$fau-wide-layout-width: var(--wide-max-width) !default;
+
+$fau-margin-align-to-content-width: var(--faue_content_inline-margin) !default;
+$fau-margin-to-default-width: var(--faue_base-max-width_bleed_inline-margin) !default;
+$fau-margin-to-wide-width: var(--faue_wide-max-width_bleed_inline-margin) !default;
+$fau-margin-to-wide-width-with-gutter: var(--faue_wide-max-width_bleed_minimal_inline-margin) !default;
+$fau-margin-to-full-width: var(--faue_fullbleed_inline-margin) !default;

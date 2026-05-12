@@ -3,6 +3,7 @@
 @use "../../_shared/scss/base-styles/cta_editor";
 @use "../../_shared/scss/fau-elemental-compatibility-layer/cta";
 @use "../../_shared/scss/fau-elemental-compatibility-layer/contentWidthFix";
+@use "../../_shared/scss/fau-elemental-compatibility-layer/bleed-variables" as bleed;
 
 .block-editor-block-list__block.wp-block-rrze-elements-cta {
 
@@ -56,4 +57,15 @@ div.wp-block-rrze-elements-cta div.cta-image:has(>img):before{
   height: 0;
   position: relative;
   width: 0;
+}
+
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta.wp-block {
+  margin-inline: initial;
+  margin-left: bleed.$fau-margin-to-wide-width;
+  margin-right: bleed.$fau-margin-to-wide-width;
+  max-width: bleed.$fau-wide-layout-width;
+}
+
+.wp-theme-FAU-Elemental .wp-block-group div.wp-block-rrze-elements-cta.wp-block {
+  margin: 0 auto;
 }

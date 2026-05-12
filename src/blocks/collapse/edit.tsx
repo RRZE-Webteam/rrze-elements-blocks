@@ -272,6 +272,8 @@ const Edit = ({
                   "core/tag-cloud",
                   "core/table",
                   "rrze-elements/alert",
+                  "rrze/appointment",
+                  "rrze/research-data",
                   "rrze/rrze-video",
                   "rrze-faudir/block",
                   "core/gallery",
