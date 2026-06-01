@@ -23,7 +23,8 @@ class ThemeSniffer {
                 'Fau-Blog',
                 'FAU Jobportal',
                 'FAU-Elemental',
-                'rrze-2019'
+                'rrze-2019',
+                'RRZE 2019'
             ],
             'fauelemental' => [
                 'FAU-Elemental',
