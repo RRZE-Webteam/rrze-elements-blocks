@@ -219,6 +219,10 @@ class Blocks
                 'build_folder' => 'info-card',
                 'class' => InfoCard::class,
             ],
+            [
+                'build_folder' => 'media-accordion',
+                'class' => Collapsibles::class,
+            ],
         ];
 
         foreach ($dynamic_blocks as $block_def) {
