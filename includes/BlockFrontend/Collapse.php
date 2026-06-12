@@ -26,6 +26,15 @@ class Collapse extends AbstractBlockRender
     $jump_name = isset($attributes['jumpName']) ? $attributes['jumpName'] : '';
     $load_open = !empty($attributes['loadOpen']);
     $hstart = isset($attributes['hstart']) ? (int)$attributes['hstart'] : 1;
+    $media_image_id = isset($attributes['mediaAccordionImageId'])
+      ? absint($attributes['mediaAccordionImageId'])
+      : 0;
+    $media_image_url = isset($attributes['mediaAccordionImageUrl'])
+      ? esc_url_raw((string)$attributes['mediaAccordionImageUrl'])
+      : '';
+    $media_image_alt = isset($attributes['mediaAccordionImageAlt'])
+      ? sanitize_text_field((string)$attributes['mediaAccordionImageAlt'])
+      : '';
 
     $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
 
@@ -62,10 +71,13 @@ class Collapse extends AbstractBlockRender
     $markup .= sprintf('<h%d class="accordion-heading">', $heading_level);
 
     $markup .= sprintf(
-      '<button class="%1$s" data-toggle="collapse" data-name="%2$s" data-href="#%2$s" type="button" aria-expanded="%3$s" aria-controls="%2$s-section" id="%2$s">',
+      '<button class="%1$s" data-toggle="collapse" data-name="%2$s" data-href="#%2$s" type="button" aria-expanded="%3$s" aria-controls="%2$s-section" id="%2$s" data-media-accordion-image-id="%4$d" data-media-accordion-image-url="%5$s" data-media-accordion-image-alt="%6$s">',
       esc_attr($button_classes),
       $jump_attr,
-      $load_open ? 'true' : 'false'
+      $load_open ? 'true' : 'false',
+      $media_image_id,
+      esc_url($media_image_url),
+      esc_attr($media_image_alt)
     );
 
     if ($iconMarkup) {

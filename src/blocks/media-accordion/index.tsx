@@ -2,14 +2,10 @@ import { registerBlockType } from '@wordpress/blocks';
 import Edit from './edit';
 import metadata from './block.json';
 import {InnerBlocks} from "@wordpress/block-editor";
+import "./editor.scss";
+import "./style.scss";
 
 registerBlockType( metadata.name as any, {
-  // Used to construct a preview for the block to be shown in the block inserter.
-  example: {
-    attributes: {
-      message: 'Accordion',
-    },
-  } as any,
   icon: {
     src: "align-center",
     background: "#00458c"

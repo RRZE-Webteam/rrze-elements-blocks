@@ -10,5 +10,8 @@
     "html": false
   },
   "textdomain": "rrze-elements-blocks",
-  "editorScript": "file:./index.js"
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "rrze-media-accordion"
 }

@@ -397,4 +397,44 @@ function wp_parse_args($args, $defaults = []): array
     return array_merge($defaults, (array)$args);
 }
 
+function get_post_type($post = null): string
+{
+    return 'attachment';
+}
+
+function has_post_thumbnail($post = null): bool
+{
+    return false;
+}
+
+function get_post_thumbnail_id($post = null): int
+{
+    return 0;
+}
+
+function wp_get_attachment_metadata($attachment_id, $unfiltered = false): array
+{
+    return [];
+}
+
 class WP_Block_Editor_Context {}
+
+if (!class_exists('WP_Block')) {
+    class WP_Block
+    {
+        /** @var array<string, mixed> */
+        public array $parsed_block;
+        public string $inner_html = '';
+
+        /**
+         * @param array<string, mixed> $parsed_block
+         */
+        public function __construct(array $parsed_block)
+        {
+            $this->parsed_block = $parsed_block;
+            $this->inner_html = isset($parsed_block['innerHTML'])
+                ? (string)$parsed_block['innerHTML']
+                : '';
+        }
+    }
+}

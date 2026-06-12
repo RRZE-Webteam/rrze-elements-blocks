@@ -21,6 +21,7 @@ use RRZE\ElementsBlocks\BlockFrontend\FactsGrid;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
 use RRZE\ElementsBlocks\BlockFrontend\InfoCard;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
+use RRZE\ElementsBlocks\BlockFrontend\MediaAccordion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
@@ -221,7 +222,7 @@ class Blocks
             ],
             [
                 'build_folder' => 'media-accordion',
-                'class' => Collapsibles::class,
+                'class' => MediaAccordion::class,
             ],
         ];
 
