@@ -11,99 +11,37 @@ import {
   Button,
   Notice,
   PanelBody,
+  Popover,
+  Modal,
   SelectControl,
   TextControl,
   ToolbarButton,
   ToolbarGroup,
 } from "@wordpress/components";
 import {useDispatch, useSelect} from "@wordpress/data";
-import {useEffect, useState} from "@wordpress/element";
+import {useCallback, useEffect, useState} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
-import {image, trash} from "@wordpress/icons";
+import {closeSmall, gallery, image, trash} from "@wordpress/icons";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 import {store as noticesStore} from "@wordpress/notices";
-import type {BlockInstance} from "@wordpress/blocks";
-
-const ACCORDION_ITEM_BLOCKS = [
-  "rrze-elements/accordion",
-  "rrze-elements/collapse",
-];
-
-interface AccordionItemAttributes {
-  title?: string;
-  jumpName?: string;
-  mediaAccordionImageId?: number;
-  mediaAccordionImageUrl?: string;
-  mediaAccordionImageAlt?: string;
-}
-
-interface AccordionItem {
-  clientId: string;
-  depth: number;
-  name: string;
-  attributes: AccordionItemAttributes;
-}
-
-interface SelectedMedia {
-  id?: number | string;
-  url?: string;
-  alt?: string;
-  alt_text?: string;
-}
+import {
+  AccordionItemAttributes,
+  collectAccordionItems,
+  getItemTitle,
+  SelectedMedia,
+} from "./accordion-items";
+import MediaAccordionImageManager from "./MediaAccordionImageManager";
 
 interface EditProps {
   clientId: string;
 }
 
-const isAccordionItem = (blockName: string) =>
-  ACCORDION_ITEM_BLOCKS.includes(blockName);
-
-const collectAccordionItems = (
-  blocks: BlockInstance[],
-  depth = 0,
-): AccordionItem[] => {
-  const items: AccordionItem[] = [];
-
-  blocks.forEach((block) => {
-    const itemBlock = isAccordionItem(block.name);
-
-    if (itemBlock) {
-      items.push({
-        clientId: block.clientId,
-        depth,
-        name: block.name,
-        attributes: block.attributes as AccordionItemAttributes,
-      });
-    }
-
-    items.push(
-      ...collectAccordionItems(block.innerBlocks, itemBlock ? depth + 1 : depth),
-    );
-  });
-
-  return items;
-};
-
-const getItemTitle = (item: AccordionItem, index: number) => {
-  const title = item.attributes.title?.trim();
-  const jumpName = item.attributes.jumpName?.trim();
-
-  if (title) {
-    return title;
-  }
-
-  if (jumpName) {
-    return jumpName;
-  }
-
-  return item.name === "rrze-elements/accordion"
-    ? `${__("Nested accordion item", "rrze-elements-blocks")} ${index + 1}`
-    : `${__("Accordion item", "rrze-elements-blocks")} ${index + 1}`;
-};
-
 const Edit = ({clientId}: EditProps) => {
   const props = useBlockProps();
   const [activeItemClientId, setActiveItemClientId] = useState("");
+  const [isImageManagerOpen, setIsImageManagerOpen] = useState(false);
+  const [imageManagerAnchor, setImageManagerAnchor] =
+    useState<Element | null>(null);
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
   const {createErrorNotice} = useDispatch(noticesStore);
 
@@ -172,6 +110,23 @@ const Edit = ({clientId}: EditProps) => {
     updateBlockAttributes(activeItem.clientId, attributes);
   };
 
+  const updateItemImage = useCallback(
+    (
+      itemClientId: string,
+      attributes: Partial<AccordionItemAttributes>,
+    ) => {
+      updateBlockAttributes(itemClientId, attributes);
+    },
+    [updateBlockAttributes],
+  );
+
+  const setImageManagerButtonRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      setImageManagerAnchor(node);
+    },
+    [],
+  );
+
   const onSelectImage = (media: SelectedMedia) => {
     if (!media?.url) {
       return;
@@ -228,8 +183,44 @@ const Edit = ({clientId}: EditProps) => {
               onClick={onRemoveImage}
             />
           )}
+          <ToolbarButton
+            ref={setImageManagerButtonRef}
+            icon={gallery}
+            label={__(
+              "Manage accordion images",
+              "rrze-elements-blocks",
+            )}
+            isPressed={isImageManagerOpen}
+            onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}
+          />
         </ToolbarGroup>
       </BlockControls>
+
+      {isImageManagerOpen && imageManagerAnchor && (
+        <Modal
+          className="media-accordion-image-manager__popover"
+          size="fill"
+          onRequestClose={() => setIsImageManagerOpen(false)}
+        >
+          <div className="media-accordion-image-manager">
+            <div className="media-accordion-image-manager__header">
+              <h2>
+                {__("Accordion images", "rrze-elements-blocks")}
+              </h2>
+              <Button
+                icon={closeSmall}
+                label={__("Close", "rrze-elements-blocks")}
+                onClick={() => setIsImageManagerOpen(false)}
+              />
+            </div>
+            <MediaAccordionImageManager
+              items={items}
+              onActivateItem={setActiveItemClientId}
+              onUpdateItem={updateItemImage}
+            />
+          </div>
+        </Modal>
+      )}
 
       <InspectorControls>
         <PanelBody

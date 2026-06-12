@@ -89,6 +89,7 @@
 	},
 	"dependencies": {
 		"@wordpress/a11y": "^4.44.0",
+		"@wordpress/dataviews": "^11.1.0",
 		"@wordpress/shortcode": "^4.44.0",
 		"color": "5.0.3",
 		"gsap": "^3.15.0",
