@@ -26,9 +26,19 @@ class Accordion extends AbstractBlockRender
 
       $title     = isset( $attributes['title'] ) ? sanitize_text_field( $attributes['title'] ) : '';
       $color     = isset( $attributes['color'] ) ? sanitize_html_class( $attributes['color'] ) : '';
+      $load_open = !empty($attributes['loadOpen']);
 
       $hstart   = isset( $attributes['hstart'] ) ? (int) $attributes['hstart'] : 1;
       $jumpname = isset( $attributes['jumpName'] ) ? sanitize_text_field($attributes['jumpName']) : '';
+      $media_image_id = isset($attributes['mediaAccordionImageId'])
+        ? absint($attributes['mediaAccordionImageId'])
+        : 0;
+      $media_image_url = isset($attributes['mediaAccordionImageUrl'])
+        ? esc_url_raw((string)$attributes['mediaAccordionImageUrl'])
+        : '';
+      $media_image_alt = isset($attributes['mediaAccordionImageAlt'])
+        ? sanitize_text_field((string)$attributes['mediaAccordionImageAlt'])
+        : '';
 
       $material_symbol = isset($attributes['materialSymbol']) ? 'symbols ' . sanitize_html_class($attributes['materialSymbol']) : '';
       $iconMarkup = '';
@@ -57,6 +67,8 @@ class Accordion extends AbstractBlockRender
 
       // BlockEditor Class
       $wrapper_class = isset( $attributes['className'] ) ? $attributes['className'] : '';
+      $button_classes = trim('accordion-toggle ' . ($load_open ? 'active' : ''));
+      $body_classes = trim('accordion-body ' . ($load_open ? 'open' : ''));
 
       // HTML Markup
       $markup  = '<div class="' . esc_attr( trim( $wrapper_class ) ) . '">';
@@ -74,8 +86,13 @@ class Accordion extends AbstractBlockRender
       $markup .= '<span class="read-mode-only">' . esc_html( $title ) . '</span>';
 
       $markup .= sprintf(
-        '<button class="accordion-toggle" data-toggle="collapse" data-name="%1$s" data-href="#%1$s" type="button" aria-expanded="false" aria-controls="%1$s">',
-        esc_attr( $output_id )
+        '<button class="%1$s" data-toggle="collapse" data-name="%2$s" data-href="#%2$s" type="button" aria-expanded="%3$s" aria-controls="%2$s" data-media-accordion-image-id="%4$d" data-media-accordion-image-url="%5$s" data-media-accordion-image-alt="%6$s">',
+        esc_attr($button_classes),
+        esc_attr( $output_id ),
+        $load_open ? 'true' : 'false',
+        $media_image_id,
+        esc_url($media_image_url),
+        esc_attr($media_image_alt)
       );
 
       if ($iconMarkup) {
@@ -88,8 +105,9 @@ class Accordion extends AbstractBlockRender
 
       // Panel-Body
       $markup .= sprintf(
-        '<div id="%1$s" class="accordion-body" aria-labelledby="%2$s" role="region">',
+        '<div id="%1$s" class="%2$s" aria-labelledby="%3$s" role="region">',
         esc_attr( $output_id ),
+        esc_attr($body_classes),
         esc_attr( $jumpname )
       );
 

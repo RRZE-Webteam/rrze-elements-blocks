@@ -18,6 +18,7 @@ use RRZE\ElementsBlocks\BlockFrontend\Fact;
 use RRZE\ElementsBlocks\BlockFrontend\FactsGrid;
 use RRZE\ElementsBlocks\BlockFrontend\IconBox;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
+use RRZE\ElementsBlocks\BlockFrontend\MediaAccordion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
@@ -26,6 +27,90 @@ use RRZE\ElementsBlocks\BlockFrontend\TimelineItem;
 
 final class BlockFrontendRenderTest extends TestCase
 {
+    public function test_media_accordion_renders_nested_load_open_image(): void
+    {
+        $block = new WP_Block([
+            'blockName' => 'rrze-elements/media-accordion',
+            'attrs' => [],
+            'innerBlocks' => [
+                [
+                    'blockName' => 'rrze-elements/collapsibles',
+                    'attrs' => [],
+                    'innerBlocks' => [
+                        [
+                            'blockName' => 'rrze-elements/collapse',
+                            'attrs' => [
+                                'mediaAccordionImageId' => 10,
+                                'mediaAccordionImageUrl' => 'https://example.com/first.jpg',
+                                'mediaAccordionImageAlt' => 'First image',
+                            ],
+                            'innerBlocks' => [
+                                [
+                                    'blockName' => 'rrze-elements/accordions',
+                                    'attrs' => [],
+                                    'innerBlocks' => [
+                                        [
+                                            'blockName' => 'rrze-elements/accordion',
+                                            'attrs' => [
+                                                'loadOpen' => true,
+                                                'mediaAccordionImageId' => 20,
+                                                'mediaAccordionImageUrl' => 'https://example.com/nested.jpg',
+                                                'mediaAccordionImageAlt' => 'Nested image',
+                                            ],
+                                            'innerBlocks' => [],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'innerHTML' => '',
+        ]);
+
+        $renderer = new MediaAccordion();
+        $output = $renderer->render(
+            ['className' => 'custom-media-accordion'],
+            '<div class="wp-block-rrze-elements-collapsibles">Accordion</div>',
+            $block
+        );
+
+        $this->assertStringContainsString('wp-block-rrze-elements-media-accordion', $output);
+        $this->assertStringContainsString('custom-media-accordion', $output);
+        $this->assertStringContainsString('https://example.com/nested.jpg', $output);
+        $this->assertStringContainsString('Nested image', $output);
+        $this->assertStringContainsString('wp-image-20', $output);
+    }
+
+    public function test_accordion_item_renderers_expose_media_attributes(): void
+    {
+        $attributes = [
+            'title' => 'Item',
+            'jumpName' => 'item',
+            'hstart' => 2,
+            'loadOpen' => true,
+            'mediaAccordionImageId' => 42,
+            'mediaAccordionImageUrl' => 'https://example.com/image.jpg?size=large&crop=1',
+            'mediaAccordionImageAlt' => 'Example image',
+        ];
+
+        $collapseOutput = (new Collapse())->render($attributes, '<p>Content</p>');
+        $accordionOutput = (new Accordion())->render($attributes, '<p>Content</p>');
+
+        foreach ([$collapseOutput, $accordionOutput] as $output) {
+            $this->assertStringContainsString('data-media-accordion-image-id="42"', $output);
+            $this->assertStringContainsString(
+                'data-media-accordion-image-url="https://example.com/image.jpg?size=large&crop=1"',
+                $output
+            );
+            $this->assertStringContainsString('data-media-accordion-image-alt="Example image"', $output);
+            $this->assertStringContainsString('class="accordion-toggle active"', $output);
+            $this->assertStringContainsString('aria-expanded="true"', $output);
+            $this->assertStringContainsString('class="accordion-body open"', $output);
+        }
+    }
+
     /**
      * @dataProvider blockProvider
      *
@@ -216,6 +301,12 @@ final class BlockFrontendRenderTest extends TestCase
                 'className' => 'insertion',
             ],
             '<p>Insertion</p>',
+        ];
+
+        yield [
+            MediaAccordion::class,
+            ['className' => 'media-accordion-class'],
+            '<div>Accordion content</div>',
         ];
 
         yield [

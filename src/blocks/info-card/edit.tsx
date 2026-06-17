@@ -466,17 +466,22 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
               data-background-overlay={backgroundOverlayDataAttr}
               style={backgroundOverlayStyle}
             >
-              <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
-                <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>
-                  <source
-                    srcSet={mobileImageUrl}
-                    media={"(max-width: 734px)"}/>
-                  <source
-                    srcSet={tabletImageUrl}
-                    media={"(max-width: 1024px)"}/>
-                  <img src={desktopImageUrl} alt={attributes.alt}/>
-                </picture>
-              </figure>
+              {(mobileImageUrl || tabletImageUrl || desktopImageUrl) && (
+                <figure className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
+                  <picture className={"rrze-elements-blocks__carousel_feature_card_bg_figure_picture"}>
+                    <source
+                      srcSet={mobileImageUrl}
+                      media={"(max-width: 734px)"}/>
+                    <source
+                      srcSet={tabletImageUrl}
+                      media={"(max-width: 1024px)"}/>
+                    <img src={desktopImageUrl} alt={attributes.alt}/>
+                  </picture>
+                </figure>
+              )} : {(
+                <div className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
+                </div>
+            )}
               <span className={"rrze-elements-blocks__carousel_feature_card_bg_overlay"} aria-hidden="true"/>
             </div>
             {shouldShowActionIcon && (

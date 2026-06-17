@@ -22,12 +22,13 @@ class ThemeSniffer {
                 'FAU-RWFak',
                 'Fau-Blog',
                 'FAU Jobportal',
-                'FAU-Elemental'
+                'FAU-Elemental',
+                'rrze-2019',
+                'RRZE 2019'
             ],
             'fauelemental' => [
                 'FAU-Elemental',
             ],
-            'rrzethemes' => ['rrze-2019'],
             'eventthemes' => ['FAU-Events'],
         ];
 

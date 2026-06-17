@@ -145,6 +145,15 @@ class Main
             true
         );
         wp_register_script(
+            'rrze-media-accordion',
+            plugins_url('assets/js/media-accordion/rrze-media-accordion.min.js', plugin_basename($this->pluginFile)),
+            ['rrze-accordions'],
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/js/media-accordion/rrze-media-accordion.min.js'
+            ) ?: RRZE_ELEMENTSB_VERSION),
+            true
+        );
+        wp_register_script(
             'rrze-tabs',
             plugins_url('assets/js/tabs/rrze-tabs.min.js', plugin_basename($this->pluginFile)),
             ['jquery'],

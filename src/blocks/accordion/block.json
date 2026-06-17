@@ -69,6 +69,18 @@
     "materialSymbol": {
       "type": "string",
       "default": ""
+    },
+    "mediaAccordionImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "mediaAccordionImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mediaAccordionImageAlt": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
