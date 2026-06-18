@@ -10,6 +10,8 @@
   const imageSelector = "[data-media-accordion-image]";
   const captionSelector = "figcaption";
   const templateSelector = "template[data-media-accordion-template]";
+  const mobileSlotSelector = "[data-media-accordion-mobile-slot]";
+  const mobileMediaQuery = "(max-width: 782px)";
 
   const getImageData = (element) => ({
     id: Number(element.dataset.mediaAccordionImageId) || 0,
@@ -17,6 +19,23 @@
     alt: element.dataset.mediaAccordionImageAlt || "",
     caption: element.dataset.mediaAccordionImageCaption || "",
   });
+
+  const getLayout = (wrapper) =>
+    Array.from(wrapper.children).find(
+      (child) =>
+        child instanceof HTMLElement &&
+        child.classList.contains("media-accordion"),
+    ) || wrapper;
+
+  const getDesktopMedia = (wrapper) => {
+    const layout = getLayout(wrapper);
+
+    return Array.from(layout.children).find(
+      (child) =>
+        child instanceof HTMLElement &&
+        child.matches(mediaSelector),
+    ) || null;
+  };
 
   const imageDataMatches = (element, imageData) => {
     const elementImageData = getImageData(element);
@@ -29,10 +48,16 @@
     );
   };
 
-  const findImageTemplate = (wrapper, imageData) =>
-    Array.from(wrapper.querySelectorAll(templateSelector)).find((template) =>
-      imageDataMatches(template, imageData),
-    );
+  const findImageTemplate = (wrapper, imageData) => {
+    const layout = getLayout(wrapper);
+
+    return Array.from(layout.children).find(
+      (child) =>
+        child instanceof Element &&
+        child.matches(templateSelector) &&
+        imageDataMatches(child, imageData),
+    ) || null;
+  };
 
   const getTemplateMedia = (template) => {
     if (
@@ -47,6 +72,24 @@
     return media instanceof HTMLElement
       ? media.cloneNode(true)
       : null;
+  };
+
+  const getDirectChild = (element, className) =>
+    Array.from(element.children).find(
+      (child) =>
+        child instanceof HTMLElement && child.classList.contains(className),
+    ) || null;
+
+  const getAccordionInner = (toggle) => {
+    const group = toggle.closest(".accordion-group");
+
+    if (!(group instanceof HTMLElement)) {
+      return null;
+    }
+
+    const body = getDirectChild(group, "accordion-body");
+
+    return body ? getDirectChild(body, "accordion-inner") : null;
   };
 
   const updateImageElement = (media, imageData) => {
@@ -104,8 +147,96 @@
     caption.innerHTML = imageData.caption;
   };
 
+  const createMobileMedia = (wrapper, imageData) => {
+    const template = findImageTemplate(wrapper, imageData);
+    let media = template ? getTemplateMedia(template) : null;
+
+    if (!(media instanceof HTMLElement)) {
+      const desktopMedia = getDesktopMedia(wrapper);
+
+      if (!(desktopMedia instanceof HTMLElement)) {
+        return null;
+      }
+
+      media = desktopMedia.cloneNode(true);
+      updateImageElement(media, imageData);
+    }
+
+    media.hidden = false;
+    media.classList.remove("is-empty", "media-accordion__media");
+    media.classList.add("media-accordion__mobile-media");
+    media.dataset.mediaAccordionMobileMedia = "";
+
+    return media;
+  };
+
+  const renderMobileImages = (wrapper) => {
+    let hasMobileImages = false;
+
+    wrapper.querySelectorAll(toggleSelector).forEach((toggle) => {
+      if (
+        !(toggle instanceof HTMLElement) ||
+        toggle.closest(wrapperSelector) !== wrapper
+      ) {
+        return;
+      }
+
+      const inner = getAccordionInner(toggle);
+
+      if (!inner) {
+        return;
+      }
+
+      const imageData = getImageData(toggle);
+      const existingSlot = getDirectChild(
+        inner,
+        "media-accordion__mobile-slot",
+      );
+
+      if (!imageData.url) {
+        existingSlot?.remove();
+        return;
+      }
+
+      const media = createMobileMedia(wrapper, imageData);
+
+      if (!media) {
+        return;
+      }
+
+      const slot = existingSlot || document.createElement("div");
+      slot.className = "media-accordion__mobile-slot";
+      slot.dataset.mediaAccordionMobileSlot = "";
+      slot.replaceChildren(media);
+
+      if (!existingSlot) {
+        inner.append(slot);
+      }
+
+      hasMobileImages = true;
+    });
+
+    wrapper.classList.toggle(
+      "has-mobile-accordion-images",
+      hasMobileImages,
+    );
+  };
+
+  const removeMobileImages = (wrapper) => {
+    wrapper.querySelectorAll(mobileSlotSelector).forEach((slot) => {
+      if (
+        slot instanceof HTMLElement &&
+        slot.closest(wrapperSelector) === wrapper
+      ) {
+        slot.remove();
+      }
+    });
+
+    wrapper.classList.remove("has-mobile-accordion-images");
+  };
+
   const updateImage = (wrapper, toggle) => {
-    const media = wrapper.querySelector(mediaSelector);
+    const media = getDesktopMedia(wrapper);
 
     if (!media) {
       return;
@@ -140,6 +271,27 @@
   };
 
   const initialize = (wrapper) => {
+    const mediaQuery = typeof window.matchMedia === "function"
+      ? window.matchMedia(mobileMediaQuery)
+      : null;
+    const syncMobileImages = () => {
+      if (!mediaQuery || mediaQuery.matches) {
+        renderMobileImages(wrapper);
+      } else {
+        removeMobileImages(wrapper);
+      }
+    };
+
+    syncMobileImages();
+
+    if (mediaQuery) {
+      if (typeof mediaQuery.addEventListener === "function") {
+        mediaQuery.addEventListener("change", syncMobileImages);
+      } else if (typeof mediaQuery.addListener === "function") {
+        mediaQuery.addListener(syncMobileImages);
+      }
+    }
+
     const getToggle = (event) => {
       const target = event.target;
 
