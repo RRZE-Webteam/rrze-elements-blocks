@@ -63,7 +63,7 @@ class MediaAccordion extends AbstractBlockRender
 
     /**
      * @param array<int, array<string, mixed>> $blocks
-     * @return array<int, array{id: int, url: string, alt: string, loadOpen: bool}>
+     * @return array<int, array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}>
      */
     private function collectItems(array $blocks): array
     {
@@ -84,6 +84,9 @@ class MediaAccordion extends AbstractBlockRender
                     'alt' => isset($attributes['mediaAccordionImageAlt'])
                         ? sanitize_text_field((string)$attributes['mediaAccordionImageAlt'])
                         : '',
+                    'caption' => array_key_exists('mediaAccordionImageCaption', $attributes)
+                        ? trim(wp_kses_post((string)$attributes['mediaAccordionImageCaption']))
+                        : null,
                     'loadOpen' => !empty($attributes['loadOpen']),
                 ];
             }
@@ -98,8 +101,8 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param non-empty-list<array{id: int, url: string, alt: string, loadOpen: bool}> $items
-     * @return array{id: int, url: string, alt: string, loadOpen: bool}
+     * @param non-empty-list<array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}> $items
+     * @return array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}
      */
     private function getInitialItem(array $items): array
     {
@@ -113,8 +116,8 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param non-empty-list<array{id: int, url: string, alt: string, loadOpen: bool}> $items
-     * @return array<string, array{item: array{id: int, url: string, alt: string, loadOpen: bool}, markup: string}>
+     * @param non-empty-list<array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}> $items
+     * @return array<string, array{item: array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}, markup: string}>
      */
     private function renderImages(array $items): array
     {
@@ -137,7 +140,7 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param array{id: int, url: string, alt: string, loadOpen: bool} $item
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
      */
     private function renderImage(array $item): string
     {
@@ -165,12 +168,12 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param array{id: int, url: string, alt: string, loadOpen: bool} $item
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
      */
     private function renderImageInnerMarkup(array $item): string
     {
         $imageUrl = $this->getImageUrl($item);
-        $caption = $this->getImageCaption($item['id']);
+        $caption = $this->getImageCaption($item);
         $imageClass = trim(
             'media-accordion__image' . ($item['id'] > 0 ? ' wp-image-' . $item['id'] : '')
         );
@@ -179,12 +182,13 @@ class MediaAccordion extends AbstractBlockRender
             : '';
 
         return sprintf(
-            '<figure class="wp-block-image size-large is-style-large has-overlay media-accordion__media" data-media-accordion-media data-media-accordion-image-id="%1$d" data-media-accordion-image-url="%2$s" data-media-accordion-image-alt="%3$s">' .
-            '<img src="%4$s" alt="%3$s" class="%5$s" data-media-accordion-image loading="lazy" decoding="async" />%6$s' .
+            '<figure class="wp-block-image size-large is-style-large has-overlay media-accordion__media" data-media-accordion-media data-media-accordion-image-id="%1$d" data-media-accordion-image-url="%2$s" data-media-accordion-image-alt="%3$s" data-media-accordion-image-caption="%4$s">' .
+            '<img src="%5$s" alt="%3$s" class="%6$s" data-media-accordion-image loading="lazy" decoding="async" />%7$s' .
             '</figure>',
             $item['id'],
             esc_url($item['url']),
             esc_attr($item['alt']),
+            esc_attr($caption),
             esc_url($imageUrl),
             esc_attr($imageClass),
             $captionMarkup
@@ -192,29 +196,38 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param array{id: int, url: string, alt: string, loadOpen: bool} $item
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
      */
     private function renderImageTemplate(array $item, string $imageMarkup): string
     {
         return sprintf(
-            '<template data-media-accordion-template data-media-accordion-image-id="%1$d" data-media-accordion-image-url="%2$s" data-media-accordion-image-alt="%3$s">%4$s</template>',
+            '<template data-media-accordion-template data-media-accordion-image-id="%1$d" data-media-accordion-image-url="%2$s" data-media-accordion-image-alt="%3$s" data-media-accordion-image-caption="%4$s">%5$s</template>',
             $item['id'],
             esc_url($item['url']),
             esc_attr($item['alt']),
+            esc_attr($this->getImageCaption($item)),
             $imageMarkup
         );
     }
 
     /**
-     * @param array{id: int, url: string, alt: string, loadOpen: bool} $item
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
      */
     private function getImageItemKey(array $item): string
     {
-        return sha1($item['id'] . "\n" . $item['url'] . "\n" . $item['alt']);
+        return sha1(
+            $item['id']
+            . "\n"
+            . $item['url']
+            . "\n"
+            . $item['alt']
+            . "\n"
+            . $this->getImageCaption($item)
+        );
     }
 
     /**
-     * @param array{id: int, url: string, alt: string, loadOpen: bool} $item
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
      */
     private function getImageUrl(array $item): string
     {
@@ -229,14 +242,21 @@ class MediaAccordion extends AbstractBlockRender
             : $item['url'];
     }
 
-    private function getImageCaption(int $imageId): string
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
+     */
+    private function getImageCaption(array $item): string
     {
-        if ($imageId <= 0 || !function_exists('wp_get_attachment_caption')) {
+        if ($item['caption'] !== null) {
+            return $item['caption'];
+        }
+
+        if ($item['id'] <= 0 || !function_exists('wp_get_attachment_caption')) {
             return '';
         }
 
-        $caption = wp_get_attachment_caption($imageId);
+        $caption = wp_get_attachment_caption($item['id']);
 
-        return is_string($caption) ? trim($caption) : '';
+        return is_string($caption) ? trim(wp_kses_post($caption)) : '';
     }
 }

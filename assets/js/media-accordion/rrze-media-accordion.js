@@ -8,12 +8,14 @@
   const toggleSelector = "button.accordion-toggle";
   const mediaSelector = "[data-media-accordion-media]";
   const imageSelector = "[data-media-accordion-image]";
+  const captionSelector = "figcaption";
   const templateSelector = "template[data-media-accordion-template]";
 
   const getImageData = (element) => ({
     id: Number(element.dataset.mediaAccordionImageId) || 0,
     url: element.dataset.mediaAccordionImageUrl || "",
     alt: element.dataset.mediaAccordionImageAlt || "",
+    caption: element.dataset.mediaAccordionImageCaption || "",
   });
 
   const imageDataMatches = (element, imageData) => {
@@ -22,7 +24,8 @@
     return (
       elementImageData.id === imageData.id &&
       elementImageData.url === imageData.url &&
-      elementImageData.alt === imageData.alt
+      elementImageData.alt === imageData.alt &&
+      elementImageData.caption === imageData.caption
     );
   };
 
@@ -76,10 +79,29 @@
     image.alt = imageData.alt;
     image.hidden = false;
     media.classList.remove("is-empty");
+    media.dataset.mediaAccordionImageId = String(imageData.id);
+    media.dataset.mediaAccordionImageUrl = imageData.url;
+    media.dataset.mediaAccordionImageAlt = imageData.alt;
+    media.dataset.mediaAccordionImageCaption = imageData.caption;
 
     if (imageData.id > 0) {
       image.classList.add(`wp-image-${imageData.id}`);
     }
+
+    let caption = media.querySelector(captionSelector);
+
+    if (!imageData.caption) {
+      caption?.remove();
+      return;
+    }
+
+    if (!caption) {
+      caption = document.createElement("figcaption");
+      caption.className = "wp-element-caption";
+      media.append(caption);
+    }
+
+    caption.innerHTML = imageData.caption;
   };
 
   const updateImage = (wrapper, toggle) => {

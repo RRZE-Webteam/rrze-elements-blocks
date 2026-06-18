@@ -35,6 +35,9 @@ class Collapse extends AbstractBlockRender
     $media_image_alt = isset($attributes['mediaAccordionImageAlt'])
       ? sanitize_text_field((string)$attributes['mediaAccordionImageAlt'])
       : '';
+    $media_image_caption = array_key_exists('mediaAccordionImageCaption', $attributes)
+      ? trim(wp_kses_post((string)$attributes['mediaAccordionImageCaption']))
+      : $this->getMediaImageCaption($media_image_id);
 
     $wrapper_class = isset($attributes['className']) ? $attributes['className'] : '';
 
@@ -71,13 +74,14 @@ class Collapse extends AbstractBlockRender
     $markup .= sprintf('<h%d class="accordion-heading">', $heading_level);
 
     $markup .= sprintf(
-      '<button class="%1$s" data-toggle="collapse" data-name="%2$s" data-href="#%2$s" type="button" aria-expanded="%3$s" aria-controls="%2$s-section" id="%2$s" data-media-accordion-image-id="%4$d" data-media-accordion-image-url="%5$s" data-media-accordion-image-alt="%6$s">',
+      '<button class="%1$s" data-toggle="collapse" data-name="%2$s" data-href="#%2$s" type="button" aria-expanded="%3$s" aria-controls="%2$s-section" id="%2$s" data-media-accordion-image-id="%4$d" data-media-accordion-image-url="%5$s" data-media-accordion-image-alt="%6$s" data-media-accordion-image-caption="%7$s">',
       esc_attr($button_classes),
       $jump_attr,
       $load_open ? 'true' : 'false',
       $media_image_id,
       esc_url($media_image_url),
-      esc_attr($media_image_alt)
+      esc_attr($media_image_alt),
+      esc_attr($media_image_caption)
     );
 
     if ($iconMarkup) {
@@ -100,5 +104,16 @@ class Collapse extends AbstractBlockRender
     $markup .= '</div></div></div></div>';
 
     return $markup;
+  }
+
+  private function getMediaImageCaption(int $imageId): string
+  {
+    if ($imageId <= 0 || !function_exists('wp_get_attachment_caption')) {
+      return '';
+    }
+
+    $caption = wp_get_attachment_caption($imageId);
+
+    return is_string($caption) ? trim(wp_kses_post($caption)) : '';
   }
 }

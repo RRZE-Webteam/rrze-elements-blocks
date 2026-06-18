@@ -43,6 +43,7 @@ final class BlockFrontendRenderTest extends TestCase
                                 'mediaAccordionImageId' => 10,
                                 'mediaAccordionImageUrl' => 'https://example.com/first.jpg',
                                 'mediaAccordionImageAlt' => 'First image',
+                                'mediaAccordionImageCaption' => 'First caption',
                             ],
                             'innerBlocks' => [
                                 [
@@ -56,6 +57,7 @@ final class BlockFrontendRenderTest extends TestCase
                                                 'mediaAccordionImageId' => 20,
                                                 'mediaAccordionImageUrl' => 'https://example.com/nested.jpg',
                                                 'mediaAccordionImageAlt' => 'Nested image',
+                                                'mediaAccordionImageCaption' => 'Nested <em>caption</em>',
                                             ],
                                             'innerBlocks' => [],
                                         ],
@@ -92,6 +94,8 @@ final class BlockFrontendRenderTest extends TestCase
         $this->assertStringContainsString('https://example.com/first.jpg', $output);
         $this->assertStringContainsString('https://example.com/nested.jpg', $output);
         $this->assertStringContainsString('Nested image', $output);
+        $this->assertStringContainsString('Nested <em>caption</em>', $output);
+        $this->assertStringContainsString('data-media-accordion-image-caption=', $output);
         $this->assertStringContainsString('wp-image-20', $output);
     }
 
@@ -105,6 +109,7 @@ final class BlockFrontendRenderTest extends TestCase
             'mediaAccordionImageId' => 42,
             'mediaAccordionImageUrl' => 'https://example.com/image.jpg?size=large&crop=1',
             'mediaAccordionImageAlt' => 'Example image',
+            'mediaAccordionImageCaption' => 'Example caption',
         ];
 
         $collapseOutput = (new Collapse())->render($attributes, '<p>Content</p>');
@@ -117,6 +122,7 @@ final class BlockFrontendRenderTest extends TestCase
                 $output
             );
             $this->assertStringContainsString('data-media-accordion-image-alt="Example image"', $output);
+            $this->assertStringContainsString('data-media-accordion-image-caption="Example caption"', $output);
             $this->assertStringContainsString('class="accordion-toggle active"', $output);
             $this->assertStringContainsString('aria-expanded="true"', $output);
             $this->assertStringContainsString('class="accordion-body open"', $output);

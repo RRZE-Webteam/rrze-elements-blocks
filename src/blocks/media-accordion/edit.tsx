@@ -3,7 +3,9 @@ import {
   InspectorControls,
   useBlockProps,
   InnerBlocks,
+  MediaPlaceholder,
   MediaReplaceFlow,
+  RichText,
   MediaUpload,
   MediaUploadCheck,
 } from "@wordpress/block-editor";
@@ -11,7 +13,6 @@ import {
   Button,
   Notice,
   PanelBody,
-  Popover,
   Modal,
   SelectControl,
   TextControl,
@@ -27,6 +28,7 @@ import {store as noticesStore} from "@wordpress/notices";
 import {
   AccordionItemAttributes,
   collectAccordionItems,
+  getMediaCaption,
   getItemTitle,
   SelectedMedia,
 } from "./accordion-items";
@@ -34,6 +36,10 @@ import MediaAccordionImageManager from "./MediaAccordionImageManager";
 
 interface EditProps {
   clientId: string;
+}
+
+interface CoreDataSelectors {
+  getMedia: (id: number) => SelectedMedia | undefined;
 }
 
 const Edit = ({clientId}: EditProps) => {
@@ -99,6 +105,19 @@ const Edit = ({clientId}: EditProps) => {
   const imageId = activeItem?.attributes.mediaAccordionImageId ?? 0;
   const imageUrl = activeItem?.attributes.mediaAccordionImageUrl ?? "";
   const imageAlt = activeItem?.attributes.mediaAccordionImageAlt ?? "";
+  const storedImageCaption =
+    activeItem?.attributes.mediaAccordionImageCaption;
+  const attachmentCaption = useSelect((select) => {
+    if (imageId <= 0 || storedImageCaption !== undefined) {
+      return "";
+    }
+
+    const {getMedia} = select("core") as unknown as CoreDataSelectors;
+
+    return getMediaCaption(getMedia(imageId) ?? {});
+  }, [imageId, storedImageCaption]);
+  const imageCaption =
+    storedImageCaption ?? attachmentCaption;
 
   const updateActiveItemImage = (
     attributes: Partial<AccordionItemAttributes>,
@@ -136,6 +155,16 @@ const Edit = ({clientId}: EditProps) => {
       mediaAccordionImageId: Number(media.id) || 0,
       mediaAccordionImageUrl: media.url,
       mediaAccordionImageAlt: media.alt ?? media.alt_text ?? "",
+      mediaAccordionImageCaption: getMediaCaption(media),
+    });
+  };
+
+  const onSelectImageUrl = (mediaAccordionImageUrl: string) => {
+    updateActiveItemImage({
+      mediaAccordionImageId: 0,
+      mediaAccordionImageUrl,
+      mediaAccordionImageAlt: "",
+      mediaAccordionImageCaption: "",
     });
   };
 
@@ -144,6 +173,7 @@ const Edit = ({clientId}: EditProps) => {
       mediaAccordionImageId: 0,
       mediaAccordionImageUrl: "",
       mediaAccordionImageAlt: "",
+      mediaAccordionImageCaption: "",
     });
   };
 
@@ -308,52 +338,74 @@ const Edit = ({clientId}: EditProps) => {
             <p className="media-accordion__item-label">{activeItemTitle}</p>
           )}
           {imageUrl ? (
-            <MediaUploadCheck
-              fallback={
-                <div className="media-accordion__image-button">
-                  <img src={imageUrl} alt={imageAlt} />
-                </div>
-              }
-            >
-              <MediaUpload
-                allowedTypes={["image"]}
-                value={imageId}
-                onSelect={onSelectImage}
-                render={({open}) => (
-                  <Button
-                    className="media-accordion__image-button"
-                    onClick={open}
-                    label={__("Replace item image", "rrze-elements-blocks")}
-                  >
+            <figure className="media-accordion__figure">
+              <MediaUploadCheck
+                fallback={
+                  <div className="media-accordion__image-button">
                     <img src={imageUrl} alt={imageAlt} />
-                  </Button>
-                )}
+                  </div>
+                }
+              >
+                <MediaUpload
+                  allowedTypes={["image"]}
+                  value={imageId}
+                  onSelect={onSelectImage}
+                  render={({open}) => (
+                    <Button
+                      className="media-accordion__image-button"
+                      onClick={open}
+                      label={__(
+                        "Replace item image",
+                        "rrze-elements-blocks",
+                      )}
+                    >
+                      <img src={imageUrl} alt={imageAlt} />
+                    </Button>
+                  )}
+                />
+              </MediaUploadCheck>
+              <RichText
+                tagName="figcaption"
+                className="wp-element-caption"
+                aria-label={__("Image caption", "rrze-elements-blocks")}
+                placeholder={__("Add caption", "rrze-elements-blocks")}
+                value={imageCaption}
+                onChange={(mediaAccordionImageCaption) =>
+                  updateActiveItemImage({mediaAccordionImageCaption})
+                }
               />
-            </MediaUploadCheck>
+            </figure>
           ) : (
-            <MediaUploadCheck>
-              <MediaUpload
+            activeItem && (
+              <MediaPlaceholder
+                className="media-accordion__image-placeholder"
+                icon={image}
+                labels={{
+                  title: __(
+                    "Add image for this item",
+                    "rrze-elements-blocks",
+                  ),
+                  instructions: __(
+                    "Upload an image, choose one from the Media Library, or insert one from a URL.",
+                    "rrze-elements-blocks",
+                  ),
+                }}
+                accept="image/*"
                 allowedTypes={["image"]}
                 value={imageId}
+                onError={onUploadError}
                 onSelect={onSelectImage}
-                render={({open}) => (
-                  <Button
-                    className="media-accordion__image-placeholder"
-                    variant="secondary"
-                    icon={image}
-                    onClick={open}
-                    disabled={!activeItem}
-                  >
-                    {activeItem
-                      ? __("Add image for this item", "rrze-elements-blocks")
-                      : __(
-                          "Add an accordion item to assign an image",
-                          "rrze-elements-blocks",
-                        )}
-                  </Button>
-                )}
+                onSelectURL={onSelectImageUrl}
               />
-            </MediaUploadCheck>
+            )
+          )}
+          {!activeItem && (
+            <Notice status="info" isDismissible={false}>
+              {__(
+                "Add an accordion item to assign an image.",
+                "rrze-elements-blocks",
+              )}
+            </Notice>
           )}
         </aside>
       </div>

@@ -17,6 +17,7 @@ import {image, replace, trash} from "@wordpress/icons";
 import {
   AccordionItem,
   AccordionItemAttributes,
+  getMediaCaption,
   getItemTitle,
   SelectedMedia,
 } from "./accordion-items";
@@ -87,6 +88,7 @@ const MediaAccordionImageManager = ({
       mediaAccordionImageId: 0,
       mediaAccordionImageUrl: "",
       mediaAccordionImageAlt: "",
+      mediaAccordionImageCaption: "",
     });
   };
 
@@ -103,6 +105,7 @@ const MediaAccordionImageManager = ({
       mediaAccordionImageId: Number(media.id) || 0,
       mediaAccordionImageUrl: media.url,
       mediaAccordionImageAlt: media.alt ?? media.alt_text ?? "",
+      mediaAccordionImageCaption: getMediaCaption(media),
     });
   };
 

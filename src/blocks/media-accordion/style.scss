@@ -23,6 +23,7 @@
 		overflow: hidden;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 	}
 
 	.media-accordion__media.is-empty {
@@ -48,6 +49,11 @@
 		min-height: 0;
 		flex: 1;
 		object-fit: contain;
+	}
+
+	.media-accordion__media .wp-element-caption {
+		width: 100%;
+		flex: 0 0 auto;
 	}
 }
 

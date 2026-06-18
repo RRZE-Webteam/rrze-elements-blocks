@@ -71,6 +71,9 @@
     "mediaAccordionImageAlt": {
       "type": "string",
       "default": ""
+    },
+    "mediaAccordionImageCaption": {
+      "type": "string"
     }
   },
   "providesContext": {

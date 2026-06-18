@@ -20,6 +20,7 @@ test("switches responsive WordPress images", () => {
         data-media-accordion-image-id="256"
         data-media-accordion-image-url="https://example.com/second.webp"
         data-media-accordion-image-alt="Second image"
+        data-media-accordion-image-caption="Rendered caption"
       >Second</button>
       <figure data-media-accordion-media>
         <img
@@ -50,6 +51,10 @@ test("switches responsive WordPress images", () => {
   assert.equal(image.hasAttribute("sizes"), false);
   assert.equal(image.classList.contains("wp-image-212"), false);
   assert.equal(image.classList.contains("wp-image-256"), true);
+  assert.equal(
+    dom.window.document.querySelector("figcaption").textContent,
+    "Rendered caption",
+  );
 });
 
 test("switches to rendered core image templates", () => {
@@ -60,6 +65,7 @@ test("switches to rendered core image templates", () => {
         data-media-accordion-image-id="256"
         data-media-accordion-image-url="https://example.com/second.webp"
         data-media-accordion-image-alt="Second image"
+        data-media-accordion-image-caption="Rendered caption"
       >Second</button>
       <figure
         class="wp-block-image size-large is-style-large has-overlay media-accordion__media"
@@ -67,6 +73,7 @@ test("switches to rendered core image templates", () => {
         data-media-accordion-image-id="212"
         data-media-accordion-image-url="https://example.com/first.jpg"
         data-media-accordion-image-alt="First image"
+        data-media-accordion-image-caption=""
       >
         <img
           class="media-accordion__image wp-image-212"
@@ -80,6 +87,7 @@ test("switches to rendered core image templates", () => {
         data-media-accordion-image-id="256"
         data-media-accordion-image-url="https://example.com/second.webp"
         data-media-accordion-image-alt="Second image"
+        data-media-accordion-image-caption="Rendered caption"
       >
         <figure
           class="wp-block-image size-large is-style-large has-overlay media-accordion__media"
@@ -87,6 +95,7 @@ test("switches to rendered core image templates", () => {
           data-media-accordion-image-id="256"
           data-media-accordion-image-url="https://example.com/second.webp"
           data-media-accordion-image-alt="Second image"
+          data-media-accordion-image-caption="Rendered caption"
         >
           <img
             class="media-accordion__image wp-image-256"
