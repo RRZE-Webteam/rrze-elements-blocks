@@ -6,18 +6,52 @@
 
   const wrapperSelector = ".wp-block-rrze-elements-media-accordion";
   const toggleSelector = "button.accordion-toggle";
+  const mediaSelector = "[data-media-accordion-media]";
+  const imageSelector = "[data-media-accordion-image]";
+  const templateSelector = "template[data-media-accordion-template]";
 
-  const updateImage = (wrapper, toggle) => {
-    const image = wrapper.querySelector("[data-media-accordion-image]");
-    const media = wrapper.querySelector("[data-media-accordion-media]");
+  const getImageData = (element) => ({
+    id: Number(element.dataset.mediaAccordionImageId) || 0,
+    url: element.dataset.mediaAccordionImageUrl || "",
+    alt: element.dataset.mediaAccordionImageAlt || "",
+  });
 
-    if (!image || !media) {
-      return;
+  const imageDataMatches = (element, imageData) => {
+    const elementImageData = getImageData(element);
+
+    return (
+      elementImageData.id === imageData.id &&
+      elementImageData.url === imageData.url &&
+      elementImageData.alt === imageData.alt
+    );
+  };
+
+  const findImageTemplate = (wrapper, imageData) =>
+    Array.from(wrapper.querySelectorAll(templateSelector)).find((template) =>
+      imageDataMatches(template, imageData),
+    );
+
+  const getTemplateMedia = (template) => {
+    if (
+      typeof HTMLTemplateElement === "undefined" ||
+      !(template instanceof HTMLTemplateElement)
+    ) {
+      return null;
     }
 
-    const url = toggle.dataset.mediaAccordionImageUrl || "";
-    const alt = toggle.dataset.mediaAccordionImageAlt || "";
-    const imageId = Number(toggle.dataset.mediaAccordionImageId) || 0;
+    const media = template.content.querySelector(mediaSelector);
+
+    return media instanceof HTMLElement
+      ? media.cloneNode(true)
+      : null;
+  };
+
+  const updateImageElement = (media, imageData) => {
+    const image = media.querySelector(imageSelector);
+
+    if (!image) {
+      return;
+    }
 
     image.classList.forEach((className) => {
       if (/^wp-image-\d+$/.test(className)) {
@@ -30,7 +64,7 @@
     image.removeAttribute("srcset");
     image.removeAttribute("sizes");
 
-    if (!url) {
+    if (!imageData.url) {
       image.hidden = true;
       image.removeAttribute("src");
       image.alt = "";
@@ -38,14 +72,49 @@
       return;
     }
 
-    image.src = url;
-    image.alt = alt;
+    image.src = imageData.url;
+    image.alt = imageData.alt;
     image.hidden = false;
     media.classList.remove("is-empty");
 
-    if (imageId > 0) {
-      image.classList.add(`wp-image-${imageId}`);
+    if (imageData.id > 0) {
+      image.classList.add(`wp-image-${imageData.id}`);
     }
+  };
+
+  const updateImage = (wrapper, toggle) => {
+    const media = wrapper.querySelector(mediaSelector);
+
+    if (!media) {
+      return;
+    }
+
+    const imageData = getImageData(toggle);
+
+    if (!imageData.url) {
+      media.hidden = true;
+      media.classList.add("is-empty");
+      return;
+    }
+
+    if (imageDataMatches(media, imageData)) {
+      media.hidden = false;
+      media.classList.remove("is-empty");
+      return;
+    }
+
+    const template = findImageTemplate(wrapper, imageData);
+    const templateMedia = template ? getTemplateMedia(template) : null;
+
+    if (templateMedia instanceof HTMLElement) {
+      templateMedia.hidden = false;
+      templateMedia.classList.remove("is-empty");
+      media.replaceWith(templateMedia);
+      return;
+    }
+
+    media.hidden = false;
+    updateImageElement(media, imageData);
   };
 
   const initialize = (wrapper) => {

@@ -78,6 +78,18 @@ final class BlockFrontendRenderTest extends TestCase
 
         $this->assertStringContainsString('wp-block-rrze-elements-media-accordion', $output);
         $this->assertStringContainsString('custom-media-accordion', $output);
+        $this->assertStringContainsString('<!-- wp:image ', $output);
+        $this->assertStringContainsString('"id":20', $output);
+        $this->assertStringContainsString('"sizeSlug":"large"', $output);
+        $this->assertStringContainsString('"linkDestination":"none"', $output);
+        $this->assertStringContainsString(
+            '"className":"is-style-large has-overlay media-accordion__media"',
+            $output
+        );
+        $this->assertStringContainsString('wp-block-image size-large is-style-large has-overlay media-accordion__media', $output);
+        $this->assertStringContainsString('data-media-accordion-media', $output);
+        $this->assertStringContainsString('data-media-accordion-template', $output);
+        $this->assertStringContainsString('https://example.com/first.jpg', $output);
         $this->assertStringContainsString('https://example.com/nested.jpg', $output);
         $this->assertStringContainsString('Nested image', $output);
         $this->assertStringContainsString('wp-image-20', $output);
