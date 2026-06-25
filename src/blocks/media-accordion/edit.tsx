@@ -21,8 +21,8 @@ import {
 } from "@wordpress/components";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {useCallback, useEffect, useState} from "@wordpress/element";
-import {__} from "@wordpress/i18n";
-import {closeSmall, gallery, image, trash} from "@wordpress/icons";
+import {__ , sprintf} from "@wordpress/i18n";
+import {closeSmall, gallery, image, trash, drawerLeft, drawerRight} from "@wordpress/icons";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 import {store as noticesStore} from "@wordpress/notices";
 import {
@@ -102,6 +102,12 @@ const Edit = ({clientId}: EditProps) => {
   const activeItemTitle = activeItem
     ? getItemTitle(activeItem, activeItemIndex)
     : "";
+  const truncateTitle = (title: string, maxLength = 40) =>
+    title.length > maxLength ? `${title.slice(0, maxLength - 1)}…` : title;
+
+  const activeItemLabel = truncateTitle(
+    activeItemTitle || __("Untitled", "rrze-elements-blocks")
+  );
   const imageId = activeItem?.attributes.mediaAccordionImageId ?? 0;
   const imageUrl = activeItem?.attributes.mediaAccordionImageUrl ?? "";
   const imageAlt = activeItem?.attributes.mediaAccordionImageAlt ?? "";
@@ -201,8 +207,14 @@ const Edit = ({clientId}: EditProps) => {
               onReset={onRemoveImage}
               name={
                 imageUrl
-                  ? __("Replace item image", "rrze-elements-blocks")
-                  : __("Add item image", "rrze-elements-blocks")
+                  ? sprintf(
+                    __("Replace image for accordion tab “%s”", "rrze-elements-blocks"),
+                    activeItemLabel || __("Untitled", "rrze-elements-blocks")
+                  )
+                  : sprintf(
+                    __("Add image for accordion section “%s”", "rrze-elements-blocks"),
+                    activeItemLabel || __("Untitled", "rrze-elements-blocks")
+                  )
               }
             />
           )}
@@ -223,6 +235,13 @@ const Edit = ({clientId}: EditProps) => {
             isPressed={isImageManagerOpen}
             onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}
           />
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarButton
+            icon={drawerRight}
+            label={__("Small image, large content area", "rrze-elements-blocks")}
+            onClick={() => {return}}
+            />
         </ToolbarGroup>
       </BlockControls>
 
