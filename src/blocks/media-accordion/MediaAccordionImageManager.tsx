@@ -127,7 +127,9 @@ const MediaAccordionImageManager = ({
         enableGlobalSearch: true,
         render: ({item}) =>
           item.jumpName ? (
-            <code>{item.jumpName}</code>
+            <code style={{ whiteSpace: 'initial' }}>
+              {item.jumpName}
+            </code>
           ) : (
             <span className="media-accordion-image-manager__empty-value">
               {__("Not set", "rrze-elements-blocks")}
