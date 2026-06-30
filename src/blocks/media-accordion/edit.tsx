@@ -33,16 +33,21 @@ import {
   SelectedMedia,
 } from "./accordion-items";
 import MediaAccordionImageManager from "./MediaAccordionImageManager";
+import { ViewRatioSelectorToolbar } from "../../components/ViewRatioSelector";
 
 interface EditProps {
   clientId: string;
+  attributes: {
+    viewRatio: "2:1" | "1:2";
+  }
+  setAttributes: (newAttributes: { viewRatio: "2:1" | "1:2"}) => void;
 }
 
 interface CoreDataSelectors {
   getMedia: (id: number) => SelectedMedia | undefined;
 }
 
-const Edit = ({clientId}: EditProps) => {
+const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
   const props = useBlockProps();
   const [activeItemClientId, setActiveItemClientId] = useState("");
   const [isImageManagerOpen, setIsImageManagerOpen] = useState(false);
@@ -50,6 +55,7 @@ const Edit = ({clientId}: EditProps) => {
     useState<Element | null>(null);
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
   const {createErrorNotice} = useDispatch(noticesStore);
+  const { viewRatio } = attributes;
 
   const {items, selectedItemClientId} = useSelect((select) => {
     const {
@@ -236,13 +242,10 @@ const Edit = ({clientId}: EditProps) => {
             onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}
           />
         </ToolbarGroup>
-        <ToolbarGroup>
-          <ToolbarButton
-            icon={drawerRight}
-            label={__("Small image, large content area", "rrze-elements-blocks")}
-            onClick={() => {return}}
-            />
-        </ToolbarGroup>
+        <ViewRatioSelectorToolbar
+          attributes = { attributes }
+          setAttributes = { setAttributes }
+        />
       </BlockControls>
 
       {isImageManagerOpen && imageManagerAnchor && (
