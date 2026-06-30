@@ -21,9 +21,13 @@ class MediaAccordion extends AbstractBlockRender
         $wrapperClass = trim((string)($attributes['className'] ?? ''));
         $classes = trim('wp-block-rrze-elements-media-accordion ' . $wrapperClass);
         $layoutClass = $imageItems === [] ? 'media-accordion has-no-images' : 'media-accordion has-images';
+        $viewRatioClass = '';
+        if(!empty($attributes['viewRatio'])) {
+            $viewRatioClass = 'media-accordion-' .  str_replace(':', '-', $attributes['viewRatio']);
+        }
 
         $markup = '<div class="' . esc_attr($classes) . '">';
-        $markup .= '<div class="' . esc_attr($layoutClass) . '">';
+        $markup .= '<div class="' . esc_attr($layoutClass) . ' ' . esc_attr($viewRatioClass) . '">';
         $markup .= '<div class="media-accordion__accordions">' . $innerBlocks . '</div>';
 
         if ($imageItems !== []) {

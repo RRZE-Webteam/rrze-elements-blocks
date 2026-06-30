@@ -56,6 +56,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
   const {createErrorNotice} = useDispatch(noticesStore);
   const { viewRatio } = attributes;
+  const viewRatioClass: string = "media-accordion-" + viewRatio.replace(':', '-');
 
   const {items, selectedItemClientId} = useSelect((select) => {
     const {
@@ -345,7 +346,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
         </PanelBody>
       </InspectorControls>
 
-      <div className="media-accordion">
+      <div className={"media-accordion " +  viewRatioClass}>
         <div className="media-accordion__accordions">
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapsibles"]}
