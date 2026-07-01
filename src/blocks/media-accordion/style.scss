@@ -4,7 +4,7 @@
 		display: grid;
 		grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
 		gap: 1.5rem;
-		align-items: stretch;
+		align-items: start;
 	}
 
   div.media-accordion.media-accordion-1-2 {
@@ -22,11 +22,12 @@
 	.media-accordion__media {
 		display: flex;
 		position: relative;
+		align-self: start;
 		min-height: 18rem;
 		margin: 0;
 		overflow: hidden;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		flex-direction: column;
 	}
 
@@ -53,6 +54,7 @@
 		min-height: 0;
 		flex: 1;
 		object-fit: contain;
+		object-position: top center;
 	}
 
 	.media-accordion__media .wp-element-caption {
