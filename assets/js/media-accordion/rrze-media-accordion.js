@@ -11,7 +11,7 @@
   const captionSelector = "figcaption";
   const templateSelector = "template[data-media-accordion-template]";
   const mobileSlotSelector = "[data-media-accordion-mobile-slot]";
-  const mobileMediaQuery = "(max-width: 782px)";
+  const mobileMediaQuery = "(max-width: 1100px)";
 
   const getImageData = (element) => ({
     id: Number(element.dataset.mediaAccordionImageId) || 0,
