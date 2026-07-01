@@ -19,6 +19,52 @@
       ]
     }
   },
+  "example": {
+    "viewportWidth": 1200,
+    "attributes": {
+      "viewRatio": "2:1"
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/collapsibles",
+        "innerBlocks": [
+          {
+            "name": "rrze-elements/collapse",
+            "attributes": {
+              "title": "Analyse zu einem Thema",
+              "loadOpen": true,
+              "mediaAccordionImageId": 0,
+              "mediaAccordionImageUrl": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%2304316a'/%3E%3Cpath d='M0 430 180 260l120 110 90-70 170 145 110-95 130 120v130H0z' fill='%23ced9e7'/%3E%3Ccircle cx='610' cy='160' r='70' fill='%23fdb735'/%3E%3Ctext x='60' y='90' fill='%23fff' font-family='Arial,sans-serif' font-size='48' font-weight='700'%3EMedia Accordion%3C/text%3E%3C/svg%3E",
+              "mediaAccordionImageAlt": "Media Accordion example image",
+              "mediaAccordionImageCaption": "Example image"
+            },
+            "innerBlocks": [
+              {
+                "name": "core/paragraph",
+                "attributes": {
+                  "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,"
+                }
+              }
+            ]
+          },
+          {
+            "name": "rrze-elements/collapse",
+            "attributes": {
+              "title": "Detailansicht zum Thema"
+            },
+            "innerBlocks": [
+              {
+                "name": "core/paragraph",
+                "attributes": {
+                  "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
