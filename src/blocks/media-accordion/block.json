@@ -23,6 +23,11 @@
     "showImageWrapper": {
       "type": "boolean",
       "default": true
+    },
+    "captionAlignment": {
+      "type": "string",
+      "default": "left",
+      "enum": ["left", "center", "right"]
     }
   },
   "example": {
@@ -30,7 +35,8 @@
     "attributes": {
       "viewRatio": "2:1",
       "mediaAlignment": "top",
-      "showImageWrapper": true
+      "showImageWrapper": true,
+      "captionAlignment": "left"
     },
     "innerBlocks": [
       {

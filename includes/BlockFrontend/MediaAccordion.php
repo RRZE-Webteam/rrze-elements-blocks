@@ -31,9 +31,15 @@ class MediaAccordion extends AbstractBlockRender
         $mediaAlignmentClass = in_array($mediaAlignment, ['top', 'center', 'bottom'], true)
             ? 'media-accordion-align-' . $mediaAlignment
             : 'media-accordion-align-top';
+        $captionAlignment = isset($attributes['captionAlignment'])
+            ? (string)$attributes['captionAlignment']
+            : 'left';
+        $captionAlignmentClass = in_array($captionAlignment, ['left', 'center', 'right'], true)
+            ? 'media-accordion-caption-align-' . $captionAlignment
+            : 'media-accordion-caption-align-left';
 
         $markup = '<div class="' . esc_attr($classes) . '">';
-        $markup .= '<div class="' . esc_attr($layoutClass) . ' ' . esc_attr($viewRatioClass) . ' ' . esc_attr($mediaAlignmentClass) . '">';
+        $markup .= '<div class="' . esc_attr($layoutClass) . ' ' . esc_attr($viewRatioClass) . ' ' . esc_attr($mediaAlignmentClass) . ' ' . esc_attr($captionAlignmentClass) . '">';
         $markup .= '<div class="media-accordion__accordions">' . $innerBlocks . '</div>';
 
         if ($imageItems !== []) {

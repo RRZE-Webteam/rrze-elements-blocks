@@ -1,6 +1,8 @@
 .wp-block-rrze-elements-media-accordion {
 
 	.media-accordion {
+		--media-accordion-caption-align: left;
+
 		display: grid;
 		grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
 		gap: 1.5rem;
@@ -60,6 +62,19 @@
 	.media-accordion__media .wp-element-caption {
 		width: 100%;
 		flex: 0 0 auto;
+		text-align: var(--media-accordion-caption-align);
+	}
+
+	.media-accordion-caption-align-left {
+		--media-accordion-caption-align: left;
+	}
+
+	.media-accordion-caption-align-center {
+		--media-accordion-caption-align: center;
+	}
+
+	.media-accordion-caption-align-right {
+		--media-accordion-caption-align: right;
 	}
 
 	.media-accordion-align-center {

@@ -1,5 +1,9 @@
 .wp-block-rrze-elements-media-accordion {
 
+	.media-accordion {
+		--media-accordion-caption-align: left;
+	}
+
 	.media-accordion__media {
 		padding: 1rem;
 		border: 1px solid #ddd;
@@ -79,7 +83,19 @@
 	.media-accordion__figure .wp-element-caption {
 		width: 100%;
 		margin: 0.75rem 0 0;
-		text-align: left;
+		text-align: var(--media-accordion-caption-align);
+	}
+
+	.media-accordion-caption-align-left {
+		--media-accordion-caption-align: left;
+	}
+
+	.media-accordion-caption-align-center {
+		--media-accordion-caption-align: center;
+	}
+
+	.media-accordion-caption-align-right {
+		--media-accordion-caption-align: right;
 	}
 
 	.media-accordion__image-placeholder {
