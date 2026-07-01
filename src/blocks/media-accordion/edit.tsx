@@ -323,26 +323,27 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
       )}
 
       <InspectorControls>
-        <PanelBody
-          title={__("Accordion images", "rrze-elements-blocks")}
-          initialOpen={true}
-        >
+        <PanelBody>
           <Text>{__("Control all images inside this Block via the Media Manager.")}</Text>
           <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Button
-            ref={setImageManagerButtonRef}
-            icon={gallery}
-            label={__(
-            "Manage accordion images",
-            "rrze-elements-blocks",
-          )}
-            variant="primary"
-            isPressed={isImageManagerOpen}
-            onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}>
-            {__("Open Media Manager")}
-          </Button>
+            <Button
+              ref={setImageManagerButtonRef}
+              icon={gallery}
+              label={__(
+                "Manage accordion images",
+                "rrze-elements-blocks",
+              )}
+              variant="primary"
+              isPressed={isImageManagerOpen}
+              onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}>
+              {__("Open Media Manager")}
+            </Button>
           </Spacer>
-          <hr />
+        </PanelBody>
+        <PanelBody
+          title={__("Accordion images", "rrze-elements-blocks")}
+          initialOpen={false}
+        >
           {items.length === 0 ? (
             <Notice status="info" isDismissible={false}>
               {__(
@@ -414,16 +415,12 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
         <PanelBody>
           <ViewRatioSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
           <AlignmentSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
-          <AlignmentControl
-            label={__("Caption alignment", "rrze-elements-blocks")}
-            value={captionAlignment}
-            onChange={setCaptionAlignment}
-          />
           <VisibilitySelectorPanel attributes={attributes} setAttributes={setAttributes}/>
         </PanelBody>
       </InspectorControls>
 
-      <div className={"media-accordion " + viewRatioClass + " " + mediaAlignmentClass + " " + captionAlignmentClass + " " + imageWrapperVisibilityClass}>
+      <div
+        className={"media-accordion " + viewRatioClass + " " + mediaAlignmentClass + " " + captionAlignmentClass + " " + imageWrapperVisibilityClass}>
         <div className="media-accordion__accordions">
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapsibles"]}
