@@ -91,20 +91,32 @@
 	}
 
 	.media-accordion-align-center {
+		align-items: stretch;
 
 		.media-accordion__media {
 			align-self: stretch;
 			height: auto;
 			justify-content: center;
 		}
+
+		.media-accordion__figure,
+		.media-accordion__image-placeholder {
+			flex: 0 1 auto;
+		}
 	}
 
 	.media-accordion-align-bottom {
+		align-items: stretch;
 
 		.media-accordion__media {
 			align-self: stretch;
 			height: auto;
 			justify-content: flex-end;
+		}
+
+		.media-accordion__figure,
+		.media-accordion__image-placeholder {
+			flex: 0 1 auto;
 		}
 	}
 }
