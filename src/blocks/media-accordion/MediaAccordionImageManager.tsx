@@ -117,7 +117,7 @@ const MediaAccordionImageManager = ({
         enableHiding: false,
         enableSorting: true,
         enableGlobalSearch: true,
-        getValue: ({item}) => item.displayTitle,
+        render:({item}) => <p className="media-accordion-image-manager__title">{item.displayTitle}</p>
       },
       {
         id: "jumpName",
