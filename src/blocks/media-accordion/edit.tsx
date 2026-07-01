@@ -42,12 +42,17 @@ import {
   AlignmentSelectorPanel,
   MediaAlignment,
 } from "../../components/AlignmentSelector";
+import {
+  VisibilitySelectorToolbar,
+  VisibilitySelectorPanel,
+} from "../../components/VisibilitySelector";
 
 interface EditProps {
   clientId: string;
   attributes: {
     viewRatio: "2:1" | "1:2";
     mediaAlignment: MediaAlignment;
+    showImageWrapper?: boolean;
   }
   setAttributes: (newAttributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -66,8 +71,12 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
   const {createErrorNotice} = useDispatch(noticesStore);
   const {viewRatio} = attributes;
   const mediaAlignment = attributes.mediaAlignment ?? "top";
+  const showImageWrapper = attributes.showImageWrapper ?? true;
   const viewRatioClass: string = "media-accordion-" + viewRatio.replace(':', '-');
   const mediaAlignmentClass: string = "media-accordion-align-" + mediaAlignment;
+  const imageWrapperVisibilityClass: string = showImageWrapper
+    ? "media-accordion-show-image-wrapper"
+    : "media-accordion-hide-image-wrapper";
 
   const {items, selectedItemClientId} = useSelect((select) => {
     const {
@@ -262,6 +271,10 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
           attributes={attributes}
           setAttributes={setAttributes}
         />
+        <VisibilitySelectorToolbar
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
       </BlockControls>
 
       {isImageManagerOpen && imageManagerAnchor && (
@@ -382,10 +395,11 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
         <PanelBody>
           <ViewRatioSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
           <AlignmentSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
+          <VisibilitySelectorPanel attributes={attributes} setAttributes={setAttributes}/>
         </PanelBody>
       </InspectorControls>
 
-      <div className={"media-accordion " + viewRatioClass + " " + mediaAlignmentClass}>
+      <div className={"media-accordion " + viewRatioClass + " " + mediaAlignmentClass + " " + imageWrapperVisibilityClass}>
         <div className="media-accordion__accordions">
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapsibles"]}

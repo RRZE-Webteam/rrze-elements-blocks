@@ -119,6 +119,19 @@
 			flex: 0 1 auto;
 		}
 	}
+
+	.media-accordion-hide-image-wrapper {
+
+		.media-accordion__media {
+			padding: 0;
+			border: 0;
+			background: transparent;
+		}
+
+		.media-accordion__item-label {
+			display: none;
+		}
+	}
 }
 
 .media-accordion__remove-image {

@@ -19,13 +19,18 @@
       "type": "string",
       "default": "top",
       "enum": ["top", "center", "bottom"]
+    },
+    "showImageWrapper": {
+      "type": "boolean",
+      "default": true
     }
   },
   "example": {
     "viewportWidth": 1200,
     "attributes": {
       "viewRatio": "2:1",
-      "mediaAlignment": "top"
+      "mediaAlignment": "top",
+      "showImageWrapper": true
     },
     "innerBlocks": [
       {
