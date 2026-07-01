@@ -51,6 +51,7 @@
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "example": {
+    "viewportWidth": 1200,
     "attributes": {
       "color": "phil",
       "innerClientIds": [

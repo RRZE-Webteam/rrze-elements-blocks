@@ -45,6 +45,52 @@
       "label": "Marketing"
     }
   ],
+  "example": {
+    "viewportWidth": 1200,
+    "attributes": {
+      "title": "Featured topics",
+      "cardHeight": 420,
+      "headingLevel": 2
+    },
+    "innerBlocks": [
+      {
+        "name": "rrze-elements/info-card",
+        "attributes": {
+          "title": "Research",
+          "scientificText": "Research infrastructure",
+          "desktopImageId": 0,
+          "desktopImageUrl": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 700'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2304316a'/%3E%3Cstop offset='1' stop-color='%2318b4f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='900' height='700' fill='url(%23g)'/%3E%3Ccircle cx='710' cy='150' r='95' fill='%23fdb735' opacity='.95'/%3E%3Cpath d='M110 520c120-170 230-185 330-65 100-135 225-155 350 20v225H110z' fill='%23ffffff' opacity='.26'/%3E%3Cpath d='M160 180h330v42H160zm0 78h500v32H160zm0 62h410v32H160z' fill='%23ffffff' opacity='.9'/%3E%3C/svg%3E",
+          "alt": "Abstract research graphic",
+          "desktopTextColor": "#ffffff",
+          "backgroundOverlayEnabled": true
+        }
+      },
+      {
+        "name": "rrze-elements/info-card",
+        "attributes": {
+          "title": "Campus",
+          "scientificText": "Campus and community",
+          "desktopImageId": 0,
+          "desktopImageUrl": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 700'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop stop-color='%23266141'/%3E%3Cstop offset='1' stop-color='%237bb725'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='900' height='700' fill='url(%23g)'/%3E%3Cpath d='M0 500 145 390l130 72 120-95 160 118 120-80 225 130v165H0z' fill='%23ffffff' opacity='.24'/%3E%3Crect x='130' y='210' width='170' height='230' rx='6' fill='%23ffffff' opacity='.78'/%3E%3Crect x='345' y='155' width='245' height='285' rx='6' fill='%23ffffff' opacity='.62'/%3E%3Crect x='635' y='250' width='120' height='190' rx='6' fill='%23ffffff' opacity='.72'/%3E%3C/svg%3E",
+          "alt": "Abstract campus graphic",
+          "desktopTextColor": "#ffffff",
+          "backgroundOverlayEnabled": true
+        }
+      },
+      {
+        "name": "rrze-elements/info-card",
+        "attributes": {
+          "title": "Teaching",
+          "scientificText": "Teaching and learning",
+          "desktopImageId": 0,
+          "desktopImageUrl": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 700'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23971b2f'/%3E%3Cstop offset='1' stop-color='%23e87722'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='900' height='700' fill='url(%23g)'/%3E%3Ccircle cx='170' cy='145' r='80' fill='%23ffffff' opacity='.28'/%3E%3Cpath d='M210 455h480v55H210zM260 380h380v48H260zM320 305h260v48H320z' fill='%23ffffff' opacity='.82'/%3E%3Cpath d='M450 120 760 285 450 450 140 285z' fill='%23fdb735' opacity='.72'/%3E%3C/svg%3E",
+          "alt": "Abstract teaching graphic",
+          "desktopTextColor": "#ffffff",
+          "backgroundOverlayEnabled": true
+        }
+      }
+    ]
+  },
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
