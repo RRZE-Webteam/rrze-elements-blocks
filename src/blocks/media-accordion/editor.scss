@@ -89,6 +89,24 @@
 		justify-content: center;
 		white-space: normal;
 	}
+
+	.media-accordion-align-center {
+
+		.media-accordion__media {
+			align-self: stretch;
+			height: auto;
+			justify-content: center;
+		}
+	}
+
+	.media-accordion-align-bottom {
+
+		.media-accordion__media {
+			align-self: stretch;
+			height: auto;
+			justify-content: flex-end;
+		}
+	}
 }
 
 .media-accordion__remove-image {

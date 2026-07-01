@@ -6,7 +6,7 @@ import {
   SVG,
   Path,
   __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
+  __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 } from "@wordpress/components";
 import {
   drawerLeft,
@@ -109,10 +109,10 @@ const ViewRatioSelectorPanel = ({attributes, setAttributes}: ViewRatioSelectorPr
       onChange={toggleViewRatio}
       >
       {/* @ts-ignore - Reason: Icon-Feature missing*/}
-      <ToggleGroupControlOption value={"1:2"} label={__("1:2", "rrze-elements-blocks")} icon={drawerLeft}
+      <ToggleGroupControlOptionIcon value={"1:2"} label={__("1:2", "rrze-elements-blocks")} icon={drawerLeft}
       />
       {/* @ts-ignore - Reason: icon-Feature missing in Types */}
-      <ToggleGroupControlOption value={"2:1"} label={__("2:1", "rrze-elements-blocks")} icon={{drawerRight}}
+      <ToggleGroupControlOptionIcon value={"2:1"} label={__("2:1", "rrze-elements-blocks")} icon={drawerRight}
       />
     </ToggleGroupControl>
   );

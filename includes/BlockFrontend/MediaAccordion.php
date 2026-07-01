@@ -25,9 +25,15 @@ class MediaAccordion extends AbstractBlockRender
         if(!empty($attributes['viewRatio'])) {
             $viewRatioClass = 'media-accordion-' .  str_replace(':', '-', $attributes['viewRatio']);
         }
+        $mediaAlignment = isset($attributes['mediaAlignment'])
+            ? (string)$attributes['mediaAlignment']
+            : 'top';
+        $mediaAlignmentClass = in_array($mediaAlignment, ['top', 'center', 'bottom'], true)
+            ? 'media-accordion-align-' . $mediaAlignment
+            : 'media-accordion-align-top';
 
         $markup = '<div class="' . esc_attr($classes) . '">';
-        $markup .= '<div class="' . esc_attr($layoutClass) . ' ' . esc_attr($viewRatioClass) . '">';
+        $markup .= '<div class="' . esc_attr($layoutClass) . ' ' . esc_attr($viewRatioClass) . ' ' . esc_attr($mediaAlignmentClass) . '">';
         $markup .= '<div class="media-accordion__accordions">' . $innerBlocks . '</div>';
 
         if ($imageItems !== []) {

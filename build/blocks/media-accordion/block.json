@@ -17,12 +17,22 @@
         "2:1",
         "1:2"
       ]
+    },
+    "mediaAlignment": {
+      "type": "string",
+      "default": "top",
+      "enum": [
+        "top",
+        "center",
+        "bottom"
+      ]
     }
   },
   "example": {
     "viewportWidth": 1200,
     "attributes": {
-      "viewRatio": "2:1"
+      "viewRatio": "2:1",
+      "mediaAlignment": "top"
     },
     "innerBlocks": [
       {

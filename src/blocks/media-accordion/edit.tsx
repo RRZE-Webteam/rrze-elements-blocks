@@ -37,13 +37,19 @@ import {
 } from "./accordion-items";
 import MediaAccordionImageManager from "./MediaAccordionImageManager";
 import {ViewRatioSelectorToolbar, ViewRatioSelectorPanel} from "../../components/ViewRatioSelector";
+import {
+  AlignmentSelectorToolbar,
+  AlignmentSelectorPanel,
+  MediaAlignment,
+} from "../../components/AlignmentSelector";
 
 interface EditProps {
   clientId: string;
   attributes: {
     viewRatio: "2:1" | "1:2";
+    mediaAlignment: MediaAlignment;
   }
-  setAttributes: (newAttributes: { viewRatio: "2:1" | "1:2" }) => void;
+  setAttributes: (newAttributes: Partial<EditProps["attributes"]>) => void;
 }
 
 interface CoreDataSelectors {
@@ -59,7 +65,9 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
   const {createErrorNotice} = useDispatch(noticesStore);
   const {viewRatio} = attributes;
+  const mediaAlignment = attributes.mediaAlignment ?? "top";
   const viewRatioClass: string = "media-accordion-" + viewRatio.replace(':', '-');
+  const mediaAlignmentClass: string = "media-accordion-align-" + mediaAlignment;
 
   const {items, selectedItemClientId} = useSelect((select) => {
     const {
@@ -250,6 +258,10 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
           attributes={attributes}
           setAttributes={setAttributes}
         />
+        <AlignmentSelectorToolbar
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
       </BlockControls>
 
       {isImageManagerOpen && imageManagerAnchor && (
@@ -369,10 +381,11 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
         </PanelBody>
         <PanelBody>
           <ViewRatioSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
+          <AlignmentSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
         </PanelBody>
       </InspectorControls>
 
-      <div className={"media-accordion " + viewRatioClass}>
+      <div className={"media-accordion " + viewRatioClass + " " + mediaAlignmentClass}>
         <div className="media-accordion__accordions">
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapsibles"]}

@@ -62,6 +62,34 @@
 		flex: 0 0 auto;
 	}
 
+	.media-accordion-align-center {
+		align-items: stretch;
+
+		.media-accordion__media {
+			align-self: stretch;
+			justify-content: center;
+		}
+
+		.media-accordion__media img,
+		.media-accordion__image {
+			object-position: center center;
+		}
+	}
+
+	.media-accordion-align-bottom {
+		align-items: stretch;
+
+		.media-accordion__media {
+			align-self: stretch;
+			justify-content: flex-end;
+		}
+
+		.media-accordion__media img,
+		.media-accordion__image {
+			object-position: bottom center;
+		}
+	}
+
 	.media-accordion__mobile-slot {
 		display: none;
 	}
