@@ -324,7 +324,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
 
       <InspectorControls>
         <PanelBody>
-          <Text>{__("Control all images inside this Block via the Media Manager.")}</Text>
+          <Text>{__("Control all images inside this Block via the Media Manager.", "rrze-elements-blocks")}</Text>
           <Spacer paddingTop="1rem" paddingBottom="1rem">
             <Button
               ref={setImageManagerButtonRef}
@@ -336,7 +336,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
               variant="primary"
               isPressed={isImageManagerOpen}
               onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}>
-              {__("Open Media Manager")}
+              {__("Open Media Manager", "rrze-elements-blocks")}
             </Button>
           </Spacer>
         </PanelBody>
