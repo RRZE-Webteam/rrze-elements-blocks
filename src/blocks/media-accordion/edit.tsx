@@ -1,9 +1,13 @@
 import {
+  AlignmentControl,
+  AlignmentToolbar,
   BlockControls,
   InspectorControls,
   useBlockProps,
   InnerBlocks,
+  MediaPlaceholder,
   MediaReplaceFlow,
+  RichText,
   MediaUpload,
   MediaUploadCheck,
 } from "@wordpress/block-editor";
@@ -11,32 +15,58 @@ import {
   Button,
   Notice,
   PanelBody,
-  Popover,
   Modal,
   SelectControl,
   TextControl,
   ToolbarButton,
   ToolbarGroup,
+  __experimentalVStack as VStack,
+  __experimentalText as Text,
+  __experimentalSpacer as Spacer,
 } from "@wordpress/components";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {useCallback, useEffect, useState} from "@wordpress/element";
-import {__} from "@wordpress/i18n";
+import {__, sprintf} from "@wordpress/i18n";
 import {closeSmall, gallery, image, trash} from "@wordpress/icons";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 import {store as noticesStore} from "@wordpress/notices";
 import {
   AccordionItemAttributes,
   collectAccordionItems,
+  getMediaCaption,
   getItemTitle,
   SelectedMedia,
 } from "./accordion-items";
 import MediaAccordionImageManager from "./MediaAccordionImageManager";
+import {ViewRatioSelectorToolbar, ViewRatioSelectorPanel} from "../../components/ViewRatioSelector";
+import {
+  AlignmentSelectorToolbar,
+  AlignmentSelectorPanel,
+  MediaAlignment,
+} from "../../components/AlignmentSelector";
+import {
+  VisibilitySelectorToolbar,
+  VisibilitySelectorPanel,
+} from "../../components/VisibilitySelector";
+
+type CaptionAlignment = "left" | "center" | "right";
 
 interface EditProps {
   clientId: string;
+  attributes: {
+    viewRatio: "2:1" | "1:2";
+    mediaAlignment: MediaAlignment;
+    showImageWrapper?: boolean;
+    captionAlignment?: CaptionAlignment;
+  }
+  setAttributes: (newAttributes: Partial<EditProps["attributes"]>) => void;
 }
 
-const Edit = ({clientId}: EditProps) => {
+interface CoreDataSelectors {
+  getMedia: (id: number) => SelectedMedia | undefined;
+}
+
+const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
   const props = useBlockProps();
   const [activeItemClientId, setActiveItemClientId] = useState("");
   const [isImageManagerOpen, setIsImageManagerOpen] = useState(false);
@@ -44,6 +74,23 @@ const Edit = ({clientId}: EditProps) => {
     useState<Element | null>(null);
   const {updateBlockAttributes} = useDispatch(blockEditorStore);
   const {createErrorNotice} = useDispatch(noticesStore);
+  const {viewRatio} = attributes;
+  const mediaAlignment = attributes.mediaAlignment ?? "top";
+  const showImageWrapper = attributes.showImageWrapper ?? true;
+  const captionAlignment = attributes.captionAlignment ?? "left";
+  const viewRatioClass: string = "media-accordion-" + viewRatio.replace(':', '-');
+  const mediaAlignmentClass: string = "media-accordion-align-" + mediaAlignment;
+  const captionAlignmentClass: string = "media-accordion-caption-align-" + captionAlignment;
+  const imageWrapperVisibilityClass: string = showImageWrapper
+    ? "media-accordion-show-image-wrapper"
+    : "media-accordion-hide-image-wrapper";
+
+  const setCaptionAlignment = (alignment?: string) => {
+    const nextAlignment: CaptionAlignment =
+      alignment === "center" || alignment === "right" ? alignment : "left";
+
+    setAttributes({captionAlignment: nextAlignment});
+  };
 
   const {items, selectedItemClientId} = useSelect((select) => {
     const {
@@ -96,9 +143,28 @@ const Edit = ({clientId}: EditProps) => {
   const activeItemTitle = activeItem
     ? getItemTitle(activeItem, activeItemIndex)
     : "";
+  const truncateTitle = (title: string, maxLength = 40) =>
+    title.length > maxLength ? `${title.slice(0, maxLength - 1)}…` : title;
+
+  const activeItemLabel = truncateTitle(
+    activeItemTitle || __("Untitled", "rrze-elements-blocks")
+  );
   const imageId = activeItem?.attributes.mediaAccordionImageId ?? 0;
   const imageUrl = activeItem?.attributes.mediaAccordionImageUrl ?? "";
   const imageAlt = activeItem?.attributes.mediaAccordionImageAlt ?? "";
+  const storedImageCaption =
+    activeItem?.attributes.mediaAccordionImageCaption;
+  const attachmentCaption = useSelect((select) => {
+    if (imageId <= 0 || storedImageCaption !== undefined) {
+      return "";
+    }
+
+    const {getMedia} = select("core") as unknown as CoreDataSelectors;
+
+    return getMediaCaption(getMedia(imageId) ?? {});
+  }, [imageId, storedImageCaption]);
+  const imageCaption =
+    storedImageCaption ?? attachmentCaption;
 
   const updateActiveItemImage = (
     attributes: Partial<AccordionItemAttributes>,
@@ -136,6 +202,16 @@ const Edit = ({clientId}: EditProps) => {
       mediaAccordionImageId: Number(media.id) || 0,
       mediaAccordionImageUrl: media.url,
       mediaAccordionImageAlt: media.alt ?? media.alt_text ?? "",
+      mediaAccordionImageCaption: getMediaCaption(media),
+    });
+  };
+
+  const onSelectImageUrl = (mediaAccordionImageUrl: string) => {
+    updateActiveItemImage({
+      mediaAccordionImageId: 0,
+      mediaAccordionImageUrl,
+      mediaAccordionImageAlt: "",
+      mediaAccordionImageCaption: "",
     });
   };
 
@@ -144,6 +220,7 @@ const Edit = ({clientId}: EditProps) => {
       mediaAccordionImageId: 0,
       mediaAccordionImageUrl: "",
       mediaAccordionImageAlt: "",
+      mediaAccordionImageCaption: "",
     });
   };
 
@@ -171,8 +248,14 @@ const Edit = ({clientId}: EditProps) => {
               onReset={onRemoveImage}
               name={
                 imageUrl
-                  ? __("Replace item image", "rrze-elements-blocks")
-                  : __("Add item image", "rrze-elements-blocks")
+                  ? sprintf(
+                    __("Replace image for accordion tab “%s”", "rrze-elements-blocks"),
+                    activeItemLabel || __("Untitled", "rrze-elements-blocks")
+                  )
+                  : sprintf(
+                    __("Add image for accordion section “%s”", "rrze-elements-blocks"),
+                    activeItemLabel || __("Untitled", "rrze-elements-blocks")
+                  )
               }
             />
           )}
@@ -194,6 +277,23 @@ const Edit = ({clientId}: EditProps) => {
             onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}
           />
         </ToolbarGroup>
+        <ViewRatioSelectorToolbar
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
+        <AlignmentSelectorToolbar
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
+        <AlignmentToolbar
+          label={__("Caption alignment", "rrze-elements-blocks")}
+          value={captionAlignment}
+          onChange={setCaptionAlignment}
+        />
+        <VisibilitySelectorToolbar
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
       </BlockControls>
 
       {isImageManagerOpen && imageManagerAnchor && (
@@ -223,9 +323,26 @@ const Edit = ({clientId}: EditProps) => {
       )}
 
       <InspectorControls>
+        <PanelBody>
+          <Text>{__("Control all images inside this Block via the Media Manager.", "rrze-elements-blocks")}</Text>
+          <Spacer paddingTop="1rem" paddingBottom="1rem">
+            <Button
+              ref={setImageManagerButtonRef}
+              icon={gallery}
+              label={__(
+                "Manage accordion images",
+                "rrze-elements-blocks",
+              )}
+              variant="primary"
+              isPressed={isImageManagerOpen}
+              onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}>
+              {__("Open Media Manager", "rrze-elements-blocks")}
+            </Button>
+          </Spacer>
+        </PanelBody>
         <PanelBody
           title={__("Accordion images", "rrze-elements-blocks")}
-          initialOpen={true}
+          initialOpen={false}
         >
           {items.length === 0 ? (
             <Notice status="info" isDismissible={false}>
@@ -237,7 +354,7 @@ const Edit = ({clientId}: EditProps) => {
           ) : (
             <>
               <SelectControl
-                label={__("Accordion item", "rrze-elements-blocks")}
+                label={__("Select an Accordion item to modify", "rrze-elements-blocks")}
                 value={activeItemClientId}
                 options={itemOptions}
                 onChange={setActiveItemClientId}
@@ -246,37 +363,41 @@ const Edit = ({clientId}: EditProps) => {
                   "rrze-elements-blocks",
                 )}
               />
-              <MediaUploadCheck>
-                <MediaUpload
-                  allowedTypes={["image"]}
-                  value={imageId}
-                  onSelect={onSelectImage}
-                  render={({open}) => (
-                    <Button
-                      variant="secondary"
-                      icon={image}
-                      onClick={open}
-                    >
-                      {imageUrl
-                        ? __("Replace image", "rrze-elements-blocks")
-                        : __("Select image", "rrze-elements-blocks")}
-                    </Button>
-                  )}
-                />
-              </MediaUploadCheck>
+              <VStack>
+                <MediaUploadCheck>
+                  <MediaUpload
+                    allowedTypes={["image"]}
+                    value={imageId}
+                    onSelect={onSelectImage}
+                    render={({open}) => (
+                      <Button
+                        variant="secondary"
+                        icon={image}
+                        onClick={open}
+                      >
+                        {imageUrl
+                          ? __("Replace image", "rrze-elements-blocks")
+                          : __("Select image", "rrze-elements-blocks")}
+                      </Button>
+                    )}
+                  />
+                </MediaUploadCheck>
+                <Button
+                  className="media-accordion__remove-image"
+                  variant="tertiary"
+                  isDestructive
+                  icon={trash}
+                  onClick={onRemoveImage}
+                  disabled={!imageUrl}
+                >
+                  {__("Remove image", "rrze-elements-blocks")}
+                </Button>
+              </VStack>
               {imageUrl && (
                 <>
-                  <Button
-                    className="media-accordion__remove-image"
-                    variant="tertiary"
-                    isDestructive
-                    icon={trash}
-                    onClick={onRemoveImage}
-                  >
-                    {__("Remove image", "rrze-elements-blocks")}
-                  </Button>
+                  <Spacer/>
                   <TextControl
-                    label={__("Alternative text", "rrze-elements-blocks")}
+                    label={__("Alt text", "rrze-elements-blocks")}
                     value={imageAlt}
                     onChange={(mediaAccordionImageAlt) =>
                       updateActiveItemImage({mediaAccordionImageAlt})
@@ -291,9 +412,15 @@ const Edit = ({clientId}: EditProps) => {
             </>
           )}
         </PanelBody>
+        <PanelBody>
+          <ViewRatioSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
+          <AlignmentSelectorPanel attributes={attributes} setAttributes={setAttributes}/>
+          <VisibilitySelectorPanel attributes={attributes} setAttributes={setAttributes}/>
+        </PanelBody>
       </InspectorControls>
 
-      <div className="media-accordion">
+      <div
+        className={"media-accordion " + viewRatioClass + " " + mediaAlignmentClass + " " + captionAlignmentClass + " " + imageWrapperVisibilityClass}>
         <div className="media-accordion__accordions">
           <InnerBlocks
             allowedBlocks={["rrze-elements/collapsibles"]}
@@ -308,52 +435,74 @@ const Edit = ({clientId}: EditProps) => {
             <p className="media-accordion__item-label">{activeItemTitle}</p>
           )}
           {imageUrl ? (
-            <MediaUploadCheck
-              fallback={
-                <div className="media-accordion__image-button">
-                  <img src={imageUrl} alt={imageAlt} />
-                </div>
-              }
-            >
-              <MediaUpload
-                allowedTypes={["image"]}
-                value={imageId}
-                onSelect={onSelectImage}
-                render={({open}) => (
-                  <Button
-                    className="media-accordion__image-button"
-                    onClick={open}
-                    label={__("Replace item image", "rrze-elements-blocks")}
-                  >
-                    <img src={imageUrl} alt={imageAlt} />
-                  </Button>
-                )}
+            <figure className="media-accordion__figure">
+              <MediaUploadCheck
+                fallback={
+                  <div className="media-accordion__image-button">
+                    <img src={imageUrl} alt={imageAlt}/>
+                  </div>
+                }
+              >
+                <MediaUpload
+                  allowedTypes={["image"]}
+                  value={imageId}
+                  onSelect={onSelectImage}
+                  render={({open}) => (
+                    <Button
+                      className="media-accordion__image-button"
+                      onClick={open}
+                      label={__(
+                        "Replace item image",
+                        "rrze-elements-blocks",
+                      )}
+                    >
+                      <img src={imageUrl} alt={imageAlt}/>
+                    </Button>
+                  )}
+                />
+              </MediaUploadCheck>
+              <RichText
+                tagName="figcaption"
+                className="wp-element-caption"
+                aria-label={__("Image caption", "rrze-elements-blocks")}
+                placeholder={__("Add caption", "rrze-elements-blocks")}
+                value={imageCaption}
+                onChange={(mediaAccordionImageCaption) =>
+                  updateActiveItemImage({mediaAccordionImageCaption})
+                }
               />
-            </MediaUploadCheck>
+            </figure>
           ) : (
-            <MediaUploadCheck>
-              <MediaUpload
+            activeItem && (
+              <MediaPlaceholder
+                className="media-accordion__image-placeholder"
+                icon={image}
+                labels={{
+                  title: __(
+                    "Add image for this item",
+                    "rrze-elements-blocks",
+                  ),
+                  instructions: __(
+                    "Upload an image, choose one from the Media Library, or insert one from a URL.",
+                    "rrze-elements-blocks",
+                  ),
+                }}
+                accept="image/*"
                 allowedTypes={["image"]}
                 value={imageId}
+                onError={onUploadError}
                 onSelect={onSelectImage}
-                render={({open}) => (
-                  <Button
-                    className="media-accordion__image-placeholder"
-                    variant="secondary"
-                    icon={image}
-                    onClick={open}
-                    disabled={!activeItem}
-                  >
-                    {activeItem
-                      ? __("Add image for this item", "rrze-elements-blocks")
-                      : __(
-                          "Add an accordion item to assign an image",
-                          "rrze-elements-blocks",
-                        )}
-                  </Button>
-                )}
+                onSelectURL={onSelectImageUrl}
               />
-            </MediaUploadCheck>
+            )
+          )}
+          {!activeItem && (
+            <Notice status="info" isDismissible={false}>
+              {__(
+                "Add an accordion item to assign an image.",
+                "rrze-elements-blocks",
+              )}
+            </Notice>
           )}
         </aside>
       </div>

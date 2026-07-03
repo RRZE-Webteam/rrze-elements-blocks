@@ -12,6 +12,7 @@ export interface AccordionItemAttributes {
   mediaAccordionImageId?: number;
   mediaAccordionImageUrl?: string;
   mediaAccordionImageAlt?: string;
+  mediaAccordionImageCaption?: string;
 }
 
 export interface AccordionItem {
@@ -26,7 +27,19 @@ export interface SelectedMedia {
   url?: string;
   alt?: string;
   alt_text?: string;
+  caption?: string | {
+    raw?: string;
+    rendered?: string;
+  };
 }
+
+export const getMediaCaption = (media: SelectedMedia) => {
+  if (typeof media.caption === "string") {
+    return media.caption;
+  }
+
+  return media.caption?.raw ?? media.caption?.rendered ?? "";
+};
 
 const isAccordionItem = (blockName: string) =>
   ACCORDION_ITEM_BLOCKS.includes(blockName);

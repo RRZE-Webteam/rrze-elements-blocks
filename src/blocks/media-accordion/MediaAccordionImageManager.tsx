@@ -17,13 +17,18 @@ import {image, replace, trash} from "@wordpress/icons";
 import {
   AccordionItem,
   AccordionItemAttributes,
+  getMediaCaption,
   getItemTitle,
   SelectedMedia,
 } from "./accordion-items";
 
+const BLOCK_TYPE_FIELD = "blockType";
+const DEFAULT_VIEW_FIELDS = ["jumpName", "image", "actions"];
+
 interface AccordionImageRow extends AccordionItem {
   id: string;
   displayTitle: string;
+  blockType: string;
   jumpName: string;
   imageId: number;
   imageUrl: string;
@@ -46,7 +51,7 @@ const MediaAccordionImageManager = ({
 }: MediaAccordionImageManagerProps) => {
   const [view, setView] = useState<View>({
     type: "table",
-    fields: ["jumpName", "image", "actions"],
+    fields: DEFAULT_VIEW_FIELDS,
     titleField: "title",
     showTitle: true,
     showLevels: true,
@@ -60,9 +65,16 @@ const MediaAccordionImageManager = ({
         image: {
           width: "100px",
         },
+        blockType: {
+          width: "160px",
+        },
         actions: {
           minWidth: "220px",
         },
+        jumpName: {
+          width: "220px",
+          minWidth: "220px",
+        }
       },
     },
   });
@@ -73,6 +85,10 @@ const MediaAccordionImageManager = ({
         ...item,
         id: item.clientId,
         displayTitle: getItemTitle(item, index),
+        blockType:
+          item.name === "rrze-elements/accordion" || item.depth > 0
+            ? __("Inner accordion item", "rrze-elements-blocks")
+            : __("Accordion item", "rrze-elements-blocks"),
         jumpName: item.attributes.jumpName?.trim() ?? "",
         imageId: item.attributes.mediaAccordionImageId ?? 0,
         imageUrl: item.attributes.mediaAccordionImageUrl ?? "",
@@ -81,12 +97,35 @@ const MediaAccordionImageManager = ({
     [items],
   );
 
+  const hasInnerAccordions = useMemo(
+    () =>
+      rows.some(
+        (item) => item.name === "rrze-elements/accordion" || item.depth > 0,
+      ),
+    [rows],
+  );
+
+  const currentView = useMemo<View>(() => {
+    const viewFields = view.fields ?? DEFAULT_VIEW_FIELDS;
+    const fieldsWithoutBlockType = viewFields.filter(
+      (field) => field !== BLOCK_TYPE_FIELD,
+    );
+
+    return {
+      ...view,
+      fields: hasInnerAccordions
+        ? [BLOCK_TYPE_FIELD, ...fieldsWithoutBlockType]
+        : fieldsWithoutBlockType,
+    };
+  }, [hasInnerAccordions, view]);
+
   const removeImage = (item: AccordionImageRow) => {
     onActivateItem(item.clientId);
     onUpdateItem(item.clientId, {
       mediaAccordionImageId: 0,
       mediaAccordionImageUrl: "",
       mediaAccordionImageAlt: "",
+      mediaAccordionImageCaption: "",
     });
   };
 
@@ -103,6 +142,7 @@ const MediaAccordionImageManager = ({
       mediaAccordionImageId: Number(media.id) || 0,
       mediaAccordionImageUrl: media.url,
       mediaAccordionImageAlt: media.alt ?? media.alt_text ?? "",
+      mediaAccordionImageCaption: getMediaCaption(media),
     });
   };
 
@@ -116,6 +156,22 @@ const MediaAccordionImageManager = ({
         enableGlobalSearch: true,
         getValue: ({item}) => item.displayTitle,
       },
+      ...(hasInnerAccordions
+        ? [
+            {
+              id: BLOCK_TYPE_FIELD,
+              label: __("Block Type", "rrze-elements-blocks"),
+              enableHiding: false,
+              enableSorting: true,
+              enableGlobalSearch: true,
+              render: ({item}) => (
+                <span className="media-accordion-image-manager__block-type">
+                  {item.blockType}
+                </span>
+              ),
+            } satisfies Field<AccordionImageRow>,
+          ]
+        : []),
       {
         id: "jumpName",
         label: __("Jump name", "rrze-elements-blocks"),
@@ -124,7 +180,9 @@ const MediaAccordionImageManager = ({
         enableGlobalSearch: true,
         render: ({item}) =>
           item.jumpName ? (
-            <code>{item.jumpName}</code>
+            <code style={{ whiteSpace: 'initial' }}>
+              {item.jumpName}
+            </code>
           ) : (
             <span className="media-accordion-image-manager__empty-value">
               {__("Not set", "rrze-elements-blocks")}
@@ -192,19 +250,19 @@ const MediaAccordionImageManager = ({
         ),
       },
     ],
-    [onActivateItem, onUpdateItem],
+    [hasInnerAccordions, onActivateItem, onUpdateItem],
   );
 
   const processed = useMemo(
-    () => filterSortAndPaginate(rows, view, fields),
-    [fields, rows, view],
+    () => filterSortAndPaginate(rows, currentView, fields),
+    [currentView, fields, rows],
   );
 
   return (
     <DataViews
       data={processed.data}
       fields={fields}
-      view={view}
+      view={currentView}
       onChangeView={setView}
       paginationInfo={processed.paginationInfo}
       defaultLayouts={{

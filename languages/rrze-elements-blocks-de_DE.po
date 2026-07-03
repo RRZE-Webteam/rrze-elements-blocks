@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-"
 "blocks\n"
-"POT-Creation-Date: 2026-04-16T12:06:32+00:00\n"
-"PO-Revision-Date: 2026-04-16 14:07+0200\n"
+"POT-Creation-Date: 2026-07-02T14:58:14+00:00\n"
+"PO-Revision-Date: 2026-07-02 16:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -63,23 +63,23 @@ msgstr "Weitere Informationen anzeigen"
 msgid "Schließen"
 msgstr "Schließen"
 
-#: includes/Blocks.php:71
+#: includes/Blocks.php:72
 msgid "Attention"
 msgstr "Achtung"
 
-#: includes/Blocks.php:107
+#: includes/Blocks.php:108
 msgid "Light"
 msgstr "Hell"
 
-#: includes/Blocks.php:111
+#: includes/Blocks.php:112
 msgid "Dark"
 msgstr "Dunkel"
 
-#: includes/Blocks.php:117 build/blocks/counter/index.js:1
+#: includes/Blocks.php:118 build/blocks/counter/index.js:1
 msgid "Normal"
 msgstr "Normal"
 
-#: includes/Blocks.php:122 build/blocks/counter/index.js:1
+#: includes/Blocks.php:123 build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Small"
 msgstr "Klein"
@@ -431,7 +431,7 @@ msgstr "Es sind keine Sprungmarken registriert."
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/fact/index.js:1 build/blocks/iconbox/index.js:1
-#: build/blocks/tab/index.js:1
+#: build/blocks/media-accordion/index.js:154 build/blocks/tab/index.js:1
 msgid "Close"
 msgstr "Schließen"
 
@@ -823,7 +823,7 @@ msgstr "Bild ersetzen"
 msgid "Add Image"
 msgstr "Bild auswählen"
 
-#: build/blocks/cta/index.js:1
+#: build/blocks/cta/index.js:1 build/blocks/media-accordion/index.js:154
 msgid "Remove image"
 msgstr "Bild entfernen"
 
@@ -1078,6 +1078,223 @@ msgstr "Deine Überschrift"
 #: build/blocks/info-card/index.js:1
 msgid "Add scientific text…"
 msgstr "Wissenschaftlichen Text hinzufügen…"
+
+#: build/blocks/media-accordion/index.js:1
+msgid "Nested accordion item"
+msgstr "Verschachteltes Accordion-Element"
+
+#: build/blocks/media-accordion/index.js:1
+#: build/blocks/media-accordion/index.js:154
+msgid "Accordion item"
+msgstr "Accordionreiter"
+
+#. translators: 1: Current page number, 2: Total number of pages.
+#: build/blocks/media-accordion/index.js:154
+msgid "Inner accordion item"
+msgstr "Inneres Accordion-Element"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Accordion title"
+msgstr "Accordion Titel"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Block Type"
+msgstr "Block-Typ"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Jump name"
+msgstr "Sprungmarke"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Not set"
+msgstr "Nicht festgelegt"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Selected image"
+msgstr "Ausgewähltes Bild"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "No image"
+msgstr "Kein Bild"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Image actions"
+msgstr "Bildaktionen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Replace"
+msgstr "Ersetzen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Select"
+msgstr "Auswählen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Remove"
+msgstr "Entfernen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Search accordion images"
+msgstr "Accordion-Titel durchsuchen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Add an accordion item before assigning images."
+msgstr "Fügen Sie ein Accordion-Element hinzu, bevor Sie Bilder zuweisen."
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Control the Image to Content ratio"
+msgstr "Verhältnis Bild zu Inhalt steuern"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Expand content area"
+msgstr "Inhaltsbereich erweitern"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Shrink content area"
+msgstr "Inhaltsbereich verkleinern"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Control the Content to Image ratio"
+msgstr "Verhältnis Inhalt zu Bild steuern"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "1:2"
+msgstr "1:2"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "2:1"
+msgstr "2:1"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Align image to top"
+msgstr "Bild oben ausrichten"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Align image centered"
+msgstr "Bild zentriert ausrichten"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Align image to bottom"
+msgstr "Bild unten ausrichten"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Control the image alignment"
+msgstr "Bildausrichtung steuern"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Hide editor image wrapper"
+msgstr "Bild-Wrapper im Editor ausblenden"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Show editor image wrapper"
+msgstr "Bild-Wrapper im Editor anzeigen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Control editor image wrapper visibility"
+msgstr "Sichtbarkeit des Bild-Wrappers im Editor steuern"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Untitled"
+msgstr "Unbenannt"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Replace image for accordion tab “%s”"
+msgstr "Bild für Accordionreiter „%s“ ersetzen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Add image for accordion section “%s”"
+msgstr "Bild für Accordionreiter „%s“ hinzufügen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Remove item image"
+msgstr "Bild für Reiter entfernen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Manage accordion images"
+msgstr "Accordion-Bilder verwalten"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Caption alignment"
+msgstr "Ausrichtung Bildbeschriftung"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Accordion images"
+msgstr "Accordion-Bilder"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Control all images inside this Block via the Media Manager."
+msgstr "Verwalten Sie alle Bilder in diesem Block über die Bildübersicht"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Open Media Manager"
+msgstr "Bildübersicht öffnen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Add an accordion item before selecting an image."
+msgstr "Füge ein Accordion-Element hinzu, bevor du ein Bild auswählst."
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Select an Accordion item to modify"
+msgstr "Wähle ein Accordion-Element aus, um es zu bearbeiten"
+
+#: build/blocks/media-accordion/index.js:154
+msgid ""
+"Nested items are indented. Selecting an item in the canvas also targets it "
+"here."
+msgstr ""
+"Verschachtelte Elemente sind eingerückt. Wenn du einen Accordionreiter in "
+"der Arbeitsfläche auswählst, wird es auch hier ausgewählt."
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Replace image"
+msgstr "Bild ersetzen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Select image"
+msgstr "Bild auswählen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Alt text"
+msgstr "Alternativtext"
+
+#: build/blocks/media-accordion/index.js:154
+msgid ""
+"Describe the image when it conveys information. Leave empty for decorative "
+"images."
+msgstr ""
+"Beschreibe das Bild, wenn es Informationen vermittelt. Für dekorative Bilder "
+"leer lassen."
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Accordion item image"
+msgstr "Accordionreiter Bild"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Replace item image"
+msgstr "Bild für Accordionreiter ersetzen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Image caption"
+msgstr "Bildunterschrift"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Add caption"
+msgstr "Bildunterschrift hinzufügen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Add image for this item"
+msgstr "Bild für dieses Element hinzufügen"
+
+#: build/blocks/media-accordion/index.js:154
+msgid ""
+"Upload an image, choose one from the Media Library, or insert one from a URL."
+msgstr ""
+"Lade ein Bild hoch, wähle eines aus der Medienbibliothek aus oder füge eines "
+"über eine URL ein."
+
+#: build/blocks/media-accordion/index.js:154
+msgid "Add an accordion item to assign an image."
+msgstr "Füge ein Accordion-Element hinzu, um ein Bild zuzuweisen."
 
 #: build/blocks/news/index.js:1
 msgid "Mirror Settings in FAU Elemental"
@@ -1597,6 +1814,16 @@ msgstr "Einschub"
 msgctxt "block description"
 msgid "Creates an insertion."
 msgstr "Erzeugt einen Einschub bei Texten."
+
+#: build/blocks/media-accordion/block.json
+msgctxt "block title"
+msgid "Media & Accordions"
+msgstr "Medien & Accordions"
+
+#: build/blocks/media-accordion/block.json
+msgctxt "block description"
+msgid "Add Images next to your Accordions."
+msgstr "Füge Bilder neben deinen Accordions hinzu."
 
 #: build/blocks/news/block.json
 msgctxt "block title"

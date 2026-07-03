@@ -10,7 +10,10 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2015",
     "downlevelIteration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "./src/**/*",

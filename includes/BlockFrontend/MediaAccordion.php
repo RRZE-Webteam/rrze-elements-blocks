@@ -21,9 +21,25 @@ class MediaAccordion extends AbstractBlockRender
         $wrapperClass = trim((string)($attributes['className'] ?? ''));
         $classes = trim('wp-block-rrze-elements-media-accordion ' . $wrapperClass);
         $layoutClass = $imageItems === [] ? 'media-accordion has-no-images' : 'media-accordion has-images';
+        $viewRatioClass = '';
+        if(!empty($attributes['viewRatio'])) {
+            $viewRatioClass = 'media-accordion-' .  str_replace(':', '-', $attributes['viewRatio']);
+        }
+        $mediaAlignment = isset($attributes['mediaAlignment'])
+            ? (string)$attributes['mediaAlignment']
+            : 'top';
+        $mediaAlignmentClass = in_array($mediaAlignment, ['top', 'center', 'bottom'], true)
+            ? 'media-accordion-align-' . $mediaAlignment
+            : 'media-accordion-align-top';
+        $captionAlignment = isset($attributes['captionAlignment'])
+            ? (string)$attributes['captionAlignment']
+            : 'left';
+        $captionAlignmentClass = in_array($captionAlignment, ['left', 'center', 'right'], true)
+            ? 'media-accordion-caption-align-' . $captionAlignment
+            : 'media-accordion-caption-align-left';
 
         $markup = '<div class="' . esc_attr($classes) . '">';
-        $markup .= '<div class="' . esc_attr($layoutClass) . '">';
+        $markup .= '<div class="' . esc_attr($layoutClass) . ' ' . esc_attr($viewRatioClass) . ' ' . esc_attr($mediaAlignmentClass) . ' ' . esc_attr($captionAlignmentClass) . '">';
         $markup .= '<div class="media-accordion__accordions">' . $innerBlocks . '</div>';
 
         if ($imageItems !== []) {
@@ -41,7 +57,19 @@ class MediaAccordion extends AbstractBlockRender
                 }
             }
 
-            $markup .= $this->renderImage($initialItem);
+            $renderedImages = $this->renderImages($imageItems);
+            $initialKey = $this->getImageItemKey($initialItem);
+
+            if (isset($renderedImages[$initialKey])) {
+                $markup .= $renderedImages[$initialKey]['markup'];
+            }
+
+            foreach ($renderedImages as $renderedImage) {
+                $markup .= $this->renderImageTemplate(
+                    $renderedImage['item'],
+                    $renderedImage['markup']
+                );
+            }
         }
 
         $markup .= '</div></div>';
@@ -51,7 +79,7 @@ class MediaAccordion extends AbstractBlockRender
 
     /**
      * @param array<int, array<string, mixed>> $blocks
-     * @return array<int, array{id: int, url: string, alt: string, loadOpen: bool}>
+     * @return array<int, array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}>
      */
     private function collectItems(array $blocks): array
     {
@@ -72,6 +100,9 @@ class MediaAccordion extends AbstractBlockRender
                     'alt' => isset($attributes['mediaAccordionImageAlt'])
                         ? sanitize_text_field((string)$attributes['mediaAccordionImageAlt'])
                         : '',
+                    'caption' => array_key_exists('mediaAccordionImageCaption', $attributes)
+                        ? trim(wp_kses_post((string)$attributes['mediaAccordionImageCaption']))
+                        : null,
                     'loadOpen' => !empty($attributes['loadOpen']),
                 ];
             }
@@ -86,8 +117,8 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param non-empty-list<array{id: int, url: string, alt: string, loadOpen: bool}> $items
-     * @return array{id: int, url: string, alt: string, loadOpen: bool}
+     * @param non-empty-list<array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}> $items
+     * @return array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}
      */
     private function getInitialItem(array $items): array
     {
@@ -101,21 +132,147 @@ class MediaAccordion extends AbstractBlockRender
     }
 
     /**
-     * @param array{id: int, url: string, alt: string, loadOpen: bool} $item
+     * @param non-empty-list<array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}> $items
+     * @return array<string, array{item: array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool}, markup: string}>
+     */
+    private function renderImages(array $items): array
+    {
+        $renderedImages = [];
+
+        foreach ($items as $item) {
+            $key = $this->getImageItemKey($item);
+
+            if (isset($renderedImages[$key])) {
+                continue;
+            }
+
+            $renderedImages[$key] = [
+                'item' => $item,
+                'markup' => $this->renderImage($item),
+            ];
+        }
+
+        return $renderedImages;
+    }
+
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
      */
     private function renderImage(array $item): string
     {
+        $blockAttributes = [
+            'sizeSlug' => 'large',
+            'linkDestination' => 'none',
+            'className' => 'is-style-large has-overlay media-accordion__media',
+        ];
+
+        if ($item['id'] > 0) {
+            $blockAttributes = ['id' => $item['id']] + $blockAttributes;
+        }
+
+        $encodedAttributes = wp_json_encode($blockAttributes);
+        if (!is_string($encodedAttributes)) {
+            $encodedAttributes = '{}';
+        }
+
+        $innerMarkup = $this->renderImageInnerMarkup($item);
+        $blockMarkup = '<!-- wp:image ' . $encodedAttributes . ' -->'
+            . $innerMarkup
+            . '<!-- /wp:image -->';
+
+        return function_exists('do_blocks') ? do_blocks($blockMarkup) : $innerMarkup;
+    }
+
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
+     */
+    private function renderImageInnerMarkup(array $item): string
+    {
+        $imageUrl = $this->getImageUrl($item);
+        $caption = $this->getImageCaption($item);
         $imageClass = trim(
             'media-accordion__image' . ($item['id'] > 0 ? ' wp-image-' . $item['id'] : '')
         );
+        $captionMarkup = $caption !== ''
+            ? '<figcaption class="wp-element-caption">' . wp_kses_post($caption) . '</figcaption>'
+            : '';
 
         return sprintf(
-            '<figure class="media-accordion__media" data-media-accordion-media>' .
-            '<img class="%1$s" data-media-accordion-image src="%2$s" alt="%3$s" loading="lazy" decoding="async" />' .
+            '<figure class="wp-block-image size-large is-style-large has-overlay media-accordion__media" data-media-accordion-media data-media-accordion-image-id="%1$d" data-media-accordion-image-url="%2$s" data-media-accordion-image-alt="%3$s" data-media-accordion-image-caption="%4$s">' .
+            '<img src="%5$s" alt="%3$s" class="%6$s" data-media-accordion-image loading="lazy" decoding="async" />%7$s' .
             '</figure>',
-            esc_attr($imageClass),
+            $item['id'],
             esc_url($item['url']),
-            esc_attr($item['alt'])
+            esc_attr($item['alt']),
+            esc_attr($caption),
+            esc_url($imageUrl),
+            esc_attr($imageClass),
+            $captionMarkup
         );
+    }
+
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
+     */
+    private function renderImageTemplate(array $item, string $imageMarkup): string
+    {
+        return sprintf(
+            '<template data-media-accordion-template data-media-accordion-image-id="%1$d" data-media-accordion-image-url="%2$s" data-media-accordion-image-alt="%3$s" data-media-accordion-image-caption="%4$s">%5$s</template>',
+            $item['id'],
+            esc_url($item['url']),
+            esc_attr($item['alt']),
+            esc_attr($this->getImageCaption($item)),
+            $imageMarkup
+        );
+    }
+
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
+     */
+    private function getImageItemKey(array $item): string
+    {
+        return sha1(
+            $item['id']
+            . "\n"
+            . $item['url']
+            . "\n"
+            . $item['alt']
+            . "\n"
+            . $this->getImageCaption($item)
+        );
+    }
+
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
+     */
+    private function getImageUrl(array $item): string
+    {
+        if ($item['id'] <= 0 || !function_exists('wp_get_attachment_image_url')) {
+            return $item['url'];
+        }
+
+        $imageUrl = wp_get_attachment_image_url($item['id'], 'large');
+
+        return is_string($imageUrl) && $imageUrl !== ''
+            ? esc_url_raw($imageUrl)
+            : $item['url'];
+    }
+
+    /**
+     * @param array{id: int, url: string, alt: string, caption: ?string, loadOpen: bool} $item
+     */
+    private function getImageCaption(array $item): string
+    {
+        if ($item['caption'] !== null) {
+            return $item['caption'];
+        }
+
+        if ($item['id'] <= 0 || !function_exists('wp_get_attachment_caption')) {
+            return '';
+        }
+
+        $caption = wp_get_attachment_caption($item['id']);
+
+        return is_string($caption) ? trim(wp_kses_post($caption)) : '';
     }
 }

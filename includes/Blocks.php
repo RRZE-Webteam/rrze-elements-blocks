@@ -220,10 +220,10 @@ class Blocks
                 'build_folder' => 'info-card',
                 'class' => InfoCard::class,
             ],
-//            [
-//                'build_folder' => 'media-accordion',
-//                'class' => MediaAccordion::class,
-//            ],
+            [
+                'build_folder' => 'media-accordion',
+                'class' => MediaAccordion::class,
+            ],
         ];
 
         foreach ($dynamic_blocks as $block_def) {

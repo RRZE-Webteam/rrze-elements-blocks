@@ -53,6 +53,7 @@
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-counter-row,
   div.wp-block-rrze-elements-facts-grid,
+  div.wp-block-rrze-elements-media-accordion,
   section.facts,
   .is-style-dark div.wp-block-rrze-elements-iconbox-row,
   .is-style-dark div.wp-block-rrze-elements-counter-row,
@@ -67,7 +68,9 @@
   }
 
   div.wp-block-group-is-layout-constrained section.facts,
-  div.wp-block-group-is-layout-constrained.is-style-dark section.facts{
+  div.wp-block-group-is-layout-constrained.is-style-dark section.facts,
+  div.wp-block-group.is-style-dark div.wp-block-rrze-elements-media-accordion,
+  div.wp-block-group div.wp-block-rrze-elements-media-accordion{
     margin: 0 auto;
   }
 

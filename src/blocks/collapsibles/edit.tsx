@@ -3,8 +3,10 @@ import {
   InnerBlocks,
   InspectorControls,
   BlockControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { PanelBody } from "@wordpress/components";
+import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import ExpandAllLink from "../../components/ExpandAllLink";
 import {
@@ -31,11 +33,23 @@ type SaveProps = {
     hstart?: number;
     expandLabel?: string;
   }) => void;
-  clientId?: string;
+  clientId: string;
 };
 
-export default function Edit({ attributes, setAttributes }: SaveProps) {
+export default function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+}: SaveProps) {
   const props = useBlockProps();
+  const isMediaAccordionChild = useSelect((select) => {
+    const {getBlockName, getBlockRootClientId} = select(blockEditorStore);
+    const parentClientId = getBlockRootClientId(clientId);
+
+    return parentClientId
+      ? getBlockName(parentClientId) === "rrze-elements/media-accordion"
+      : false;
+  }, [clientId]);
 
   useEffect(() => {
     setAttributes({
@@ -84,6 +98,7 @@ export default function Edit({ attributes, setAttributes }: SaveProps) {
         )}
         <InnerBlocks
           allowedBlocks={["rrze-elements/collapse"]}
+          templateLock={isMediaAccordionChild ? false : undefined}
           template={[
             ["rrze-elements/collapse", {}],
             ["rrze-elements/collapse", {}],
