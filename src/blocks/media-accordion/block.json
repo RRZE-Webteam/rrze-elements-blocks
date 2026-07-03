@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/media-accordion",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "title": "Media & Accordions",
   "category": "rrze_elements",
   "description": "Add Images next to your Accordions.",
@@ -13,12 +13,19 @@
     "viewRatio": {
       "type": "string",
       "default": "2:1",
-      "enum" : ["2:1", "1:2"]
+      "enum": [
+        "2:1",
+        "1:2"
+      ]
     },
     "mediaAlignment": {
       "type": "string",
       "default": "top",
-      "enum": ["top", "center", "bottom"]
+      "enum": [
+        "top",
+        "center",
+        "bottom"
+      ]
     },
     "showImageWrapper": {
       "type": "boolean",
@@ -27,7 +34,11 @@
     "captionAlignment": {
       "type": "string",
       "default": "left",
-      "enum": ["left", "center", "right"]
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
     }
   },
   "example": {
