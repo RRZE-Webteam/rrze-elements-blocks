@@ -48,6 +48,8 @@ export default function Edit({ attributes, setAttributes }: SaveProps) {
             ["rrze-elements/process-step", {}],
             ["rrze-elements/process-step", {}],
           ]}
+          orientation={"vertical"}
+          templateLock={false}
         />
       </ol>
     </div>
