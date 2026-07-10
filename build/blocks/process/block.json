@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/process",
+  "version": "1.2.2",
+  "title": "Process",
+  "category": "rrze_elements",
+  "description": "Visualize a process on your webpage.",
+  "attributes": {
+    "hstart": {
+      "type": "integer",
+      "default": 3
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

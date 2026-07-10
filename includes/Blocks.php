@@ -205,6 +205,14 @@ class Blocks
                 'class' => TimelineItem::class,
             ],
             [
+                'build_folder' => 'process',
+                'class' => Timeline::class,
+            ],
+            [
+                'build_folder' => 'process-step',
+                'class' => TimelineItem::class,
+            ],
+            [
                 'build_folder' => 'facts-grid',
                 'class' => FactsGrid::class,
             ],

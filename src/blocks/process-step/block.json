@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/process-step",
+  "version": "1.2.2",
+  "title": "Step",
+  "category": "rrze_elements",
+  "description": "Add another step as part of a bigger process",
+  "parent": [
+    "rrze-elements/timeline"
+  ],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "hstart": {
+      "type": "integer",
+      "default": 3
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "usesContext": [
+    "rrze-elements/timeline-hstart"
+  ],
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
