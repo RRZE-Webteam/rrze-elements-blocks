@@ -278,6 +278,7 @@ const Edit = ({
                   "rrze-faudir/block",
                   "core/gallery",
                   "rrze-calendar/calendar",
+                  "rrze/faubox",
                 ]}
               />
             </div>
