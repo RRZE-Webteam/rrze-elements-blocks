@@ -2,9 +2,9 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/collapse",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "title": "Accordion-item",
-  "category": "design",
+  "category": "rrze_elements",
   "description": "Creates an accordion block",
   "parent": [
     "rrze-elements/collapsibles"
