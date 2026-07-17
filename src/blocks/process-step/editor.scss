@@ -8,7 +8,7 @@ li.wp-block-rrze-elements-process-step div.step-content p {
   color: #fff;
 }
 
-li.wp-block-rrze-elements-process-step div.step-label {
+li.wp-block-rrze-elements-process-step div.step-label p.rrze-elements-process-step-label {
   padding: .5rem;
   margin-bottom: .5rem;
   margin-top: 2rem;
@@ -59,7 +59,7 @@ li.wp-block-rrze-elements-process-step div.tooltip{
   grid-template-columns: 1fr 3fr;
 }
 
-li.wp-block-rrze-elements-process-step .step-label {
+li.wp-block-rrze-elements-process-step div.step-label p.rrze-elements-process-step-label{
   grid-column: 1/1;
   grid-row: 1/1;
 }

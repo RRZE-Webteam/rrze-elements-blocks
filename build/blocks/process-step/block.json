@@ -17,6 +17,10 @@
     "hstart": {
       "type": "integer",
       "default": 3
+    },
+    "stepLabel": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
