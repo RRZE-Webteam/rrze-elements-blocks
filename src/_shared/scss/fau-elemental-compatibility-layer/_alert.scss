@@ -10,6 +10,16 @@
       padding-top: 0;
     }
 
+    .wp-block.wp-block-buttons {
+      margin-top: var(--Spacing-4x);
+
+      &.wp-block-buttons-is-layout-flex{
+        .wp-block-button {
+          margin-right: 40px;
+        }
+      }
+    }
+
     padding: var(--Spacing-6x, 1.5rem) !important;
 
     &.alert-success *:not(code, pre),
