@@ -58,7 +58,7 @@ export default function Edit({
             onChange={onChangeStepLabel}
             placeholder={__("Step 1", "rrze-elements-blocks")}
             allowedFormats={[]}
-            className="elements-blocks-process-step-label"
+            className="rrze-elements-blocks-process-step-label"
           />
         </div>
         <div className="step-icon"></div>
