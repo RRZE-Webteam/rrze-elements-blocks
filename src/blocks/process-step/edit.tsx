@@ -1,10 +1,12 @@
 import {
   useBlockProps,
   InnerBlocks,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 
 import {RichText} from "@wordpress/block-editor";
-import {__} from "@wordpress/i18n";
+import {__, sprintf} from "@wordpress/i18n";
+import {useSelect} from "@wordpress/data";
 import HeadingComponent from "../../components/HeadingComponent";
 import {useEffect} from "@wordpress/element";
 
@@ -15,17 +17,31 @@ type SaveProps = {
     stepLabel: string;
   };
   setAttributes: (attributes: Partial<SaveProps["attributes"]>) => void;
-  clientId?: string;
+  clientId: string;
   context: { [key: string]: any };
 };
 
 export default function Edit({
                                attributes,
                                setAttributes,
+                               clientId,
                                context,
                              }: SaveProps) {
   const props = useBlockProps();
   const {title, stepLabel} = attributes;
+  const stepNumber = useSelect(
+    (select) => {
+      const blockEditor = select(blockEditorStore);
+      const parentClientId = blockEditor.getBlockRootClientId(clientId);
+      const siblingClientIds = parentClientId
+        ? blockEditor.getBlockOrder(parentClientId)
+        : [];
+      const stepIndex = siblingClientIds.indexOf(clientId);
+
+      return stepIndex >= 0 ? stepIndex + 1 : 1;
+    },
+    [clientId]
+  );
 
   /**
    * Set the heading level attribute based on the global setting.
@@ -56,7 +72,11 @@ export default function Edit({
             tagName="p"
             value={stepLabel}
             onChange={onChangeStepLabel}
-            placeholder={__("Step 1", "rrze-elements-blocks")}
+            placeholder={sprintf(
+              /* translators: %d: position of the step within the process. */
+              __("Step %d", "rrze-elements-blocks"),
+              stepNumber
+            )}
             allowedFormats={[]}
             className="rrze-elements-blocks-process-step-label"
           />
@@ -80,7 +100,7 @@ export default function Edit({
                 {placeholder: __("Provide the key information needed to complete this step.", "rrze-elements-blocks")},
               ],
             ]}
-            allowedBlocks={["core/paragraph", "core/heading", "core/image", "core/list", "core/buttons", "core/button", "core/quote", "core/quotes", "core/media-text"]}
+            allowedBlocks={["core/paragraph", "core/heading", "core/spacer", "core/image", "core/list", "core/buttons", "core/button", "core/quote", "core/quotes", "core/media-text"]}
             templateLock={false}
           />
         </div>

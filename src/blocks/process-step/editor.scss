@@ -6,12 +6,16 @@ li.wp-block-rrze-elements-process-step {
   container-type: inline-size;
 
   div.step-content {
-    background: #04316a;
+    background: color.$fau-color-fau-blue-100;
     padding: 1rem;
     padding-inline: 2rem;
 
     p {
       color: #fff;
+
+      &:first-of-type {
+        margin-top: .5rem;
+      }
     }
   }
 
@@ -19,7 +23,7 @@ li.wp-block-rrze-elements-process-step {
     padding: .5rem;
     margin-bottom: .5rem;
     margin-top: 2rem;
-    color: #04316a;
+    color: color.$fau-color-fau-blue-100;
     font-size: 2rem;
     padding-left: 2rem;
     font-weight: bold;
@@ -30,11 +34,14 @@ li.wp-block-rrze-elements-process-step {
 
     h2.timeline-label {
       margin-bottom: 0;
+      margin-top: 0;
     }
 
     h2.timeline-label > p{
       font-size: 1.5rem;
       font-weight: 600;
+      margin-bottom: 0;
+      margin-top: 1rem;
     }
   }
 
@@ -49,7 +56,7 @@ li.wp-block-rrze-elements-process-step {
     left: 20px;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-top: 20px solid #04316a;
+    border-top: 20px solid color.$fau-color-fau-blue-100;
   }
 
   div.step-content::after {
@@ -63,7 +70,7 @@ li.wp-block-rrze-elements-process-step {
     left: 20px;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-top: 20px solid #fff;
+    border-top: 20px solid color.$fau-color-fau-white-100;
   }
 
   div.tooltip {
@@ -102,7 +109,7 @@ li.wp-block-rrze-elements-process-step {
       position: relative;
       padding-top: 16px;
       padding-bottom: 16px;
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid color.$fau-color-fau-white-100;
       background-color: color.$fau-color-fau-darkblue-100;
     }
 
@@ -117,7 +124,7 @@ li.wp-block-rrze-elements-process-step {
       left: 20px;
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
-      border-top: 20px solid #fff;
+      border-top: 20px solid color.$fau-color-fau-white-100;
     }
 
     div.step-content::before,
@@ -129,5 +136,21 @@ li.wp-block-rrze-elements-process-step {
     div.step-content::after{
       display: none;
     }
+  }
+}
+
+ol.process li.wp-block-rrze-elements-process-step {
+  &:first-of-type {
+    div.step-content::after {
+      display: none;
+    }
+
+    div.step-label p::after {
+      display: none;
+    }
+  }
+
+  &:last-of-type div.step-content::before {
+    display: none;
   }
 }
