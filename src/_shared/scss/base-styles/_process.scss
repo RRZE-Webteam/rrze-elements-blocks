@@ -1,4 +1,4 @@
-@use "../../_shared/scss/designsystem/tokens/_color.scss" as color;
+@use "../designsystem/tokens/color" as color;
 
 li.wp-block-rrze-elements-process-step {
   margin-top: 1.5rem;
@@ -94,7 +94,9 @@ li.wp-block-rrze-elements-process-step {
 }
 
 .wp-block-rrze-elements-process ol.process {
+  margin-inline: 0;
   padding-inline: 0;
+  list-style: none;
 }
 
 @container (width < 790px) {
@@ -154,5 +156,15 @@ ol.process li.wp-block-rrze-elements-process-step {
 
   &:last-of-type div.step-content::before {
     display: none;
+  }
+}
+
+li.wp-block-rrze-elements-process-step {
+  div.step-content > .process-step-label {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    color: color.$fau-color-fau-white-100;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 }

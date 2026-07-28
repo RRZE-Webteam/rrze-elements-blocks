@@ -23,6 +23,8 @@ use RRZE\ElementsBlocks\BlockFrontend\InfoCard;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\MediaAccordion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
+use RRZE\ElementsBlocks\BlockFrontend\Process;
+use RRZE\ElementsBlocks\BlockFrontend\ProcessStep;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
 use RRZE\ElementsBlocks\BlockFrontend\Timeline;
@@ -206,11 +208,11 @@ class Blocks
             ],
             [
                 'build_folder' => 'process',
-                'class' => Timeline::class,
+                'class' => Process::class,
             ],
             [
                 'build_folder' => 'process-step',
-                'class' => TimelineItem::class,
+                'class' => ProcessStep::class,
             ],
             [
                 'build_folder' => 'facts-grid',

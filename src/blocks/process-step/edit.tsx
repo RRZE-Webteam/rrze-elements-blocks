@@ -83,7 +83,7 @@ export default function Edit({
         </div>
         <div className="step-icon"></div>
         <div className="step-content">
-          <HeadingComponent level={attributes.hstart} className="timeline-label">
+          <HeadingComponent level={attributes.hstart} className="process-step-label">
             <RichText
               tagName="p"
               value={title}
