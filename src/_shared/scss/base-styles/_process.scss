@@ -168,3 +168,42 @@ li.wp-block-rrze-elements-process-step {
     font-weight: 600;
   }
 }
+
+.wp-theme-FAU-Elemental div.is-style-dark {
+  li.wp-block-rrze-elements-process-step {
+    div.step-label, div.step-label p.rrze-elements-blocks-process-step-label,
+    div.step-content .process-step-label {
+      color: color.$fau-color-fau-white-100;
+    }
+
+    div.step-content {
+      background: color.$fau-color-fau-white-100;
+      color: color.$fau-color-fau-black-100;
+
+      p {
+        color: color.$fau-color-fau-black-100;
+      }
+
+      .process-step-label, .process-step-label p {
+        color: color.$fau-color-fau-blue-100;
+      }
+
+      &::after {
+        border-top-color: color.$fau-color-fau-blue-100;
+      }
+
+      &::before {
+        border-top-color: color.$fau-color-fau-white-100;
+      }
+    }
+  }
+}
+
+@container (width < 790px) {
+  .wp-theme-FAU-Elemental div.is-style-dark li.wp-block-rrze-elements-process-step div.tooltip {
+    .step-label p::after {
+      border-top-color: color.$fau-color-fau-blue-100;
+
+    }
+  }
+}
