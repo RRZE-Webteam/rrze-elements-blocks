@@ -15,7 +15,7 @@ import {
 } from "@wordpress/components";
 import {useState, useRef, useEffect} from "@wordpress/element";
 import type {CSSProperties} from "react";
-import {page, desktop, tablet, mobile, link} from "@wordpress/icons";
+import {desktop, tablet, mobile, link} from "@wordpress/icons";
 import {__} from "@wordpress/i18n";
 import {getImageBrightness} from "../../utility/color";
 import {useDispatch, useSelect} from "@wordpress/data";
@@ -66,9 +66,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
 
   const cardHeight = parentAttributes?.cardHeight !== undefined ? parentAttributes.cardHeight : 680;
   const parentClassName = typeof parentAttributes?.className === 'string' ? parentAttributes.className : '';
+  const parentClasses = parentClassName.split(/\s+/).filter(Boolean);
   const isScientificStyle = parentBlockName === 'rrze-elements/carousel'
-    ? !parentClassName.includes('is-style-marketing')
-    : parentClassName.includes('is-style-scientific');
+    ? !parentClasses.includes('is-style-marketing')
+    : parentClasses.includes('is-style-scientific');
   const isMarketingStyle = !isScientificStyle;
   const getMarketingAlignmentVars = (value: string): CSSProperties => {
     const safeValue = value || DEFAULT_CARD_ALIGNMENT;
