@@ -114,6 +114,12 @@ class Blocks
                 'label' => __('Dark', 'rrze-elements-blocks'),
                 'is_default' => true,
             ]);
+
+            $block_name = 'rrze-elements/process';
+            register_block_style($block_name, [
+                'name' => 'isohypsen',
+                'label' => __('Isohypsen', 'rrze-elements-blocks'),
+            ]);
         } else {
             register_block_style($block_name, [
                 'name' => 'no-background',

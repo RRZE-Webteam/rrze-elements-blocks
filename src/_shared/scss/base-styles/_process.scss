@@ -99,11 +99,10 @@ li.wp-block-rrze-elements-process-step {
     grid-column: 2/5;
     grid-row: 1/1;
   }
+}
 
-  div.step-content {
-
-		@include process-background-image(0.25, #ffffff);
-  }
+.is-style-isohypsen li.wp-block-rrze-elements-process-step div.step-content {
+  @include process-background-image(0.25, #ffffff);
 }
 
 .wp-block-rrze-elements-process ol.process {
@@ -192,7 +191,6 @@ li.wp-block-rrze-elements-process-step {
     div.step-content {
       background: color.$fau-color-fau-white-100;
       color: color.$fau-color-fau-black-100;
-      @include process-background-image(0.025, #04316a);
 
       p {
         color: color.$fau-color-fau-black-100;
@@ -211,6 +209,11 @@ li.wp-block-rrze-elements-process-step {
       }
     }
   }
+
+  .is-style-isohypsen li.wp-block-rrze-elements-process-step div.step-content {
+    @include process-background-image(0.025, #04316a);
+  }
+
 }
 
 @container (width < 790px) {
