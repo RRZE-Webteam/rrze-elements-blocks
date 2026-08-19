@@ -17,6 +17,10 @@
     "hstart": {
       "type": "integer",
       "default": 3
+    },
+    "stepLabel": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
@@ -27,6 +31,5 @@
   ],
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "editorStyle": "file:./index.css"
 }

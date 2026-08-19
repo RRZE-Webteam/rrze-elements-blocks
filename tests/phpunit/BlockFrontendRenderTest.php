@@ -20,6 +20,8 @@ use RRZE\ElementsBlocks\BlockFrontend\IconBox;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\MediaAccordion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
+use RRZE\ElementsBlocks\BlockFrontend\Process;
+use RRZE\ElementsBlocks\BlockFrontend\ProcessStep;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
 use RRZE\ElementsBlocks\BlockFrontend\Timeline;
@@ -127,6 +129,42 @@ final class BlockFrontendRenderTest extends TestCase
             $this->assertStringContainsString('aria-expanded="true"', $output);
             $this->assertStringContainsString('class="accordion-body open"', $output);
         }
+    }
+
+    public function test_process_renderers_create_the_editor_structure(): void
+    {
+        $step = (new ProcessStep())->render(
+            [
+                'className' => 'custom-step',
+                'title' => 'Apply now',
+                'stepLabel' => 'Step 2',
+                'hstart' => 3,
+            ],
+            '<p>Send the completed form.</p>'
+        );
+        $process = (new Process())->render(
+            ['className' => 'custom-process'],
+            $step
+        );
+
+        $this->assertStringContainsString(
+            'class="wp-block-rrze-elements-process custom-process"',
+            $process
+        );
+        $this->assertStringContainsString('<ol class="process">', $process);
+        $this->assertStringContainsString(
+            'class="wp-block-rrze-elements-process-step custom-step"',
+            $process
+        );
+        $this->assertStringContainsString(
+            '<p class="rrze-elements-blocks-process-step-label">Step 2</p>',
+            $process
+        );
+        $this->assertStringContainsString(
+            '<h3 class="timeline-label">Apply now</h3>',
+            $process
+        );
+        $this->assertStringContainsString('<p>Send the completed form.</p>', $process);
     }
 
     /**
@@ -381,6 +419,23 @@ final class BlockFrontendRenderTest extends TestCase
                 'hstart' => 3,
             ],
             '<p>Event details</p>',
+        ];
+
+        yield [
+            Process::class,
+            ['className' => 'process'],
+            '<li>Step</li>',
+        ];
+
+        yield [
+            ProcessStep::class,
+            [
+                'className' => 'process-step',
+                'title' => 'Complete the form',
+                'stepLabel' => 'Step 1',
+                'hstart' => 3,
+            ],
+            '<p>Step details</p>',
         ];
     }
 }

@@ -23,6 +23,8 @@ use RRZE\ElementsBlocks\BlockFrontend\InfoCard;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\MediaAccordion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
+use RRZE\ElementsBlocks\BlockFrontend\Process;
+use RRZE\ElementsBlocks\BlockFrontend\ProcessStep;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
 use RRZE\ElementsBlocks\BlockFrontend\Tabs;
 use RRZE\ElementsBlocks\BlockFrontend\Timeline;
@@ -111,6 +113,12 @@ class Blocks
                 'name' => 'darkmode',
                 'label' => __('Dark', 'rrze-elements-blocks'),
                 'is_default' => true,
+            ]);
+
+            $block_name = 'rrze-elements/process';
+            register_block_style($block_name, [
+                'name' => 'isohypsen',
+                'label' => __('Isohypsen', 'rrze-elements-blocks'),
             ]);
         } else {
             register_block_style($block_name, [
@@ -204,14 +212,14 @@ class Blocks
                 'build_folder' => 'timeline-item',
                 'class' => TimelineItem::class,
             ],
-//            [
-//                'build_folder' => 'process',
-//                'class' => Timeline::class,
-//            ],
-//            [
-//                'build_folder' => 'process-step',
-//                'class' => TimelineItem::class,
-//            ],
+            [
+                'build_folder' => 'process',
+                'class' => Process::class,
+            ],
+            [
+                'build_folder' => 'process-step',
+                'class' => ProcessStep::class,
+            ],
             [
                 'build_folder' => 'facts-grid',
                 'class' => FactsGrid::class,

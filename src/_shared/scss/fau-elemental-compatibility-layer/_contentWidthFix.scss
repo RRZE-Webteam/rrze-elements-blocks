@@ -60,7 +60,7 @@
   .is-style-dark div.wp-block-rrze-elements-counter-row,
   .is-style-dark section.facts,
   div.wp-block-group-is-layout-constrained div.wp-block-group-is-layout-constrained section.facts,
-  div.wp-block-group-is-layout-constrained div.wp-block-group-is-layout-constrained.is-style-dark section.facts,
+  div.wp-block-group-is-layout-constrained div.wp-block-group-is-layout-constrained.is-style-dark section.facts
   {
     max-width: var(--wide-max-width);
     margin-left: bleed.$fau-margin-to-wide-width-with-gutter;
@@ -70,6 +70,8 @@
   div.wp-block-group-is-layout-constrained section.facts,
   div.wp-block-group-is-layout-constrained.is-style-dark section.facts,
   div.wp-block-group.is-style-dark div.wp-block-rrze-elements-media-accordion,
+  div.wp-block-group div.wp-block-rrze-elements-iconbox-row,
+  div.wp-block-group div.wp-block-rrze-elements-counter-row,
   div.wp-block-group div.wp-block-rrze-elements-media-accordion{
     margin: 0 auto;
   }

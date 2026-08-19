@@ -20,6 +20,10 @@ ul.rrze-elements-blocks__carousel-content-list{
   li.rrze-elements-blocks__carousel-content-list-item {
     margin: 0;
     padding: 0;
+
+    &:last-of-type div.rrze-elements-blocks__carousel_feature-card-bg{
+      margin-right: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
+    }
   }
 }
 
@@ -196,7 +200,8 @@ div.rrze-elements-blocks__carousel_feature_card_scientific-text{
   text-shadow: var(--card-text-shadow, 1px 1px 2px #222);
 }
 
-.is-style-scientific{
+.is-style-scientific,
+.wp-block-rrze-elements-carousel:not(.is-style-marketing){
   .rrze-elements-blocks__carousel_feature_card_scientific-text{
     display: block;
   }
