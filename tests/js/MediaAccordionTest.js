@@ -343,3 +343,130 @@ test("adds and removes mobile images when the viewport changes", () => {
   );
   assert.equal(wrapper.classList.contains("has-mobile-accordion-images"), false);
 });
+
+test("keeps only the selected accordion panel open within a media accordion", async () => {
+  const dom = new JSDOM(`
+    <div class="wp-block-rrze-elements-media-accordion">
+      <div class="accordion-group">
+        <h3 class="accordion-heading">
+          <button class="accordion-toggle active" aria-expanded="true">First</button>
+        </h3>
+        <div class="accordion-body open"><div class="accordion-inner">First content</div></div>
+      </div>
+      <div class="accordion-group">
+        <h3 class="accordion-heading">
+          <button class="accordion-toggle active" aria-expanded="true">Second</button>
+        </h3>
+        <div class="accordion-body open"><div class="accordion-inner">Second content</div></div>
+      </div>
+    </div>
+  `, {
+    runScripts: "outside-only",
+  });
+
+  dom.window.eval(script);
+  dom.window.document.dispatchEvent(new dom.window.Event("DOMContentLoaded"));
+
+  const toggles = dom.window.document.querySelectorAll(".accordion-toggle");
+  const bodies = dom.window.document.querySelectorAll(".accordion-body");
+
+  // Multiple loadOpen attributes are normalized when the block initializes.
+  assert.equal(toggles[0].classList.contains("active"), true);
+  assert.equal(toggles[1].classList.contains("active"), false);
+  assert.equal(toggles[1].getAttribute("aria-expanded"), "false");
+  assert.equal(bodies[1].style.display, "none");
+
+  toggles[1].dispatchEvent(
+    new dom.window.MouseEvent("mousedown", { bubbles: true }),
+  );
+
+  assert.equal(toggles[0].classList.contains("active"), false);
+  assert.equal(toggles[0].getAttribute("aria-expanded"), "false");
+  assert.equal(bodies[0].classList.contains("open"), false);
+  assert.equal(bodies[0].style.display, "none");
+
+  toggles[1].classList.add("active");
+  toggles[1].setAttribute("aria-expanded", "true");
+  await new Promise((resolve) => dom.window.queueMicrotask(resolve));
+
+  assert.equal(toggles[1].classList.contains("active"), true);
+  assert.equal(toggles[1].getAttribute("aria-expanded"), "true");
+});
+
+test("does not close accordions in another media accordion block", () => {
+  const dom = new JSDOM(`
+    <div class="wp-block-rrze-elements-media-accordion" id="first-block">
+      <div class="accordion-group">
+        <h3 class="accordion-heading">
+          <button class="accordion-toggle active" aria-expanded="true">First</button>
+        </h3>
+        <div class="accordion-body open"><div class="accordion-inner">First content</div></div>
+      </div>
+    </div>
+    <div class="wp-block-rrze-elements-media-accordion" id="second-block">
+      <div class="accordion-group">
+        <h3 class="accordion-heading">
+          <button class="accordion-toggle" aria-expanded="false">Second</button>
+        </h3>
+        <div class="accordion-body"><div class="accordion-inner">Second content</div></div>
+      </div>
+    </div>
+  `, {
+    runScripts: "outside-only",
+  });
+
+  dom.window.eval(script);
+  dom.window.document.dispatchEvent(new dom.window.Event("DOMContentLoaded"));
+
+  const firstToggle = dom.window.document.querySelector(
+    "#first-block .accordion-toggle",
+  );
+  const secondToggle = dom.window.document.querySelector(
+    "#second-block .accordion-toggle",
+  );
+
+  secondToggle.dispatchEvent(
+    new dom.window.MouseEvent("mousedown", { bubbles: true }),
+  );
+
+  assert.equal(firstToggle.classList.contains("active"), true);
+  assert.equal(firstToggle.getAttribute("aria-expanded"), "true");
+});
+
+test("normalizes an expand-all state to one open panel", async () => {
+  const dom = new JSDOM(`
+    <div class="wp-block-rrze-elements-media-accordion">
+      <div class="accordion-group">
+        <h3 class="accordion-heading">
+          <button class="accordion-toggle" aria-expanded="false">First</button>
+        </h3>
+        <div class="accordion-body"><div class="accordion-inner">First content</div></div>
+      </div>
+      <div class="accordion-group">
+        <h3 class="accordion-heading">
+          <button class="accordion-toggle" aria-expanded="false">Second</button>
+        </h3>
+        <div class="accordion-body"><div class="accordion-inner">Second content</div></div>
+      </div>
+    </div>
+  `, {
+    runScripts: "outside-only",
+  });
+
+  dom.window.eval(script);
+  dom.window.document.dispatchEvent(new dom.window.Event("DOMContentLoaded"));
+
+  const toggles = dom.window.document.querySelectorAll(".accordion-toggle");
+  const bodies = dom.window.document.querySelectorAll(".accordion-body");
+
+  // The shared accordion script's expand-all action changes the active class
+  // without updating aria-expanded.
+  toggles.forEach((toggle) => toggle.classList.add("active"));
+  await new Promise((resolve) => dom.window.queueMicrotask(resolve));
+
+  assert.equal(toggles[0].classList.contains("active"), true);
+  assert.equal(toggles[0].getAttribute("aria-expanded"), "true");
+  assert.equal(toggles[1].classList.contains("active"), false);
+  assert.equal(toggles[1].getAttribute("aria-expanded"), "false");
+  assert.equal(bodies[1].style.display, "none");
+});
