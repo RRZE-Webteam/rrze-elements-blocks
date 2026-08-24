@@ -235,6 +235,15 @@
     wrapper.classList.remove("has-mobile-accordion-images");
   };
 
+  const activeToggleClass = "is-media-accordion-active";
+
+  const markActiveToggle = (wrapper, toggle) => {
+    wrapper.querySelectorAll(toggleSelector).forEach((el) => {
+      el.classList.remove(activeToggleClass);
+    });
+    toggle.classList.add(activeToggleClass);
+  };
+
   const updateImage = (wrapper, toggle) => {
     const media = getDesktopMedia(wrapper);
 
@@ -245,10 +254,15 @@
     const imageData = getImageData(toggle);
 
     if (!imageData.url) {
+      wrapper.querySelectorAll(toggleSelector).forEach((el) => {
+        el.classList.remove(activeToggleClass);
+      });
       media.hidden = true;
       media.classList.add("is-empty");
       return;
     }
+
+    markActiveToggle(wrapper, toggle);
 
     if (imageDataMatches(media, imageData)) {
       media.hidden = false;
