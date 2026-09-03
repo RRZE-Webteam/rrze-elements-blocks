@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: RRZE Elements Blocks 1.2.1\n"
+"Project-Id-Version: RRZE Elements Blocks 1.2.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-02T14:58:14+00:00\n"
+"POT-Creation-Date: 2026-09-03T12:24:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rrze-elements-blocks\n"
@@ -61,24 +61,50 @@ msgstr ""
 msgid "Schließen"
 msgstr ""
 
-#: includes/Blocks.php:72
+#: includes/BlockFrontend/News.php:374
+msgid "No posts found."
+msgstr ""
+
+#: includes/BlockFrontend/News.php:471
+#, php-format
+msgid "View all posts in %s"
+msgstr ""
+
+#: includes/BlockFrontend/News.php:532
+msgid "More news"
+msgstr ""
+
+#: includes/BlockFrontend/News.php:587
+msgid "Read more"
+msgstr ""
+
+#: includes/BlockFrontend/News.php:590
+#, php-format
+msgid "Read more about %s"
+msgstr ""
+
+#: includes/Blocks.php:71
 msgid "Attention"
 msgstr ""
 
-#: includes/Blocks.php:108
+#: includes/Blocks.php:107
 msgid "Light"
 msgstr ""
 
-#: includes/Blocks.php:112
+#: includes/Blocks.php:111
 msgid "Dark"
 msgstr ""
 
 #: includes/Blocks.php:118
+msgid "Isohypsen"
+msgstr ""
+
+#: includes/Blocks.php:123
 #: build/blocks/counter/index.js:1
 msgid "Normal"
 msgstr ""
 
-#: includes/Blocks.php:123
+#: includes/Blocks.php:128
 #: build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Small"
@@ -141,13 +167,13 @@ msgid "Description for Example Pattern"
 msgstr ""
 
 #. translators: 1: current PHP version, 2: required PHP version
-#: rrze-elements-blocks.php:80
+#: rrze-elements-blocks.php:78
 #, php-format
 msgid "The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s."
 msgstr ""
 
 #. translators: 1: current WordPress version, 2: required WordPress version
-#: rrze-elements-blocks.php:83
+#: rrze-elements-blocks.php:81
 #, php-format
 msgid "The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s."
 msgstr ""
@@ -688,6 +714,7 @@ msgstr ""
 #. translators: accessibility text. 1: heading level. 2: heading title.
 #: build/blocks/accordion/index.js:2
 #: build/blocks/collapse/index.js:2
+#: build/blocks/process-step/index.js:3
 #: build/blocks/timeline-item/index.js:2
 #, js-format
 msgid "Level %1$s. %2$s"
@@ -696,6 +723,7 @@ msgstr ""
 #. translators: accessibility text. %s: heading level.
 #: build/blocks/accordion/index.js:3
 #: build/blocks/collapse/index.js:3
+#: build/blocks/process-step/index.js:4
 #: build/blocks/timeline-item/index.js:3
 #, js-format
 msgid "Level %s. Empty."
@@ -803,18 +831,21 @@ msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 #: build/blocks/news/index.js:1
+#: build/blocks/process/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Select heading level"
 msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 #: build/blocks/news/index.js:1
+#: build/blocks/process/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Heading level"
 msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
 #: build/blocks/news/index.js:1
+#: build/blocks/process/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Controls the heading level of the accordion"
 msgstr ""
@@ -824,6 +855,7 @@ msgid "Untitled Collapse"
 msgstr ""
 
 #: build/blocks/collapsibles/index.js:1
+#: build/blocks/process/index.js:1
 #: build/blocks/timeline/index.js:1
 msgid "Heading Settings"
 msgstr ""
@@ -1488,6 +1520,10 @@ msgid "Img first"
 msgstr ""
 
 #: build/blocks/news/index.js:1
+msgid "Show fallback image for posts without a featured image"
+msgstr ""
+
+#: build/blocks/news/index.js:1
 msgid "Show more articles button"
 msgstr ""
 
@@ -1641,6 +1677,20 @@ msgstr ""
 
 #: build/blocks/notice/index.js:1
 msgid "Add a Headline"
+msgstr ""
+
+#. translators: %d: position of the step within the process.
+#: build/blocks/process-step/index.js:2
+#, js-format
+msgid "Step %d"
+msgstr ""
+
+#: build/blocks/process-step/index.js:2
+msgid "Add a concise step title"
+msgstr ""
+
+#: build/blocks/process-step/index.js:2
+msgid "Provide the key information needed to complete this step."
 msgstr ""
 
 #: build/blocks/tab/index.js:1
@@ -1953,6 +2003,26 @@ msgctxt "block description"
 msgid "Creates an notice."
 msgstr ""
 
+#: build/blocks/process-step/block.json
+msgctxt "block title"
+msgid "Step"
+msgstr ""
+
+#: build/blocks/process-step/block.json
+msgctxt "block description"
+msgid "Add another step as part of a bigger process"
+msgstr ""
+
+#: build/blocks/process/block.json
+msgctxt "block title"
+msgid "Process"
+msgstr ""
+
+#: build/blocks/process/block.json
+msgctxt "block description"
+msgid "Visualize a process on your webpage."
+msgstr ""
+
 #: build/blocks/tab/block.json
 #: build/blocks/tabs/block.json
 msgctxt "block title"
@@ -1983,13 +2053,4 @@ msgstr ""
 #: build/blocks/timeline/block.json
 msgctxt "block description"
 msgid "Creates a Timeline block"
-msgstr ""
-
-#: includes/BlockFrontend/News.php
-msgid "Read more"
-msgstr ""
-
-#: includes/BlockFrontend/News.php
-#, php-format
-msgid "Read more about %s"
 msgstr ""

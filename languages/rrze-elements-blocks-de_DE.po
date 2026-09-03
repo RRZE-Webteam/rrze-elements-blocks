@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: RRZE Elements Blocks 0.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-elements-"
 "blocks\n"
-"POT-Creation-Date: 2026-07-02T14:58:14+00:00\n"
-"PO-Revision-Date: 2026-07-02 16:59+0200\n"
+"POT-Creation-Date: 2026-09-03T12:24:32+00:00\n"
+"PO-Revision-Date: 2026-09-03 14:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -63,23 +63,49 @@ msgstr "Weitere Informationen anzeigen"
 msgid "Schließen"
 msgstr "Schließen"
 
-#: includes/Blocks.php:72
+#: includes/BlockFrontend/News.php:374
+msgid "No posts found."
+msgstr "Es wurden keine Beiträge gefunden."
+
+#: includes/BlockFrontend/News.php:471
+#, php-format
+msgid "View all posts in %s"
+msgstr "Alle Beiträge in %s anzeigen"
+
+#: includes/BlockFrontend/News.php:532
+msgid "More news"
+msgstr "Weitere Nachrichten"
+
+#: includes/BlockFrontend/News.php:587
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: includes/BlockFrontend/News.php:590
+#, php-format
+msgid "Read more about %s"
+msgstr "Mehr über %s erfahren"
+
+#: includes/Blocks.php:71
 msgid "Attention"
 msgstr "Achtung"
 
-#: includes/Blocks.php:108
+#: includes/Blocks.php:107
 msgid "Light"
 msgstr "Hell"
 
-#: includes/Blocks.php:112
+#: includes/Blocks.php:111
 msgid "Dark"
 msgstr "Dunkel"
 
-#: includes/Blocks.php:118 build/blocks/counter/index.js:1
+#: includes/Blocks.php:118
+msgid "Isohypsen"
+msgstr "Isohypsen"
+
+#: includes/Blocks.php:123 build/blocks/counter/index.js:1
 msgid "Normal"
 msgstr "Normal"
 
-#: includes/Blocks.php:123 build/blocks/counter/index.js:1
+#: includes/Blocks.php:128 build/blocks/counter/index.js:1
 #: build/blocks/iconbox/index.js:1
 msgid "Small"
 msgstr "Klein"
@@ -141,7 +167,7 @@ msgid "Description for Example Pattern"
 msgstr "Beschreibung für eine Beispiel-Vorlage"
 
 #. translators: 1: current PHP version, 2: required PHP version
-#: rrze-elements-blocks.php:80
+#: rrze-elements-blocks.php:78
 #, php-format
 msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
@@ -151,7 +177,7 @@ msgstr ""
 "Version %2$s."
 
 #. translators: 1: current WordPress version, 2: required WordPress version
-#: rrze-elements-blocks.php:83
+#: rrze-elements-blocks.php:81
 #, php-format
 msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
@@ -571,13 +597,13 @@ msgstr "Accordion-Titel vergeben…"
 
 #. translators: accessibility text. 1: heading level. 2: heading title.
 #: build/blocks/accordion/index.js:2 build/blocks/collapse/index.js:2
-#: build/blocks/timeline-item/index.js:2
+#: build/blocks/process-step/index.js:3 build/blocks/timeline-item/index.js:2
 msgid "Level %1$s. %2$s"
 msgstr "Ebene %1$s. %2$s"
 
 #. translators: accessibility text. %s: heading level.
 #: build/blocks/accordion/index.js:3 build/blocks/collapse/index.js:3
-#: build/blocks/timeline-item/index.js:3
+#: build/blocks/process-step/index.js:4 build/blocks/timeline-item/index.js:3
 msgid "Level %s. Empty."
 msgstr "Ebene %s. Leer."
 
@@ -678,17 +704,17 @@ msgid "Show Expand-All-Link"
 msgstr "Zeige \"Alle öffnen\"-Button"
 
 #: build/blocks/collapsibles/index.js:1 build/blocks/news/index.js:1
-#: build/blocks/timeline/index.js:1
+#: build/blocks/process/index.js:1 build/blocks/timeline/index.js:1
 msgid "Select heading level"
 msgstr "Überschriftebene auswählen"
 
 #: build/blocks/collapsibles/index.js:1 build/blocks/news/index.js:1
-#: build/blocks/timeline/index.js:1
+#: build/blocks/process/index.js:1 build/blocks/timeline/index.js:1
 msgid "Heading level"
 msgstr "Überschriftsebene"
 
 #: build/blocks/collapsibles/index.js:1 build/blocks/news/index.js:1
-#: build/blocks/timeline/index.js:1
+#: build/blocks/process/index.js:1 build/blocks/timeline/index.js:1
 msgid "Controls the heading level of the accordion"
 msgstr "Steuert die Überschriftebene von Accordions"
 
@@ -696,7 +722,8 @@ msgstr "Steuert die Überschriftebene von Accordions"
 msgid "Untitled Collapse"
 msgstr "Akkordeonreiter ohne Titel"
 
-#: build/blocks/collapsibles/index.js:1 build/blocks/timeline/index.js:1
+#: build/blocks/collapsibles/index.js:1 build/blocks/process/index.js:1
+#: build/blocks/timeline/index.js:1
 msgid "Heading Settings"
 msgstr "Überschrift | Einstellungen"
 
@@ -1363,6 +1390,10 @@ msgid "Img first"
 msgstr "Bild zuerst"
 
 #: build/blocks/news/index.js:1
+msgid "Show fallback image for posts without a featured image"
+msgstr "Für Beiträge ohne Ausgewähltes Bild ein Ersatzbild anzeigen"
+
+#: build/blocks/news/index.js:1
 msgid "Show more articles button"
 msgstr "Zeige \"Mehr Beiträge anzeigen\"-Button"
 
@@ -1522,6 +1553,21 @@ msgstr "Notice"
 #: build/blocks/notice/index.js:1
 msgid "Add a Headline"
 msgstr "Überschrift festlegen"
+
+#. translators: %d: position of the step within the process.
+#: build/blocks/process-step/index.js:2
+msgid "Step %d"
+msgstr "Schritt %d"
+
+#: build/blocks/process-step/index.js:2
+msgid "Add a concise step title"
+msgstr "Fügen Sie einen prägnanten Titel hinzu"
+
+#: build/blocks/process-step/index.js:2
+msgid "Provide the key information needed to complete this step."
+msgstr ""
+"Geben Sie die wichtigsten Informationen an, die zum Abschluss dieses "
+"Schritts erforderlich sind."
 
 #: build/blocks/tab/index.js:1
 msgid "Add an Label"
@@ -1845,6 +1891,26 @@ msgctxt "block description"
 msgid "Creates an notice."
 msgstr "Erzeugt einen kurzen Hinweis zur Nutzung zwischen Absätzen."
 
+#: build/blocks/process-step/block.json
+msgctxt "block title"
+msgid "Step"
+msgstr "Schritt"
+
+#: build/blocks/process-step/block.json
+msgctxt "block description"
+msgid "Add another step as part of a bigger process"
+msgstr "Einen weiteren Schritt als Teil eines größeren Prozesses hinzufügen"
+
+#: build/blocks/process/block.json
+msgctxt "block title"
+msgid "Process"
+msgstr "Prozess"
+
+#: build/blocks/process/block.json
+msgctxt "block description"
+msgid "Visualize a process on your webpage."
+msgstr "Stellen Sie einen Prozess auf Ihrer Webseite dar."
+
 #: build/blocks/tab/block.json build/blocks/tabs/block.json
 msgctxt "block title"
 msgid "Tabs"
@@ -1874,15 +1940,6 @@ msgstr "Zeitstrahl"
 msgctxt "block description"
 msgid "Creates a Timeline block"
 msgstr "Erzeugt einen Zeitstrahl"
-
-#: includes/BlockFrontend/News.php
-msgid "Read more"
-msgstr "Weiterlesen"
-
-#: includes/BlockFrontend/News.php
-#, php-format
-msgid "Read more about %s"
-msgstr "Mehr über %s erfahren"
 
 #~ msgid "Image with Accordion"
 #~ msgstr "Bild mit Accordion"
