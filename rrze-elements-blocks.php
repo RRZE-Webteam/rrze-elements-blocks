@@ -16,8 +16,6 @@ Text Domain:     rrze-elements-blocks
 namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit('No direct script access allowed');
-use RRZE\Elements\News\News;
-
 // Require necessary configuration files.
 require_once 'config/config.php';
 

@@ -76,6 +76,10 @@
     "legacyMode": {
       "type": "boolean",
       "default": false
+    },
+    "showFallbackImage": {
+      "type": "boolean",
+      "default": true
     }
   },
   "example": {
@@ -93,7 +97,8 @@
       "imgfloat": "left",
       "columns": 0,
       "sticky_only": false,
-      "grid": false
+      "grid": false,
+      "showFallbackImage": true
     }
   },
   "textdomain": "rrze-elements-blocks",
