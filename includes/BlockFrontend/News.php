@@ -4,6 +4,8 @@ namespace RRZE\ElementsBlocks\BlockFrontend;
 
 defined('ABSPATH') || exit;
 
+use RRZE\ElementsBlocks\SpriteGenerator;
+
 /**
  * Server-side renderer for the News block.
  */
@@ -454,6 +456,7 @@ class News extends AbstractBlockRender
         if (!$hideDate) {
             $output .= '<div class="entry-date" itemprop="datePublished" content="'
                 . esc_attr((string) get_the_date('Y-m-d', $id)) . '">'
+                . SpriteGenerator::svgUse('symbols calendar_month', 'news-meta-icon')
                 . esc_html((string) get_the_date((string) get_option('date_format'), $id)) . '</div>';
         } else {
             $output .= '<div><meta itemprop="datePublished" content="'
@@ -470,7 +473,9 @@ class News extends AbstractBlockRender
                     )) . '">' . esc_html($category->name) . '</a>';
             }
             if ($categoryLinks !== []) {
-                $output .= '<div class="entry-cats">' . implode(' / ', $categoryLinks) . '</div>';
+                $output .= '<div class="entry-cats">'
+                    . SpriteGenerator::svgUse('symbols sell', 'news-meta-icon')
+                    . '<span>' . implode(' / ', $categoryLinks) . '</span></div>';
             }
         }
         $output .= '</div>';
@@ -528,7 +533,9 @@ class News extends AbstractBlockRender
 
         return '<div class="more-posts"><a class="standard-btn xsmall-btn primary-btn" href="'
             . esc_url($url) . '" aria-label="' . esc_attr($label . ': ' . $context) . '">'
-            . esc_html($label) . '</a></div>';
+            . esc_html($label)
+            . SpriteGenerator::svgUse('symbols arrow_forward', 'news-link-icon')
+            . '</a></div>';
     }
 
     private function getSchemaPublisher(): string
@@ -554,11 +561,7 @@ class News extends AbstractBlockRender
         $abstract = get_post_meta($postId, 'abstract', true);
         $abstract = is_string($abstract) ? $abstract : '';
         if (strlen(trim($abstract)) >= 3) {
-            if (function_exists('fau_create_readmore')) {
-                $abstract .= (string) fau_create_readmore($permalink, get_the_title($postId), false, true);
-            }
-
-            return $abstract;
+            return $abstract . $this->renderReadMoreLink($permalink, (string) get_the_title($postId));
         }
 
         if (function_exists('fau_custom_excerpt')) {
@@ -570,16 +573,24 @@ class News extends AbstractBlockRender
                 true,
                 get_theme_mod('search_display_excerpt_morestring')
             );
-            if (function_exists('fau_create_readmore')) {
-                $abstract .= (string) fau_create_readmore($permalink, get_the_title($postId), false, true);
-            }
-
-            return $abstract;
+            return $abstract . $this->renderReadMoreLink($permalink, (string) get_the_title($postId));
         }
 
         $excerptMore = (string) apply_filters('excerpt_more', '&hellip;');
 
-        return wp_trim_words(get_the_excerpt($postId), $teaserLength, $excerptMore);
+        return wp_trim_words(get_the_excerpt($postId), $teaserLength, $excerptMore)
+            . $this->renderReadMoreLink($permalink, (string) get_the_title($postId));
+    }
+
+    private function renderReadMoreLink(string $permalink, string $postTitle): string
+    {
+        $label = __('Read more', 'rrze-elements-blocks');
+
+        return '<a class="read-more-link" href="' . esc_url($permalink) . '" aria-label="'
+            . esc_attr(sprintf(__('Read more about %s', 'rrze-elements-blocks'), $postTitle)) . '">'
+            . esc_html($label)
+            . SpriteGenerator::svgUse('symbols arrow_forward', 'news-link-icon')
+            . '</a>';
     }
 
     /**

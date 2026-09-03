@@ -1984,3 +1984,12 @@ msgstr ""
 msgctxt "block description"
 msgid "Creates a Timeline block"
 msgstr ""
+
+#: includes/BlockFrontend/News.php
+msgid "Read more"
+msgstr ""
+
+#: includes/BlockFrontend/News.php
+#, php-format
+msgid "Read more about %s"
+msgstr ""

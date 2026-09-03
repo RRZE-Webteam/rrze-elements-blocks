@@ -1875,6 +1875,15 @@ msgctxt "block description"
 msgid "Creates a Timeline block"
 msgstr "Erzeugt einen Zeitstrahl"
 
+#: includes/BlockFrontend/News.php
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: includes/BlockFrontend/News.php
+#, php-format
+msgid "Read more about %s"
+msgstr "Mehr über %s erfahren"
+
 #~ msgid "Image with Accordion"
 #~ msgstr "Bild mit Accordion"
 
