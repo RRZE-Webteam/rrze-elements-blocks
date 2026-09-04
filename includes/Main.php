@@ -28,8 +28,6 @@ class Main
         SpriteGenerator::setAssetPath( plugin_dir_path(plugin_dir_path( __DIR__ ) . 'src/_shared/icons/svgs' ) );
 
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts'], 5);
-        add_filter('wp_kses_allowed_html', [$this, 'extendKsesAllowedHtml'], 10, 1);
-        add_filter('safe_style_css', [$this, 'extendAllowedCssStyles'], 10, 1);
 
         new Blocks();
         new Patterns();
@@ -48,69 +46,6 @@ class Main
     {
         return rest_ensure_response(['panel_abc123', 'panel_xyz456']);
     }
-
-    /**
-     * Extends allowed HTML tags and attributes based on plugin needs.
-     *
-     * @param array<string, array<string, bool|int|string>> $allowedtags Existing allowed tags configuration.
-     * @return array<string, array<string, bool|int|string>> Modified allowed tags configuration.
-     */
-    public function extendKsesAllowedHtml(array $allowedtags): array
-    {
-        // Custom tags and attributes
-        $custom_tags = [
-            'div' => [
-                'class' => true,
-                'id' => true,
-                'name' => true,
-            ],
-            'span' => [
-                'class' => true,
-                'tabindex' => true,
-            ],
-            'a' => [
-                'href' => true,
-                'title' => true,
-                'class' => true,
-            ],
-            'button' => [
-                'type' => true,
-                'class' => true,
-                'aria-controls' => true,
-                'aria-expanded' => true,
-                'aria-selected' => true,
-                'tabindex' => true,
-                'href' => true,
-                'data-name' => true,
-            ],
-            'img' => [
-                'decoding' => true,
-            ]
-        ];
-
-        // Merge with existing tags
-        foreach ($custom_tags as $tag => $attributes) {
-            $allowedtags[$tag] = $allowedtags[$tag] ?? [];
-            foreach ($attributes as $attr => $value) {
-                if (!isset($allowedtags[$tag][$attr])) {
-                    $allowedtags[$tag][$attr] = $value;
-                }
-            }
-        }
-
-        return $allowedtags;
-    }
-
-    /**
-     * @param array<int, string> $styles
-     * @return array<int, string>
-     */
-    public function extendAllowedCssStyles(array $styles): array
-    {
-        $custom_styles = ['display', 'fill', 'margin', 'padding', 'color', 'background-color', 'font-size'];
-        return array_merge($styles, $custom_styles);
-    }
-
 
 
     /**

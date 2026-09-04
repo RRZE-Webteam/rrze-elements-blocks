@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/news",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "title": "News",
   "category": "rrze_elements",
   "description": "Creates a news block.",
@@ -76,6 +76,10 @@
     "legacyMode": {
       "type": "boolean",
       "default": false
+    },
+    "showFallbackImage": {
+      "type": "boolean",
+      "default": true
     }
   },
   "example": {
@@ -93,7 +97,8 @@
       "imgfloat": "left",
       "columns": 0,
       "sticky_only": false,
-      "grid": false
+      "grid": false,
+      "showFallbackImage": true
     }
   },
   "textdomain": "rrze-elements-blocks",

@@ -22,6 +22,17 @@ li.wp-block-rrze-elements-process-step {
     padding: 1rem;
     padding-inline: 2rem;
 
+    div.wp-block-image-wrapper figcaption,
+    .wp-block-image figcaption{
+      background-color: color.$fau-color-fau-blue-100;
+      color: color.$fau-color-fau-white-100;
+    }
+
+    div.wp-block-image-wrapper img,
+    .wp-block-image img {
+      object-fit: cover;
+    }
+
     p {
       color: #fff;
 
@@ -191,6 +202,12 @@ li.wp-block-rrze-elements-process-step {
     div.step-content {
       background: color.$fau-color-fau-white-100;
       color: color.$fau-color-fau-black-100;
+
+      div.wp-block-image-wrapper figcaption,
+      .wp-block-image figcaption {
+        background-color: color.$fau-color-fau-white-100;
+        color: color.$fau-color-fau-blue-100;
+      }
 
       p {
         color: color.$fau-color-fau-black-100;

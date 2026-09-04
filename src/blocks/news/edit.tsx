@@ -52,6 +52,7 @@ interface EditProps {
     leftcolumn: number;
     rightcolumn: number;
     legacyMode?: boolean;
+    showFallbackImage: boolean;
   };
   setAttributes: (attributes: Partial<EditProps["attributes"]>) => void;
 }
@@ -113,7 +114,8 @@ export default function Edit({attributes, setAttributes}: EditProps) {
     attributes.cat,
     attributes.columns,
     attributes.tag,
-    attributes.legacyMode
+    attributes.legacyMode,
+    attributes.showFallbackImage,
   ]);
 
   const onChangeType = (newType: string) => () => {
@@ -337,6 +339,14 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                 onChange={onChangeType("img_first")}
               />
               <CheckboxControl
+                label={__(
+                  "Show fallback image for posts without a featured image",
+                  "rrze-elements-blocks",
+                )}
+                checked={attributes.showFallbackImage ?? true}
+                onChange={(value) => setAttributes({showFallbackImage: value})}
+              />
+              <CheckboxControl
                 label={__("Show more articles button", "rrze-elements-blocks")}
                 checked={attributes.type?.includes("show_more") ?? false}
                 onChange={onChangeType("show_more")}
@@ -427,6 +437,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
             hide: attributes.hide,
             imgfloat: attributes.imgfloat,
             legacyMode: attributes.legacyMode,
+            showFallbackImage: attributes.showFallbackImage,
           }}
         />
       </ErrorBoundary>

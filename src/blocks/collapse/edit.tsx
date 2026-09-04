@@ -252,6 +252,7 @@ const Edit = ({
                   "core/preformatted",
                   "core/pullquote",
                   "core/verse",
+                  "core/media-text",
                   "core/buttons",
                   "core/button",
                   "core/code",

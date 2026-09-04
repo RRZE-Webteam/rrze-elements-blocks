@@ -4,7 +4,6 @@ namespace RRZE\ElementsBlocks;
 
 defined('ABSPATH') || exit;
 
-use RRZE\Elements\News\News;
 use RRZE\ElementsBlocks\BlockFrontend\Accordion;
 use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
@@ -23,6 +22,7 @@ use RRZE\ElementsBlocks\BlockFrontend\InfoCard;
 use RRZE\ElementsBlocks\BlockFrontend\Insertion;
 use RRZE\ElementsBlocks\BlockFrontend\MediaAccordion;
 use RRZE\ElementsBlocks\BlockFrontend\Notice;
+use RRZE\ElementsBlocks\BlockFrontend\News;
 use RRZE\ElementsBlocks\BlockFrontend\Process;
 use RRZE\ElementsBlocks\BlockFrontend\ProcessStep;
 use RRZE\ElementsBlocks\BlockFrontend\Tab;
@@ -48,16 +48,13 @@ class Blocks
             $this->rrze_register_dynamic_blocks();
             $this->rrze_register_block_styles();
 
-            // Additional logic for blocks with custom render callbacks.
-            if (class_exists('RRZE\Elements\News\News')) {
-                register_block_type(plugin_dir_path(__DIR__) . 'build/blocks/news', array(
-                    'render_callback' => [$this, 'render_news_block'],
-                ));
-                load_plugin_textdomain('rrze-elements-blocks', false, plugin_dir_path(__DIR__) . 'languages');
+            register_block_type(plugin_dir_path(__DIR__) . 'build/blocks/news', array(
+                'render_callback' => [$this, 'render_news_block'],
+            ));
+            load_plugin_textdomain('rrze-elements-blocks', false, plugin_dir_path(__DIR__) . 'languages');
 
-                $script_handle = generate_block_asset_handle('rrze-elements/' . 'news', 'editorScript');
-                wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
-            }
+            $script_handle = generate_block_asset_handle('rrze-elements/' . 'news', 'editorScript');
+            wp_set_script_translations($script_handle, 'rrze-elements-blocks', plugin_dir_path(__DIR__) . 'languages');
         }
         $this->rrze_register_custom_styles();
     }
@@ -276,14 +273,10 @@ class Blocks
         $isListView = $listView === 'list';
         if (ThemeSniffer::getThemeGroup('fauelemental') && !$legacyMode && !$isListView) {
             return $this->channel_fau_teaser_grid($attributes);
-        } else {
-            if (class_exists('RRZE\Elements\News\News')) {
-                $news_instance = new News();
-                return $news_instance->shortcodeCustomNews($attributes);
-            }
-
-            return '';
         }
+
+        $news_instance = new News();
+        return $news_instance->render($attributes);
     }
 
     /**

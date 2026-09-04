@@ -1,5 +1,3 @@
-@use "mixins";
-
 /*!
  * News
  */
@@ -8,11 +6,30 @@
     .entry-content {
         width: 100%;
     }
-    .entry-date:before {
-        @include mixins.svg-content('calendar', 'regular');
+    .entry-date,
+    .entry-cats {
+        align-items: center;
+        display: inline-flex;
+        gap: 5px;
     }
-    .entry-cats:before {
-        @include mixins.svg-content('tag', 'solid');
+    .news-meta-icon,
+    .news-link-icon {
+        fill: currentColor;
+        flex: 0 0 auto;
+        height: 1em;
+        width: 1em;
+    }
+    .read-more-link {
+        align-items: center;
+        display: flex;
+        gap: 5px;
+        margin-top: 0.5rem;
+        width: fit-content;
+    }
+    .more-posts a {
+        align-items: center;
+        display: inline-flex;
+        gap: 5px;
     }
     .float-left {
         @media screen and (min-width: 37.5em) {

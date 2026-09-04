@@ -1,4 +1,3 @@
-$space-mobile: var(--Spacing-10x, 1rem);
 $space-vertical: var(--Spacing-4x, 1rem);
 $grid-12: repeat(12, 1fr);
 
@@ -18,8 +17,6 @@ body.wp-theme-FAU-Elemental .wp-block-rrze-elements-news .wp-block-fau-elemental
 }
 
 body.wp-theme-FAU-Elemental section.rrze-elements-news {
-  padding: 0 $space-mobile;
-
   article {
     margin-bottom: calc(2 * #{$space-vertical});
 

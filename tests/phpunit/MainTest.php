@@ -7,20 +7,6 @@ use RRZE\ElementsBlocks\Main;
 
 final class MainTest extends TestCase
 {
-    public function test_filters_extend_allowed_html_and_styles(): void
-    {
-        $main = new Main(__FILE__);
-
-        $allowed = $main->extendKsesAllowedHtml([
-            'div' => ['class' => true],
-        ]);
-
-        $this->assertArrayHasKey('button', $allowed);
-        $this->assertArrayHasKey('href', $allowed['button']);
-
-        $styles = $main->extendAllowedCssStyles(['width']);
-        $this->assertContains('fill', $styles);
-    }
 
     public function test_get_jump_names_returns_response(): void
     {

@@ -235,6 +235,58 @@
     wrapper.classList.remove("has-mobile-accordion-images");
   };
 
+  const isToggleInWrapper = (wrapper, toggle) =>
+    toggle.closest(wrapperSelector) === wrapper;
+
+  const closeAccordion = (toggle) => {
+    const group = toggle.closest(".accordion-group");
+
+    if (!(group instanceof HTMLElement)) {
+      return;
+    }
+
+    const body = getDirectChild(group, "accordion-body");
+
+    toggle.classList.remove("active");
+    toggle.setAttribute("aria-expanded", "false");
+
+    if (!body) {
+      return;
+    }
+
+    body.classList.remove("open");
+
+    // Stop an accordion animation that may already be running (for example
+    // after using "Expand all") before hiding the panel.
+    if (typeof window.jQuery === "function") {
+      window.jQuery(body).stop(true, true).hide();
+      return;
+    }
+
+    body.style.display = "none";
+  };
+
+  const closeOtherAccordions = (wrapper, currentToggle) => {
+    wrapper.querySelectorAll(toggleSelector).forEach((toggle) => {
+      if (
+        !(toggle instanceof HTMLElement) ||
+        toggle === currentToggle ||
+        !isToggleInWrapper(wrapper, toggle)
+      ) {
+        return;
+      }
+
+      const group = toggle.closest(".accordion-group");
+
+      // A nested accordion needs its ancestor panels to remain open.
+      if (group instanceof HTMLElement && group.contains(currentToggle)) {
+        return;
+      }
+
+      closeAccordion(toggle);
+    });
+  };
+
   const updateImage = (wrapper, toggle) => {
     const media = getDesktopMedia(wrapper);
 
@@ -303,7 +355,8 @@
     const handleMouseDown = (event) => {
       const toggle = getToggle(event);
 
-      if (toggle && wrapper.contains(toggle)) {
+      if (toggle && isToggleInWrapper(wrapper, toggle)) {
+        closeOtherAccordions(wrapper, toggle);
         updateImage(wrapper, toggle);
       }
     };
@@ -315,7 +368,8 @@
 
       const toggle = getToggle(event);
 
-      if (toggle && wrapper.contains(toggle)) {
+      if (toggle && isToggleInWrapper(wrapper, toggle)) {
+        closeOtherAccordions(wrapper, toggle);
         updateImage(wrapper, toggle);
       }
     };
@@ -327,8 +381,20 @@
         if (
           toggle instanceof HTMLElement &&
           toggle.matches(toggleSelector) &&
-          toggle.getAttribute("aria-expanded") === "true"
+          isToggleInWrapper(wrapper, toggle) &&
+          (mutation.attributeName === "aria-expanded" ||
+            mutation.attributeName === "class") &&
+          (toggle.classList.contains("active") ||
+            toggle.getAttribute("aria-expanded") === "true")
         ) {
+          if (!toggle.classList.contains("active")) {
+            toggle.classList.add("active");
+          }
+          if (toggle.getAttribute("aria-expanded") !== "true") {
+            toggle.setAttribute("aria-expanded", "true");
+          }
+
+          closeOtherAccordions(wrapper, toggle);
           updateImage(wrapper, toggle);
         }
       });
@@ -336,15 +402,18 @@
 
     observer.observe(wrapper, {
       attributes: true,
-      attributeFilter: ["aria-expanded"],
+      attributeFilter: ["aria-expanded", "class"],
       subtree: true,
     });
 
-    const activeToggle = wrapper.querySelector(
-      `${toggleSelector}[aria-expanded="true"], ${toggleSelector}.active`,
-    );
+    const activeToggle = Array.from(
+      wrapper.querySelectorAll(
+        `${toggleSelector}[aria-expanded="true"], ${toggleSelector}.active`,
+      ),
+    ).find((toggle) => isToggleInWrapper(wrapper, toggle));
 
     if (activeToggle) {
+      closeOtherAccordions(wrapper, activeToggle);
       updateImage(wrapper, activeToggle);
     }
 
