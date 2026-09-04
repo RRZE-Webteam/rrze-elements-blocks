@@ -65,6 +65,8 @@ const filesToUpdate = [
   "./src/blocks/carousel/block.json",
   "./src/blocks/info-card/block.json",
   "./src/blocks/media-accordion/block.json",
+  "./src/blocks/process/block.json",
+  "./src/blocks/process-step/block.json",
 ];
 
 filesToUpdate.forEach((filePath) => updateVersion(filePath, version));

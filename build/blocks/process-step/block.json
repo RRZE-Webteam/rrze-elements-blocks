@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "rrze-elements/process-step",
-  "version": "1.2.2",
+  "version": "1.2.5",
   "title": "Step",
   "category": "rrze_elements",
   "description": "Add another step as part of a bigger process",
