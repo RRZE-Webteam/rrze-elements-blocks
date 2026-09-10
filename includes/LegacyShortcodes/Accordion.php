@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  *   [collapsibles], [accordion], [accordionsub]  – wrapper
  *   [collapse], [accordion-item]                – single panel
  */
-class Accordion
+class Accordion implements ShortcodeAdapter
 {
   /** @var string Plugin main file path (kept for BC). */
   protected $pluginFile;
@@ -30,53 +30,20 @@ class Accordion
   public function __construct(string $pluginFile)
   {
     $this->pluginFile = $pluginFile;
-
-    /*
-    * Register / override all legacy shortcode tags.
-    *
-    * WordPress will happily overwrite existing callbacks when add_shortcode()
-    * is called a second time. However, explicitly removing a previous
-    * registration makes the intent obvious and helps avoid situations
-    * where remove_shortcode() might later be used elsewhere in the stack
-    * (e.g. by a compatibility layer) and unexpectedly un‑register OUR
-    * shortcode handler again.
-    */
-    $this->addShortcodeForce('collapsibles', [$this, 'shortcodeCollapsibles']);
-    $this->addShortcodeForce('accordion', [$this, 'shortcodeCollapsibles']);
-    $this->addShortcodeForce('accordionsub', [$this, 'shortcodeCollapsibles']);
-    $this->addShortcodeForce('collapse', [$this, 'shortcodeCollapse']);
-    $this->addShortcodeForce('accordion-item', [$this, 'shortcodeCollapse']);
   }
 
-  /* --------------------------------------------------------------------- */
-  /*  Shortcode registration helper                                        */
-  /* --------------------------------------------------------------------- */
-
   /**
-   * Registers a shortcode, removing any existing callback first so we are
-   * *guaranteed* to win collisions with other plugins or previous versions.
-   *
-   * @param string $tag The shortcode tag (e.g. "collapse").
-   * @param callable(array<string>, string|null, string): string $callback The handler callback.
+   * @return array<string, callable>
    */
-  protected function addShortcodeForce(string $tag, callable $callback): void
+  public function getShortcodes(): array
   {
-    if ($tag === '') {
-      return;
-    }
-    if (shortcode_exists($tag)) {
-      // Keep a small trace in the debug log – very handy when hunting
-      // conflicts in large installations.
-      //            if (WP_DEBUG) {
-      //                $prev = $GLOBALS['shortcode_tags'][$tag];
-      //                $prevDesc = is_array($prev)
-      //                    ? (is_object($prev[0]) ? get_class($prev[0]) . '::' . $prev[1] : $prev[0] . '()')
-      //                    : (is_string($prev)    ? $prev . '()'                        : 'closure');
-      //                error_log(sprintf('RRZE ElementsBlocks: overriding existing shortcode "%s" previously registered by %s', $tag, $prevDesc));
-      //            }
-      remove_shortcode($tag);
-    }
-    add_shortcode($tag, $callback);
+    return [
+      'collapsibles' => [$this, 'shortcodeCollapsibles'],
+      'accordion' => [$this, 'shortcodeCollapsibles'],
+      'accordionsub' => [$this, 'shortcodeCollapsibles'],
+      'collapse' => [$this, 'shortcodeCollapse'],
+      'accordion-item' => [$this, 'shortcodeCollapse'],
+    ];
   }
 
   /* --------------------------------------------------------------------- */
