@@ -2,6 +2,8 @@
 
 namespace RRZE\ElementsBlocks\LegacyShortcodes;
 
+use RRZE\ElementsBlocks\BlockFrontend\Accordion as AccordionRender;
+use RRZE\ElementsBlocks\BlockFrontend\Accordions as AccordionsRender;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse as CollapseRender;
 use RRZE\ElementsBlocks\BlockFrontend\Collapsibles as CollapsiblesRender;
 use RRZE\ElementsBlocks\FrontendAssets;
@@ -30,10 +32,10 @@ class Accordion implements ShortcodeAdapter
     {
         return [
             'collapsibles' => [$this, 'shortcodeCollapsibles'],
-            'accordion' => [$this, 'shortcodeCollapsibles'],
-            'accordionsub' => [$this, 'shortcodeCollapsibles'],
+            'accordion' => [$this, 'shortcodeAccordions'],
+            'accordionsub' => [$this, 'shortcodeAccordions'],
             'collapse' => [$this, 'shortcodeCollapse'],
-            'accordion-item' => [$this, 'shortcodeCollapse'],
+            'accordion-item' => [$this, 'shortcodeAccordionItem'],
         ];
     }
 
@@ -67,13 +69,13 @@ class Accordion implements ShortcodeAdapter
         $registerMarkup = Helper::shortcode_boolean($args['register'])
             ? $this->renderRegister($context)
             : '';
-        $style = $args['style'] === 'light' ? 'style_light' : 'style_default';
+        $style = $args['style'] === 'light' ? 'style_light' : '';
 
         $markup = (new CollapsiblesRender())->render([
             'expandAllLink' => Helper::shortcode_boolean($args['expand-all-link']),
             'expandLabel' => $this->getExpandLabel(),
             'accordionId' => $context->getId(),
-            'accordionClassName' => 'rrze-elements ' . $style,
+            'accordionClassName' => $style,
         ], $registerMarkup . $innerContent);
 
         FrontendAssets::enqueueAccordion();
@@ -85,6 +87,73 @@ class Accordion implements ShortcodeAdapter
      * @param array<string, string> $atts
      */
     public function shortcodeCollapse(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        return $this->renderItem($atts, $content, $tag, false);
+    }
+
+    /**
+     * Renders the wrapper for the nested accordion-item shortcode.
+     *
+     * @param array<string, string> $atts
+     */
+    public function shortcodeAccordions(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        $args = shortcode_atts([
+            'register' => 'false',
+            'hstart' => '',
+        ], $atts, $tag);
+        $parentContext = $this->getAccordionContext();
+        $headingLevel = $parentContext !== null ? $parentContext->getHeadingLevel() : 1;
+
+        if ($args['hstart'] !== '') {
+            $requestedHeadingLevel = (int)$args['hstart'];
+            if ($requestedHeadingLevel >= 1 && $requestedHeadingLevel <= 6) {
+                // AccordionRender adds one level for an inner accordion item.
+                $headingLevel = max(1, $requestedHeadingLevel - 1);
+            }
+        }
+
+        $context = new AccordionContext('accordion-' . $this->nextAccordionId++, $headingLevel);
+        $this->contexts->push($context);
+
+        $content = $this->stripLeadingParagraphClose($content ?? '');
+        try {
+            $innerContent = do_shortcode(shortcode_unautop($content));
+        } finally {
+            $this->contexts->pop();
+        }
+
+        if ($parentContext !== null) {
+            foreach ($context->getRegisterItems() as $item) {
+                $parentContext->addRegisterItem($item['name'], $item['label']);
+            }
+        }
+
+        $registerMarkup = Helper::shortcode_boolean($args['register'])
+            ? $this->renderRegister($context)
+            : '';
+        $markup = (new AccordionsRender())->render([
+            'className' => 'wp-block-rrze-elements-accordions',
+            'accordionId' => $context->getId(),
+        ], $registerMarkup . $innerContent);
+
+        FrontendAssets::enqueueAccordion();
+
+        return wpautop($markup, false);
+    }
+
+    /**
+     * @param array<string, string> $atts
+     */
+    public function shortcodeAccordionItem(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        return $this->renderItem($atts, $content, $tag, true);
+    }
+
+    /**
+     * @param array<string, string> $atts
+     */
+    private function renderItem(array $atts, ?string $content, string $tag, bool $isInnerItem): string
     {
         $args = shortcode_atts([
             'title' => 'Tab',
@@ -109,7 +178,7 @@ class Accordion implements ShortcodeAdapter
             $context->addRegisterItem($dataName, sanitize_text_field($args['name']));
         }
 
-        $markup = (new CollapseRender())->render([
+        $attributes = [
             'title' => wp_kses($args['title'], ['br' => []]),
             'suffix' => $args['suffix'],
             'color' => sanitize_html_class($args['color']),
@@ -123,8 +192,20 @@ class Accordion implements ShortcodeAdapter
             'loadOpen' => $loadClass !== '',
             'bodyStateClass' => $loadClass,
             'activeOnLoad' => $loadClass === 'open',
-            'hstart' => $context !== null ? $context->getHeadingLevel() : 2,
-        ], do_shortcode(shortcode_unautop($content ?? '')));
+            'hstart' => $context !== null
+                ? $context->getHeadingLevel()
+                : ($isInnerItem ? 1 : 2),
+        ];
+        $innerContent = do_shortcode(shortcode_unautop($content ?? ''));
+
+        if ($isInnerItem) {
+            $attributes['className'] = 'wp-block-rrze-elements-accordion';
+            $attributes['outputId'] = $panelId;
+            $attributes['panelName'] = $dataName;
+            $markup = (new AccordionRender())->render($attributes, $innerContent);
+        } else {
+            $markup = (new CollapseRender())->render($attributes, $innerContent);
+        }
 
         FrontendAssets::enqueueAccordion();
 

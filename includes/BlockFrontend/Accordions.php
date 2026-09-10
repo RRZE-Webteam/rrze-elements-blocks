@@ -18,9 +18,13 @@ class Accordions extends AbstractBlockRender
             return $innerBlocks;
         }
         $wrapper_class = $attributes['className'] ?? '';
+        $accordion_id = $attributes['accordionId'] ?? '';
+        $accordion_id_attribute = $accordion_id !== ''
+            ? ' id="' . esc_attr((string)$accordion_id) . '"'
+            : '';
 
         $markup = '<div class="' . esc_attr(trim($wrapper_class)) . '">';
-        $markup .= '<div class="accordion">';
+        $markup .= '<div class="accordion"' . $accordion_id_attribute . '>';
         $markup .= $innerBlocks;
         $markup .= '</div></div>';
 

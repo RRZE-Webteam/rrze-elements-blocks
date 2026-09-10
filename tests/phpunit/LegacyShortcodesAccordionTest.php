@@ -49,6 +49,7 @@ final class LegacyShortcodesAccordionTest extends TestCase
             1,
             $xpath->query('//div[@id="accordion-0" and contains(@class, "style_light")]')->length
         );
+        $this->assertSame(0, $xpath->query('//div[@id="accordion-0" and contains(@class, "rrze-elements")]')->length);
         $this->assertSame(1, $xpath->query('//button[contains(@class, "expand-all")]')->length);
         $this->assertSame(1, $xpath->query('//ul[contains(@class, "accordion-register")]/li/a[@href="#FirstPanel"]')->length);
         $this->assertSame(1, $xpath->query('//h3[contains(@class, "accordion-heading")]')->length);
@@ -62,15 +63,25 @@ final class LegacyShortcodesAccordionTest extends TestCase
         $this->assertContains('rrze-accordions', $GLOBALS['wp_test_enqueued_scripts']);
     }
 
-    public function test_nested_wrappers_restore_parent_heading_and_register_context(): void
+    public function test_default_wrapper_uses_canonical_block_classes_only(): void
+    {
+        $adapter = new LegacyAccordion();
+        $output = $adapter->shortcodeCollapsibles([], '', 'collapsibles');
+        $wrapper = $this->createXPath($output)->query('//div[@id="accordion-0"]')->item(0);
+
+        $this->assertInstanceOf(DOMElement::class, $wrapper);
+        $this->assertSame('accordion', $wrapper->getAttribute('class'));
+    }
+
+    public function test_four_shortcode_nested_structure_uses_matching_block_renderers(): void
     {
         $adapter = new LegacyAccordion();
         $GLOBALS['wp_test_do_shortcode'] = static function (string $content) use ($adapter): string {
             if ($content === 'nested-child') {
-                return $adapter->shortcodeCollapse([
+                return $adapter->shortcodeAccordionItem([
                     'title' => 'Nested',
                     'name' => 'nested',
-                ], 'Nested body', 'collapse');
+                ], 'Nested body', 'accordion-item');
             }
 
             if ($content !== 'outer-children') {
@@ -81,10 +92,9 @@ final class LegacyShortcodesAccordionTest extends TestCase
                 'title' => 'Outer first',
                 'name' => 'outer-first',
             ], 'First body', 'collapse');
-            $nested = $adapter->shortcodeCollapsibles([
+            $nested = $adapter->shortcodeAccordions([
                 'register' => 'true',
-                'hstart' => '4',
-            ], 'nested-child', 'collapsibles');
+            ], 'nested-child', 'accordion');
             $last = $adapter->shortcodeCollapse([
                 'title' => 'Outer last',
                 'name' => 'outer-last',
@@ -101,7 +111,7 @@ final class LegacyShortcodesAccordionTest extends TestCase
         $outer = $xpath->query('//div[@id="accordion-0"]')->item(0);
         $nested = $xpath->query('//div[@id="accordion-1"]')->item(0);
 
-        $this->assertSame(2, $xpath->query('./ul/li/a', $outer)->length);
+        $this->assertSame(3, $xpath->query('./ul/li/a', $outer)->length);
         $this->assertSame(1, $xpath->query('./ul/li/a', $nested)->length);
         $this->assertSame(
             2,
@@ -109,8 +119,16 @@ final class LegacyShortcodesAccordionTest extends TestCase
         );
         $this->assertSame(
             1,
-            $xpath->query('./div[contains(@class, "wp-block-rrze-elements-collapse")]/div/h4', $nested)->length
+            $xpath->query('./div[contains(@class, "wp-block-rrze-elements-accordion")]/div/h3', $nested)->length
         );
+        $this->assertSame(1, $xpath->query(
+            '//div[contains(concat(" ", normalize-space(@class), " "), " wp-block-rrze-elements-accordions ")]'
+        )->length);
+        $this->assertSame(1, $xpath->query(
+            '//div[contains(concat(" ", normalize-space(@class), " "), " wp-block-rrze-elements-accordion ")]'
+        )->length);
+        $this->assertSame(1, $xpath->query('//button[@id="collapse_button_1" and @data-href="#collapse_1"]')->length);
+        $this->assertSame(1, $xpath->query('//div[@id="collapse_1" and @aria-labelledby="collapse_button_1"]')->length);
     }
 
     public function test_explicit_id_and_stayopen_state_use_legacy_relationships(): void
@@ -128,6 +146,27 @@ final class LegacyShortcodesAccordionTest extends TestCase
         $this->assertSame(1, $xpath->query('//button[@aria-expanded="true" and not(contains(@class, "active"))]')->length);
         $this->assertSame(1, $xpath->query('//div[@id="collapse_42" and contains(@class, "stayopen")]')->length);
         $this->assertSame(1, $xpath->query('//h2')->length);
+    }
+
+    public function test_inner_item_preserves_legacy_attributes_through_accordion_renderer(): void
+    {
+        $adapter = new LegacyAccordion();
+        $output = $adapter->shortcodeAccordionItem([
+            'title' => 'Inner<br>title',
+            'suffix' => 'New',
+            'color' => 'phil',
+            'name' => 'inner_target',
+            'load' => 'open',
+        ], 'Content', 'accordion-item');
+        $xpath = $this->createXPath($output);
+
+        $this->assertSame(1, $xpath->query('//div[contains(@class, "wp-block-rrze-elements-accordion")]')->length);
+        $this->assertSame(1, $xpath->query('//div[contains(@class, "accordion-group") and contains(@class, "phil")]')->length);
+        $this->assertSame(1, $xpath->query('//h2/button/br')->length);
+        $this->assertSame('New', $xpath->query('//button/span[contains(@class, "accordion-suffix")]')->item(0)->textContent);
+        $this->assertSame(1, $xpath->query('//button[@id="collapse_button_0" and @data-name="inner_target"]')->length);
+        $this->assertSame(1, $xpath->query('//button[@aria-expanded="true" and contains(@class, "active")]')->length);
+        $this->assertSame(1, $xpath->query('//div[@id="collapse_0" and @name="inner_target" and contains(@class, "open")]')->length);
     }
 
     public function test_context_is_restored_when_nested_rendering_throws(): void

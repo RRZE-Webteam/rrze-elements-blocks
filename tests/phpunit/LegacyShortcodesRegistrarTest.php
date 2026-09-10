@@ -46,6 +46,8 @@ final class LegacyShortcodesRegistrarTest extends TestCase
             array_keys($GLOBALS['shortcode_tags'])
         );
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
+        $this->assertSame('shortcodeAccordions', $GLOBALS['shortcode_tags']['accordion'][1]);
+        $this->assertSame('shortcodeAccordionItem', $GLOBALS['shortcode_tags']['accordion-item'][1]);
     }
 
     public function test_legacy_callback_is_replaced(): void
