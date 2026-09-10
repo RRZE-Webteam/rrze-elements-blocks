@@ -117,6 +117,11 @@ final class BlockFrontendRenderTest extends TestCase
         $collapseOutput = (new Collapse())->render($attributes, '<p>Content</p>');
         $accordionOutput = (new Accordion())->render($attributes, '<p>Content</p>');
 
+        $this->assertStringContainsString('id="item"', $collapseOutput);
+        $this->assertStringContainsString('data-href="#item"', $collapseOutput);
+        $this->assertStringContainsString('aria-controls="item-section"', $collapseOutput);
+        $this->assertStringContainsString('id="item-section"', $collapseOutput);
+
         foreach ([$collapseOutput, $accordionOutput] as $output) {
             $this->assertStringContainsString('data-media-accordion-image-id="42"', $output);
             $this->assertStringContainsString(

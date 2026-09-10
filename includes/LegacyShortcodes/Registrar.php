@@ -7,8 +7,7 @@ defined('ABSPATH') || exit;
 /**
  * Registers legacy shortcode adapters after all plugins have loaded.
  *
- * Families are disabled by default while their compatibility behavior is
- * being verified. Enable individual families with the
+ * Only verified families are enabled by default. Enable or disable individual families with the
  * rrze_elements_blocks_legacy_shortcode_families filter.
  */
 class Registrar
@@ -16,15 +15,11 @@ class Registrar
     private const LEGACY_NAMESPACE = 'RRZE\\Elements\\';
     private const COMPATIBILITY_NAMESPACE = 'RRZE\\ElementsBlocks\\LegacyShortcodes\\';
 
-    private string $pluginFile;
-
     /** @var array<string, string> */
     private array $conflicts = [];
 
-    public function __construct(string $pluginFile)
+    public function __construct()
     {
-        $this->pluginFile = $pluginFile;
-
         add_action('init', [$this, 'register'], 20);
     }
 
@@ -39,8 +34,8 @@ class Registrar
         /**
          * Filters the legacy shortcode families enabled for this request.
          *
-         * Families remain disabled by default until their adapters have
-         * passed compatibility testing.
+         * The default contains only families that have passed compatibility
+         * testing and are ready to replace their RRZE Elements callbacks.
          *
          * @param string[] $enabledFamilies Enabled family names.
          * @param string[] $availableFamilies All available family names.
@@ -48,7 +43,7 @@ class Registrar
         /** @var mixed $enabledFamilies */
         $enabledFamilies = apply_filters(
             'rrze_elements_blocks_legacy_shortcode_families',
-            [],
+            ['accordion'],
             array_keys($adapters)
         );
 
@@ -107,7 +102,7 @@ class Registrar
     private function getAdapters(): array
     {
         return [
-            'accordion' => new Accordion($this->pluginFile),
+            'accordion' => new Accordion(),
         ];
     }
 

@@ -31,7 +31,7 @@ class Main
 
         new Blocks();
         new Patterns();
-        new LegacyShortcodes\Registrar($this->pluginFile);
+        new LegacyShortcodes\Registrar();
         Filters::register();
 
         add_action('rest_api_init', function () {

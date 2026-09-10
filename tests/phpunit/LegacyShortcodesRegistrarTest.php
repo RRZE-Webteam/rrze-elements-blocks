@@ -14,10 +14,23 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $GLOBALS['wp_test_filters'] = [];
     }
 
-    public function test_families_are_disabled_by_default(): void
+    public function test_verified_accordion_family_is_enabled_by_default(): void
     {
-        $registrar = new Registrar(__FILE__);
+        $registrar = new Registrar();
 
+        $registrar->register();
+
+        $this->assertArrayHasKey('accordion', $GLOBALS['shortcode_tags']);
+    }
+
+    public function test_family_can_be_disabled(): void
+    {
+        add_filter(
+            'rrze_elements_blocks_legacy_shortcode_families',
+            static fn(): array => []
+        );
+
+        $registrar = new Registrar();
         $registrar->register();
 
         $this->assertSame([], $GLOBALS['shortcode_tags']);
@@ -25,12 +38,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
     public function test_enabled_family_registers_all_adapter_tags(): void
     {
-        add_filter(
-            'rrze_elements_blocks_legacy_shortcode_families',
-            static fn(): array => ['accordion']
-        );
-
-        $registrar = new Registrar(__FILE__);
+        $registrar = new Registrar();
         $registrar->register();
 
         $this->assertSame(
@@ -46,12 +54,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
             'RRZE\\Elements\\Accordion\\Accordion',
             'shortcodeCollapsibles',
         ];
-        add_filter(
-            'rrze_elements_blocks_legacy_shortcode_families',
-            static fn(): array => ['accordion']
-        );
-
-        $registrar = new Registrar(__FILE__);
+        $registrar = new Registrar();
         $registrar->register();
 
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
@@ -62,12 +65,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
     {
         $thirdPartyCallback = static fn(): string => 'third party';
         $GLOBALS['shortcode_tags']['accordion'] = $thirdPartyCallback;
-        add_filter(
-            'rrze_elements_blocks_legacy_shortcode_families',
-            static fn(): array => ['accordion']
-        );
-
-        $registrar = new Registrar(__FILE__);
+        $registrar = new Registrar();
         $registrar->register();
 
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
