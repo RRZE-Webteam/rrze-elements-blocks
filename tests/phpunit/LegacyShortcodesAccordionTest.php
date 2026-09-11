@@ -46,7 +46,7 @@ final class LegacyShortcodesAccordionTest extends TestCase
 
         $this->assertSame(1, $xpath->query('//div[@id="accordion-0"]')->length);
         $this->assertSame(
-            1,
+            0,
             $xpath->query('//div[@id="accordion-0" and contains(@class, "style_light")]')->length
         );
         $this->assertSame(0, $xpath->query('//div[@id="accordion-0" and contains(@class, "rrze-elements")]')->length);
@@ -129,6 +129,33 @@ final class LegacyShortcodesAccordionTest extends TestCase
         )->length);
         $this->assertSame(1, $xpath->query('//button[@id="collapse_button_1" and @data-href="#collapse_1"]')->length);
         $this->assertSame(1, $xpath->query('//div[@id="collapse_1" and @aria-labelledby="collapse_button_1"]')->length);
+    }
+
+    public function test_inner_wrapper_preserves_expand_all_link(): void
+    {
+        $adapter = new LegacyAccordion();
+        $output = $adapter->shortcodeAccordions([
+            'expand-all-link' => 'true',
+        ], '', 'accordion');
+        $xpath = $this->createXPath($output);
+
+        $this->assertSame(1, $xpath->query('//div[@id="accordion-0"]')->length);
+        $this->assertSame(1, $xpath->query('//button[contains(@class, "expand-all")]')->length);
+        $this->assertSame('Expand All', $xpath->query('//button[contains(@class, "expand-all")]')->item(0)->textContent);
+    }
+
+    public function test_inner_wrapper_can_start_with_a_level_one_heading(): void
+    {
+        $adapter = new LegacyAccordion();
+        $GLOBALS['wp_test_do_shortcode'] = static function (string $content) use ($adapter): string {
+            return $content === 'child'
+                ? $adapter->shortcodeAccordionItem(['title' => 'Level one'], '', 'accordion-item')
+                : $content;
+        };
+
+        $output = $adapter->shortcodeAccordions(['hstart' => '1'], 'child', 'accordion');
+
+        $this->assertSame(1, $this->createXPath($output)->query('//h1')->length);
     }
 
     public function test_explicit_id_and_stayopen_state_use_legacy_relationships(): void

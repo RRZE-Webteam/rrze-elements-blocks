@@ -18,9 +18,13 @@ class Registrar
     /** @var array<string, string> */
     private array $conflicts = [];
 
+    /** @var array<string, ShortcodeAdapter> */
+    private array $activeAdapters = [];
+
     public function __construct()
     {
         add_action('init', [$this, 'register'], 20);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueAssets'], 10);
     }
 
     /**
@@ -29,6 +33,7 @@ class Registrar
     public function register(): void
     {
         $this->conflicts = [];
+        $this->activeAdapters = [];
         $adapters = $this->getAdapters();
 
         /**
@@ -56,17 +61,27 @@ class Registrar
                 continue;
             }
 
-            foreach ($adapters[$family]->getShortcodes() as $tag => $callback) {
-                if ($tag === '') {
-                    continue;
-                }
+            $shortcodes = array_filter(
+                $adapters[$family]->getShortcodes(),
+                static fn(string $tag): bool => $tag !== '',
+                ARRAY_FILTER_USE_KEY
+            );
+            $familyConflicts = [];
 
+            foreach (array_keys($shortcodes) as $tag) {
                 if (!$this->canOwnShortcode($tag)) {
-                    $this->conflicts[$tag] = $this->getShortcodeOwner($tag);
+                    $familyConflicts[$tag] = $this->getShortcodeOwner($tag);
+                }
+            }
+
+            if ($familyConflicts !== []) {
+                foreach ($familyConflicts as $tag => $owner) {
+                    $this->conflicts[$tag] = $owner;
 
                     /**
                      * Fires when an enabled legacy tag is owned by an
-                     * unrelated plugin or theme and is therefore preserved.
+                     * unrelated plugin or theme. The complete family is
+                     * preserved to avoid mixing incompatible nested parsers.
                      *
                      * @param string $tag Shortcode tag.
                      * @param string $owner Existing callback owner.
@@ -75,14 +90,33 @@ class Registrar
                     do_action(
                         'rrze_elements_blocks_legacy_shortcode_conflict',
                         $tag,
-                        $this->conflicts[$tag],
+                        $owner,
                         $family
                     );
-                    continue;
                 }
 
+                continue;
+            }
+
+            foreach ($shortcodes as $tag => $callback) {
                 add_shortcode($tag, $callback);
             }
+
+            $this->activeAdapters[$family] = $adapters[$family];
+        }
+    }
+
+    /**
+     * Enqueues assets early enough for styles to be printed in wp_head.
+     */
+    public function enqueueAssets(): void
+    {
+        if (is_404() || is_search()) {
+            return;
+        }
+
+        foreach ($this->activeAdapters as $adapter) {
+            $adapter->enqueueAssets();
         }
     }
 

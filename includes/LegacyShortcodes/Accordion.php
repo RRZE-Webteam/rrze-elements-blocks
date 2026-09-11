@@ -39,6 +39,11 @@ class Accordion implements ShortcodeAdapter
         ];
     }
 
+    public function enqueueAssets(): void
+    {
+        FrontendAssets::enqueueAccordion();
+    }
+
     /**
      * @param array<string, string> $atts
      */
@@ -48,7 +53,6 @@ class Accordion implements ShortcodeAdapter
             'expand-all-link' => 'false',
             'register' => 'false',
             'hstart' => '',
-            'style' => '',
         ], $atts, $tag);
 
         $headingLevel = $args['hstart'] !== '' ? (int)$args['hstart'] : 2;
@@ -69,16 +73,13 @@ class Accordion implements ShortcodeAdapter
         $registerMarkup = Helper::shortcode_boolean($args['register'])
             ? $this->renderRegister($context)
             : '';
-        $style = $args['style'] === 'light' ? 'style_light' : '';
-
         $markup = (new CollapsiblesRender())->render([
             'expandAllLink' => Helper::shortcode_boolean($args['expand-all-link']),
             'expandLabel' => $this->getExpandLabel(),
             'accordionId' => $context->getId(),
-            'accordionClassName' => $style,
         ], $registerMarkup . $innerContent);
 
-        FrontendAssets::enqueueAccordion();
+        $this->enqueueAssets();
 
         return wpautop($markup, false);
     }
@@ -99,6 +100,7 @@ class Accordion implements ShortcodeAdapter
     public function shortcodeAccordions(array $atts = [], ?string $content = '', string $tag = ''): string
     {
         $args = shortcode_atts([
+            'expand-all-link' => 'false',
             'register' => 'false',
             'hstart' => '',
         ], $atts, $tag);
@@ -109,7 +111,7 @@ class Accordion implements ShortcodeAdapter
             $requestedHeadingLevel = (int)$args['hstart'];
             if ($requestedHeadingLevel >= 1 && $requestedHeadingLevel <= 6) {
                 // AccordionRender adds one level for an inner accordion item.
-                $headingLevel = max(1, $requestedHeadingLevel - 1);
+                $headingLevel = $requestedHeadingLevel - 1;
             }
         }
 
@@ -135,9 +137,11 @@ class Accordion implements ShortcodeAdapter
         $markup = (new AccordionsRender())->render([
             'className' => 'wp-block-rrze-elements-accordions',
             'accordionId' => $context->getId(),
+            'expandAllLink' => Helper::shortcode_boolean($args['expand-all-link']),
+            'expandLabel' => $this->getExpandLabel(),
         ], $registerMarkup . $innerContent);
 
-        FrontendAssets::enqueueAccordion();
+        $this->enqueueAssets();
 
         return wpautop($markup, false);
     }
@@ -207,7 +211,7 @@ class Accordion implements ShortcodeAdapter
             $markup = (new CollapseRender())->render($attributes, $innerContent);
         }
 
-        FrontendAssets::enqueueAccordion();
+        $this->enqueueAssets();
 
         return wpautop($markup, false);
     }

@@ -12,4 +12,9 @@ interface ShortcodeAdapter
      * @return array<string, callable>
      */
     public function getShortcodes(): array;
+
+    /**
+     * Enqueues the frontend assets required by this shortcode family.
+     */
+    public function enqueueAssets(): void;
 }

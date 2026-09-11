@@ -12,6 +12,8 @@ final class LegacyShortcodesRegistrarTest extends TestCase
     {
         $GLOBALS['shortcode_tags'] = [];
         $GLOBALS['wp_test_filters'] = [];
+        $GLOBALS['wp_test_enqueued_styles'] = [];
+        $GLOBALS['wp_test_enqueued_scripts'] = [];
     }
 
     public function test_verified_accordion_family_is_enabled_by_default(): void
@@ -71,9 +73,34 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
+        $this->assertSame(['accordion'], array_keys($GLOBALS['shortcode_tags']));
         $this->assertSame(
             ['accordion' => Closure::class],
             $registrar->getConflicts()
         );
+    }
+
+    public function test_family_assets_are_enqueued_early_after_successful_registration(): void
+    {
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $registrar->enqueueAssets();
+
+        $this->assertSame(['rrze-elements-blocks'], $GLOBALS['wp_test_enqueued_styles']);
+        $this->assertSame(['rrze-accordions'], $GLOBALS['wp_test_enqueued_scripts']);
+    }
+
+    public function test_conflicted_family_does_not_enqueue_its_assets(): void
+    {
+        $GLOBALS['shortcode_tags']['accordion-item'] = static fn(): string => 'third party';
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $registrar->enqueueAssets();
+
+        $this->assertSame(['accordion-item'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
 }
