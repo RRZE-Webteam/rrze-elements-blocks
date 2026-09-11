@@ -24,10 +24,15 @@ class Collapsibles extends AbstractBlockRender
         $expand_label = $attributes['expandLabel'] ?? '';
 
         $wrapper_class = $attributes['className'] ?? '';
+        $accordion_class = $attributes['accordionClassName'] ?? '';
+        $accordion_id = $attributes['accordionId'] ?? '';
+        $accordion_id_attribute = $accordion_id !== ''
+            ? ' id="' . esc_attr((string)$accordion_id) . '"'
+            : '';
 
         $markup = '<div class="wp-block-rrze-elements-collapsibles ' . esc_attr(trim($wrapper_class)) . '">';
 
-        $markup .= '<div class="accordion">';
+        $markup .= '<div class="' . esc_attr(trim('accordion ' . $accordion_class)) . '"' . $accordion_id_attribute . '>';
 
         if ($expand_all_link) {
             $markup .= '<div class="button-container-right">';

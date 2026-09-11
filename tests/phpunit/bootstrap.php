@@ -21,6 +21,10 @@ $GLOBALS['wp_theme_data'] = [
     'template' => 'FAU-Elemental',
 ];
 $GLOBALS['shortcode_tags'] = [];
+$GLOBALS['wp_test_filters'] = [];
+$GLOBALS['wp_test_enqueued_styles'] = [];
+$GLOBALS['wp_test_enqueued_scripts'] = [];
+$GLOBALS['wp_test_do_shortcode'] = null;
 
 function __($text, $domain = null): string
 {
@@ -156,9 +160,36 @@ function wp_rand(int $min, int $max): int
 }
 
 function add_action($hook, $callback, $priority = 10, $accepted_args = 1): void {}
-function add_filter($hook, $callback, $priority = 10, $accepted_args = 1): void {}
-function wp_enqueue_style($handle, $src = '', $deps = [], $ver = false, $media = 'all'): void {}
-function wp_enqueue_script($handle, $src = '', $deps = [], $ver = false, $in_footer = false): void {}
+
+function add_filter($hook, $callback, $priority = 10, $accepted_args = 1): void
+{
+    $GLOBALS['wp_test_filters'][$hook][$priority][] = $callback;
+}
+
+function apply_filters($hook, $value, ...$args)
+{
+    $callbacks = $GLOBALS['wp_test_filters'][$hook] ?? [];
+    ksort($callbacks);
+
+    foreach ($callbacks as $priorityCallbacks) {
+        foreach ($priorityCallbacks as $callback) {
+            $value = $callback($value, ...$args);
+        }
+    }
+
+    return $value;
+}
+
+function do_action($hook, ...$args): void {}
+function wp_enqueue_style($handle, $src = '', $deps = [], $ver = false, $media = 'all'): void
+{
+    $GLOBALS['wp_test_enqueued_styles'][] = $handle;
+}
+
+function wp_enqueue_script($handle, $src = '', $deps = [], $ver = false, $in_footer = false): void
+{
+    $GLOBALS['wp_test_enqueued_scripts'][] = $handle;
+}
 function wp_register_style($handle, $src = '', $deps = [], $ver = false, $media = 'all'): void {}
 function wp_register_script($handle, $src = '', $deps = [], $ver = false, $in_footer = false): void {}
 function load_plugin_textdomain($domain, $deprecated = false, $plugin_rel_path = ''): void {}
@@ -353,6 +384,10 @@ function shortcode_unautop($string): string
 
 function do_shortcode($content): string
 {
+    if (is_callable($GLOBALS['wp_test_do_shortcode'])) {
+        return (string)call_user_func($GLOBALS['wp_test_do_shortcode'], (string)$content);
+    }
+
     return (string)$content;
 }
 

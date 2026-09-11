@@ -2,306 +2,266 @@
 
 namespace RRZE\ElementsBlocks\LegacyShortcodes;
 
-use RRZE\ElementsBlocks\Helper;
-use RRZE\ElementsBlocks\BlockFrontend\Collapsibles as CollapsiblesRender;
+use RRZE\ElementsBlocks\BlockFrontend\Accordion as AccordionRender;
+use RRZE\ElementsBlocks\BlockFrontend\Accordions as AccordionsRender;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse as CollapseRender;
+use RRZE\ElementsBlocks\BlockFrontend\Collapsibles as CollapsiblesRender;
+use RRZE\ElementsBlocks\FrontendAssets;
+use RRZE\ElementsBlocks\Helper;
 
-if (!defined('ABSPATH')) {
-  exit;
-}
+defined('ABSPATH') || exit;
 
 /**
- * Legacy Accordion/Collapsible shortcode handler.
- *
- * Re‑implements the original shortcode API while internally delegating the
- * markup generation to the new block‑based render classes. All historical
- * shortcode attributes continue to work so that existing content does not
- * have to be migrated.
- *
- * Supported shortcodes:
- *   [collapsibles], [accordion], [accordionsub]  – wrapper
- *   [collapse], [accordion-item]                – single panel
+ * Adapts the legacy accordion shortcode family to the canonical block renderers.
  */
-class Accordion
+class Accordion implements ShortcodeAdapter
 {
-  /** @var string Plugin main file path (kept for BC). */
-  protected $pluginFile;
+    private ContextStack $contexts;
+    private int $nextAccordionId = 0;
+    private int $nextPanelId = 0;
 
-  public function __construct(string $pluginFile)
-  {
-    $this->pluginFile = $pluginFile;
-
-    /*
-    * Register / override all legacy shortcode tags.
-    *
-    * WordPress will happily overwrite existing callbacks when add_shortcode()
-    * is called a second time. However, explicitly removing a previous
-    * registration makes the intent obvious and helps avoid situations
-    * where remove_shortcode() might later be used elsewhere in the stack
-    * (e.g. by a compatibility layer) and unexpectedly un‑register OUR
-    * shortcode handler again.
-    */
-    $this->addShortcodeForce('collapsibles', [$this, 'shortcodeCollapsibles']);
-    $this->addShortcodeForce('accordion', [$this, 'shortcodeCollapsibles']);
-    $this->addShortcodeForce('accordionsub', [$this, 'shortcodeCollapsibles']);
-    $this->addShortcodeForce('collapse', [$this, 'shortcodeCollapse']);
-    $this->addShortcodeForce('accordion-item', [$this, 'shortcodeCollapse']);
-  }
-
-  /* --------------------------------------------------------------------- */
-  /*  Shortcode registration helper                                        */
-  /* --------------------------------------------------------------------- */
-
-  /**
-   * Registers a shortcode, removing any existing callback first so we are
-   * *guaranteed* to win collisions with other plugins or previous versions.
-   *
-   * @param string $tag The shortcode tag (e.g. "collapse").
-   * @param callable(array<string>, string|null, string): string $callback The handler callback.
-   */
-  protected function addShortcodeForce(string $tag, callable $callback): void
-  {
-    if ($tag === '') {
-      return;
-    }
-    if (shortcode_exists($tag)) {
-      // Keep a small trace in the debug log – very handy when hunting
-      // conflicts in large installations.
-      //            if (WP_DEBUG) {
-      //                $prev = $GLOBALS['shortcode_tags'][$tag];
-      //                $prevDesc = is_array($prev)
-      //                    ? (is_object($prev[0]) ? get_class($prev[0]) . '::' . $prev[1] : $prev[0] . '()')
-      //                    : (is_string($prev)    ? $prev . '()'                        : 'closure');
-      //                error_log(sprintf('RRZE ElementsBlocks: overriding existing shortcode "%s" previously registered by %s', $tag, $prevDesc));
-      //            }
-      remove_shortcode($tag);
-    }
-    add_shortcode($tag, $callback);
-  }
-
-  /* --------------------------------------------------------------------- */
-  /*  Wrapper shortcode : [collapsibles]                                   */
-  /* --------------------------------------------------------------------- */
-
-  /**
-   * Handles the wrapper shortcode (multiple collapsible panels).
-   * Maps legacy attributes to the Collapsibles block renderer so the new
-   * front‑end is used while the legacy API stays intact.
-   *
-   * @param array<string, string> $atts
-   */
-  public function shortcodeCollapsibles(array $atts = [], ?string $content = '', string $tag = ''): string
-  {
-    $content = $content ?? '';
-    /* --------------------------------------------------
-     * 1. Parse legacy attributes
-     * --------------------------------------------------*/
-    $defaults = [
-      'expand-all-link' => 'false', // bool
-      'register' => 'false', // bool
-      'hstart' => '',      // int (1‑6) – passed down to children
-      'style' => '',      // "light" for alternative colour scheme
-    ];
-    $args = shortcode_atts($defaults, $atts, $tag);
-    $expandAll = Helper::shortcode_boolean($args['expand-all-link']);
-    $register = Helper::shortcode_boolean($args['register']);
-
-    /* Store heading start level for nested [collapse] shortcodes */
-    $hstart = ($args['hstart'] !== '') ? intval($args['hstart']) : 2;
-    $hstart = ($hstart < 1 || $hstart > 6) ? 2 : $hstart;
-
-    // Maintain the global the old shortcodes relied on – still needed so
-    // that nested [collapse] instances know which heading level to start
-    // with. The new render classes do not use the global, but the nested
-    // shortcode handler below does.
-    if (!isset($GLOBALS['collapsibles_count'])) {
-      $GLOBALS['collapsibles_count'] = 0;
-    }
-    $GLOBALS['collapsibles_id'] = $GLOBALS['collapsibles_count'];
-    $GLOBALS['collapsibles_hstart'][$GLOBALS['collapsibles_id']] = $hstart;
-    $GLOBALS['collapsibles_count']++;
-
-    /* --------------------------------------------------
-     * 2. Build inner HTML (register list + child panels)
-     * --------------------------------------------------*/
-    // Strip leading autop that WordPress sometimes adds when the shortcode
-    // is on its own line.
-    if ($content !== '' && str_starts_with($content, '</p>')) {
-      $content = substr($content, 4);
+    public function __construct()
+    {
+        $this->contexts = new ContextStack();
     }
 
-    // Convert shortcodes inside the wrapper *first* so we can parse names
-    // for the optional register list.
-    $innerContent = do_shortcode(shortcode_unautop($content));
+    /**
+     * @return array<string, callable>
+     */
+    public function getShortcodes(): array
+    {
+        return [
+            'collapsibles' => [$this, 'shortcodeCollapsibles'],
+            'accordion' => [$this, 'shortcodeAccordions'],
+            'accordionsub' => [$this, 'shortcodeAccordions'],
+            'collapse' => [$this, 'shortcodeCollapse'],
+            'accordion-item' => [$this, 'shortcodeAccordionItem'],
+        ];
+    }
 
-    $registerMarkup = '';
-    if ($register) {
-      // Look for name="…" attributes provided in child shortcodes.
-      if (preg_match_all('/name=\"(.*?)\"/', $content, $matches)) {
-        $names = array_filter($matches[1], static fn($val) => $val !== '');
-        if ($names) {
-          $registerMarkup .= '<ul aria-hidden="true" class="accordion-register clear clearfix">';
-          foreach ($names as $name) {
-            $registerMarkup .= '<li><a href="#' . esc_attr($name) . '">' . esc_html($name) . '</a></li>';
-          }
-          $registerMarkup .= '</ul>';
+    public function enqueueAssets(): void
+    {
+        FrontendAssets::enqueueAccordion();
+    }
+
+    /**
+     * @param array<string, string> $atts
+     */
+    public function shortcodeCollapsibles(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        $args = shortcode_atts([
+            'expand-all-link' => 'false',
+            'register' => 'false',
+            'hstart' => '',
+        ], $atts, $tag);
+
+        $headingLevel = $args['hstart'] !== '' ? (int)$args['hstart'] : 2;
+        if ($headingLevel < 1 || $headingLevel > 6) {
+            $headingLevel = 2;
         }
-      }
+
+        $context = new AccordionContext('accordion-' . $this->nextAccordionId++, $headingLevel);
+        $this->contexts->push($context);
+
+        $content = $this->stripLeadingParagraphClose($content ?? '');
+        try {
+            $innerContent = do_shortcode(shortcode_unautop($content));
+        } finally {
+            $this->contexts->pop();
+        }
+
+        $registerMarkup = Helper::shortcode_boolean($args['register'])
+            ? $this->renderRegister($context)
+            : '';
+        $markup = (new CollapsiblesRender())->render([
+            'expandAllLink' => Helper::shortcode_boolean($args['expand-all-link']),
+            'expandLabel' => $this->getExpandLabel(),
+            'accordionId' => $context->getId(),
+        ], $registerMarkup . $innerContent);
+
+        $this->enqueueAssets();
+
+        return wpautop($markup, false);
     }
 
-    $innerBlocks = $registerMarkup . $innerContent;
-
-    /* --------------------------------------------------
-     * 3. Map legacy attributes to the new renderer
-     * --------------------------------------------------*/
-    $style = esc_attr($args['style']);
-    $className = $style === 'light' ? 'style_light' : 'style_default';
-
-    $attributesNew = [
-      'expandAllLink' => $expandAll,
-      'expandLabel' => $this->getExpandLabel(''), // will calculate below
-      'className' => $className,
-    ];
-
-    // Custom expand‑all label (legacy didn’t allow overriding the label via
-    // shortcode, but we keep the option open for filters or future use).
-    $attributesNew['expandLabel'] = $this->getExpandLabel($attributesNew['expandLabel']);
-
-    /* --------------------------------------------------
-     * 4. Delegate to the new renderer
-     * --------------------------------------------------*/
-    $renderer = new CollapsiblesRender();
-    $markup = $renderer->render($attributesNew, $innerBlocks);
-
-    // Assets – identical to the legacy implementation so no front‑end
-    // breakage occurs when scripts/styles were dequeued elsewhere.
-    wp_enqueue_script('rrze-accordions');
-
-    // Keep the original behaviour of running through wpautop() (with $br
-    // disabled) so existing content keeps its exact markup.
-    return wpautop($markup, false);
-  }
-
-  /* --------------------------------------------------------------------- */
-  /*  Panel shortcode : [collapse] / [accordion-item]                       */
-  /* --------------------------------------------------------------------- */
-
-  /**
-   * Handles a single collapsible panel.
-   *
-   * @param array<string, string> $atts
-   */
-  public function shortcodeCollapse(array $atts = [], ?string $content = '', string $tag = ''): string
-  {
-    $content = $content ?? '';
-    /* Maintain legacy globals for unique IDs */
-    if (!isset($GLOBALS['current_collapse'])) {
-      $GLOBALS['current_collapse'] = 0;
-    }
-    $id = $GLOBALS['current_collapse']++;
-
-    if (!isset($GLOBALS['collapsibles_count'])) {
-      $GLOBALS['collapsibles_count'] = 0;
-    }
-    if (!isset($GLOBALS['collapsibles_id'])) {
-      $GLOBALS['collapsibles_id'] = $GLOBALS['collapsibles_count'];
+    /**
+     * @param array<string, string> $atts
+     */
+    public function shortcodeCollapse(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        return $this->renderItem($atts, $content, $tag, false);
     }
 
-    /* ----------------------------------------
-     * 1. Parse legacy attributes
-     * ----------------------------------------*/
-    $defaults = [
-      'title' => 'Tab',
-      'color' => '',
-      'id' => '',
-      'load' => '',
-      'name' => '',
-      'icon' => '',
-      'suffix' => '',
-    ];
-    $args = shortcode_atts($defaults, $atts, $tag);
+    /**
+     * Renders the wrapper for the nested accordion-item shortcode.
+     *
+     * @param array<string, string> $atts
+     */
+    public function shortcodeAccordions(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        $args = shortcode_atts([
+            'expand-all-link' => 'false',
+            'register' => 'false',
+            'hstart' => '',
+        ], $atts, $tag);
+        $parentContext = $this->getAccordionContext();
+        $headingLevel = $parentContext !== null ? $parentContext->getHeadingLevel() : 1;
 
-    // Heading start level is inherited from the parent wrapper (set above).
-    $hstart = $GLOBALS['collapsibles_hstart'][$GLOBALS['collapsibles_id']] ?? 2;
+        if ($args['hstart'] !== '') {
+            $requestedHeadingLevel = (int)$args['hstart'];
+            if ($requestedHeadingLevel >= 1 && $requestedHeadingLevel <= 6) {
+                // AccordionRender adds one level for an inner accordion item.
+                $headingLevel = $requestedHeadingLevel - 1;
+            }
+        }
 
-    /* ----------------------------------------
-     * 2. Map legacy attributes → new renderer
-     * ----------------------------------------*/
-    $panelId = $args['id'] !== '' ? intval($args['id']) : $id;
-    $jumpName = $args['name'] !== '' ? sanitize_title_with_dashes($args['name']) : 'collapse_' . $panelId;
+        $context = new AccordionContext('accordion-' . $this->nextAccordionId++, $headingLevel);
+        $this->contexts->push($context);
 
-    $title = strip_tags($args['title'], ['<br>', '<br />']);
-    if ($args['suffix'] !== '') {
-      // Preserve legacy suffix: add a span inside the button like it used
-      // to be. We’ll append it after rendering.
-      $titleForRenderer = $title; // keep plain for renderer
-    } else {
-      $titleForRenderer = $title;
+        $content = $this->stripLeadingParagraphClose($content ?? '');
+        try {
+            $innerContent = do_shortcode(shortcode_unautop($content));
+        } finally {
+            $this->contexts->pop();
+        }
+
+        if ($parentContext !== null) {
+            foreach ($context->getRegisterItems() as $item) {
+                $parentContext->addRegisterItem($item['name'], $item['label']);
+            }
+        }
+
+        $registerMarkup = Helper::shortcode_boolean($args['register'])
+            ? $this->renderRegister($context)
+            : '';
+        $markup = (new AccordionsRender())->render([
+            'className' => 'wp-block-rrze-elements-accordions',
+            'accordionId' => $context->getId(),
+            'expandAllLink' => Helper::shortcode_boolean($args['expand-all-link']),
+            'expandLabel' => $this->getExpandLabel(),
+        ], $registerMarkup . $innerContent);
+
+        $this->enqueueAssets();
+
+        return wpautop($markup, false);
     }
 
-    $attributesNew = [
-      'title' => $titleForRenderer,
-      'color' => trim($args['color']),
-      'icon' => $args['icon'],
-      'materialSymbol' => '',
-      'jumpName' => $jumpName,
-      'loadOpen' => $args['load'] !== '',
-      'hstart' => $hstart,
-      'className' => '',
-    ];
-
-    /* ----------------------------------------
-     * 3. Render inner content first
-     * ----------------------------------------*/
-    $innerBlocks = do_shortcode(shortcode_unautop($content));
-
-    /* ----------------------------------------
-     * 4. Delegate to the new renderer
-     * ----------------------------------------*/
-    $renderer = new CollapseRender();
-    $markup = $renderer->render($attributesNew, $innerBlocks);
-
-    /* ----------------------------------------
-     * 5. Inject legacy “suffix” if used
-     * ----------------------------------------*/
-    if ($args['suffix'] !== '') {
-      // We reliably know that the button closes with </button>; inject the
-      // suffix span right before it.
-      $suffixHTML = '<span class="accordion-suffix">' . esc_html($args['suffix']) . '</span>';
-      $markup = str_replace('</button>', $suffixHTML . '</button>', $markup);
+    /**
+     * @param array<string, string> $atts
+     */
+    public function shortcodeAccordionItem(array $atts = [], ?string $content = '', string $tag = ''): string
+    {
+        return $this->renderItem($atts, $content, $tag, true);
     }
 
-    // Assets (same handle names as legacy).
-    wp_enqueue_script('rrze-accordions');
+    /**
+     * @param array<string, string> $atts
+     */
+    private function renderItem(array $atts, ?string $content, string $tag, bool $isInnerItem): string
+    {
+        $args = shortcode_atts([
+            'title' => 'Tab',
+            'color' => '',
+            'id' => '',
+            'load' => '',
+            'name' => '',
+            'icon' => '',
+            'suffix' => '',
+        ], $atts, $tag);
 
-    return wpautop($markup, false);
-  }
+        $generatedId = $this->nextPanelId++;
+        $requestedId = (int)$args['id'];
+        $panelNumber = $requestedId > 0 ? $requestedId : $generatedId;
+        $panelId = 'collapse_' . $panelNumber;
+        $buttonId = 'collapse_button_' . $panelNumber;
+        $dataName = $this->sanitizeLegacyAnchorName($args['name']);
+        $loadClass = sanitize_html_class($args['load']);
+        $context = $this->getAccordionContext();
 
-  /* --------------------------------------------------------------------- */
-  /*  Helper                                                               */
-  /* --------------------------------------------------------------------- */
+        if ($context !== null && $dataName !== '') {
+            $context->addRegisterItem($dataName, sanitize_text_field($args['name']));
+        }
 
-  /**
-   * Returns the correct label for the “Expand all” button based on the
-   * current post language, falling back to gettext.
-   */
-  protected function getExpandLabel(string $fallback): string
-  {
-    if ($fallback !== '') {
-      return $fallback;
+        $attributes = [
+            'title' => wp_kses($args['title'], ['br' => []]),
+            'suffix' => $args['suffix'],
+            'color' => sanitize_html_class($args['color']),
+            'icon' => $args['icon'],
+            'materialSymbol' => '',
+            'jumpName' => $dataName,
+            'buttonId' => $buttonId,
+            'panelId' => $panelId,
+            'targetId' => $panelId,
+            'dataName' => $dataName,
+            'loadOpen' => $loadClass !== '',
+            'bodyStateClass' => $loadClass,
+            'activeOnLoad' => $loadClass === 'open',
+            'hstart' => $context !== null
+                ? $context->getHeadingLevel()
+                : ($isInnerItem ? 1 : 2),
+        ];
+        $innerContent = do_shortcode(shortcode_unautop($content ?? ''));
+
+        if ($isInnerItem) {
+            $attributes['className'] = 'wp-block-rrze-elements-accordion';
+            $attributes['outputId'] = $panelId;
+            $attributes['panelName'] = $dataName;
+            $markup = (new AccordionRender())->render($attributes, $innerContent);
+        } else {
+            $markup = (new CollapseRender())->render($attributes, $innerContent);
+        }
+
+        $this->enqueueAssets();
+
+        return wpautop($markup, false);
     }
-    $postId = get_the_ID();
-    if (!is_int($postId)) {
-      return esc_html__('Expand All', 'rrze-elements-blocks');
+
+    private function getAccordionContext(): ?AccordionContext
+    {
+        $context = $this->contexts->current();
+
+        return $context instanceof AccordionContext ? $context : null;
     }
 
-    switch (get_post_meta($postId, 'fauval_langcode', true)) {
-      case 'en':
-        return 'Expand All';
-      case 'de':
-        return 'Alle öffnen';
-      default:
-        return esc_html__('Expand All', 'rrze-elements-blocks');
+    private function stripLeadingParagraphClose(string $content): string
+    {
+        return str_starts_with($content, '</p>') ? substr($content, 4) : $content;
     }
-  }
+
+    private function sanitizeLegacyAnchorName(string $name): string
+    {
+        return preg_replace('/[^a-zA-Z0-9_-]/', '', sanitize_text_field($name)) ?? '';
+    }
+
+    private function renderRegister(AccordionContext $context): string
+    {
+        $items = $context->getRegisterItems();
+        if ($items === []) {
+            return '';
+        }
+
+        $markup = '<ul class="accordion-register clear clearfix">';
+        foreach ($items as $item) {
+            $markup .= '<li><a href="#' . esc_attr($item['name']) . '">'
+                . esc_html($item['label'])
+                . '</a></li>';
+        }
+
+        return $markup . '</ul>';
+    }
+
+    private function getExpandLabel(): string
+    {
+        $postId = get_the_ID();
+        $language = $postId ? get_post_meta($postId, 'fauval_langcode', true) : '';
+
+        switch ($language) {
+            case 'en':
+                return 'Expand All';
+            case 'de':
+                return 'Alle öffnen';
+            default:
+                return esc_html__('Expand All', 'rrze-elements-blocks');
+        }
+    }
 }
