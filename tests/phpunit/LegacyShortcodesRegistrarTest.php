@@ -44,7 +44,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame(
-            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item'],
+            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button'],
             array_keys($GLOBALS['shortcode_tags'])
         );
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
@@ -73,7 +73,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
-        $this->assertSame(['accordion'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame(['accordion', 'button'], array_keys($GLOBALS['shortcode_tags']));
         $this->assertSame(
             ['accordion' => Closure::class],
             $registrar->getConflicts()
@@ -99,7 +99,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $registrar->enqueueAssets();
 
-        $this->assertSame(['accordion-item'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame(['accordion-item', 'button'], array_keys($GLOBALS['shortcode_tags']));
         $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
         $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
