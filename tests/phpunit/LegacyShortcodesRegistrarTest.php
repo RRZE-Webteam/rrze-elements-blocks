@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use RRZE\ElementsBlocks\LegacyShortcodes\Accordion;
+use RRZE\ElementsBlocks\LegacyShortcodes\CallToAction;
 use RRZE\ElementsBlocks\LegacyShortcodes\Registrar;
 
 final class LegacyShortcodesRegistrarTest extends TestCase
@@ -38,7 +39,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $GLOBALS['shortcode_tags']);
     }
 
-    public function test_enabled_family_registers_all_adapter_tags(): void
+    public function test_default_families_register_only_enabled_adapter_tags(): void
     {
         $registrar = new Registrar();
         $registrar->register();
@@ -62,6 +63,36 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
+        $this->assertSame([], $registrar->getConflicts());
+    }
+
+    public function test_existing_legacy_cta_callback_is_preserved_by_default(): void
+    {
+        $legacyCallback = ['RRZE\\Elements\\Shortcodes', 'shortcodeCTA'];
+        $GLOBALS['shortcode_tags']['CTA'] = $legacyCallback;
+
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $this->assertSame($legacyCallback, $GLOBALS['shortcode_tags']['CTA']);
+        $this->assertSame([], $registrar->getConflicts());
+    }
+
+    public function test_cta_family_can_be_enabled_explicitly(): void
+    {
+        add_filter(
+            'rrze_elements_blocks_legacy_shortcode_families',
+            static fn(array $families): array => array_merge($families, ['cta'])
+        );
+
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $this->assertArrayHasKey('accordion', $GLOBALS['shortcode_tags']);
+        $this->assertArrayHasKey('button', $GLOBALS['shortcode_tags']);
+        $this->assertArrayHasKey('CTA', $GLOBALS['shortcode_tags']);
+        $this->assertInstanceOf(CallToAction::class, $GLOBALS['shortcode_tags']['CTA'][0]);
+        $this->assertSame('shortcodeCTA', $GLOBALS['shortcode_tags']['CTA'][1]);
         $this->assertSame([], $registrar->getConflicts());
     }
 

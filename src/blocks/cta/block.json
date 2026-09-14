@@ -47,6 +47,25 @@
     "isSearch": {
       "type": "boolean",
       "default": false
+    },
+    "icon": {
+      "type": "string"
+    },
+    "searchParameter": {
+      "type": "string",
+      "default": "s"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Search for..."
+    },
+    "additionalLink": {
+      "type": "string",
+      "default": ""
+    },
+    "additionalLinkText": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {

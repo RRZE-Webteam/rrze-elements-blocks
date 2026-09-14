@@ -25,6 +25,9 @@ $GLOBALS['wp_test_filters'] = [];
 $GLOBALS['wp_test_enqueued_styles'] = [];
 $GLOBALS['wp_test_enqueued_scripts'] = [];
 $GLOBALS['wp_test_do_shortcode'] = null;
+$GLOBALS['wp_test_attachment_ids'] = [];
+$GLOBALS['wp_test_attachment_urls'] = [];
+$GLOBALS['wp_test_attachment_alt'] = [];
 
 function __($text, $domain = null): string
 {
@@ -97,7 +100,7 @@ function sanitize_title($title): string
 
 function sanitize_key($key): string
 {
-    return preg_replace('/[^a-z0-9_]/', '', strtolower((string)$key)) ?? '';
+    return preg_replace('/[^a-z0-9_\-]/', '', strtolower((string)$key)) ?? '';
 }
 
 function sanitize_text_field_deep($value)
@@ -152,6 +155,13 @@ function wp_json_encode($data): string
 function wp_generate_uuid4(): string
 {
     return '00000000-0000-4000-8000-000000000000';
+}
+
+function wp_unique_id($prefix = ''): string
+{
+    static $id = 0;
+    $id++;
+    return (string)$prefix . $id;
 }
 
 function wp_rand(int $min, int $max): int
@@ -345,7 +355,30 @@ function get_post_meta($post_id, $key, $single = false)
     if ($key === 'fauval_langcode') {
         return 'en';
     }
+    if ($key === '_wp_attachment_image_alt') {
+        return $GLOBALS['wp_test_attachment_alt'][(int)$post_id] ?? '';
+    }
     return '';
+}
+
+function attachment_url_to_postid($url): int
+{
+    return (int)($GLOBALS['wp_test_attachment_ids'][(string)$url] ?? 0);
+}
+
+function wp_get_attachment_image_url($attachment_id, $size = 'thumbnail', $icon = false)
+{
+    return $GLOBALS['wp_test_attachment_urls'][(int)$attachment_id] ?? false;
+}
+
+function home_url($path = '', $scheme = null): string
+{
+    return 'https://example.com' . ($path !== '' ? '/' . ltrim((string)$path, '/') : '');
+}
+
+function trailingslashit($value): string
+{
+    return rtrim((string)$value, '/\\') . '/';
 }
 
 function wp_enqueue_media(): void {}

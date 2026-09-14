@@ -138,6 +138,7 @@ class Registrar
         return [
             'accordion' => new Accordion(),
             'button' => new Button(),
+            'cta' => new CallToAction(),
         ];
     }
 

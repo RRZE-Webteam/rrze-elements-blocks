@@ -29,6 +29,61 @@ use RRZE\ElementsBlocks\BlockFrontend\TimelineItem;
 
 final class BlockFrontendRenderTest extends TestCase
 {
+    public function test_cta_renders_an_explicit_empty_icon_and_link_target(): void
+    {
+        $output = (new CallToAction())->render([
+            'title' => 'CTA title',
+            'buttonText' => 'Learn more',
+            'buttonUrl' => 'https://example.com/destination',
+            'buttonOpensInNewTab' => true,
+            'icon' => '',
+        ], '');
+
+        $this->assertStringContainsString('<span class="cta-title">CTA title</span>', $output);
+        $this->assertStringContainsString(
+            'href="https://example.com/destination" class="btn cta-button" target="_blank" rel="noopener noreferrer"',
+            $output
+        );
+        $this->assertStringNotContainsString('<svg', $output);
+    }
+
+    public function test_cta_without_icon_attribute_keeps_the_block_default_arrow(): void
+    {
+        $output = (new CallToAction())->render([
+            'buttonText' => 'Learn more',
+            'buttonUrl' => 'https://example.com',
+        ], '');
+
+        $this->assertStringContainsString('icon-solid-arrow-right', $output);
+        $this->assertStringContainsString('rrze-elements-cta-icon', $output);
+    }
+
+    public function test_search_cta_renders_accessible_form_and_additional_link(): void
+    {
+        $output = (new CallToAction())->render([
+            'title' => 'People search',
+            'buttonUrl' => 'http://example.com/people',
+            'isSearch' => true,
+            'searchParameter' => 'person-query',
+            'placeholder' => 'Find a person',
+            'additionalLink' => 'https://example.com/advanced',
+            'additionalLinkText' => 'Advanced search',
+            'icon' => 'solid magnifying-glass',
+        ], '');
+
+        $this->assertStringContainsString('role="search"', $output);
+        $this->assertStringContainsString('action="https://example.com/people/"', $output);
+        $this->assertStringContainsString('name="person-query"', $output);
+        $this->assertStringContainsString('placeholder="Find a person"', $output);
+        $this->assertMatchesRegularExpression('/<label for="(cta-search-\d+)">/', $output);
+        $this->assertMatchesRegularExpression('/id="cta-search-\d+" type="text"/', $output);
+        $this->assertStringContainsString('icon-solid-magnifying-glass', $output);
+        $this->assertStringContainsString(
+            '<a href="https://example.com/advanced" class="standard-btn primary-btn xsmall-btn">Advanced search</a>',
+            $output
+        );
+    }
+
     public function test_media_accordion_renders_nested_load_open_image(): void
     {
         $block = new WP_Block([
