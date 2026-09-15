@@ -240,14 +240,15 @@ export default function Edit({
               />
             </dt>
             <dd>
+              {/* A block editing host lets Firefox place the caret reliably. */}
               <RichText
-                tagName="span"
+                tagName="div"
                 value={attributes.description}
                 onChange={(description) => setAttributes({ description })}
                 placeholder={__("Definition", "rrze-elements-blocks")}
                 allowedFormats={[]}
+                className="fau-iconbox-editor-data-description"
               />
-              <br />
               {isURLSet && isLinkTag && (
                 <a className="standard-btn ghost-btn">
                   <RichText

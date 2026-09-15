@@ -202,6 +202,7 @@ export default function Edit({
 							onChange={(description) => setAttributes({ description })}
 							placeholder={__("Description", "rrze-elements-blocks")}
 							allowedFormats={[]}
+              style={{ display: "block"  }}
 						/>
 						<br />
 						{isURLSet && isLinkTag && (

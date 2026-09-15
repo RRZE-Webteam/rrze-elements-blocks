@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use RRZE\ElementsBlocks\LegacyShortcodes\Accordion;
+use RRZE\ElementsBlocks\LegacyShortcodes\CallToAction;
 use RRZE\ElementsBlocks\LegacyShortcodes\Registrar;
 
 final class LegacyShortcodesRegistrarTest extends TestCase
@@ -38,13 +39,13 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $GLOBALS['shortcode_tags']);
     }
 
-    public function test_enabled_family_registers_all_adapter_tags(): void
+    public function test_default_families_register_only_enabled_adapter_tags(): void
     {
         $registrar = new Registrar();
         $registrar->register();
 
         $this->assertSame(
-            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item'],
+            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button'],
             array_keys($GLOBALS['shortcode_tags'])
         );
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
@@ -65,6 +66,36 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $registrar->getConflicts());
     }
 
+    public function test_existing_legacy_cta_callback_is_preserved_by_default(): void
+    {
+        $legacyCallback = ['RRZE\\Elements\\Shortcodes', 'shortcodeCTA'];
+        $GLOBALS['shortcode_tags']['CTA'] = $legacyCallback;
+
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $this->assertSame($legacyCallback, $GLOBALS['shortcode_tags']['CTA']);
+        $this->assertSame([], $registrar->getConflicts());
+    }
+
+    public function test_cta_family_can_be_enabled_explicitly(): void
+    {
+        add_filter(
+            'rrze_elements_blocks_legacy_shortcode_families',
+            static fn(array $families): array => array_merge($families, ['cta'])
+        );
+
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $this->assertArrayHasKey('accordion', $GLOBALS['shortcode_tags']);
+        $this->assertArrayHasKey('button', $GLOBALS['shortcode_tags']);
+        $this->assertArrayHasKey('CTA', $GLOBALS['shortcode_tags']);
+        $this->assertInstanceOf(CallToAction::class, $GLOBALS['shortcode_tags']['CTA'][0]);
+        $this->assertSame('shortcodeCTA', $GLOBALS['shortcode_tags']['CTA'][1]);
+        $this->assertSame([], $registrar->getConflicts());
+    }
+
     public function test_unrelated_callback_is_preserved_and_reported(): void
     {
         $thirdPartyCallback = static fn(): string => 'third party';
@@ -73,7 +104,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
-        $this->assertSame(['accordion'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame(['accordion', 'button'], array_keys($GLOBALS['shortcode_tags']));
         $this->assertSame(
             ['accordion' => Closure::class],
             $registrar->getConflicts()
@@ -99,7 +130,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $registrar->enqueueAssets();
 
-        $this->assertSame(['accordion-item'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame(['accordion-item', 'button'], array_keys($GLOBALS['shortcode_tags']));
         $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
         $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
