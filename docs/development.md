@@ -9,12 +9,12 @@ Use Node.js 24.15 or newer within the 24.x LTS line, matching CI. The supported 
 
 ## JavaScript and TypeScript checks
 
-- `npm run lint` checks source files, unminified frontend scripts, Node configuration/scripts, type declarations, and current and legacy tests.
+- `npm run lint` checks source files, unminified frontend scripts, Node configuration/scripts, and type declarations. The `tests/` and `legacy-tests/` directories are excluded.
 - `npm run lint:fix` applies available ESLint fixes. Review the changes before committing.
 - `npm run typecheck` checks the TypeScript project without generating build files.
 - `npm run format` handles formatting separately from linting.
 
-`eslint.config.js` uses the native WordPress recommended flat configuration, including React, Hooks, accessibility, internationalization, and TypeScript rules. The text domain is `rrze-elements-blocks`. Browser globals apply to browser files; Node globals apply to configuration files and tests. Playwright rules apply only to its spec files. Build output, dependencies, minified scripts, and test reports are ignored.
+`eslint.config.js` uses the native WordPress recommended flat configuration, including React, Hooks, accessibility, internationalization, and TypeScript rules. The text domain is `rrze-elements-blocks`. Browser globals apply to browser files; Node globals apply to root configuration files and scripts. Build output, dependencies, minified scripts, test directories, and test reports are ignored.
 
 The TypeScript lint rules do not require type information, so ESLint does not load a TypeScript project. Type checking runs separately. Keep TypeScript pinned to `5.9.3`: the current typescript-eslint release supports TypeScript `<6.1.0`, and TypeScript 7 does not expose the compiler API required by these tools. See the [typescript-eslint compatibility range](https://typescript-eslint.io/users/dependency-versions/) and [TypeScript 7 migration notes](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/). `typescript-eslint` keeps the parser and plugin versions aligned. ESLint stays on major version 9 for the React lint dependencies, while Babel stays on major version 7 for the WordPress build pipeline. React and React DOM stay together on version 18.3.1.
 

@@ -5,7 +5,6 @@ const globals = require( 'globals' );
 const tsdoc = require( 'eslint-plugin-tsdoc' );
 
 const browserFiles = [ 'src/**/*.{js,jsx,ts,tsx}', 'assets/js/**/*.js' ];
-const playwrightFiles = [ 'tests/**/*.spec.ts', 'legacy-tests/**/*.spec.ts' ];
 const nodeOnlyGlobals = Object.fromEntries(
 	Object.keys( globals.node )
 		.filter( ( name ) => ! ( name in globals.browser ) )
@@ -28,6 +27,8 @@ module.exports = [
 			'dist/**',
 			'_tmp/**',
 			'coverage/**',
+			'legacy-tests/**',
+			'tests/**',
 			'playwright-report/**',
 			'test-results/**',
 			'blob-report/**',
@@ -89,7 +90,7 @@ module.exports = [
 		},
 	},
 	{
-		files: [ '*.js', 'tests/js/**/*.js' ],
+		files: [ '*.js' ],
 		settings: {
 			// Resolve runtime packages rather than their @types declarations.
 			'import/resolver': 'node',
@@ -100,7 +101,7 @@ module.exports = [
 		},
 	},
 	{
-		files: [ '*.ts', 'tests/**/*.ts', 'legacy-tests/**/*.ts' ],
+		files: [ '*.ts' ],
 		languageOptions: {
 			globals: nodeGlobals,
 		},
@@ -123,8 +124,4 @@ module.exports = [
 			'tsdoc/syntax': 'warn',
 		},
 	},
-	...wordpress.configs[ 'test-playwright' ].map( ( config ) => ( {
-		...config,
-		files: playwrightFiles,
-	} ) ),
 ];
