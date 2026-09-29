@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * This script updates the version number for the main php file and all block.json files
  */

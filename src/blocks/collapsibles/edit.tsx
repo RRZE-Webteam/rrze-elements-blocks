@@ -51,11 +51,12 @@ export default function Edit({
       : false;
   }, [clientId]);
 
+  const expandLabel = __("Expand All", "rrze-elements-blocks");
   useEffect(() => {
-    setAttributes({
-      expandLabel: __("Expand All", "rrze-elements-blocks"),
-    })
-  }, []);
+    if (attributes.expandLabel !== expandLabel) {
+      setAttributes({expandLabel});
+    }
+  }, [attributes.expandLabel, expandLabel, setAttributes]);
 
   return (
     <div {...props}>

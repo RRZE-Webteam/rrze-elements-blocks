@@ -181,3 +181,173 @@ test("InputWarning preserves translated text and its display thresholds", (t) =>
   show(7, null);
   assert.equal(container.textContent, "Bereits übersetzte Meldung");
 });
+
+const EmptyComponent = () => null;
+// These tests exercise editor effects; child controls are outside their scope.
+const emptyControls = new Proxy({}, { get: () => EmptyComponent });
+function editorMocks(blockProps, selectors = {}, actions = {}) {
+  return {
+    "@wordpress/element": React,
+    "@wordpress/i18n": { __: (text) => text, sprintf: (text, value) => text.replace("%d", value) },
+    "@wordpress/components": emptyControls,
+    "@wordpress/icons": {},
+    "@wordpress/block-editor": {
+      useBlockProps: () => ({ ...blockProps }),
+      InnerBlocks: EmptyComponent,
+      BlockControls: EmptyComponent,
+      InspectorControls: EmptyComponent,
+      RichText: EmptyComponent,
+      ContrastChecker: EmptyComponent,
+      store: "core/block-editor",
+    },
+    "@wordpress/data": {
+      useDispatch: () => ({ __unstableMarkNextChangeAsNotPersistent: () => {}, ...actions }),
+      useSelect: (callback) => callback(() => selectors),
+    },
+    "../../components/HeadingComponent": EmptyComponent,
+    "../../components/CustomColorSwitcher": emptyControls,
+    "../../components/IconPicker": emptyControls,
+    "../../components/MaterialSymbolPicker": emptyControls,
+    "../../components/Xray": emptyControls,
+    "../../components/InputWarning": EmptyComponent,
+    "./InspectorControls/CustomInspectorControls": emptyControls,
+    "./InspectorControls/TitleSettings": emptyControls,
+  };
+}
+
+function mountBlock(t, Edit, initialAttributes) {
+  const { render, container } = mount(t);
+  const writes = [];
+  let currentAttributes;
+  function Harness(props) {
+    const [attributes, setAttributes] = React.useState(initialAttributes);
+    currentAttributes = attributes;
+    return React.createElement(Edit, {
+      ...props,
+      attributes,
+      // Deliberately recreate the callback to catch effects that keep writing
+      // unchanged attributes when a parent rerenders.
+      setAttributes: (update) => {
+        assert.ok(writes.length < 30, "attribute synchronization must settle");
+        writes.push(update);
+        setAttributes((previous) => ({ ...previous, ...update }));
+      },
+    });
+  }
+  return {
+    container,
+    writes,
+    get attributes() { return currentAttributes; },
+    render: (props) => render(React.createElement(Harness, props)),
+  };
+}
+
+test("tab attributes follow parent context without repeated writes", (t) => {
+  const blockProps = { "data-block": "tab-a" };
+  const { default: Edit } = loadComponent("blocks/tab/edit.tsx", editorMocks(blockProps));
+  const block = mountBlock(t, Edit, { blockId: "tab-a", tabsUid: "tabs", active: true, xray: false, icon: "" });
+  const context = { "rrze-elements/tabs-uid": "tabs", "rrze-elements/tabs-active": "tab-a", "rrze-elements/tabs-xray": false };
+  block.render({ context });
+  assert.equal(block.writes.length, 0);
+
+  block.render({ context: { ...context, "rrze-elements/tabs-active": "tab-b", "rrze-elements/tabs-xray": true } });
+  assert.equal(block.attributes.active, false);
+  assert.equal(block.attributes.xray, true);
+  assert.equal(block.writes.length, 2);
+
+  block.render({ context: { ...context, "rrze-elements/tabs-active": "" } });
+  assert.equal(block.attributes.active, true);
+  assert.equal(block.attributes.xray, false);
+  const count = block.writes.length;
+  block.render({ context });
+  assert.equal(block.writes.length, count);
+
+  // Duplicating a block changes its ID even if the parent's active ID is stable.
+  blockProps["data-block"] = "tab-copy";
+  block.render({ context });
+  assert.equal(block.attributes.blockId, "tab-copy");
+  assert.equal(block.attributes.active, false);
+});
+
+test("tabs store a shortened ID once and select a remaining tab after deletion", (t) => {
+  const clientId = "abcdefghij-klmnopqrst";
+  let children = [
+    { clientId: "tab-a", attributes: { title: "First" } },
+    { clientId: "tab-b", attributes: { title: "Second" } },
+  ];
+  const mocks = editorMocks({ "data-block": clientId }, { getBlocks: () => children });
+  mocks["@wordpress/blocks"] = {};
+  const { default: Edit } = loadComponent("blocks/tabs/edit.tsx", mocks);
+  const block = mountBlock(t, Edit, { blockId: "old", active: "tab-a", innerClientIds: [] });
+  block.render({ clientId });
+  assert.equal(block.attributes.blockId, "abcdefghij");
+  assert.equal(block.writes.filter((write) => "blockId" in write).length, 1);
+  const count = block.writes.length;
+  block.render({ clientId });
+  assert.equal(block.writes.length, count);
+
+  children = children.slice(1);
+  block.render({ clientId });
+  assert.equal(block.attributes.active, "tab-b");
+  assert.deepEqual(block.attributes.innerClientIds.map((item) => item.clientId), ["tab-b"]);
+});
+
+for (const name of ["timeline-item", "process-step"]) {
+  test(`${name} follows heading context and skips unchanged attributes`, (t) => {
+    const mocks = editorMocks({}, { getBlockRootClientId: () => null });
+    const { default: Edit } = loadComponent(`blocks/${name}/edit.tsx`, mocks);
+    const block = mountBlock(t, Edit, { hstart: 2, title: "Title", stepLabel: "Step" });
+    block.render({ clientId: "item", context: { "rrze-elements/timeline-hstart": 2 } });
+    assert.equal(block.writes.length, 0);
+    block.render({ clientId: "item", context: { "rrze-elements/timeline-hstart": 4 } });
+    assert.equal(block.attributes.hstart, 4);
+    assert.equal(block.writes.length, 1);
+    block.render({ clientId: "item", context: { "rrze-elements/timeline-hstart": 4 } });
+    assert.equal(block.writes.length, 1);
+  });
+}
+
+test("columns synchronize color slugs without looping on callback changes", (t) => {
+  const { default: Edit } = loadComponent("blocks/columns/edit.tsx", editorMocks({}));
+  const block = mountBlock(t, Edit, { color: "#DFF0D8", colorSlug: "default", numberOfColumns: 2 });
+  block.render({});
+  assert.equal(block.attributes.colorSlug, "success");
+  assert.equal(block.writes.length, 1);
+  block.render({});
+  assert.equal(block.writes.length, 1);
+});
+
+for (const initialURL of ["", "blob:stale-upload"]) {
+  test(`media replacement clears only initial stale uploads (${initialURL || "empty"})`, (t) => {
+    const revoked = [];
+    const mocks = editorMocks({});
+    mocks["@wordpress/notices"] = { store: "core/notices" };
+    mocks["@wordpress/blob"] = {
+      isBlobURL: (url) => typeof url === "string" && url.startsWith("blob:"),
+      revokeBlobURL: (url) => revoked.push(url),
+    };
+    mocks["@wordpress/block-editor"].MediaReplaceFlow = EmptyComponent;
+    const { CustomMediaReplaceFlow } = loadComponent("components/CustomMediaReplaceFlow.tsx", mocks);
+    const { render } = mount(t);
+    const writes = [];
+    const show = (url, id = 0) => render(React.createElement(React.StrictMode, null,
+      React.createElement(CustomMediaReplaceFlow, {
+        attributes: { id, url, alt: "", srcset: "" },
+        setAttributes: (update) => writes.push(update),
+      }),
+    ));
+    show(initialURL);
+    const expectedClears = initialURL ? 1 : 0;
+    assert.equal(writes.length, expectedClears);
+    if (initialURL) assert.equal(writes[0].url, undefined);
+
+    show("blob:upload-a");
+    show("blob:upload-a");
+    assert.equal(writes.length, expectedClears, "keep the in-progress upload");
+    assert.ok(!revoked.includes("blob:upload-a"));
+    show("blob:upload-b");
+    show("https://example.com/uploaded.jpg", 42);
+    assert.deepEqual(revoked, [...(initialURL ? [initialURL] : []), "blob:upload-a", "blob:upload-b"]);
+    assert.equal(writes.length, expectedClears);
+  });
+}

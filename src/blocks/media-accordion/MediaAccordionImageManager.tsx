@@ -11,7 +11,7 @@ import type {
   Field,
   View,
 } from "@wordpress/dataviews";
-import {useMemo, useState} from "@wordpress/element";
+import {useCallback, useMemo, useState} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import {image, replace, trash} from "@wordpress/icons";
 import {
@@ -119,7 +119,7 @@ const MediaAccordionImageManager = ({
     };
   }, [hasInnerAccordions, view]);
 
-  const removeImage = (item: AccordionImageRow) => {
+  const removeImage = useCallback((item: AccordionImageRow) => {
     onActivateItem(item.clientId);
     onUpdateItem(item.clientId, {
       mediaAccordionImageId: 0,
@@ -127,9 +127,9 @@ const MediaAccordionImageManager = ({
       mediaAccordionImageAlt: "",
       mediaAccordionImageCaption: "",
     });
-  };
+  }, [onActivateItem, onUpdateItem]);
 
-  const selectImage = (
+  const selectImage = useCallback((
     item: AccordionImageRow,
     media: SelectedMedia,
   ) => {
@@ -144,7 +144,7 @@ const MediaAccordionImageManager = ({
       mediaAccordionImageAlt: media.alt ?? media.alt_text ?? "",
       mediaAccordionImageCaption: getMediaCaption(media),
     });
-  };
+  }, [onActivateItem, onUpdateItem]);
 
   const fields = useMemo<Field<AccordionImageRow>[]>(
     () => [
@@ -250,7 +250,7 @@ const MediaAccordionImageManager = ({
         ),
       },
     ],
-    [hasInnerAccordions, onActivateItem, onUpdateItem],
+    [hasInnerAccordions, removeImage, selectImage],
   );
 
   const processed = useMemo(

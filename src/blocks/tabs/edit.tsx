@@ -87,7 +87,7 @@ export default function Edit({
   // @ts-ignore
   const {__unstableMarkNextChangeAsNotPersistent} = useDispatch(blockEditorStore);
   const props = useBlockProps();
-  const blockId = props["data-block"];
+  const blockId = props["data-block"].slice(0, 10);
   const lastInnerClientIdsRef = useRef<Array<{
     clientId: string;
     title: string;
@@ -131,9 +131,9 @@ export default function Edit({
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({blockId: blockId.slice(0, 10)});
+      setAttributes({blockId});
     }
-  }, [attributes.blockId, blockId]);
+  }, [attributes.blockId, blockId, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Syncs the innerClientIds attribute with the component state
@@ -144,7 +144,7 @@ export default function Edit({
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({innerClientIds});
     }
-  }, [innerClientIds, attributes.innerClientIds, setAttributes]);
+  }, [innerClientIds, attributes.innerClientIds, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Handles logic to set the active tab.
@@ -161,7 +161,7 @@ export default function Edit({
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: innerClientIds[0].clientId });
     }
-  }, [innerClientIds, attributes.active]);
+  }, [innerClientIds, attributes.active, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Adds a new "rrze-elements/tab" block as a child of this block.

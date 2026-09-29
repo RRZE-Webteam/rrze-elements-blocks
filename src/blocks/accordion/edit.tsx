@@ -70,30 +70,10 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
   const { doesJumpNameExist, areDuplicateJumpNamesPresent, sanitizeTitleToJumpName } = useJumpNameStore({
     clientId,
     jumpName: attributes.jumpName,
-    setAttributes: (attrs) => setAttributes(attrs),
+    setAttributes,
   });
 
   //////////////// Use Effects ////////////////
-
-  useEffect(() => {
-    if (jumpName === "") {
-      setAttributes({
-        jumpName: `panel_${clientId?.slice(-8)}`,
-      });
-    }
-  }, [clientId]);
-
-  useEffect(() => {
-    let color = context["rrze-elements/collapseColor"];
-
-    if (color !== attributes.color) {
-      color = attributes.color;
-    }
-
-    setAttributes({
-      color,
-    });
-  }, [context["rrze-elements/collapseColor"], attributes.color]);
 
   useEffect(() => {
     if (

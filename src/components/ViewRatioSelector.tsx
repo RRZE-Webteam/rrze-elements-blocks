@@ -23,8 +23,8 @@ type ViewRatioSelectorProps = {
 
 /**
  * Creates the SVG Icon for the ViewRatioSelector Toolbar
- * @param fillColor : Fillcolor Value
- * @param viewRatio : Either 2:1 or 1:2
+ * @param fillColor - Fillcolor Value
+ * @param viewRatio - Either 2:1 or 1:2
  */
 const createViewRatioIcon = (fillColor = "none", viewRatio: "2:1" | "1:2") => {
   switch (viewRatio) {

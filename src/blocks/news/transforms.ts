@@ -50,9 +50,9 @@ const toIntIfNumeric = (v: unknown): number | undefined => {
  *   positional intent we cannot deduce from `columns`, so we skip them.
  *
  * Mappings:
- *   1 -> "1xl"
- *   2 -> "2xl"
- *   3 -> "3m"
+ *   `1` maps to `"1xl"`
+ *   `2` maps to `"2xl"`
+ *   `3` maps to `"3m"`
  *
  * Any other value returns `undefined` to avoid overriding target defaults.
  *

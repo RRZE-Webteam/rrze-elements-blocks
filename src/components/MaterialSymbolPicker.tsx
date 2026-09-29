@@ -185,17 +185,6 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
     [maps]
   );
 
-  // Only trigger search on Enter or button click
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        handleSearch();
-      }
-    },
-    [searchQuery, maps]
-  );
-
   const handleSearch = useCallback(() => {
     if (!maps) return;
     startTransition(() => {
@@ -206,6 +195,17 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
       speak(__("The search results got updated.", "rrze-elements-blocks"));
     });
   }, [maps, searchQuery, searchIcons]);
+
+  // Only trigger search on Enter or button click
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleSearch();
+      }
+    },
+    [handleSearch]
+  );
 
   // Visible pages (avoid rendering everything at once)
   const visibleSearchIcons = useMemo(

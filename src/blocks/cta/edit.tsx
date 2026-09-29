@@ -86,15 +86,14 @@ export default function Edit({
       const hasNeedle = (needle: string) => {
         return props.className.indexOf(needle) !== -1;
       };
-      if (hasNeedle("is-style-no-background")) {
-        setAttributes({background: ""});
-      } else if (hasNeedle("is-style-small")) {
-        setAttributes({background: "style-small"});
-      } else {
-        setAttributes({background: ""});
+      const nextBackground = !hasNeedle("is-style-no-background") && hasNeedle("is-style-small")
+        ? "style-small"
+        : "";
+      if (background !== nextBackground) {
+        setAttributes({background: nextBackground});
       }
     }
-  }, [props.className]);
+  }, [props.className, background, setAttributes]);
 
   useEffect(() => {
     if (!isSelected) {

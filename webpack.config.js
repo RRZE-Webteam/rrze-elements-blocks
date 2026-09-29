@@ -1,4 +1,3 @@
-/* eslint-disable */
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const { getWebpackEntryPoints } = require( '@wordpress/scripts/utils/config' );
 

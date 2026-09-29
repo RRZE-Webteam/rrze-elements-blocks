@@ -29,6 +29,7 @@ export default function Edit({
                              }: SaveProps) {
   const props = useBlockProps();
   const {title, stepLabel} = attributes;
+  const inheritedHeadingLevel = context["rrze-elements/timeline-hstart"];
   const stepNumber = useSelect(
     (select) => {
       const blockEditor = select(blockEditorStore);
@@ -47,10 +48,10 @@ export default function Edit({
    * Set the heading level attribute based on the global setting.
    */
   useEffect(() => {
-    setAttributes({
-      hstart: context["rrze-elements/timeline-hstart"],
-    });
-  }, [context["rrze-elements/timeline-hstart"]]);
+    if (attributes.hstart !== inheritedHeadingLevel) {
+      setAttributes({hstart: inheritedHeadingLevel});
+    }
+  }, [inheritedHeadingLevel, attributes.hstart, setAttributes]);
 
   const onChangeTitle = (newText: string) => {
     if (newText === "") {
