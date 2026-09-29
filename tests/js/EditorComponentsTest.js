@@ -379,8 +379,12 @@ test("counter start value rejects empty, invalid and negative drafts and follows
   assert.equal(inputProps.value, "10", "undo or external updates refresh the displayed value");
 });
 
-test("notice style choices work in the placeholder and inspector without replacing content", (t) => {
+test("notice presets reset custom icons in both pickers without replacing content", (t) => {
   const { default: VariationPicker } = loadComponent("blocks/notice/VariationPicker.tsx", controlMocks);
+  const { IconMarkComponent } = loadComponent("components/IconPicker.tsx", {
+    ...controlMocks,
+    "@wordpress/a11y": { speak: () => {} },
+  });
   const variations = [
     { name: "notice-hinweis", title: "Hint", iconClass: "symbol notifications" },
     { name: "notice-attention", title: "Warning", iconClass: "symbol warning" },
@@ -391,20 +395,37 @@ test("notice style choices work in the placeholder and inspector without replaci
   mocks["@wordpress/block-editor"].InnerBlocks = () => React.createElement("p", null, "Existing notice content");
   mocks["@wordpress/blocks"] = { store: "core/blocks" };
   mocks["./VariationPicker"] = VariationPicker;
+  mocks["../../components/IconPicker"] = { IconMarkComponent };
   const { default: Edit } = loadComponent("blocks/notice/edit.tsx", mocks);
-  const block = mountBlock(t, Edit, { color: "red" });
+  let selectCustomIcon;
+  function NoticeEditor(props) {
+    // Apply the same attribute update as the custom icon picker.
+    selectCustomIcon = (materialSymbol) => props.setAttributes({ materialSymbol });
+    return React.createElement(Edit, props);
+  }
+  const block = mountBlock(t, NoticeEditor, { color: "red", materialSymbol: "star" });
+  const renderedIcon = () => block.container.querySelector(".notice .material-symbols-outlined").textContent;
   block.render({});
+  assert.equal(renderedIcon(), "star");
   const buttons = [...block.container.querySelectorAll("button")];
   assert.deepEqual(buttons.map((button) => button.textContent), ["Hint", "Warning", "Hint", "Warning"]);
   assert.ok(buttons.every((button) => button.type === "button"));
   React.act(() => buttons[3].click());
-  assert.deepEqual(block.writes, [{ style: "notice-attention" }]);
+  assert.deepEqual(block.writes, [{ style: "notice-attention", materialSymbol: "" }]);
+  assert.equal(renderedIcon(), "warning");
   assert.equal(block.attributes.color, "red");
   assert.equal(block.container.querySelectorAll("button").length, 2);
   assert.equal(block.container.querySelector('button[aria-pressed="true"]').textContent, "Warning");
   const content = block.container.querySelector(".notice p");
+  React.act(() => selectCustomIcon("favorite"));
+  assert.equal(renderedIcon(), "favorite");
   React.act(() => block.container.querySelector("button").click());
-  assert.deepEqual(block.writes.at(-1), { style: "notice-hinweis" });
+  assert.deepEqual(block.writes.at(-1), { style: "notice-hinweis", materialSymbol: "" });
+  assert.equal(renderedIcon(), "notifications");
+  React.act(() => selectCustomIcon("star"));
+  assert.equal(renderedIcon(), "star");
+  React.act(() => block.container.querySelector("button").click());
+  assert.equal(renderedIcon(), "notifications", "reselecting the current preset also resets its icon");
   assert.equal(block.container.querySelector(".notice p"), content);
 });
 

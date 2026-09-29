@@ -65,6 +65,10 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 
 	const openModal = () => setOpen(true);
 	const closeModal = () => setOpen(false);
+	const selectVariation = (variation: NoticeVariation) => {
+		// Restore the preset icon, including when reselecting the current preset.
+		setAttributes({ style: variation.name, materialSymbol: "" });
+	};
 
 	return (
 		<div {...props}>
@@ -76,9 +80,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 					<VariationPicker
 						variations={variations}
 						selectedName={attributes.style}
-						onSelect={(variation) => {
-							setAttributes({ style: variation.name });
-						}}
+						onSelect={selectVariation}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -121,9 +123,7 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 					<VariationPicker
 						variations={variations}
 						selectedName={attributes.style}
-						onSelect={(variation) => {
-							setAttributes({ style: variation.name });
-						}}
+						onSelect={selectVariation}
 					/>
 				</Placeholder>
 			)}
