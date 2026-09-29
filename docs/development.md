@@ -5,14 +5,14 @@
 Use Node.js 24.15 or newer within the 24.x LTS line, matching CI. The supported Node.js ranges are recorded in `package.json` (`^22.22.2 || ^24.15.0 || >=26.0.0`) and follow the requirements of `@wordpress/scripts` and jsdom.
 
 1. Install the locked dependencies with `npm ci`. Use `npm install` when intentionally changing dependencies, and commit both `package.json` and `package-lock.json`.
-2. Make sure, you have SASS Language Processor installed `npm install -g sass`
+2. Sass is installed locally by `npm ci`; a global installation is not needed.
 
 ## JavaScript and TypeScript checks
 
 - `npm run lint` checks source files, unminified frontend scripts, Node configuration/scripts, and type declarations. The `tests/` and `legacy-tests/` directories are excluded.
 - `npm run lint:fix` applies available ESLint fixes. Review the changes before committing.
 - `npm run typecheck` checks the TypeScript project without generating build files.
-- `node --test tests/js/*.js` runs the frontend and editor component regression tests.
+- `npm run test:js` runs the frontend and editor component regression tests.
 - `npm run format` handles formatting separately from linting.
 
 `eslint.config.js` uses the native WordPress recommended flat configuration, including React, Hooks, accessibility, internationalization, and TypeScript rules. The text domain is `rrze-elements-blocks`. Browser globals apply to browser files; Node globals apply to root configuration files and scripts. Build output, dependencies, minified scripts, test directories, and test reports are ignored.
@@ -23,7 +23,25 @@ The TypeScript lint rules do not require type information, so ESLint does not lo
 
 Keep the direct `@wordpress/blocks` dependency on major 15 and `@wordpress/components` on major 30 while using `@types/wordpress__block-editor@15.0.6`. Updating these two packages to majors 16 and 41 creates conflicting React peer dependencies inside the older declaration package. Upgrading them requires revisiting the block-editor type dependencies; do not bypass the conflict with `--force` or `--legacy-peer-deps`.
 
-Run lint, typecheck, and the JavaScript regression tests before opening a pull request. The GitHub Actions workflow in `.github/workflows/lint.yml` runs lint and typecheck after `npm ci`. Lint errors fail CI; warnings remain visible without blocking it. Keep historical save output unchanged when fixing lint findings, because existing blocks rely on it for validation.
+Run lint, typecheck, and the JavaScript regression tests before opening a pull request. Lint errors fail CI; warnings remain visible without blocking it. Keep historical save output unchanged when fixing lint findings, because existing blocks rely on it for validation.
+
+## Pull request checks
+
+`.github/workflows/lint.yml` runs for every pull request, pushes to `main` and `dev`, and manual runs. It cancels superseded runs for the same branch or pull request.
+
+- On Node.js 24: install locked dependencies, typecheck, lint, run the JavaScript regression tests, and build production assets. The job also checks that `build/` and `assets/css/` match the committed output, including newly generated files. Run `npm run build` and commit its output when changing source files that affect these assets.
+- On PHP 8.0 and 8.5: install locked Composer dependencies and run `composer test`. These unit tests use WordPress stubs and do not require a database or a running WordPress site. PHPStan also runs on PHP 8.5.
+- The final `PR checks` job succeeds only when all of these jobs succeed. Configure it as a **required status check** in the GitHub rulesets or branch protection settings for `main` and `dev` after its first run. The workflow alone does not prevent merging a failing pull request; see [GitHub's required status checks documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging).
+
+Playwright and `legacy-tests/` are intentionally excluded until the browser tests are replaced. The existing Psalm workflow remains separate. This workflow validates pull requests; it does not deploy the plugin.
+
+The PR workflow runs untrusted code on GitHub-hosted runners with read-only repository access, no configured secrets, and no persisted checkout credentials. The final `PR checks` job has no token permissions. Actions are pinned to full commit SHAs; when updating them, verify the commit in the upstream repository and update the version comment too. These pins cover the action code, not every tool downloaded at runtime. See [GitHub's workflow security guidance](https://docs.github.com/en/actions/reference/security/secure-use).
+
+In GitHub settings, require review before merging and review workflow, dependency, and lockfile changes carefully: a pull request can change the checks it runs. Require approval for workflows from outside contributors, and keep write tokens and secrets disabled for fork pull requests. These repository settings are managed separately from the workflow files.
+
+The older `.github/workflows/psalm.yml` still needs separate hardening: its pinned Psalm action pulls a mutable container image, and the scanning job also holds the permission used to upload security results. Its action SHA alone does not pin the scanner. Replace or pin the scanner runtime and separate scanning from the privileged upload before treating that workflow as hardened.
+
+For PHP development, run `composer install`, `composer test`, and `composer phpstan`. Commit `composer.lock` alongside dependency changes so local development and CI use the same versions. Composer resolves dependencies against PHP 8.0, the plugin's minimum version, even when updating them on newer PHP installations. `npm test` remains the existing PHPStan alias; use `npm run test:js` for JavaScript tests.
 
 ## Start the development process
 Based on which part you're currently working on, you can follow these simple steps.

@@ -221,7 +221,7 @@ final class BlockFrontendRenderTest extends TestCase
             $process
         );
         $this->assertStringContainsString(
-            '<h3 class="timeline-label">Apply now</h3>',
+            '<h3 class="process-step-label">Apply now</h3>',
             $process
         );
         $this->assertStringContainsString('<p>Send the completed form.</p>', $process);

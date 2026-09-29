@@ -1,22 +1,87 @@
-name: JavaScript and TypeScript checks
+name: Pull request checks
 
 on:
   push:
     branches: [ "main", "dev" ]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm run lint
+      - name: Install JavaScript dependencies
+        run: npm ci
+      - name: Check TypeScript
+        run: npm run typecheck
+      - name: Lint JavaScript and TypeScript
+        run: npm run lint
+      - name: Run JavaScript regression tests
+        run: npm run test:js
+      - name: Build production assets
+        run: npm run build
+      - name: Check committed production assets are current
+        run: |
+          changes=$(git status --porcelain --untracked-files=all -- build assets/css)
+          if [ -n "$changes" ]; then
+            echo "::error::Run npm run build and commit the updated production assets."
+            echo "$changes"
+            exit 1
+          fi
+
+  php:
+    name: PHP ${{ matrix.php }} checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ '8.0', '8.5' ]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, mbstring, xml, xmlwriter
+          tools: composer:v2
+          coverage: none
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Run PHP unit tests
+        run: composer test
+      - name: Analyze PHP
+        if: matrix.php == '8.5'
+        run: composer phpstan -- --no-progress
+
+  required-checks:
+    name: PR checks
+    permissions: {}
+    if: ${{ always() }}
+    needs: [ lint, php ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require every check to pass
+        env:
+          JAVASCRIPT_RESULT: ${{ needs.lint.result }}
+          PHP_RESULT: ${{ needs.php.result }}
+        run: |
+          test "$JAVASCRIPT_RESULT" = success
+          test "$PHP_RESULT" = success

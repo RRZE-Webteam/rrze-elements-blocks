@@ -16,7 +16,7 @@ phpunit.xml.dist
 ### Node ###
 node_modules/
 ### Composer ###
-composer.lock
+# Keep composer.lock in version control for reproducible CI installs.
 ### Tmp ###
 _tmp/
 
