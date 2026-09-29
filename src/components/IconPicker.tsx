@@ -1,12 +1,9 @@
+import "./editor-controls.scss";
 import {__} from '@wordpress/i18n';
 import {
   ComboboxControl,
   Button,
   SearchControl,
-  __experimentalGrid as Grid,
-  __experimentalHeading as Heading,
-  __experimentalSpacer as Spacer,
-  __experimentalDivider as Divider,
 } from '@wordpress/components';
 import {
   useState,
@@ -270,10 +267,10 @@ const IconPickerModalInset = memo(
         </p>
 
         {/* Suche */}
-        <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Spacer paddingTop="1rem" paddingBottom="1rem">
-            <Heading>{__('Search for an Icon', 'rrze-elements-blocks')}</Heading>
-          </Spacer>
+        <div className="rrze-editor-section">
+          <div className="rrze-editor-section">
+            <h2 className="rrze-editor-heading">{__('Search for an Icon', 'rrze-elements-blocks')}</h2>
+          </div>
 
           <SearchControl
             label={__('Search for an Icon', 'rrze-elements-blocks')}
@@ -288,9 +285,9 @@ const IconPickerModalInset = memo(
 
           {attributes.icon && (
             <>
-              <Spacer paddingBottom="1rem" paddingTop="1rem">
-                <Divider/>
-              </Spacer>
+              <div className="rrze-editor-section">
+                <hr className="rrze-editor-divider" />
+              </div>
               <Fragment>
                 <SpriteIcon
                   type={type}
@@ -307,21 +304,21 @@ const IconPickerModalInset = memo(
               </Fragment>
             </>
           )}
-        </Spacer>
+        </div>
 
         {showSearch && (
           <>
-            <Divider/>
-            <Spacer paddingTop="1rem" paddingBottom="1rem">
-              <Heading>{__('Search Results', 'rrze-elements-blocks')}</Heading>
+            <hr className="rrze-editor-divider" />
+            <div className="rrze-editor-section">
+              <h2 className="rrze-editor-heading">{__('Search Results', 'rrze-elements-blocks')}</h2>
               {filteredIcons.length ? (
-                <Grid columns={12}>
+                <div className="rrze-editor-icon-grid">
                   {filteredIcons.map((opt) =>
                     renderIconButton(opt, attributes.icon, (v) =>
                       setAttributes({icon: v}),
                     ),
                   )}
-                </Grid>
+                </div>
               ) : (
                 <p>
                   {__(
@@ -330,52 +327,52 @@ const IconPickerModalInset = memo(
                   )}
                 </p>
               )}
-            </Spacer>
+            </div>
           </>
         )}
 
         {/* Solid */}
-        <Divider/>
-        <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__('Solid Icons', 'rrze-elements-blocks')}</Heading>
-          <Grid columns={12}>
+        <hr className="rrze-editor-divider" />
+        <div className="rrze-editor-section">
+          <h2 className="rrze-editor-heading">{__('Solid Icons', 'rrze-elements-blocks')}</h2>
+          <div className="rrze-editor-icon-grid">
             {solidIcons.map((opt) =>
               renderIconButton(opt, attributes.icon, (v) =>
                 setAttributes({icon: v}),
               ),
             )}
-          </Grid>
-        </Spacer>
+          </div>
+        </div>
 
         {/* Regular */}
-        <Divider/>
-        <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__('Regular Icons', 'rrze-elements-blocks')}</Heading>
-          <Grid columns={12}>
+        <hr className="rrze-editor-divider" />
+        <div className="rrze-editor-section">
+          <h2 className="rrze-editor-heading">{__('Regular Icons', 'rrze-elements-blocks')}</h2>
+          <div className="rrze-editor-icon-grid">
             {regularIcons.map((opt) =>
               renderIconButton(opt, attributes.icon, (v) =>
                 setAttributes({icon: v}),
               ),
             )}
-          </Grid>
-        </Spacer>
+          </div>
+        </div>
 
         {/* Brands */}
-        <Divider/>
-        <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__('Brand Icons', 'rrze-elements-blocks')}</Heading>
-          <Grid columns={12}>
+        <hr className="rrze-editor-divider" />
+        <div className="rrze-editor-section">
+          <h2 className="rrze-editor-heading">{__('Brand Icons', 'rrze-elements-blocks')}</h2>
+          <div className="rrze-editor-icon-grid">
             {brandIcons.map((opt) =>
               renderIconButton(opt, attributes.icon, (v) =>
                 setAttributes({icon: v}),
               ),
             )}
-          </Grid>
-        </Spacer>
+          </div>
+        </div>
 
-        <Spacer paddingBottom="1rem">
-          <Divider/>
-        </Spacer>
+        <div style={{ paddingBottom: "1rem", marginBottom: 8 }}>
+          <hr className="rrze-editor-divider" />
+        </div>
       </>
     );
   },

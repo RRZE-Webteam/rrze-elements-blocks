@@ -1,3 +1,4 @@
+import { ToggleGroupControl, ToggleGroupControlOptionIcon } from "./ToggleGroupControl";
 import { __ } from "@wordpress/i18n";
 import {
   ToolbarDropdownMenu,
@@ -5,8 +6,6 @@ import {
   ToolbarGroup,
   SVG,
   Path,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 } from "@wordpress/components";
 import {
   drawerLeft,
@@ -103,16 +102,21 @@ const ViewRatioSelectorPanel = ({attributes, setAttributes}: ViewRatioSelectorPr
 
   return (
     <ToggleGroupControl
+      __next40pxDefaultSize
       label={__("Control the Content to Image ratio", "rrze-elements-blocks")}
       value={viewRatio}
       isBlock
       onChange={toggleViewRatio}
-      >
-      {/* @ts-ignore - Reason: Icon-Feature missing*/}
-      <ToggleGroupControlOptionIcon value={"1:2"} label={__("1:2", "rrze-elements-blocks")} icon={drawerLeft}
+    >
+      <ToggleGroupControlOptionIcon
+        value="1:2"
+        label={__("1:2", "rrze-elements-blocks")}
+        icon={drawerLeft}
       />
-      {/* @ts-ignore - Reason: icon-Feature missing in Types */}
-      <ToggleGroupControlOptionIcon value={"2:1"} label={__("2:1", "rrze-elements-blocks")} icon={drawerRight}
+      <ToggleGroupControlOptionIcon
+        value="2:1"
+        label={__("2:1", "rrze-elements-blocks")}
+        icon={drawerRight}
       />
     </ToggleGroupControl>
   );

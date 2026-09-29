@@ -1,11 +1,10 @@
+import "./editor-controls.scss";
 import { __ } from "@wordpress/i18n";
 import "../stores/jumpNameStore";
 import {
 	Button,
 	PanelBody,
 	BaseControl,
-	__experimentalText as Text,
-	__experimentalSpacer as Spacer,
 	Icon,
 	ToggleControl,
 } from "@wordpress/components";
@@ -118,16 +117,14 @@ const JumpLinkSelector = ({
 				initialOpen={false}
 				icon={<Icon icon={link} />}
 			>
-				<Spacer>
-					<Text>
-						{__(
-							"Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL.",
-							"rrze-elements-blocks",
-						)}
-					</Text>
-				</Spacer>
+				<p className="rrze-editor-description">
+					{__(
+						"Jump Links allow your users to jump to this collapse by adding /#jumplinkname to the end of the URL.",
+						"rrze-elements-blocks",
+					)}
+				</p>
 
-				<form onSubmit={handleToggleSubmit}>
+				<form onSubmit={handleToggleSubmit} style={{ marginBottom: 8 }}>
 					<BaseControl
 						label={__("Jump Link Name", "rrze-elements-blocks")}
 						id="rrze-elements"
@@ -147,7 +144,6 @@ const JumpLinkSelector = ({
 						{__("Set Jump Link", "rrze-elements-blocks")}
 					</Button>
 				</form>
-				<Spacer />
 				<ToggleControl
 					checked={attributes.isCustomJumpname}
 					__nextHasNoMarginBottom
@@ -157,8 +153,7 @@ const JumpLinkSelector = ({
 						setAttributes({ isCustomJumpname })
 					}
 				/>
-				<Spacer />
-				<Button variant="secondary" onClick={() => setIsModalOpen(true)}>
+				<Button variant="secondary" style={{ marginTop: 8 }} onClick={() => setIsModalOpen(true)}>
 					{__("Manage all Jump Names", "rrze-elements-blocks")}
 				</Button>
 			</PanelBody>

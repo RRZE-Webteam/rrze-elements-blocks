@@ -4,7 +4,7 @@ import {
   BlockControls,
   InspectorControls,
   RichText,
-  __experimentalLinkControl as LinkControl,
+  LinkControl,
 } from "@wordpress/block-editor";
 
 import {

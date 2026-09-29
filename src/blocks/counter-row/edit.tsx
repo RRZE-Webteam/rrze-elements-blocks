@@ -11,7 +11,7 @@ import {
   PanelBody,
   RangeControl,
   Button,
-  __experimentalNumberControl as NumberControl,
+  TextControl,
 } from "@wordpress/components";
 
 import { __ } from "@wordpress/i18n";
@@ -19,7 +19,7 @@ import { update as play } from "@wordpress/icons";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { useRef } from "@wordpress/element";
+import { useEffect, useRef, useState } from "@wordpress/element";
 
 interface EditProps {
   blockProps: string[];
@@ -49,6 +49,11 @@ export default function Edit({
   const dynamicClass = `rrze-elements-column-${attributes.columns}`;
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const [startValueInput, setStartValueInput] = useState(String(attributes.startValue));
+
+  useEffect(() => {
+    setStartValueInput(String(attributes.startValue));
+  }, [attributes.startValue]);
 
   const props = useBlockProps({
     className: dynamicClass,
@@ -63,8 +68,13 @@ export default function Edit({
   };
 
   const onChangeStartValue = (startValue: string) => {
-    const output = parseInt(startValue, 10);
-    setAttributes({ startValue: output });
+    setStartValueInput(startValue);
+    if (startValue.trim() === '') return;
+
+    const output = Number(startValue);
+    if (Number.isInteger(output) && output >= 0 && output <= Number.MAX_VALUE && output !== attributes.startValue) {
+      setAttributes({ startValue: output });
+    }
   };
 
   const onClickPlay = () => {
@@ -133,12 +143,15 @@ export default function Edit({
               onMouseMove={function noRefCheck() {}}
               step={1}
             />
-            <NumberControl
+            <TextControl
+              type="number"
               label={__("Start value", "rrze-elements-blocks")}
-              value={attributes.startValue}
+              value={startValueInput}
               onChange={onChangeStartValue}
+              onBlur={() => setStartValueInput(String(attributes.startValue))}
               min={0}
               max={Number.MAX_VALUE}
+              step={1}
             />
             <Button onClick={onClickPlay}>
               {__("Preview Animation", "rrze-elements-blocks")}

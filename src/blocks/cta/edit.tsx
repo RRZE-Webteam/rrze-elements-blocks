@@ -11,7 +11,7 @@ import {
   BlockControls,
   InspectorControls,
   RichText,
-  __experimentalLinkControl as LinkControl,
+  LinkControl,
 } from "@wordpress/block-editor";
 import {useEffect, useState} from "@wordpress/element";
 import {__} from "@wordpress/i18n";

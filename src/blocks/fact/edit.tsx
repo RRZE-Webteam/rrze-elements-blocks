@@ -3,7 +3,7 @@ import {
   BlockControls, RichText,
   useBlockProps,
   InspectorControls,
-  __experimentalLinkControl as LinkControl,
+  LinkControl,
 } from "@wordpress/block-editor";
 import {IconMarkComponent} from "../../components/IconPicker";
 // @ts-ignore

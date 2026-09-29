@@ -39,9 +39,10 @@ function loadComponent(relativePath, mocks) {
   });
   const realRequire = createRequire(filename);
   const module = { exports: {} };
+  // Styles are bundled by webpack; they do not execute in these DOM tests.
   const localRequire = (name) => Object.hasOwn(mocks, name)
     ? mocks[name]
-    : realRequire(name);
+    : name.endsWith(".scss") ? {} : realRequire(name);
   new Function("require", "module", "exports", outputText)(
     localRequire, module, module.exports,
   );
@@ -241,6 +242,171 @@ function mountBlock(t, Edit, initialAttributes) {
     render: (props) => render(React.createElement(Harness, props)),
   };
 }
+
+const wrapControl = ({ children }) => React.createElement("div", null, children);
+const controlMocks = {
+  "@wordpress/element": React,
+  "@wordpress/i18n": { __: (text) => text },
+  "@wordpress/icons": {},
+  "@wordpress/components": {
+    PanelBody: wrapControl,
+    ToolbarGroup: wrapControl,
+    ToolbarItem: EmptyComponent,
+    ToolbarButton: EmptyComponent,
+    __experimentalToggleGroupControl: ({ label, value, children, onChange }) => React.createElement("fieldset", null,
+      React.createElement("legend", null, label),
+      React.Children.map(children, (option) => React.createElement("label", null,
+        React.createElement("input", {
+          type: "radio", value: option.props.value, checked: option.props.value === value,
+          onChange: () => onChange(option.props.value),
+        }), option.props.label,
+      )),
+    ),
+    __experimentalToggleGroupControlOption: EmptyComponent,
+    __experimentalToggleGroupControlOptionIcon: EmptyComponent,
+    SVG: "svg",
+    Path: "path",
+    Button: ({ children, onClick, type, "aria-pressed": pressed }) => React.createElement("button", {
+      type, onClick, "aria-pressed": pressed,
+    }, children),
+  },
+};
+
+const toggleGroupControls = loadComponent("components/ToggleGroupControl.ts", controlMocks);
+controlMocks["./ToggleGroupControl"] = toggleGroupControls;
+controlMocks["../../../components/ToggleGroupControl"] = toggleGroupControls;
+
+test("media toggle groups preserve alignment and ratio values", (t) => {
+  const { AlignmentSelectorPanel } = loadComponent("components/AlignmentSelector.tsx", controlMocks);
+  const alignment = mountBlock(t, AlignmentSelectorPanel, {});
+  alignment.render({});
+  assert.equal(alignment.container.querySelector('input[value="top"]').checked, true);
+  assert.equal(alignment.container.querySelector('input[value="bottom"]').labels[0].textContent, "Align image to bottom");
+  React.act(() => alignment.container.querySelector('input[value="bottom"]').click());
+  assert.equal(alignment.attributes.mediaAlignment, "bottom");
+  React.act(() => alignment.container.querySelector('input[value="center"]').click());
+  assert.equal(alignment.attributes.mediaAlignment, "center");
+
+  const { ViewRatioSelectorPanel } = loadComponent("components/ViewRatioSelector.tsx", controlMocks);
+  const ratio = mountBlock(t, ViewRatioSelectorPanel, { viewRatio: "2:1" });
+  ratio.render({});
+  assert.equal(ratio.container.querySelector('input[value="2:1"]').checked, true);
+  React.act(() => ratio.container.querySelector('input[value="1:2"]').click());
+  assert.equal(ratio.attributes.viewRatio, "1:2");
+});
+
+test("heading and visibility controls preserve numeric and boolean attributes", (t) => {
+  const { HeadingSelectorInspector } = loadComponent("components/HeadingSelector.tsx", controlMocks);
+  const heading = mountBlock(t, HeadingSelectorInspector, { hstart: 3 });
+  heading.render({});
+  assert.equal(heading.container.querySelector('input[value="3"]').checked, true);
+  React.act(() => heading.container.querySelector('input[value="5"]').click());
+  assert.equal(heading.attributes.hstart, 5);
+
+  const { VisibilitySelectorPanel } = loadComponent("components/VisibilitySelector.tsx", controlMocks);
+  const visibility = mountBlock(t, VisibilitySelectorPanel, {});
+  visibility.render({});
+  assert.equal(visibility.container.querySelector('input[value="visible"]').checked, true, "missing visibility defaults to visible");
+  React.act(() => visibility.container.querySelector('input[value="hidden"]').click());
+  assert.equal(visibility.attributes.showImageWrapper, false);
+  React.act(() => visibility.container.querySelector('input[value="visible"]').click());
+  assert.equal(visibility.attributes.showImageWrapper, true);
+});
+
+test("viewport selection follows parent changes and image fit keeps its saved values", (t) => {
+  const { default: DeviceViewportToggle } = loadComponent("blocks/info-card/inspectorControls/DeviceViewportToggle.tsx", controlMocks);
+  const { container, render } = mount(t);
+  const devices = [];
+  const show = (deviceType) => render(React.createElement(DeviceViewportToggle, {
+    label: "Viewport", deviceType, onChange: (value) => devices.push(value),
+  }));
+  show("desktop");
+  React.act(() => container.querySelector('input[value="tablet"]').click());
+  assert.deepEqual(devices, ["tablet"]);
+  show("mobile");
+  assert.equal(container.querySelector('input[value="mobile"]').checked, true);
+  assert.equal(container.querySelector('input[value="desktop"]').checked, false);
+
+  const { default: ImageSettingsPanel } = loadComponent("blocks/info-card/inspectorControls/ImageSettingsPanel.tsx", {
+    ...controlMocks, "./DeviceViewportToggle": EmptyComponent,
+  });
+  const image = mountBlock(t, ImageSettingsPanel, {});
+  image.render({});
+  assert.equal(image.container.querySelector('input[value="cover"]').checked, true);
+  React.act(() => image.container.querySelector('input[value="contain"]').click());
+  assert.equal(image.attributes.imageObjectFit, "contain");
+});
+
+test("counter start value rejects empty, invalid and negative drafts and follows undo", (t) => {
+  let inputProps;
+  const mocks = editorMocks({});
+  mocks["@wordpress/block-editor"].InspectorControls = wrapControl;
+  mocks["@wordpress/components"] = {
+    ...controlMocks["@wordpress/components"],
+    RangeControl: EmptyComponent,
+    TextControl: (props) => { inputProps = props; return null; },
+  };
+  mocks.gsap = { gsap: { registerPlugin: () => {} } };
+  mocks["gsap/ScrollTrigger"] = { ScrollTrigger: {} };
+  const { default: Edit } = loadComponent("blocks/counter-row/edit.tsx", mocks);
+  const { render } = mount(t);
+  const writes = [];
+  let updateAttributes;
+  function Harness() {
+    const [attributes, setAttributes] = React.useState({ startValue: 10, columns: 3, stagger: 0 });
+    updateAttributes = setAttributes;
+    return React.createElement(Edit, {
+      attributes, setAttributes: (update) => {
+        writes.push(update);
+        setAttributes((previous) => ({ ...previous, ...update }));
+      },
+    });
+  }
+  render(React.createElement(Harness));
+  assert.equal(inputProps.type, "number");
+  for (const draft of ["", "-1", "1.5", "invalid", "Infinity", "1e999"]) {
+    React.act(() => inputProps.onChange(draft));
+    assert.equal(inputProps.value, draft);
+    assert.equal(writes.length, 0);
+    React.act(() => inputProps.onBlur());
+    assert.equal(inputProps.value, "10", "invalid drafts revert to the saved value on blur");
+  }
+  for (const draft of ["0", "42", "1e3"]) {
+    React.act(() => inputProps.onChange(draft));
+    assert.equal(writes.at(-1).startValue, Number(draft));
+  }
+  React.act(() => updateAttributes((previous) => ({ ...previous, startValue: 10 })));
+  assert.equal(inputProps.value, "10", "undo or external updates refresh the displayed value");
+});
+
+test("notice style choices work in the placeholder and inspector without replacing content", (t) => {
+  const { default: VariationPicker } = loadComponent("blocks/notice/VariationPicker.tsx", controlMocks);
+  const variations = [
+    { name: "notice-hinweis", title: "Hint", iconClass: "symbol notifications" },
+    { name: "notice-attention", title: "Warning", iconClass: "symbol warning" },
+  ];
+  const mocks = editorMocks({}, { getBlockVariations: () => variations });
+  mocks["@wordpress/components"] = { ...controlMocks["@wordpress/components"], Placeholder: wrapControl };
+  mocks["@wordpress/block-editor"].InspectorControls = wrapControl;
+  mocks["@wordpress/block-editor"].InnerBlocks = () => React.createElement("p", null, "Existing notice content");
+  mocks["@wordpress/blocks"] = { store: "core/blocks" };
+  mocks["./VariationPicker"] = VariationPicker;
+  const { default: Edit } = loadComponent("blocks/notice/edit.tsx", mocks);
+  const block = mountBlock(t, Edit, { color: "red" });
+  block.render({});
+  const buttons = [...block.container.querySelectorAll("button")];
+  assert.deepEqual(buttons.map((button) => button.textContent), ["Hint", "Warning", "Hint", "Warning"]);
+  assert.ok(buttons.every((button) => button.type === "button"));
+  React.act(() => buttons[3].click());
+  assert.deepEqual(block.writes, [{ style: "notice-attention" }]);
+  assert.equal(block.attributes.color, "red");
+  assert.equal(block.container.querySelectorAll("button").length, 2);
+  assert.equal(block.container.querySelector('button[aria-pressed="true"]').textContent, "Warning");
+  const content = block.container.querySelector(".notice p");
+  React.act(() => block.container.querySelector("button").click());
+  assert.deepEqual(block.writes.at(-1), { style: "notice-hinweis" });
+  assert.equal(block.container.querySelector(".notice p"), content);
+});
 
 test("tab attributes follow parent context without repeated writes", (t) => {
   const blockProps = { "data-block": "tab-a" };

@@ -1,10 +1,9 @@
+import { ToggleGroupControl, ToggleGroupControlOptionIcon } from "./ToggleGroupControl";
 import {__} from "@wordpress/i18n";
 import {
   ToolbarDropdownMenu,
   ToolbarItem,
   ToolbarGroup,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 } from "@wordpress/components";
 import {seen, unseen} from "@wordpress/icons";
 
@@ -92,6 +91,7 @@ const VisibilitySelectorPanel = ({
 
   return (
     <ToggleGroupControl
+      __next40pxDefaultSize
       label={__("Control editor image wrapper visibility", "rrze-elements-blocks")}
       value={visibility}
       isBlock

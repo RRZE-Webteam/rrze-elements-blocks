@@ -1,3 +1,4 @@
+import "../../components/editor-controls.scss";
 import {
   AlignmentToolbar,
   BlockControls,
@@ -20,9 +21,7 @@ import {
   TextControl,
   ToolbarButton,
   ToolbarGroup,
-  __experimentalVStack as VStack,
-  __experimentalText as Text,
-  __experimentalSpacer as Spacer,
+  Flex,
 } from "@wordpress/components";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {useCallback, useEffect, useState} from "@wordpress/element";
@@ -325,8 +324,8 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
 
       <InspectorControls>
         <PanelBody>
-          <Text>{__("Control all images inside this Block via the Media Manager.", "rrze-elements-blocks")}</Text>
-          <Spacer paddingTop="1rem" paddingBottom="1rem">
+          <p className="rrze-editor-description" style={{ marginBottom: 0 }}>{__("Control all images inside this Block via the Media Manager.", "rrze-elements-blocks")}</p>
+          <div className="rrze-editor-section">
             <Button
               ref={setImageManagerButtonRef}
               icon={gallery}
@@ -339,7 +338,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
               onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}>
               {__("Open Media Manager", "rrze-elements-blocks")}
             </Button>
-          </Spacer>
+          </div>
         </PanelBody>
         <PanelBody
           title={__("Accordion images", "rrze-elements-blocks")}
@@ -364,7 +363,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
                   "rrze-elements-blocks",
                 )}
               />
-              <VStack>
+              <Flex direction="column" align="stretch" justify="center" gap={2}>
                 <MediaUploadCheck>
                   <MediaUpload
                     allowedTypes={["image"]}
@@ -393,10 +392,9 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
                 >
                   {__("Remove image", "rrze-elements-blocks")}
                 </Button>
-              </VStack>
+              </Flex>
               {imageUrl && (
-                <>
-                  <Spacer/>
+                <div style={{ marginTop: 8 }}>
                   <TextControl
                     label={__("Alt text", "rrze-elements-blocks")}
                     value={imageAlt}
@@ -408,7 +406,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
                       "rrze-elements-blocks",
                     )}
                   />
-                </>
+                </div>
               )}
             </>
           )}
