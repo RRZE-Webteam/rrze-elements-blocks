@@ -1,38 +1,107 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Psalm Security Scan
 
 on:
   push:
     branches: [ "main", "dev" ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   schedule:
     - cron: '27 23 * * 0'
+  workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   php-security:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+      contents: read
+    outputs:
+      sarif-artifact-id: ${{ steps.report.outputs.artifact-id }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          php-version: '8.5'
+          extensions: dom, mbstring, simplexml, xml, xmlwriter
+          tools: composer:v2
+          coverage: none
+
+      - name: Install locked PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress --no-plugins --no-scripts
+
+      - name: Prepare WordPress stubs for Psalm
+        run: php scripts/prepare-psalm-stubs.php
+
+      - name: Download and verify Psalm
+        env:
+          PSALM_VERSION: '6.19.0'
+          # GitHub's release-asset SHA-256; update together with the version.
+          PSALM_SHA256: '6d0e26be1f551a14d8f0f63d875d5a4f55a56e680004e8c28e56869632585490'
+        run: |
+          curl --fail --silent --show-error --location --retry 3 --max-time 120 \
+            --proto '=https' --tlsv1.2 \
+            "https://github.com/vimeo/psalm/releases/download/$PSALM_VERSION/psalm.phar" \
+            --output "$RUNNER_TEMP/psalm.phar"
+          printf '%s  %s\n' "$PSALM_SHA256" "$RUNNER_TEMP/psalm.phar" | sha256sum --check --strict
+          php "$RUNNER_TEMP/psalm.phar" --version
 
       - name: Psalm Security Scan
-        uses: psalm/psalm-github-security-scan@f3e6fd9432bc3e44aec078572677ce9d2ef9c287
+        id: scan
+        run: |
+          mkdir -p "$RUNNER_TEMP/psalm-results"
+          php -d memory_limit=2G "$RUNNER_TEMP/psalm.phar" \
+            --config=psalm.xml --taint-analysis --no-cache --no-progress \
+            --threads=1 --scan-threads=1 \
+            --report="$RUNNER_TEMP/psalm-results/results.sarif"
+
+      # Keep findings available when Psalm exits with an error; the scan stays failed.
+      - name: Preserve SARIF report
+        id: report
+        if: ${{ !cancelled() && steps.scan.outcome != 'skipped' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: psalm-sarif
+          path: ${{ runner.temp }}/psalm-results/results.sarif
+          if-no-files-found: error
+          retention-days: 7
+
+  upload-results:
+    # Only this fresh runner has upload permission. Never execute repository code here.
+    needs: php-security
+    if: ${{ !cancelled() && needs.php-security.outputs.sarif-artifact-id != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - name: Download this run's SARIF report
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ needs.php-security.outputs.sarif-artifact-id }}
+          path: ${{ runner.temp }}/psalm-results
+          merge-multiple: true
 
       - name: Upload Security Analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
         with:
-          sarif_file: results.sarif
+          sarif_file: ${{ runner.temp }}/psalm-results/results.sarif
+          checkout_path: ${{ github.workspace }}
+          category: psalm-taint
