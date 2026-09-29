@@ -29,10 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 maxScroll = Math.max(0, contentScroller.scrollWidth - contentScroller.clientWidth);
                 firstItemOffset = items[0].offsetLeft;
                 itemPositions = items.map((item, index) => {
-                    const raw = Math.round(item.offsetLeft - firstItemOffset);
                     if (index === items.length - 1) {
                         return maxScroll;
                     }
+
+                    const raw = Math.round(item.offsetLeft - firstItemOffset);
                     return Math.max(0, Math.min(raw, maxScroll));
                 });
             };
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const updateButtons = () => {
                 const currentScroll = Math.round(contentScroller.scrollLeft);
-                const maxScroll = Math.round(contentScroller.scrollWidth - contentScroller.clientWidth);
+                maxScroll = Math.round(contentScroller.scrollWidth - contentScroller.clientWidth);
                 const atStart = currentScroll <= 1;
                 const atEnd = currentScroll >= maxScroll - 1;
                 prevButton.disabled = isAnimating || atStart;

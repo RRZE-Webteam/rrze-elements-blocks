@@ -1,5 +1,5 @@
 import { test, expect } from '../test-utils/index';
-let createdPageId: number;
+//let createdPageId: number;
 
 // We have multiple tests in this file, all requiring us to be authenticated.
 // Compare this to the front-end.spec.ts.
@@ -19,12 +19,12 @@ test.describe(() => {
     test('Columns Block is present in the block inserter', async ({ page, admin, editor }) => {
         await admin.visitAdminPage('/');
         await page.goto(process.env.WP_PLAYWRIGHT_TESTPAGE);
-        
+
         await editor.insertBlock({
             name: 'rrze-elements/columns'
         })
 
-        await page.waitForTimeout(1000);
+        //await page.waitForTimeout(1000);
         const blockDiv = page.locator('div.wp-block-rrze-elements-columns');
 
         // Assert that the block div is visible on the page
