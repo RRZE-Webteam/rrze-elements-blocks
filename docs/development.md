@@ -2,6 +2,8 @@
 
 
 ## Installation of required NPM packages
+Use Node.js 24.15 or newer within the 24.x LTS line, matching CI. The supported Node.js ranges are recorded in `package.json` (`^22.22.2 || ^24.15.0 || >=26.0.0`) and follow the requirements of `@wordpress/scripts` and jsdom.
+
 1. Install the locked dependencies with `npm ci`. Use `npm install` when intentionally changing dependencies, and commit both `package.json` and `package-lock.json`.
 2. Make sure, you have SASS Language Processor installed `npm install -g sass`
 
@@ -14,7 +16,9 @@
 
 `eslint.config.js` uses the native WordPress recommended flat configuration, including React, Hooks, accessibility, internationalization, and TypeScript rules. The text domain is `rrze-elements-blocks`. Browser globals apply to browser files; Node globals apply to configuration files and tests. Playwright rules apply only to its spec files. Build output, dependencies, minified scripts, and test reports are ignored.
 
-The TypeScript lint rules do not require type information, so ESLint does not load a TypeScript project. Type checking runs separately. Keep TypeScript pinned to `5.9.3`: the current typescript-eslint release supports TypeScript `<6.1.0`, and TypeScript 7 does not expose the compiler API required by these tools. See the [typescript-eslint compatibility range](https://typescript-eslint.io/users/dependency-versions/) and [TypeScript 7 migration notes](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/). `typescript-eslint` keeps the parser and plugin versions aligned. ESLint stays on major version 9 and Babel on major version 7 to satisfy the WordPress lint dependencies.
+The TypeScript lint rules do not require type information, so ESLint does not load a TypeScript project. Type checking runs separately. Keep TypeScript pinned to `5.9.3`: the current typescript-eslint release supports TypeScript `<6.1.0`, and TypeScript 7 does not expose the compiler API required by these tools. See the [typescript-eslint compatibility range](https://typescript-eslint.io/users/dependency-versions/) and [TypeScript 7 migration notes](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/). `typescript-eslint` keeps the parser and plugin versions aligned. ESLint stays on major version 9 for the React lint dependencies, while Babel stays on major version 7 for the WordPress build pipeline. React and React DOM stay together on version 18.3.1.
+
+Keep the direct `@wordpress/blocks` dependency on major 15 and `@wordpress/components` on major 30 while using `@types/wordpress__block-editor@15.0.6`. Updating these two packages to majors 16 and 41 creates conflicting React peer dependencies inside the older declaration package. Upgrading them requires revisiting the block-editor type dependencies; do not bypass the conflict with `--force` or `--legacy-peer-deps`.
 
 Run lint and typecheck before opening a pull request. The GitHub Actions workflow in `.github/workflows/lint.yml` also runs these checks after `npm ci`. Existing code can produce additional findings now that the WordPress rules and broader file coverage are enabled; these are code findings, not parser failures. Lint errors fail CI and must be addressed before the check can pass.
 
