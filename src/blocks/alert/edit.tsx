@@ -1,8 +1,6 @@
 import {
   TextControl,
   PanelBody,
-  __experimentalText as Text,
-  __experimentalSpacer as Spacer,
 } from "@wordpress/components";
 import {
   useBlockProps,
@@ -117,15 +115,13 @@ export default function Edit({
           title={__("Label settings", "rrze-elements-blocks")}
           initialOpen={true}
         >
-          <Spacer>
-            <Text>{__("Add a Label for your Alert. This changes the style to example", "rrze-elements-blocks")}</Text>
-          </Spacer>
-
+          <div style={{paddingTop: ".25rem", paddingBottom: ".5rem"}}>
+            <p>{__("Add a Label for your Alert. This changes the style to example", "rrze-elements-blocks")}</p>
+          </div>
           <TextControl
             value={attributes.title}
             onChange={onChangeTitle}
             placeholder={__("Add a Label", "rrze-elements-blocks")}
-            className="elements-blocks-input-following-icon"
           />
         </PanelBody>
       </InspectorControls>
