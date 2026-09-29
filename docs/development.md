@@ -2,8 +2,21 @@
 
 
 ## Installation of required NPM packages
-1. Install all needed dependencies through `npm install -i`
+1. Install the locked dependencies with `npm ci`. Use `npm install` when intentionally changing dependencies, and commit both `package.json` and `package-lock.json`.
 2. Make sure, you have SASS Language Processor installed `npm install -g sass`
+
+## JavaScript and TypeScript checks
+
+- `npm run lint` checks source files, unminified frontend scripts, Node configuration/scripts, type declarations, and current and legacy tests.
+- `npm run lint:fix` applies available ESLint fixes. Review the changes before committing.
+- `npm run typecheck` checks the TypeScript project without generating build files.
+- `npm run format` handles formatting separately from linting.
+
+`eslint.config.js` uses the native WordPress recommended flat configuration, including React, Hooks, accessibility, internationalization, and TypeScript rules. The text domain is `rrze-elements-blocks`. Browser globals apply to browser files; Node globals apply to configuration files and tests. Playwright rules apply only to its spec files. Build output, dependencies, minified scripts, and test reports are ignored.
+
+The TypeScript lint rules do not require type information, so ESLint does not load a TypeScript project. Type checking runs separately. Keep TypeScript pinned to `5.9.3`: the current typescript-eslint release supports TypeScript `<6.1.0`, and TypeScript 7 does not expose the compiler API required by these tools. See the [typescript-eslint compatibility range](https://typescript-eslint.io/users/dependency-versions/) and [TypeScript 7 migration notes](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/). `typescript-eslint` keeps the parser and plugin versions aligned. ESLint stays on major version 9 and Babel on major version 7 to satisfy the WordPress lint dependencies.
+
+Run lint and typecheck before opening a pull request. The GitHub Actions workflow in `.github/workflows/lint.yml` also runs these checks after `npm ci`. Existing code can produce additional findings now that the WordPress rules and broader file coverage are enabled; these are code findings, not parser failures. Lint errors fail CI and must be addressed before the check can pass.
 
 ## Start the development process
 Based on which part you're currently working on, you can follow these simple steps.
