@@ -27,8 +27,10 @@ const EffectsPanel = ({
       onChange={(value: boolean) => setAttributes({backgroundOverlayEnabled: value})}
     />
     {backgroundOverlayEnabled && (
-      <BaseControl label={__("Overlay gradient", "rrze-elements-blocks")}>
+      <BaseControl>
+        <BaseControl.VisualLabel>{__("Overlay gradient", "rrze-elements-blocks")}</BaseControl.VisualLabel>
         <GradientPicker
+          aria-label={__("Overlay gradient", "rrze-elements-blocks")}
           value={backgroundOverlayGradient || overlayGradient}
           onChange={(gradientValue?: string) => setAttributes({backgroundOverlayGradient: gradientValue || ''})}
           gradients={overlayGradientOptions}

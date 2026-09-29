@@ -12,15 +12,18 @@ Use Node.js 24.15 or newer within the 24.x LTS line, matching CI. The supported 
 - `npm run lint` checks source files, unminified frontend scripts, Node configuration/scripts, and type declarations. The `tests/` and `legacy-tests/` directories are excluded.
 - `npm run lint:fix` applies available ESLint fixes. Review the changes before committing.
 - `npm run typecheck` checks the TypeScript project without generating build files.
+- `node --test tests/js/*.js` runs the frontend and editor component regression tests.
 - `npm run format` handles formatting separately from linting.
 
 `eslint.config.js` uses the native WordPress recommended flat configuration, including React, Hooks, accessibility, internationalization, and TypeScript rules. The text domain is `rrze-elements-blocks`. Browser globals apply to browser files; Node globals apply to root configuration files and scripts. Build output, dependencies, minified scripts, test directories, and test reports are ignored.
+
+Experimental WordPress APIs remain supported: `@wordpress/no-unsafe-wp-apis` reports warnings instead of errors. Historical save and migration files allow versioned identifiers such as `saveV1_0_19`; other naming checks remain active. TypeScript documentation describes a destructured props object with one `@param` tag and documents its fields in the type, avoiding dotted parameter names that TSDoc rejects.
 
 The TypeScript lint rules do not require type information, so ESLint does not load a TypeScript project. Type checking runs separately. Keep TypeScript pinned to `5.9.3`: the current typescript-eslint release supports TypeScript `<6.1.0`, and TypeScript 7 does not expose the compiler API required by these tools. See the [typescript-eslint compatibility range](https://typescript-eslint.io/users/dependency-versions/) and [TypeScript 7 migration notes](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/). `typescript-eslint` keeps the parser and plugin versions aligned. ESLint stays on major version 9 for the React lint dependencies, while Babel stays on major version 7 for the WordPress build pipeline. React and React DOM stay together on version 18.3.1.
 
 Keep the direct `@wordpress/blocks` dependency on major 15 and `@wordpress/components` on major 30 while using `@types/wordpress__block-editor@15.0.6`. Updating these two packages to majors 16 and 41 creates conflicting React peer dependencies inside the older declaration package. Upgrading them requires revisiting the block-editor type dependencies; do not bypass the conflict with `--force` or `--legacy-peer-deps`.
 
-Run lint and typecheck before opening a pull request. The GitHub Actions workflow in `.github/workflows/lint.yml` also runs these checks after `npm ci`. Existing code can produce additional findings now that the WordPress rules and broader file coverage are enabled; these are code findings, not parser failures. Lint errors fail CI and must be addressed before the check can pass.
+Run lint, typecheck, and the JavaScript regression tests before opening a pull request. The GitHub Actions workflow in `.github/workflows/lint.yml` runs lint and typecheck after `npm ci`. Lint errors fail CI; warnings remain visible without blocking it. Keep historical save output unchanged when fixing lint findings, because existing blocks rely on it for validation.
 
 ## Start the development process
 Based on which part you're currently working on, you can follow these simple steps.

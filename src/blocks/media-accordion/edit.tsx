@@ -1,5 +1,4 @@
 import {
-  AlignmentControl,
   AlignmentToolbar,
   BlockControls,
   InspectorControls,
@@ -10,6 +9,7 @@ import {
   RichText,
   MediaUpload,
   MediaUploadCheck,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {
   Button,
@@ -28,7 +28,6 @@ import {useDispatch, useSelect} from "@wordpress/data";
 import {useCallback, useEffect, useState} from "@wordpress/element";
 import {__, sprintf} from "@wordpress/i18n";
 import {closeSmall, gallery, image, trash} from "@wordpress/icons";
-import {store as blockEditorStore} from "@wordpress/block-editor";
 import {store as noticesStore} from "@wordpress/notices";
 import {
   AccordionItemAttributes,
@@ -167,21 +166,21 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
     storedImageCaption ?? attachmentCaption;
 
   const updateActiveItemImage = (
-    attributes: Partial<AccordionItemAttributes>,
+    imageAttributes: Partial<AccordionItemAttributes>,
   ) => {
     if (!activeItem) {
       return;
     }
 
-    updateBlockAttributes(activeItem.clientId, attributes);
+    updateBlockAttributes(activeItem.clientId, imageAttributes);
   };
 
   const updateItemImage = useCallback(
     (
       itemClientId: string,
-      attributes: Partial<AccordionItemAttributes>,
+      imageAttributes: Partial<AccordionItemAttributes>,
     ) => {
-      updateBlockAttributes(itemClientId, attributes);
+      updateBlockAttributes(itemClientId, imageAttributes);
     },
     [updateBlockAttributes],
   );
@@ -249,10 +248,12 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
               name={
                 imageUrl
                   ? sprintf(
+                    // translators: %s: Accordion section title.
                     __("Replace image for accordion tab “%s”", "rrze-elements-blocks"),
                     activeItemLabel || __("Untitled", "rrze-elements-blocks")
                   )
                   : sprintf(
+                    // translators: %s: Accordion section title.
                     __("Add image for accordion section “%s”", "rrze-elements-blocks"),
                     activeItemLabel || __("Untitled", "rrze-elements-blocks")
                   )

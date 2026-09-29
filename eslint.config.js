@@ -46,6 +46,8 @@ module.exports = [
 		rules: {
 			'prettier/prettier': 'off',
 			'no-console': 'off',
+			// Keep experimental WordPress APIs visible without blocking lint.
+			'@wordpress/no-unsafe-wp-apis': 'warn',
 			'@wordpress/i18n-text-domain': [
 				'error',
 				{ allowedTextDomain: 'rrze-elements-blocks' },
@@ -107,6 +109,16 @@ module.exports = [
 		},
 	},
 	{
+		files: [ 'src/blocks/**/deprecated.tsx', 'src/blocks/**/v*/**/*.{ts,tsx}' ],
+		rules: {
+			// Preserve readable version numbers in historical save/migration aliases.
+			camelcase: [ 'error', {
+				properties: 'never',
+				allow: [ '^(?:[Aa]ttributes|save|migrate)V\\d+(?:_\\d+)+$' ],
+			} ],
+		},
+	},
+	{
 		files: [ '**/*.{ts,tsx}' ],
 		plugins: { tsdoc },
 		settings: {
@@ -121,6 +133,10 @@ module.exports = [
 			'no-undef': 'off',
 			'no-unused-expressions': 'off',
 			'@typescript-eslint/no-unused-expressions': 'error',
+			// TSDoc documents the props object; its properties belong in the type.
+			// Dotted @param names required by JSDoc are invalid in TSDoc.
+			'jsdoc/require-param': [ 'error', { checkDestructured: false } ],
+			'jsdoc/check-param-names': [ 'error', { checkDestructured: false } ],
 			'tsdoc/syntax': 'warn',
 		},
 	},

@@ -422,15 +422,15 @@ export default function Edit({attributes, setAttributes}: EditProps) {
           block="rrze-elements/news"
           key={renderVersion}
           attributes={{
-            title: title,
+            title,
             num: attributes.num,
             cat: attributes.cat,
             columns: attributes.columns,
-            tag: tag,
+            tag,
             type: attributes.type,
             has_thumbnail: attributes.has_thumbnail,
-            divclass: divclass,
-            hidemeta: hidemeta,
+            divclass,
+            hidemeta,
             sticky_only: attributes.sticky_only,
             hideduplicates: attributes.hideduplicates,
             display: attributes.display,

@@ -79,26 +79,32 @@ const SpriteIcon = ({
   const href = hrefOverride ?? `${SPRITES[type]}#${iconName}`;
   if (!href) return null;
 
-  if (type === 'symbol') {
-    return (
-      <span onClick={onClick} style={{pointerEvents: onClick ? 'auto' : 'none'}} className={`material-symbols-outlined ${iconName} ${className}`}>
-        {iconName}
-      </span>
-    )
-  }
-
-  return (
+  const icon = type === 'symbol' ? (
+    <span aria-hidden="true" style={{pointerEvents: 'none'}} className={`material-symbols-outlined ${iconName} ${className}`}>
+      {iconName}
+    </span>
+  ) : (
     <svg
       role="img"
       aria-hidden="true"
       className={className}
-      onClick={onClick}
-      style={{pointerEvents: onClick ? 'auto' : 'none'}}
+      style={{pointerEvents: 'none'}}
     >
       {/* @ts-ignore: href ist in SVG2 spezifiziert */}
       <use href={href}/>
     </svg>
   );
+
+  return onClick ? (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={__('Select an icon', 'rrze-elements-blocks')}
+      style={{border: 0, padding: 0, background: 'none', color: 'inherit', font: 'inherit', display: 'inline-flex', cursor: 'pointer'}}
+    >
+      {icon}
+    </button>
+  ) : icon;
 };
 
 const IconPicker = memo(
@@ -253,7 +259,7 @@ const IconPickerModalInset = memo(
     return (
       <>
         <p>
-          {__('Icons are provided by ', 'rrze-elements-blocks')}
+          {__('Icons are provided by', 'rrze-elements-blocks')}{' '}
           <a href="https://fontawesome.com" target="_blank" rel="noopener noreferrer">
             Font&nbsp;Awesome
           </a>

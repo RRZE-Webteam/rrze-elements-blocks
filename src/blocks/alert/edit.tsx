@@ -10,11 +10,11 @@ import {
   InspectorControls,
   BlockControls,
   ContrastChecker,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 
 import { __ } from "@wordpress/i18n";
 import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
 import {
   StandardColorSwitcher,
   StandardColorSwitcherToolbar,

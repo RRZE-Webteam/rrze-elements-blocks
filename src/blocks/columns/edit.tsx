@@ -3,6 +3,7 @@ import {
   InnerBlocks,
   InspectorControls,
   ContrastChecker,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 
 import {
@@ -13,7 +14,6 @@ import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
 
 interface EditProps {
   blockProps: string[];
@@ -56,12 +56,12 @@ export default function Edit({
     color,
   } = attributes;
 
-  const onChangeRangeControl = (numberOfColumns: number) => {
-    setAttributes({ numberOfColumns });
+  const onChangeRangeControl = (newNumberOfColumns: number) => {
+    setAttributes({ numberOfColumns: newNumberOfColumns });
   };
 
-  const onChangeRuler = (rule: boolean) => {
-    setAttributes({ rule });
+  const onChangeRuler = (showRule: boolean) => {
+    setAttributes({ rule: showRule });
   };
 
   const colorDataAlert = [

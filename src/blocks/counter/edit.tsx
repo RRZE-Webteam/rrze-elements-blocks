@@ -40,7 +40,7 @@ interface EditProps {
  *
  * Provides controls for customizing the Blueprint-block and renders the block inside the editor.
  *
- * @param  props  - The properties passed to the component.
+ * @param props - The properties passed to the component.
  * @returns       - The JSX representation of the component.
  */
 export default function Edit({
@@ -53,9 +53,7 @@ export default function Edit({
 	const { buttonUrl, ariaLabel } = attributes;
 
 	const onChangeTitle = (title: string) => {
-		if (isNaN(parseInt(title))) {
-			return;
-		} else {
+		if (!isNaN(parseInt(title))) {
 			setAttributes({ title: parseInt(title) });
 		}
 	};
@@ -206,7 +204,7 @@ export default function Edit({
 						/>
 						<br />
 						{isURLSet && isLinkTag && (
-							<a className="standard-btn ghost-btn">
+							<a className="standard-btn ghost-btn" href={buttonUrl} onClick={(event) => event.preventDefault()}>
 								<RichText
 									tagName="span"
 									value={attributes.buttonText}

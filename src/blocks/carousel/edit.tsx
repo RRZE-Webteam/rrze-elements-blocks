@@ -3,13 +3,13 @@ import {
   useBlockProps,
   useInnerBlocksProps,
   BlockControls,
-  HeadingLevelDropdown
+  HeadingLevelDropdown,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {PanelBody, RangeControl, Notice} from "@wordpress/components";
 import {__, sprintf} from "@wordpress/i18n";
 import {useMemo, useRef, useEffect} from "@wordpress/element";
 import {useSelect} from "@wordpress/data";
-import {store as blockEditorStore} from "@wordpress/block-editor";
 
 type HeadingLevel = 2 | 3 | 4 | 5 | 6;
 
@@ -136,6 +136,8 @@ export default function Edit({attributes, setAttributes, clientId}: EditProps) {
           </div>
           <div id={listId} className={"rrze-elements-blocks__carousel-container"}>
             <div className={"rrze-elements-blocks__carousel-content"} ref={scrollRef}>
+              {/* Keep list semantics in Safari/VoiceOver when list-style is none. */}
+              {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
               <ul aria-labelledby={headingId} role={"list"}
                   className={"rrze-elements-blocks__carousel-content-list"} {...innerBlocksProps} >
               </ul>

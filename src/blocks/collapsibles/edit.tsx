@@ -18,7 +18,7 @@ import { useEffect } from "@wordpress/element";
 /**
  * Retrieve all blocks, including nested ones.
  *
- * @param blocks  - List of top-level blocks.
+ * @param blocks - List of top-level blocks.
  * @returns       - List of all blocks, including nested ones.
  */
 

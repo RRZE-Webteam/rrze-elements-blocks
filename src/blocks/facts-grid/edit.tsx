@@ -1,5 +1,7 @@
 import {
   useBlockProps,
+  // @ts-ignore
+  HeadingLevelDropdown,
   InnerBlocks, BlockControls, RichText,
 } from "@wordpress/block-editor";
 import {useSelect} from "@wordpress/data";
@@ -7,8 +9,6 @@ import type {ComponentProps} from "react";
 import {__} from "@wordpress/i18n";
 import {SVG, Path, ToolbarItem, ToolbarDropdownMenu, ToolbarGroup} from "@wordpress/components";
 
-// @ts-ignore
-import {HeadingLevelDropdown} from "@wordpress/block-editor";
 
 type WPBlock = {
   clientId: string;

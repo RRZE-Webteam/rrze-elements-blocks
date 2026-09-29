@@ -87,9 +87,9 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 
 	let hint = "";
 	if (Math.round(width * 0.125) >= 50 && Math.round(width * 0.125) <= 75) {
-		hint = __(" (Ideale Leselänge)", "rrze-elements-blocks");
+		hint = " " + __("(Ideale Leselänge)", "rrze-elements-blocks");
 	} else if (width <= 300 || width >= 1040) {
-		hint = __(" (Außerhalb des sichtbaren Bereichs)", "rrze-elements-blocks");
+		hint = " " + __("(Außerhalb des sichtbaren Bereichs)", "rrze-elements-blocks");
 	} else {
 		hint = "";
 	}
@@ -117,9 +117,9 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 				/>
 			</BlockControls>
 			{active &&
-				__("Ca. ") +
+				__("Ca.", "rrze-elements-blocks") + " " +
 					Math.round(width * 0.125) +
-					__(" Zeichen", "rrze-elements-blocks") +
+					" " + __("Zeichen", "rrze-elements-blocks") +
 					hint}
 			<ResizableBox
 				className={`limit-width cwl-${alignment}`}
@@ -137,13 +137,13 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 				onResize={onChangeResizer as any}
 				size={{
 					height: "auto",
-					width: width,
+					width,
 				}}
 			>
 				<div
 					style={{
 						alignItems: "center",
-						background: background,
+						background,
 						display: "flex",
 						height: "100%",
 						justifyContent: "left",

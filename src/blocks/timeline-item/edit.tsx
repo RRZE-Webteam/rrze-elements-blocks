@@ -1,9 +1,9 @@
 import {
   useBlockProps,
   InnerBlocks,
+  RichText,
 } from "@wordpress/block-editor";
 
-import { RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
 import { useEffect } from "@wordpress/element";

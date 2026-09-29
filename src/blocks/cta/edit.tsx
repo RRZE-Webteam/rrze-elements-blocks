@@ -134,10 +134,10 @@ export default function Edit({
       <BlockControls>
         <CustomMediaReplaceFlow
           attributes={{
-            id: id,
-            url: url,
-            alt: alt,
-            srcset: srcset,
+            id,
+            url,
+            alt,
+            srcset,
           }}
           setAttributes={setAttributes}
         />
@@ -218,7 +218,7 @@ export default function Edit({
         )}
         {!isSearch && (
           <div className="cta-button-container">
-            <a ref={setUrlPopoverAnchor} className="btn cta-button">
+            <a ref={setUrlPopoverAnchor} className="btn cta-button" href={buttonUrl || undefined} onClick={(event) => event.preventDefault()}>
               <RichText
                 tagName="span"
                 value={buttonText}

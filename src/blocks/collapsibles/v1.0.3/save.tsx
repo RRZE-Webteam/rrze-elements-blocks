@@ -18,6 +18,8 @@ const Save = ({ attributes }: BlockSaveProps<AttributesV1>) => {
                 className="expand-all standard-btn primary-btn xsmall-btn"
                 data-status="closed"
               >
+                {/* Preserve the historical translation domain for saved-block validation. */}
+                {/* eslint-disable-next-line @wordpress/i18n-text-domain */}
                 {__("Expand All", "rrze-elements-b")}
               </button>
             </div>

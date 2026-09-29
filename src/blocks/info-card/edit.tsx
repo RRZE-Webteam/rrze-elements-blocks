@@ -5,7 +5,8 @@ import {
   InnerBlocks,
   MediaReplaceFlow,
   LinkControl,
-  InspectorControls
+  InspectorControls,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {
   ToolbarGroup,
@@ -19,7 +20,6 @@ import {desktop, tablet, mobile, link} from "@wordpress/icons";
 import {__} from "@wordpress/i18n";
 import {getImageBrightness} from "../../utility/color";
 import {useDispatch, useSelect} from "@wordpress/data";
-import {store as blockEditorStore} from "@wordpress/block-editor";
 import {CharacterCountProgressBar} from "../../components/ProgressBar";
 import {DeviceType, InfoCardAttributes, InfoCardCustomStyles} from "./types";
 import CarouselSettingsPanel from "./inspectorControls/CarouselSettingsPanel";
@@ -53,12 +53,12 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const {parentId, parentAttributes, parentBlockName, hasInnerBlocks} = useSelect((select) => {
     const {getBlockParents, getBlockAttributes, getBlock} = select(blockEditorStore);
     const parents = getBlockParents(clientId);
-    const parentId = parents.length > 0 ? parents[parents.length - 1] : null;
-    const parentBlock = parentId ? getBlock(parentId) : null;
+    const parentClientId = parents.length > 0 ? parents[parents.length - 1] : null;
+    const parentBlock = parentClientId ? getBlock(parentClientId) : null;
     const block = getBlock(clientId);
     return {
-      parentId,
-      parentAttributes: parentId ? getBlockAttributes(parentId) : null,
+      parentId: parentClientId,
+      parentAttributes: parentClientId ? getBlockAttributes(parentClientId) : null,
       parentBlockName: parentBlock?.name ?? null,
       hasInnerBlocks: !!block?.innerBlocks?.length,
     };
@@ -131,7 +131,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
 
   const blockProps = useBlockProps({
     className: `rrze-elements-blocks__carousel-content-list-item ${imageStatus}`,
-    ref: ref
+    ref
   });
 
   const isLinkCard = !!attributes.url;
@@ -141,9 +141,9 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const backgroundOverlayEnabled = attributes.backgroundOverlayEnabled ?? false;
 
   const deviceIcons = {
-    desktop: desktop,
-    tablet: tablet,
-    mobile: mobile,
+    desktop,
+    tablet,
+    mobile,
   };
 
   useEffect(() => {
@@ -252,11 +252,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     return ['#fff', '#ffffff', 'fff', 'ffffff', 'rgb(255,255,255)', 'rgba(255,255,255,1)', 'white'].includes(normalized);
   };
   const needsLightShadow = [desktopFinalColor, tabletFinalColor, mobileFinalColor].some((color) => isWhite(color));
-  const cardTextShadow = !textShadowEnabled
-    ? 'none'
-    : hasBackgroundImage
-      ? `1px 1px 2px ${needsLightShadow ? '#ddd' : '#222'}`
-      : 'none';
+  const shadowColor = needsLightShadow ? '#ddd' : '#222';
+  const cardTextShadow = textShadowEnabled && hasBackgroundImage
+    ? `1px 1px 2px ${shadowColor}`
+    : 'none';
 
   const clampFocusValue = (value: number) => Math.min(1, Math.max(0, value));
   const formatFocusPercentage = (value: number) => `${parseFloat((clampFocusValue(value) * 100).toFixed(2))}%`;

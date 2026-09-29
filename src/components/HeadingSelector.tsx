@@ -25,7 +25,7 @@ type SaveProps = {
 /**
  * Checks the heading level and returns the corresponding icon
  * @param hstart - The heading level
- * @returns
+ * @returns The heading icon, defaulting to level two.
  */
 const checkHeadingLevelIcon = (hstart: number) => {
   switch (hstart) {

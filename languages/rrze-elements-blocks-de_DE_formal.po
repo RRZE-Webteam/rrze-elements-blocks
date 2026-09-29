@@ -269,8 +269,8 @@ msgstr "Die Suchergebnisse wurden aktualisiert."
 #: build/blocks/cta/index.js:1 build/blocks/fact/index.js:1
 #: build/blocks/iconbox/index.js:1 build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1 build/blocks/tabs/index.js:1
-msgid "Icons are provided by "
-msgstr "Icons werden bereitgestellt durch "
+msgid "Icons are provided by"
+msgstr "Icons werden bereitgestellt durch"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 #: build/blocks/cta/index.js:1 build/blocks/fact/index.js:1
@@ -385,11 +385,8 @@ msgid "This jump name is a duplicate."
 msgstr "Dieser Sprungmarke ist ein Duplikat."
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-msgid ""
-"If enabled, the jump link will not be overwritten automatically any longer. "
-msgstr ""
-"Wenn diese Option aktiviert ist, wird die Sprungmarke nicht mehr automatisch "
-"überschrieben. "
+msgid "If enabled, the jump link will not be overwritten automatically any longer."
+msgstr "Wenn diese Option aktiviert ist, wird die Sprungmarke nicht mehr automatisch überschrieben."
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 msgid "Generate new jump name"
@@ -494,9 +491,8 @@ msgid "Lock Jump Link Name"
 msgstr "Name der Sprungmarke sperren"
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
-msgid "If enabled, the jump link will not generated automatically any longer. "
-msgstr ""
-"Falls aktiviert, wird die Sprungmarke nicht mehr automatisch generiert. "
+msgid "If enabled, the jump link will not generated automatically any longer."
+msgstr "Falls aktiviert, wird die Sprungmarke nicht mehr automatisch generiert."
 
 #: build/blocks/accordion/index.js:1 build/blocks/collapse/index.js:1
 msgid "Manage all Jump Names"
@@ -764,16 +760,16 @@ msgid "Display options for the Editor"
 msgstr "Darstellungsoptionen für den Editor"
 
 #: build/blocks/contentwidthlimiter/index.js:1
-msgid " (Ideale Leselänge)"
-msgstr " (Ideale Leselänge)"
+msgid "(Ideale Leselänge)"
+msgstr "(Ideale Leselänge)"
 
 #: build/blocks/contentwidthlimiter/index.js:1
-msgid " (Außerhalb des sichtbaren Bereichs)"
-msgstr " (Außerhalb des sichtbaren Bereichs)"
+msgid "(Außerhalb des sichtbaren Bereichs)"
+msgstr "(Außerhalb des sichtbaren Bereichs)"
 
 #: build/blocks/contentwidthlimiter/index.js:1
-msgid " Zeichen"
-msgstr " Characters"
+msgid "Zeichen"
+msgstr "Characters"
 
 #: build/blocks/counter-row/index.js:1
 msgid "Preview Animation"

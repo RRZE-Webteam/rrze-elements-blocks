@@ -295,7 +295,7 @@ msgstr ""
 #: build/blocks/notice/index.js:1
 #: build/blocks/tab/index.js:1
 #: build/blocks/tabs/index.js:1
-msgid "Icons are provided by "
+msgid "Icons are provided by"
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -448,7 +448,7 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
-msgid "If enabled, the jump link will not be overwritten automatically any longer. "
+msgid "If enabled, the jump link will not be overwritten automatically any longer."
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -577,7 +577,7 @@ msgstr ""
 
 #: build/blocks/accordion/index.js:1
 #: build/blocks/collapse/index.js:1
-msgid "If enabled, the jump link will not generated automatically any longer. "
+msgid "If enabled, the jump link will not generated automatically any longer."
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -898,15 +898,15 @@ msgid "Display options for the Editor"
 msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
-msgid " (Ideale Leselänge)"
+msgid "(Ideale Leselänge)"
 msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
-msgid " (Außerhalb des sichtbaren Bereichs)"
+msgid "(Außerhalb des sichtbaren Bereichs)"
 msgstr ""
 
 #: build/blocks/contentwidthlimiter/index.js:1
-msgid " Zeichen"
+msgid "Zeichen"
 msgstr ""
 
 #: build/blocks/counter-row/index.js:1

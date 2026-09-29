@@ -13,8 +13,7 @@ type AdvancedSettingsProps = {
 
 /**
  * Handles the Expand All Link selection inside the InspectorControls
- * @param attributes - The attributes of the block
- * @param setAttributes - The function to set the attributes of the block
+ * @param props - The block attributes and their update callback.
  * @returns JSX element
  * @see edit.js
  */

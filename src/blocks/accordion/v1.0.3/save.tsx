@@ -8,7 +8,6 @@ const Save = ({ attributes }: BlockSaveProps<AttributesV1>) => {
   const {
     sameBlockCount,
     totalChildrenCount,
-    color,
     title,
     svgString,
     ancestorCount,

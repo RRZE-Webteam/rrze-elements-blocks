@@ -25,8 +25,8 @@ interface BlockInfoProps {
 
 export const BlockInfo = ({ clientId }: BlockInfoProps) => {
     const block = useSelect(
-        (select): Block | null => {
-            const editorSelect = select(blockEditorStore);
+        (getStore): Block | null => {
+            const editorSelect = getStore(blockEditorStore);
             // @ts-ignore
           return editorSelect ? editorSelect.getBlock(clientId) : null;
         },
@@ -136,23 +136,8 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         setSelectedEntry(null);
     };
 
-    const handleAutoResolve = () => {
-        if (!selectedEntry) return;
-
-        const [firstClientId, ...remainingClientIds] = selectedEntry.clientIds;
-        remainingClientIds.forEach(clientId => {
-            const newJumpName = `panel_${clientId.slice(-8)}`;
-            removeJumpNameByClientId(clientId);
-            updateBlockAttributes(clientId, {
-                jumpName: newJumpName,
-                isCustomJumpname: false,
-            });
-        });
-        setSelectedEntry(null);
-    };
-
     const handleAutoResolveSingleEntry = (entry: JumpNameEntry) => {
-        const [firstClientId, ...remainingClientIds] = entry.clientIds;
+        const remainingClientIds = entry.clientIds.slice(1);
         remainingClientIds.forEach(clientId => {
             const newJumpName = `panel_${clientId.slice(-8)}`;
             removeJumpNameByClientId(clientId);
@@ -225,7 +210,7 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
                                     <ToggleControl
                                         label={__("Lock Jump Name", "rrze-elements-blocks")}
                                         checked={isCustomJumpname}
-                                        help={__("If enabled, the jump link will not be overwritten automatically any longer. ", "rrze-elements-blocks")}
+                                        help={__("If enabled, the jump link will not be overwritten automatically any longer.", "rrze-elements-blocks")}
                                         onChange={(isChecked) => handleLockChange(clientId, isChecked)}
                                     />
                                 </td>
@@ -354,9 +339,16 @@ const JumpNameResolverModal = ({ isOpen, onRequestClose }: JumpNameResolverModal
         return null;
     }
 
+    let modalTitle: string = __("Jump Name Manager", "rrze-elements-blocks");
+    if (selectedEntry) {
+        modalTitle = selectedEntry.clientIds.length > 1
+            ? __("Resolve Jump Name Conflict", "rrze-elements-blocks")
+            : __("Edit Jump Name", "rrze-elements-blocks");
+    }
+
     return createPortal(
         <Modal
-            title={selectedEntry ? (selectedEntry.clientIds.length > 1 ? __("Resolve Jump Name Conflict", "rrze-elements-blocks") : __("Edit Jump Name", "rrze-elements-blocks")) : __("Jump Name Manager", "rrze-elements-blocks")}
+            title={modalTitle}
             onRequestClose={onRequestClose}
             isFullScreen={true}
         >

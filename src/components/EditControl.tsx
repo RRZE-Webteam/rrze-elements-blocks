@@ -36,10 +36,9 @@ const EditControl = ({attributes, setAttributes}: EditControlProps) => {
 
   /**
    * Creates the SVG icon for the View Button
-   * @param fillColor - The color to fill the SVG path with
    * @returns         - The SVG icon
    */
-  const createViewIcon = (fillColor = "none") => (
+  const createViewIcon = () => (
     <SVG xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><Path
       d="M280-160v-640h400v640H280Zm-160-80v-480h80v480h-80Zm640 0v-480h80v480h-80Zm-400 0h240v-480H360v480Zm0 0v-480 480Z"/></SVG>
   );
@@ -49,7 +48,7 @@ const EditControl = ({attributes, setAttributes}: EditControlProps) => {
   }
 
   const inactiveEditIcon = createEditIcon("#D3D3D3");
-  const activeEditIcon = createViewIcon("currentColor");
+  const activeEditIcon = createViewIcon();
 
   return(
     <ToolbarGroup>

@@ -18,7 +18,6 @@ import { symbol } from "@wordpress/icons";
 import { useDispatch } from "@wordpress/data";
 
 // Custom components for enhancing block controls.
-import { IconPickerModalInset } from "../../components/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   TitleModal,
@@ -72,7 +71,7 @@ export default function Edit({
   const { icon } = attributes;
 
   // Hide the block in the editor if it is not active or xray is enabled.
-  let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
+  const classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
 
   // isOpen state is used to control the opening and closing of the icon picker modal
   const [isOpen, setOpen] = useState(false);
@@ -92,7 +91,7 @@ export default function Edit({
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ blockId: blockId });
+      setAttributes({ blockId });
     }
   }, [attributes.blockId, blockId]);
 

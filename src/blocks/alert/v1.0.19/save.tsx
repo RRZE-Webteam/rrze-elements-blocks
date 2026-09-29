@@ -3,16 +3,6 @@ import { BlockSaveProps } from "@wordpress/blocks";
 import { AttributesV1_0_19 } from "./attributes";
 import type { CSSProperties } from 'react';
 
-interface SaveProps {
-  attributes: {
-    style?: string;
-    color?: string;
-    title?: string;
-    textColor?: string;
-    borderColor?: string;
-  };
-}
-
 const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_19>) => {
   const blockProps = useBlockProps.save();
 

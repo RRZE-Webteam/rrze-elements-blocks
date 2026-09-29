@@ -4,7 +4,6 @@ import {
   BlockControls,
 } from "@wordpress/block-editor";
 
-import { __ } from "@wordpress/i18n";
 import { AlignmentBar } from "../../components/Alignment";
 
 interface EditProps {

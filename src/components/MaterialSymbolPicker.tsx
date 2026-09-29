@@ -51,7 +51,7 @@ type Maps = {
 const PAGE_SIZE = 120;
 
 /** Memoized grid so large lists don't re-render unnecessarily */
-const IconGrid = memo(function IconGrid({
+const IconGrid = memo(function MaterialIconGrid({
                                           icons,
                                           selected,
                                           onClick,
@@ -230,7 +230,7 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
   return (
     <>
       <p>
-        {__("Icons are provided by ", "rrze-elements-blocks")}
+        {__("Icons are provided by", "rrze-elements-blocks")}{" "}
         <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreferrer">
           Google Material Design Icons
         </a>

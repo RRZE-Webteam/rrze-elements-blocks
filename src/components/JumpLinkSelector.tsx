@@ -23,16 +23,16 @@ interface JumpNameEntry {
 }
 
 interface RrzeElementsBlocksSelectors {
-	jumpNameExists(jumpName: string): boolean;
-	getJumpNames(): JumpNameEntry[];
+	jumpNameExists: (jumpName: string) => boolean;
+	getJumpNames: () => JumpNameEntry[];
 }
 
 interface RrzeElementsBlocksActions {
-	addJumpName(
+	addJumpName: (
 		jumpName: string,
 		clientId: string,
-	): { type: string; jumpName: string; clientId: string };
-	removeJumpName(jumpName: string): { type: string; jumpName: string };
+	) => { type: string; jumpName: string; clientId: string };
+	removeJumpName: (jumpName: string) => { type: string; jumpName: string };
 }
 
 interface JumpLinkSelectorProps {
@@ -152,7 +152,7 @@ const JumpLinkSelector = ({
 					checked={attributes.isCustomJumpname}
 					__nextHasNoMarginBottom
 					label={__("Lock Jump Link Name", "rrze-elements-blocks")}
-					help={__("If enabled, the jump link will not generated automatically any longer. ", "rrze-elements-blocks")}
+					help={__("If enabled, the jump link will not generated automatically any longer.", "rrze-elements-blocks")}
 					onChange={(isCustomJumpname) =>
 						setAttributes({ isCustomJumpname })
 					}

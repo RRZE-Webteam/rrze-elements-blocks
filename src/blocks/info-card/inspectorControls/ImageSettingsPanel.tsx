@@ -38,7 +38,6 @@ const ImageSettingsPanel = ({
   mobileImageUrl,
   attributes,
   setAttributes,
-  onImageSelect,
 }: ImageSettingsPanelProps) => (
   <PanelBody title={__("Image Settings", "rrze-elements-blocks")} initialOpen={false}>
     <DeviceViewportToggle

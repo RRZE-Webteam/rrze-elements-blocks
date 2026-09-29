@@ -13,6 +13,7 @@ import {
   InspectorControls,
   BlockControls,
   RichText,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {BlockEditProps} from "@wordpress/blocks";
 import {seen, unseen, symbol} from "@wordpress/icons";
@@ -38,7 +39,6 @@ import {speak} from "@wordpress/a11y";
 
 import {useJumpNameStore} from "../../hooks/useJumpNameStore";
 import {useDispatch} from "@wordpress/data";
-import {store as blockEditorStore} from "@wordpress/block-editor";
 
 import {AttributesV1_0_12 as BlockAttributes} from "./index";
 import JumpNameResolverModal from "../../components/JumpNameResolverModal";
@@ -67,7 +67,7 @@ const Edit = ({
     setAttributes: (attrs) => setAttributes(attrs),
   });
 
-  let sameTypeSiblingsBefore = 0;
+  const sameTypeSiblingsBefore = 0;
 
   useEffect(() => {
     if (
