@@ -55,10 +55,8 @@ class Main
      */
     public function enqueueScripts()
     {
-        if (is_404() || is_search()) {
-            return;
-        }
-
+        // Templates can render interactive blocks on search and 404 pages, too.
+        // Register assets on every frontend request; rendering controls their enqueueing.
         wp_register_style(
             'rrze-elements-blocks',
             plugins_url('assets/css/rrze-elements-blocks.css', plugin_basename($this->pluginFile)),
@@ -92,7 +90,7 @@ class Main
         wp_register_script(
             'rrze-tabs',
             plugins_url('assets/js/tabs/rrze-tabs.min.js', plugin_basename($this->pluginFile)),
-            ['jquery'],
+            [],
             RRZE_ELEMENTSB_VERSION,
             true
         );
@@ -141,7 +139,7 @@ class Main
         wp_register_script(
             'rrze-carousel',
             plugins_url('assets/js/carousel/rrze-carousel.min.js', plugin_basename($this->pluginFile)),
-            ['rrze-gsap-scrolltrigger', 'rrze-gsap-scrolltoplugin'],
+            ['rrze-gsap-scrolltoplugin'],
             RRZE_ELEMENTSB_VERSION,
             true
         );
