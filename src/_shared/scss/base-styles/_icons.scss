@@ -48,3 +48,25 @@ ul[class^="rrze-elements-icon-list-"] {
         }
     }
 }
+
+// FAU-Elemental also draws its list markers with ::before. Its classic-list,
+// block-list and column selectors must not shrink the icon to a 2px-high bar.
+ul.rrze-elements-material-icon-list > li,
+body.wp-theme-FAU-Elemental .wp-block-post-content ul.rrze-elements-material-icon-list > li {
+    list-style-type: none;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -1.25em;
+        top: .35em;
+        width: .8em;
+        height: .8em;
+        background: var(--rrze-elements-list-icon-color, currentColor);
+        mask-image: var(--rrze-elements-list-icon);
+        mask-size: contain;
+        mask-position: center;
+        mask-repeat: no-repeat;
+    }
+}
