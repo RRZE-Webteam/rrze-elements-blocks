@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.3] - 2026-10-09
+- Temporarily disable automatic handling of the legacy `icon` and `list-icons` shortcodes and their FontAwesome-to-Material-Symbols mapping. Existing shortcode handlers remain in charge; explicit opt-in remains available.
+- Update dependencies.
+
 ## [1.2.0] - 2026-05-12
 Minor CSS Update for compatibility with FAU-Elemental Version 1.0.15.
 Please Update FAU-Elemental to >=1.0.15 when using this Plugin Version.
