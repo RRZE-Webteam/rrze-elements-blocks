@@ -19,7 +19,8 @@
     color: #fff;
     letter-spacing: 0.03em;
 
-    a {
+    // FAUdir cards keep their own link colors on their light background.
+    a:where(:not(.faudir *)) {
       color: #fff;
     }
 
