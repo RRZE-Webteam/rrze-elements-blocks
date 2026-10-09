@@ -7,6 +7,23 @@ Use Node.js 24.15 or newer within the 24.x LTS line, matching CI. The supported 
 1. Install the locked dependencies with `npm ci`. Use `npm install` when intentionally changing dependencies, and commit both `package.json` and `package-lock.json`.
 2. Sass is installed locally by `npm ci`; a global installation is not needed.
 
+### Dependency security updates
+
+Run `npm audit` and `composer audit --locked` when updating dependencies. The version-scoped `overrides` in `package.json` replace vulnerable transitive versions whose parent packages still require older ranges:
+
+| Package | Parent dependency | Fixed version floor |
+| --- | --- | --- |
+| `js-yaml` 5.x | `markdownlint-cli` | [5.4.1](https://github.com/advisories/GHSA-r3ph-w7gj-g6xm) |
+| `smol-toml` | `markdownlint-cli` | [1.8.1](https://github.com/advisories/GHSA-r4xh-jqrq-34v2) |
+| `katex` | `micromark-extension-math` via `markdownlint` | [0.18.2](https://github.com/advisories/GHSA-238p-pmpm-9mq7) |
+| `postcss-selector-parser` | `cssnano` 6 and its plugins | [7.1.6](https://github.com/advisories/GHSA-rj75-hqrm-r3gf) |
+| `serialize-javascript` | `copy-webpack-plugin` 10 | [7.0.5](https://github.com/advisories/GHSA-qj8w-gfj5-8c6v), also fixes [RCE](https://github.com/advisories/GHSA-5c6j-r48x-rmvq) |
+| `uuid` | `@wordpress/components` 30 and `sockjs` | [11.1.1](https://github.com/advisories/GHSA-w5hq-g745-h8pq) |
+
+The UUID override keeps CommonJS support for these consumers and leaves existing UUID 14 dependencies unchanged. The YAML override leaves the unaffected 4.x branch unchanged. Remove an override once the parent dependency accepts a fixed version, then regenerate the lockfile and run the checks and production build below. Avoid `npm audit fix --force`: its proposed WordPress downgrades do not preserve the dependency compatibility described below.
+
+As of 2026-10-09, the remaining npm finding is [GHSA-vfj7-8cjw-p6xm in `braces` 3.0.3](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm), for which no patched release is available. It is pulled in by the build and lint dependency chains; npm also reports affected parent packages for this same advisory. Keep the finding visible and reassess it when upstream releases a fix.
+
 ## JavaScript and TypeScript checks
 
 - `npm run lint` checks source files, unminified frontend scripts, Node configuration/scripts, and type declarations. The `tests/` and `legacy-tests/` directories are excluded.
