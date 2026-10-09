@@ -1,7 +1,12 @@
 @use "../designsystem/tokens/color" as color;
 
+// Legacy [accordion] groups can be outermost, including when callers render
+// their items before the wrapper. Use the final DOM to exclude nested groups;
+// :where() preserves the specificity of the existing collapsibles rules.
+$accordion-root: ":is(.wp-block-rrze-elements-collapsibles, .wp-block-rrze-elements-accordions:where(:not(.accordion *)))";
+
 .wp-theme-FAU-Elemental {
-  .wp-block-rrze-elements-collapsibles .block-editor-block-list__layout:last-child {
+  #{$accordion-root} .block-editor-block-list__layout:last-child {
     padding-bottom: 0;
     border-bottom: 0;
   }
@@ -10,7 +15,7 @@
     background: none;
   }
 
-  .wp-block-rrze-elements-collapsibles {
+  #{$accordion-root} {
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
@@ -24,7 +29,7 @@
     border-bottom: none;
   }
 
-  .wp-block-rrze-elements-collapsibles {
+  #{$accordion-root} {
     .accordion-group {
       border: none;
       border-top: 1px solid var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
@@ -173,7 +178,7 @@
     }
   }
 
-  .wp-block-rrze-elements-collapsibles .accordion-body {
+  #{$accordion-root} .accordion-body {
     & {
       background: none;
       padding: 0;
@@ -249,7 +254,7 @@
     padding-left: 2.5rem;
   }
 
-  .wp-block-rrze-elements-collapsibles {
+  #{$accordion-root} {
     .accordion-group.nat {
       .accordion-toggle::before {
         background: color.$fau-color-nat-green-100;
@@ -304,7 +309,7 @@
 }
 
 .wp-theme-FAU-Elemental .is-style-dark {
-  .wp-block-rrze-elements-collapsibles {
+  #{$accordion-root} {
     .accordion-group {
       border-top: 1px solid var(--FAU-Col-FAU-Weiss-100, color.$fau-color-fau-white-100);
       background-color: var(--FAU-Col-FAU-Blau-100, color.$fau-color-fau-blue-100);
