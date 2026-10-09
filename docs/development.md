@@ -52,6 +52,11 @@ Require the `php-security` status check in branch protection as well if Psalm fi
 For PHP development, run `composer install`, `composer test`, and `composer phpstan`. Commit `composer.lock` alongside dependency changes so local development and CI use the same versions. Composer resolves dependencies against PHP 8.0, the plugin's minimum version, even when updating them on newer PHP installations. `npm test` remains the existing PHPStan alias; use `npm run test:js` for JavaScript tests.
 
 ## Start the development process
+### Build a release archive
+Run `npm run update-version` after changing the version in `package.json`, and commit all generated changes in `build/` and `assets/css/`. Run `npm run plugin-zip` to create `rrze-elements-blocks.zip` from the production files listed in `package.json`.
+
+The archive must include `config/`, `assets/`, `webfonts/`, and `src/_shared/icons/` as well as the PHP code, translations, and compiled blocks. The icon sources are also read by PHP at runtime. The default `wp-scripts plugin-zip` file discovery omits these directories, so preserve the explicit `files` list. Composer dependencies are for development; the plugin uses its fallback class loader when `vendor/` is absent.
+
 Based on which part you're currently working on, you can follow these simple steps.
 ### Development for existing blocks via src/blocks via Webpack
 If you want to extend blocks in the src folder, follow these simple steps:
