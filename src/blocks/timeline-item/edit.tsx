@@ -1,9 +1,9 @@
 import {
   useBlockProps,
   InnerBlocks,
+  RichText,
 } from "@wordpress/block-editor";
 
-import { RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import HeadingComponent from "../../components/HeadingComponent";
 import { useEffect } from "@wordpress/element";
@@ -25,15 +25,16 @@ export default function Edit({
 }: SaveProps) {
   const props = useBlockProps();
   const title = attributes.title;
+  const inheritedHeadingLevel = context["rrze-elements/timeline-hstart"];
 
   /**
    * Set the heading level attribute based on the global setting.
    */
   useEffect(() => {
-    setAttributes({
-      hstart: context["rrze-elements/timeline-hstart"],
-    });
-  },[context["rrze-elements/timeline-hstart"]]);
+    if (attributes.hstart !== inheritedHeadingLevel) {
+      setAttributes({hstart: inheritedHeadingLevel});
+    }
+  }, [inheritedHeadingLevel, attributes.hstart, setAttributes]);
 
   // Function to handle the change of the title attribute.
   const onChangeTitle = (newText: string) => {

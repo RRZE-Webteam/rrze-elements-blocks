@@ -3,7 +3,7 @@ import {
   BlockControls, RichText,
   useBlockProps,
   InspectorControls,
-  __experimentalLinkControl as LinkControl,
+  LinkControl,
 } from "@wordpress/block-editor";
 import {IconMarkComponent} from "../../components/IconPicker";
 // @ts-ignore
@@ -153,7 +153,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
         </Popover>
       )}
       <li className="facts__item">
-        <span className="facts__icon" aria-hidden="true">
+        <span className="facts__icon">
           <IconMarkComponent className={"no-selection"} type={"symbol"} iconName={"add_reaction"}
                              materialSymbol={iconName}
                              onClick={openModal}/>
@@ -173,7 +173,7 @@ export default function Edit({attributes, setAttributes, isSelected}: EditProps)
           <CharacterCountProgressBar value={descriptionLength} maxValue={120}/>
         )}
         {isURLSet && isLinkTag && (
-          <a className="is-style-tertiary">
+          <a className="is-style-tertiary" href={buttonUrl} onClick={(event) => event.preventDefault()}>
             <RichText
               tagName="span"
               value={attributes.buttonText}

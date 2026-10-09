@@ -4,7 +4,6 @@ import {
 	InnerBlocks,
 	InspectorControls,
 	BlockControls,
-	__experimentalBlockVariationPicker as BlockVariationPicker,
 } from "@wordpress/block-editor";
 import { store as blocksStore } from "@wordpress/blocks";
 import { useState } from "@wordpress/element";
@@ -23,6 +22,7 @@ import {
 import { symbol } from "@wordpress/icons";
 import {IconMarkComponent} from "../../components/IconPicker";
 import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
+import VariationPicker, { type NoticeVariation } from "./VariationPicker";
 
 interface EditProps {
 	attributes: {
@@ -49,22 +49,26 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 
 	const blockName = "rrze-elements/notice";
 
-	const variations = useSelect(
+	const variations: NoticeVariation[] = useSelect(
 		(select) => {
 			const { getBlockVariations } = select(blocksStore) as any;
 			return getBlockVariations(blockName, "block");
 		},
 		[blockName],
-	);
+	) ?? [];
 
 	const matchedVariation = variations.find(
-		(variation: any) => variation.name === attributes.style,
+		(variation) => variation.name === attributes.style,
 	);
 
-  const [iconType, iconName] = matchedVariation?.iconClass.split(" ") || [];
+  const [iconType, iconName] = matchedVariation?.iconClass?.split(" ") || [];
 
 	const openModal = () => setOpen(true);
 	const closeModal = () => setOpen(false);
+	const selectVariation = (variation: NoticeVariation) => {
+		// Restore the preset icon, including when reselecting the current preset.
+		setAttributes({ style: variation.name, materialSymbol: "" });
+	};
 
 	return (
 		<div {...props}>
@@ -73,11 +77,10 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 					title={__("Style Settings", "rrze-elements-blocks")}
 					initialOpen={true}
 				>
-					<BlockVariationPicker
+					<VariationPicker
 						variations={variations}
-						onSelect={(variation) => {
-							setAttributes({ style: variation?.name });
-						}}
+						selectedName={attributes.style}
+						onSelect={selectVariation}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -117,11 +120,10 @@ export default function Edit({ attributes, setAttributes }: EditProps) {
 					icon="admin-plugins"
 					label={__("Notice", "rrze-elements-blocks")}
 				>
-					<BlockVariationPicker
+					<VariationPicker
 						variations={variations}
-						onSelect={(variation) => {
-							setAttributes({ style: variation?.name });
-						}}
+						selectedName={attributes.style}
+						onSelect={selectVariation}
 					/>
 				</Placeholder>
 			)}

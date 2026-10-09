@@ -1,85 +1,143 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
+const js = require( '@eslint/js' );
+const wordpress = require( '@wordpress/eslint-plugin' );
+const prettier = require( 'eslint-config-prettier' );
+const globals = require( 'globals' );
+const tsdoc = require( 'eslint-plugin-tsdoc' );
 
-const { FlatCompat } = require('@eslint/eslintrc');
-const js = require('@eslint/js');
-
-const typescriptEslintPlugin = require('@typescript-eslint/eslint-plugin');
-const typescriptEslintParser = require('@typescript-eslint/parser');
-const reactPlugin = require('eslint-plugin-react');
-const tsdocPlugin = require('eslint-plugin-tsdoc');
-const wordpressEslintPlugin = require('@wordpress/eslint-plugin');
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+const browserFiles = [ 'src/**/*.{js,jsx,ts,tsx}', 'assets/js/**/*.js' ];
+const nodeOnlyGlobals = Object.fromEntries(
+	Object.keys( globals.node )
+		.filter( ( name ) => ! ( name in globals.browser ) )
+		.map( ( name ) => [ name, 'off' ] )
+);
+const nodeGlobals = {
+	...globals.node,
+	window: 'off',
+	document: 'off',
+	wp: 'off',
+	SCRIPT_DEBUG: 'off',
+};
 
 module.exports = [
-  // Basis-Konfiguration für JavaScript
-  js.configs.recommended,
-  
-  // Gemeinsame Konfiguration für alle Dateien
-  ...compat.config({
-    plugins: ['react', 'tsdoc', '@wordpress'],
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-    env: {
-      browser: true,
-    },
-    rules: {
-      'react/jsx-key': 'error',
-      'tsdoc/syntax': 'warn',
-
-      // Weitere gemeinsame Regeln
-    },
-  }),
-  
-  // Spezifische Konfiguration für TypeScript-Dateien
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser: typescriptEslintParser,
-      parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
-        ecmaVersion: 2020,
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    plugins: {
-      '@typescript-eslint': typescriptEslintPlugin,
-      '@typescript-eslint/tsdoc': tsdocPlugin,
-    },
-    rules: {
-      // TypeScript-spezifische Regeln
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["error"],
-      'no-console': 'off'
-      // Weitere TypeScript-Regeln
-    },
-  },
-  
-  // Spezifische Konfiguration für JavaScript-Dateien
-  {
-    files: ['**/*.js', '**/*.jsx'],
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    rules: {
-      'no-unused-vars': 'error',
-      'no-console': 'off', 
-    },
-  },
+	{
+		ignores: [
+			'**/node_modules/**',
+			'**/vendor/**',
+			'build/**',
+			'dist/**',
+			'_tmp/**',
+			'coverage/**',
+			'legacy-tests/**',
+			'tests/**',
+			'playwright-report/**',
+			'test-results/**',
+			'blob-report/**',
+			'**/*.min.js',
+		],
+	},
+	js.configs.recommended,
+	...wordpress.configs.recommended,
+	// Formatting remains the responsibility of `npm run format`.
+	prettier,
+	{
+		languageOptions: {
+			ecmaVersion: 'latest',
+		},
+		rules: {
+			'prettier/prettier': 'off',
+			'no-console': 'off',
+			// Keep experimental WordPress APIs visible without blocking lint.
+			'@wordpress/no-unsafe-wp-apis': 'warn',
+			'@wordpress/i18n-text-domain': [
+				'error',
+				{ allowedTextDomain: 'rrze-elements-blocks' },
+			],
+		},
+	},
+	{
+		files: browserFiles,
+		languageOptions: {
+			globals: {
+				...nodeOnlyGlobals,
+				...globals.browser,
+				wp: 'readonly',
+			},
+		},
+	},
+	{
+		files: [ 'assets/js/**/*.js' ],
+		languageOptions: {
+			sourceType: 'script',
+		},
+	},
+	{
+		files: [ 'assets/js/accordion/*.js' ],
+		languageOptions: {
+			globals: { jQuery: 'readonly' },
+		},
+	},
+	{
+		files: [
+			'assets/js/carousel/*.js',
+			'assets/js/counter/*.js',
+			'assets/js/timeline/*.js',
+			'assets/js/scrollstories/*.js',
+		],
+		languageOptions: {
+			globals: {
+				gsap: 'readonly',
+				ScrollTrigger: 'readonly',
+				ScrollToPlugin: 'readonly',
+			},
+		},
+	},
+	{
+		files: [ '*.js' ],
+		settings: {
+			// Resolve runtime packages rather than their @types declarations.
+			'import/resolver': 'node',
+		},
+		languageOptions: {
+			sourceType: 'commonjs',
+			globals: nodeGlobals,
+		},
+	},
+	{
+		files: [ '*.ts' ],
+		languageOptions: {
+			globals: nodeGlobals,
+		},
+	},
+	{
+		files: [ 'src/blocks/**/deprecated.tsx', 'src/blocks/**/v*/**/*.{ts,tsx}' ],
+		rules: {
+			// Preserve readable version numbers in historical save/migration aliases.
+			camelcase: [ 'error', {
+				properties: 'never',
+				allow: [ '^(?:[Aa]ttributes|save|migrate)V\\d+(?:_\\d+)+$' ],
+			} ],
+		},
+	},
+	{
+		files: [ '**/*.{ts,tsx}' ],
+		plugins: { tsdoc },
+		settings: {
+			jsdoc: {
+				mode: 'typescript',
+				tagNamePreference: { returns: 'returns', yields: 'yields' },
+			},
+		},
+		// The WordPress preset supplies the TS parser and syntax-only rules.
+		// Keep type checking in `npm run typecheck`; no parserOptions.project.
+		rules: {
+			'no-undef': 'off',
+			'no-unused-expressions': 'off',
+			'@typescript-eslint/no-unused-expressions': 'error',
+			// TSDoc documents the props object; its properties belong in the type.
+			// Dotted @param names required by JSDoc are invalid in TSDoc.
+			'jsdoc/require-param': [ 'error', { checkDestructured: false } ],
+			'jsdoc/check-param-names': [ 'error', { checkDestructured: false } ],
+			'tsdoc/syntax': 'warn',
+		},
+	},
 ];

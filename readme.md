@@ -22,6 +22,21 @@ Die Nutzerdokumentation ist selbsterklärend und bei der Nutzung des Blocks ersi
 ## Entwicklung
 Tipps zur Entwicklung finden sich unter /docs
 
+## Bestehende Icon-Shortcodes
+
+`[icon]` und `[list-icons]` aus RRZE Elements werden automatisch übernommen:
+
+```text
+[icon icon="solid pencil" style="2x, border" color="fau" alt="Bearbeiten"]
+[list-icons icon="check" color="#04316a"]<ul><li>Listenpunkt</li></ul>[/list-icons]
+```
+
+Die alten Namen werden ausschließlich über `src/_shared/icons/sprites/material-symbols/mapping/fontAwesome6ToMaterialSymbols.json` auf lokal vorhandene Material Symbols abgebildet. Die Präfixe `solid`, `regular` und `brands` werden weiterhin akzeptiert; die Darstellung verwendet immer Material Symbols. Es gibt keinen Font-Awesome-Fallback und keine automatische Namenssuche. Fehlende Zuordnungen oder SVG-Dateien ergeben „Icon not found.“; Listeninhalte bleiben erhalten. Das betrifft auch Markenlogos ohne Zuordnung.
+
+`[icon]` unterstützt weiterhin `2x` bis `5x`, `border`, `pull-left`, `pull-right`, Fakultätsfarben und Hexfarben. Ohne `alt` ist das Icon dekorativ, mit `alt` erhält es einen zugänglichen Namen. `[list-icons]` ersetzt die Aufzählungszeichen ungeordneter Listen; vorhandene Klassen und Attribute bleiben erhalten.
+
+Die Familie `icon` lässt sich über `rrze_elements_blocks_legacy_shortcode_families` deaktivieren. Shortcodes anderer Plugins werden nicht überschrieben.
+
 ## Fehler melden & Feedback
 Feedback und Fehler können als Issue im GitHub Repository oder als E-Mail an webmaster@fau.de mit Betreff "Elements-Blocks" gemeldet werden.
 

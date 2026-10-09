@@ -1,3 +1,4 @@
+import "../../components/editor-controls.scss";
 // Imports from WordPress libraries
 import {
   useBlockProps,
@@ -19,8 +20,8 @@ import {
   CheckboxControl,
   RangeControl,
   ToolbarDropdownMenu,
-  __experimentalText as Text,
-  __experimentalSpacer as Spacer, SVG, Path,
+  SVG,
+  Path,
 } from "@wordpress/components";
 
 import {__} from "@wordpress/i18n";
@@ -265,8 +266,7 @@ export default function Edit({attributes, setAttributes}: EditProps) {
               title={__("This Block is currently mirroring another block", "rrze-elements-blocks")}
               initialOpen={true}
             >
-              <Text>{__("To ease the process of migrating onto the new theme, this block mirrors the Block fau-teaser-grid. You can deactivate this behavior via the following Checkbox.", "rrze-elements-blocks")}</Text>
-              <Spacer/>
+              <p className="rrze-editor-description">{__("To ease the process of migrating onto the new theme, this block mirrors the Block fau-teaser-grid. You can deactivate this behavior via the following Checkbox.", "rrze-elements-blocks")}</p>
               <CheckboxControl
                 label={__("Stop Mirroring the FAU-Teaser-Grid", "rrze-elements-blocks")}
                 checked={attributes.legacyMode}
@@ -274,7 +274,6 @@ export default function Edit({attributes, setAttributes}: EditProps) {
                   legacyMode : true
                 })}
               />
-              <Spacer/>
             </PanelBody>
           </>
           :
@@ -422,15 +421,15 @@ export default function Edit({attributes, setAttributes}: EditProps) {
           block="rrze-elements/news"
           key={renderVersion}
           attributes={{
-            title: title,
+            title,
             num: attributes.num,
             cat: attributes.cat,
             columns: attributes.columns,
-            tag: tag,
+            tag,
             type: attributes.type,
             has_thumbnail: attributes.has_thumbnail,
-            divclass: divclass,
-            hidemeta: hidemeta,
+            divclass,
+            hidemeta,
             sticky_only: attributes.sticky_only,
             hideduplicates: attributes.hideduplicates,
             display: attributes.display,

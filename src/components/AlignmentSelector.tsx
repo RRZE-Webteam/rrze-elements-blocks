@@ -1,10 +1,9 @@
+import { ToggleGroupControl, ToggleGroupControlOptionIcon } from "./ToggleGroupControl";
 import {__} from "@wordpress/i18n";
 import {
   ToolbarDropdownMenu,
   ToolbarItem,
   ToolbarGroup,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 } from "@wordpress/components";
 import {
   justifyBottom,
@@ -99,6 +98,7 @@ const AlignmentSelectorPanel = ({
 
   return (
     <ToggleGroupControl
+      __next40pxDefaultSize
       label={__("Control the image alignment", "rrze-elements-blocks")}
       value={mediaAlignment}
       isBlock

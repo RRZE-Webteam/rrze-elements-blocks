@@ -1,5 +1,4 @@
-import { registerBlockType } from "@wordpress/blocks";
-import { createBlock } from "@wordpress/blocks";
+import { registerBlockType , createBlock } from "@wordpress/blocks";
 
 import Edit from "./edit";
 import metadata from "./block.json";
@@ -76,7 +75,7 @@ registerBlockType(
 					type: "shortcode",
 					tag: "limit-width",
 					transform: (attributes: ShortcodeTransformAttributes, data: any) => {
-						let cleanData = data.shortcode?.content;
+						const cleanData = data.shortcode?.content;
 						const blockContent = createBlock("core/freeform", {
 							content: cleanData,
 						});

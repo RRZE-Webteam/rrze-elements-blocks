@@ -1,3 +1,4 @@
+import "./editor-controls.scss";
 import type {KeyboardEvent} from "react";
 import {
   Fragment,
@@ -11,10 +12,6 @@ import {
 } from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import {
-  __experimentalDivider as Divider,
-  __experimentalGrid as Grid,
-  __experimentalHeading as Heading,
-  __experimentalSpacer as Spacer,
   Button,
   SearchControl,
   Spinner,
@@ -51,7 +48,7 @@ type Maps = {
 const PAGE_SIZE = 120;
 
 /** Memoized grid so large lists don't re-render unnecessarily */
-const IconGrid = memo(function IconGrid({
+const IconGrid = memo(function MaterialIconGrid({
                                           icons,
                                           selected,
                                           onClick,
@@ -61,7 +58,7 @@ const IconGrid = memo(function IconGrid({
   onClick: (value: string) => void;
 }) {
   return (
-    <Grid columns={12}>
+    <div className="rrze-editor-icon-grid">
       {icons.map((icon) => (
         <Button
           key={icon}
@@ -75,7 +72,7 @@ const IconGrid = memo(function IconGrid({
           <span className={`material-symbols-outlined ${icon}`}>{icon}</span>
         </Button>
       ))}
-    </Grid>
+    </div>
   );
 });
 
@@ -185,17 +182,6 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
     [maps]
   );
 
-  // Only trigger search on Enter or button click
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        handleSearch();
-      }
-    },
-    [searchQuery, maps]
-  );
-
   const handleSearch = useCallback(() => {
     if (!maps) return;
     startTransition(() => {
@@ -206,6 +192,17 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
       speak(__("The search results got updated.", "rrze-elements-blocks"));
     });
   }, [maps, searchQuery, searchIcons]);
+
+  // Only trigger search on Enter or button click
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleSearch();
+      }
+    },
+    [handleSearch]
+  );
 
   // Visible pages (avoid rendering everything at once)
   const visibleSearchIcons = useMemo(
@@ -230,7 +227,7 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
   return (
     <>
       <p>
-        {__("Icons are provided by ", "rrze-elements-blocks")}
+        {__("Icons are provided by", "rrze-elements-blocks")}{" "}
         <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreferrer">
           Google Material Design Icons
         </a>
@@ -240,10 +237,10 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
         )}
       </p>
 
-      <Spacer paddingTop="1rem" paddingBottom="1rem">
-        <Spacer paddingTop="1rem" paddingBottom="1rem">
-          <Heading>{__("Search for an Icon", "rrze-elements-blocks")}</Heading>
-        </Spacer>
+      <div className="rrze-editor-section">
+        <div className="rrze-editor-section">
+          <h2 className="rrze-editor-heading">{__("Search for an Icon", "rrze-elements-blocks")}</h2>
+        </div>
 
         <SearchControl
           label={__("Select an icon", "rrze-elements-blocks")}
@@ -266,8 +263,8 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
         )}
 
         {showSearchResults ? (
-          <Spacer paddingTop="1rem" paddingBottom="1rem">
-            <Heading>{__("Search Results", "rrze-elements-blocks")}</Heading>
+          <div className="rrze-editor-section">
+            <h2 className="rrze-editor-heading">{__("Search Results", "rrze-elements-blocks")}</h2>
             <IconGrid
               icons={visibleSearchIcons}
               selected={materialSymbol}
@@ -280,12 +277,12 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
                 </Button>
               </div>
             )}
-          </Spacer>
+          </div>
         ) : (
           <>
-            <Spacer paddingBottom="1rem" paddingTop="1rem">
-              <Divider/>
-            </Spacer>
+            <div className="rrze-editor-section">
+              <hr className="rrze-editor-divider" />
+            </div>
 
             <Fragment>
               <span
@@ -298,8 +295,8 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
               </Button>
             </Fragment>
 
-            <Spacer paddingTop="1rem" paddingBottom="1rem">
-              <Heading>{__("Material Symbols", "rrze-elements-blocks")}</Heading>
+            <div className="rrze-editor-section">
+              <h2 className="rrze-editor-heading">{__("Material Symbols", "rrze-elements-blocks")}</h2>
               <IconGrid
                 icons={visiblePopularIcons}
                 selected={materialSymbol}
@@ -318,9 +315,9 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
                   </Button>
                 ) : (
                   <>
-                    <Heading>{__("FAU-exklusive Icons", "rrze-elements-blocks")}</Heading>
+                    <h2 className="rrze-editor-heading">{__("FAU-exklusive Icons", "rrze-elements-blocks")}</h2>
                     <br/>
-                    <Grid columns={5}>
+                    <div className="rrze-editor-icon-grid rrze-editor-icon-grid--exclusive">
                       {EXCLUSIVE_ICONS.map(({name, svg}) => (
                         <Button
                           key={name}
@@ -336,17 +333,17 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
       </span>
                         </Button>
                       ))}
-                    </Grid>
+                    </div>
                     <br/>
                       <Button variant="tertiary" onClick={() => setIsExclusive(false)}>
                         {__("Back to Material Symbols", "rrze-elements-blocks")}
                       </Button>
                   </>
                 )}
-            </Spacer>
+            </div>
           </>
         )}
-      </Spacer>
+      </div>
     </>
   );
 };

@@ -44,7 +44,7 @@ const transforms = {
       type: "shortcode",
       tag: "text-columns",
       transform: (attributes: ShortcodeTransformAttributes, data: any) => {
-        let cleanData = data.shortcode?.content;
+        const cleanData = data.shortcode?.content;
         const numberChoice = (number: string) => {
           return parseInt(number);
         };

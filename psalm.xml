@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psalm
+    xmlns="https://getpsalm.org/schema/config"
+    phpVersion="8.0"
+    resolveFromConfigFile="true"
+>
+    <projectFiles>
+        <directory name="includes" />
+        <directory name="config" />
+        <file name="rrze-elements-blocks.php" />
+    </projectFiles>
+    <stubs>
+        <file name="_tmp/psalm/wordpress-stubs.php" />
+    </stubs>
+</psalm>

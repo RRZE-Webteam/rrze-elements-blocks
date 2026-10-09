@@ -9,7 +9,7 @@ import { store as noticesStore } from "@wordpress/notices";
 import { isBlobURL, revokeBlobURL } from "@wordpress/blob";
 import { useDispatch } from "@wordpress/data";
 import { trash } from "@wordpress/icons";
-import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useRef } from "@wordpress/element";
 
 interface CustomMediaReplaceFlowProps {
 	attributes: {
@@ -29,9 +29,13 @@ const CustomMediaReplaceFlow = ({
 }: CustomMediaReplaceFlowProps) => {
 	const { id, url } = attributes;
 	const { createErrorNotice } = useDispatch(noticesStore);
-	const [blobURL, setBlobURL] = useState<string | undefined>();
+	const hasInitialized = useRef(false);
+	const blobURL = useRef<string | undefined>(undefined);
 
 	useEffect(() => {
+		// Clear stale uploads only on mount; a new upload may also have no ID yet.
+		if (hasInitialized.current) return;
+		hasInitialized.current = true;
 		if (!id && isBlobURL(url)) {
 			setAttributes({
 				url: undefined,
@@ -40,15 +44,13 @@ const CustomMediaReplaceFlow = ({
 				srcset: undefined,
 			});
 		}
-	}, []);
+	}, [id, url, setAttributes]);
 
 	useEffect(() => {
-		if (isBlobURL(url)) {
-			setBlobURL(url);
-		} else {
-			revokeBlobURL(blobURL);
-			setBlobURL(undefined);
+		if (blobURL.current && blobURL.current !== url) {
+			revokeBlobURL(blobURL.current);
 		}
+		blobURL.current = isBlobURL(url) ? url : undefined;
 	}, [url]);
 
 	const onSelectImage = (image: any) => {

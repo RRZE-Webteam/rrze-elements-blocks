@@ -1,8 +1,7 @@
+import { ToggleGroupControl, ToggleGroupControlOption } from "../../../components/ToggleGroupControl";
 import {
   PanelBody,
   TextControl,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
   FocalPointPicker,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -38,7 +37,6 @@ const ImageSettingsPanel = ({
   mobileImageUrl,
   attributes,
   setAttributes,
-  onImageSelect,
 }: ImageSettingsPanelProps) => (
   <PanelBody title={__("Image Settings", "rrze-elements-blocks")} initialOpen={false}>
     <DeviceViewportToggle
@@ -75,6 +73,7 @@ const ImageSettingsPanel = ({
       />
     )}
     <ToggleGroupControl
+      __next40pxDefaultSize
       isBlock
       label={__("Image Fit", "rrze-elements-blocks")}
       value={attributes.imageObjectFit || 'cover'}

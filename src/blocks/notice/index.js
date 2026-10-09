@@ -17,5 +17,5 @@ registerBlockType( metadata.name, {
 	edit: Edit,
 	// @see ./save.js
   save: () => <InnerBlocks.Content />,
-	transforms: transforms,
+	transforms,
 } );

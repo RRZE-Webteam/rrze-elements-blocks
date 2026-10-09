@@ -1,5 +1,5 @@
+import "../../components/editor-controls.scss";
 import {
-  AlignmentControl,
   AlignmentToolbar,
   BlockControls,
   InspectorControls,
@@ -10,6 +10,7 @@ import {
   RichText,
   MediaUpload,
   MediaUploadCheck,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {
   Button,
@@ -20,15 +21,12 @@ import {
   TextControl,
   ToolbarButton,
   ToolbarGroup,
-  __experimentalVStack as VStack,
-  __experimentalText as Text,
-  __experimentalSpacer as Spacer,
+  Flex,
 } from "@wordpress/components";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {useCallback, useEffect, useState} from "@wordpress/element";
 import {__, sprintf} from "@wordpress/i18n";
 import {closeSmall, gallery, image, trash} from "@wordpress/icons";
-import {store as blockEditorStore} from "@wordpress/block-editor";
 import {store as noticesStore} from "@wordpress/notices";
 import {
   AccordionItemAttributes,
@@ -167,21 +165,21 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
     storedImageCaption ?? attachmentCaption;
 
   const updateActiveItemImage = (
-    attributes: Partial<AccordionItemAttributes>,
+    imageAttributes: Partial<AccordionItemAttributes>,
   ) => {
     if (!activeItem) {
       return;
     }
 
-    updateBlockAttributes(activeItem.clientId, attributes);
+    updateBlockAttributes(activeItem.clientId, imageAttributes);
   };
 
   const updateItemImage = useCallback(
     (
       itemClientId: string,
-      attributes: Partial<AccordionItemAttributes>,
+      imageAttributes: Partial<AccordionItemAttributes>,
     ) => {
-      updateBlockAttributes(itemClientId, attributes);
+      updateBlockAttributes(itemClientId, imageAttributes);
     },
     [updateBlockAttributes],
   );
@@ -249,10 +247,12 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
               name={
                 imageUrl
                   ? sprintf(
+                    // translators: %s: Accordion section title.
                     __("Replace image for accordion tab “%s”", "rrze-elements-blocks"),
                     activeItemLabel || __("Untitled", "rrze-elements-blocks")
                   )
                   : sprintf(
+                    // translators: %s: Accordion section title.
                     __("Add image for accordion section “%s”", "rrze-elements-blocks"),
                     activeItemLabel || __("Untitled", "rrze-elements-blocks")
                   )
@@ -324,8 +324,8 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
 
       <InspectorControls>
         <PanelBody>
-          <Text>{__("Control all images inside this Block via the Media Manager.", "rrze-elements-blocks")}</Text>
-          <Spacer paddingTop="1rem" paddingBottom="1rem">
+          <p className="rrze-editor-description" style={{ marginBottom: 0 }}>{__("Control all images inside this Block via the Media Manager.", "rrze-elements-blocks")}</p>
+          <div className="rrze-editor-section">
             <Button
               ref={setImageManagerButtonRef}
               icon={gallery}
@@ -338,7 +338,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
               onClick={() => setIsImageManagerOpen((isOpen) => !isOpen)}>
               {__("Open Media Manager", "rrze-elements-blocks")}
             </Button>
-          </Spacer>
+          </div>
         </PanelBody>
         <PanelBody
           title={__("Accordion images", "rrze-elements-blocks")}
@@ -363,7 +363,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
                   "rrze-elements-blocks",
                 )}
               />
-              <VStack>
+              <Flex direction="column" align="stretch" justify="center" gap={2}>
                 <MediaUploadCheck>
                   <MediaUpload
                     allowedTypes={["image"]}
@@ -392,10 +392,9 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
                 >
                   {__("Remove image", "rrze-elements-blocks")}
                 </Button>
-              </VStack>
+              </Flex>
               {imageUrl && (
-                <>
-                  <Spacer/>
+                <div style={{ marginTop: 8 }}>
                   <TextControl
                     label={__("Alt text", "rrze-elements-blocks")}
                     value={imageAlt}
@@ -407,7 +406,7 @@ const Edit = ({clientId, attributes, setAttributes}: EditProps) => {
                       "rrze-elements-blocks",
                     )}
                   />
-                </>
+                </div>
               )}
             </>
           )}

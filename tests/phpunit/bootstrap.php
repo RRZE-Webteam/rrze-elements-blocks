@@ -46,7 +46,7 @@ function esc_html__($text, $domain = null): string
 
 function esc_attr($text): string
 {
-    return is_scalar($text) ? (string)$text : '';
+    return htmlspecialchars(is_scalar($text) ? (string)$text : '', ENT_QUOTES, 'UTF-8', false);
 }
 
 function esc_html($text): string

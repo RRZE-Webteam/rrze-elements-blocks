@@ -3,28 +3,11 @@ import { BlockSaveProps } from "@wordpress/blocks";
 import HeadingComponent from "../../../components/HeadingComponent";
 import { AttributesV1_0_8 } from "./attributes";
 
-interface Attributes extends Record<string, unknown> {
-  totalChildrenCount?: number;
-  sameBlockCount?: number;
-  title: string;
-  color: string;
-  loadOpen: boolean;
-  icon: string;
-  hstart?: number;
-  jumpName?: string;
-  svgString?: string;
-  ancestorCount?: number;
-}
-
-interface SaveProps {
-  attributes: Attributes;
-}
 const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_8>) => {
   const blockProps = useBlockProps.save();
   const {
     sameBlockCount,
     totalChildrenCount,
-    color,
     title,
     svgString,
     ancestorCount,

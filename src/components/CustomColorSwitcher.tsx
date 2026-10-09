@@ -36,7 +36,7 @@ type ColorSwitcherProps = {
 /**
  * Updates color attributes based on color contrast.
  *
- * @param bgColor - Background color.
+ * @param bgColor       - Background color.
  * @param setAttributes - Function to set attributes.
  */
 const updateColorAttributes = (
@@ -66,12 +66,12 @@ const updateColorAttributes = (
 /**
  * Handles changes in color selection.
  *
- * @param colorData - Array of color data.
- * @param newColor - New color value.
+ * @param colorData     - Array of color data.
+ * @param newColor      - New color value.
  * @param setAttributes - Function to set attributes.
- * @param outputHex - Outputs hex value if true. Defaults to `false`.
- * @param useStyle - Uses style attributes if true. Defaults to `false`.
- * @param useTextColor - Uses text color based on selected color if true. Defaults to `false`.
+ * @param outputHex     - Outputs hex value if true. Defaults to `false`.
+ * @param useStyle      - Uses style attributes if true. Defaults to `false`.
+ * @param useTextColor  - Uses text color based on selected color if true. Defaults to `false`.
  */
 const handleColorChange = (
 	colorData: { color: string; slug: string; name: string }[],
@@ -91,12 +91,10 @@ const handleColorChange = (
 		}
 	} else if (colorEntry) {
 		setAttributes({ color: colorEntry.slug });
-	} else {
-		if (useStyle) {
-			setAttributes({ color: newColor, style: "" });
-			if (useTextColor) {
-				updateColorAttributes(newColor, setAttributes);
-			}
+	} else if (useStyle) {
+		setAttributes({ color: newColor, style: "" });
+		if (useTextColor) {
+			updateColorAttributes(newColor, setAttributes);
 		}
 	}
 };
@@ -118,18 +116,8 @@ const ColorSwitcher = ({
 	overwriteThemeColors = false,
 	clearButton = false,
 }: ColorSwitcherProps) => {
-	// if the theme colorPalette is not empty, use it instead of the passed values!
-	// Example entry from colorPalette [Log] [{slug: "primary", color: "#005177", name: "Primary"}, {slug: "accent", color: "#f2a900", name: "Accent"}] (2)
-	// const colorPalette = useSetting( 'color.palette' );
-	// console.log(colorPalette);
-	const themeColorPalette = !overwriteThemeColors
-		? (useSettings("color.palette")[0] as {
-				color: string;
-				slug: string;
-				name: string;
-			}[])
-		: null;
-	const colorData = themeColorPalette || standardColorData;
+	const [themeColorPalette] = useSettings("color.palette") as [ColorSwitcherProps["colorData"]];
+	const colorData = (!overwriteThemeColors && themeColorPalette) || standardColorData;
 
 	const value = hex
 		? attributes.color
@@ -172,15 +160,8 @@ const ColorSwitcherToolbar = ({
 	hex = false,
 	overwriteThemeColors = false,
 }: ColorSwitcherProps) => {
-	const themeColorPalette = !overwriteThemeColors
-		? (useSettings("color.palette")[0] as {
-				color: string;
-				slug: string;
-				name: string;
-			}[])
-		: null;
-
-	const effectiveColorData = themeColorPalette || colorData;
+	const [themeColorPalette] = useSettings("color.palette") as [ColorSwitcherProps["colorData"]];
+	const effectiveColorData = (!overwriteThemeColors && themeColorPalette) || colorData;
 
 	let classLabel = `rrzeElementsBFakColorSelector`;
 	if (attributes.color) {

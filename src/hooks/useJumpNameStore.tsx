@@ -4,10 +4,10 @@ import {JumpNameEntry} from "../stores/jumpNameStore";
 import { sanitizeTitleToJumpName } from "../utility/sanitize";
 
 interface RrzeElementsBlocksSelectors {
-  getJumpNames(): JumpNameEntry[];
+  getJumpNames: () => JumpNameEntry[];
 
-  jumpNameExists(jumpName: string): boolean;
-  jumpNameDuplicateIDs(jumpName: string): string[];
+  jumpNameExists: (jumpName: string) => boolean;
+  jumpNameDuplicateIDs: (jumpName: string) => string[];
 }
 
 interface UseJumpNameStoreParams {
@@ -25,8 +25,8 @@ export function useJumpNameStore({
     "rrze/elements-blocks",
   );
 
-  const jumpNames = useSelect((select) => {
-    const store = select("rrze/elements-blocks") as unknown as RrzeElementsBlocksSelectors;
+  const jumpNames = useSelect((getStore) => {
+    const store = getStore("rrze/elements-blocks") as unknown as RrzeElementsBlocksSelectors;
     return store.getJumpNames();
   }, []);
 

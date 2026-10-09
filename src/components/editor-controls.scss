@@ -1,0 +1,34 @@
+.rrze-editor-description {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.rrze-editor-section {
+  padding-block: 1rem;
+  margin-block-end: 8px;
+}
+
+.rrze-editor-heading {
+  margin: 0;
+  font-size: calc(1.95 * 13px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.rrze-editor-divider {
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-block-end: 1px solid currentColor;
+}
+
+.rrze-editor-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
+
+  &--exclusive {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

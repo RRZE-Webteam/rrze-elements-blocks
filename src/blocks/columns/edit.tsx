@@ -3,6 +3,7 @@ import {
   InnerBlocks,
   InspectorControls,
   ContrastChecker,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 
 import {
@@ -13,7 +14,6 @@ import { RangeControl, PanelBody, ToggleControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
 
 interface EditProps {
   blockProps: string[];
@@ -56,12 +56,12 @@ export default function Edit({
     color,
   } = attributes;
 
-  const onChangeRangeControl = (numberOfColumns: number) => {
-    setAttributes({ numberOfColumns });
+  const onChangeRangeControl = (newNumberOfColumns: number) => {
+    setAttributes({ numberOfColumns: newNumberOfColumns });
   };
 
-  const onChangeRuler = (rule: boolean) => {
-    setAttributes({ rule });
+  const onChangeRuler = (showRule: boolean) => {
+    setAttributes({ rule: showRule });
   };
 
   const colorDataAlert = [
@@ -93,20 +93,15 @@ export default function Edit({
   ];
 
   // Lookup color slug based on hex value
+  const colorSlug = color
+    ? colorDataAlert.find((entry) => entry.color.toUpperCase() === color.toUpperCase())?.slug
+    : "colorless";
   useEffect(() => {
-    if (!color) {
+    if (colorSlug !== undefined && colorSlug !== attributes.colorSlug) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ colorSlug: "colorless" });
-    } else {
-      const colorEntry = colorDataAlert.find(
-        (c) => c.color.toUpperCase() === color.toUpperCase()
-      );
-      if (colorEntry) {
-        __unstableMarkNextChangeAsNotPersistent();
-        setAttributes({ colorSlug: colorEntry.slug });
-      }
+      setAttributes({colorSlug});
     }
-  }, [color, setAttributes]);
+  }, [colorSlug, attributes.colorSlug, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   // Style calculation moved outside JSX for clarity and optimization
   const style = {
@@ -123,7 +118,7 @@ export default function Edit({
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ textColor: undefined, color: "default" });
     }
-  }, [attributes.color]);
+  }, [attributes.color, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   return (
     <div {...props}>

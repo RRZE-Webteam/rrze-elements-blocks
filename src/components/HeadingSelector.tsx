@@ -1,12 +1,8 @@
+import "./editor-controls.scss";
 //Imports for necessary WordPress libraries
 import { __ } from "@wordpress/i18n";
-import {
-  ToolbarDropdownMenu,
-  __experimentalDivider as Divider,
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
-  __experimentalText as Text
-} from "@wordpress/components";
+import { ToolbarDropdownMenu } from "@wordpress/components";
+import { ToggleGroupControl, ToggleGroupControlOption } from "./ToggleGroupControl";
 import {
   headingLevel2,
   headingLevel3,
@@ -25,7 +21,7 @@ type SaveProps = {
 /**
  * Checks the heading level and returns the corresponding icon
  * @param hstart - The heading level
- * @returns
+ * @returns The heading icon, defaulting to level two.
  */
 const checkHeadingLevelIcon = (hstart: number) => {
   switch (hstart) {
@@ -95,30 +91,22 @@ const HeadingSelector = ({ attributes, setAttributes }: SaveProps) => {
  * @returns JSX element
  */
 const HeadingSelectorInspector = ({ attributes, setAttributes }: SaveProps) => {
-  const handleToggleHeadingGroup = (newValue: number) => {
-    setAttributes({ hstart: newValue });
-  };
-
   return (
     <>
       <ToggleGroupControl
         label={__("Heading level", "rrze-elements-blocks")}
         value={attributes.hstart}
-        onChange={handleToggleHeadingGroup}
+        onChange={(value: number) => setAttributes({ hstart: value })}
         isBlock
         __next40pxDefaultSize
         __nextHasNoMarginBottom
+        help={__("Controls the heading level of the accordion", "rrze-elements-blocks")}
       >
-        <ToggleGroupControlOption value={2} label="H2" />
-        <ToggleGroupControlOption value={3} label="H3" />
-        <ToggleGroupControlOption value={4} label="H4" />
-        <ToggleGroupControlOption value={5} label="H5" />
-        <ToggleGroupControlOption value={6} label="H6" />
+        {[2, 3, 4, 5, 6].map((level) => (
+          <ToggleGroupControlOption key={level} value={level} label={`H${level}`} />
+        ))}
       </ToggleGroupControl>
-      <Text>
-        {__("Controls the heading level of the accordion", "rrze-elements-blocks")}
-    </Text>
-      <Divider />
+      <hr className="rrze-editor-divider" />
     </>
   );
 };

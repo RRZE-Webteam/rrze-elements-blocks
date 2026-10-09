@@ -87,7 +87,7 @@ export default function Edit({
   // @ts-ignore
   const {__unstableMarkNextChangeAsNotPersistent} = useDispatch(blockEditorStore);
   const props = useBlockProps();
-  const blockId = props["data-block"];
+  const blockId = props["data-block"].slice(0, 10);
   const lastInnerClientIdsRef = useRef<Array<{
     clientId: string;
     title: string;
@@ -131,9 +131,9 @@ export default function Edit({
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({blockId: blockId.slice(0, 10)});
+      setAttributes({blockId});
     }
-  }, [attributes.blockId, blockId]);
+  }, [attributes.blockId, blockId, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Syncs the innerClientIds attribute with the component state
@@ -144,7 +144,7 @@ export default function Edit({
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({innerClientIds});
     }
-  }, [innerClientIds, attributes.innerClientIds, setAttributes]);
+  }, [innerClientIds, attributes.innerClientIds, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Handles logic to set the active tab.
@@ -161,7 +161,7 @@ export default function Edit({
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({ active: innerClientIds[0].clientId });
     }
-  }, [innerClientIds, attributes.active]);
+  }, [innerClientIds, attributes.active, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Adds a new "rrze-elements/tab" block as a child of this block.
@@ -178,12 +178,8 @@ export default function Edit({
    * Changes the currently active tab.
    *
    * @param index - The index of the tab to activate.
-   * @param innerClientIds - List of inner block client IDs.
    */
-  const onChangeActive = (
-    index: number,
-    innerClientIds: { clientId: string; position: number }[]
-  ) => {
+  const onChangeActive = (index: number) => {
     if (innerClientIds[index]?.clientId !== undefined) {
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({active: innerClientIds[index].clientId});
@@ -193,7 +189,7 @@ export default function Edit({
 
   /**
    * Function to determine if a tab is currently selected.
-   * @param index  - The index of the tab.
+   * @param index - The index of the tab.
    * @returns      - Whether the tab is selected.
    */
   const ariaSelected = (index: number): boolean => {
@@ -243,7 +239,7 @@ export default function Edit({
               return (
                 <Button
                   key={innerClientId.clientId || index}
-                  onClick={() => onChangeActive(index, innerClientIds)}
+                  onClick={() => onChangeActive(index)}
                   id={innerClientId.clientId}
                   type="button"
                   role="tab"
@@ -251,21 +247,15 @@ export default function Edit({
                   aria-controls={innerClientId.clientId}
                 >
         <span className="focus" tabIndex={-1}>
-         {showMaterial ? (
+         {(showMaterial || innerClientId.icon) && (
            <IconMarkComponent
              type={iconType}
              iconName={iconName}
              attributes={{icon: innerClientId.icon, svgString: innerClientId.svgString}}
-             materialSymbol={innerClientId.materialSymbol}
+             materialSymbol={showMaterial ? innerClientId.materialSymbol : undefined}
+             defaultClass={showMaterial ? undefined : "elements-tabs-label-icon-inside-editor"}
            />
-         ) : innerClientId.icon ? (
-           <IconMarkComponent
-             type={iconType}
-             iconName={iconName}
-             attributes={{icon: innerClientId.icon, svgString: innerClientId.svgString}}
-             defaultClass="elements-tabs-label-icon-inside-editor"
-           />
-         ) : null}
+         )}
           {innerClientId.title}
         </span>
                 </Button>

@@ -1,7 +1,6 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { BlockSaveProps } from "@wordpress/blocks";
 import { AttributesV1_0_19 } from "./attributes";
-import type { CSSProperties } from 'react';
 import HeadingComponent from "../../../components/HeadingComponent";
 
 const Save = ({ attributes }: BlockSaveProps<AttributesV1_0_19>) => {

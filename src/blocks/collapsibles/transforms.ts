@@ -3,16 +3,13 @@ import iconJson from "../../components/assets/fontawesome/fontawesomeIconNames.j
 import { __ } from "@wordpress/i18n";
 import { sanitizeTitleToJumpName as sanitizeJumpName } from "../../utility/utils";
 
-interface CollapseBlockAttributes {
-  title: string;
-}
-
 interface CollapsiblesBlockAttributes {
   // Define the attributes for rrze-elements/collapsibles if needed
 }
 
 /**
- * Helper Functions
+ * Flattens accordion wrappers while preserving their headings and inner blocks.
+ * @param block - The block to flatten.
  */
 function flattenBlockToHeadingsAndInnerBlocks(block: BlockInstance): BlockInstance[] {
   const output: BlockInstance[] = [];
@@ -188,14 +185,14 @@ const transforms = {
         const matchesCollapseContent = [
           ...cleanData.matchAll(regexCollapse),
         ];
-        let titleStore: { title: string; type: string; level: number; items?: any[] }[] = [];
+        const titleStore: { title: string; type: string; level: number; items?: any[] }[] = [];
         const originalContent = data?.content || "";
 
         matchesCollapseContent.forEach((match, collapseIndex) => {
           const collapseAttributesString = match[1];
           const attributesRegex = /(\w+)="([^"]*)"/g;
           let attributeMatches;
-          let collapseAttributes: { [key: string]: string } = {};
+          const collapseAttributes: { [key: string]: string } = {};
           while (
             (attributeMatches = attributesRegex.exec(
               collapseAttributesString
@@ -208,8 +205,8 @@ const transforms = {
 
           const contentInsideCollapse = match[2].trim();
 
-          let collapseInnerBlocks: any[] = [];
-          let accordionTitles: { title: string; type: string; level: number }[] = [];
+          const collapseInnerBlocks: any[] = [];
+          const accordionTitles: { title: string; type: string; level: number }[] = [];
 
           const accordionRegex =
             /\[accordion(?=\s|\])(?:\s+\w+="[^"]*")*\]([\s\S]*?)\[\/accordion\]/g;
@@ -230,7 +227,7 @@ const transforms = {
                 ...splitContent.matchAll(accordionItemsRegex),
               ];
 
-              let innerAccordionBlocks: any = [];
+              const innerAccordionBlocks: any = [];
 
               accordionItemMatches.forEach((accordionItem) => {
                 const accordionAttributesString = accordionItem[1];
@@ -240,7 +237,7 @@ const transforms = {
                   accordionAttributesString.match(
                     /(\w+)=('[^']*'|"[^"]*"|“[^”]*”)/g
                   );
-                let accordionAttributes: { [key: string]: string } = {};
+                const accordionAttributes: { [key: string]: string } = {};
 
                 accordionAttributeMatches?.forEach((attr) => {
                   const [key, fullValue] = attr.split("=");
@@ -323,7 +320,7 @@ const transforms = {
         blocks.push(
           createBlock(
             "rrze-elements/collapsibles",
-            { hstart: hstart },
+            { hstart },
             globalInnerBlocks
           )
         );
@@ -336,6 +333,8 @@ const transforms = {
         const titleList: string = formatTitles(titleStore);
 
         // Ask user if they want to proceed and show the array of titles as bullet points
+        // Transforms are synchronous; retain confirmation before replacing legacy content.
+        // eslint-disable-next-line no-alert
         const proceed: boolean = confirm(
           `Wichtiger Hinweis\n\nBitte überprüfen Sie Ihre Akkordeonstruktur, um sicherzustellen, dass alle Elemente vorhanden sind.\n\n${titleList}\n\nBestätigen Sie mit Ok, damit die Umwandlung in einen Block durchgeführt wird.`
         );

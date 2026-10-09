@@ -21,9 +21,9 @@ class TabsManual {
         this.tabs = Array.from(this.tablistNode.querySelectorAll('[role=tab]'));
         this.tabpanels = [];
 
-        for (var i = 0; i < this.tabs.length; i += 1) {
-            var tab = this.tabs[i];
-            var tabpanel = document.getElementById(tab.getAttribute('aria-controls'));
+        for (let i = 0; i < this.tabs.length; i += 1) {
+            const tab = this.tabs[i];
+            const tabpanel = document.getElementById(tab.getAttribute('aria-controls'));
 
             tab.tabIndex = -1;
             tab.setAttribute('aria-selected', 'false');
@@ -42,8 +42,8 @@ class TabsManual {
     }
 
     setSelectedTab(currentTab) {
-        for (var i = 0; i < this.tabs.length; i += 1) {
-            var tab = this.tabs[i];
+        for (let i = 0; i < this.tabs.length; i += 1) {
+            const tab = this.tabs[i];
             if (currentTab === tab) {
                 tab.setAttribute('aria-selected', 'true');
                 tab.removeAttribute('tabindex');
@@ -61,7 +61,7 @@ class TabsManual {
     }
 
     moveFocusToPreviousTab(currentTab) {
-        var index;
+        let index;
 
         if (currentTab === this.firstTab) {
             this.moveFocusToTab(this.lastTab);
@@ -72,7 +72,7 @@ class TabsManual {
     }
 
     moveFocusToNextTab(currentTab) {
-        var index;
+        let index;
 
         if (currentTab === this.lastTab) {
             this.moveFocusToTab(this.firstTab);
@@ -85,7 +85,8 @@ class TabsManual {
     /* EVENT HANDLERS */
 
     onKeydown(event) {
-        var tgt = event.currentTarget,
+      // eslint-disable-next-line prefer-const
+        let tgt = event.currentTarget,
             flag = false;
 
         switch (event.key) {
@@ -129,8 +130,8 @@ class TabsManual {
 // Initialize tablist
 
 window.addEventListener('load', function () {
-    var tablists = document.querySelectorAll('[role=tablist].manual');
-    for (var i = 0; i < tablists.length; i++) {
-        new TabsManual(tablists[i]);
+    const tabLists = document.querySelectorAll('[role=tablist].manual');
+    for (let i = 0; i < tabLists.length; i++) {
+        new TabsManual(tabLists[i]);
     }
 });

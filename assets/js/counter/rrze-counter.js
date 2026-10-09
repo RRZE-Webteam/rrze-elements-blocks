@@ -7,12 +7,12 @@ try {
   });
 
   function numberWithDots(x) {
-    if (x == null) {
+    if (x === null) {
       console.log("Received null or undefined");
       return "0";
     }
 
-    let cleanInput = x.toString().replace(/\./g, ""); // Remove any dots in the string
+    const cleanInput = x.toString().replace(/\./g, ""); // Remove any dots in the string
     const number = parseInt(cleanInput, 10);
     if (isNaN(number)) {
       console.log("Conversion to number failed");

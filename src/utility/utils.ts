@@ -1,12 +1,11 @@
 
 //todo: remove old sanitization file. It is replaced with sanitize.ts in the future.
-var he = require('he');
 
 /**
  * Sanitizes a given string to be used as a valid HTML ID / Jump Name.
  * Handles European diacritics, expands specific ligatures/umlauts,
  * and formats the string safely for HTML attributes.
- * * @param title The raw string to sanitize
+ * @param title - The raw string to sanitize
  * @returns A safe, URL-friendly string
  */
 export const sanitizeTitleToJumpName = (title: string): string => {

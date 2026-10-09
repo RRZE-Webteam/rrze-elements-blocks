@@ -23,7 +23,7 @@ type TaxonomySelectorProps = {
 
 /**
  * Displays a SelectorControl with all available post categories
- * 
+ *
  * Use this component inside InspectorControls inside a PanelBody or inside a Modal Component
  * Users can select a category from the dropdown. Pass it your category attribute and the * set Attributes function.
  * @param props - The properties passed to the component.

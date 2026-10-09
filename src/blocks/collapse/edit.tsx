@@ -13,6 +13,7 @@ import {
   InspectorControls,
   BlockControls,
   RichText,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import {BlockEditProps} from "@wordpress/blocks";
 import {seen, unseen, symbol} from "@wordpress/icons";
@@ -38,7 +39,6 @@ import {speak} from "@wordpress/a11y";
 
 import {useJumpNameStore} from "../../hooks/useJumpNameStore";
 import {useDispatch} from "@wordpress/data";
-import {store as blockEditorStore} from "@wordpress/block-editor";
 
 import {AttributesV1_0_12 as BlockAttributes} from "./index";
 import JumpNameResolverModal from "../../components/JumpNameResolverModal";
@@ -52,6 +52,7 @@ const Edit = ({
   const props = useBlockProps();
   const {color, loadOpen, icon, jumpName, isCustomJumpname} = attributes;
   const title = attributes.title;
+  const inheritedHeadingLevel = context["rrze-elements/accordion-hstart"];
 
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
@@ -64,20 +65,20 @@ const Edit = ({
   const { doesJumpNameExist, areDuplicateJumpNamesPresent, sanitizeTitleToJumpName } = useJumpNameStore({
     clientId,
     jumpName: attributes.jumpName,
-    setAttributes: (attrs) => setAttributes(attrs),
+    setAttributes,
   });
 
-  let sameTypeSiblingsBefore = 0;
+  const sameTypeSiblingsBefore = 0;
 
   useEffect(() => {
     if (
-      context["rrze-elements/accordion-hstart"] &&
-      context["rrze-elements/accordion-hstart"] !== attributes.hstart
+      inheritedHeadingLevel &&
+      inheritedHeadingLevel !== attributes.hstart
     ) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({hstart: context["rrze-elements/accordion-hstart"] as number});
+      setAttributes({hstart: inheritedHeadingLevel as number});
     }
-  }, [context["rrze-elements/accordion-hstart"]]);
+  }, [inheritedHeadingLevel, attributes.hstart, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);

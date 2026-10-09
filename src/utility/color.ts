@@ -1,6 +1,6 @@
 /**
  * Calculates the average brightness of an image.
- * @param imageUrl The URL of the image to analyze.
+ * @param imageUrl - The URL of the image to analyze.
  * @returns A promise that resolves with a brightness value between 0 (black) and 255 (white).
  */
 export const getImageBrightness = (imageUrl: string): Promise<number> => {

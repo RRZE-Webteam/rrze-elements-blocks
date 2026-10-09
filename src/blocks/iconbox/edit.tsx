@@ -4,7 +4,7 @@ import {
   BlockControls,
   InspectorControls,
   RichText,
-  __experimentalLinkControl as LinkControl,
+  LinkControl,
 } from "@wordpress/block-editor";
 
 import {
@@ -17,15 +17,12 @@ import {
   Button,
   TextControl,
 } from "@wordpress/components";
-import { link, linkOff } from "@wordpress/icons";
+import { link, linkOff, symbol } from "@wordpress/icons";
 import { displayShortcut } from "@wordpress/keycodes";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
-import { symbol } from "@wordpress/icons";
 import {
-  IconPicker,
   IconMarkComponent,
-  IconPickerModalInset,
 } from "../../components/IconPicker";
 import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 
@@ -67,7 +64,7 @@ export default function Edit({
   const [iconType, iconName] = icon?.split(" ") || [];
 
   const onChangeTitle = (title: string) => {
-    setAttributes({ title: title });
+    setAttributes({ title });
   };
 
   const onChangeButtonUrl = (newButtonUrl: {
@@ -250,7 +247,7 @@ export default function Edit({
                 className="fau-iconbox-editor-data-description"
               />
               {isURLSet && isLinkTag && (
-                <a className="standard-btn ghost-btn">
+                <a className="standard-btn ghost-btn" href={buttonUrl} onClick={(event) => event.preventDefault()}>
                   <RichText
                     tagName="span"
                     value={attributes.buttonText}

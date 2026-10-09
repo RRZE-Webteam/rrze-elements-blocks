@@ -1,3 +1,4 @@
+import "../../../components/editor-controls.scss";
 import { __ } from "@wordpress/i18n";
 import {
 	PanelBody,
@@ -9,8 +10,6 @@ import {
 	Button,
 	TextControl,
 	Modal,
-	__experimentalSpacer as Spacer,
-	__experimentalText as Text,
 } from "@wordpress/components";
 import { store as blockEditorStore } from "@wordpress/block-editor";
 
@@ -235,9 +234,7 @@ const TitleInspectorControls = ({
 			title={__("Label settings", "rrze-elements-blocks")}
 			initialOpen={true}
 		>
-			<Spacer>
-				<Text>{__("Enter your Tab Label.", "rrze-elements-blocks")}</Text>
-			</Spacer>
+			<p className="rrze-editor-description">{__("Enter your Tab Label.", "rrze-elements-blocks")}</p>
 
 			<TextControl
 				value={attributes.title}

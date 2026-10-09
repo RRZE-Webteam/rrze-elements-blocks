@@ -1,1 +1,24 @@
-<?php return array('dependencies' => array('react', 'react-dom', 'react-jsx-runtime', 'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-compose', 'wp-data', 'wp-date', 'wp-deprecated', 'wp-element', 'wp-i18n', 'wp-keycodes', 'wp-notices', 'wp-primitives', 'wp-private-apis', 'wp-theme', 'wp-warning'), 'version' => '85e6ce2def1af751242e');
+<?php return array(
+	'dependencies' => array(
+		'react',
+		'react-dom',
+		'react-jsx-runtime',
+		'wp-a11y',
+		'wp-block-editor',
+		'wp-blocks',
+		'wp-components',
+		'wp-compose',
+		'wp-data',
+		'wp-date',
+		'wp-deprecated',
+		'wp-element',
+		'wp-i18n',
+		'wp-keycodes',
+		'wp-notices',
+		'wp-primitives',
+		'wp-private-apis',
+		'wp-theme',
+		'wp-warning'
+	),
+	'version' => '7548b4dedded09bdfa69'
+);

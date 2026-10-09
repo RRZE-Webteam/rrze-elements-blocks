@@ -1,4 +1,4 @@
-import {InnerBlocks, useBlockProps} from "@wordpress/block-editor";
+import {useBlockProps} from "@wordpress/block-editor";
 import {BlockSaveProps} from "@wordpress/blocks";
 import {AttributesV1_0_19} from "./attributes";
 
@@ -17,13 +17,13 @@ const Save = ({attributes}: BlockSaveProps<AttributesV1_0_19>) => {
     isSearch,
   } = attributes;
 
-  function prependHttps(url: string): string {
-    if (url?.startsWith("www.")) {
-      return "https://" + url;
-    } else if (url?.startsWith("http://")) {
-      return url.replace("http://", "https://");
+  function prependHttps(linkUrl: string): string {
+    if (linkUrl?.startsWith("www.")) {
+      return "https://" + linkUrl;
+    } else if (linkUrl?.startsWith("http://")) {
+      return linkUrl.replace("http://", "https://");
     }
-    return url;
+    return linkUrl;
   }
 
   let urlClass = "has-image";

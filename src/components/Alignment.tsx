@@ -50,12 +50,15 @@ const AlignmentBar = ({
     },
   ].filter(Boolean); // Filter out false values
 
+  const fallbackIcon = alignment === 'center' ? alignCenter : alignRight;
+  const alignmentIcon = alignment === 'left' ? alignLeft : fallbackIcon;
+
   return (
     <ToolbarGroup>
       <ToolbarItem>
         {() => (
           <ToolbarDropdownMenu
-            icon={(alignment === 'left') ? alignLeft : (alignment === 'center') ? alignCenter : alignRight}
+            icon={alignmentIcon}
             label={__("Display options for the Editor", "rrze-elements-blocks")}
             controls={alignmentControls}
           />

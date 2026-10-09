@@ -11,7 +11,7 @@ import {
   BlockControls,
   InspectorControls,
   RichText,
-  __experimentalLinkControl as LinkControl,
+  LinkControl,
 } from "@wordpress/block-editor";
 import {useEffect, useState} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
@@ -86,15 +86,14 @@ export default function Edit({
       const hasNeedle = (needle: string) => {
         return props.className.indexOf(needle) !== -1;
       };
-      if (hasNeedle("is-style-no-background")) {
-        setAttributes({background: ""});
-      } else if (hasNeedle("is-style-small")) {
-        setAttributes({background: "style-small"});
-      } else {
-        setAttributes({background: ""});
+      const nextBackground = !hasNeedle("is-style-no-background") && hasNeedle("is-style-small")
+        ? "style-small"
+        : "";
+      if (background !== nextBackground) {
+        setAttributes({background: nextBackground});
       }
     }
-  }, [props.className]);
+  }, [props.className, background, setAttributes]);
 
   useEffect(() => {
     if (!isSelected) {
@@ -134,10 +133,10 @@ export default function Edit({
       <BlockControls>
         <CustomMediaReplaceFlow
           attributes={{
-            id: id,
-            url: url,
-            alt: alt,
-            srcset: srcset,
+            id,
+            url,
+            alt,
+            srcset,
           }}
           setAttributes={setAttributes}
         />
@@ -218,7 +217,7 @@ export default function Edit({
         )}
         {!isSearch && (
           <div className="cta-button-container">
-            <a ref={setUrlPopoverAnchor} className="btn cta-button">
+            <a ref={setUrlPopoverAnchor} className="btn cta-button" href={buttonUrl || undefined} onClick={(event) => event.preventDefault()}>
               <RichText
                 tagName="span"
                 value={buttonText}

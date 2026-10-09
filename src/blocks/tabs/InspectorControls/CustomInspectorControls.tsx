@@ -17,7 +17,7 @@ interface EditProps {
 
 /**
  * CustomInspectorControls component - Adds custom inspector controls to the block editor.
- * @param  props  - React props.
+ * @param props - React props.
  * @returns       - The rendered CustomInspectorControls component.
  */
 const CustomInspectorControls = ({
@@ -26,7 +26,7 @@ const CustomInspectorControls = ({
 }: EditProps) => {
   const { xray } = attributes;
 
-  /**
+  /*
    * Render method for the CustomInspectorControls component.
    * Adds X-ray and ColorSwitcher settings to the block inspector.
    */
@@ -40,7 +40,7 @@ const CustomInspectorControls = ({
               "rrze-elements-blocks"
             )}
             checked={xray}
-            onChange={(xray) => setAttributes({ xray })}
+            onChange={(showXray) => setAttributes({ xray: showXray })}
           />
         </PanelBody>
         <StandardColorSwitcher

@@ -2,7 +2,6 @@ import {createBlock, BlockInstance} from "@wordpress/blocks";
 import {select} from "@wordpress/data";
 
 /**
- * @fileoverview
  * Transform helpers and a Gutenberg block transform that maps attributes from
  * `rrze-elements/news` to `fau-elemental/fau-teaser-grid`.
  */
@@ -51,9 +50,9 @@ const toIntIfNumeric = (v: unknown): number | undefined => {
  *   positional intent we cannot deduce from `columns`, so we skip them.
  *
  * Mappings:
- *   1 -> "1xl"
- *   2 -> "2xl"
- *   3 -> "3m"
+ *   `1` maps to `"1xl"`
+ *   `2` maps to `"2xl"`
+ *   `3` maps to `"3m"`
  *
  * Any other value returns `undefined` to avoid overriding target defaults.
  *
@@ -105,13 +104,10 @@ const mapHstartToHeadingLevel = (hstart?: unknown): string | undefined => {
  */
 const getCategoryIdFromCat = (cat: unknown): number | undefined => {
   // Numeric already?
-  const maybeId =
-    typeof cat === "number" && Number.isFinite(cat)
-      ? cat
-      : (typeof cat === "string" && /^\d+$/.test(cat.trim())
-        ? Number.parseInt(cat.trim(), 10)
-        : undefined);
-  if (typeof maybeId === "number") return maybeId;
+  if (typeof cat === "number" && Number.isFinite(cat)) return cat;
+  if (typeof cat === "string" && /^\d+$/.test(cat.trim())) {
+    return Number.parseInt(cat.trim(), 10);
+  }
 
   // Try slug lookup via core store (synchronously; may be undefined if not resolved yet)
   if (typeof cat === "string" && cat.trim().length > 0) {

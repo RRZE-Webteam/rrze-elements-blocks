@@ -4,10 +4,8 @@
  * Uses jQuery for DOM manipulation and event handling.
  * Features include Anchor/Hash detection, Easier Search via Ctrl + F, and more
  */
-// eslint-disable-next-line no-undef
 const {__} = wp.i18n;
 
-// eslint-disable-next-line no-undef
 jQuery(document).ready(function ($) {
   /**
    * Initially hides all accordion bodies except those marked as open or should stay open,
@@ -41,7 +39,7 @@ jQuery(document).ready(function ($) {
   /**
    * Retrieves the target accordion ID from a button or link element.
    * @param {jQuery} $elem - The element that may contain a href or data-href attribute.
-   * @returns {string} The target selector for the accordion to be toggled.
+   * @return {string} The target selector for the accordion to be toggled.
    */
   function getAccordionTarget($elem) {
     return sanitizeSelector($elem.data("href") || $elem.attr("href"));
@@ -50,7 +48,7 @@ jQuery(document).ready(function ($) {
   /**
    * Sanitizes a jQuery selector to prevent jQuery selector injection.
    * @param {string} selector - The selector to sanitize.
-   * @returns {string} The sanitized selector.
+   * @return {string} The sanitized selector.
    */
   function sanitizeSelector(selector) {
     return selector.replace(/[^a-zA-Z0-9_\-#]/g, "");
@@ -129,9 +127,9 @@ jQuery(document).ready(function ($) {
 
     // Traverse up from the starting body to open all parent accordions
     $startBody.parents('.accordion-group').add($startBody.closest('.accordion-group')).each(function () {
-      var $section = $(this);
-      var $body = $section.children('.accordion-body');
-      var $toggle = $section.children('.accordion-heading').children('.accordion-toggle');
+      const $section = $(this);
+      const $body = $section.children('.accordion-body');
+      const $toggle = $section.children('.accordion-heading').children('.accordion-toggle');
 
       if (!$body.is(':visible')) {
         $toggle.addClass('active').attr('aria-expanded', 'true');

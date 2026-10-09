@@ -34,9 +34,8 @@ const transforms = {
               )
             ) {
               return attrs.named.style;
-            } else {
-              return "info";
             }
+            return "info";
           },
         },
         content: {
@@ -50,7 +49,7 @@ const transforms = {
         },
       },
       transform: (attributes: ShortcodeTransformAttributes, data: any) => {
-        let cleanData = data.shortcode?.content;
+        const cleanData = data.shortcode?.content;
         const styleChoice = (style: string) => {
           switch (style) {
             case "success":

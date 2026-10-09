@@ -18,7 +18,6 @@ import { symbol } from "@wordpress/icons";
 import { useDispatch } from "@wordpress/data";
 
 // Custom components for enhancing block controls.
-import { IconPickerModalInset } from "../../components/IconPicker";
 import { CustomInspectorControls } from "./InspectorControls/CustomInspectorControls";
 import {
   TitleModal,
@@ -70,20 +69,23 @@ export default function Edit({
   const props = useBlockProps();
   const blockId = props["data-block"];
   const { icon } = attributes;
+  const parentTabsUid = context["rrze-elements/tabs-uid"];
+  const parentActiveTab = context["rrze-elements/tabs-active"];
+  const parentXray = context["rrze-elements/tabs-xray"];
 
   // Hide the block in the editor if it is not active or xray is enabled.
-  let classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
+  const classNameValue = attributes.active || attributes.xray ? "" : "is-hidden";
 
   // isOpen state is used to control the opening and closing of the icon picker modal
   const [isOpen, setOpen] = useState(false);
 
   // Sync the block's 'tabsUid' attribute with the parent block's context.
   useEffect(() => {
-    if (attributes.tabsUid !== context["rrze-elements/tabs-uid"]) {
+    if (attributes.tabsUid !== parentTabsUid) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ tabsUid: context["rrze-elements/tabs-uid"] });
+      setAttributes({ tabsUid: parentTabsUid });
     }
-  }, [attributes.tabsUid, context["rrze-elements/tabs-uid"]]);
+  }, [attributes.tabsUid, parentTabsUid, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Sync the block's 'blockId' attribute with the block's ID.
@@ -92,33 +94,33 @@ export default function Edit({
   useEffect(() => {
     if (attributes.blockId !== blockId) {
       __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ blockId: blockId });
+      setAttributes({ blockId });
     }
-  }, [attributes.blockId, blockId]);
+  }, [attributes.blockId, blockId, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Sync the block's 'active' attribute with the parent block's context.
    * This is needed for the tab navigation to make active tabs visible.
    */
   useEffect(() => {
-    if (context["rrze-elements/tabs-active"] === "") {
-      setAttributes({ active: true });
-    } else if (context["rrze-elements/tabs-active"] !== blockId) {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ active: false });
-    } else {
-      __unstableMarkNextChangeAsNotPersistent();
-      setAttributes({ active: true });
+    const active = parentActiveTab === "" || parentActiveTab === blockId;
+    if (attributes.active !== active) {
+      if (parentActiveTab !== "") {
+        __unstableMarkNextChangeAsNotPersistent();
+      }
+      setAttributes({active});
     }
-  }, [attributes.active, context["rrze-elements/tabs-active"]]);
+  }, [attributes.active, parentActiveTab, blockId, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /**
    * Sync the block's 'xray' attribute with the parent block's context.
    * The xray attribute is used to show all tabs in the editor.
    */
   useEffect(() => {
-    setAttributes({ xray: context["rrze-elements/tabs-xray"] });
-  }, [attributes.active, context["rrze-elements/tabs-xray"]]);
+    if (attributes.xray !== parentXray) {
+      setAttributes({xray: parentXray});
+    }
+  }, [attributes.xray, parentXray, setAttributes]);
 
   // Functions to handle the opening and closing of the icon picker modal.
   const openModal = () => setOpen(true);

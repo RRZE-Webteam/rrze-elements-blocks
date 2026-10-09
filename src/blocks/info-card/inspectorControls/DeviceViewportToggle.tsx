@@ -1,7 +1,4 @@
-import {
-  __experimentalToggleGroupControl as ToggleGroupControl,
-  __experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from "@wordpress/components";
+import { ToggleGroupControl, ToggleGroupControlOption } from "../../../components/ToggleGroupControl";
 import { __ } from "@wordpress/i18n";
 import { DeviceType } from "../types";
 

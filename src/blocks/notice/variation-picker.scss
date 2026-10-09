@@ -1,0 +1,17 @@
+.rrze-notice-variation-picker {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 100px), 1fr));
+  gap: 8px;
+
+  &__option.components-button {
+    height: auto;
+    min-height: 64px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px;
+    white-space: normal;
+    text-align: center;
+  }
+}

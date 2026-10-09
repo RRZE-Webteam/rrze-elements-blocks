@@ -41,7 +41,8 @@ class Accordion implements ShortcodeAdapter
 
     public function enqueueAssets(): void
     {
-        FrontendAssets::enqueueAccordion();
+        // Styles must be available in wp_head; scripts are requested when a shortcode renders.
+        wp_enqueue_style(FrontendAssets::STYLE);
     }
 
     /**
@@ -79,7 +80,7 @@ class Accordion implements ShortcodeAdapter
             'accordionId' => $context->getId(),
         ], $registerMarkup . $innerContent);
 
-        $this->enqueueAssets();
+        FrontendAssets::enqueueAccordion();
 
         return wpautop($markup, false);
     }
@@ -141,7 +142,7 @@ class Accordion implements ShortcodeAdapter
             'expandLabel' => $this->getExpandLabel(),
         ], $registerMarkup . $innerContent);
 
-        $this->enqueueAssets();
+        FrontendAssets::enqueueAccordion();
 
         return wpautop($markup, false);
     }
@@ -211,7 +212,7 @@ class Accordion implements ShortcodeAdapter
             $markup = (new CollapseRender())->render($attributes, $innerContent);
         }
 
-        $this->enqueueAssets();
+        FrontendAssets::enqueueAccordion();
 
         return wpautop($markup, false);
     }

@@ -6,7 +6,7 @@ try {
     sections.pop();
 
     // Ensure snapping by setting up ScrollTriggers for each section
-    sections.forEach((section, i) => {
+    sections.forEach((section) => {
       ScrollTrigger.create({
         trigger: section,
         start: "top top",

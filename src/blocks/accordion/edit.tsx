@@ -13,6 +13,7 @@ import {
   InnerBlocks,
   InspectorControls,
   RichText,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -30,7 +31,6 @@ import { speak } from "@wordpress/a11y";
 import { useJumpNameStore } from "../../hooks/useJumpNameStore";
 import JumpLinkSelector from "../../components/JumpLinkSelector";
 import { useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
 import {MaterialSymbolPicker} from "../../components/MaterialSymbolPicker";
 import JumpNameResolverModal from "../../components/JumpNameResolverModal";
 
@@ -58,6 +58,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
 
   const props = useBlockProps();
   const { loadOpen, icon, jumpName, title, isCustomJumpname } = attributes;
+  const inheritedHeadingLevel = context["rrze-elements/accordion-hstart"];
   const [isActive, setIsActive] = useState(false);
   const [iconType, iconName] = icon?.split(" ") || [];
   const [isOpen, setOpen] = useState(false);
@@ -69,43 +70,22 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
   const { doesJumpNameExist, areDuplicateJumpNamesPresent, sanitizeTitleToJumpName } = useJumpNameStore({
     clientId,
     jumpName: attributes.jumpName,
-    setAttributes: (attrs) => setAttributes(attrs),
+    setAttributes,
   });
 
   //////////////// Use Effects ////////////////
 
   useEffect(() => {
-    if (jumpName === "") {
-      setAttributes({
-        jumpName: `panel_${clientId?.slice(-8)}`,
-      });
-    }
-  }, [clientId]);
-
-  useEffect(() => {
-    let color = context["rrze-elements/collapseColor"];
-
-    if (color !== attributes.color) {
-      color = attributes.color;
-    }
-
-    setAttributes({
-      color: color,
-    });
-  }, [context["rrze-elements/collapseColor"], attributes.color]);
-
-  useEffect(() => {
     if (
-      context["rrze-elements/accordion-hstart"] &&
-      context["rrze-elements/accordion-hstart"] !== attributes.hstart
+      inheritedHeadingLevel &&
+      inheritedHeadingLevel !== attributes.hstart
     ) {
       __unstableMarkNextChangeAsNotPersistent();
       setAttributes({
-        hstart: context["rrze-elements/accordion-hstart"],
+        hstart: inheritedHeadingLevel,
       });
     }
-  }),
-    [context["rrze-elements/accordion-hstart"]];
+  }, [inheritedHeadingLevel, attributes.hstart, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
 
   /////////////////////// Event Handler / OnClick Handler //////////
   const openModal = () => setOpen(true);
@@ -137,7 +117,7 @@ const Edit = ({ attributes, setAttributes, clientId, context }: EditProps) => {
     }
   };
 
-  let finalColor =
+  const finalColor =
     attributes.color === "inherit"
       ? context["rrze-elements/collapseColor"]
       : attributes.color;

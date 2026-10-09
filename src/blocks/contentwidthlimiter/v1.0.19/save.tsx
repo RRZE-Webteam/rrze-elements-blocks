@@ -6,9 +6,9 @@ const Save = ({attributes}: BlockSaveProps<AttributesV1_0_19>) => {
   const blockProps = useBlockProps.save();
 
   const width = attributes.width;
-  let characterWidth = Math.round(width * 0.125);
+  const characterWidth = Math.round(width * 0.125);
 
-  let alignment = attributes.alignment;
+  const alignment = attributes.alignment;
   let marginStyle = "";
   if (alignment === "left") {
     marginStyle = "margin-right: auto;";
