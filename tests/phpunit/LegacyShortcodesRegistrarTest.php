@@ -5,7 +5,6 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use RRZE\ElementsBlocks\LegacyShortcodes\Accordion;
 use RRZE\ElementsBlocks\LegacyShortcodes\CallToAction;
-use RRZE\ElementsBlocks\LegacyShortcodes\Icon;
 use RRZE\ElementsBlocks\LegacyShortcodes\Registrar;
 
 final class LegacyShortcodesRegistrarTest extends TestCase
@@ -46,14 +45,12 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame(
-            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon', 'list-icons'],
+            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button'],
             array_keys($GLOBALS['shortcode_tags'])
         );
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
         $this->assertSame('shortcodeAccordions', $GLOBALS['shortcode_tags']['accordion'][1]);
         $this->assertSame('shortcodeAccordionItem', $GLOBALS['shortcode_tags']['accordion-item'][1]);
-        $this->assertInstanceOf(Icon::class, $GLOBALS['shortcode_tags']['icon'][0]);
-        $this->assertSame($GLOBALS['shortcode_tags']['icon'][0], $GLOBALS['shortcode_tags']['list-icons'][0]);
     }
 
     public function test_legacy_callback_is_replaced(): void
@@ -107,7 +104,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
-        $this->assertSame(['accordion', 'button', 'icon', 'list-icons'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame(['accordion', 'button'], array_keys($GLOBALS['shortcode_tags']));
         $this->assertSame(
             ['accordion' => Closure::class],
             $registrar->getConflicts()
@@ -139,16 +136,18 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
 
-    public function test_legacy_icon_callbacks_are_replaced_together(): void
+    public function test_legacy_icon_callbacks_are_preserved_by_default(): void
     {
-        $GLOBALS['shortcode_tags']['icon'] = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeIcon'];
-        $GLOBALS['shortcode_tags']['list-icons'] = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeListIcons'];
+        $iconCallback = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeIcon'];
+        $listCallback = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeListIcons'];
+        $GLOBALS['shortcode_tags']['icon'] = $iconCallback;
+        $GLOBALS['shortcode_tags']['list-icons'] = $listCallback;
 
         $registrar = new Registrar();
         $registrar->register();
 
-        $this->assertInstanceOf(Icon::class, $GLOBALS['shortcode_tags']['icon'][0]);
-        $this->assertInstanceOf(Icon::class, $GLOBALS['shortcode_tags']['list-icons'][0]);
+        $this->assertSame($iconCallback, $GLOBALS['shortcode_tags']['icon']);
+        $this->assertSame($listCallback, $GLOBALS['shortcode_tags']['list-icons']);
         $this->assertSame([], $registrar->getConflicts());
     }
 

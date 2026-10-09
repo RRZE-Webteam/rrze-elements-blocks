@@ -19,6 +19,11 @@
     color: #fff;
     letter-spacing: 0.03em;
 
+    // FAUdir cards keep their own link colors on their light background.
+    a:where(:not(.faudir *)) {
+      color: #fff;
+    }
+
     .block-editor-inner-blocks > .block-editor-block-list__layout {
       > p,
       > strong,

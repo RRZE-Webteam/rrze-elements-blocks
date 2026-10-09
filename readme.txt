@@ -4,7 +4,7 @@ Tags: blocks, gutenberg, design, elements
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ Nach der Aktivierung des Plugins stehen die Blöcke im Gutenberg Editor unter de
 
 == Changelog ==
 
+= 1.3.3 =
+* Deaktiviert vorerst die automatische Übernahme der Legacy-Shortcodes icon und list-icons samt FontAwesome-zu-Material-Symbols-Mapping. Bestehende Shortcode-Handler bleiben zuständig.
+* Aktualisiert Abhängigkeiten.
+
 = 1.3.2 =
 * Korrigiert das FAU-Elemental-Styling eigenständiger Legacy-Accordion-Gruppen, unter anderem bei der Ausgabe von fau-cris.
 * Verbessert das Laden der Frontend-Assets für Accordions und Legacy-Shortcodes.
@@ -56,6 +60,9 @@ Nach der Aktivierung des Plugins stehen die Blöcke im Gutenberg Editor unter de
 * Erste Veröffentlichung.
 
 == Upgrade Notice ==
+
+= 1.3.3 =
+Die Übernahme der Legacy-Icon-Shortcodes und das zugehörige Mapping sind standardmäßig deaktiviert. Eine explizite Aktivierung über den Filter rrze_elements_blocks_legacy_shortcode_families bleibt möglich.
 
 = 1.3.2 =
 Benötigt WordPress 7.0 oder neuer und PHP 8.0 oder neuer. Korrigiert Legacy-Accordions im FAU-Elemental-Theme; bestehende Shortcodes können unverändert weiterverwendet werden.

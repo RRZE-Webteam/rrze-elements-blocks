@@ -41,6 +41,7 @@ class Registrar
          *
          * The default contains only families that have passed compatibility
          * testing and are ready to replace their RRZE Elements callbacks.
+         * Icon handling and its Material Symbols mapping are temporarily opt-in.
          *
          * @param string[] $enabledFamilies Enabled family names.
          * @param string[] $availableFamilies All available family names.
@@ -48,7 +49,7 @@ class Registrar
         /** @var mixed $enabledFamilies */
         $enabledFamilies = apply_filters(
             'rrze_elements_blocks_legacy_shortcode_families',
-            ['accordion', 'button', 'icon'],
+            ['accordion', 'button'],
             array_keys($adapters)
         );
 
