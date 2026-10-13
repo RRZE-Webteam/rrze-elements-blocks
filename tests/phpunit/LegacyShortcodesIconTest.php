@@ -102,6 +102,32 @@ final class LegacyShortcodesIconTest extends TestCase
         );
     }
 
+    public function test_german_quotes_unsanitized(): void
+    {
+        $userInput = '„arrow-down“';
+
+        $output = (new Icon())->shortcodeIcon(['icon' => $userInput]);
+
+        $this->assertStringNotContainsString('Icon not found.', $output);
+        $this->assertStringContainsString(
+            'href="#symbols-arrow_downward"',
+            $output
+        );
+    }
+
+    public function test_german_quotes_sanitized(): void
+    {
+        $userInput = '&ldquo;arrow-down&rdquo;';
+
+        $output = (new Icon())->shortcodeIcon(['icon' => $userInput]);
+
+        $this->assertStringNotContainsString('Icon not found.', $output);
+        $this->assertStringContainsString(
+            'href="#symbols-arrow_downward"',
+            $output
+        );
+    }
+
     public function test_unsupported_list_icon_preserves_the_list(): void
     {
         $content = '<ul class="existing"><li>Keep this text</li></ul>';

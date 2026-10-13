@@ -116,7 +116,17 @@ class Icon implements ShortcodeAdapter
             'alt' => '',
         ], is_array($atts) ? $atts : [], $tag);
 
-        return array_map('sanitize_text_field', $args);
+        $sanitizedArgs = array_map('sanitize_text_field', $args);
+        $normalizedIcon = html_entity_decode($sanitizedArgs['icon']);
+
+        $needles = ['"', '”', '„', '“'];
+        forEach($needles as $needle)
+        {
+            $normalizedIcon = trim($normalizedIcon, $needle);
+        }
+
+        $normalizedArgs = array_merge($sanitizedArgs, ['icon' => $normalizedIcon]);
+        return $normalizedArgs;
     }
 
     /**
