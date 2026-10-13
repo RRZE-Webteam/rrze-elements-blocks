@@ -80,6 +80,32 @@ final class LegacyShortcodesIconTest extends TestCase
         $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
     }
 
+    public function test_quotes_sanitized(): void
+    {
+        $userInput = '&quot;arrow-down&quot;';
+
+        $output = (new Icon())->shortcodeIcon(['icon' => $userInput]);
+
+        $this->assertStringNotContainsString('Icon not found.', $output);
+        $this->assertStringContainsString(
+            'href="#symbols-arrow_downward"',
+            $output
+        );
+    }
+
+    public function test_quotes_unsanitized(): void
+    {
+        $userInput = '"arrow-down"';
+
+        $output = (new Icon())->shortcodeIcon(['icon' => $userInput]);
+
+        $this->assertStringNotContainsString('Icon not found.', $output);
+        $this->assertStringContainsString(
+            'href="#symbols-arrow_downward"',
+            $output
+        );
+    }
+
     public function test_unsupported_list_icon_preserves_the_list(): void
     {
         $content = '<ul class="existing"><li>Keep this text</li></ul>';

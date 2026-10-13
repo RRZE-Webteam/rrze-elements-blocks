@@ -3,6 +3,8 @@
 namespace RRZE\ElementsBlocks\LegacyShortcodes;
 
 use RRZE\ElementsBlocks\FrontendAssets;
+use RRZE\ElementsBlocks\Helper;
+use RRZE\ElementsBlocks\SpriteGenerator;
 
 defined('ABSPATH') || exit;
 
@@ -21,7 +23,7 @@ class Icon implements ShortcodeAdapter
     {
         return [
             'icon' => [$this, 'shortcodeIcon'],
-            'list-icons' => [$this, 'shortcodeListIcons'],
+//            'list-icons' => [$this, 'shortcodeListIcons'],
         ];
     }
 
@@ -36,6 +38,7 @@ class Icon implements ShortcodeAdapter
     public function shortcodeIcon(array|string $atts = [], ?string $content = '', string $tag = ''): string
     {
         $args = $this->sanitizeAtts($atts, $tag);
+        Helper::debug($args);
         if ($args['icon'] === '') {
             return '';
         }
@@ -56,11 +59,13 @@ class Icon implements ShortcodeAdapter
 
         $this->enqueueAssets();
 
-        return '<svg xmlns="http://www.w3.org/2000/svg" class="rrze-elements-icon icon-symbols-'
-            . esc_attr($icon['name']) . '" width="1em" height="1em" viewBox="'
-            . esc_attr($matches[1]) . '" fill="currentColor" focusable="false"'
-            . $accessibility . ' style="' . esc_attr($this->getStyles($args)) . '">'
-            . $matches[2] . '</svg>';
+        return SpriteGenerator::svgUse('symbols/' . $icon['name']);
+
+        //        return '<svg xmlns="http://www.w3.org/2000/svg" class="rrze-elements-icon icon-symbols-'
+        //            . esc_attr($icon['name']) . '" width="1em" height="1em" viewBox="'
+        //            . esc_attr($matches[1]) . '" fill="currentColor" focusable="false"'
+        //            . $accessibility . ' style="' . esc_attr($this->getStyles($args)) . '">'
+        //            . $matches[2] . '</svg>';
     }
 
     /**
@@ -137,6 +142,8 @@ class Icon implements ShortcodeAdapter
             $mapping = $json !== false ? json_decode($json, true) : null;
             if (is_array($mapping)) {
                 foreach ($mapping as $name => $symbol) {
+                    Helper::debug('Mapping:');
+                    Helper::debug($name);
                     if (is_string($symbol) && preg_match('/^[a-z0-9_]+$/D', $symbol) === 1) {
                         self::$mapping[$name] = $symbol;
                     }
