@@ -68,6 +68,45 @@ Require the `php-security` status check in branch protection as well if Psalm fi
 
 For PHP development, run `composer install`, `composer test`, and `composer phpstan`. Commit `composer.lock` alongside dependency changes so local development and CI use the same versions. Composer resolves dependencies against PHP 8.0, the plugin's minimum version, even when updating them on newer PHP installations. `npm test` remains the existing PHPStan alias; use `npm run test:js` for JavaScript tests.
 
+### Legacy shortcode compatibility regression tests
+
+Run `composer test:compat` to test icons before, inside and after Notice, Tabs,
+Timeline and CTA shortcodes, plus icons in a rendered Collapse block. The tests
+assert that phone icons keep referencing `#symbols-call` and that rendering does
+not replace the registered icon callback. Control cases cover combinations that
+already work, including the migrated accordion adapter.
+
+This suite uses WordPress's original shortcode parser, hook API, formatting and
+escaping functions, and the actual classes and SVG assets from the legacy
+`rrze-elements` plugin. The regular unit suite uses a `do_shortcode()` stub and
+cannot exercise this interaction. Environment services such as translations,
+post metadata and asset enqueueing are substituted; this is not a full WordPress
+or browser test. The Collapse cases begin after block rendering, before the
+shortcode pass. No database, running web server or `wp-config.php` is needed.
+
+In a normal WordPress checkout, the suite finds WordPress above this plugin and
+`rrze-elements` in the neighbouring plugin directory. For a standalone checkout,
+set both paths explicitly:
+
+```sh
+WP_CORE_DIR=/path/to/wordpress RRZE_ELEMENTS_DIR=/path/to/rrze-elements composer test:compat
+```
+
+Dependencies must already exist; the suite neither downloads them nor silently
+skips tests when they are missing. It runs separately from `composer test` and
+the current CI unit job, which does not provide these external checkouts.
+
+To focus on the Notice migration:
+
+```sh
+composer test:compat -- --filter notice
+```
+
+The tests express the desired behavior, so the current legacy constructor bug
+produces real failures until the corresponding adapters are migrated or the old
+registration side effect is fixed. They are not marked as expected failures or
+skipped. Do not change their expectations to accept Font Awesome output.
+
 ## Start the development process
 ### Build a release archive
 Run `npm run update-version` after changing the version in `package.json`, and commit all generated changes in `build/` and `assets/css/`. Run `npm run plugin-zip` to create `rrze-elements-blocks.zip` from the production files listed in `package.json`.

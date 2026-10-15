@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/compatibility/bootstrap.php"
+         colors="true"
+         cacheResult="false">
+    <testsuites>
+        <testsuite name="Legacy shortcode compatibility">
+            <directory suffix="Test.php">tests/compatibility</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

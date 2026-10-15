@@ -20,6 +20,7 @@
   },
   "scripts": {
     "phpstan": "vendor/bin/phpstan analyse --memory-limit=2048M",
-    "test": "vendor/bin/phpunit"
+    "test": "vendor/bin/phpunit",
+    "test:compat": "vendor/bin/phpunit --configuration phpunit.compat.xml.dist"
   }
 }
