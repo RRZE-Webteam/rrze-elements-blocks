@@ -102,6 +102,11 @@ final class LegacyShortcodesIconCompatibilityTest extends TestCase
         );
         $output = do_shortcode($this->phone('before') . $prefix . $collapse . $this->phone('after'));
 
+        if ($prefix !== '') {
+            // Dropping the notice entirely must not make this regression pass.
+            $this->assertStringContainsString('A tip', $output);
+            $this->assertStringContainsString('href="#symbols-lightbulb"', $output);
+        }
         $this->assertMaterialPhones($output, ['before', 'inside', 'after']);
         $this->assertSame($this->iconCallback, $GLOBALS['shortcode_tags']['icon']);
     }

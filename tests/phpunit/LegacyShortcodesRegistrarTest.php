@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use RRZE\ElementsBlocks\LegacyShortcodes\Accordion;
 use RRZE\ElementsBlocks\LegacyShortcodes\CallToAction;
 use RRZE\ElementsBlocks\LegacyShortcodes\Icon;
+use RRZE\ElementsBlocks\LegacyShortcodes\Notices;
 use RRZE\ElementsBlocks\LegacyShortcodes\Registrar;
 
 final class LegacyShortcodesRegistrarTest extends TestCase
@@ -37,12 +38,16 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame(
-            ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon'],
+            array_merge(
+                ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon'],
+                array_keys((new Notices())->getShortcodes())
+            ),
             array_keys($GLOBALS['shortcode_tags'])
         );
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
         $this->assertSame('shortcodeAccordions', $GLOBALS['shortcode_tags']['accordion'][1]);
         $this->assertSame('shortcodeAccordionItem', $GLOBALS['shortcode_tags']['accordion-item'][1]);
+        $this->assertInstanceOf(Notices::class, $GLOBALS['shortcode_tags']['notice-tipp'][0]);
     }
 
     public function test_legacy_callback_is_replaced(): void
@@ -96,7 +101,10 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $registrar->register();
 
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
-        $this->assertSame(['accordion', 'button', 'icon'], array_keys($GLOBALS['shortcode_tags']));
+        $this->assertSame(
+            array_merge(['accordion', 'button', 'icon'], array_keys((new Notices())->getShortcodes())),
+            array_keys($GLOBALS['shortcode_tags'])
+        );
         $this->assertSame(
             ['accordion' => Closure::class],
             $registrar->getConflicts()
@@ -112,6 +120,39 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $this->assertSame(['rrze-elements-blocks'], array_unique($GLOBALS['wp_test_enqueued_styles']));
         $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
+    }
+
+    public function test_legacy_notice_and_alias_callbacks_are_replaced_together(): void
+    {
+        $legacyCallback = ['RRZE\\Elements\\Notice\\Notice', 'shortcodeNotice'];
+        $GLOBALS['shortcode_tags']['notice-tipp'] = $legacyCallback;
+        $GLOBALS['shortcode_tags']['hinweis'] = $legacyCallback;
+        $registrar = new Registrar();
+        $registrar->register();
+
+        $this->assertInstanceOf(Notices::class, $GLOBALS['shortcode_tags']['notice-tipp'][0]);
+        $this->assertSame($GLOBALS['shortcode_tags']['notice-tipp'], $GLOBALS['shortcode_tags']['hinweis']);
+        $this->assertSame([], $registrar->getConflicts());
+    }
+
+    public function test_conflicting_notice_alias_preserves_the_whole_family(): void
+    {
+        add_filter('rrze_elements_blocks_legacy_shortcode_families', static fn(): array => ['notices']);
+        $legacyCallback = ['RRZE\\Elements\\Notice\\Notice', 'shortcodeNotice'];
+        $thirdPartyCallback = static fn(): string => 'third party';
+        $GLOBALS['shortcode_tags']['notice-tipp'] = $legacyCallback;
+        $GLOBALS['shortcode_tags']['hinweis'] = $thirdPartyCallback;
+        $registrar = new Registrar();
+
+        $registrar->register();
+        $registrar->enqueueAssets();
+
+        $this->assertSame([
+            'notice-tipp' => $legacyCallback,
+            'hinweis' => $thirdPartyCallback,
+        ], $GLOBALS['shortcode_tags']);
+        $this->assertSame(['hinweis' => Closure::class], $registrar->getConflicts());
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
     }
 
     public function test_conflicted_family_does_not_enqueue_its_assets(): void
