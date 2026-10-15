@@ -36,8 +36,11 @@ class SpriteGenerator
    *
    * @param string          $iconRaw     e.g. "solid cow" or "solid/cow"
    * @param string|string[] $extraClass  Additional CSS classes
+   * @param string          $color       Validated CSS color
+   * @param string          $size        CSS Value for height and width
+   * @param string          $border      CSS Border Value
    */
-  public static function svgUse(string $iconRaw, array|string $extraClass = ''): string
+  public static function svgUse(string $iconRaw, array|string $extraClass = '', string $color = '', string $size = '', string $border = ''): string
   {
     $iconPath = self::iconPathFromRaw($iconRaw); // solid/cow
     $symbolId = self::symbolId($iconPath);       // solid-cow
@@ -48,11 +51,39 @@ class SpriteGenerator
     $extraClass = is_array($extraClass) ? implode(' ', $extraClass) : $extraClass;
     $classAttr  = trim('icon icon-' . $symbolId . ' ' . $extraClass);
 
+    $propertyMap = [
+        'color' => $color,
+        'height' => $size,
+        'width' => $size,
+        'border' => $border
+    ];
+    $inlineStyles = self::weaveInlineStyles($propertyMap);
+
     return sprintf(
-      '<svg class="%1$s" aria-hidden="true"><use href="#%2$s"></use></svg>',
+      '<svg class="%1$s" aria-hidden="true"%3$s><use href="#%2$s"></use></svg>',
       esc_attr($classAttr),
-      esc_attr($symbolId)
+      esc_attr($symbolId),
+      $inlineStyles === '' ? '' : ' ' . $inlineStyles
     );
+  }
+
+  /**
+   * Build an escaped HTML style attribute from already validated CSS properties.
+   *
+   * @param array<string, string> $styleProps e.g. ['border' => '1px solid red']
+   * @return string Empty string when no properties are set.
+   */
+  public static function weaveInlineStyles(array $styleProps): string
+  {
+      $declarations = [];
+
+      foreach ($styleProps as $property => $value) {
+          if ($value !== '') {
+              $declarations[] = $property . ': ' . $value . ';';
+          }
+      }
+
+      return $declarations === [] ? '' : 'style="' . esc_attr(implode(' ', $declarations)) . '"';
   }
 
   /** Attach sprite output to wp_footer (only once per request). */
