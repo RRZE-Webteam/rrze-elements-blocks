@@ -427,3 +427,164 @@ div.wp-block-rrze-elements-cta.is-style-lightmode {
 
   }
 }
+
+// The old plugin's no-image minimum height and absolute button positioning can
+// still be loaded alongside the block styles. Keep the adapter's content compact.
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta.rrze-elements-legacy-cta {
+  > div.rrze-elements-cta {
+    color: var(--rrze-cta-text);
+  }
+
+  .rrze-elements-cta.no-image .cta-content {
+    min-height: 0;
+  }
+
+  a.cta-button:not(:has(svg)) {
+    padding: .75rem 1.5rem;
+  }
+
+  .rrze-elements-cta.style-small {
+    grid-template-rows: 1rem auto auto 1rem;
+
+    .cta-content {
+      grid-row: 2/3;
+      min-height: 0;
+      padding: 1rem 2rem;
+    }
+
+    .cta-button-container,
+    .cta-search-container {
+      position: relative;
+      grid-row: 3/4;
+      margin: 0;
+      padding: 1rem 2rem;
+
+      a.cta-button {
+        margin: 0;
+      }
+    }
+
+    .cta-image {
+      grid-row: 1/-1;
+    }
+
+    @media screen and (max-width: 768px) {
+      grid-template-rows: auto auto auto;
+
+      .cta-image {
+        grid-row: 1/2;
+      }
+    }
+  }
+}
+
+// Search and text need separate grid rows; the input must be allowed to shrink
+// inside the image column layout, including when both plugins load their styles.
+.wp-theme-FAU-Elemental div.wp-block-rrze-elements-cta div.rrze-elements-cta:has(> .cta-search-container) {
+  grid-template-rows: 3rem auto auto 3rem;
+
+  .cta-content {
+    grid-row: 2/3;
+    min-width: 0;
+    padding: 0 2rem;
+  }
+
+  .cta-subtitle {
+    padding-top: 0;
+  }
+
+  .cta-image {
+    grid-row: 1/-1;
+  }
+
+  .cta-search-container {
+    position: static;
+    grid-row: 3/4;
+    grid-column: 1/4;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-sizing: border-box;
+    min-width: 0;
+    width: auto;
+    margin: 1.5rem 0 0;
+    padding: 0 2rem;
+  }
+
+  .cta-search {
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 36rem;
+    margin: 0;
+
+    input[type="text"] {
+      flex: 1 1 0;
+      min-width: 0;
+      width: 0;
+      padding: .75rem 1rem;
+      color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+    }
+
+    input[type="text"],
+    button[type="submit"] {
+      box-sizing: border-box;
+      height: 3.25rem;
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: -4px;
+      }
+    }
+
+    button[type="submit"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 3.25rem;
+      padding: 0;
+      background-color: var(--FAU-Col-FAU-Blau-12_5, #dfe6ef);
+      color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+        color: #fff;
+      }
+    }
+  }
+
+  &.no-image {
+    padding: 2rem 0;
+  }
+
+  &.style-small {
+    grid-template-rows: 1rem auto auto 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: minmax(0, 1fr);
+
+    &,
+    &.style-small {
+      grid-template-rows: auto auto auto;
+    }
+
+    &.no-image {
+      padding: 0;
+    }
+
+    .cta-content {
+      padding-top: 1.5rem;
+    }
+
+    .cta-image {
+      grid-row: 1/2;
+      grid-column: 1/-1;
+    }
+
+    .cta-search-container {
+      grid-column: 1/-1;
+      padding-bottom: 2rem;
+    }
+  }
+}

@@ -2,6 +2,10 @@
 
 namespace RRZE\ElementsBlocks\LegacyShortcodes;
 
+use RRZE\ElementsBlocks\BlockFrontend\Alert as AlertRender;
+use RRZE\ElementsBlocks\BlockFrontend\CallToAction as CallToActionRender;
+use RRZE\ElementsBlocks\FrontendAssets;
+
 defined('ABSPATH') || exit;
 
 /**
@@ -21,36 +25,36 @@ class CallToAction implements ShortcodeAdapter
 
     public function enqueueAssets(): void
     {
-        // The shared frontend stylesheet is enqueued globally for supported themes.
+        wp_enqueue_style(FrontendAssets::STYLE);
     }
 
     /**
-     * @param array<string, string> $atts
+     * @param array<string, string>|string $atts WordPress may pass an empty string.
      */
-    public function shortcodeCTA(array $atts = [], ?string $content = '', string $tag = ''): string
+    public function shortcodeCTA(array|string $atts = [], ?string $content = '', string $tag = ''): string
     {
-        if (trim((string)($atts['search'] ?? '')) === '' && trim((string)($atts['url'] ?? '')) === '') {
-            return $this->renderMissingUrlNotice();
-        }
-
+        $this->enqueueAssets();
         $args = shortcode_atts([
             'title' => '',
             'subtitle' => '',
             'button' => '',
             'url' => '',
             'icon' => '',
-            'background' => '',
             'image' => '',
             'search' => '',
             'style' => '',
             'placeholder' => __('Search for...', 'rrze-elements-blocks'),
             'additional_link' => '',
             'additional_link_text' => '',
-        ], $atts, $tag);
+            'color' => 'fau',
+        ], is_array($atts) ? $atts : [], $tag);
 
         $searchParameter = $this->getSearchParameter($args['search']);
         $isSearch = $searchParameter !== '';
         $buttonUrl = esc_url_raw($args['url']);
+        if (!$isSearch && $buttonUrl === '') {
+            return $this->renderMissingUrlNotice();
+        }
         $imageUrl = esc_url_raw($args['image']);
         $imageId = $this->resolveImageId($imageUrl);
 
@@ -66,32 +70,34 @@ class CallToAction implements ShortcodeAdapter
             $innerClasses[] = 'style-small';
         }
 
-        $background = strtolower(trim($args['background']));
-        if (in_array($background, ['1', 'rrze'], true)) {
-            $innerClasses[] = 'bg-' . $background;
-        }
+        $color = strtolower(trim($args['color']));
+        $colors = ['fau', 'fau2', 'phil', 'phil2', 'med', 'med2', 'nat', 'nat2', 'rw', 'rw2', 'tf', 'tf2'];
+        $innerClasses[] = 'color-' . (in_array($color, $colors, true) ? $color : 'fau');
 
         $additionalLink = esc_url_raw($args['additional_link']);
         if ($additionalLink !== '') {
             $innerClasses[] = 'has-additional-link';
         }
 
-        $icon = $this->normalizeIcon($args['icon']);
+        $icon = trim($args['icon']);
         if ($isSearch && $icon === '') {
             $icon = 'solid magnifying-glass';
         } elseif (!$isSearch && $icon === '' && trim($args['button']) !== '') {
             // The native CTA design treats the arrow as part of the button component.
             $icon = 'solid arrow-right';
         }
+        $materialSymbol = (new Icon())->getMaterialSymbol($icon);
 
         $attributes = [
+            'className' => 'rrze-elements-legacy-cta',
             'title' => sanitize_text_field($args['title']),
             'subtitle' => sanitize_text_field($args['subtitle']),
             'buttonText' => sanitize_text_field($args['button']),
             'buttonUrl' => $buttonUrl,
             'background' => implode(' ', $innerClasses),
             'isSearch' => $isSearch,
-            'icon' => $icon,
+            'icon' => $materialSymbol !== '' ? 'symbols ' . $materialSymbol : '',
+            'showButton' => trim($args['button']) !== '',
         ];
 
         if ($imageUrl !== '') {
@@ -113,9 +119,7 @@ class CallToAction implements ShortcodeAdapter
                 : $additionalLink;
         }
 
-        return do_blocks(
-            '<!-- wp:rrze-elements/cta ' . wp_json_encode($attributes) . ' /-->'
-        );
+        return (new CallToActionRender())->render($attributes, '');
     }
 
     private function getSearchParameter(string $search): string
@@ -129,22 +133,7 @@ class CallToAction implements ShortcodeAdapter
             return 's';
         }
 
-        return sanitize_key($search);
-    }
-
-    private function normalizeIcon(string $icon): string
-    {
-        $icon = sanitize_text_field($icon);
-        if ($icon === '') {
-            return '';
-        }
-
-        $icon = trim(str_replace('\\', '/', $icon));
-        if (str_contains($icon, '/') || preg_match('/^(solid|regular|brands|symbols)\s+/', $icon) === 1) {
-            return $icon;
-        }
-
-        return 'solid ' . $icon;
+        return sanitize_text_field($search);
     }
 
     private function resolveImageId(string $imageUrl): int
@@ -179,10 +168,6 @@ class CallToAction implements ShortcodeAdapter
             '</code>'
         );
 
-        $blockMarkup = '<!-- wp:rrze-elements/alert {"style":"danger"} -->'
-            . '<!-- wp:paragraph --><p>' . $message . '</p><!-- /wp:paragraph -->'
-            . '<!-- /wp:rrze-elements/alert -->';
-
-        return do_blocks($blockMarkup);
+        return (new AlertRender())->render(['style' => 'danger'], '<p>' . $message . '</p>');
     }
 }

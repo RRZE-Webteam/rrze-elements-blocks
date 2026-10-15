@@ -34,6 +34,11 @@ function get_locale(): string
     return 'en_US';
 }
 
+function home_url($path = '', $scheme = null): string
+{
+    return 'https://example.com' . ($path !== '' ? '/' . ltrim((string)$path, '/') : '');
+}
+
 // PHP 8 removed mbstring.func_overload; no encoding switch is needed here.
 function mbstring_binary_safe_encoding($reset = false): void {}
 function reset_mbstring_encoding(): void {}

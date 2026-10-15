@@ -1,20 +1,12 @@
 @use "variables" as v;
 @use "mixins" as m;
+@use "sass:map";
 
 .rrze-elements-cta {
   position: relative;
   margin: 2em 0;
   color: var(--color-primary-basis-kontrast, #fff);
   background-color: var(--color-primary-basis, #04316a);
-  $backgrounds: '1', 'rrze';
-  @each $background in $backgrounds {
-    &.bg-#{$background} {
-      background-image: url("../svg/cta/background-#{$background}.svg?url");
-      background-position: bottom 50% left;
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-  }
 
   @media screen and (max-width: 767px) {
     margin-left: -15px;
@@ -232,7 +224,6 @@
   }
 
   &.style-small {
-    background-size: cover;
 
     .cta-content {
       @media screen and (min-width: 992px) {
@@ -304,17 +295,6 @@
       }
     }
 
-    @each $background in $backgrounds {
-      &.bg-#{$background} {
-        background-position: left bottom;
-      }
-    }
-
-    &.bg-rrze {
-      background-size: cover;
-      background-position: center center;
-    }
-
     &.style-small {
 
       .cta-button-container,
@@ -326,6 +306,12 @@
       }
     }
   }
+}
+
+// Saved CTA markup can still contain old background classes. Prevent the legacy
+// plugin's stylesheet from restoring decorative images inside block output.
+div.wp-block-rrze-elements-cta div.rrze-elements-cta {
+  background-image: none;
 }
 
 .wp-block-rrze-elements-cta {
@@ -377,4 +363,30 @@ a.cta-button svg{
   width: 1.25rem;
   height: 1.25rem;
   margin-left: 1.25rem;
+}
+
+// Legacy color attributes belong to the inner CTA, unlike block style classes.
+// Scope these rules to the adapter so existing native block styles keep priority.
+div.wp-block-rrze-elements-cta.rrze-elements-legacy-cta > div.rrze-elements-cta {
+  @each $color in 'fau', 'phil', 'med', 'nat', 'rw', 'tf' {
+    $token: $color;
+    @if $color == 'fau' {
+      $token: 'zentral';
+    }
+    &.color-#{$color} {
+      --rrze-cta-background: var(--color-#{$token}-ci-hell, #{map.get(v.$colormaps, $token, "ci-hell")});
+      --rrze-cta-text: var(--color-#{$token}-ci-hell-kontrast, #{map.get(v.$colormaps, $token, "ci-hell-kontrast")});
+    }
+    &.color-#{$color}2 {
+      --rrze-cta-background: var(--color-#{$token}-dunkler, #{map.get(v.$colormaps, $token, "dunkler")});
+      --rrze-cta-text: var(--color-#{$token}-dunkler-kontrast, #{map.get(v.$colormaps, $token, "dunkler-kontrast")});
+    }
+  }
+
+  background-color: var(--rrze-cta-background);
+  color: var(--rrze-cta-text);
+
+  .cta-image::before {
+    background-color: var(--rrze-cta-background);
+  }
 }

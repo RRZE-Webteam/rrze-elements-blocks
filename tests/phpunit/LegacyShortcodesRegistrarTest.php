@@ -42,7 +42,8 @@ final class LegacyShortcodesRegistrarTest extends TestCase
             array_merge(
                 ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
-                array_keys((new Tab())->getShortcodes())
+                array_keys((new Tab())->getShortcodes()),
+                ['CTA']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );
@@ -66,15 +67,16 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $registrar->getConflicts());
     }
 
-    public function test_existing_legacy_cta_callback_is_preserved_by_default(): void
+    public function test_existing_legacy_cta_callback_is_replaced_by_default(): void
     {
-        $legacyCallback = ['RRZE\\Elements\\Shortcodes', 'shortcodeCTA'];
+        $legacyCallback = ['RRZE\\Elements\\CTA\\CTA', 'shortcodeCTA'];
         $GLOBALS['shortcode_tags']['CTA'] = $legacyCallback;
 
         $registrar = new Registrar();
         $registrar->register();
 
-        $this->assertSame($legacyCallback, $GLOBALS['shortcode_tags']['CTA']);
+        $this->assertInstanceOf(CallToAction::class, $GLOBALS['shortcode_tags']['CTA'][0]);
+        $this->assertSame('shortcodeCTA', $GLOBALS['shortcode_tags']['CTA'][1]);
         $this->assertSame([], $registrar->getConflicts());
     }
 
@@ -133,11 +135,11 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
 
-    public function test_cta_family_can_be_enabled_explicitly(): void
+    public function test_cta_family_can_be_disabled(): void
     {
         add_filter(
             'rrze_elements_blocks_legacy_shortcode_families',
-            static fn(array $families): array => array_merge($families, ['cta'])
+            static fn(array $families): array => array_values(array_diff($families, ['cta']))
         );
 
         $registrar = new Registrar();
@@ -145,9 +147,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $this->assertArrayHasKey('accordion', $GLOBALS['shortcode_tags']);
         $this->assertArrayHasKey('button', $GLOBALS['shortcode_tags']);
-        $this->assertArrayHasKey('CTA', $GLOBALS['shortcode_tags']);
-        $this->assertInstanceOf(CallToAction::class, $GLOBALS['shortcode_tags']['CTA'][0]);
-        $this->assertSame('shortcodeCTA', $GLOBALS['shortcode_tags']['CTA'][1]);
+        $this->assertArrayNotHasKey('CTA', $GLOBALS['shortcode_tags']);
         $this->assertSame([], $registrar->getConflicts());
     }
 
@@ -163,7 +163,8 @@ final class LegacyShortcodesRegistrarTest extends TestCase
             array_merge(
                 ['accordion', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
-                array_keys((new Tab())->getShortcodes())
+                array_keys((new Tab())->getShortcodes()),
+                ['CTA']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );

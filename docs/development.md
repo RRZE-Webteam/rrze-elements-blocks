@@ -188,6 +188,39 @@ registration. The mixed-plugin icon regression suite also exercises the new
 tabs family through the default registration. PHP tests verify markup and asset requests; they do not exercise
 keyboard interaction in a browser or promise nested groups of identical tags.
 
+### CTA shortcode migration
+
+The `cta` family is enabled by default and replaces the old `CTA` callback.
+`LegacyShortcodes/CallToAction.php` maps attributes directly to the shared
+`BlockFrontend/CallToAction.php` renderer. Icons use the Icon adapter's Material
+Symbol mapping, without constructing the old Icon class or replacing its callbacks.
+
+The adapter preserves titles, subtitles, optional buttons, images,
+`style="small"`, and all twelve legacy faculty colors. The legacy `background`
+attribute is ignored: decorative SVG backgrounds are no longer part of the design.
+The frontend and editor also suppress these backgrounds in saved block markup
+when the old plugin's styles are loaded alongside the new plugin. An empty
+button label suppresses the button through the renderer's optional `showButton`
+attribute; existing blocks retain their default behavior. Local images use their
+attachment metadata and large image size; valid remote URLs also remain visible.
+
+Search supports the standard `s` parameter, custom parameter names including
+their original case, a placeholder and an additional link. Missing search URLs
+use the site's home URL. A normal CTA without a valid URL renders an alert.
+The FAU-Elemental search styles give text and form separate grid rows, align their
+left edges, and keep the input flexible beside a fixed-size, keyboard-focusable
+submit button. These search styles apply to both native and legacy CTA output.
+
+```sh
+composer test -- --filter LegacyShortcodesCallToActionTest
+composer test:compat -- --filter 'CallToAction|CTA'
+```
+
+The compatibility tests cover the five documentation examples, unsafe attributes,
+search options and icons around the CTA. The remaining known mixed-plugin icon
+failures concern Timeline; the CTA cases now pass. Check responsive layout and
+keyboard focus separately in the browser, since PHP tests only verify markup.
+
 ## Start the development process
 ### Build a release archive
 Run `npm run update-version` after changing the version in `package.json`, and commit all generated changes in `build/` and `assets/css/`. Run `npm run plugin-zip` to create `rrze-elements-blocks.zip` from the production files listed in `package.json`.

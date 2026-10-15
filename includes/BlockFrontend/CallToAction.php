@@ -73,7 +73,7 @@ class CallToAction extends AbstractBlockRender
 
         if ($is_search) {
             $html .= $this->renderSearch($attributes, $href, $icon_markup);
-        } else {
+        } elseif ($attributes['showButton'] ?? true) {
             $html .= '<div class="cta-button-container">';
             $html .= '<a href="' . esc_url($href) . '" class="btn cta-button"' . $aria_label_attr . $target_attributes . '>' . esc_html($button_text) . $icon_markup . '</a>';
             $html .= '</div>';
@@ -95,7 +95,7 @@ class CallToAction extends AbstractBlockRender
         $action = trailingslashit($action);
 
         $search_parameter = isset($attributes['searchParameter'])
-            ? sanitize_key($attributes['searchParameter'])
+            ? sanitize_text_field($attributes['searchParameter'])
             : 's';
         if ($search_parameter === '') {
             $search_parameter = 's';
