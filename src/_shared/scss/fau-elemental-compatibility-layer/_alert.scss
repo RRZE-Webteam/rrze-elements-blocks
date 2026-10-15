@@ -1,5 +1,13 @@
 .wp-theme-FAU-Elemental, .wp-theme-FAU-Elemental .wp-block-rrze-elements-alert {
   div.alert {
+    box-sizing: border-box;
+    min-width: 0;
+
+    // Text inherits from its nearest box, including a differently colored inner alert.
+    :where(p, strong, em, h1, h2, h3, h4, h5, h6, ul, ol, li, blockquote) {
+      color: inherit;
+    }
+
     & >p,
     & >h2,
     & >h3,
@@ -21,13 +29,6 @@
     }
 
     padding: var(--Spacing-6x, 1.5rem) !important;
-
-    &.alert-success *:not(code, pre),
-    &.alert-danger *:not(code, pre),
-    &.alert-warning *:not(code, pre),
-    &.alert-info *:not(code, pre){
-      background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #dfe2e7);
-    }
 
     &.alert-default,
     &.alert-success,
@@ -55,15 +56,32 @@
     &.alert-success{
       border-left: var(--Spacing-2x) solid var(--FAU-Col-FAU-Success, #10C000);
     }
+
+    // Page-wide negative margins must stop at the enclosing alert/column.
+    div.elements-textcolumns,
+    div.wp-block-rrze-elements-columns {
+      width: auto;
+      max-width: 100%;
+      margin-inline: 0;
+    }
+
+    // Legacy text columns also need a readable minimum column width on mobile.
+    div.rrze-elements.elements-textcolumns {
+      column-width: 15rem;
+    }
+
+    .elements-columns > .column {
+      min-width: min(220px, 100%);
+    }
   }
 
   .is-style-dark div.alert {
     & p{
-      color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
+      color: inherit;
     }
 
     & ul li {
-      color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
+      color: inherit;
 
       &:before {
         background-image: var(--icon-arrow-fau-blau);
@@ -71,7 +89,7 @@
     }
 
     & h1, & h2, & h3, & h4, & h5, & h6{
-      color: var(--FAU-Col-FAU-Dunkelblau-100, #04316a);
+      color: inherit;
     }
 
     &.alert-default,
@@ -84,15 +102,9 @@
       color: var(--FAU-Col-FAU-Schwarz-90, #1a1a1a);
     }
 
-    &.alert-success *:not(code, pre),
-    &.alert-danger *:not(code, pre),
-    &.alert-warning *:not(code, pre),
-    &.alert-info *:not(code, pre){
-      background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
-    }
   }
 }
 
-.is-layout-flow div.alert *{
+.is-layout-flow div.alert > :where(p, h1, h2, h3, h4, h5, h6){
   padding: 0;
 }

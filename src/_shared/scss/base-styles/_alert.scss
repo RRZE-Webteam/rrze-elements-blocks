@@ -11,7 +11,7 @@
   overflow: hidden;
   color: #000;
 
-  p, strong {
+  :where(p, strong, em, h1, h2, h3, h4, h5, h6, ul, ol, li, blockquote) {
     color: inherit;
   }
 
@@ -21,7 +21,7 @@
 
     // FAUdir cards keep their own link colors on their light background.
     a:where(:not(.faudir *)) {
-      color: #fff;
+      color: inherit;
     }
 
     .block-editor-inner-blocks > .block-editor-block-list__layout {
@@ -45,7 +45,7 @@
     }
 
     & a:hover, & a:focus, & a:active {
-      color: color.adjust(#fff, $lightness: -10%);
+      color: inherit;
     }
 
     & .faudir{
@@ -75,25 +75,26 @@
   }
 }
 
-.alert-success, .alert-success *:not(code, pre) {
+// Each alert owns its palette. Descendant boxes must keep their own background.
+.alert-success {
   color: #315f31;
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
 
-.alert-info, .alert-info *:not(code, pre) {
+.alert-info {
   color: #245269;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
 
-.alert-warning, .alert-warning *:not(code, pre) {
+.alert-warning {
   color: #66512c;
   background-color: #fcf8e3;
   border-color: #faebcc;
 }
 
-.alert-danger, .alert-danger *:not(code, pre) {
+.alert-danger {
   color: #78302f;
   background-color: #f2dede;
   border-color: #ebccd1;

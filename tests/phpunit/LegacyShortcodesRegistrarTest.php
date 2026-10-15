@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use RRZE\ElementsBlocks\LegacyShortcodes\Accordion;
+use RRZE\ElementsBlocks\LegacyShortcodes\Alert;
 use RRZE\ElementsBlocks\LegacyShortcodes\CallToAction;
 use RRZE\ElementsBlocks\LegacyShortcodes\Icon;
 use RRZE\ElementsBlocks\LegacyShortcodes\Notices;
@@ -44,7 +45,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
                 ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes()),
-                ['CTA', 'timeline', 'timeline-item']
+                ['CTA', 'timeline', 'timeline-item', 'alert', 'inner_alert']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );
@@ -66,6 +67,40 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
         $this->assertSame([], $registrar->getConflicts());
+    }
+
+    /** Both alert aliases migrate together and can be disabled as one family. */
+    public function test_alert_family_replaces_both_callbacks_and_can_be_disabled(): void
+    {
+        $legacy = ['RRZE\\Elements\\Alert\\Alert', 'shortcodeAlert'];
+        $GLOBALS['shortcode_tags'] = ['alert' => $legacy, 'inner_alert' => $legacy];
+        (new Registrar())->register();
+        $this->assertInstanceOf(Alert::class, $GLOBALS['shortcode_tags']['alert'][0]);
+        $this->assertSame($GLOBALS['shortcode_tags']['alert'], $GLOBALS['shortcode_tags']['inner_alert']);
+
+        $GLOBALS['shortcode_tags'] = ['alert' => $legacy, 'inner_alert' => $legacy];
+        add_filter('rrze_elements_blocks_legacy_shortcode_families',
+            static fn(array $families): array => array_values(array_diff($families, ['alert'])));
+        (new Registrar())->register();
+        $this->assertSame($legacy, $GLOBALS['shortcode_tags']['alert']);
+        $this->assertSame($legacy, $GLOBALS['shortcode_tags']['inner_alert']);
+    }
+
+    /** A third-party inner alert prevents a mixture of parent and child implementations. */
+    public function test_conflicting_inner_alert_preserves_the_entire_family(): void
+    {
+        add_filter('rrze_elements_blocks_legacy_shortcode_families', static fn(): array => ['alert']);
+        $callbacks = [
+            'alert' => ['RRZE\\Elements\\Alert\\Alert', 'shortcodeAlert'],
+            'inner_alert' => static fn(): string => 'Third party',
+        ];
+        $GLOBALS['shortcode_tags'] = $callbacks;
+        $registrar = new Registrar();
+        $registrar->register();
+        $registrar->enqueueAssets();
+        $this->assertSame($callbacks, $GLOBALS['shortcode_tags']);
+        $this->assertSame(['inner_alert' => Closure::class], $registrar->getConflicts());
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
     }
 
     public function test_existing_legacy_cta_callback_is_replaced_by_default(): void
@@ -204,7 +239,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
                 ['accordion', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes()),
-                ['CTA', 'timeline', 'timeline-item']
+                ['CTA', 'timeline', 'timeline-item', 'alert', 'inner_alert']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );

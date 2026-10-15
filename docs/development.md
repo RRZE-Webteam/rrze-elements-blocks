@@ -254,6 +254,41 @@ and timelines inside accordions. As with Tabs, these tests do not promise nested
 groups of the same shortcode tag, which WordPress's parser cannot reliably match.
 The complete mixed-plugin icon regression suite, including Timeline, now passes.
 
+### Alert shortcode migration
+
+The default `alert` family replaces `alert` and `inner_alert` together through
+`LegacyShortcodes/Alert.php`, using the shared `BlockFrontend/Alert.php` renderer.
+Disabling the family or finding a third-party callback on either tag preserves
+both existing callbacks.
+
+The variations `success`, `info`, `warning`, `danger` and `example` use the block
+design. `shadow`, `shadow-hover` and unknown styles fall back to a normal alert;
+they retain their content and any valid custom colors. For the named variations,
+custom colors are ignored. Otherwise `color` and `border_color` accept three- or
+six-digit hex colors. Text contrast is calculated as in the old handler; its
+unused `font` attribute remains unnecessary. Native blocks can still supply an
+explicit `textColor` and `borderColor`.
+
+Legacy `title` supplies the example label only when `style="example"`. An empty
+title leaves the stylesheet's translated default label intact. Native blocks
+continue to switch to the example variation when their label is set.
+
+Content is paragraph-formatted before expanding child shortcodes. Use
+`inner_alert` inside `alert`; WordPress cannot reliably match nested occurrences
+of the same shortcode tag. Compatibility tests cover this nesting, icons,
+notices, escaped examples, accordion/tab containers and the old column handlers.
+
+Alert palettes apply to their own boxes, allowing nested boxes to keep independent
+colors. The FAU Elemental compatibility styles contain text columns within the
+alert instead of applying page-wide negative margins, and allow the legacy
+column layout to shrink on mobile. This is a scoped layout fix; the column
+shortcodes themselves still belong to the old plugin.
+
+```sh
+composer test -- --filter 'LegacyShortcodesAlertTest|LegacyShortcodesRegistrarTest'
+composer test:compat -- --filter LegacyShortcodesAlertCompatibilityTest
+```
+
 ## Start the development process
 ### Build a release archive
 Run `npm run update-version` after changing the version in `package.json`, and commit all generated changes in `build/` and `assets/css/`. Run `npm run plugin-zip` to create `rrze-elements-blocks.zip` from the production files listed in `package.json`.
