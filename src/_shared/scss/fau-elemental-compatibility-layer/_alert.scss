@@ -41,6 +41,18 @@
       border-right: 0;
     }
 
+    &.alert-success,
+    &.alert-info,
+    &.alert-warning,
+    &.alert-danger {
+      // The still-active legacy stylesheet colors every descendant. Clear text
+      // backgrounds while preserving nested boxes, buttons and explicit block colors.
+      :where(p, strong, em, b, i, span, h1, h2, h3, h4, h5, h6, ul, ol, li, blockquote,
+        a:not(.wp-block-button__link, .standard-btn)):not(.has-background) {
+        background-color: transparent;
+      }
+    }
+
     &.alert-warning{
       border-left: var(--Spacing-2x) solid var(--FAU-Col-FAU-Warning, #FDDF35);
     }
