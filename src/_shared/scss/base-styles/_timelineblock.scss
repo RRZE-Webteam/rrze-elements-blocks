@@ -8,7 +8,7 @@
 }
 
 .wp-block-rrze-elements-timeline {
-    ol.timeline {
+    > ol.timeline {
         max-width: var(--max-w);
         padding-bottom: var(--s-xl);
         -webkit-pading-start: calc(var(--s-m) + .5rem);
@@ -17,7 +17,8 @@
         list-style: none;
         margin-left: 0;
 
-        li {
+        > li {
+            scroll-margin-top: 5rem;
             text-align: match-parent;
             padding-bottom: var(--s-xl);
             padding-inline-start: calc(var(--s-m) + .5rem);
@@ -26,7 +27,7 @@
             list-style: none;
         }
 
-        li:before {
+        > li:before {
             border-inline-start: .125rem solid var(--color-primary-basis, #04316a);
             -webkit-border-start: .125rem solid var(--color-primary-basis, #04316a);
             content: "";
@@ -36,7 +37,7 @@
             top: 0;
         }
 
-        li:after {
+        > li:after {
             background-color: #fff;
             border: .125rem solid var(--color-primary-basis, #04316a);
             border-radius: 50%;
@@ -49,13 +50,13 @@
             width: 1rem;
         }
 
-        li>div {
+        > li > .tooltip {
             color: var(--color-primary-basis-kontrast, #fff) !important;
             padding: 1rem;
             border: .15rem solid var(--color-primary-basis, #04316a);
         }
 
-        div.tooltip-arrow:after {
+        > li > .tooltip > .tooltip-arrow:after {
             background: var(--color-primary-basis, #04316a);
             content: "";
             height: 10px;
@@ -66,7 +67,7 @@
             width: 10px;
         }
 
-        div.tooltip-arrow {
+        > li > .tooltip > .tooltip-arrow {
             height: 15px;
             left: 0;
             overflow: hidden;
@@ -77,23 +78,23 @@
             border: none;
         }
 
-        div.tooltip {
+        > li > .tooltip {
             position: relative;
             background-color: var(--color-primary-basis, #04316a);
 
-            :first-child {
+            > :first-child {
                 margin-top: 0;
             }
 
-            p{
+            > p {
                 color: var(--color-primary-basis-kontrast, #fff);
             }
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
+            > h1,
+            > h2,
+            > h3,
+            > h4,
+            > h5,
+            > h6 {
                 margin-top: 0;
                 margin-bottom: 1rem;
                 color: var(--color-primary-basis-kontrast, #fff);

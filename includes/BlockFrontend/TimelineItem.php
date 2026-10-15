@@ -20,13 +20,17 @@ class TimelineItem extends AbstractBlockRender
 
         $wrapper_class = $attributes['className'] ?? '';
 
-        $title = $attributes['title'] ?? '';
-        $hstart = max(1, min(6, $attributes['hstart'] ?? 2));
+        $title = sanitize_text_field($attributes['title'] ?? '');
+        $hstart = max(1, min(6, (int)($attributes['hstart'] ?? 2)));
+        $anchor = (string)($attributes['anchor'] ?? '');
+        $id = $anchor !== '' ? ' id="' . esc_attr($anchor) . '"' : '';
 
-        $html = '<li class="wp-block-rrze-elements-timeline-item ' . esc_attr(trim($wrapper_class)) . '">';
+        $html = '<li class="wp-block-rrze-elements-timeline-item ' . esc_attr(trim($wrapper_class)) . '"' . $id . '>';
         $html .= '<div class="tooltip">';
         $html .= '<div class="tooltip-arrow"></div>';
-        $html .= '<h' . $hstart . ' class="timeline-label">' . sanitize_text_field($title) . '</h' . $hstart . '>';
+        if ($title !== '') {
+            $html .= '<h' . $hstart . ' class="timeline-label">' . esc_html($title) . '</h' . $hstart . '>';
+        }
         $html .= $innerBlocks;
         $html .= '</div></li>';
 

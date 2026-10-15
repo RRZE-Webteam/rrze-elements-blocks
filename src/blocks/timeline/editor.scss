@@ -18,7 +18,8 @@ ol.timeline {
     position: relative;
     list-style: none;
 
-    li {
+    // InnerBlocks inserts editor wrappers between the ol and its items.
+    li.wp-block-rrze-elements-timeline-item {
         text-align: match-parent;
         padding-bottom: var(--s-xl);
         padding-inline-start: calc(var(--s-m) + .5rem);
@@ -26,7 +27,7 @@ ol.timeline {
         position: relative;
     }
 
-    li:before {
+    li.wp-block-rrze-elements-timeline-item:before {
         border-inline-start: .125rem solid var(--color-primary-basis, #04316a);
         -webkit-border-start: .125rem solid var(--color-primary-basis, #04316a);
         content: "";
@@ -36,7 +37,7 @@ ol.timeline {
         top: 0;
     }
 
-    li:after {
+    li.wp-block-rrze-elements-timeline-item:after {
         background-color: var(--color-primary-basis, #04316a);
         border: .125rem solid var(--color-primary-basis, #04316a);
         border-radius: 50%;
@@ -49,13 +50,13 @@ ol.timeline {
         width: 1rem;
     }
 
-    li>div {
+    li.wp-block-rrze-elements-timeline-item > .tooltip {
         color: var(--color-primary-basis-kontrast, #fff) !important;
         padding: 1rem;
         border: .15rem solid var(--color-primary-basis, #04316a);
     }
 
-    div.tooltip-arrow:after {
+    li.wp-block-rrze-elements-timeline-item > .tooltip > .tooltip-arrow:after {
         background: var(--color-primary-basis, #04316a);
         // box-shadow: 0 0 6px rgba(14, 71, 203, .2);
         content: "";
@@ -67,7 +68,7 @@ ol.timeline {
         width: 10px;
     }
 
-    div.tooltip-arrow {
+    li.wp-block-rrze-elements-timeline-item > .tooltip > .tooltip-arrow {
         height: 15px;
         left: 0;
         overflow: hidden;
@@ -78,15 +79,15 @@ ol.timeline {
         border: none;
     }
 
-    div.tooltip{
+    li.wp-block-rrze-elements-timeline-item > .tooltip {
         position: relative;
         z-index: 10;
         background-color: var(--color-primary-basis, #04316a);
 
-        :first-child {
+        > :first-child {
             margin-top: 0;
         }
-        p{
+        p {
             color: var(--color-primary-basis-kontrast, #fff);
         }
         h1, h2, h3, h4, h5, h6 {

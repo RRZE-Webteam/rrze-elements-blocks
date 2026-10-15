@@ -102,10 +102,9 @@ To focus on the Notice migration:
 composer test:compat -- --filter notice
 ```
 
-The tests express the desired behavior, so the current legacy constructor bug
-produces real failures until the corresponding adapters are migrated or the old
-registration side effect is fixed. They are not marked as expected failures or
-skipped. Do not change their expectations to accept Font Awesome output.
+The migrated families now pass these regressions. The old constructor's
+registration side effect remains covered: rendering a wrapper must not replace
+the new icon callback. Do not change expectations to accept Font Awesome output.
 
 ### Icon-list shortcode migration
 
@@ -217,9 +216,43 @@ composer test:compat -- --filter 'CallToAction|CTA'
 ```
 
 The compatibility tests cover the five documentation examples, unsafe attributes,
-search options and icons around the CTA. The remaining known mixed-plugin icon
-failures concern Timeline; the CTA cases now pass. Check responsive layout and
+search options and icons around the CTA. Check responsive layout and
 keyboard focus separately in the browser, since PHP tests only verify markup.
+
+### Timeline shortcode migration
+
+The default `timeline` family replaces `timeline` and `timeline-item` together,
+using `BlockFrontend/Timeline.php` and `BlockFrontend/TimelineItem.php`. Removing
+the family through `rrze_elements_blocks_legacy_shortcode_families` preserves
+both old callbacks; a third-party conflict on either tag also preserves both.
+
+This migration intentionally adopts the new vertical block design. The old
+slider options `orientation`, `speed`, `startat`, `autoplay`, `autoplaypause`,
+`fixedsize`, `datewidth` and `start-end` are ignored. All entries remain in source
+order, with the shared `rrze-timeline` scroll animation instead of `rrze-timelinr`.
+
+The item `name` becomes its label and a sanitized anchor. Repeated names receive
+unique suffixes, including across successive timelines. Empty names produce no
+empty heading. The optional parent `hstart` follows the block's default of 3,
+accepting levels 1–6; existing headings in the content remain unchanged.
+
+`TimelineContext` keeps parent settings and the item count while children render;
+`finally` restores the stack after errors. Nested shortcodes execute once.
+Formatting cleanup only removes `wpautop` remnants at item boundaries, retaining
+paragraphs, line breaks, images and lists inside each item. Empty groups and
+orphan items preserve their content without an empty or invalid timeline list.
+Timeline line/marker CSS targets timeline entries, not nested content lists.
+
+```sh
+composer test -- --filter 'LegacyShortcodesTimelineTest|LegacyShortcodesRegistrarTest'
+composer test:compat -- --filter 'Timeline|timeline'
+```
+
+Compatibility tests use the real WordPress parser and cover the documentation
+example, formatting, obsolete options, safe names, anchors, embedded shortcodes
+and timelines inside accordions. As with Tabs, these tests do not promise nested
+groups of the same shortcode tag, which WordPress's parser cannot reliably match.
+The complete mixed-plugin icon regression suite, including Timeline, now passes.
 
 ## Start the development process
 ### Build a release archive

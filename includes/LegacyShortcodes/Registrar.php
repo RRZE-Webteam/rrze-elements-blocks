@@ -48,7 +48,7 @@ class Registrar
         /** @var mixed $enabledFamilies */
         $enabledFamilies = apply_filters(
             'rrze_elements_blocks_legacy_shortcode_families',
-            ['accordion', 'button', 'icon', 'notices', 'tabs', 'cta'],
+            ['accordion', 'button', 'icon', 'notices', 'tabs', 'cta', 'timeline'],
             array_keys($adapters)
         );
 
@@ -142,6 +142,7 @@ class Registrar
             'cta' => new CallToAction(),
             'notices' => new Notices(),
             'tabs' => new Tab(),
+            'timeline' => new Timeline(),
         ];
     }
 

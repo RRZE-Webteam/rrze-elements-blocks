@@ -9,6 +9,7 @@ use RRZE\ElementsBlocks\LegacyShortcodes\Icon;
 use RRZE\ElementsBlocks\LegacyShortcodes\Notices;
 use RRZE\ElementsBlocks\LegacyShortcodes\Registrar;
 use RRZE\ElementsBlocks\LegacyShortcodes\Tab;
+use RRZE\ElementsBlocks\LegacyShortcodes\Timeline;
 
 final class LegacyShortcodesRegistrarTest extends TestCase
 {
@@ -43,7 +44,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
                 ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes()),
-                ['CTA']
+                ['CTA', 'timeline', 'timeline-item']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );
@@ -97,6 +98,45 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         foreach ($callbacks as $tag => $callback) {
             $this->assertSame($callback, $GLOBALS['shortcode_tags'][$tag]);
         }
+    }
+
+    /** Verifies default migration and explicit opt-out for both timeline tags. */
+    public function test_timeline_family_replaces_both_callbacks_and_can_be_disabled(): void
+    {
+        $callbacks = [
+            'timeline' => ['RRZE\\Elements\\TimeLine\\TimeLine', 'shortcodeTimeline'],
+            'timeline-item' => ['RRZE\\Elements\\TimeLine\\TimeLine', 'shortcodeTimelineItem'],
+        ];
+        $GLOBALS['shortcode_tags'] = $callbacks;
+        (new Registrar())->register();
+        $this->assertInstanceOf(Timeline::class, $GLOBALS['shortcode_tags']['timeline'][0]);
+        $this->assertSame($GLOBALS['shortcode_tags']['timeline'][0], $GLOBALS['shortcode_tags']['timeline-item'][0]);
+
+        $GLOBALS['shortcode_tags'] = $callbacks;
+        add_filter('rrze_elements_blocks_legacy_shortcode_families',
+            static fn(array $families): array => array_values(array_diff($families, ['timeline'])));
+        (new Registrar())->register();
+        foreach ($callbacks as $tag => $callback) {
+            $this->assertSame($callback, $GLOBALS['shortcode_tags'][$tag]);
+        }
+    }
+
+    /** Prevents mixing parent and child callbacks from unrelated implementations. */
+    public function test_conflicting_timeline_item_preserves_the_entire_family(): void
+    {
+        add_filter('rrze_elements_blocks_legacy_shortcode_families', static fn(): array => ['timeline']);
+        $callbacks = [
+            'timeline' => ['RRZE\\Elements\\TimeLine\\TimeLine', 'shortcodeTimeline'],
+            'timeline-item' => static fn(): string => 'Third party',
+        ];
+        $GLOBALS['shortcode_tags'] = $callbacks;
+        $registrar = new Registrar();
+        $registrar->register();
+        $registrar->enqueueAssets();
+        $this->assertSame($callbacks, $GLOBALS['shortcode_tags']);
+        $this->assertSame(['timeline-item' => Closure::class], $registrar->getConflicts());
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
 
     public function test_tabs_family_can_replace_both_legacy_callbacks_when_enabled(): void
@@ -164,7 +204,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
                 ['accordion', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes()),
-                ['CTA']
+                ['CTA', 'timeline', 'timeline-item']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );

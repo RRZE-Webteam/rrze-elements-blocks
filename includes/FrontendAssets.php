@@ -12,6 +12,7 @@ class FrontendAssets
     public const STYLE = 'rrze-elements-blocks';
     public const ACCORDION_SCRIPT = 'rrze-accordions';
     public const TABS_SCRIPT = 'rrze-tabs';
+    public const TIMELINE_SCRIPT = 'rrze-timeline';
 
     public static function enqueueAccordion(): void
     {
@@ -23,5 +24,12 @@ class FrontendAssets
     {
         wp_enqueue_style(self::STYLE);
         wp_enqueue_script(self::TABS_SCRIPT);
+    }
+
+    /** Requests the shared timeline styles and the registered scroll animation. */
+    public static function enqueueTimeline(): void
+    {
+        wp_enqueue_style(self::STYLE);
+        wp_enqueue_script(self::TIMELINE_SCRIPT);
     }
 }
