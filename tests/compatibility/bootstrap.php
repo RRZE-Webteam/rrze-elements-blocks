@@ -34,6 +34,21 @@ require ABSPATH . WPINC . '/formatting.php';
 require ABSPATH . WPINC . '/kses.php';
 require ABSPATH . WPINC . '/shortcodes.php';
 
+// Exercise list attribute updates with WordPress's real HTML API as well.
+if (is_readable(ABSPATH . WPINC . '/class-wp-token-map.php')) {
+    require ABSPATH . WPINC . '/class-wp-token-map.php';
+}
+foreach ([
+    'html5-named-character-references.php',
+    'class-wp-html-attribute-token.php',
+    'class-wp-html-span.php',
+    'class-wp-html-text-replacement.php',
+    'class-wp-html-decoder.php',
+    'class-wp-html-tag-processor.php',
+] as $file) {
+    require ABSPATH . WPINC . '/html-api/' . $file;
+}
+
 spl_autoload_register(static function (string $class) use ($legacyRoot): void {
     $prefix = 'RRZE\\Elements\\';
     if (!str_starts_with($class, $prefix)) {

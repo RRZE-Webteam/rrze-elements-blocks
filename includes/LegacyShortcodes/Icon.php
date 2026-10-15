@@ -23,7 +23,7 @@ class Icon implements ShortcodeAdapter
     {
         return [
             'icon' => [ $this, 'shortcodeIcon' ],
-//            'list-icons' => [$this, 'shortcodeListIcons'],
+            'list-icons' => [$this, 'shortcodeListIcons'],
         ];
     }
 
@@ -71,11 +71,11 @@ class Icon implements ShortcodeAdapter
     /**
      * @param array<string, string>|string $atts
      */
-    public
-    function shortcodeListIcons( array|string $atts = [], ?string $content = '', string $tag = '' ): string
+    public function shortcodeListIcons( array|string $atts = [], ?string $content = '', string $tag = '' ): string
     {
         $args = $this->sanitizeAtts( $atts, $tag );
-        $content = $content ?? '';
+        // A wrapping shortcode must explicitly render its children, just like Tabs and Notices.
+        $content = do_shortcode(shortcode_unautop($content ?? ''));
         if ( $args[ 'icon' ] === '' ) {
             return $content;
         }
@@ -87,15 +87,17 @@ class Icon implements ShortcodeAdapter
 
         // Store the mask on each list so rendering after wp_head needs no late stylesheet.
         $mask = 'url("data:image/svg+xml,' . rawurlencode( $icon[ 'svg' ] ) . '")';
+        $color = $this->getColor($args['color']);
         $processor = new \WP_HTML_Tag_Processor( $content );
         while ( $processor->next_tag( [ 'tag_name' => 'UL' ] ) ) {
             $processor->add_class( 'rrze-elements-material-icon-list' );
             $style = $processor->get_attribute( 'style' );
-            $style = is_string( $style ) ? rtrim( $style, "; \t\n\r\0\x0B" ) . ';' : '';
+            $style = is_string($style) ? rtrim($style, "; \t\n\r\0\x0B") : '';
+            $style = $style !== '' ? $style . ';' : '';
             $processor->set_attribute(
                 'style',
                 $style . '--rrze-elements-list-icon:' . $mask . ';'
-                . '--rrze-elements-list-icon-color:' . $this->getColor( $args[ 'color' ] )
+                . '--rrze-elements-list-icon-color:' . $color . ';'
             );
         }
 

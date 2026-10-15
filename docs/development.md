@@ -107,6 +107,25 @@ produces real failures until the corresponding adapters are migrated or the old
 registration side effect is fixed. They are not marked as expected failures or
 skipped. Do not change their expectations to accept Font Awesome output.
 
+### Icon-list shortcode migration
+
+The `icon` family registers both `icon` and `list-icons`. The latter preserves
+the legacy `icon` and `color` attributes, mapping icon names to the bundled
+Material Symbols. Missing icons preserve the content; unsupported names add an
+error message without removing the list. Nested shortcodes run once.
+
+The WordPress HTML Tag Processor adds a class and per-list CSS variables to each
+`ul`, retaining existing attributes, content and nested lists. Ordered lists and
+lists outside the shortcode keep their own markers. SVG masks and colors live on
+the list itself, so rendering after `wp_head` needs no late inline stylesheet.
+The default marker color follows the list text via `currentColor`.
+
+Scoped CSS replaces the theme's `::before` bars with `1.1em` icons and resets the
+matching indentation. The FAU-Elemental override covers classic lists, block
+lists and lists in columns. Run `composer test:compat -- --filter IconList` for
+the documented examples, colors, HTML preservation and combinations with Notice,
+Tabs and Accordion; inspect the resulting marker sizes in a real browser too.
+
 ### Tabs shortcode migration
 
 `includes/LegacyShortcodes/Tab.php` provides the `tabs` and `tab` callbacks. The

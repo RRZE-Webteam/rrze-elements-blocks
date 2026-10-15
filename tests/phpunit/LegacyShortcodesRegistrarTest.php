@@ -40,7 +40,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $this->assertSame(
             array_merge(
-                ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon'],
+                ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes())
             ),
@@ -161,7 +161,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['accordion']);
         $this->assertSame(
             array_merge(
-                ['accordion', 'button', 'icon'],
+                ['accordion', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes())
             ),
@@ -231,7 +231,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame([], $GLOBALS['wp_test_enqueued_scripts']);
     }
 
-    public function test_legacy_icon_is_replaced_but_list_icons_is_preserved(): void
+    public function test_legacy_icon_and_list_icons_are_replaced_together(): void
     {
         $iconCallback = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeIcon'];
         $listCallback = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeListIcons'];
@@ -243,7 +243,8 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $this->assertInstanceOf(Icon::class, $GLOBALS['shortcode_tags']['icon'][0]);
         $this->assertSame('shortcodeIcon', $GLOBALS['shortcode_tags']['icon'][1]);
-        $this->assertSame($listCallback, $GLOBALS['shortcode_tags']['list-icons']);
+        $this->assertSame($GLOBALS['shortcode_tags']['icon'][0], $GLOBALS['shortcode_tags']['list-icons'][0]);
+        $this->assertSame('shortcodeListIcons', $GLOBALS['shortcode_tags']['list-icons'][1]);
         $this->assertSame([], $registrar->getConflicts());
     }
 
@@ -262,6 +263,24 @@ final class LegacyShortcodesRegistrarTest extends TestCase
         $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['icon']);
         $this->assertSame($legacyCallback, $GLOBALS['shortcode_tags']['list-icons']);
         $this->assertSame(['icon' => Closure::class], $registrar->getConflicts());
+        $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
+    }
+
+    public function test_conflicting_list_callback_preserves_the_entire_icon_family(): void
+    {
+        add_filter('rrze_elements_blocks_legacy_shortcode_families', static fn(): array => ['icon']);
+        $legacyCallback = ['RRZE\\Elements\\Icon\\Icon', 'shortcodeIcon'];
+        $thirdPartyCallback = static fn(): string => 'third party list';
+        $GLOBALS['shortcode_tags']['icon'] = $legacyCallback;
+        $GLOBALS['shortcode_tags']['list-icons'] = $thirdPartyCallback;
+
+        $registrar = new Registrar();
+        $registrar->register();
+        $registrar->enqueueAssets();
+
+        $this->assertSame($legacyCallback, $GLOBALS['shortcode_tags']['icon']);
+        $this->assertSame($thirdPartyCallback, $GLOBALS['shortcode_tags']['list-icons']);
+        $this->assertSame(['list-icons' => Closure::class], $registrar->getConflicts());
         $this->assertSame([], $GLOBALS['wp_test_enqueued_styles']);
     }
 }
