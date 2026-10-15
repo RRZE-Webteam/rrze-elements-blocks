@@ -11,10 +11,17 @@ class FrontendAssets
 {
     public const STYLE = 'rrze-elements-blocks';
     public const ACCORDION_SCRIPT = 'rrze-accordions';
+    public const TABS_SCRIPT = 'rrze-tabs';
 
     public static function enqueueAccordion(): void
     {
         wp_enqueue_style(self::STYLE);
         wp_enqueue_script(self::ACCORDION_SCRIPT);
+    }
+
+    public static function enqueueTabs(): void
+    {
+        wp_enqueue_style(self::STYLE);
+        wp_enqueue_script(self::TABS_SCRIPT);
     }
 }

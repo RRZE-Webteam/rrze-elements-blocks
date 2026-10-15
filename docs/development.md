@@ -107,6 +107,68 @@ produces real failures until the corresponding adapters are migrated or the old
 registration side effect is fixed. They are not marked as expected failures or
 skipped. Do not change their expectations to accept Font Awesome output.
 
+### Tabs shortcode migration
+
+`includes/LegacyShortcodes/Tab.php` provides the `tabs` and `tab` callbacks. The
+registrar enables the `tabs` family by default and replaces both legacy
+callbacks together. Remove `tabs` from the
+`rrze_elements_blocks_legacy_shortcode_families` filter to preserve the old
+callbacks when necessary; third-party callback conflicts preserve the entire family.
+
+The adapter translates shortcode attributes and collects child metadata for
+the existing `BlockFrontend/Tabs.php` and `BlockFrontend/Tab.php` renderers. The
+renderers remain responsible for markup and SpriteGenerator output. In
+particular, `TabContext` holds one group's ID, heading level and navigation data;
+a `try/finally` restores the context even after child rendering fails. The Icon
+adapter's `getMaterialSymbol()` method shares the existing normalization and
+mapping without rendering SVG or changing shortcode registrations.
+
+Before rendering children, the adapter removes `wpautop` line-break and paragraph
+remnants at tab boundaries. Otherwise those elements stay visible between hidden
+panels and push later panels down. Paragraphs and line breaks inside each tab are
+preserved; compatibility tests cover adjacent tabs, single newlines and blank lines.
+
+The renderers accept an optional full `tabId` so generated shortcode IDs are not
+truncated to ten characters. Existing blocks retain their ID derivation from
+`blockId`/`clientId`. The child renderer accepts `headingLevel` and
+`printMaterialSymbol`; navigation entries accept `suffix`. These options leave
+existing block output unchanged when omitted.
+
+The contract comes from `rrze-elements/includes/Tabs/Tabs.php`:
+
+| Shortcode | Attribute or feature | Expected behavior |
+| --- | --- | --- |
+| `tabs` | `color` | Default `primary`; support `primary`, `phil`, `nat`, `med`, `rw`, `tf`; map `fau` and `zuv` to `zentral`. Unknown values use the block's default color. |
+| `tabs` | `hstart` | Default `2`; controls the child panels' print headings. Accept levels 1–6 and fall back to 2 otherwise. |
+| `tab` | `title` | Label in navigation and print heading; escaped as text, with a nonempty fallback when omitted. Preserve the title `0`. |
+| `tab` | `icon` | Map the legacy name to a Material Symbol in both navigation and print heading. Unsupported icons preserve the tab content without a Font Awesome fallback. |
+| `tab` | `suffix` | Escaped `tab-suffix` label in navigation only. The old callback computes a print suffix but never outputs it. |
+| `tab` | `color`, `id`, `load`, `name` | The old callback reads these values but does not include them in its output. Preserve that behavior; they do not override group color, selection or generated anchors. |
+| Both | Content and state | Preserve HTML and nested shortcodes; execute child content once; keep independent groups and restore group context after exceptions. |
+| Both | Assets and accessibility | Use shared block styles and `rrze-tabs`; keep unique IDs and matching `aria-controls`/`aria-labelledby` references. |
+
+Intentional improvements over legacy bugs are valid heading levels, safe title
+and suffix output, collision-free IDs for repeated titles, and exactly the first
+tab selected in each group before JavaScript initializes. The old script already
+selects the first tab on load, although the old PHP marks every tab selected.
+The orphan-tab fallback preserves its content; an empty group emits no tablist.
+
+Run the focused tests with:
+
+```sh
+composer test -- --filter LegacyShortcodesTabTest
+composer test -- --filter LegacyShortcodesRegistrarTest
+composer test:compat -- --filter LegacyShortcodesTabCompatibilityTest
+```
+
+The unit tests invoke the actual child callback through a controlled
+`do_shortcode()` substitute. Compatibility tests verify default replacement of
+the old callbacks and exercise WordPress's real parser, including single-quoted
+and unquoted attributes, paragraph formatting, nested content and sprite
+registration. The mixed-plugin icon regression suite also exercises the new
+tabs family through the default registration. PHP tests verify markup and asset requests; they do not exercise
+keyboard interaction in a browser or promise nested groups of identical tags.
+
 ## Start the development process
 ### Build a release archive
 Run `npm run update-version` after changing the version in `package.json`, and commit all generated changes in `build/` and `assets/css/`. Run `npm run plugin-zip` to create `rrze-elements-blocks.zip` from the production files listed in `package.json`.

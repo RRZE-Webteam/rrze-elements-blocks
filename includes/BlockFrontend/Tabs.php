@@ -3,7 +3,6 @@
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
 use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
-use RRZE\ElementsBlocks\Helper;
 use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Tabs extends AbstractBlockRender
@@ -34,27 +33,24 @@ class Tabs extends AbstractBlockRender
 
         foreach ($inner_ids as $tab) {
             $client_id = $tab['clientId'] ?? '';
-            $inner_uid = substr($client_id, 0, 10);
+            // Shortcodes supply full IDs; existing blocks keep their saved ten-character IDs.
+            $inner_uid = isset($tab['tabId']) ? sanitize_html_class((string)$tab['tabId']) : substr($client_id, 0, 10);
             $selected = ($client_id === $active || $active === '') ? 'true' : 'false';
             $title = $tab['title'] ?? '';
             $iconMarkup = '';
-          $material_symbol = isset($tab['materialSymbol']) ? 'symbols ' . sanitize_html_class($tab['materialSymbol']) : '';
-          $iconMarkup = '';
-          if (empty($tab['materialSymbol']) && !empty($tab['icon'])) {
-            $iconMarkup = SpriteGenerator::svgUse(
-              $tab['icon'],          // z. B. "solid cow"
-              'fa fa-' . str_replace(' ', ' fa-', $tab['icon'])
-            );
-          }
-
-          if (!empty($tab['materialSymbol'])) {
-            $iconMarkup = SpriteGenerator::svgUse(
-              $material_symbol
-            );
-          }
+            if (!empty($tab['materialSymbol'])) {
+                $iconMarkup = SpriteGenerator::svgUse('symbols ' . sanitize_html_class($tab['materialSymbol']));
+            } elseif (!empty($tab['icon'])) {
+                $iconMarkup = SpriteGenerator::svgUse(
+                    $tab['icon'],
+                    'fa fa-' . str_replace(' ', ' fa-', $tab['icon'])
+                );
+            }
+            $suffix = (string)($tab['suffix'] ?? '');
+            $suffixMarkup = $suffix !== '' ? '<span class="tab-suffix">' . esc_html($suffix) . '</span>' : '';
 
             $html .= '<button id="' . esc_attr($inner_uid) . '" type="button" role="tab" aria-selected="' . $selected . '" aria-controls="tab-' . esc_attr($uid) . '_tabpanel_tab-label-' . esc_attr($inner_uid) . '">';
-            $html .= '<span class="focus" tabindex="-1">' . $iconMarkup . esc_html($title) . '</span>';
+            $html .= '<span class="focus" tabindex="-1">' . $iconMarkup . esc_html($title) . $suffixMarkup . '</span>';
             $html .= '</button>';
         }
 

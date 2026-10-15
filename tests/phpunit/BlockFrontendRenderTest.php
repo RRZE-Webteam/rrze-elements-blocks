@@ -29,6 +29,62 @@ use RRZE\ElementsBlocks\BlockFrontend\TimelineItem;
 
 final class BlockFrontendRenderTest extends TestCase
 {
+    public function test_tabs_keep_existing_block_ids_and_plain_print_headings(): void
+    {
+        $panel = (new Tab())->render([
+            'tabsUid' => 'parent1234',
+            'blockId' => 'abcdefghij-rest',
+            'title' => 'Block title',
+            'materialSymbol' => 'mail',
+        ], '<p>Body</p>');
+        $output = (new Tabs())->render([
+            'blockId' => 'parent1234',
+            'innerClientIds' => [[
+                'clientId' => 'abcdefghij-rest',
+                'title' => 'Block title',
+                'materialSymbol' => 'mail',
+            ]],
+        ], $panel);
+
+        $this->assertStringContainsString('<button id="abcdefghij"', $output);
+        $this->assertStringContainsString('aria-controls="tab-parent1234_tabpanel_tab-label-abcdefghij"', $output);
+        $this->assertStringContainsString('id="tab-parent1234_tabpanel_tab-label-abcdefghij"', $panel);
+        $this->assertStringContainsString('aria-labelledby="abcdefghij"', $panel);
+        $this->assertStringContainsString('<h2 class="print-only">Block title</h2>', $panel);
+        $this->assertStringNotContainsString('<svg', $panel);
+        $this->assertStringContainsString('href="#symbols-mail"', $output);
+        $this->assertStringNotContainsString('tab-suffix', $output);
+    }
+
+    public function test_tabs_accept_full_ids_and_optional_print_and_suffix_attributes(): void
+    {
+        $id = 'legacy-tab-123456789';
+        $panel = (new Tab())->render([
+            'tabsUid' => 'parent1234',
+            'tabId' => $id,
+            'title' => 'Contact',
+            'headingLevel' => 99,
+            'printMaterialSymbol' => 'mail',
+        ], 'Body');
+        $output = (new Tabs())->render([
+            'blockId' => 'parent1234',
+            'innerClientIds' => [[
+                'clientId' => $id,
+                'tabId' => $id,
+                'title' => 'Contact',
+                'suffix' => '<New>',
+            ]],
+        ], $panel);
+
+        $this->assertStringContainsString('<button id="' . $id . '"', $output);
+        $this->assertStringContainsString('aria-controls="tab-parent1234_tabpanel_tab-label-' . $id . '"', $output);
+        $this->assertStringContainsString('id="tab-parent1234_tabpanel_tab-label-' . $id . '"', $panel);
+        $this->assertStringContainsString('aria-labelledby="' . $id . '"', $panel);
+        $this->assertStringContainsString('<h2 class="print-only"><svg', $panel);
+        $this->assertStringContainsString('href="#symbols-mail"', $panel);
+        $this->assertStringContainsString('<span class="tab-suffix">&lt;New&gt;</span>', $output);
+    }
+
     public function test_cta_renders_an_explicit_empty_icon_and_link_target(): void
     {
         $output = (new CallToAction())->render([

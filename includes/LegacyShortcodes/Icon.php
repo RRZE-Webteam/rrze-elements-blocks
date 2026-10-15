@@ -147,6 +147,18 @@ class Icon implements ShortcodeAdapter
     }
 
     /**
+     * Resolve a legacy name for other adapters without rendering or registering shortcodes.
+     * Returns an empty string when no bundled Material Symbol is available.
+     */
+    public function getMaterialSymbol(string $raw): string
+    {
+        $normalized = $this->normalizeIcon(sanitize_text_field($raw));
+        $icon = $this->getIcon($normalized);
+
+        return $icon['name'] ?? '';
+    }
+
+    /**
      * No Font Awesome file lookup or guessed aliases: the mapping is the allowlist.
      *
      * @return array{name: string, svg: string}|null
