@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * Keeps theme integration fixtures on their documented default settings.
+ *
+ * @param string $name Theme setting name.
+ * @param mixed $default Default value when no database is loaded.
+ * @return mixed The requested default.
+ */
+function get_theme_mod(string $name, mixed $default = false): mixed
+{
+    return $default;
+}
+
 // Only environment services are substituted. Parsing, shortcode registration,
 // hook dispatch, escaping, formatting and the plugin renderers use original code.
 function __($text, $domain = null): string

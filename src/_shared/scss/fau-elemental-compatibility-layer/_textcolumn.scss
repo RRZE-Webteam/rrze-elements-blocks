@@ -10,3 +10,23 @@ div.rrze-elements-blocks-text-column {
 div.rrze-elements-blocks-text-column.no-border {
   column-rule: none;
 }
+
+// Shortcodes may sit inside tabs, accordions or layout columns. Keep their
+// width relative to that container instead of applying page-wide negative margins.
+.wp-theme-FAU-Elemental div.elements-textcolumns.rrze-elements-legacy-textcolumns {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  margin-inline: 0;
+
+  > .alert {
+    max-width: 100%;
+    margin-inline: 0;
+  }
+
+  .rrze-elements-blocks-text-column {
+    box-sizing: border-box;
+    min-width: 0;
+    margin-inline: 0;
+  }
+}

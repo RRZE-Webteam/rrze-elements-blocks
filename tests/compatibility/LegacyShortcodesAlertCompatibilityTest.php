@@ -85,11 +85,12 @@ final class LegacyShortcodesAlertCompatibilityTest extends TestCase
         $this->assertSame(2, $this->xpath($output)->query('//div[contains(concat(" ",normalize-space(@class)," ")," alert ")]')->length);
     }
 
-    /** The documentation's still-legacy columns may surround the migrated inner alert. */
+    /** Legacy layout columns surround migrated alerts and flowing text columns. */
     public function test_legacy_columns_and_text_columns_keep_the_inner_alert_adapter(): void
     {
         new \RRZE\Elements\Columns\Columns();
         new \RRZE\Elements\TextColumns\TextColumns();
+        (new Registrar())->register();
         $callback = $GLOBALS['shortcode_tags']['inner_alert'];
         $output = do_shortcode('[alert color="#fff" border_color="#04316A"]'
             . '[columns number="3"][column span="1"]'
@@ -98,6 +99,7 @@ final class LegacyShortcodesAlertCompatibilityTest extends TestCase
             . '[/columns][/alert]');
         $this->assertSame($callback, $GLOBALS['shortcode_tags']['inner_alert']);
         $this->assertStringContainsString('elements-textcolumns', $output);
+        $this->assertStringContainsString('rrze-elements-blocks-text-column', $output);
         $this->assertSame(1, $this->xpath($output)->query('//div[contains(@class,"colspan-1")]/div[contains(@class,"font-light")]')->length);
         $this->assertStringContainsString('Research', $output);
     }

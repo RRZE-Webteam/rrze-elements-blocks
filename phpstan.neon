@@ -6,3 +6,4 @@ parameters:
 
   scanFiles:
     - rrze-elements-blocks.php
+    - config/config.php

@@ -23,6 +23,7 @@ define('WPINC', 'wp-includes');
 define('RRZE_ELEMENTS_COMPAT_PLUGIN_FILE', $legacyRoot . '/rrze-elements.php');
 
 require $pluginRoot . '/vendor/autoload.php';
+require_once $pluginRoot . '/config/config.php';
 require __DIR__ . '/wordpress-services.php';
 require ABSPATH . WPINC . '/compat.php';
 require ABSPATH . WPINC . '/plugin.php';

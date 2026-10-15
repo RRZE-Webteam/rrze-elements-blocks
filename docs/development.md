@@ -276,17 +276,60 @@ continue to switch to the example variation when their label is set.
 Content is paragraph-formatted before expanding child shortcodes. Use
 `inner_alert` inside `alert`; WordPress cannot reliably match nested occurrences
 of the same shortcode tag. Compatibility tests cover this nesting, icons,
-notices, escaped examples, accordion/tab containers and the old column handlers.
+notices, escaped examples, accordion/tab containers, legacy layout columns and
+migrated text columns.
 
 Alert palettes apply to their own boxes, allowing nested boxes to keep independent
 colors. The FAU Elemental compatibility styles contain text columns within the
 alert instead of applying page-wide negative margins, and allow the legacy
-column layout to shrink on mobile. This is a scoped layout fix; the column
-shortcodes themselves still belong to the old plugin.
+column layout to shrink on mobile. The layout shortcodes `columns`/`column`
+still belong to the old plugin; `text-columns` is migrated as described below.
 
 ```sh
 composer test -- --filter 'LegacyShortcodesAlertTest|LegacyShortcodesRegistrarTest'
 composer test:compat -- --filter LegacyShortcodesAlertCompatibilityTest
+```
+
+### Text columns shortcode migration
+
+The default `text-columns` family replaces the old flowing-text callback through
+`LegacyShortcodes/TextColumns.php` and the shared `BlockFrontend/Columns.php`
+renderer. The layout shortcodes `columns` and `column` remain separate and still
+belong to the old plugin. The family filter supports opt-out, and unrelated
+third-party callbacks retain ownership.
+
+`number` sets the maximum column count (default 2); `width` sets the minimum
+column width in pixels (default 240, matching the old code rather than the 200
+still mentioned in the public documentation). Invalid or zero dimensions fall
+back to those defaults. Negative legacy values retain their absolute-value
+interpretation. CSS reduces the number of columns when space is limited.
+
+`rule` understands the old boolean spellings (`true`, `1`, `yes`, `ja`, `on`).
+`rule-color` and `border-color` remain independent; turning the divider off does
+not remove an explicit outer border. Custom colors accept three- or six-digit
+hex values. The default divider uses `var(--color-ContentBorders, #C3C3CB)`.
+`background-color` also sets automatic black/white text contrast. The old handler
+did not evaluate `font`, so contrast continues to be automatic.
+
+The five named `style` variations (`success`, `info`, `warning`, `danger`,
+`example`) use the shared Alert renderer. They override custom box colors but
+keep the independently configured column divider. Unknown styles retain valid
+custom colors. Native column blocks keep their palette classes and their
+existing shared border/divider color unless a separate `ruleColor` is supplied.
+
+Source text is paragraph-formatted before child shortcodes expand. Regression
+tests cover formatting, escaping, single execution of child callbacks, mixed
+containers and callback ownership. Same-tag nested `text-columns` groups are not
+supported by WordPress's shortcode parser. The Elemental compatibility rules
+keep legacy text columns inside their containing tab, alert or layout column.
+The renderer emits the CSS `columns` shorthand because Elemental's content
+sanitizer currently removes `width` even inside `column-width`. An optional
+integration test loads that real theme filter from `FAU_ELEMENTAL_DIR` (default:
+the local WordPress installation's `wp-content/themes/FAU-Elemental`).
+
+```sh
+composer test -- --filter 'LegacyShortcodesTextColumnsTest|LegacyShortcodesRegistrarTest'
+composer test:compat -- --filter LegacyShortcodesTextColumnsCompatibilityTest
 ```
 
 ## Start the development process

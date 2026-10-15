@@ -11,6 +11,7 @@ use RRZE\ElementsBlocks\LegacyShortcodes\Notices;
 use RRZE\ElementsBlocks\LegacyShortcodes\Registrar;
 use RRZE\ElementsBlocks\LegacyShortcodes\Tab;
 use RRZE\ElementsBlocks\LegacyShortcodes\Timeline;
+use RRZE\ElementsBlocks\LegacyShortcodes\TextColumns;
 
 final class LegacyShortcodesRegistrarTest extends TestCase
 {
@@ -45,7 +46,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
                 ['collapsibles', 'accordion', 'accordionsub', 'collapse', 'accordion-item', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes()),
-                ['CTA', 'timeline', 'timeline-item', 'alert', 'inner_alert']
+                ['CTA', 'timeline', 'timeline-item', 'alert', 'inner_alert', 'text-columns']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );
@@ -67,6 +68,31 @@ final class LegacyShortcodesRegistrarTest extends TestCase
 
         $this->assertInstanceOf(Accordion::class, $GLOBALS['shortcode_tags']['accordion'][0]);
         $this->assertSame([], $registrar->getConflicts());
+    }
+
+    /** Text columns migrate by default while sites can retain their old callback. */
+    public function test_text_columns_takeover_and_opt_out(): void
+    {
+        $legacy = ['RRZE\\Elements\\TextColumns\\TextColumns', 'shortcodeTextColumns'];
+        $GLOBALS['shortcode_tags']['text-columns'] = $legacy;
+        (new Registrar())->register();
+        $this->assertInstanceOf(TextColumns::class, $GLOBALS['shortcode_tags']['text-columns'][0]);
+        $GLOBALS['shortcode_tags']['text-columns'] = $legacy;
+        add_filter('rrze_elements_blocks_legacy_shortcode_families',
+            static fn(array $families): array => array_values(array_diff($families, ['text-columns'])));
+        (new Registrar())->register();
+        $this->assertSame($legacy, $GLOBALS['shortcode_tags']['text-columns']);
+    }
+
+    /** Unrelated plugins retain ownership of the flowing-text shortcode. */
+    public function test_text_columns_conflict_is_preserved(): void
+    {
+        $callback = static fn(): string => 'Third party';
+        $GLOBALS['shortcode_tags']['text-columns'] = $callback;
+        $registrar = new Registrar();
+        $registrar->register();
+        $this->assertSame($callback, $GLOBALS['shortcode_tags']['text-columns']);
+        $this->assertSame(['text-columns' => Closure::class], $registrar->getConflicts());
     }
 
     /** Both alert aliases migrate together and can be disabled as one family. */
@@ -239,7 +265,7 @@ final class LegacyShortcodesRegistrarTest extends TestCase
                 ['accordion', 'button', 'icon', 'list-icons'],
                 array_keys((new Notices())->getShortcodes()),
                 array_keys((new Tab())->getShortcodes()),
-                ['CTA', 'timeline', 'timeline-item', 'alert', 'inner_alert']
+                ['CTA', 'timeline', 'timeline-item', 'alert', 'inner_alert', 'text-columns']
             ),
             array_keys($GLOBALS['shortcode_tags'])
         );

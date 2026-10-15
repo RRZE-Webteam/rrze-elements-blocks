@@ -21,7 +21,8 @@
         hyphens: auto;
         orphans: 3;
         widows: 3;
-        display: inline-block;
+        // Paragraphs may continue in the next column, like newspaper text.
+        display: block;
     }
 
     figure {
@@ -82,4 +83,18 @@
 
 
 }
+}
+
+// Custom backgrounds need their calculated foreground on the actual text nodes.
+div.rrze-elements-blocks-text-column.has-custom-background {
+    :where(p, strong, em, b, i, span, a, h1, h2, h3, h4, h5, h6, ul, ol, li, blockquote):not(.has-text-color) {
+        color: inherit;
+    }
+}
+
+// The alert supplies the frame and padding; columns only provide the text flow.
+.elements-textcolumns > .alert > .rrze-elements-blocks-text-column {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
 }
