@@ -2,16 +2,19 @@
 
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
-use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
-use RRZE\ElementsBlocks\Helper;
-
 class Collapsibles extends AbstractBlockRender
 {
 
     /**
-     * @param array<string, mixed> $attributes
-     * @param string $innerBlocks
-     * @inheritDoc
+     * Renders an accordion, optionally as a Schema.org FAQPage.
+     *
+     * Direct PHP callers must also pass faqSchema to the individual Collapse
+     * renderers. Gutenberg supplies that setting to children through context.
+     *
+     * @param array<string, mixed> $attributes Block settings; faqSchema defaults to false.
+     * @param string $innerBlocks Already rendered accordion items.
+     * @param \WP_Block|null $block Block instance, if rendered by WordPress.
+     * @return string The complete accordion HTML.
      */
     public function render(array $attributes = [], string $innerBlocks = '', ?\WP_Block $block = null): string
     {
@@ -30,7 +33,10 @@ class Collapsibles extends AbstractBlockRender
             ? ' id="' . esc_attr((string)$accordion_id) . '"'
             : '';
 
-        $markup = '<div class="wp-block-rrze-elements-collapsibles ' . esc_attr(trim($wrapper_class)) . '">';
+        $schema_attributes = ($attributes['faqSchema'] ?? false) === true
+            ? ' itemscope itemtype="https://schema.org/FAQPage"'
+            : '';
+        $markup = '<div class="wp-block-rrze-elements-collapsibles ' . esc_attr(trim($wrapper_class)) . '"' . $schema_attributes . '>';
 
         $markup .= '<div class="' . esc_attr(trim('accordion ' . $accordion_class)) . '"' . $accordion_id_attribute . '>';
 

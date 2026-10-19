@@ -2015,3 +2015,11 @@ msgstr "Erzeugt einen Zeitstrahl"
 #~ msgctxt "block style label"
 #~ msgid "Small"
 #~ msgstr "Klein"
+
+#: build/blocks/collapsibles/index.js:1
+msgid "Mark as FAQ"
+msgstr "Als FAQ auszeichnen"
+
+#: build/blocks/collapsibles/index.js:1
+msgid "Item headings are marked as questions and their contents as answers using Schema.org."
+msgstr "Die Überschriften der Fächer werden mit Schema.org als Fragen und deren Inhalte als Antworten ausgezeichnet."

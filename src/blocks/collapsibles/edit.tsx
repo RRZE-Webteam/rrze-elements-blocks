@@ -5,7 +5,7 @@ import {
   BlockControls,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
-import { PanelBody } from "@wordpress/components";
+import { PanelBody, ToolbarButton, ToolbarGroup, ToggleControl } from "@wordpress/components";
 import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import ExpandAllLink from "../../components/ExpandAllLink";
@@ -14,21 +14,17 @@ import {
   HeadingSelectorInspector,
 } from "../../components/HeadingSelector";
 import { useEffect } from "@wordpress/element";
+import PersonRaisedHand from "../../_shared/icons/symbols/person_raised_hand.svg";
 
-/**
- * Retrieve all blocks, including nested ones.
- *
- * @param blocks - List of top-level blocks.
- * @returns       - List of all blocks, including nested ones.
- */
-
-type SaveProps = {
+type EditProps = {
   attributes: {
+    faqSchema: boolean;
     expandAllLink: boolean;
     hstart: number;
     expandLabel: string;
   };
   setAttributes: (newAttributes: {
+    faqSchema?: boolean;
     expandAllLink?: boolean;
     hstart?: number;
     expandLabel?: string;
@@ -36,12 +32,32 @@ type SaveProps = {
   clientId: string;
 };
 
+/**
+ * Edits accordion settings and shares the FAQ state between toolbar and inspector.
+ *
+ * @param props - The block attributes, update callback and editor client ID.
+ * @returns The accordion editor and its controls.
+ */
 export default function Edit({
   attributes,
   setAttributes,
   clientId,
-}: SaveProps) {
+}: EditProps) {
   const props = useBlockProps();
+  const faqSchema = attributes.faqSchema === true;
+
+  /**
+   * Stores an explicit boolean for both FAQ controls.
+   *
+   * @param enabled - Whether the accordion should emit FAQ microdata.
+   */
+  const updateFaqSchema = (enabled: boolean) => {
+    setAttributes({faqSchema: enabled});
+  };
+
+  /** Toggles the parent's FAQ mode without changing individual items. */
+  const toggleFaqSchema = () => updateFaqSchema(!faqSchema);
+
   const isMediaAccordionChild = useSelect((select) => {
     const {getBlockName, getBlockRootClientId} = select(blockEditorStore);
     const parentClientId = getBlockRootClientId(clientId);
@@ -65,6 +81,14 @@ export default function Edit({
           attributes={attributes}
           setAttributes={setAttributes}
         />
+        <ToolbarGroup>
+          <ToolbarButton
+            icon={<PersonRaisedHand aria-hidden="true" focusable="false" />}
+            label={__("Mark as FAQ", "rrze-elements-blocks")}
+            isPressed={faqSchema}
+            onClick={toggleFaqSchema}
+          />
+        </ToolbarGroup>
       </BlockControls>
       <InspectorControls>
         <PanelBody
@@ -83,6 +107,13 @@ export default function Edit({
           <ExpandAllLink
             attributes={attributes}
             setAttributes={setAttributes}
+          />
+          <ToggleControl
+            label={__("Mark as FAQ", "rrze-elements-blocks")}
+            help={__("Item headings are marked as questions and their contents as answers using Schema.org.", "rrze-elements-blocks")}
+            checked={faqSchema}
+            onChange={updateFaqSchema}
+            __nextHasNoMarginBottom
           />
         </PanelBody>
       </InspectorControls>

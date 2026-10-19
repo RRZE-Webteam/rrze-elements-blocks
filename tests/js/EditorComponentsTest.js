@@ -244,6 +244,47 @@ function mountBlock(t, Edit, initialAttributes) {
 }
 
 const wrapControl = ({ children }) => React.createElement("div", null, children);
+
+test("accordion FAQ toolbar and inspector share an opt-in boolean", (t) => {
+  const metadata = require("../../src/blocks/collapsibles/block.json");
+  const mocks = editorMocks({}, { getBlockRootClientId: () => null });
+  mocks["@wordpress/block-editor"].BlockControls = wrapControl;
+  mocks["@wordpress/block-editor"].InspectorControls = wrapControl;
+  mocks["../../components/HeadingSelector"] = emptyControls;
+  mocks["../../components/ExpandAllLink"] = EmptyComponent;
+  mocks["../../_shared/icons/symbols/person_raised_hand.svg"] = (props) =>
+    React.createElement("svg", { ...props, "data-symbol": "person_raised_hand" });
+  mocks["@wordpress/components"] = {
+    PanelBody: wrapControl,
+    ToolbarGroup: wrapControl,
+    ToolbarButton: ({ icon, label, isPressed, onClick }) => React.createElement("button", {
+      "aria-label": label, "aria-pressed": isPressed, onClick,
+    }, icon),
+    ToggleControl: ({ label, checked, onChange }) => React.createElement("input", {
+      type: "checkbox", "aria-label": label, checked,
+      onChange: (event) => onChange(event.target.checked),
+    }),
+  };
+  const { default: Edit } = loadComponent("blocks/collapsibles/edit.tsx", mocks);
+  const block = mountBlock(t, Edit, { faqSchema: metadata.attributes.faqSchema.default, expandLabel: "Expand All" });
+  block.render({ clientId: "accordion" });
+  const button = block.container.querySelector('button[aria-label="Mark as FAQ"]');
+  const checkbox = block.container.querySelector('input[aria-label="Mark as FAQ"]');
+  assert.equal(block.attributes.faqSchema, false);
+  assert.equal(button.getAttribute("aria-pressed"), "false");
+  assert.equal(checkbox.checked, false);
+  assert.ok(button.querySelector('svg[data-symbol="person_raised_hand"][aria-hidden="true"]'));
+
+  React.act(() => button.click());
+  assert.equal(block.attributes.faqSchema, true);
+  assert.equal(checkbox.checked, true);
+  assert.equal(button.getAttribute("aria-pressed"), "true");
+
+  React.act(() => checkbox.click());
+  assert.equal(block.attributes.faqSchema, false);
+  assert.equal(button.getAttribute("aria-pressed"), "false");
+});
+
 const controlMocks = {
   "@wordpress/element": React,
   "@wordpress/i18n": { __: (text) => text },

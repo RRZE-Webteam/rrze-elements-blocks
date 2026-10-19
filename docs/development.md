@@ -68,6 +68,39 @@ Require the `php-security` status check in branch protection as well if Psalm fi
 
 For PHP development, run `composer install`, `composer test`, and `composer phpstan`. Commit `composer.lock` alongside dependency changes so local development and CI use the same versions. Composer resolves dependencies against PHP 8.0, the plugin's minimum version, even when updating them on newer PHP installations. `npm test` remains the existing PHPStan alias; use `npm run test:js` for JavaScript tests.
 
+### Accordion FAQ microdata
+
+`rrze-elements/collapsibles` has an opt-in boolean `faqSchema` (default `false`).
+The toolbar's `person_raised_hand` button and the inspector toggle edit the same
+attribute. The parent provides `rrze-elements/faq-schema` context to `collapse`;
+each nested `collapsibles` supplies its own value, including the default `false`.
+
+`Collapsibles::render()` emits the FAQPage scope. `Collapse::render()` emits
+Question/name and acceptedAnswer/Answer/text scopes only for items with a textual
+title and answer. Icons and suffixes are outside the question name. Existing
+rendered answer HTML is reused without rendering blocks or shortcodes again.
+The flag adds semantics, not a different accordion interaction or appearance.
+
+For direct PHP integrations, call both renderers without a `WP_Block` and pass
+`['faqSchema' => true]` in their attribute arrays. Pass `false` for individual
+items that should be excluded, for example imported FAQ entries. The caller
+remains responsible for rendering answer content, unique accordion IDs and
+`FrontendAssets::enqueueAccordion()`. Do not add a second schema wrapper in the
+integrating plugin. WordPress block instances always use their inherited context
+for the item flag, so there is no separately saved child setting.
+
+Legacy saved HTML stays on the existing pass-through path. Opening and saving it
+in the editor uses the existing block deprecations to migrate to dynamic markup;
+enabling FAQ is then persisted on the parent without rewriting old save functions.
+
+Run the PHP and editor tests with `composer test` and `npm run test:js`. After
+`npm run build`, additionally exercise real WordPress registration, nested context,
+dynamic answers and the site's content filters (without writing stored content):
+
+```sh
+wp eval-file tests/wordpress/accordion-faq.php --url=https://your-test-site
+```
+
 ### Legacy shortcode compatibility regression tests
 
 Run `composer test:compat` to test icons before, inside and after Notice, Tabs,

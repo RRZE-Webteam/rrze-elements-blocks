@@ -3,17 +3,21 @@ declare(strict_types=1);
 
 namespace RRZE\ElementsBlocks\BlockFrontend;
 
-use RRZE\ElementsBlocks\BlockFrontend\AbstractBlockRender;
-use RRZE\ElementsBlocks\Helper;
 use RRZE\ElementsBlocks\SpriteGenerator;
 
 class Collapse extends AbstractBlockRender
 {
 
   /**
-   * @param array<string, mixed> $attributes
-   * @param string $innerBlocks
-   * @inheritDoc
+   * Renders an accordion item and optional Question/Answer microdata.
+   *
+   * WordPress blocks inherit FAQ mode from their nearest Collapsibles parent.
+   * Direct PHP callers can supply faqSchema explicitly for each item instead.
+   *
+   * @param array<string, mixed> $attributes Item settings and optional PHP-only faqSchema flag.
+   * @param string $innerBlocks Already rendered answer HTML, never rendered a second time.
+   * @param \WP_Block|null $block Block instance carrying inherited FAQ context.
+   * @return string The complete accordion item HTML.
    */
   public function render(array $attributes, string $innerBlocks, ?\WP_Block $block = null): string
   {
@@ -25,6 +29,10 @@ class Collapse extends AbstractBlockRender
     $title = isset($attributes['title'])
       ? wp_kses((string)$attributes['title'], ['br' => []])
       : '';
+    $faq_schema = ($block !== null
+      ? ($block->context['rrze-elements/faq-schema'] ?? false)
+      : ($attributes['faqSchema'] ?? false)) === true;
+    $faq_schema = $faq_schema && $this->hasText($title) && $this->hasText($innerBlocks);
     $suffix = isset($attributes['suffix']) ? sanitize_text_field((string)$attributes['suffix']) : '';
     $jump_name = isset($attributes['jumpName']) ? (string)$attributes['jumpName'] : '';
     $load_open = !empty($attributes['loadOpen']);
@@ -78,8 +86,9 @@ class Collapse extends AbstractBlockRender
 
     $markup = '<div class="wp-block-rrze-elements-collapse ' . esc_attr(trim($wrapper_class)) . '">';
     $markup .= sprintf(
-      '<div class="accordion-group %s">',
-      esc_attr($color)
+      '<div class="accordion-group %1$s"%2$s>',
+      esc_attr($color),
+      $faq_schema ? ' itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"' : ''
     );
 
     // Heading with toggle button
@@ -103,7 +112,7 @@ class Collapse extends AbstractBlockRender
       $markup .= $iconMarkup;
     }
 
-    $markup .= $title !== '' ? $title : '…';
+    $markup .= $faq_schema ? '<span itemprop="name">' . $title . '</span>' : ($title !== '' ? $title : '…');
     if ($suffix !== '') {
       $markup .= '<span class="accordion-suffix">' . esc_html($suffix) . '</span>';
     }
@@ -111,20 +120,40 @@ class Collapse extends AbstractBlockRender
     $markup .= '</h' . $heading_level . '>';
 
     $markup .= sprintf(
-      '<div id="%1$s" class="%2$s" aria-labelledby="%3$s" role="region"%4$s>',
+      '<div id="%1$s" class="%2$s" aria-labelledby="%3$s" role="region"%4$s%5$s>',
       esc_attr($region_id),
       esc_attr(trim('accordion-body ' . $body_state_class)),
       esc_attr($button_id),
-      $data_name !== '' ? ' name="' . esc_attr($data_name) . '"' : ''
+      $data_name !== '' ? ' name="' . esc_attr($data_name) . '"' : '',
+      $faq_schema ? ' itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"' : ''
     );
 
-    $markup .= '<div class="accordion-inner clearfix">';
+    $markup .= '<div class="accordion-inner clearfix"' . ($faq_schema ? ' itemprop="text"' : '') . '>';
     $markup .= $innerBlocks;
     $markup .= '</div></div></div></div>';
 
     return $markup;
   }
 
+  /**
+   * Checks for textual content after removing tags and decoding whitespace entities.
+   *
+   * @param string $html Rendered title or answer HTML.
+   * @return bool Whether the content contains more than whitespace or empty markup.
+   */
+  private function hasText(string $html): bool
+  {
+    $text = html_entity_decode(wp_strip_all_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    return preg_match('/[^\s\p{Z}\x{200B}\x{FEFF}]/u', $text) === 1;
+  }
+
+  /**
+   * Retrieves the sanitized caption for an optional media accordion image.
+   *
+   * @param int $imageId Attachment ID.
+   * @return string Caption HTML, or an empty string when unavailable.
+   */
   private function getMediaImageCaption(int $imageId): string
   {
     if ($imageId <= 0 || !function_exists('wp_get_attachment_caption')) {

@@ -80,7 +80,8 @@
     "rrze-elements/collapseColor": "color"
   },
   "usesContext": [
-    "rrze-elements/accordion-hstart"
+    "rrze-elements/accordion-hstart",
+    "rrze-elements/faq-schema"
   ],
   "supports": {
     "html": false

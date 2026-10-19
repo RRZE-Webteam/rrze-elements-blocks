@@ -494,6 +494,8 @@ if (!class_exists('WP_Block')) {
         /** @var array<string, mixed> */
         public array $parsed_block;
         public string $inner_html = '';
+        /** @var array<string, mixed> Inherited block context. */
+        public array $context = [];
 
         /**
          * @param array<string, mixed> $parsed_block

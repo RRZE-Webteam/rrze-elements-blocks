@@ -2054,3 +2054,11 @@ msgstr ""
 msgctxt "block description"
 msgid "Creates a Timeline block"
 msgstr ""
+
+#: build/blocks/collapsibles/index.js:1
+msgid "Mark as FAQ"
+msgstr ""
+
+#: build/blocks/collapsibles/index.js:1
+msgid "Item headings are marked as questions and their contents as answers using Schema.org."
+msgstr ""
