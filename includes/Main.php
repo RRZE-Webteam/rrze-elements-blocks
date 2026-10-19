@@ -50,7 +50,8 @@ class Main
 
 
     /**
-     * [enqueueScripts description]
+     * Registers frontend styles and scripts for blocks and legacy shortcodes.
+     *
      * @return void
      */
     public function enqueueScripts()
@@ -68,7 +69,10 @@ class Main
             'rrze-elements-blocks-fau-elemental-compatibility',
             plugins_url('assets/css/rrze-elements-blocks-elemental-compatibility.css', plugin_basename($this->pluginFile)),
             [],
-            RRZE_ELEMENTSB_VERSION
+            // Invalidate cached theme overrides whenever the compiled CSS changes.
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/css/rrze-elements-blocks-elemental-compatibility.css'
+            ) ?: RRZE_ELEMENTSB_VERSION)
         );
 
         wp_register_script(

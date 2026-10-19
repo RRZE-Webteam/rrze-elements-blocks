@@ -21,9 +21,42 @@
     max-width: var(--small-max-width);
   }
 
+  .wp-block-rrze-elements-carousel {
+    // Share the theme's wide-content edges without counting the viewport scrollbar.
+    --rrze-carousel-inline-gutter: max(
+      var(--faue_minimal_inline-margin, var(--Spacing-10x)),
+      calc((var(--container-width, 100cqw) - var(--wide-max-width)) / 2)
+    );
+  }
+
   div.rrze-elements-blocks__carousel-section-header {
-    padding-left: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
-    padding-right: calc((100vw - min(87.5vw, 1260px) - 14px) / 2);
+    padding-inline: var(--rrze-carousel-inline-gutter);
+  }
+
+  div.rrze-elements-blocks__carousel-content {
+    scroll-padding-inline: var(--rrze-carousel-inline-gutter);
+  }
+
+  ul.rrze-elements-blocks__carousel-content-list {
+    // A scrolling track must not inherit the theme's text-list width limit.
+    max-width: none;
+    padding-inline: var(--rrze-carousel-inline-gutter) !important;
+
+    li.rrze-elements-blocks__carousel-content-list-item:last-of-type div.rrze-elements-blocks__carousel_feature-card-bg {
+      // The full-width track now supplies its own trailing padding.
+      margin-right: 0;
+    }
+  }
+
+  div.rrze-elements-blocks__carousel-navigation {
+    margin-inline: var(--rrze-carousel-inline-gutter);
+    max-width: none;
+    padding-inline: 0;
+
+    ul.rrze-elements-blocks__carousel-navigation-container {
+      max-width: none;
+      padding-inline: 0;
+    }
   }
 
   div.elements-textcolumns,
