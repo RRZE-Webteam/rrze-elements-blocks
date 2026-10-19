@@ -5,10 +5,7 @@
   "version": "1.3.3",
   "title": "Info card",
   "category": "rrze_elements",
-  "ancestor": [
-    "rrze-elements/carousel"
-  ],
-  "description": "Creates an info card for use in Carousels.",
+  "description": "Creates an independent info card with an image, link or additional content.",
   "supports": {
     "html": false
   },
@@ -133,11 +130,31 @@
     "desktopContentWidth": {
       "type": "number",
       "default": 320
+    },
+    "cardHeight": {
+      "type": "number",
+      "default": 350
     }
   },
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "viewScript": "rrze-carousel"
+  "viewScript": "rrze-info-card",
+  "usesContext": [
+    "rrze-elements/card-height",
+    "rrze-elements/card-container-style",
+    "rrze-elements/card-list-layout"
+  ],
+  "styles": [
+    {
+      "name": "marketing",
+      "label": "Marketing",
+      "isDefault": true
+    },
+    {
+      "name": "scientific",
+      "label": "Scientific"
+    }
+  ]
 }

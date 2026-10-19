@@ -62,7 +62,9 @@ class Main
             'rrze-elements-blocks',
             plugins_url('assets/css/rrze-elements-blocks.css', plugin_basename($this->pluginFile)),
             [],
-            RRZE_ELEMENTSB_VERSION
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/css/rrze-elements-blocks.css'
+            ) ?: RRZE_ELEMENTSB_VERSION)
         );
 
         wp_register_style(
@@ -141,10 +143,21 @@ class Main
             true
         );
         wp_register_script(
+            'rrze-info-card',
+            plugins_url('assets/js/info-card/rrze-info-card.min.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap'],
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/js/info-card/rrze-info-card.min.js'
+            ) ?: RRZE_ELEMENTSB_VERSION),
+            true
+        );
+        wp_register_script(
             'rrze-carousel',
             plugins_url('assets/js/carousel/rrze-carousel.min.js', plugin_basename($this->pluginFile)),
             ['rrze-gsap-scrolltoplugin'],
-            RRZE_ELEMENTSB_VERSION,
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/js/carousel/rrze-carousel.min.js'
+            ) ?: RRZE_ELEMENTSB_VERSION),
             true
         );
         wp_set_script_translations(

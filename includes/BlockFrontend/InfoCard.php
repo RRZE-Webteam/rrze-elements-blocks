@@ -9,9 +9,10 @@ class InfoCard
      *
      * @param array<string, mixed> $attributes Block attributes coming from Gutenberg.
      * @param string $content Inner block content.
+     * @param \WP_Block|null $block Block instance carrying optional container context.
      * @return string Rendered HTML for the info card block.
      */
-    public function render(array $attributes = [], string $content = ''): string
+    public function render(array $attributes = [], string $content = '', ?\WP_Block $block = null): string
     {
         $defaultOverlayGradient = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
 
@@ -44,6 +45,14 @@ class InfoCard
 
         $attributes = wp_parse_args($attributes, $defaults);
 
+        $context = $block ? $block->context : [];
+        $isListItem = ($context['rrze-elements/card-list-layout'] ?? false) === true;
+        $wrapperTag = $isListItem ? 'li' : 'div';
+        $cardHeight = max(350, min(680, (int)($context['rrze-elements/card-height'] ?? $attributes['cardHeight'] ?? 350)));
+        $styleClasses = preg_split('/\s+/', (string)($context['rrze-elements/card-container-style'] ?? $attributes['className'] ?? '')) ?: [];
+        $isScientificStyle = in_array('is-style-scientific', $styleClasses, true)
+            || ($isListItem && !in_array('is-style-marketing', $styleClasses, true));
+
         $title = isset($attributes['title']) ? wp_strip_all_tags($attributes['title']) : '';
         $subtitle = isset($attributes['subtitle']) ? wp_strip_all_tags($attributes['subtitle']) : '';
         $desktopImageUrl = $attributes['desktopImageUrl'];
@@ -72,7 +81,7 @@ class InfoCard
             $backgroundOverlayGradient = $defaultOverlayGradient;
         }
 
-        $style = "--background-color: {$backgroundColor};";
+        $style = "--card-height: {$cardHeight}px;--background-color: {$backgroundColor};";
         $style .= "--desktop-text-color: {$desktopTextColor};";
         $style .= "--tablet-text-color: " . ($tabletTextColor ?: $desktopTextColor) . ";";
         $style .= "--mobile-text-color: " . ($mobileTextColor ?: $tabletTextColor ?: $desktopTextColor) . ";";
@@ -87,7 +96,7 @@ class InfoCard
         }
         $style .= "--image-object-fit: {$imageObjectFit};";
         $style .= "--rrze-card-overlay-gradient: {$backgroundOverlayGradient};";
-        $style .= "--desktop-card-width: {$desktopContentWidth}px;";
+        $style .= "--rrze-card-size: {$desktopContentWidth}px;";
         $alignmentVars = $this->getMarketingAlignmentStyles($cardTextAlignment);
         $contentStyle = sprintf('--marketing-content-justify: %s; --marketing-content-align: %s; --marketing-content-text-align: %s;', $alignmentVars['justify'], $alignmentVars['align'], $alignmentVars['textAlign']);
 
@@ -122,10 +131,21 @@ class InfoCard
         $isEmptyContent = $normalizedContent === '<p class="wp-block-paragraph"></p>';
         $shouldShowActionIcon = $showLinkIcon || ($hasInnerBlocks && !$isEmptyContent);
         $cardHasAction = $shouldShowActionIcon ? 'true' : 'false';
+        $wrapperClass = 'rrze-elements-blocks__info-card';
+        if ($isListItem) {
+            $wrapperClass .= ' rrze-elements-blocks__carousel-content-list-item';
+        }
+        if (!$block) {
+            $wrapperClass .= ' wp-block-rrze-elements-info-card ' . ($attributes['className'] ?? '');
+        }
+        $wrapperAttributes = get_block_wrapper_attributes(['class' => trim($wrapperClass), 'style' => $style]);
 
         ob_start();
         ?>
-        <li class="rrze-elements-blocks__carousel-content-list-item" role="listitem" tabIndex="-1" style="<?php echo esc_attr($style); ?>" data-card-has-action="<?php echo esc_attr($cardHasAction); ?>">
+        <<?php echo $wrapperTag; ?> <?php echo $wrapperAttributes; ?><?php echo $isListItem ? ' role="listitem"' : ''; ?>
+            data-card-layout="<?php echo $isListItem ? 'list' : 'standalone'; ?>"
+            data-card-appearance="<?php echo $isScientificStyle ? 'scientific' : 'marketing'; ?>"
+            data-card-has-action="<?php echo esc_attr($cardHasAction); ?>">
             <div class="rrze-elements-blocks__carousel_feature-card-bg">
                 <div class="rrze-elements-blocks__carousel_feature_card-content" style="<?php echo esc_attr($contentStyle); ?>">
                     <h3 class="rrze-elements-blocks__carousel_feature_card_subtitle">
@@ -158,13 +178,13 @@ class InfoCard
                                 </div>
                             </a>
                         <?php else : ?>
-                            <a href="#" class="rrze-elements-blocks__carousel_feature_card_link" role="button" aria-haspopup="dialog" aria-controls="<?php echo esc_attr($modalId); ?>" data-modal-id="<?php echo esc_attr($modalId); ?>" aria-label="<?php esc_attr_e('Show more information', 'rrze-elements-blocks'); ?>">
-                                <div class="rrze-elements-blocks__carousel_feature_card_link_control_container">
+                            <button type="button" class="rrze-elements-blocks__carousel_feature_card_link" aria-haspopup="dialog" aria-controls="<?php echo esc_attr($modalId); ?>" data-modal-id="<?php echo esc_attr($modalId); ?>" aria-label="<?php esc_attr_e('Show more information', 'rrze-elements-blocks'); ?>">
+                                <span class="rrze-elements-blocks__carousel_feature_card_link_control_container">
                                     <span class="rrze-elements-blocks__carousel_feature_card_link_control_icon-container">
                                         <svg class="rrze-elements-blocks__carousel_feature_card_link_control_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
                                     </span>
-                                </div>
-                            </a>
+                                </span>
+                            </button>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
@@ -187,7 +207,7 @@ class InfoCard
                     </div>
                 </dialog>
             <?php endif; ?>
-        </li>
+        </<?php echo $wrapperTag; ?>>
         <?php
         return (string) ob_get_clean();
     }
@@ -270,6 +290,12 @@ class InfoCard
         return false;
     }
 
+    /**
+     * Recognizes the white values used by the editor's text color controls.
+     *
+     * @param string $color CSS color value.
+     * @return bool Whether a light text shadow is needed.
+     */
     private function isColorWhite(string $color): bool
     {
         if (empty($color)) {
@@ -282,6 +308,12 @@ class InfoCard
         return in_array($normalized, $whiteValues, true);
     }
 
+    /**
+     * Clamps a focal-point coordinate and formats it as a CSS percentage.
+     *
+     * @param float $value Normalized coordinate.
+     * @return string Percentage without trailing fractional zeros.
+     */
     private function formatPercentage(float $value): string
     {
         $value = max(0, min(1, $value));

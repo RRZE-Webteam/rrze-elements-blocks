@@ -32,6 +32,10 @@
         6
       ],
       "default": 2
+    },
+    "cardListLayout": {
+      "type": "boolean",
+      "default": true
     }
   },
   "styles": [
@@ -94,5 +98,11 @@
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.ts",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "providesContext": {
+    "rrze-elements/card-height": "cardHeight",
+    "rrze-elements/card-container-style": "className",
+    "rrze-elements/card-list-layout": "cardListLayout"
+  },
+  "viewScript": "rrze-carousel"
 }

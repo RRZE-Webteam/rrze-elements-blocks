@@ -21,8 +21,8 @@ import {__} from "@wordpress/i18n";
 import {getImageBrightness} from "../../utility/color";
 import {useDispatch, useSelect} from "@wordpress/data";
 import {CharacterCountProgressBar} from "../../components/ProgressBar";
-import {DeviceType, InfoCardAttributes, InfoCardCustomStyles} from "./types";
-import CarouselSettingsPanel from "./inspectorControls/CarouselSettingsPanel";
+import {DeviceType, InfoCardAttributes, InfoCardCustomStyles, InfoCardContext} from "./types";
+import CardSettingsPanel from "./inspectorControls/CardSettingsPanel";
 import ImageSettingsPanel from "./inspectorControls/ImageSettingsPanel";
 import TextColorPanel from "./inspectorControls/TextColorPanel";
 import BackgroundColorPanel from "./inspectorControls/BackgroundColorPanel";
@@ -35,41 +35,38 @@ interface EditProps {
   setAttributes: (attributes: Partial<InfoCardAttributes>) => void;
   clientId: string;
   isSelected: boolean;
+  context?: InfoCardContext;
 }
 
 const DEFAULT_OVERLAY_GRADIENT = 'linear-gradient(160deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 70%)';
 const DEFAULT_CARD_ALIGNMENT = 'top left';
 
-export default function Edit({attributes, setAttributes, isSelected, clientId}: EditProps) {
-  const ref = useRef<HTMLLIElement>(null);
+/**
+ * Edits card content using optional layout context supplied by any container.
+ *
+ * @param props - Card attributes, editor callbacks and inherited layout settings.
+ * @returns The card editor with independent content and appearance controls.
+ */
+export default function Edit({attributes, setAttributes, isSelected, clientId, context = {}}: EditProps) {
+  const ref = useRef<HTMLDivElement & HTMLLIElement>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLinkPickerVisible, setIsLinkPickerVisible] = useState(false);
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
   const {__experimentalSetPreviewDeviceType: setPreviewDeviceType} = useDispatch('core/edit-post');
-  const {updateBlockAttributes} = useDispatch(blockEditorStore);
 
-  const {parentId, parentAttributes, parentBlockName, hasInnerBlocks} = useSelect((select) => {
-    const {getBlockParents, getBlockAttributes, getBlock} = select(blockEditorStore);
-    const parents = getBlockParents(clientId);
-    const parentClientId = parents.length > 0 ? parents[parents.length - 1] : null;
-    const parentBlock = parentClientId ? getBlock(parentClientId) : null;
-    const block = getBlock(clientId);
-    return {
-      parentId: parentClientId,
-      parentAttributes: parentClientId ? getBlockAttributes(parentClientId) : null,
-      parentBlockName: parentBlock?.name ?? null,
-      hasInnerBlocks: !!block?.innerBlocks?.length,
-    };
+  const hasInnerBlocks = useSelect((select) => {
+    const block = select(blockEditorStore).getBlock(clientId);
+    return !!block?.innerBlocks?.length;
   }, [clientId]);
-
-  const cardHeight = parentAttributes?.cardHeight !== undefined ? parentAttributes.cardHeight : 680;
-  const parentClassName = typeof parentAttributes?.className === 'string' ? parentAttributes.className : '';
-  const parentClasses = parentClassName.split(/\s+/).filter(Boolean);
-  const isScientificStyle = parentBlockName === 'rrze-elements/carousel'
-    ? !parentClasses.includes('is-style-marketing')
-    : parentClasses.includes('is-style-scientific');
+  const isListItem = context['rrze-elements/card-list-layout'] === true;
+  const Wrapper = isListItem ? 'li' : 'div';
+  const inheritedHeight = context['rrze-elements/card-height'];
+  const cardHeight = Math.max(350, Math.min(680, inheritedHeight ?? attributes.cardHeight ?? 350));
+  const styleClasses = (context['rrze-elements/card-container-style'] ?? attributes.className ?? '').split(/\s+/);
+  const isScientificStyle = styleClasses.includes('is-style-scientific')
+    || (isListItem && !styleClasses.includes('is-style-marketing'));
   const isMarketingStyle = !isScientificStyle;
   const getMarketingAlignmentVars = (value: string): CSSProperties => {
     const safeValue = value || DEFAULT_CARD_ALIGNMENT;
@@ -102,15 +99,9 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const marketingAlignmentStyles = isMarketingStyle ? getMarketingAlignmentVars(cardTextAlignment) : {};
   const cardContentInlineStyles: CSSProperties = {
     position: 'relative',
-    height: `${cardHeight}px`,
-    width: 'var(--desktop-card-width, 320px)',
+    minHeight: `${cardHeight}px`,
+    width: isListItem ? 'var(--rrze-card-size, 320px)' : '100%',
     ...(isMarketingStyle ? marketingAlignmentStyles : {}),
-  };
-
-  const setCardHeight = (val: number) => {
-    if (parentId) {
-      updateBlockAttributes(parentId, {cardHeight: val});
-    }
   };
 
   const desktopImageUrl = attributes.desktopImageUrl;
@@ -130,7 +121,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const imageStatus = hasBackgroundImage ? 'image' : 'no-image';
 
   const blockProps = useBlockProps({
-    className: `rrze-elements-blocks__carousel-content-list-item ${imageStatus}`,
+    className: `rrze-elements-blocks__info-card ${isListItem ? "rrze-elements-blocks__carousel-content-list-item" : ""} ${imageStatus}`,
     ref
   });
 
@@ -266,6 +257,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   };
 
   const style: InfoCardCustomStyles = {
+    '--card-height': `${cardHeight}px`,
     '--desktop-text-color': desktopFinalColor,
     '--tablet-text-color': tabletFinalColor,
     '--mobile-text-color': mobileFinalColor,
@@ -276,7 +268,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
     '--image-object-fit': attributes.imageObjectFit || 'cover',
     '--card-text-shadow': cardTextShadow,
     '--rrze-card-overlay-gradient': overlayGradient,
-    '--desktop-card-width': `${desktopContentWidth}px`,
+    '--rrze-card-size': `${desktopContentWidth}px`,
   };
 
   const backgroundOverlayStyle: InfoCardCustomStyles = {
@@ -286,7 +278,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
   const backgroundOverlayDataAttr = backgroundOverlayEnabled ? 'true' : undefined;
 
   return (
-    <li {...blockProps} style={style}>
+    <Wrapper {...blockProps} style={style} data-card-appearance={isScientificStyle ? "scientific" : "marketing"} data-card-layout={isListItem ? "list" : "standalone"}>
       <BlockControls>
         <EditControl
           attributes={{isEditView: isModalOpen}}
@@ -375,10 +367,10 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
       </BlockControls>
 
       <InspectorControls>
-        <CarouselSettingsPanel
-          isVisible={Boolean(parentId)}
+        <CardSettingsPanel
+          isVisible={inheritedHeight === undefined}
           cardHeight={cardHeight}
-          onChange={setCardHeight}
+          onChange={(value) => setAttributes({cardHeight: value})}
         />
         <ImageSettingsPanel
           deviceType={deviceType}
@@ -409,6 +401,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           setAttributes={setAttributes}
         />
         <LayoutPanel
+          showWidthControl={isListItem}
           desktopContentWidth={desktopContentWidth}
           onChange={handleDesktopWidthChange}
           showAlignmentControl={isMarketingStyle}
@@ -478,10 +471,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
                     <img src={desktopImageUrl} alt={attributes.alt}/>
                   </picture>
                 </figure>
-              )} : {(
-                <div className={"rrze-elements-blocks__carousel_feature_card_bg_figure"}>
-                </div>
-            )}
+              )}
               <span className={"rrze-elements-blocks__carousel_feature_card_bg_overlay"} aria-hidden="true"/>
             </div>
             {shouldShowActionIcon && (
@@ -529,7 +519,7 @@ export default function Edit({attributes, setAttributes, isSelected, clientId}: 
           )}
         </div>
       )}
-    </li>
+    </Wrapper>
   )
     ;
 }

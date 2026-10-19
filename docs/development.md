@@ -68,6 +68,84 @@ Require the `php-security` status check in branch protection as well if Psalm fi
 
 For PHP development, run `composer install`, `composer test`, and `composer phpstan`. Commit `composer.lock` alongside dependency changes so local development and CI use the same versions. Composer resolves dependencies against PHP 8.0, the plugin's minimum version, even when updating them on newer PHP installations. `npm test` remains the existing PHPStan alias; use `npm run test:js` for JavaScript tests.
 
+### Independent info cards and carousel context
+
+`rrze-elements/info-card` can be inserted independently or inside a container.
+Its saved block name, existing attributes and inner-content serialization remain
+unchanged, so existing carousels do not need a content migration. An independent
+card uses a `div`, defaults to Marketing, and owns its height (350–680 px) and
+style. It fills its containing content area or column. Only list cards expose a
+fixed-width control; the saved width is preserved when moving a card between
+layouts. A carousel supplies shared settings through WordPress block context:
+
+| Context key | Meaning | Carousel attribute |
+| --- | --- | --- |
+| `rrze-elements/card-height` | Overrides the card's own height without changing it | `cardHeight` |
+| `rrze-elements/card-container-style` | Container style classes, such as `is-style-marketing` | `className` |
+| `rrze-elements/card-list-layout` | Uses `li` and list sizing; the container must supply a list | `cardListLayout` (default `true`) |
+
+List cards default to Scientific unless Marketing is selected. Other containers
+can provide only the context they need, for example a common height while retaining
+`div` wrappers. The card neither searches for a specific parent block nor writes
+parent attributes. Change a shared height on the container; after moving a card
+out of it, the card's own saved height applies again.
+
+`InfoCard::render()` accepts an optional `WP_Block` as its third parameter. Calls
+without a block render an independent card. Frontend card/dialog behavior lives
+in `assets/js/info-card/rrze-info-card.js`, registered as `rrze-info-card`; carousel
+navigation loads separately through `rrze-carousel`. Shared card styles live in
+`src/_shared/scss/base-styles/_info-card.scss` and are also imported by the card's
+editor stylesheet. Historical inner CSS class names remain for compatibility.
+Use `npm run minify:js` after changing frontend scripts and `npm run build` after
+changing block sources or styles.
+
+The root uses `data-card-appearance` and `--rrze-card-size`: FAU Elemental's content
+filter matches `style=` and `width:` even inside longer attribute/property names,
+so names such as `data-card-style` or `--desktop-card-width` are unsafe on a `div`.
+
+Run focused regression checks with:
+
+```sh
+composer test -- --filter CarouselInfoCardRenderTest
+node --test tests/js/CarouselFrontendTest.js tests/js/CarouselSerializationTest.js tests/js/EditorComponentsTest.js
+```
+
+The renderer tests cover card order, heading and dialog references across multiple
+instances, heading validation, nesting warnings, passive/link/dialog cards,
+responsive images, scientific captions and appearance settings. A link takes
+precedence over saved dialog content; an empty editor paragraph creates no dialog.
+Assertions target DOM relationships and selected properties rather than full HTML
+snapshots or generated ID values.
+
+The JavaScript tests exercise the real frontend script with a small DOM fixture:
+navigation boundaries, independent carousels, manual scrolling, resizing, dialog
+opening/focus, both close buttons, backdrop clicks and the Escape cancellation
+event, plus independent dialogs without carousel markup, navigation code or GSAP.
+jsdom layout, GSAP animations and native dialog methods are substituted;
+these are interaction tests, not browser layout or accessibility certification.
+
+Editor tests protect inherited height/style, independent height updates, nesting
+warnings and switching between link and detail editing. A saved block fixture
+passes through WordPress's real parser/serializer and the actual block save
+functions to preserve block names, attributes, card order and formatted inner
+content. WordPress host controls and registration services are substituted.
+
+The PHP suite uses the existing WordPress stubs, including an explicit-attributes
+wrapper stub; it does not test WordPress block-support merging or real KSES/URL
+sanitization. Theme CSS, native keyboard/focus behavior and visual layout still
+need browser checks when production rendering changes.
+
+Both sets also run in the normal suites: `composer test` and `npm run test:js`.
+After building, check real WordPress rendering and context propagation without
+changing stored content:
+
+```sh
+wp --skip-plugins --skip-themes --url=https://your-test-site eval-file tests/wordpress/info-card.php
+```
+
+This covers independent cards, ordinary groups, both carousel styles, an unknown
+future container and (when installed) FAU Elemental's actual content filter.
+
 ### Accordion FAQ microdata
 
 `rrze-elements/collapsibles` has an opt-in boolean `faqSchema` (default `false`).

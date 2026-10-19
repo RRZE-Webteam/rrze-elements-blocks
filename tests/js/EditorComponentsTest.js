@@ -245,6 +245,166 @@ function mountBlock(t, Edit, initialAttributes) {
 
 const wrapControl = ({ children }) => React.createElement("div", null, children);
 
+/**
+ * Supplies registered attribute defaults to editor components, as WordPress does.
+ *
+ * @param {string} name Block directory name.
+ * @returns {object} Default attribute values.
+ */
+function blockDefaults(name) {
+  const metadata = require(`../../src/blocks/${name}/block.json`);
+  return Object.fromEntries(Object.entries(metadata.attributes)
+    .filter(([, definition]) => Object.hasOwn(definition, "default"))
+    .map(([key, definition]) => [key, definition.default]));
+}
+
+/**
+ * Renders editable text without loading WordPress's rich-text host.
+ *
+ * @param {object} props RichText properties.
+ * @returns {React.ReactElement} Visible text and its semantic element.
+ */
+function plainRichText({ tagName = "p", value, className, id }) {
+  return React.createElement(tagName, { className, id }, value);
+}
+
+test("carousel editor allows top-level and dark-group placement and clears stale warnings", (t) => {
+  let parent = null;
+  let innerOptions;
+  const mocks = editorMocks({}, {
+    getBlockRootClientId: () => parent ? "parent" : null,
+    getBlock: () => parent,
+  });
+  mocks["@wordpress/block-editor"].useBlockProps = (props) => props;
+  mocks["@wordpress/block-editor"].RichText = plainRichText;
+  mocks["@wordpress/block-editor"].useInnerBlocksProps = (props, options) => {
+    innerOptions = options;
+    return props;
+  };
+  mocks["@wordpress/components"] = { ...emptyControls, Notice: wrapControl };
+  const { default: Edit } = loadComponent("blocks/carousel/edit.tsx", mocks);
+  const block = mountBlock(t, Edit, { ...blockDefaults("carousel"), title: "Projects", headingLevel: 4 });
+  block.render({ clientId: "carousel" });
+  assert.equal(block.attributes.isNestedWarning, false);
+  assert.equal(block.container.querySelector("h4").textContent, "Projects");
+  assert.equal(block.container.querySelector('ul[role="list"]').getAttribute("aria-labelledby"), block.container.querySelector("h4").id);
+  assert.deepEqual(innerOptions.allowedBlocks, ["rrze-elements/info-card"]);
+  assert.equal(innerOptions.orientation, "horizontal");
+
+  parent = { name: "core/columns", attributes: {} };
+  block.render({ clientId: "carousel" });
+  assert.equal(block.attributes.isNestedWarning, true);
+  assert.match(block.container.textContent, /Please move it out/);
+
+  parent = { name: "core/group", attributes: { className: "is-style-dark" } };
+  block.render({ clientId: "carousel" });
+  assert.equal(block.attributes.isNestedWarning, false);
+  assert.doesNotMatch(block.container.textContent, /Please move it out/);
+
+  parent = { name: "core/group", attributes: {} };
+  block.render({ clientId: "carousel" });
+  assert.equal(block.attributes.isNestedWarning, true);
+  parent = null;
+  block.render({ clientId: "carousel" });
+  assert.equal(block.attributes.isNestedWarning, false);
+});
+
+/**
+ * Replaces host controls while retaining the card editor's real state and context.
+ *
+ * @param {object} actions Block-editor actions to observe.
+ * @returns {object} Module substitutes for the existing component loader.
+ */
+function infoCardEditorMocks(actions = {}) {
+  const mocks = editorMocks({}, {
+    getBlock: () => ({ innerBlocks: [{ name: "core/paragraph" }] }),
+  }, actions);
+  Object.assign(mocks["@wordpress/block-editor"], {
+    useBlockProps: (props) => props,
+    RichText: plainRichText,
+    InspectorControls: wrapControl,
+    BlockControls: wrapControl,
+    MediaReplaceFlow: EmptyComponent,
+    InnerBlocks: () => React.createElement("p", { "data-inner-content": true }, "Saved details"),
+  });
+  mocks["../../utility/color"] = { getImageBrightness: async () => 128 };
+  mocks["../../components/ProgressBar"] = emptyControls;
+  mocks["../../components/EditControl"] = {
+    EditControl: ({ attributes, setAttributes }) => React.createElement("button", {
+      "aria-label": "Edit details",
+      onClick: () => setAttributes({ isEditView: !attributes.isEditView }),
+    }, "Edit details"),
+  };
+  for (const name of ["CardSettingsPanel", "ImageSettingsPanel", "TextColorPanel", "BackgroundColorPanel", "LayoutPanel", "EffectsPanel"]) {
+    mocks[`./inspectorControls/${name}`] = EmptyComponent;
+  }
+  return mocks;
+}
+
+test("info card editor follows generic container context without changing parent attributes", (t) => {
+  let settings;
+  const mocks = infoCardEditorMocks({
+    updateBlockAttributes: () => assert.fail("cards must not write attributes of other blocks"),
+  });
+  mocks["./inspectorControls/CardSettingsPanel"] = (props) => { settings = props; return null; };
+  const { default: Edit } = loadComponent("blocks/info-card/edit.tsx", mocks);
+  const { container, render } = mount(t);
+  const attributes = { ...blockDefaults("info-card"), title: "Card title", scientificText: "Scientific caption" };
+  const show = (context) => render(React.createElement(Edit, {
+    attributes, context, setAttributes: () => assert.fail("inherited layout must not rewrite the card"), clientId: "card", isSelected: false,
+  }));
+  show({ "rrze-elements/card-height": 420, "rrze-elements/card-list-layout": true });
+  assert.equal(container.firstElementChild.tagName, "LI");
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card-content").style.minHeight, "420px");
+  assert.ok(container.querySelector(".rrze-elements-blocks__carousel_feature_card_scientific-text"));
+  assert.equal(settings.isVisible, false);
+  show({ "rrze-elements/card-height": 520, "rrze-elements/card-list-layout": true, "rrze-elements/card-container-style": "is-style-marketing" });
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card-content").style.minHeight, "520px");
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card_text").textContent, "Card title");
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card_scientific-text"), null);
+});
+
+test("standalone info cards control their own height and restore it after leaving a container", (t) => {
+  let settings;
+  const mocks = infoCardEditorMocks();
+  mocks["./inspectorControls/CardSettingsPanel"] = (props) => { settings = props; return null; };
+  const { default: Edit } = loadComponent("blocks/info-card/edit.tsx", mocks);
+  const block = mountBlock(t, Edit, blockDefaults("info-card"));
+  const show = (context = {}) => block.render({ clientId: "card", isSelected: false, context });
+  show();
+  assert.equal(block.container.firstElementChild.tagName, "DIV");
+  assert.equal(settings.isVisible, true);
+  React.act(() => settings.onChange(480));
+  assert.equal(block.attributes.cardHeight, 480);
+  show({ "rrze-elements/card-height": 600 });
+  assert.equal(settings.isVisible, false);
+  assert.equal(block.attributes.cardHeight, 480);
+  show();
+  assert.equal(settings.cardHeight, 480);
+  assert.equal(block.container.firstElementChild.dataset.cardAppearance, "marketing");
+});
+
+test("adding a link closes the info card's detail editor without deleting saved content", (t) => {
+  const mocks = infoCardEditorMocks();
+  const { default: Edit } = loadComponent("blocks/info-card/edit.tsx", mocks);
+  const { container, render } = mount(t);
+  const writes = [];
+  const show = (url) => render(React.createElement(Edit, {
+    attributes: { ...blockDefaults("info-card"), url },
+    setAttributes: (values) => writes.push(values), clientId: "card", isSelected: false,
+  }));
+  show("");
+  React.act(() => container.querySelector('[aria-label="Edit details"]').click());
+  assert.ok(container.querySelector("[data-inner-content]"));
+  show("https://example.com/project");
+  assert.equal(container.querySelector("[data-inner-content]"), null);
+  assert.ok(container.querySelector('[aria-label="Open card link"]'));
+  assert.deepEqual(writes, [], "switching the view must not rewrite card attributes");
+  show("");
+  React.act(() => container.querySelector('[aria-label="Edit details"]').click());
+  assert.equal(container.querySelector("[data-inner-content]").textContent, "Saved details");
+});
+
 test("accordion FAQ toolbar and inspector share an opt-in boolean", (t) => {
   const metadata = require("../../src/blocks/collapsibles/block.json");
   const mocks = editorMocks({}, { getBlockRootClientId: () => null });

@@ -132,6 +132,32 @@ function esc_attr__($text, $domain = null): string
     return esc_attr($text);
 }
 
+/**
+ * Echoes a translated attribute in the unit-test locale.
+ *
+ * @param string $text Attribute text.
+ * @param string $domain Translation domain.
+ */
+function esc_attr_e(string $text, string $domain = 'default'): void
+{
+    echo esc_attr__($text, $domain);
+}
+
+/**
+ * Serializes explicit wrapper attributes without WordPress block-support context.
+ *
+ * @param array<string, string> $extra_attributes Attributes supplied by the renderer.
+ * @return string Escaped HTML attributes; theme and block-support merging is not simulated.
+ */
+function get_block_wrapper_attributes(array $extra_attributes = []): string
+{
+    $attributes = [];
+    foreach ($extra_attributes as $name => $value) {
+        $attributes[] = $name . '="' . esc_attr($value) . '"';
+    }
+    return implode(' ', $attributes);
+}
+
 function wp_kses_post($text): string
 {
     return is_scalar($text) ? (string)$text : '';

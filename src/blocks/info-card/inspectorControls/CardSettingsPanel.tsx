@@ -7,13 +7,19 @@ interface Props {
   onChange: (value: number) => void;
 }
 
-const CarouselSettingsPanel = ({ isVisible, cardHeight, onChange }: Props) => {
+/**
+ * Exposes height for independent cards; containers own inherited heights.
+ *
+ * @param props - Visibility, current height and update callback.
+ * @returns The height control when the card controls its own layout.
+ */
+const CardSettingsPanel = ({ isVisible, cardHeight, onChange }: Props) => {
   if (!isVisible) {
     return null;
   }
 
   return (
-    <PanelBody title={__("Carousel Settings", "rrze-elements-blocks")}>
+    <PanelBody title={__("Card Settings", "rrze-elements-blocks")}>
       <RangeControl
         label={__("Card Height (px)", "rrze-elements-blocks")}
         value={cardHeight}
@@ -29,4 +35,4 @@ const CarouselSettingsPanel = ({ isVisible, cardHeight, onChange }: Props) => {
   );
 };
 
-export default CarouselSettingsPanel;
+export default CardSettingsPanel;

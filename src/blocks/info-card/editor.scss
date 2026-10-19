@@ -1,7 +1,10 @@
+@use "../../_shared/scss/base-styles/info-card";
+
 div.rrze-elements-blocks-info-card-editor{
   border: 3px solid var(--background-color);
   position: relative;
-  width: min(80vw, 95ch);
+  width: 100%;
+  box-sizing: border-box;
   min-height: 680px;
 }
 div.rrze-elements-blocks-info-card-editor::before{
@@ -10,7 +13,7 @@ div.rrze-elements-blocks-info-card-editor::before{
   position: absolute;
   top: 0;
   left: 0;
-  color: var(--desktop-text-color);
+  color: var(--desktop-custom-text-color, var(--desktop-text-color));
   padding: .125rem .5rem .25rem;
 }
 
@@ -18,7 +21,7 @@ div.rrze-elements-blocks__carousel_feature_card-content
 {
   position: relative;
   padding: 32px;
-  width: var(--desktop-card-width, 320px);
+  width: var(--rrze-card-size, 320px);
   z-index: 1;
   background-color: var(--background-color);
   will-change: transform;
@@ -34,8 +37,8 @@ body.is-device-tablet,
 body.is-device-mobile,
 .is-tablet-preview,
 .is-mobile-preview {
-  div.rrze-elements-blocks__carousel_feature_card-content,
-  div.rrze-elements-blocks__carousel_feature_card_scientific-text {
+  [data-card-layout="list"] div.rrze-elements-blocks__carousel_feature_card-content,
+  [data-card-layout="list"] div.rrze-elements-blocks__carousel_feature_card_scientific-text {
     width: 312px !important;
   }
 }
@@ -103,7 +106,7 @@ body.is-device-mobile,
     }
 }
 
-.is-style-marketing {
+.rrze-elements-blocks__info-card[data-card-appearance="marketing"] {
   .rrze-elements-blocks__carousel_feature_card-content{
     display: flex;
     flex-direction: column;
@@ -115,5 +118,15 @@ body.is-device-mobile,
   .rrze-elements-blocks__carousel_feature_card_subtitle,
   .rrze-elements-blocks__carousel_feature_card_text {
     width: 100%;
+  }
+}
+
+body.wp-theme-FAU-Elemental div.is-style-dark {
+  div.rrze-elements-blocks-info-card-editor {
+    border-color: var(--FAU-Col-Weiss-100, #fff);
+  }
+  div.rrze-elements-blocks-info-card-editor::before {
+    background: var(--FAU-Col-Weiss-100, #fff);
+    color: var(--FAU-Col-Schwarz-100, #000);
   }
 }
