@@ -355,12 +355,7 @@
     }
   }
 
-  margin: 0 auto;
-  max-width: var(--base-max-width);
-
   &.no-image {
-    max-width: var(--small-max-width);
-
     a {
       max-width: fit-content;
     }

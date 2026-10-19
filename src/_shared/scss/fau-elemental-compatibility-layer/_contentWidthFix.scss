@@ -60,12 +60,20 @@
   }
 
   div.elements-textcolumns,
-  div.wp-block-rrze-elements-columns,
-  div.wp-block-rrze-elements-cta,
-  {
+  div.wp-block-rrze-elements-columns {
     max-width: var(--wide-max-width);
     margin-left: bleed.$fau-margin-to-wide-width;
     margin-right: bleed.$fau-margin-to-wide-width;
+  }
+
+  // Image CTAs span ten grid columns; text-only CTAs keep the eight-column default above.
+  div.wp-block-rrze-elements-cta:has(> .rrze-elements-cta.has-image) {
+    max-width: var(--base-max-width);
+  }
+
+  // Only top-level CTAs may extend beyond the text column, in both frontend and editor.
+  :is(.wp-block-post-content, .is-root-container) > div.wp-block-rrze-elements-cta:has(> .rrze-elements-cta.has-image) {
+    margin-inline: bleed.$fau-margin-to-default-width;
   }
 
     div.wp-block-rrze-elements-iconbox-row,
