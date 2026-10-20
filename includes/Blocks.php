@@ -9,6 +9,7 @@ use RRZE\ElementsBlocks\BlockFrontend\Accordions;
 use RRZE\ElementsBlocks\BlockFrontend\Alert;
 use RRZE\ElementsBlocks\BlockFrontend\CallToAction;
 use RRZE\ElementsBlocks\BlockFrontend\Carousel;
+use RRZE\ElementsBlocks\BlockFrontend\ContentSlider;
 use RRZE\ElementsBlocks\BlockFrontend\Collapse;
 use RRZE\ElementsBlocks\BlockFrontend\Collapsibles;
 use RRZE\ElementsBlocks\BlockFrontend\Columns;
@@ -228,6 +229,10 @@ class Blocks
             [
                 'build_folder' => 'carousel',
                 'class' => Carousel::class,
+            ],
+            [
+                'build_folder' => 'content-slider',
+                'class' => ContentSlider::class,
             ],
             [
                 'build_folder' => 'info-card',

@@ -79,6 +79,7 @@ module.exports = [
 	{
 		files: [
 			'assets/js/carousel/*.js',
+			'assets/js/content-slider/*.js',
 			'assets/js/info-card/*.js',
 			'assets/js/counter/*.js',
 			'assets/js/timeline/*.js',

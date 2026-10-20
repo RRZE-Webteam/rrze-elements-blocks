@@ -143,8 +143,55 @@ changing stored content:
 wp --skip-plugins --skip-themes --url=https://your-test-site eval-file tests/wordpress/info-card.php
 ```
 
-This covers independent cards, ordinary groups, both carousel styles, an unknown
-future container and (when installed) FAU Elemental's actual content filter.
+This covers independent cards, ordinary groups, both carousel styles, content
+sliders (including dark groups), an unknown future container and (when installed)
+FAU Elemental's actual content filter.
+
+### Content slider
+
+`rrze-elements/content-slider` is a second parent for `rrze-elements/info-card`.
+It supplies a shared `cardHeight` (default 480 px, editor range 350–680 px) and
+explicitly supplies `card-list-layout: false`. Cards keep their own appearance,
+images, links and dialog content, and retain their original standalone height
+and carousel width when moved elsewhere. The slider saves only the original
+inner blocks; `ContentSlider::render()` creates the section and navigation.
+
+The full-width stage uses Elemental's existing full-bleed margin and avoids
+applying it twice inside groups. The heading stays at the normal text width.
+Cards occupy 80% of the stage, capped at 960 px, with tighter gaps on small screens; the number
+of visible neighbors follows the available space. Non-centered cards are scaled
+to 90% and faded to 70% opacity, without changing the measured scroll positions. Styles live in
+`src/_shared/scss/base-styles/_content-slider.scss` and are shared with the editor.
+
+`rrze-content-slider` uses the existing GSAP core and ScrollToPlugin. Native
+horizontal scrolling handles touch/trackpad gestures; buttons and viewport
+Arrow/Home/End keys navigate between cards. There is no autoplay. Reduced motion
+and missing GSAP use immediate positioning. A click on a neighboring card centers
+that card first; the centered card retains its normal link/dialog action.
+Keyboard focus on an original card also centers it.
+
+The frontend adds enough inert, aria-hidden previews on both ends for the current
+viewport, including wide screens and two-card sliders. Copies exclude dialogs,
+IDs and ID references. After crossing an edge, scrolling is normalized to the
+identical original. Original DOM order and dialog ownership never change.
+One card remains centered without navigation; an empty slider renders nothing.
+Without JavaScript, originals remain horizontally scrollable and navigation
+buttons stay hidden. In the editor there are no copies: original cards remain
+editable in document order, with three empty cards as the insertion template.
+
+```sh
+npm run minify:content-slider:js
+npm run build
+composer test -- --filter 'ContentSliderRenderTest|CarouselInfoCardRenderTest'
+node --test tests/js/ContentSliderFrontendTest.js tests/js/CarouselSerializationTest.js tests/js/EditorComponentsTest.js
+```
+
+The frontend tests cover both loop boundaries, resize and wide-screen copies,
+one/two-card cases, independent instances, reduced motion, interruption, keyboard
+and focus navigation, and pointer clicks on linked neighbors before their native
+focus action can open a destination. Geometry and GSAP are substituted in jsdom;
+check actual centering, dark groups, neighbor scaling and responsive overflow
+in the browser after style changes.
 
 ### Accordion FAQ microdata
 

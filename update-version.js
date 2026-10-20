@@ -62,6 +62,7 @@ const filesToUpdate = [
   "./src/blocks/facts-grid/block.json",
   "./src/blocks/fact/block.json",
   "./src/blocks/carousel/block.json",
+  "./src/blocks/content-slider/block.json",
   "./src/blocks/info-card/block.json",
   "./src/blocks/media-accordion/block.json",
   "./src/blocks/process/block.json",

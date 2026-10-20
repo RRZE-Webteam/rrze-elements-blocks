@@ -160,6 +160,15 @@ class Main
             ) ?: RRZE_ELEMENTSB_VERSION),
             true
         );
+        wp_register_script(
+            'rrze-content-slider',
+            plugins_url('assets/js/content-slider/rrze-content-slider.min.js', plugin_basename($this->pluginFile)),
+            ['rrze-gsap-scrolltoplugin', 'rrze-info-card'],
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/js/content-slider/rrze-content-slider.min.js'
+            ) ?: RRZE_ELEMENTSB_VERSION),
+            true
+        );
         wp_set_script_translations(
             'rrze-accordions',
             'rrze-elements-blocks',

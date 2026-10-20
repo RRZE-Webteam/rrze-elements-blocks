@@ -10,7 +10,7 @@ declare(strict_types=1);
 $root = dirname(__DIR__, 2);
 require_once $root . '/vendor/autoload.php';
 
-foreach (['carousel' => 'Carousel', 'info-card' => 'InfoCard'] as $folder => $renderer) {
+foreach (['carousel' => 'Carousel', 'info-card' => 'InfoCard', 'content-slider' => 'ContentSlider'] as $folder => $renderer) {
     if (!WP_Block_Type_Registry::get_instance()->is_registered('rrze-elements/' . $folder)) {
         $class = 'RRZE\\ElementsBlocks\\BlockFrontend\\' . $renderer;
         register_block_type($root . '/build/blocks/' . $folder, [
@@ -80,6 +80,12 @@ $carousel = rrze_check_card_context('<!-- wp:rrze-elements/carousel {"title":"Pr
 rrze_check_card_context('<!-- wp:rrze-elements/carousel {"title":"Projects","className":"is-style-marketing"} -->'
     . $card . '<!-- /wp:rrze-elements/carousel -->', 'li', 'marketing', 350);
 rrze_check_card_context($card, 'div', 'marketing', 480);
+
+$slider = '<!-- wp:rrze-elements/content-slider {"title":"Topics","cardHeight":560} -->'
+    . $card . '<!-- /wp:rrze-elements/content-slider -->';
+rrze_check_card_context($slider, 'div', 'marketing', 560);
+rrze_check_card_context('<!-- wp:group {"className":"is-style-dark"} --><div class="wp-block-group is-style-dark">'
+    . $slider . '</div><!-- /wp:group -->', 'div', 'marketing', 560);
 
 // Demonstrates that a future container need not be known to the card implementation.
 register_block_type('rrze-card-test/container', [

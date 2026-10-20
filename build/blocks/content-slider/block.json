@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rrze-elements/content-slider",
+  "version": "1.3.3",
+  "title": "Inhalts-Slider",
+  "category": "rrze_elements",
+  "description": "Zentrierte Infokarten mit angeschnittenen Nachbarn und endloser Navigation.",
+  "keywords": [
+    "slider",
+    "carousel",
+    "Infokarte"
+  ],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "headingLevel": {
+      "type": "number",
+      "enum": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "default": 2
+    },
+    "cardHeight": {
+      "type": "number",
+      "default": 480
+    },
+    "cardListLayout": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "providesContext": {
+    "rrze-elements/card-height": "cardHeight",
+    "rrze-elements/card-list-layout": "cardListLayout"
+  },
+  "textdomain": "rrze-elements-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "viewScript": "rrze-content-slider"
+}

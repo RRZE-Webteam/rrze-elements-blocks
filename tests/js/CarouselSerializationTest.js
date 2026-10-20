@@ -106,6 +106,28 @@ test("independent info cards retain their own height, style and link after savin
   assert.deepEqual(reopened.innerBlocks, []);
 });
 
+test("content sliders save only original info cards and retain independent card settings", (t) => {
+  registerActualBlock("content-slider");
+  registerActualBlock("info-card");
+  t.after(() => {
+    blocks.unregisterBlockType("rrze-elements/content-slider");
+    blocks.unregisterBlockType("rrze-elements/info-card");
+  });
+  const saved = `<!-- wp:rrze-elements/content-slider {"title":"Topics","cardHeight":560,"headingLevel":3} -->
+<!-- wp:rrze-elements/info-card {"title":"First","cardHeight":380,"desktopContentWidth":420,"url":"/first"} /-->
+<!-- wp:rrze-elements/info-card {"title":"Second","className":"is-style-scientific"} /-->
+<!-- /wp:rrze-elements/content-slider -->`;
+  const [slider] = blocks.parse(blocks.serialize(blocks.parse(saved)));
+  assert.equal(slider.isValid, true);
+  assert.equal(slider.attributes.cardHeight, 560);
+  assert.equal(slider.attributes.headingLevel, 3);
+  assert.deepEqual(slider.innerBlocks.map((card) => card.attributes.title), ["First", "Second"]);
+  assert.equal(slider.innerBlocks[0].attributes.cardHeight, 380);
+  assert.equal(slider.innerBlocks[0].attributes.desktopContentWidth, 420);
+  assert.equal(slider.innerBlocks[1].attributes.className, "is-style-scientific");
+  assert.equal(slider.attributes.cardListLayout, false);
+});
+
 test.after(() => {
   dom.window.close();
   delete global.window;

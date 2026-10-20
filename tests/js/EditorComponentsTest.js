@@ -341,6 +341,37 @@ function infoCardEditorMocks(actions = {}) {
   return mocks;
 }
 
+test("content slider editor accepts reusable cards and changes only its shared height", (t) => {
+  let innerOptions;
+  let heightControl;
+  const mocks = editorMocks({}, {
+    getBlockOrder: () => ["one", "two"],
+    getSelectedBlockClientId: () => null,
+  });
+  Object.assign(mocks["@wordpress/block-editor"], {
+    useBlockProps: (props) => props,
+    useInnerBlocksProps: (props, options) => { innerOptions = options; return props; },
+    HeadingLevelDropdown: EmptyComponent,
+    InspectorControls: wrapControl,
+  });
+  mocks["@wordpress/components"] = {
+    PanelBody: wrapControl,
+    RangeControl: (props) => { heightControl = props; return null; },
+  };
+  const { default: Edit } = loadComponent("blocks/content-slider/edit.tsx", mocks);
+  const block = mountBlock(t, Edit, blockDefaults("content-slider"));
+  block.render({ clientId: "slider" });
+  assert.deepEqual(innerOptions.allowedBlocks, ["rrze-elements/info-card"]);
+  assert.equal(innerOptions.template.length, 3);
+  assert.equal(innerOptions.orientation, "horizontal");
+  assert.equal(block.container.querySelectorAll("button").length, 2);
+  assert.equal(heightControl.value, 480);
+  React.act(() => heightControl.onChange(560));
+  assert.equal(block.attributes.cardHeight, 560);
+  assert.equal(block.attributes.cardListLayout, false);
+  assert.equal(block.container.querySelectorAll("[data-slider-clone]").length, 0);
+});
+
 test("info card editor follows generic container context without changing parent attributes", (t) => {
   let settings;
   const mocks = infoCardEditorMocks({
