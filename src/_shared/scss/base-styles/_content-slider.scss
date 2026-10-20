@@ -66,21 +66,27 @@
         box-sizing: border-box;
       }
 
-      > .rrze-elements-blocks__carousel_feature-card-bg {
+      // Include the editor wrapper and the frontend caption, but never dialogs.
+      > :is(.rrze-elements-blocks__carousel_feature-card-bg,
+        .rrze-elements-blocks__carousel_feature-card-box,
+        .rrze-elements-blocks__carousel_feature_card_scientific-text) {
         transform: scale(.9);
         opacity: .7;
         transform-origin: center;
         transition: transform .35s ease, opacity .35s ease;
       }
 
-      &[data-slider-active] > .rrze-elements-blocks__carousel_feature-card-bg {
+      &[data-slider-active] > :is(.rrze-elements-blocks__carousel_feature-card-bg,
+        .rrze-elements-blocks__carousel_feature-card-box,
+        .rrze-elements-blocks__carousel_feature_card_scientific-text) {
         transform: scale(1);
         opacity: 1;
       }
     }
   }
 
-  .is-rebasing .rrze-elements-blocks__info-card > .rrze-elements-blocks__carousel_feature-card-bg {
+  .is-rebasing .rrze-elements-blocks__info-card > :is(.rrze-elements-blocks__carousel_feature-card-bg,
+    .rrze-elements-blocks__carousel_feature_card_scientific-text) {
     transition: none;
   }
 
@@ -130,7 +136,8 @@
   &[data-slider-count="1"] .rrze-elements-blocks__content-slider-navigation { display: none; }
 
   &:not([data-slider-ready]):not([data-slider-editor]) .rrze-elements-blocks__content-slider-track
-    > .rrze-elements-blocks__info-card > .rrze-elements-blocks__carousel_feature-card-bg {
+    > .rrze-elements-blocks__info-card > :is(.rrze-elements-blocks__carousel_feature-card-bg,
+      .rrze-elements-blocks__carousel_feature_card_scientific-text) {
     transform: none;
     opacity: 1;
   }
@@ -142,7 +149,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     .rrze-elements-blocks__content-slider-track > .rrze-elements-blocks__info-card
-      > .rrze-elements-blocks__carousel_feature-card-bg { transition: none; }
+      > :is(.rrze-elements-blocks__carousel_feature-card-bg,
+        .rrze-elements-blocks__carousel_feature-card-box,
+        .rrze-elements-blocks__carousel_feature_card_scientific-text) { transition: none; }
   }
 }
 

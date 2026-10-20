@@ -151,8 +151,14 @@ FAU Elemental's actual content filter.
 
 `rrze-elements/content-slider` is a second parent for `rrze-elements/info-card`.
 It supplies a shared `cardHeight` (default 480 px, editor range 350–680 px) and
-explicitly supplies `card-list-layout: false`. Cards keep their own appearance,
-images, links and dialog content, and retain their original standalone height
+explicitly supplies `card-list-layout: false`. The styles `marketing` (Standard)
+and `scientific` (Wissenschaftliche Abbildungen) pass the slider's `className`
+through `card-container-style`. Scientific cards hide the image's title/subtitle
+and display their existing `scientificText` caption below it. Switching styles
+does not rewrite the cards' saved text or individual styles.
+The card's existing background defaults to FAU blue (`#04316a`); both the background
+color and `imageObjectFit` (`contain` or `cover`) remain individual card settings.
+Cards keep their images, links and dialog content, and retain their original standalone height
 and carousel width when moved elsewhere. The slider saves only the original
 inner blocks; `ContentSlider::render()` creates the section and navigation.
 

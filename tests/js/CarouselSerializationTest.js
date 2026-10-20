@@ -128,6 +128,32 @@ test("content sliders save only original info cards and retain independent card 
   assert.equal(slider.attributes.cardListLayout, false);
 });
 
+test("content slider styles survive saving without replacing card text or individual styles", (t) => {
+  registerActualBlock("content-slider");
+  registerActualBlock("info-card");
+  t.after(() => {
+    blocks.unregisterBlockType("rrze-elements/content-slider");
+    blocks.unregisterBlockType("rrze-elements/info-card");
+  });
+  const type = blocks.getBlockType("rrze-elements/content-slider");
+  assert.deepEqual(type.styles.map((style) => style.name), ["marketing", "scientific"]);
+  for (const style of type.styles) {
+    const original = blocks.createBlock("rrze-elements/content-slider", {
+      className: `is-style-${style.name}`,
+    }, [blocks.createBlock("rrze-elements/info-card", {
+      title: "Preserved heading",
+      subtitle: "Preserved topic",
+      scientificText: "H<sub>2</sub>O: <strong>measurement</strong>",
+      className: "is-style-marketing",
+      imageObjectFit: "contain",
+    })]);
+    const [reopened] = blocks.parse(blocks.serialize(original));
+    assert.equal(reopened.isValid, true);
+    assert.equal(reopened.attributes.className, `is-style-${style.name}`);
+    assert.deepEqual(reopened.innerBlocks[0].attributes, original.innerBlocks[0].attributes);
+  }
+});
+
 test.after(() => {
   dom.window.close();
   delete global.window;

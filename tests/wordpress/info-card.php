@@ -87,6 +87,22 @@ rrze_check_card_context($slider, 'div', 'marketing', 560);
 rrze_check_card_context('<!-- wp:group {"className":"is-style-dark"} --><div class="wp-block-group is-style-dark">'
     . $slider . '</div><!-- /wp:group -->', 'div', 'marketing', 560);
 
+foreach (['scientific', 'marketing'] as $style) {
+    $childStyle = $style === 'scientific' ? 'marketing' : 'scientific';
+    $styledCard = '<!-- wp:rrze-elements/info-card ' . wp_json_encode([
+        'title' => 'Stored title', 'className' => 'is-style-' . $childStyle,
+        'scientificText' => 'H<sub>2</sub>O: measurement', 'imageObjectFit' => 'contain',
+    ]) . ' /-->';
+    $styledSlider = '<!-- wp:rrze-elements/content-slider ' . wp_json_encode([
+        'className' => 'is-style-' . $style, 'cardHeight' => 560,
+    ]) . ' -->' . $styledCard . '<!-- /wp:rrze-elements/content-slider -->';
+    rrze_check_card_context($styledSlider, 'div', $style, 560);
+    rrze_check_card_context('<!-- wp:group {"className":"is-style-dark"} --><div class="wp-block-group is-style-dark">'
+        . $styledSlider . '</div><!-- /wp:group -->', 'div', $style, 560);
+    // Removing the parent restores the card's own saved style.
+    rrze_check_card_context($styledCard, 'div', $childStyle, 350);
+}
+
 // Demonstrates that a future container need not be known to the card implementation.
 register_block_type('rrze-card-test/container', [
     'attributes' => ['height' => ['type' => 'number', 'default' => 560]],

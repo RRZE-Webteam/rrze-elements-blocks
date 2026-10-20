@@ -415,6 +415,41 @@ test("standalone info cards control their own height and restore it after leavin
   assert.equal(block.container.firstElementChild.dataset.cardAppearance, "marketing");
 });
 
+test("slider style switches show captions below the image without rewriting card text", (t) => {
+  const metadata = require("../../src/blocks/content-slider/block.json");
+  const { default: Edit } = loadComponent("blocks/info-card/edit.tsx", infoCardEditorMocks());
+  const { container, render } = mount(t);
+  const attributes = {
+    ...blockDefaults("info-card"), className: "is-style-marketing",
+    title: "Stored title", subtitle: "Stored subtitle", scientificText: "Scientific caption",
+  };
+  /**
+   * Passes the parent attributes through its actual registered context mapping.
+   *
+   * @param {string} className Selected slider style.
+   */
+  const show = (className) => {
+    const parent = { ...blockDefaults("content-slider"), className };
+    const context = Object.fromEntries(Object.entries(metadata.providesContext)
+      .map(([key, attribute]) => [key, parent[attribute]]));
+    render(React.createElement(Edit, {
+      attributes, context, clientId: "card", isSelected: false,
+      setAttributes: () => assert.fail("style inheritance must preserve the saved card"),
+    }));
+  };
+  show("is-style-scientific");
+  assert.equal(container.firstElementChild.dataset.cardAppearance, "scientific");
+  const caption = container.querySelector(".rrze-elements-blocks__carousel_feature_card_scientific-text");
+  assert.equal(caption.textContent, "Scientific caption");
+  assert.equal(caption.closest(".rrze-elements-blocks__carousel_feature_card-content"), null);
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card_text"), null);
+  show("is-style-marketing");
+  assert.equal(container.firstElementChild.dataset.cardAppearance, "marketing");
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card_text").textContent, "Stored title");
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card_subtitle").textContent, "Stored subtitle");
+  assert.equal(container.querySelector(".rrze-elements-blocks__carousel_feature_card_scientific-text"), null);
+});
+
 test("adding a link closes the info card's detail editor without deleting saved content", (t) => {
   const mocks = infoCardEditorMocks();
   const { default: Edit } = loadComponent("blocks/info-card/edit.tsx", mocks);

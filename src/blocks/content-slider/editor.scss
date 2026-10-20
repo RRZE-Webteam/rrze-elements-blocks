@@ -20,14 +20,4 @@
   .rrze-elements-blocks__content-slider-navigation {
     display: flex;
   }
-
-  // The editor keeps originals only; selecting a card makes it the visual focus.
-  .rrze-elements-blocks__content-slider-track > .rrze-elements-blocks__info-card {
-    > .rrze-elements-blocks__carousel_feature-card-bg {
-      transform: scale(.9);
-    }
-    &[data-slider-active] > .rrze-elements-blocks__carousel_feature-card-bg {
-      transform: none;
-    }
-  }
 }

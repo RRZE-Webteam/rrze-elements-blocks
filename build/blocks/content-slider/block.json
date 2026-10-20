@@ -49,8 +49,20 @@
   },
   "providesContext": {
     "rrze-elements/card-height": "cardHeight",
+    "rrze-elements/card-container-style": "className",
     "rrze-elements/card-list-layout": "cardListLayout"
   },
+  "styles": [
+    {
+      "name": "marketing",
+      "label": "Standard",
+      "isDefault": true
+    },
+    {
+      "name": "scientific",
+      "label": "Wissenschaftliche Abbildungen"
+    }
+  ],
   "textdomain": "rrze-elements-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
