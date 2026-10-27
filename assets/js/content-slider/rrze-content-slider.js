@@ -108,8 +108,9 @@ function initializeContentSlider(root) {
         viewport.classList.add('is-animating', 'is-rebasing');
         viewport.scrollTo({ left: position(card), behavior: 'instant' });
         highlight(card);
-        // Commit the same visual size before restoring transitions across a loop boundary.
-        void viewport.offsetWidth;
+        // Commit the active style before restoring transitions. Closure removes an unused
+        // offsetWidth read, but preserves this explicit geometry measurement.
+        card.getBoundingClientRect();
         viewport.classList.remove('is-animating', 'is-rebasing');
     }
 

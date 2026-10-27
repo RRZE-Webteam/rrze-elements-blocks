@@ -4,7 +4,8 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const { JSDOM } = require("jsdom");
 
-const script = fs.readFileSync(path.resolve(__dirname, "../../assets/js/content-slider/rrze-content-slider.js"), "utf8");
+// Exercise the shipped bundle, including changes introduced by minification.
+const script = fs.readFileSync(path.resolve(__dirname, "../../assets/js/content-slider/rrze-content-slider.min.js"), "utf8");
 
 /**
  * Builds independent sliders with real link and dialog identity constraints.
