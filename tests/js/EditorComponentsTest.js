@@ -21,15 +21,18 @@ test.after(() => {
   delete global.IS_REACT_ACT_ENVIRONMENT;
 });
 
-// Exercise the actual TSX with React while substituting WordPress host services.
+/** Loads actual TSX/SVG components with React while substituting WordPress host services. */
 function loadComponent(relativePath, mocks) {
   const filename = path.resolve(__dirname, "../../src", relativePath);
-  const source = fs.readFileSync(filename, "utf8").replaceAll(
+  let source = fs.readFileSync(filename, "utf8").replaceAll(
     "import.meta.url",
     JSON.stringify(pathToFileURL(filename).href),
   );
+  if (filename.endsWith(".svg")) {
+    source = require("@svgr/core").transform.sync(source, { plugins: ["@svgr/plugin-jsx"] });
+  }
   const { outputText } = ts.transpileModule(source, {
-    fileName: filename,
+    fileName: filename.endsWith(".svg") ? `${filename}.tsx` : filename,
     compilerOptions: {
       module: ts.ModuleKind.CommonJS,
       jsx: ts.JsxEmit.ReactJSX,
@@ -40,9 +43,17 @@ function loadComponent(relativePath, mocks) {
   const realRequire = createRequire(filename);
   const module = { exports: {} };
   // Styles are bundled by webpack; they do not execute in these DOM tests.
-  const localRequire = (name) => Object.hasOwn(mocks, name)
-    ? mocks[name]
-    : name.endsWith(".scss") ? {} : realRequire(name);
+  /** Resolves local TSX/SVG dependencies just as the webpack loaders do. */
+  const localRequire = (name) => {
+    if (Object.hasOwn(mocks, name)) return mocks[name];
+    if (name.endsWith(".scss")) return {};
+    const localPath = path.resolve(path.dirname(filename), name);
+    const component = name.endsWith(".svg") ? localPath : `${localPath}.tsx`;
+    if (name.startsWith(".") && fs.existsSync(component)) {
+      return loadComponent(path.relative(path.resolve(__dirname, "../../src"), component), mocks);
+    }
+    return realRequire(name);
+  };
   new Function("require", "module", "exports", outputText)(
     localRequire, module, module.exports,
   );
@@ -161,6 +172,104 @@ for (const type of ["symbol", "solid"]) {
     assert.ok(container.querySelector('[aria-hidden="true"]'));
   });
 }
+
+test("EU labels render as actual SVGs in block previews and retain native selection buttons", (t) => {
+  const { IconMarkComponent } = loadComponent("components/IconPicker.tsx", {
+    "@wordpress/i18n": { __: (text) => text },
+    "@wordpress/components": {},
+    "@wordpress/element": React,
+    "@wordpress/a11y": { speak: () => {} },
+  });
+  const { container, render } = mount(t);
+  for (const materialSymbol of ["eu-ai", "eu-ai-generated", "eu-ai-modified"]) {
+    let clicks = 0;
+    render(React.createElement(IconMarkComponent, {
+      type: "symbol", iconName: materialSymbol, materialSymbol, onClick: () => clicks++,
+    }));
+    const button = container.querySelector("button");
+    assert.equal(button.type, "button");
+    assert.equal(button.getAttribute("aria-label"), "Select an icon");
+    const svg = button.querySelector("svg");
+    assert.ok(svg.querySelector("path"));
+    assert.equal(svg.getAttribute("aria-hidden"), "true");
+    assert.equal(svg.style.width, "auto");
+    assert.equal(svg.style.fill, "rgb(0, 0, 0)");
+    assert.equal(svg.querySelector("style"), null);
+    assert.equal(container.querySelector(".material-symbols-outlined"), null);
+    React.act(() => button.click());
+    assert.equal(clicks, 1);
+  }
+});
+
+test("shared picker finds, selects and removes EU AI labels alongside Material Symbols", async (t) => {
+  /** Models the WordPress button's accessible name and selection state. */
+  const Button = ({children, label, isPressed, onClick, className}) => React.createElement("button", {
+    type: "button", "aria-label": label, "aria-pressed": isPressed, onClick, className,
+  }, children);
+  /** Models only the search field events needed by this integration test. */
+  const SearchControl = ({value, onChange, onKeyDown, ref}) => React.createElement("input", {
+    value, onInput: (event) => onChange(event.target.value), onKeyDown, ref,
+  });
+  const { MaterialSymbolPicker } = loadComponent("components/MaterialSymbolPicker.tsx", {
+    "@wordpress/i18n": { __: (text) => text },
+    "@wordpress/element": React,
+    "@wordpress/a11y": { speak: () => {} },
+    "@wordpress/components": { Button, SearchControl, Spinner: () => null },
+  });
+  const { container, render } = mount(t);
+  const changes = [];
+  /** Renders the controlled picker with the selection supplied by its parent block. */
+  const show = async (materialSymbol = "") => {
+    await React.act(async () => render(React.createElement(MaterialSymbolPicker, {
+      attributes: {materialSymbol}, setAttributes: (attributes) => changes.push(attributes),
+    })));
+  };
+  /** Submits the same explicit search action used in the editor. */
+  const search = async (query) => {
+    await React.act(async () => {
+      const input = container.querySelector("input");
+      input.value = query;
+      input.dispatchEvent(new window.Event("input", {bubbles: true}));
+    });
+    await React.act(async () => [...container.querySelectorAll("button")]
+      .find((button) => button.textContent === "Search for Icons").click());
+  };
+
+  await show();
+  assert.doesNotMatch(container.textContent, /EU AI labels/);
+  for (const name of ["eu-ai", "eu-ai-generated", "eu-ai-modified"]) {
+    assert.equal(container.querySelector(`button[aria-label="${name}"]`), null);
+  }
+  assert.ok(container.querySelector(".material-symbols-outlined"));
+
+  for (const query of ["ai", "ki", "eu-ai"]) {
+    await search(query);
+    assert.equal(container.querySelectorAll("button.rrze-editor-eu-ai-button").length, 3);
+  }
+  for (const query of ["mail", "", "generated"]) {
+    await search(query);
+    assert.equal(container.querySelectorAll("button.rrze-editor-eu-ai-button").length, 0);
+  }
+  await search("ai-modified");
+  assert.equal(container.querySelectorAll("button.rrze-editor-eu-ai-button").length, 1);
+  const selectedButton = container.querySelector('button[aria-label="eu-ai-modified"]');
+  React.act(() => selectedButton.click());
+  assert.deepEqual(changes.at(-1), {materialSymbol: "eu-ai-modified"});
+  await show("eu-ai-modified");
+  assert.equal(container.querySelector('button[aria-label="eu-ai-modified"]').getAttribute("aria-pressed"), "true");
+  React.act(() => container.querySelector('button[aria-label="eu-ai-modified"]').click());
+  assert.deepEqual(changes.at(-1), {materialSymbol: ""});
+
+  await React.act(async () => {
+    const input = container.querySelector("input");
+    input.value = "";
+    input.dispatchEvent(new window.Event("input", {bubbles: true}));
+  });
+  await show("eu-ai-generated");
+  assert.ok(container.querySelector("svg.elements-blocks-icon-selector-display path"));
+  React.act(() => [...container.querySelectorAll("button")].find((button) => button.textContent === "Remove Icon").click());
+  assert.deepEqual(changes.at(-1), {materialSymbol: ""});
+});
 
 test("InputWarning preserves translated text and its display thresholds", (t) => {
   const { default: InputWarning } = loadComponent("components/InputWarning.tsx", {

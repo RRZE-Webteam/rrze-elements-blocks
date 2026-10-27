@@ -1,5 +1,6 @@
 <?php return array(
 	'dependencies' => array(
+		'react',
 		'react-jsx-runtime',
 		'wp-a11y',
 		'wp-blob',
@@ -13,5 +14,5 @@
 		'wp-notices',
 		'wp-primitives'
 	),
-	'version' => '3ead3f9c9073aef8baad'
+	'version' => '908afe0b118bf9dd2ff6'
 );

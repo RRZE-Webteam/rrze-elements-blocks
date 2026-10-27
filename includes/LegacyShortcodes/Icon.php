@@ -9,10 +9,20 @@ use RRZE\ElementsBlocks\SpriteGenerator;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Renders legacy icon shortcodes exclusively with mapped Material Symbols.
+ * Renders icon shortcodes with mapped Material Symbols and official EU AI labels.
  */
 class Icon implements ShortcodeAdapter
 {
+    /** @var array<string, string> Explicit aliases for the bundled EU AI labels. */
+    private const EU_AI_ICONS = [
+        'ai' => 'eu-ai',
+        'ai-generated' => 'eu-ai-generated',
+        'ai-modified' => 'eu-ai-modified',
+        'eu-ai' => 'eu-ai',
+        'eu-ai-generated' => 'eu-ai-generated',
+        'eu-ai-modified' => 'eu-ai-modified',
+    ];
+
     /** @var array<string|int, string>|null */
     private static ?array $mapping = null;
 
@@ -47,14 +57,10 @@ class Icon implements ShortcodeAdapter
             return $this->notFound();
         }
 
-        // The SVG comes from the bundled Material assets, never from shortcode input.
+        // The SVG comes from bundled assets, never from shortcode input.
         if ( preg_match( '#<svg\b[^>]*viewBox="([^"]+)"[^>]*>(.*?)</svg>#s', $icon[ 'svg' ], $matches ) !== 1 ) {
             return $this->notFound();
         }
-
-        $accessibility = $args[ 'alt' ] === ''
-            ? ' aria-hidden="true"'
-            : ' role="img" aria-label="' . esc_attr( $args[ 'alt' ] ) . '"';
 
         $this->enqueueAssets();
         $styleProps = $this->getStyles( $args );
@@ -64,7 +70,8 @@ class Icon implements ShortcodeAdapter
             '',
             $styleProps['color'],
             $styleProps['size'],
-            $styleProps['border']
+            $styleProps['border'],
+            $args['alt']
         );
     }
 
@@ -150,7 +157,7 @@ class Icon implements ShortcodeAdapter
 
     /**
      * Resolve a legacy name for other adapters without rendering or registering shortcodes.
-     * Returns an empty string when no bundled Material Symbol is available.
+     * Returns a bundled symbol name (including EU labels), or an empty string if unavailable.
      */
     public function getMaterialSymbol(string $raw): string
     {
@@ -161,7 +168,7 @@ class Icon implements ShortcodeAdapter
     }
 
     /**
-     * No Font Awesome file lookup or guessed aliases: the mapping is the allowlist.
+     * Resolves only explicitly allowed EU names or mapped legacy names to local SVGs.
      *
      * @return array{name: string, svg: string}|null
      */
@@ -191,7 +198,7 @@ class Icon implements ShortcodeAdapter
             }
         }
 
-        $name = self::$mapping[ $parts[ 0 ] ] ?? '';
+        $name = self::EU_AI_ICONS[ $parts[ 0 ] ] ?? self::$mapping[ $parts[ 0 ] ] ?? '';
         $file = $basePath . 'symbols/' . $name . '.svg';
         if ( $name === '' || !is_readable( $file ) ) {
             return null;

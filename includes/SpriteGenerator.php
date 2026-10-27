@@ -39,8 +39,10 @@ class SpriteGenerator
    * @param string          $color       Validated CSS color
    * @param string          $size        CSS Value for height and width
    * @param string          $border      CSS Border Value
+   * @param string          $label       Accessible name; empty for decorative icons
+   * @return string SVG markup referencing the request's inline sprite.
    */
-  public static function svgUse(string $iconRaw, array|string $extraClass = '', string $color = '', string $size = '', string $border = ''): string
+  public static function svgUse(string $iconRaw, array|string $extraClass = '', string $color = '', string $size = '', string $border = '', string $label = ''): string
   {
     $iconPath = self::iconPathFromRaw($iconRaw); // solid/cow
     $symbolId = self::symbolId($iconPath);       // solid-cow
@@ -57,14 +59,44 @@ class SpriteGenerator
         'width' => $size,
         'border' => $border
     ];
+    $viewBox = self::euAiViewBox($iconPath);
+    if ($viewBox !== '') {
+        // Text labels are wide: use their intrinsic ratio instead of a square viewport.
+        $propertyMap['height'] = $size !== '' ? $size : '1em';
+        $propertyMap['width'] = 'auto';
+    }
     $inlineStyles = self::weaveInlineStyles($propertyMap);
+    $accessibility = $label === ''
+        ? 'aria-hidden="true"'
+        : 'role="img" aria-label="' . esc_attr($label) . '"';
 
     return sprintf(
-      '<svg class="%1$s" aria-hidden="true"%3$s><use href="#%2$s"></use></svg>',
+      '<svg class="%1$s" %4$s%5$s%3$s><use href="#%2$s"></use></svg>',
       esc_attr($classAttr),
       esc_attr($symbolId),
-      $inlineStyles === '' ? '' : ' ' . $inlineStyles
+      $inlineStyles === '' ? '' : ' ' . $inlineStyles,
+      $accessibility,
+      $viewBox === '' ? '' : ' viewBox="' . esc_attr($viewBox) . '"'
     );
+  }
+
+  /**
+   * Reads the original viewport of an EU label so its text keeps its proportions.
+   *
+   * @param string $iconPath Normalized icon path relative to the asset directory.
+   * @return string Original SVG viewBox, or an empty string for other or unavailable icons.
+   */
+  private static function euAiViewBox(string $iconPath): string
+  {
+      if (!in_array($iconPath, ['symbols/eu-ai', 'symbols/eu-ai-generated', 'symbols/eu-ai-modified'], true)) {
+          return '';
+      }
+
+      $file = self::$assetPath . '/' . $iconPath . '.svg';
+      $svg = is_readable($file) ? file_get_contents($file) : false;
+      return $svg !== false && preg_match('/<svg\b[^>]*viewBox="([^"]+)"/', $svg, $matches) === 1
+          ? $matches[1]
+          : '';
   }
 
   /**

@@ -24,20 +24,40 @@ Tipps zur Entwicklung finden sich unter /docs
 
 ## Bestehende Icon-Shortcodes
 
-Die Übernahme von `[icon]` und `[list-icons]` aus RRZE Elements und das zugehörige FontAwesome→Material-Symbols-Mapping sind vorerst standardmäßig deaktiviert. Vorhandene Shortcode-Handler bleiben zuständig.
+Die Shortcodes `[icon]` und `[list-icons]` sind standardmäßig aktiviert und übernehmen vorhandene Handler von RRZE Elements. Handler anderer Plugins werden nicht überschrieben.
 
-Bei expliziter Aktivierung der Familie `icon` werden diese Shortcodes unterstützt:
+Diese Shortcodes werden unterstützt:
 
 ```text
 [icon icon="solid pencil" style="2x, border" color="fau" alt="Bearbeiten"]
 [list-icons icon="check" color="#04316a"]<ul><li>Listenpunkt</li></ul>[/list-icons]
 ```
 
-Die alten Namen werden ausschließlich über `src/_shared/icons/sprites/material-symbols/mapping/fontAwesome6ToMaterialSymbols.json` auf lokal vorhandene Material Symbols abgebildet. Die Präfixe `solid`, `regular` und `brands` werden weiterhin akzeptiert; die Darstellung verwendet immer Material Symbols. Es gibt keinen Font-Awesome-Fallback und keine automatische Namenssuche. Fehlende Zuordnungen oder SVG-Dateien ergeben „Icon not found.“; Listeninhalte bleiben erhalten. Das betrifft auch Markenlogos ohne Zuordnung.
+Die alten Namen werden ausschließlich über `src/_shared/icons/sprites/material-symbols/mapping/fontAwesome6ToMaterialSymbols.json` auf lokal vorhandene Material Symbols abgebildet. Die Präfixe `solid`, `regular` und `brands` werden weiterhin akzeptiert. Zusätzlich stehen die unten beschriebenen EU-KI-Icons als eigenständige SVGs zur Verfügung. Es gibt keinen Font-Awesome-Fallback und keine automatische Namenssuche. Fehlende Zuordnungen oder SVG-Dateien ergeben „Icon not found.“; Listeninhalte bleiben erhalten. Das betrifft auch Markenlogos ohne Zuordnung.
 
 `[icon]` unterstützt weiterhin `2x` bis `5x`, `border`, `pull-left`, `pull-right`, Fakultätsfarben und Hexfarben. Ohne `alt` ist das Icon dekorativ, mit `alt` erhält es einen zugänglichen Namen. `[list-icons]` ersetzt die Aufzählungszeichen ungeordneter Listen; vorhandene Klassen und Attribute bleiben erhalten.
 
-Die Familie `icon` lässt sich über `rrze_elements_blocks_legacy_shortcode_families` explizit aktivieren. Shortcodes anderer Plugins werden nicht überschrieben.
+Die Familie `icon` lässt sich über `rrze_elements_blocks_legacy_shortcode_families` deaktivieren.
+
+### EU-Icons zur KI-Kennzeichnung
+
+Im gemeinsamen Icon-Picker (z. B. bei Collapse, Accordion, Tabs und IconBox) erscheinen die offiziellen EU-Icons nur bei einer gezielten Suche nach `ai`, `ki` oder einem Icon-Namen wie `eu-ai-modified`. Die Standardansicht bleibt bei den bisherigen Icons; Suchbegriffe wie `mail` blenden keine EU-Labels ein.
+
+| Icon-Name | Shortcode-Kurzform | Darstellung |
+| --- | --- | --- |
+| `eu-ai` | `ai` | AI-Basissymbol |
+| `eu-ai-generated` | `ai-generated` | AI GENERATED |
+| `eu-ai-modified` | `ai-modified` | AI MODIFIED |
+
+```text
+[icon icon="ai" style="2x" alt="Mit künstlicher Intelligenz erstellt"]
+[icon icon="ai-generated" style="2x" alt="Vollständig KI-generiert"]
+[icon icon="eu-ai-modified" style="2x" alt="Teilweise mit KI bearbeitet"]
+```
+
+Die Icons behalten ihre offiziellen schwarzen Flächen und weißen Schriftzüge sowie ihr ursprüngliches Seitenverhältnis. `color` färbt diese zweifarbigen Labels deshalb nicht um. `style="2x"` vergrößert auch die Beschriftung. Ohne `alt` bleiben Icons dekorativ; bei einer alleinstehenden Kennzeichnung sollte ein verständlicher Alternativtext angegeben werden.
+
+Quelle und Nutzungshinweise: [EU-Kommission – Icons für die Kennzeichnung von KI-generierten Inhalten](https://digital-strategy.ec.europa.eu/de/policies/eu-icons-labelling-ai-generated-content). Die SVGs dürfen laut dortigem Lizenzabschnitt frei und ohne Namensnennung verwendet werden. Details zur übernommenen Variante und technischen Aufbereitung stehen in [docs/eu-ai-icons.md](docs/eu-ai-icons.md).
 
 ## Fehler melden & Feedback
 Feedback und Fehler können als Issue im GitHub Repository oder als E-Mail an webmaster@fau.de mit Betreff "Elements-Blocks" gemeldet werden.

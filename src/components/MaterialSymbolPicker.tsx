@@ -17,6 +17,7 @@ import {
   Spinner,
 } from "@wordpress/components";
 import {speak} from "@wordpress/a11y";
+import {EuAiIcon, EU_AI_ICON_NAMES, searchEuAiIcons} from "./EuAiIcon";
 import FAUEngineeringSymbol from "../_shared/icons/sprites/fau-icons/fau_engineering.svg";
 import FAUDevelopingSymbol from "../_shared/icons/sprites/fau-icons/fau_developing.svg";
 import FAUUnderstandingSymbol from "../_shared/icons/sprites/fau-icons/fau_understanding.svg";
@@ -47,7 +48,7 @@ type Maps = {
 
 const PAGE_SIZE = 120;
 
-/** Memoized grid so large lists don't re-render unnecessarily */
+/** Renders selectable Material Symbols and EU SVG labels without rerendering unchanged grids. */
 const IconGrid = memo(function MaterialIconGrid({
                                           icons,
                                           selected,
@@ -57,9 +58,27 @@ const IconGrid = memo(function MaterialIconGrid({
   selected?: string;
   onClick: (value: string) => void;
 }) {
+  const euIcons = icons.filter((icon) => EU_AI_ICON_NAMES.includes(icon));
+  const materialIcons = icons.filter((icon) => !EU_AI_ICON_NAMES.includes(icon));
   return (
+    <>
+    {euIcons.length > 0 && <div className="rrze-editor-eu-ai-grid">
+      {euIcons.map((icon) => (
+        <Button
+          key={icon}
+          isPressed={icon === selected}
+          onClick={() => onClick(icon)}
+          className="rrze-editor-eu-ai-button"
+          label={icon}
+        >
+          <EuAiIcon name={icon} style={{height: "64px", width: "100%"}} />
+          <span className="rrze-editor-eu-ai-name">{icon}</span>
+        </Button>
+      ))}
+    </div>}
+    {materialIcons.length > 0 &&
     <div className="rrze-editor-icon-grid">
-      {icons.map((icon) => (
+      {materialIcons.map((icon) => (
         <Button
           key={icon}
           isPressed={icon === selected}
@@ -72,10 +91,16 @@ const IconGrid = memo(function MaterialIconGrid({
           <span className={`material-symbols-outlined ${icon}`}>{icon}</span>
         </Button>
       ))}
-    </div>
+    </div>}
+    </>
   );
 });
 
+/**
+ * Offers a shared, searchable icon selection for blocks using the materialSymbol attribute.
+ *
+ * @param root0 - Current block attributes and their update callback.
+ */
 const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerProps) => {
   const {materialSymbol} = attributes;
 
@@ -152,7 +177,7 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
     [materialSymbol, setAttributes]
   );
 
-  // Pure search helper using loaded maps
+  /** Searches Material Symbols and adds EU labels independently of Material keyword matches. */
   const searchIcons = useCallback(
     (raw: string): string[] => {
       if (!maps) return [];
@@ -177,7 +202,7 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
 
       // 3) stable order: popularity index
       const idx = (name: string) => maps.popularity.indexOf(name);
-      return Array.from(resultSet).sort((a, b) => idx(a) - idx(b));
+      return [...searchEuAiIcons(q), ...Array.from(resultSet).sort((a, b) => idx(a) - idx(b))];
     },
     [maps]
   );
@@ -285,11 +310,13 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
             </div>
 
             <Fragment>
-              <span
+              {materialSymbol && EU_AI_ICON_NAMES.includes(materialSymbol) ? (
+                <EuAiIcon name={materialSymbol} className="elements-blocks-icon-selector-display" />
+              ) : <span
                 className={`elements-blocks-icon-selector-display material-symbols-outlined ${materialSymbol}`}
               >
                 {materialSymbol}
-              </span>
+              </span>}
               <Button variant="secondary" onClick={() => setAttributes({materialSymbol: ""})}>
                 {__("Remove Icon", "rrze-elements-blocks")}
               </Button>

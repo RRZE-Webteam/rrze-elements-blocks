@@ -16,6 +16,7 @@ import {speak} from '@wordpress/a11y';
 import type {KeyboardEvent} from 'react';
 
 import fontawesomeIconNames from './assets/fontawesome/fontawesomeIconNames.json';
+import {EuAiIcon, EU_AI_ICON_NAMES} from './EuAiIcon';
 
 const solidSpriteUrl = new URL(
   '../_shared/icons/sprites/font-awesome/solid.svg?url',
@@ -60,6 +61,11 @@ const updateSvgHref = (
   }
 };
 
+/**
+ * Renders a decorative icon, optionally wrapped in an accessible selection button.
+ *
+ * @param root0 - Icon identity, presentation and optional selection callback.
+ */
 const SpriteIcon = ({
                       type,
                       iconName,
@@ -76,11 +82,17 @@ const SpriteIcon = ({
   const href = hrefOverride ?? `${SPRITES[type]}#${iconName}`;
   if (!href) return null;
 
-  const icon = type === 'symbol' ? (
+  let icon;
+  if (type === 'symbol' && EU_AI_ICON_NAMES.includes(iconName)) {
+    icon = <EuAiIcon name={iconName} className={className} style={{pointerEvents: 'none'}} />;
+  } else if (type === 'symbol') {
+    icon = (
     <span aria-hidden="true" style={{pointerEvents: 'none'}} className={`material-symbols-outlined ${iconName} ${className}`}>
       {iconName}
     </span>
-  ) : (
+    );
+  } else {
+    icon = (
     <svg
       role="img"
       aria-hidden="true"
@@ -90,7 +102,8 @@ const SpriteIcon = ({
       {/* @ts-ignore: href ist in SVG2 spezifiziert */}
       <use href={href}/>
     </svg>
-  );
+    );
+  }
 
   return onClick ? (
     <button
