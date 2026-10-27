@@ -41,7 +41,7 @@ Die Familie `icon` lässt sich über `rrze_elements_blocks_legacy_shortcode_fami
 
 ### EU-Icons zur KI-Kennzeichnung
 
-Im gemeinsamen Icon-Picker (z. B. bei Collapse, Accordion, Tabs und IconBox) erscheinen die offiziellen EU-Icons nur bei einer gezielten Suche nach `ai`, `ki` oder einem Icon-Namen wie `eu-ai-modified`. Die Standardansicht bleibt bei den bisherigen Icons; Suchbegriffe wie `mail` blenden keine EU-Labels ein.
+Im gemeinsamen Icon-Picker (z. B. bei Collapse, Accordion, Tabs und IconBox) erscheinen die offiziellen EU-Icons nur bei einer gezielten Suche nach `ai`, `ki` oder einem Icon-Namen wie `eu-ai-modified`. Die Standardansicht bleibt bei den bisherigen Icons; Suchbegriffe wie `mail` blenden keine EU-Labels ein. `ai` und `ki` finden zusätzlich Material-Symbole mit dem vollständigen Schlagwort `ai`, aber keine zufälligen Teiltreffer wie `mail`, `air` oder `banking`.
 
 | Icon-Name | Shortcode-Kurzform | Darstellung |
 | --- | --- | --- |

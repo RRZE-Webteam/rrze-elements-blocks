@@ -185,10 +185,24 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
       if (!q) return maps.popularity;
 
       const resultSet = new Set<string>();
+      const materialQuery = q === "ki" ? "ai" : q;
+
+      /**
+       * Treats AI as a whole keyword so mail, air, banking and cooking do not match.
+       *
+       * @param candidate - Material keyword or icon name from the bundled search index.
+       * @returns Whether the candidate matches the normalized Material search term.
+       */
+      const matchesMaterial = (candidate: string): boolean => {
+        const normalized = candidate.toLowerCase();
+        return materialQuery === "ai"
+          ? normalized.split(/[\s_-]+/).includes("ai")
+          : normalized.includes(materialQuery);
+      };
 
       // 1) keyword index match
       for (const key in maps.keywords) {
-        if (key.toLowerCase().includes(q)) {
+        if (matchesMaterial(key)) {
           maps.keywords[key].forEach((icon) => resultSet.add(icon));
         }
       }
@@ -196,7 +210,7 @@ const MaterialSymbolPicker = ({attributes, setAttributes}: MaterialSymbolPickerP
       // 2) fallback: icon name contains query
       if (resultSet.size === 0) {
         for (const icon of maps.alphabetical) {
-          if (icon.toLowerCase().includes(q)) resultSet.add(icon);
+          if (matchesMaterial(icon)) resultSet.add(icon);
         }
       }
 

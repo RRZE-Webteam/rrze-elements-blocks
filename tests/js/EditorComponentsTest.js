@@ -246,6 +246,28 @@ test("shared picker finds, selects and removes EU AI labels alongside Material S
     await search(query);
     assert.equal(container.querySelectorAll("button.rrze-editor-eu-ai-button").length, 3);
   }
+
+  let aiResults;
+  for (const query of ["ai", "ki", " KI "]) {
+    await search(query);
+    const results = [...container.querySelectorAll("button.elements-blocks-icon-Button")]
+      .map((button) => button.getAttribute("aria-label"));
+    for (const relevant of ["smart_toy", "model_training", "robot_2"]) {
+      assert.ok(results.includes(relevant), `${query} should find ${relevant}`);
+    }
+    for (const unrelated of ["mail", "air", "payments", "kitchen", "local_parking", "settings"]) {
+      assert.ok(!results.includes(unrelated), `${query} must not find unrelated ${unrelated}`);
+    }
+    if (aiResults) assert.deepEqual(results, aiResults, "AI and its German alias must return the same Material icons");
+    aiResults = results;
+  }
+
+  await search("mail");
+  assert.ok(container.querySelector('button[aria-label="mail"]'), "ordinary keyword searches keep working");
+  await search("zzzz-no-such-icon");
+  assert.equal(container.querySelectorAll("button.elements-blocks-icon-Button, button.rrze-editor-eu-ai-button").length, 0,
+    "a search without matches must not show the default icons");
+
   for (const query of ["mail", "", "generated"]) {
     await search(query);
     assert.equal(container.querySelectorAll("button.rrze-editor-eu-ai-button").length, 0);
