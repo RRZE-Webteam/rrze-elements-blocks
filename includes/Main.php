@@ -81,7 +81,10 @@ class Main
             'rrze-accordions',
             plugins_url('assets/js/accordion/rrze-accordion.min.js', plugin_basename($this->pluginFile)),
             ['jquery', 'wp-i18n'],
-            RRZE_ELEMENTSB_VERSION,
+            // Refresh cached accordion behavior whenever the compiled script changes.
+            (string)(filemtime(
+                plugin_dir_path($this->pluginFile) . 'assets/js/accordion/rrze-accordion.min.js'
+            ) ?: RRZE_ELEMENTSB_VERSION),
             true
         );
         wp_register_script(
